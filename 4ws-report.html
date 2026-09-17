@@ -289,18 +289,30 @@
       </div>
 
       <div class="ofwhom">
-        <p class="ofw-h" data-i18n="f4.ofwHead" data-i18n-html>Of whom <span>— already counted above, <b>never added to it</b></span></p>
+        <p class="ofw-h" data-i18n="f4.ofwHead" data-i18n-html>Seen at the session <span>— count what you can see; already inside the total, <b>never added to it</b></span></p>
         <div class="ofw-g">
           <div>
-            <label for="ofPwd" data-i18n="f4.ofPwd">Persons with disabilities</label>
+            <label for="ofChildAlone">Children without an adult with them</label>
+            <input type="number" id="ofChildAlone" min="0" step="1" inputmode="numeric" placeholder="—">
+          </div>
+          <div>
+            <label for="ofPreg" data-i18n="f4.ofPreg">Pregnant women or women with an infant</label>
+            <input type="number" id="ofPreg" min="0" step="1" inputmode="numeric" placeholder="—">
+          </div>
+          <div>
+            <label for="ofPwd" data-i18n="f4.ofPwd">Visible disability or needing help to move</label>
             <input type="number" id="ofPwd" min="0" step="1" inputmode="numeric" placeholder="—">
           </div>
           <div>
-            <label for="ofPreg" data-i18n="f4.ofPreg">Pregnant or postpartum</label>
-            <input type="number" id="ofPreg" min="0" step="1" inputmode="numeric" placeholder="—">
+            <label for="ofInjured">Visibly injured or unwell</label>
+            <input type="number" id="ofInjured" min="0" step="1" inputmode="numeric" placeholder="—">
+          </div>
+          <div>
+            <label for="ofDistress">In acute distress — needed one-to-one attention</label>
+            <input type="number" id="ofDistress" min="0" step="1" inputmode="numeric" placeholder="—">
           </div>
         </div>
-        <p class="ofw-n" data-i18n="f4.ofwNote">One person can be in both, and is in a band above as well. These two are checked against the total but are never summed with it or with each other.</p>
+        <p class="ofw-n" data-i18n="f4.ofwNote">Five things a PFA provider can count by looking, without asking. One person can be on more than one line and is in an age group above as well; these are checked against the total but never summed with it or with each other. Leave blank what you did not see.</p>
       </div>
 
       <div class="help" style="margin-top:8px" data-i18n="f4.disHelp">Reports in the current workbook carry breakdowns typed into the provider column — a “women 18+ = 12, men 18+ = 9” where an organisation name should be — because the form has nowhere else to put them. Here they have somewhere, the parts are checked against the total, and the four bands fold to the two the official 5Ws asks for.</div>
