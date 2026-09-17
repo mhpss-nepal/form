@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How are you coping — MHPSS Nepal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Lora + Manrope. design.css declares Georgia / system fallbacks, so a
+     failed font request costs typography and never legibility -- which
+     matters on the field forms, where there may be no signal at all. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Manrope:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="../hub/assets/app.css">
+<link rel="stylesheet" href="../hub/assets/design.css">
+<style>
+  .wrap.simple{max-width:660px}
+  .wrap.simple h1{font-size:26px}
+  .wrap.simple .card{padding:20px}
+  .wrap.simple label{font-size:15px; margin-bottom:8px; line-height:1.45}
+  .wrap.simple .radios label{font-size:14px; font-weight:400; padding:9px 15px}
+  .wrap.simple .help{font-size:12.5px}
+  .helpnow{background:var(--ok-t); border:2px solid var(--ok); border-radius:var(--r);
+    padding:18px 20px; margin:0 0 20px}
+  .helpnow h2{margin:0 0 8px; font-size:18px; color:#24543f}
+  .helpnow p{font-size:14.5px; line-height:1.55; margin:0 0 9px}
+  .helpnow .slot{background:#fff; border:2px dashed var(--warn); border-radius:var(--r);
+    padding:11px 13px; font-size:13.5px; color:var(--warn); font-weight:700}
+</style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1d1d1b">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MHPSS Field">
+</head>
+<body>
+<div style="background:#d03b3b;color:#fff;font:700 12.5px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;letter-spacing:.02em;text-align:center;padding:7px 16px;padding-top:calc(7px + env(safe-area-inset-top,0px))"><span data-i18n="banner.trial"></span><span data-i18n="banner.trialSub"></span></div>
+
+<div class="top">
+  <div>
+    <div class="brand" data-i18n="page.selfreport.brand"></div>
+    <div class="sub" data-i18n="page.selfreport.sub"></div>
+  </div>
+  <div class="spacer"></div>
+  <a href="index.html" data-i18n="nav.backToForms">← Forms</a>
+</div>
+
+<div class="wrap simple">
+
+  <div class="helpnow">
+    <h2 data-i18n="sr.p037"></h2>
+    <p data-i18n="sr.p034"></p>
+    <p class="slot" data-i18n="sr.p033"></p>
+  </div>
+
+  <h1 data-i18n="sr.p035"></h1>
+  <p class="lede" data-i18n="sr.p032" data-i18n-html></p>
+
+  <div class="banner warn" data-i18n="sr.p007" data-i18n-html></div>
+
+  <form id="f" autocomplete="off" novalidate>
+
+    <div class="card">
+      <div class="f">
+        <label for="site" data-i18n="sr.p031"></label>
+        <select id="site"></select>
+        <div class="help" data-i18n="sr.p006"></div>
+      </div>
+      <div class="f">
+        <label for="ageband" data-i18n="sr.p030"></label>
+        <select id="ageband">
+          <option value="" data-i18n="sr.age.choose">— choose —</option>
+          <option value="12-17" data-i18n="sr.age.u18">Under 18</option>
+          <option value="18-24" data-i18n="sr.age.18to24">18 to 24</option>
+          <option value="25-59" data-i18n="sr.age.25to59">25 to 59</option>
+          <option value="60+" data-i18n="sr.age.60plus">60 or over</option>
+          <option value="NS" data-i18n="sr.age.noSay">I would rather not say</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="f">
+        <label data-i18n="sr.p029"></label>
+        <div class="radios" id="cope">
+          <label><input type="radio" name="cope" value="4"> <span data-i18n="sr.p028">Well</span></label>
+          <label><input type="radio" name="cope" value="3"> <span data-i18n="sr.p027">Mostly all right</span></label>
+          <label><input type="radio" name="cope" value="2"> <span data-i18n="sr.p026">Some difficult days</span></label>
+          <label><input type="radio" name="cope" value="1"> <span data-i18n="sr.p025">Difficult most days</span></label>
+          <label><input type="radio" name="cope" value="0"> <span data-i18n="sr.p024">I am not coping</span></label>
+        </div>
+        <div class="help" data-i18n="sr.p005"></div>
+      </div>
+
+      <div class="f">
+        <label data-i18n="sr.p023"></label>
+        <div class="radios" id="need">
+          <label><input type="radio" name="need" value="TALK"> <span data-i18n="sr.p022">Someone to talk to</span></label>
+          <label><input type="radio" name="need" value="NEWS"> <span data-i18n="sr.p021">News about a missing family member</span></label>
+          <label><input type="radio" name="need" value="SLEEP"> <span data-i18n="sr.p020">Help with sleep</span></label>
+          <label><input type="radio" name="need" value="CHILD"> <span data-i18n="sr.p019">Support for my children</span></label>
+          <label><input type="radio" name="need" value="DOC"> <span data-i18n="sr.p018">Replacing lost documents</span></label>
+          <label><input type="radio" name="need" value="WORK"> <span data-i18n="sr.p017">Work or money</span></label>
+          <label><input type="radio" name="need" value="HEALTH"> <span data-i18n="sr.p016">Medical care</span></label>
+          <label><input type="radio" name="need" value="OTH"> <span data-i18n="sr.p015">Something else</span></label>
+        </div>
+      </div>
+
+      <div class="f">
+        <label data-i18n="sr.p014"></label>
+        <div class="radios" id="know">
+          <label><input type="radio" name="know" value="Y"> <span data-i18n="sr.yes">Yes</span></label>
+          <label><input type="radio" name="know" value="N"> <span data-i18n="sr.no">No</span></label>
+          <label><input type="radio" name="know" value="UNS"> <span data-i18n="sr.p013">I am not sure</span></label>
+        </div>
+      </div>
+
+      <div class="f">
+        <label data-i18n="sr.p012"></label>
+        <div class="radios" id="reach">
+          <label><input type="radio" name="reach" value="Y"> <span data-i18n="sr.yes">Yes</span></label>
+          <label><input type="radio" name="reach" value="TRIED"> <span data-i18n="sr.p011">I tried but could not</span></label>
+          <label><input type="radio" name="reach" value="N"> <span data-i18n="sr.p010">I have not tried</span></label>
+          <label><input type="radio" name="reach" value="NA"> <span data-i18n="sr.p009">I do not need it</span></label>
+        </div>
+        <div class="help" data-i18n="sr.p004"></div>
+      </div>
+
+      <div class="f">
+        <label for="say" data-i18n="sr.p008" data-i18n-html></label>
+        <input type="text" id="say" maxlength="300" placeholder="In your own words">
+        <div class="help" data-i18n="sr.p003"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div id="errs"></div>
+      <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
+        <button type="submit" class="btn" data-i18n="sr.p040"></button>
+        <button type="button" class="btn ghost" id="csvBtn" data-i18n="sr.p039"></button>
+        <button type="button" class="btn grey" id="clearBtn" data-i18n="sr.p038"></button>
+        <span class="xs" id="count"></span>
+      </div>
+      <div class="help" style="margin-top:10px" data-i18n="sr.p002"></div>
+    </div>
+  </form>
+
+  <h2 data-i18n="sr.p036"></h2>
+  <!-- One key for the whole banner, with data-i18n-html, because the
+       sentence carries a <b> lead and an inline link to the PHQ-9 form.
+       Keying only the <b> left the body prose loose -- the same half-keyed
+       banner that has caught us twice now. A sentence that contains markup
+       is ONE string; splitting it also makes it untranslatable, since
+       Nepali will not put the link in the same place. -->
+  <div class="banner" data-i18n="sr.clinicalNote" data-i18n-html></div>
+  <div class="banner warn" data-i18n="sr.p001" data-i18n-html></div>
+</div>
+
+<script src="../hub/assets/codes.js"></script>
+<script src="../hub/assets/l1.js"></script>
+<script src="../hub/assets/fb-config.js"></script>
+<script src="../hub/assets/fb.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = window.CODES, L = window.L1, KIND = "selfreport";
+  var $ = function (id) { return document.getElementById(id); };
+
+  L.fillSelect($("site"), C.FORM_SITES.filter(function (s) { return s.source !== "escape"; })
+                            .concat([{ code: "OTHER", name: "Somewhere else", np: "अन्य कतै", np_src: "draft" }]),
+               { placeholder: "— choose your site —" });
+
+  function pick(name) {
+    var r = document.querySelector('input[name="' + name + '"]:checked');
+    return r ? r.value : "";
+  }
+  function record() {
+    return {
+      schema: "mhpss-np-selfreport/0.1.0-draft",
+      kind: "self_report",
+      anonymous: true,
+      contact_code: null,
+      site: $("site").value,
+      age_band: $("ageband").value,
+      coping: pick("cope"),
+      need: pick("need"),
+      knows_where: pick("know"),
+      could_reach: pick("reach"),
+      free_text: $("say").value.trim(),
+      free_text_reviewed_by_human: false
+    };
+  }
+  var COLS = Object.keys(record()).concat(["_saved"]);
+
+  function showCount() {
+    var n = L.all(KIND).length;
+    $("count").textContent = n ? n + " answer(s) on this device" : "nothing saved on this device yet";
+  }
+  showCount();
+
+  $("f").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var r = record(), e = [];
+    if (!r.site) e.push("Please choose the site you are at.");
+    if (!r.coping) e.push("Please answer question 1.");
+    if (!r.knows_where) e.push("Please answer question 3.");
+    if (e.length) {
+      $("errs").innerHTML = '<div class="banner stop"><b>Not sent.</b><ul><li>' + e.join("</li><li>") + "</li></ul></div>";
+      return;
+    }
+    L.save(KIND, r);
+    $("errs").innerHTML = '<div class="banner ok"><b>Thank you.</b> Your answer was saved on this device, ' +
+      'with nothing attached to it that could identify you. Remember that nobody can contact you about ' +
+      'it — if you want support, speak to a worker at this site.</div>';
+    /* reset so the next person starts clean and cannot see the previous answer */
+    Array.prototype.forEach.call(document.querySelectorAll('input[type=radio]'), function (i) { i.checked = false; });
+    $("say").value = ""; $("ageband").value = "";
+    showCount();
+    $("errs").scrollIntoView({ block: "center" });
+  });
+
+  $("csvBtn").addEventListener("click", function () {
+    var list = L.all(KIND);
+    if (!list.length) { alert("Nothing saved on this device yet."); return; }
+    L.download("mhpss_np_selfreport_" + L.stamp() + ".csv", L.toCSV(list, COLS), "text/csv");
+  });
+  $("clearBtn").addEventListener("click", function () {
+    if (!L.all(KIND).length) { alert("Nothing saved on this device yet."); return; }
+    if (confirm("Delete every answer held in this browser? This cannot be undone.")) {
+      L.clear(KIND); showCount(); $("errs").innerHTML = '<div class="banner"><b>Cleared.</b></div>';
+    }
+  });
+})();
+</script>
+<script src="pwa.js"></script>
+<!-- The bilingual engine. On a page that is not yet keyed up it still earns
+     its place: it sets data-lang, which is what makes the Nepali words in
+     the code lists appear in the dropdowns, and it mounts the ENG/NEP
+     toggle and an honest notice saying the prose is still English. -->
+<script src="../hub/assets/mark.js"></script>
+<script src="../hub/assets/icons.js"></script>
+<script src="../hub/assets/i18n-strings.js"></script>
+<script src="../hub/assets/i18n.js"></script>
+</body>
+</html>

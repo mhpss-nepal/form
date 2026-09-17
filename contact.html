@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Service contact record — MHPSS Nepal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Lora + Manrope. design.css declares Georgia / system fallbacks, so a
+     failed font request costs typography and never legibility -- which
+     matters on the field forms, where there may be no signal at all. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Manrope:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="../hub/assets/app.css">
+<link rel="stylesheet" href="../hub/assets/design.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1d1d1b">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MHPSS Field">
+</head>
+<body>
+<div style="background:#d03b3b;color:#fff;font:700 12.5px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;letter-spacing:.02em;text-align:center;padding:7px 16px;padding-top:calc(7px + env(safe-area-inset-top,0px))">DEMONSTRATION INSTRUMENT — NOT THE LIVE REPORTING SYSTEM <span style="font-weight:400;opacity:.92">· draft, not agreed with EDCD or the MHPSS Technical Working Group · nothing you enter is sent anywhere</span></div>
+
+<div class="top">
+  <div>
+    <div class="brand">Service contact record</div>
+    <div class="sub">Layer 1 · Rasuwa / Bhote Koshi</div>
+  </div>
+  <div class="spacer"></div>
+  <a href="index.html">← Forms</a>
+  <a href="../hub/">Hub</a>
+</div>
+
+<div class="wrap">
+
+  <h1>One contact with one person</h1>
+  <p class="lede">Use this when you have seen, spoken to or supported a specific person. For a group
+    activity or a day's total, use the <a href="4ws-report.html">activity report</a> instead — this form
+    is deliberately one record per person per contact, because that is the only way a returning person can
+    be recognised instead of counted twice.</p>
+
+  <div class="banner stop">
+    <b>The person's name and phone number stay on this handset.</b> You type a few details so the phone can
+    work out a <b>contact code</b>; the details are used for that calculation and then discarded. Only the
+    code is saved. Nobody downstream — not the coordination view, not the dashboard, not this site — ever
+    receives the name, the number, or a date of birth.
+  </div>
+
+  <div class="banner">
+    <b>Works with no signal.</b> Records are held in this browser as you save them, and you export a file
+    when you next have connection. <span id="storeWarn"></span>
+  </div>
+
+  <form id="f" autocomplete="off" novalidate>
+
+    <!-- 1 -->
+    <div class="card">
+      <div class="step"><span class="n">1</span><h2>Who is reporting</h2><span class="hint">remembered for next time</span></div>
+      <div class="row">
+        <div class="f">
+          <label for="org">Reporting organisation</label>
+          <select id="org"></select>
+        </div>
+        <div class="f" id="orgOtherWrap" hidden>
+          <label for="orgOther">Name of organisation</label>
+          <input type="text" id="orgOther" placeholder="Full name, as it should appear in reports">
+        </div>
+      </div>
+      <div class="row three">
+        <div class="f">
+          <label for="focalName">Focal point name</label>
+          <input type="text" id="focalName" placeholder="You — the person recording this">
+          <div class="help">A staff member, never a service user.</div>
+        </div>
+        <div class="f">
+          <label for="focalPhone">Focal point phone</label>
+          <input type="tel" id="focalPhone" placeholder="98XXXXXXXX">
+        </div>
+        <div class="f">
+          <label for="cadre">Type of service provider</label>
+          <select id="cadre"></select>
+          <div class="help">Who actually delivered this contact. Asked for on 15 September so that
+            counsellors, psychologists and psychiatrists can be counted apart.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="card">
+      <div class="step"><span class="n">2</span><h2>When and where</h2></div>
+      <div class="row three">
+        <div class="f">
+          <label for="dateAD">Date — Gregorian (AD)</label>
+          <input type="date" id="dateAD">
+          <div class="help">This is the date the system sorts and groups on.</div>
+        </div>
+        <div class="f">
+          <label for="dateBS">Date — Bikram Sambat <span class="opt">— optional</span></label>
+          <input type="text" id="dateBS" placeholder="2083-05-29" pattern="\d{4}-\d{2}-\d{2}">
+          <div class="help">Typed as reported. <b>Not converted automatically</b> — that needs a verified
+            BS calendar table, which has not been obtained.</div>
+        </div>
+        <div class="f">
+          <label for="district">District</label>
+          <select id="district"></select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="f">
+          <label for="site">Site</label>
+          <select id="site"></select>
+          <div class="help" id="siteHelp">From the holding-centre roster. Only choose “Other” if the site
+            genuinely is not listed — every “Other” has to be reconciled by hand later.</div>
+        </div>
+        <div class="f">
+          <label for="ward">Municipality and ward <span class="opt">— optional</span></label>
+          <input type="text" id="ward" placeholder="e.g. Uttargaya, ward 4">
+          <div class="help">Asked for on 15 September as province / subdistrict. Free text for now: the
+            agreed municipality and ward code list has not been obtained.</div>
+        </div>
+      </div>
+      <div class="f" id="siteOtherWrap" hidden>
+        <label for="siteOther">Name of site</label>
+        <input type="text" id="siteOther" placeholder="Site name, ward, municipality">
+      </div>
+      <div class="f">
+        <label>Location pin <span class="opt">— optional</span></label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <button type="button" class="btn ghost sm" id="geoBtn">📍 Use my location</button>
+          <span id="geoOut" class="xs" style="flex:1 1 200px;min-width:0"></span>
+        </div>
+        <div class="help">Recorded to three decimal places — a grid of roughly 100 m. Enough to put the
+          site on a map; not enough to point at a household. A precise pin, a small count and a target
+          group together identify people even with no name attached, which is why the precision is
+          reduced here rather than in the dashboard.</div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="card">
+      <div class="step"><span class="n">3</span><h2>The person</h2></div>
+      <div class="f">
+        <label>Is this the first time your organisation has recorded this person?</label>
+        <div class="radios" id="newRet">
+          <label><input type="radio" name="nr" value="NEW"> New — first contact</label>
+          <label><input type="radio" name="nr" value="RET"> Returning — seen before</label>
+          <label><input type="radio" name="nr" value="UNK"> Not known</label>
+        </div>
+        <div class="help">This is the question that makes the cumulative figure mean something. On
+          15 September the reported total was over 9,000 with duplication nobody could size.</div>
+      </div>
+
+      <div id="codeWrap">
+        <div class="banner" style="margin-top:4px">
+          <b>These four boxes are not saved.</b> They are read, combined into a code, and cleared when you
+          save. Type them the same way each time and the same person gets the same code.
+        </div>
+        <div class="row four">
+          <div class="f">
+            <label for="ini">Initials</label>
+            <input type="text" id="ini" maxlength="4" placeholder="e.g. RB">
+            <div class="help">First letters of the name, as the person says it.</div>
+          </div>
+          <div class="f">
+            <label for="byear">Year of birth</label>
+            <input type="text" id="byear" inputmode="numeric" maxlength="4" placeholder="1990" pattern="\d{4}">
+            <div class="help">Year only — never a full date.</div>
+          </div>
+          <div class="f">
+            <label for="sex">Sex</label>
+            <select id="sex">
+              <option value="">— choose —</option>
+              <option value="F">Female</option>
+              <option value="M">Male</option>
+              <option value="O">Other</option>
+              <option value="NS">Not stated</option>
+            </select>
+          </div>
+          <div class="f">
+            <label for="mun">Municipality</label>
+            <input type="text" id="mun" placeholder="e.g. Uttargaya">
+            <div class="help">Where the person is from, not where you met them.</div>
+          </div>
+        </div>
+        <div class="f">
+          <label>Contact code</label>
+          <div id="codeOut" class="codebox">— fill the four boxes above —</div>
+          <div class="help">This is the only part that is saved. It is a <b>pseudonym, not an anonymous
+            token</b>: the four inputs vary little, so someone holding a list of candidate names could
+            test them against a code. Adequate for agreeing these questions; a live register needs the
+            code mixed with a secret this handset never holds, which means a server.</div>
+        </div>
+      </div>
+
+      <div class="row three">
+        <div class="f">
+          <label for="ageband">Age band</label>
+          <select id="ageband">
+            <option value="">— choose —</option>
+            <option value="0-4">0–4</option>
+            <option value="5-11">5–11</option>
+            <option value="12-17">12–17</option>
+            <option value="18-24">18–24</option>
+            <option value="25-59">25–59</option>
+            <option value="60+">60 and over</option>
+            <option value="NS">Not stated</option>
+          </select>
+        </div>
+        <div class="f">
+          <label for="tgroup">Target group</label>
+          <select id="tgroup"></select>
+        </div>
+        <div class="f">
+          <label for="disab">Disability reported <span class="opt">— optional</span></label>
+          <select id="disab">
+            <option value="">— choose —</option>
+            <option value="Y">Yes, reported</option>
+            <option value="N">No</option>
+            <option value="NS">Not asked</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="card">
+      <div class="step"><span class="n">4</span><h2>What was provided</h2></div>
+      <div class="row three">
+        <div class="f">
+          <label for="service">Service at this contact</label>
+          <select id="service"></select>
+          <div class="help">Draft list. The agreed service list is an <b>open action item</b> from
+            15 September and is not settled.</div>
+        </div>
+        <div class="f">
+          <label for="modality">Modality</label>
+          <select id="modality"></select>
+        </div>
+        <div class="f">
+          <label for="mins">Length in minutes <span class="opt">— optional</span></label>
+          <input type="text" id="mins" inputmode="numeric" placeholder="30" pattern="\d{1,4}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="f">
+          <label for="outcome">Outcome of this contact</label>
+          <select id="outcome">
+            <option value="">— choose —</option>
+            <option value="CLOSE">Supported, no further contact planned</option>
+            <option value="FOLLOW">Follow-up arranged with us</option>
+            <option value="REFER">Referred on — record it on the referral form</option>
+            <option value="DECL">Support declined</option>
+            <option value="OTH">Other</option>
+          </select>
+        </div>
+        <div class="f">
+          <label for="notes">Anything the coordination team needs to know <span class="opt">— optional</span></label>
+          <input type="text" id="notes" maxlength="200" placeholder="About the service or the site — not about the person">
+          <div class="help">Never a clinical detail, a diagnosis, or anything that would identify someone.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="card">
+      <div class="step"><span class="n">5</span><h2>Save</h2></div>
+      <div id="errs"></div>
+      <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
+        <button type="submit" class="btn">Save this contact</button>
+        <button type="button" class="btn ghost" id="csvBtn">Export CSV</button>
+        <button type="button" class="btn ghost" id="jsonBtn">Export JSON</button>
+        <button type="button" class="btn grey" id="clearBtn">Clear everything on this device</button>
+        <span class="xs" id="count"></span>
+      </div>
+      <div class="f" style="margin-top:16px">
+        <label>What would be sent, if there were anywhere to send it</label>
+        <pre id="payload" class="pay">—</pre>
+        <div class="help">Shown so the Technical Working Group can see exactly what leaves the handset before
+          agreeing to collect anything. Note what is <i>not</i> in it.</div>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<script src="../hub/assets/codes.js"></script>
+<script src="../hub/assets/l1.js"></script>
+<script src="../hub/assets/fb-config.js"></script>
+<script src="../hub/assets/fb.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = window.CODES, L = window.L1, KIND = "contact";
+  var $ = function (id) { return document.getElementById(id); };
+
+  var SERVICES = [
+    { code: "PFA",  name: "Psychological first aid" },
+    { code: "IND",  name: "Individual counselling session" },
+    { code: "PSE",  name: "Psychoeducation / information" },
+    { code: "CLIN", name: "Clinical consultation (prescriber present)" },
+    { code: "CM",   name: "Case management / follow-up visit" },
+    { code: "FAM",  name: "Family support" },
+    { code: "REFO", name: "Referral only, no other service" },
+    { code: "OTH",  name: "Other" }
+  ];
+
+  L.fillSelect($("org"), C.ORGS.concat([{ code: "OTHER", name: "Other — not listed", np: "अन्य — सूचीमा नभएको", np_src: "draft" }]));
+  L.fillSelect($("cadre"), C.CADRES);
+  L.fillSelect($("district"), C.DISTRICTS);
+  L.fillSelect($("tgroup"), C.TARGET_GROUPS);
+  L.fillSelect($("modality"), C.MODALITIES);
+  L.fillSelect($("service"), SERVICES);
+  $("dateAD").value = L.today();
+
+  /* remembered fields */
+  ["org", "focalName", "focalPhone", "cadre"].forEach(function (id) {
+    var v = L.recall(id); if (v) $(id).value = v;
+    $(id).addEventListener("change", function () { L.remember(id, $(id).value); });
+  });
+  if (!L.storageWorks()) {
+    $("storeWarn").innerHTML = "<b>This browser is not keeping records</b> — private mode, or site data " +
+      "is blocked. Export before you close the tab.";
+  }
+
+  /* site list follows district */
+  function refreshSites() {
+    var d = $("district").value;
+    var list = C.FORM_SITES.filter(function (s) { return s.source !== "escape" && (!d || s.district === d); });
+    L.fillSelect($("site"), list.concat([{ code: "OTHER", name: "Other — not on the roster" }]));
+    $("siteHelp").textContent = list.length
+      ? list.length + " site(s) on the roster for this district."
+      : "No roster site recorded for this district — choose Other and name it.";
+  }
+  $("district").addEventListener("change", refreshSites);
+  refreshSites();
+  $("site").addEventListener("change", function () {
+    $("siteOtherWrap").hidden = $("site").value !== "OTHER";
+  });
+  $("org").addEventListener("change", function () {
+    $("orgOtherWrap").hidden = $("org").value !== "OTHER";
+  });
+
+  /* contact code, live */
+  function code() {
+    return L.contactCode([$("ini").value, $("byear").value, $("sex").value, $("mun").value]);
+  }
+  function refreshCode() {
+    var c = code();
+    $("codeOut").textContent = c || "— fill the four boxes above —";
+    $("codeOut").className = c ? "codebox on" : "codebox";
+    refreshPayload();
+  }
+  ["ini", "byear", "sex", "mun"].forEach(function (id) {
+    $(id).addEventListener("input", refreshCode);
+    $(id).addEventListener("change", refreshCode);
+  });
+
+  /* location */
+  var geo = null;
+  $("geoBtn").addEventListener("click", function () {
+    $("geoOut").textContent = "Looking…";
+    L.geo(function (g) {
+      geo = g;
+      $("geoOut").innerHTML = "<b>" + g.lat.toFixed(3) + ", " + g.lon.toFixed(3) + "</b> — rounded to " +
+        "about 100 m" + (g.accuracy_m ? " (device accuracy ±" + g.accuracy_m + " m)" : "");
+      refreshPayload();
+    }, function (msg) {
+      geo = null;
+      $("geoOut").textContent = msg + " You can leave the pin empty and name the ward instead.";
+    });
+  });
+
+  /* build the record */
+  function nr() {
+    var r = document.querySelector('input[name="nr"]:checked');
+    return r ? r.value : "";
+  }
+  function record() {
+    return {
+      schema: "mhpss-np-contact/0.1.0-draft",
+      kind: "service_contact",
+      org: $("org").value === "OTHER" ? ($("orgOther").value || "OTHER") : $("org").value,
+      focal_name: $("focalName").value.trim(),
+      focal_phone: $("focalPhone").value.trim(),
+      provider_type: $("cadre").value,
+      date_ad: $("dateAD").value,
+      date_bs: $("dateBS").value.trim(),
+      date_bs_converted: false,
+      district: $("district").value,
+      site: $("site").value === "OTHER" ? ("OTHER:" + ($("siteOther").value || "")) : $("site").value,
+      ward_text: $("ward").value.trim(),
+      lat: geo ? geo.lat : "",
+      lon: geo ? geo.lon : "",
+      geo_rounded_dp: geo ? geo.rounded_to_dp : "",
+      client_status: nr(),
+      contact_code: code(),
+      sex: $("sex").value,
+      age_band: $("ageband").value,
+      target_group: $("tgroup").value,
+      disability_reported: $("disab").value,
+      service: $("service").value,
+      modality: $("modality").value,
+      minutes: $("mins").value.trim(),
+      outcome: $("outcome").value,
+      note: $("notes").value.trim()
+    };
+  }
+  var COLS = Object.keys(record()).concat(["_saved"]);
+
+  function refreshPayload() {
+    var r = record();
+    $("payload").textContent = JSON.stringify(r, null, 2);
+  }
+
+  function problems(r) {
+    var e = [];
+    if (!r.org) e.push("Choose the reporting organisation.");
+    if (!r.focal_name) e.push("Give the focal point name.");
+    if (!r.provider_type) e.push("Choose the type of service provider.");
+    if (!r.date_ad) e.push("Give the Gregorian date.");
+    if (r.date_ad && r.date_ad > L.today()) e.push("The date is in the future.");
+    if (!r.district) e.push("Choose the district.");
+    if (!r.site) e.push("Choose the site.");
+    if (r.site === "OTHER:") e.push("Name the site you chose “Other” for.");
+    if (!r.client_status) e.push("Say whether this is a new or a returning person.");
+    if (r.client_status !== "UNK" && !r.contact_code)
+      e.push("Fill the four boxes so a contact code can be worked out — or choose “Not known”.");
+    if ($("byear").value && !/^\d{4}$/.test($("byear").value)) e.push("Year of birth should be four digits.");
+    if ($("byear").value && (+$("byear").value < 1900 || +$("byear").value > new Date().getFullYear()))
+      e.push("Check the year of birth.");
+    if (!r.age_band) e.push("Choose the age band.");
+    if (!r.target_group) e.push("Choose the target group.");
+    if (!r.service) e.push("Choose the service provided.");
+    if (!r.modality) e.push("Choose the modality.");
+    if (!r.outcome) e.push("Choose the outcome.");
+    if (r.date_bs && !/^\d{4}-\d{2}-\d{2}$/.test(r.date_bs))
+      e.push("Bikram Sambat date should look like 2083-05-29, or be left empty.");
+    return e;
+  }
+
+  function showCount() {
+    var n = L.all(KIND).length;
+    $("count").textContent = n ? n + " contact(s) held on this device" : "nothing saved on this device yet";
+  }
+  showCount();
+
+  $("f").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var r = record(), e = problems(r);
+    if (e.length) {
+      $("errs").innerHTML = '<div class="banner stop"><b>Not saved.</b><ul><li>' +
+        e.map(function (x) { return x.replace(/</g, "&lt;"); }).join("</li><li>") + "</li></ul></div>";
+      $("errs").scrollIntoView({ block: "center" });
+      return;
+    }
+    var res = L.save(KIND, r);
+    /* the four identifying boxes are cleared here — they were only ever
+       inputs to the code, and the code is already in the saved record */
+    ["ini", "byear", "mun"].forEach(function (id) { $(id).value = ""; });
+    $("sex").value = ""; $("mins").value = ""; $("notes").value = "";
+    document.querySelectorAll('input[name="nr"]').forEach(function (i) { i.checked = false; });
+    refreshCode();
+    $("errs").innerHTML = '<div class="banner ok"><b>Saved on this device.</b> ' +
+      (res.persisted ? "" : "Storage is blocked, so it is only in memory — export before closing. ") +
+      "The name details have been cleared; the contact code is kept. Nothing was sent anywhere, because " +
+      "there is nowhere to send it.</div>";
+    showCount();
+  });
+
+  $("csvBtn").addEventListener("click", function () {
+    var list = L.all(KIND);
+    if (!list.length) { alert("Nothing saved on this device yet."); return; }
+    L.download("mhpss_np_contacts_" + L.stamp() + ".csv", L.toCSV(list, COLS), "text/csv");
+  });
+  $("jsonBtn").addEventListener("click", function () {
+    var list = L.all(KIND);
+    if (!list.length) { alert("Nothing saved on this device yet."); return; }
+    L.download("mhpss_np_contacts_" + L.stamp() + ".json", JSON.stringify(list, null, 2), "application/json");
+  });
+  $("clearBtn").addEventListener("click", function () {
+    if (!L.all(KIND).length) { alert("Nothing saved on this device yet."); return; }
+    if (confirm("Delete every contact held in this browser? Export first if you need them — this cannot be undone.")) {
+      L.clear(KIND); showCount();
+      $("errs").innerHTML = '<div class="banner"><b>Cleared.</b></div>';
+    }
+  });
+
+  refreshCode();
+})();
+</script>
+<script src="pwa.js"></script>
+<!-- The bilingual engine. On a page that is not yet keyed up it still earns
+     its place: it sets data-lang, which is what makes the Nepali words in
+     the code lists appear in the dropdowns, and it mounts the ENG/NEP
+     toggle and an honest notice saying the prose is still English. -->
+<script src="../hub/assets/mark.js"></script>
+<script src="../hub/assets/icons.js"></script>
+<script src="../hub/assets/i18n-strings.js"></script>
+<script src="../hub/assets/i18n.js"></script>
+</body>
+</html>

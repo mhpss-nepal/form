@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Layer 1 · Field forms — MHPSS Nepal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Lora + Manrope. design.css declares Georgia / system fallbacks, so a
+     failed font request costs typography and never legibility -- which
+     matters on the field forms, where there may be no signal at all. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Manrope:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="../hub/assets/app.css">
+<link rel="stylesheet" href="../hub/assets/design.css">
+<link rel="stylesheet" href="../hub/assets/brand.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1d1d1b">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MHPSS Field">
+</head>
+<body>
+<div style="background:#d03b3b;color:#fff;font:700 12.5px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;letter-spacing:.02em;text-align:center;padding:7px 16px;padding-top:calc(7px + env(safe-area-inset-top,0px))"><span data-i18n="banner.trial"></span><span data-i18n="banner.trialSub"></span></div>
+
+<div class="top">
+  <div>
+    <div class="brand" data-i18n="nav.forms"></div>
+    <div class="sub" data-i18n="page.index.sub"></div>
+  </div>
+  <div class="spacer"></div>
+  <a href="../hub/">← <span data-i18n="nav.hub"></span></a>
+  <a href="../hub/"><span data-i18n="nav.coordination"></span></a>
+  <a href="../hub/inbox.html"><span data-i18n="nav.inbox"></span></a>
+  <a href="../method.html"><span data-i18n="nav.method"></span></a>
+</div>
+
+<div class="wrap">
+
+  <div class="ml-hero">
+    <div class="eyebrow" data-i18n="ml.p012"></div>
+    <h1 data-i18n="ml.p036"></h1>
+    <p class="lede" data-i18n="ml.p030" data-i18n-html></p>
+    <div class="ml-phone">
+      <button class="pb" id="copyAll" data-url="./" data-i18n="ml.p076"></button>
+      <button class="pb" id="qrAll" data-i18n="ml.p075"></button>
+      <a class="pb" href="cards.html" data-i18n="ml.p078"></a>
+      <span class="pn" data-i18n="ml.p077"></span>
+    </div>
+    <div class="qrbox" id="qrAllBox" hidden></div>
+    <p class="pn" style="margin-top:8px" data-i18n="ml.p079"></p>
+  </div>
+
+  <div class="banner stop" data-i18n="ml.p011" data-i18n-html></div>
+
+  <h2 data-i18n="ml.p040"></h2>
+
+  <div class="ml-grid">
+
+    <div class="ml-card svc">
+      <div class="tag" data-i18n="ml.p010"></div>
+      <h3 data-i18n="ml.p048"></h3>
+      <p data-i18n="ml.p029" data-i18n-html></p>
+      <p class="src" data-i18n="ml.p028"></p>
+      <div class="ml-actions">
+        <a href="4ws-report.html" data-i18n="ml.act.open"></a>
+        <button class="sec" data-url="4ws-report.html" onclick="COPY(this)" data-i18n="ml.p074"></button>
+        <button class="sec" data-qr="4ws" onclick="QRT(this)" data-i18n="ml.act.qr"></button>
+      </div>
+      <div class="qrbox" hidden></div>
+    </div>
+
+    <div class="ml-card svc">
+      <div class="tag" data-i18n="ml.p009"></div>
+      <h3 data-i18n="ml.p047"></h3>
+      <p data-i18n="ml.p027" data-i18n-html></p>
+      <p class="src" data-i18n="ml.p026"></p>
+      <div class="ml-actions">
+        <a href="contact.html" data-i18n="ml.act.open"></a>
+        <button class="sec" data-url="contact.html" onclick="COPY(this)" data-i18n="ml.p073"></button>
+        <button class="sec" data-qr="contact" onclick="QRT(this)" data-i18n="ml.act.qr"></button>
+      </div>
+      <div class="qrbox" hidden></div>
+    </div>
+
+    <div class="ml-card clin">
+      <div class="tag" data-i18n="ml.p008"></div>
+      <h3 data-i18n="ml.p046"></h3>
+      <p data-i18n="ml.p025" data-i18n-html></p>
+      <p class="src" data-i18n="ml.p024"></p>
+      <div class="ml-actions">
+        <a href="phq9.html" data-i18n="ml.act.open"></a>
+        <button class="sec" data-url="phq9.html" onclick="COPY(this)" data-i18n="ml.p072"></button>
+        <button class="sec" data-qr="phq9" onclick="QRT(this)" data-i18n="ml.act.qr"></button>
+      </div>
+      <div class="qrbox" hidden></div>
+    </div>
+
+    <div class="ml-card ref">
+      <div class="tag" data-i18n="ml.p007"></div>
+      <h3 data-i18n="ml.p045"></h3>
+      <p data-i18n="ml.p023"></p>
+      <p class="src" data-i18n="ml.p022"></p>
+      <div class="ml-actions">
+        <a href="referral.html" data-i18n="ml.act.open"></a>
+        <button class="sec" data-url="referral.html" onclick="COPY(this)" data-i18n="ml.p071"></button>
+        <button class="sec" data-qr="referral" onclick="QRT(this)" data-i18n="ml.act.qr"></button>
+      </div>
+      <div class="qrbox" hidden></div>
+    </div>
+
+    <div class="ml-card selfr">
+      <div class="tag" data-i18n="ml.p006"></div>
+      <h3 data-i18n="ml.p044"></h3>
+      <p data-i18n="ml.p021"></p>
+      <p class="src" data-i18n="ml.p020"></p>
+      <div class="ml-actions">
+        <a href="selfreport.html" data-i18n="ml.act.open"></a>
+        <button class="sec" data-url="selfreport.html" onclick="COPY(this)" data-i18n="ml.p070"></button>
+        <button class="sec" data-qr="self" onclick="QRT(this)" data-i18n="ml.act.qr"></button>
+      </div>
+      <div class="qrbox" hidden></div>
+    </div>
+
+    <div class="ml-card todo">
+      <div class="tag" data-i18n="ml.p005"></div>
+      <h3 data-i18n="ml.p043" data-i18n-html></h3>
+      <p data-i18n="ml.p019"></p>
+      <p class="src" data-i18n="ml.p018"></p>
+    </div>
+
+    <div class="ml-card todo">
+      <div class="tag" data-i18n="ml.p004"></div>
+      <h3 data-i18n="ml.p042" data-i18n-html></h3>
+      <p data-i18n="ml.p017"></p>
+      <p class="src" data-i18n="ml.p016"></p>
+    </div>
+
+    <div class="ml-card todo">
+      <div class="tag" data-i18n="ml.p003"></div>
+      <h3 data-i18n="ml.p041" data-i18n-html></h3>
+      <p data-i18n="ml.p015"></p>
+      <p class="src" data-i18n="ml.p014"></p>
+    </div>
+
+  </div>
+
+  <h2 data-i18n="ml.p039"></h2>
+  <div class="ml-note">
+    <ul>
+      <li data-i18n="ml.p035" data-i18n-html></li>
+      <li data-i18n="ml.p034" data-i18n-html></li>
+      <li data-i18n="ml.p033" data-i18n-html></li>
+      <li data-i18n="ml.p032" data-i18n-html></li>
+      <li data-i18n="ml.p031" data-i18n-html></li>
+    </ul>
+  </div>
+
+  <h2 data-i18n="ml.p038"></h2>
+  <p class="lede" data-i18n="ml.p013"></p>
+  <div class="tw">
+  <table class="prov">
+    <tr><th data-i18n="ml.p051"></th><th data-i18n="ml.p050"></th><th data-i18n="ml.p049"></th></tr>
+    <tr>
+      <td data-i18n="ml.p069"></td>
+      <td data-i18n="ml.p068"></td>
+      <td data-i18n="ml.p067"></td>
+    </tr>
+    <tr>
+      <td data-i18n="ml.p066"></td>
+      <td data-i18n="ml.p065"></td>
+      <td data-i18n="ml.p064"></td>
+    </tr>
+    <tr>
+      <td data-i18n="ml.p063"></td>
+      <td data-i18n="ml.p062"></td>
+      <td data-i18n="ml.p061"></td>
+    </tr>
+    <tr>
+      <td data-i18n="ml.p060"></td>
+      <td data-i18n="ml.p059"></td>
+      <td data-i18n="ml.p058"></td>
+    </tr>
+    <tr>
+      <td data-i18n="ml.p057"></td>
+      <td data-i18n="ml.p056"></td>
+      <td data-i18n="ml.p055"></td>
+    </tr>
+    <tr>
+      <td data-i18n="ml.p054"></td>
+      <td data-i18n="ml.p053" data-i18n-html></td>
+      <td data-i18n="ml.p052"></td>
+    </tr>
+  </table>
+  </div>
+
+  <h2 data-i18n="ml.p037"></h2>
+  <div class="banner warn" data-i18n="ml.p002" data-i18n-html></div>
+  <div class="banner" data-i18n="ml.p001" data-i18n-html></div>
+
+  <!-- Filled by assets/brand.js. Emblems are off until the official
+       files are supplied — see that file before changing anything here. -->
+  <div class="attrib"></div>
+</div>
+
+<script src="../hub/assets/qr.js"></script>
+<script src="../hub/assets/fb-config.js"></script>
+<script src="../hub/assets/fb.js"></script>
+<script>
+function flash(btn, text){
+  var old = btn.textContent; btn.textContent = text;
+  setTimeout(function(){ btn.textContent = old; }, 1600);
+}
+function COPY(btn){
+  /* The button carries a RELATIVE path and it is resolved here, against the
+     page's own address. So the link a field worker receives over WhatsApp is
+     correct on whatever address this site is on -- github.io today, a real
+     domain later -- and does not die every time the address changes.
+     (Sadar Hati learned this one the hard way and wrote it down; the QR codes
+     cannot be relative in the same way, because a phone camera has no base
+     address to resolve against -- those are regenerated by tools/qr-build.py
+     and checked on every deploy by tools/qr-check.py.) */
+  var rel = btn.getAttribute('data-url');
+  var url;
+  try { url = new URL(rel, window.location.href).href; }
+  catch (e) { url = rel; }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(function(){ flash(btn, '✓ Copied'); },
+                                           function(){ flash(btn, url); });
+  } else { flash(btn, url); }
+}
+function svgFor(key){
+  var d = window.QR && window.QR[key];
+  if (!d) return '<p class="xs">QR not available for this form.</p>';
+  var rows = d.m.split(','), n = d.n, q = 2, size = n + 2*q, r = '';
+  for (var y = 0; y < n; y++) {
+    var row = rows[y], x = 0;
+    while (x < n) {
+      if (row[x] === '1') {
+        var run = 1;
+        while (x + run < n && row[x + run] === '1') run++;
+        r += '<rect x="' + (x + q) + '" y="' + (y + q) + '" width="' + run + '" height="1"/>';
+        x += run;
+      } else x++;
+    }
+  }
+  return '<svg viewBox="0 0 ' + size + ' ' + size + '" shape-rendering="crispEdges" role="img" '
+       + 'aria-label="QR code for ' + d.url + '">'
+       + '<rect width="' + size + '" height="' + size + '" fill="#fff"/>'
+       + '<g fill="#20313b">' + r + '</g></svg>'
+       + '<div class="u">' + d.url + '</div>'
+       + '<p class="xs">Print this page, or screenshot the code, and put it where people can reach it.</p>';
+}
+function QRT(btn){
+  var box = btn.closest('.ml-card').querySelector('.qrbox');
+  if (!box.hidden) { box.hidden = true; return; }
+  if (!box.innerHTML) box.innerHTML = svgFor(btn.getAttribute('data-qr'));
+  box.hidden = false;
+}
+document.getElementById('copyAll').addEventListener('click', function(){ COPY(this); });
+document.getElementById('qrAll').addEventListener('click', function(){
+  var box = document.getElementById('qrAllBox');
+  if (!box.hidden) { box.hidden = true; return; }
+  if (!box.innerHTML) box.innerHTML = svgFor('master');
+  box.hidden = false;
+});
+</script>
+<script src="pwa.js"></script>
+<script>window.BRAND_PREFIX="../";</script>
+<script src="../hub/assets/brand.js"></script>
+<script src="../hub/assets/mark.js"></script>
+<script src="../hub/assets/icons.js"></script>
+<script src="../hub/assets/i18n-strings.js"></script>
+<script src="../hub/assets/i18n.js"></script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Form cards — MHPSS Nepal field forms</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#1d1d1b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../hub/assets/app.css">
+<link rel="stylesheet" href="../hub/assets/design.css">
+<style>
+/* ---------------------------------------------------------------------
+   A PRINT SHEET, not a web page. Asked for by the MHPSS data system review
+   of 16 September 2026 and flagged urgent there: every form's QR on one
+   page or card that a field worker can be handed.
+
+   Two deliberate departures from the rest of the site:
+
+   · BOTH LANGUAGES ARE ON THE CARD. Every other page carries a language
+     switch; a printed card cannot switch, and the person holding it may
+     read either language. So English and Nepali sit together on the card
+     and assets/i18n.js is not loaded here at all.
+   · IT IS LAID OUT IN MILLIMETRES. Six cards, two by three on A4, each
+     about 92 by 82mm -- a pocket size that still leaves the QR big enough
+     for a cheap phone camera to read across a table.
+
+   The QR matrices come from assets/qr.js. They are pre-computed, so they
+   render with no signal, and the address is inside the matrix -- see the
+   header of that file before touching anything about the addresses.
+   --------------------------------------------------------------------- */
+:root{ --card-gap:6mm }
+body{background:var(--grey-1);font-family:var(--sans);color:var(--hc-ink);margin:0}
+.sheetwrap{max-width:210mm;margin:0 auto;padding:12px}
+.ctop{display:flex;align-items:center;gap:11px;background:var(--hc-ink);color:#fff;
+      border-bottom:3px solid var(--wh);padding:11px 14px;border-radius:8px 8px 0 0}
+.ctop b{display:block;font-size:15px;font-weight:700;line-height:1.2}
+.ctop i{display:block;font-style:normal;font-size:10.5px;letter-spacing:1.2px;
+        text-transform:uppercase;color:var(--wh-3);font-weight:700;margin-top:2px}
+.ctop .sp{flex:1}
+.ctop a{color:var(--wh-b);text-decoration:none;font-size:12.5px;font-weight:700}
+.pbar{background:#fff;border:1px solid var(--grey-3);border-top:0;padding:11px 14px;
+      display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:12.5px;
+      color:var(--hc-mute);border-radius:0 0 8px 8px;margin-bottom:14px}
+.pbar .gbtn{margin-left:auto}
+
+.sheet6{background:#fff;border:1px solid var(--grey-3);border-radius:8px;padding:8mm}
+.shead{display:flex;align-items:flex-start;gap:10px;padding-bottom:5mm;
+       border-bottom:2px solid var(--hc-ink);margin-bottom:6mm}
+.shead .ti{flex:1;min-width:0}
+.shead h1{margin:0;font-size:17px;font-weight:700;color:var(--wh-dd);line-height:1.25}
+.shead .np{display:block;font-size:13px;font-weight:600;color:var(--hc-ink);margin-top:1px}
+.shead .who{font-size:10.5px;color:var(--hc-mute);line-height:1.45;margin-top:4px}
+.shead .stamp{flex:0 0 auto;font-size:10px;font-weight:700;letter-spacing:.6px;
+              text-transform:uppercase;color:#fff;background:#a3201f;border-radius:3px;
+              padding:3px 8px}
+
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:var(--card-gap)}
+.qcard{border:1.5px dashed var(--grey-3);border-radius:4px;padding:5mm;
+       display:flex;flex-direction:column;min-height:80mm}
+.qcard .nm{font-size:13.5px;font-weight:700;color:var(--wh-dd);line-height:1.25}
+.qcard .nmnp{font-size:12px;font-weight:600;color:var(--hc-ink);line-height:1.3;
+             margin-top:1px}
+.qcard .use{font-size:10.5px;line-height:1.5;color:var(--hc-mute);margin:4px 0 0}
+.qcard .usenp{font-size:10px;line-height:1.5;color:var(--hc-mute);margin:2px 0 0}
+.qcard .qwrap{margin:4mm auto 0;width:38mm}
+.qcard .qwrap svg{display:block;width:100%;height:auto;border:1px solid var(--grey-2)}
+.qcard .qurl{font-size:8.5px;color:var(--hc-mute);word-break:break-all;text-align:center;
+          margin-top:2mm;line-height:1.35;font-family:ui-monospace,Menlo,monospace}
+.qcard.first{border-style:solid;border-color:var(--wh-d);border-width:2px}
+.qcard.first .nm{color:var(--wh-d)}
+.qcard .tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.5px;
+            text-transform:uppercase;color:var(--wh-dd);background:var(--wh-t);
+            border:1px solid var(--wh-b);border-radius:3px;padding:1px 6px;margin-bottom:3px}
+
+.sfoot{margin-top:6mm;padding-top:4mm;border-top:1px solid var(--grey-3);
+       font-size:9.5px;line-height:1.55;color:var(--hc-mute)}
+.sfoot b{color:var(--hc-ink)}
+.sfoot .row{display:grid;grid-template-columns:1fr 1fr;gap:6mm}
+
+@media (max-width:780px){
+  .cards,.sfoot .row{grid-template-columns:1fr}
+  .qcard{min-height:0}
+}
+
+/* ---------------- print ---------------- */
+/* ---------------- print ----------------
+   Tuned to ONE A4 page, measured not guessed: 297mm less 2x8mm margins leaves
+   281mm. Header 17mm + footer 25mm + two 4mm gaps leaves about 231mm for three
+   rows, so a card gets 71mm and the QR 34mm. A 34mm code with 33 modules is
+   about 0.9mm a module, which decodes off a table; the sheet was decoded back
+   with OpenCV at 150 and 300 dpi to check, not assumed.
+   Do NOT also pass a margin to the print dialog or to a PDF renderer -- the
+   @page margin here already provides it, and doubling it pushed the footer to
+   a second page. */
+@media print{
+  @page{ size:A4 portrait; margin:8mm }
+  html,body{background:#fff}
+  .ctop,.pbar,.noprint{display:none!important}
+  .sheetwrap{max-width:none;padding:0}
+  .sheet6{border:0;border-radius:0;padding:0}
+  .shead{padding-bottom:3mm;margin-bottom:4mm}
+  .shead h1{font-size:14px}
+  .shead .np{font-size:11px}
+  .shead .who{font-size:9px}
+  .cards{gap:4mm}
+  .qcard{break-inside:avoid;page-break-inside:avoid;min-height:71mm;padding:3mm}
+  .qcard .nm{font-size:12px}
+  .qcard .nmnp{font-size:10.5px}
+  .qcard .use{font-size:9px;margin-top:2px}
+  .qcard .usenp{font-size:8.5px}
+  .qcard .qwrap{width:34mm;margin-top:2mm}
+  .qcard .qurl{font-size:7.5px;margin-top:1.5mm}
+  .sfoot{margin-top:3mm;padding-top:2mm;font-size:7.5px;line-height:1.45}
+  .sfoot .row{gap:5mm}
+  .sfoot p{margin:0 0 1mm}
+  .sheetwrap{padding:0;margin:0}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<div class="sheetwrap">
+
+  <div class="ctop noprint">
+    <span data-mark="34"></span>
+    <span>
+      <b>Form cards</b>
+      <i>MHPSS Nepal &middot; field forms</i>
+    </span>
+    <span class="sp"></span>
+    <a href="./">&larr; Forms</a>
+    <a href="../hub/">Dashboard</a>
+  </div>
+  <div class="pbar noprint">
+    One A4 sheet, six cut-out cards. Print it, cut along the dashed lines, and give
+    a card to each field worker. It also works with no signal once the form pages
+    have been opened once.
+    <a class="gbtn crimson" href="#" id="printBtn">Print this sheet</a>
+  </div>
+
+  <div class="sheet6">
+
+    <div class="shead">
+      <span data-mark="40"></span>
+      <div class="ti">
+        <h1>MHPSS field forms &mdash; scan to open</h1>
+        <span class="np">मानसिक स्वास्थ्य र मनोसामाजिक सहयोग &mdash; फिल्ड फारम</span>
+        <div class="who">स्वास्थ्य तथा खाद्य स्वच्छता मन्त्रालय / Ministry of Health and Food
+        Safety &middot; EDCD &middot; WHO Nepal &middot; MHPSS Technical Working Group, Health Cluster
+        &middot; Rasuwa&ndash;Bhotekoshi flood response</div>
+      </div>
+      <span class="stamp">Draft &middot; not agreed</span>
+    </div>
+
+    <div class="cards">
+
+      <div class="qcard first">
+        <span class="tag">Start here</span>
+        <div class="nm">All five forms</div>
+        <div class="nmnp">सबै पाँच फारम</div>
+        <p class="use">Scan this one if you are not sure which form you need. It opens the
+        list, and every form on it works offline afterwards.</p>
+        <p class="usenp">कुन फारम चाहिने हो निश्चित नभएमा यही स्कयान गर्नुहोस्।</p>
+        <div class="qwrap" data-qr="master"></div>
+        <div class="qurl" data-qu="master"></div>
+      </div>
+
+      <div class="qcard">
+        <div class="nm">Activity report (4Ws)</div>
+        <div class="nmnp">क्रियाकलाप प्रतिवेदन</div>
+        <p class="use">One report per organisation, per site, per day. Who did what, where,
+        how many people. This is the form the coordination figures are built from.</p>
+        <p class="usenp">प्रति संस्था, प्रति स्थल, प्रति दिन एक प्रतिवेदन।</p>
+        <div class="qwrap" data-qr="4ws"></div>
+        <div class="qurl" data-qu="4ws"></div>
+      </div>
+
+      <div class="qcard">
+        <div class="nm">Service contact record</div>
+        <div class="nmnp">सेवा सम्पर्क अभिलेख</div>
+        <p class="use">One record per session with a person. No name, no phone number &mdash;
+        a code, so the same person can be followed up without being identified.</p>
+        <p class="usenp">व्यक्तिसँगको प्रत्येक सत्रको एक अभिलेख। नाम वा फोन नम्बर लेख्नु पर्दैन।</p>
+        <div class="qwrap" data-qr="contact"></div>
+        <div class="qurl" data-qu="contact"></div>
+      </div>
+
+      <div class="qcard">
+        <div class="nm">PHQ-9 follow-up</div>
+        <div class="nmnp">पिएचक्यू-९ अनुगमन</div>
+        <p class="use">Only where a counsellor is already following someone up, and only with
+        their agreement. Not a screening tool to be used on everyone.</p>
+        <p class="usenp">परामर्शकर्ताले अनुगमन गरिरहेको व्यक्तिको हकमा मात्र, उनको सहमतिमा।</p>
+        <div class="qwrap" data-qr="phq9"></div>
+        <div class="qurl" data-qu="phq9"></div>
+      </div>
+
+      <div class="qcard">
+        <div class="nm">Referral record</div>
+        <div class="nmnp">प्रेषण (रेफर) अभिलेख</div>
+        <p class="use">Referral in or out: which organisation, who referred, the date, the
+        district, and whether the person arrived.</p>
+        <p class="usenp">भित्र वा बाहिर प्रेषण &mdash; संस्था, प्रेषण गर्ने, मिति, जिल्ला।</p>
+        <div class="qwrap" data-qr="referral"></div>
+        <div class="qurl" data-qu="referral"></div>
+      </div>
+
+      <div class="qcard">
+        <div class="nm">How are you coping</div>
+        <div class="nmnp">तपाईं कसरी सामना गर्दै हुनुहुन्छ</div>
+        <p class="use">For the person themselves, not for a worker to fill in. It gives them
+        something to read and a way to ask for help.</p>
+        <p class="usenp">व्यक्ति आफैंले भर्ने फारम &mdash; कार्यकर्ताले भर्ने होइन।</p>
+        <div class="qwrap" data-qr="self"></div>
+        <div class="qurl" data-qu="self"></div>
+      </div>
+
+    </div>
+
+    <div class="sfoot">
+      <div class="row">
+        <div>
+          <p><b>With no signal.</b> Open a form once while you have a connection. After that
+          it opens and saves on the phone with no signal at all, and sends by itself the next
+          time there is one. Nothing is lost by filling a form in a holding centre.</p>
+          <p><b>No names.</b> None of these forms will accept a name, a phone number, a date
+          of birth or a national ID. If a field seems to want one, it does not &mdash; use the
+          code.</p>
+        </div>
+        <div>
+          <p><b>सिग्नल नभएमा।</b> इन्टरनेट भएको बेला फारम एकचोटि खोल्नुहोस्। त्यसपछि सिग्नल नभएपनि
+          फारम खुल्छ र फोनमै सुरक्षित हुन्छ, र सिग्नल आउनासाथ आफै पठाउँछ।</p>
+          <p><b>नाम लेख्नु पर्दैन।</b> यी फारमहरूले नाम, फोन नम्बर, जन्म मिति वा परिचयपत्र नम्बर
+          स्वीकार गर्दैनन्।</p>
+        </div>
+      </div>
+      <p style="margin-top:3mm"><b>Draft, September 2026.</b> These forms and the dashboard
+      behind them are not yet agreed with EDCD or the MHPSS Technical Working Group, and every figure now
+      showing in them is synthetic. Prepared for the WHO Nepal mental health team, the Ministry
+      of Health and Food Safety and EDCD. &nbsp;<span id="cardHost"></span></p>
+    </div>
+
+  </div>
+</div>
+
+<script src="../hub/assets/qr.js"></script>
+<script src="../hub/assets/mark.js"></script>
+<script>
+(function () {
+  /* The same renderer as form/index.html: runs of set modules become one <rect>
+     each, which keeps a 33-module matrix to a few hundred bytes of markup and
+     prints without a blur. A 4-module quiet zone, not 2 -- a printed card gets
+     scanned off a table at an angle and the spec's quiet zone is the thing that
+     makes that work. */
+  var Q = 4;
+  function svgFor(key) {
+    var d = window.QR && window.QR[key];
+    if (!d) return null;
+    var rows = d.m.split(','), n = d.n, size = n + 2 * Q, r = '';
+    for (var y = 0; y < n; y++) {
+      var row = rows[y], x = 0;
+      while (x < n) {
+        if (row[x] === '1') {
+          var run = 1;
+          while (x + run < n && row[x + run] === '1') run++;
+          r += '<rect x="' + (x + Q) + '" y="' + (y + Q) + '" width="' + run + '" height="1"/>';
+          x += run;
+        } else x++;
+      }
+    }
+    return '<svg viewBox="0 0 ' + size + ' ' + size + '" shape-rendering="crispEdges" '
+         + 'role="img" aria-label="QR code that opens ' + d.url + '">'
+         + '<rect width="' + size + '" height="' + size + '" fill="#fff"/>'
+         + '<g fill="#000">' + r + '</g></svg>';
+  }
+  var missing = 0;
+  Array.prototype.forEach.call(document.querySelectorAll('[data-qr]'), function (el) {
+    var s = svgFor(el.getAttribute('data-qr'));
+    if (s) el.innerHTML = s; else { missing++; el.textContent = '—'; }
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-qu]'), function (el) {
+    var d = window.QR && window.QR[el.getAttribute('data-qu')];
+    /* the address is printed as text as well: a card whose QR will not scan is
+       still usable if someone can type the address. The class is .qurl, not
+       .u: design.css uses .u for the unit-chart square (width 18px), and that
+       collision squeezed the address to three characters a line. */
+    if (d) el.textContent = d.url.replace(/^https:\/\//, '');
+  });
+  if (missing) console.error('[cards] ' + missing + ' QR matrices missing from assets/qr.js');
+
+  var h = location.host, host = document.getElementById('cardHost');
+  if (host) host.textContent = h ? h : '';
+  var b = document.getElementById('printBtn');
+  if (b) b.addEventListener('click', function (e) { e.preventDefault(); window.print(); });
+})();
+</script>
+</body>
+</html>

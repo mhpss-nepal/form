@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PHQ-9 follow-up measure — MHPSS Nepal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Lora + Manrope. design.css declares Georgia / system fallbacks, so a
+     failed font request costs typography and never legibility -- which
+     matters on the field forms, where there may be no signal at all. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Manrope:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="../hub/assets/app.css">
+<link rel="stylesheet" href="../hub/assets/design.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1d1d1b">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MHPSS Field">
+</head>
+<body>
+<div style="background:#d03b3b;color:#fff;font:700 12.5px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;letter-spacing:.02em;text-align:center;padding:7px 16px;padding-top:calc(7px + env(safe-area-inset-top,0px))">DEMONSTRATION INSTRUMENT — NOT THE LIVE REPORTING SYSTEM <span style="font-weight:400;opacity:.92">· English items only — the validated Nepali text has not been obtained · nothing you enter is sent anywhere</span></div>
+
+<div class="top">
+  <div>
+    <div class="brand">PHQ-9 · follow-up measure</div>
+    <div class="sub">Layer 1 · Rasuwa / Bhote Koshi</div>
+  </div>
+  <div class="spacer"></div>
+  <a href="index.html">← Forms</a>
+  <a href="../hub/">Hub</a>
+</div>
+
+<div class="wrap">
+
+  <h1>Following one person over time</h1>
+  <p class="lede">This measure exists to answer one question the 14 September briefing asked: does a person
+    move from acute distress towards a clinical disorder, or away from it? It is for repeating with
+    <b>someone already in care</b>, so the second score can be compared with the first.</p>
+
+  <div class="banner stop">
+    <b>Do not use this to screen a shelter.</b> In the Nepali validation the cut-off of 10 or more had a
+    positive predictive value of 0.42 — in that primary-care sample, fewer than half of the people who
+    screened positive turned out to have a depressive episode. Run it across a displaced population and
+    most positives will be wrong, while the people you flag will have been told something about themselves
+    that is not true. Use it where someone has already been identified and referred.
+  </div>
+
+  <div class="banner warn">
+    <b>The Nepali text is missing, and this form is not ready for field use without it.</b> The Nepali
+    version validated by the PRIME consortium exists, but the copy available is typeset in a legacy
+    non-Unicode Nepali font, so the characters cannot be transferred here without risking a corrupted
+    questionnaire. <b>Nothing has been translated or approximated.</b> Before any real use, obtain the
+    Unicode Nepali items from the PRIME / Kohrt source and have them checked by a Nepali-speaking
+    clinician. Administering the English items to a Nepali speaker through an untrained interpreter is
+    not the same instrument and the cut-off does not carry over.
+  </div>
+
+  <form id="f" autocomplete="off" novalidate>
+
+    <div class="card">
+      <div class="step"><span class="n">1</span><h2>Who, and which visit</h2></div>
+      <div class="row three">
+        <div class="f">
+          <label for="org">Organisation</label>
+          <select id="org"></select>
+        </div>
+        <div class="f">
+          <label for="cadre">Administered by</label>
+          <select id="cadre"></select>
+          <div class="help">A measure like this belongs with a counsellor or clinician, not a volunteer.</div>
+        </div>
+        <div class="f">
+          <label for="dateAD">Date — Gregorian (AD)</label>
+          <input type="date" id="dateAD">
+        </div>
+      </div>
+      <div class="row three">
+        <div class="f">
+          <label for="ccode">Contact code</label>
+          <input type="text" id="ccode" placeholder="NP-XXXXX-XXXXX" style="font-family:ui-monospace,Menlo,monospace">
+          <div class="help">Paste the code from the person's <a href="contact.html">service contact
+            record</a>, so the two scores can be lined up without a name.</div>
+        </div>
+        <div class="f">
+          <label for="visit">Which administration is this?</label>
+          <select id="visit">
+            <option value="">— choose —</option>
+            <option value="1">First — baseline</option>
+            <option value="2">Follow-up</option>
+            <option value="X">Not recorded</option>
+          </select>
+        </div>
+        <div class="f">
+          <label for="lang">Language used</label>
+          <select id="lang">
+            <option value="">— choose —</option>
+            <option value="EN">English, directly</option>
+            <option value="NE-INT">Nepali, through an interpreter</option>
+            <option value="NE-VAL">Validated Nepali form on paper</option>
+            <option value="OTH">Another language</option>
+          </select>
+          <div class="help">Recorded because it changes what the score means.</div>
+        </div>
+      </div>
+      <div class="f">
+        <label>Consent</label>
+        <div class="radios">
+          <label><input type="checkbox" id="consent"> The person was told what this is for and agreed to answer</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="step"><span class="n">2</span><h2>The nine items</h2><span class="hint" id="answered"></span></div>
+      <p class="lede" style="margin-bottom:14px"><b>Over the last 2 weeks, how often have you been bothered
+        by any of the following problems?</b></p>
+      <div class="scale" id="items"></div>
+    </div>
+
+    <div class="card">
+      <div class="step"><span class="n">3</span><h2>Difficulty, and the score</h2></div>
+      <div class="f">
+        <label for="fx">If you checked off any problems, how difficult have these problems made it for you
+          to do your work, take care of things at home, or get along with other people?</label>
+        <select id="fx">
+          <option value="">— choose —</option>
+          <option value="0">Not difficult at all</option>
+          <option value="1">Somewhat difficult</option>
+          <option value="2">Very difficult</option>
+          <option value="3">Extremely difficult</option>
+        </select>
+      </div>
+
+      <div class="score" id="score">
+        <span class="big" id="sNum">—</span>
+        <span class="of">out of 27</span>
+        <span class="band" id="sBand">answer all nine items</span>
+      </div>
+
+      <div id="risk"></div>
+
+      <div class="help" style="margin-top:12px">
+        Bands are the standard PHQ-9 cut-points (Kroenke, Spitzer &amp; Williams, 2001): 0–4 minimal,
+        5–9 mild, 10–14 moderate, 15–19 moderately severe, 20–27 severe. The action threshold of
+        <b>10 or more</b> is the one validated in Nepal (Kohrt et al., 2016; sensitivity 0.94,
+        specificity 0.80, in 125 primary-care patients in Chitwan). A score is not a diagnosis and
+        must not be recorded as one.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="step"><span class="n">4</span><h2>Save</h2></div>
+      <div id="errs"></div>
+      <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
+        <button type="submit" class="btn">Save this administration</button>
+        <button type="button" class="btn ghost" id="csvBtn">Export CSV</button>
+        <button type="button" class="btn grey" id="clearBtn">Clear everything on this device</button>
+        <span class="xs" id="count"></span>
+      </div>
+      <div class="f" style="margin-top:16px">
+        <label>What would be sent, if there were anywhere to send it</label>
+        <pre id="payload" class="pay">—</pre>
+        <div class="help">Item-by-item answers are kept because a total alone cannot be re-checked, and
+          because item 9 has to be auditable. There is no name, no phone number and no date of birth.</div>
+      </div>
+    </div>
+
+  </form>
+
+  <h2>Attribution</h2>
+  <div class="banner">
+    PHQ-9 was developed by Drs Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke and colleagues, with
+    an educational grant from Pfizer Inc. The instrument carries the statement: <i>“No permission required
+    to reproduce, translate, display or distribute.”</i> The items above are reproduced verbatim on that
+    basis. The Nepali adaptation was made and validated through the Programme for Improving Mental Health
+    Care (PRIME) consortium, funded by UK aid — and is <b>not</b> included here, for the reason given at
+    the top of this page.
+  </div>
+</div>
+
+<script src="../hub/assets/codes.js"></script>
+<script src="../hub/assets/l1.js"></script>
+<script src="../hub/assets/fb-config.js"></script>
+<script src="../hub/assets/fb.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = window.CODES, L = window.L1, KIND = "phq9";
+  var $ = function (id) { return document.getElementById(id); };
+
+  /* Verbatim PHQ-9 items. Do not paraphrase, reorder or shorten these —
+     a reworded PHQ-9 is no longer the validated instrument. */
+  var ITEMS = [
+    "Little interest or pleasure in doing things",
+    "Feeling down, depressed, or hopeless",
+    "Trouble falling or staying asleep, or sleeping too much",
+    "Feeling tired or having little energy",
+    "Poor appetite or overeating",
+    "Feeling bad about yourself — or that you are a failure or have let yourself or your family down",
+    "Trouble concentrating on things, such as reading the newspaper or watching television",
+    "Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual",
+    "Thoughts that you would be better off dead or of hurting yourself in some way"
+  ];
+  var OPTS = [
+    { v: 0, l: "Not at all" },
+    { v: 1, l: "Several days" },
+    { v: 2, l: "More than half the days" },
+    { v: 3, l: "Nearly every day" }
+  ];
+
+  L.fillSelect($("org"), C.ORGS.concat([{ code: "OTHER", name: "Other — not listed", np: "अन्य — सूचीमा नभएको", np_src: "draft" }]));
+  L.fillSelect($("cadre"), C.CADRES);
+  $("dateAD").value = L.today();
+  ["org", "cadre"].forEach(function (id) {
+    var v = L.recall(id); if (v) $(id).value = v;
+    $(id).addEventListener("change", function () { L.remember(id, $(id).value); });
+  });
+
+  /* render items */
+  var html = ITEMS.map(function (t, i) {
+    var opts = OPTS.map(function (o) {
+      return '<label><input type="radio" name="q' + i + '" value="' + o.v + '"> ' + o.l +
+             ' <span style="color:var(--mute)">(' + o.v + ')</span></label>';
+    }).join("");
+    return '<div class="q" id="qw' + i + '"><div class="qt">' + (i + 1) + '. ' +
+           t.replace(/&/g, "&amp;").replace(/</g, "&lt;") +
+           '<span class="np">Nepali text not obtained — see the warning above.</span></div>' +
+           '<div class="opts">' + opts + '</div></div>';
+  }).join("");
+  $("items").innerHTML = html;
+
+  function answers() {
+    return ITEMS.map(function (_, i) {
+      var r = document.querySelector('input[name="q' + i + '"]:checked');
+      return r ? +r.value : null;
+    });
+  }
+  function band(t) {
+    if (t <= 4)  return { t: "Minimal", act: false };
+    if (t <= 9)  return { t: "Mild", act: false };
+    if (t <= 14) return { t: "Moderate", act: true };
+    if (t <= 19) return { t: "Moderately severe", act: true };
+    return { t: "Severe", act: true };
+  }
+
+  function refresh() {
+    var a = answers(), done = a.filter(function (x) { return x !== null; }).length;
+    $("answered").textContent = done + " of 9 answered";
+    a.forEach(function (x, i) {
+      $("qw" + i).className = x === null ? "q" : "q done";
+    });
+
+    if (done === 9) {
+      var total = a.reduce(function (s, x) { return s + x; }, 0), b = band(total);
+      $("sNum").textContent = total;
+      $("sBand").textContent = b.t + (b.act ? " — at or above the threshold validated in Nepal" : "");
+      $("sBand").style.color = b.act ? "#9b2c2c" : "#2f6b53";
+    } else {
+      $("sNum").textContent = "—";
+      $("sBand").textContent = "answer all nine items";
+      $("sBand").style.color = "";
+    }
+
+    /* item 9 — asking this question creates a duty to act on the answer */
+    if (a[8] !== null && a[8] > 0) {
+      $("risk").innerHTML = '<div class="banner stop" style="margin:14px 0 0"><b>Item 9 is positive. ' +
+        'Do not close this form and move on.</b> Stay with the person, ask directly about thoughts of ' +
+        'suicide and about means and plan, and follow your organisation\'s referral pathway now — record ' +
+        'it on the <a href="referral.html">referral form</a>. If your organisation has no pathway for ' +
+        'this, that is the gap to raise at the Technical Working Group, and it should be raised before this ' +
+        'instrument is used in the field at all. The answer to item 9 is kept in the record so that a ' +
+        'positive answer can be audited against whether a referral followed.</div>';
+    } else {
+      $("risk").innerHTML = "";
+    }
+    payload();
+  }
+
+  function record() {
+    var a = answers(), done = a.filter(function (x) { return x !== null; }).length;
+    var total = done === 9 ? a.reduce(function (s, x) { return s + x; }, 0) : null;
+    return {
+      schema: "mhpss-np-phq9/0.1.0-draft",
+      kind: "phq9",
+      instrument: "PHQ-9",
+      item_language: $("lang").value,
+      nepali_validated_text_used: $("lang").value === "NE-VAL",
+      org: $("org").value,
+      administered_by: $("cadre").value,
+      date_ad: $("dateAD").value,
+      contact_code: $("ccode").value.trim().toUpperCase(),
+      administration: $("visit").value,
+      consent_recorded: $("consent").checked,
+      q1: a[0], q2: a[1], q3: a[2], q4: a[3], q5: a[4],
+      q6: a[5], q7: a[6], q8: a[7], q9: a[8],
+      total: total,
+      band: total === null ? "" : band(total).t,
+      at_or_above_nepal_threshold: total === null ? "" : total >= 10,
+      functional_difficulty: $("fx").value,
+      item9_positive: a[8] === null ? "" : a[8] > 0,
+      is_diagnosis: false
+    };
+  }
+  var COLS = Object.keys(record()).concat(["_saved"]);
+  function payload() { $("payload").textContent = JSON.stringify(record(), null, 2); }
+
+  function problems(r) {
+    var e = [];
+    if (!r.org) e.push("Choose the organisation.");
+    if (!r.administered_by) e.push("Say who administered it.");
+    if (!r.date_ad) e.push("Give the date.");
+    if (r.date_ad && r.date_ad > L.today()) e.push("The date is in the future.");
+    if (!r.contact_code) e.push("Give the contact code, so this score can be matched to a person without a name.");
+    if (r.contact_code && !/^NP-[0-9A-Z]{5}-[0-9A-Z]{5}$/.test(r.contact_code))
+      e.push("The contact code should look like NP-ABCDE-12345.");
+    if (!r.administration) e.push("Say whether this is the baseline or a follow-up.");
+    if (!r.item_language) e.push("Say which language was used.");
+    if (!r.consent_recorded) e.push("Consent has not been recorded. Do not administer this without it.");
+    if (r.total === null) e.push("All nine items have to be answered — a partial PHQ-9 has no score.");
+    if (!r.functional_difficulty) e.push("Answer the difficulty question.");
+    return e;
+  }
+
+  function showCount() {
+    var n = L.all(KIND).length;
+    $("count").textContent = n ? n + " administration(s) on this device" : "nothing saved on this device yet";
+  }
+  showCount();
+
+  document.querySelectorAll('input[type=radio]').forEach(function (i) {
+    i.addEventListener("change", refresh);
+  });
+  ["lang", "fx", "visit", "ccode", "consent", "org", "cadre", "dateAD"].forEach(function (id) {
+    $(id).addEventListener("change", payload);
+  });
+  $("ccode").addEventListener("input", payload);
+
+  $("f").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var r = record(), e = problems(r);
+    if (e.length) {
+      $("errs").innerHTML = '<div class="banner stop"><b>Not saved.</b><ul><li>' +
+        e.map(function (x) { return x; }).join("</li><li>") + "</li></ul></div>";
+      $("errs").scrollIntoView({ block: "center" });
+      return;
+    }
+    var res = L.save(KIND, r);
+    $("errs").innerHTML = '<div class="banner ok"><b>Saved on this device.</b> ' +
+      (res.persisted ? "" : "Storage is blocked, so it is only in memory — export before closing. ") +
+      "Nothing was sent anywhere.</div>";
+    showCount();
+  });
+
+  $("csvBtn").addEventListener("click", function () {
+    var list = L.all(KIND);
+    if (!list.length) { alert("Nothing saved on this device yet."); return; }
+    L.download("mhpss_np_phq9_" + L.stamp() + ".csv", L.toCSV(list, COLS), "text/csv");
+  });
+  $("clearBtn").addEventListener("click", function () {
+    if (!L.all(KIND).length) { alert("Nothing saved on this device yet."); return; }
+    if (confirm("Delete every record held in this browser? This cannot be undone.")) {
+      L.clear(KIND); showCount(); $("errs").innerHTML = '<div class="banner"><b>Cleared.</b></div>';
+    }
+  });
+
+  refresh();
+})();
+</script>
+<script src="pwa.js"></script>
+<!-- The bilingual engine. On a page that is not yet keyed up it still earns
+     its place: it sets data-lang, which is what makes the Nepali words in
+     the code lists appear in the dropdowns, and it mounts the ENG/NEP
+     toggle and an honest notice saying the prose is still English. -->
+<script src="../hub/assets/mark.js"></script>
+<script src="../hub/assets/icons.js"></script>
+<script src="../hub/assets/i18n-strings.js"></script>
+<script src="../hub/assets/i18n.js"></script>
+</body>
+</html>

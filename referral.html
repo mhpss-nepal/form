@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Referral record — MHPSS Nepal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Lora + Manrope. design.css declares Georgia / system fallbacks, so a
+     failed font request costs typography and never legibility -- which
+     matters on the field forms, where there may be no signal at all. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Manrope:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="../hub/assets/app.css">
+<link rel="stylesheet" href="../hub/assets/design.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1d1d1b">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MHPSS Field">
+</head>
+<body>
+<div style="background:#d03b3b;color:#fff;font:700 12.5px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;letter-spacing:.02em;text-align:center;padding:7px 16px;padding-top:calc(7px + env(safe-area-inset-top,0px))">DEMONSTRATION INSTRUMENT — NOT THE LIVE REPORTING SYSTEM <span style="font-weight:400;opacity:.92">· draft, not agreed with EDCD or the MHPSS Technical Working Group · nothing you enter is sent anywhere</span></div>
+
+<div class="top">
+  <div>
+    <div class="brand">Referral record</div>
+    <div class="sub">Layer 1 · Rasuwa / Bhote Koshi</div>
+  </div>
+  <div class="spacer"></div>
+  <a href="index.html">← Forms</a>
+  <a href="../hub/">Hub</a>
+</div>
+
+<div class="wrap">
+
+  <h1>Where a person was sent, and whether they arrived</h1>
+  <p class="lede">On 14 September the briefing recorded that around 5,000 psychosocial counselling cases
+    had been logged, but that once a person reaches a health facility their case goes into HMIS and is no
+    longer visible here. This form is the join. Without it, “continuum of care” is a claim rather than
+    something anyone can show.</p>
+
+  <div class="banner stop">
+    <b>Three kinds of case do not belong on this form. Stop and use the proper pathway.</b>
+    <ul>
+      <li><b>Gender-based violence.</b> GBV cases follow the specialised, survivor-centred pathway of the
+        protection cluster, with its own consent and its own confidential system. Never record a GBV
+        referral in a shared coordination form, not even coded.</li>
+      <li><b>An unaccompanied or separated child.</b> These go to child-protection case management.
+        Around 200 were reported in one area alone on 14 September; each one is a case file, not a row.</li>
+      <li><b>Immediate risk to life.</b> Act first. Record afterwards, if at all.</li>
+    </ul>
+    Recording these here would put people at risk and would break the consent under which they spoke to
+    you. The count of such referrals can be reported to coordination as a number, by the pathway that
+    holds them — never as records here.
+  </div>
+
+  <form id="f" autocomplete="off" novalidate>
+
+    <div class="card">
+      <div class="step"><span class="n">1</span><h2>Who is referring</h2><span class="hint">remembered</span></div>
+      <div class="row three">
+        <div class="f"><label for="org">Referring organisation</label><select id="org"></select></div>
+        <div class="f"><label for="cadre">Referred by</label><select id="cadre"></select></div>
+        <div class="f"><label for="dateAD">Date of referral (AD)</label><input type="date" id="dateAD"></div>
+      </div>
+      <div class="row three">
+        <div class="f"><label for="district">District</label><select id="district"></select></div>
+        <div class="f">
+          <label for="site">Site referred from</label><select id="site"></select>
+        </div>
+        <div class="f">
+          <label for="focalPhone">Referrer phone <span class="opt">— optional</span></label>
+          <input type="tel" id="focalPhone" placeholder="98XXXXXXXX">
+          <div class="help">So the receiving service can close the loop with you.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="step"><span class="n">2</span><h2>Who is being referred</h2></div>
+      <div class="banner"><b>No name, no phone number, no date of birth.</b> A referral needs those to work,
+        and they are handed over <b>person to person or on paper</b> between the referring worker and the
+        receiving service. What is recorded here is only what coordination needs in order to see whether
+        referrals are being made and completed.</div>
+      <div class="row four">
+        <div class="f">
+          <label for="ccode">Contact code</label>
+          <input type="text" id="ccode" placeholder="NP-XXXXX-XXXXX" style="font-family:ui-monospace,Menlo,monospace">
+          <div class="help">From the <a href="contact.html">contact record</a>.</div>
+        </div>
+        <div class="f">
+          <label for="sex">Sex</label>
+          <select id="sex"><option value="">— choose —</option><option value="F">Female</option><option value="M">Male</option><option value="O">Other</option><option value="NS">Not stated</option></select>
+        </div>
+        <div class="f">
+          <label for="ageband">Age band</label>
+          <select id="ageband"><option value="">— choose —</option><option value="0-4">0–4</option><option value="5-11">5–11</option><option value="12-17">12–17</option><option value="18-24">18–24</option><option value="25-59">25–59</option><option value="60+">60 and over</option><option value="NS">Not stated</option></select>
+        </div>
+        <div class="f">
+          <label for="tgroup">Target group</label><select id="tgroup"></select>
+        </div>
+      </div>
+      <div class="f">
+        <label>Safeguarding check</label>
+        <div class="radios">
+          <label><input type="checkbox" id="notgbv"> This is not a GBV case, not an unaccompanied or separated child, and not an immediate risk to life</label>
+        </div>
+        <div class="help">If you cannot tick this, close the form and use the specialised pathway.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="step"><span class="n">3</span><h2>The referral</h2></div>
+      <div class="row three">
+        <div class="f">
+          <label for="reason">Referred for</label>
+          <select id="reason"></select>
+        </div>
+        <div class="f">
+          <label for="direction">Direction</label>
+          <select id="direction">
+            <option value="">— choose —</option>
+            <option value="OUT">Out — we sent them elsewhere</option>
+            <option value="IN">In — they were sent to us</option>
+          </select>
+        </div>
+        <div class="f">
+          <label for="urgency">Urgency</label>
+          <select id="urgency">
+            <option value="">— choose —</option>
+            <option value="SAME">Same day</option>
+            <option value="WEEK">Within a week</option>
+            <option value="ROUT">Routine</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="f">
+          <label for="toType">Type of service referred to</label>
+          <select id="toType">
+            <option value="">— choose —</option>
+            <option value="PSC">Psychosocial counselling</option>
+            <option value="PHC">Health post / primary care</option>
+            <option value="HOSP">Hospital — general</option>
+            <option value="PSYT">Psychiatric service</option>
+            <option value="PROT">Protection services</option>
+            <option value="LEG">Legal or documentation support</option>
+            <option value="LIVE">Livelihood or cash support</option>
+            <option value="OTH">Other</option>
+          </select>
+        </div>
+        <div class="f">
+          <label for="toName">Name of receiving service <span class="opt">— optional</span></label>
+          <input type="text" id="toName" maxlength="120" placeholder="Facility or organisation">
+          <div class="help">Free text for now. The agreed directory of services does not exist yet — it is
+            still the single Excel sheet noted on 14 September, which is why this is not a dropdown.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="step"><span class="n">4</span><h2>Did they arrive?</h2></div>
+      <div class="banner warn"><b>This is the field that will be empty, and that is the finding.</b>
+        A referral is only complete when the receiving service confirms the person arrived. Nobody can
+        fill this in from the referring side alone. Leave it as “not yet known” and come back — the
+        proportion that stays unknown is the honest measure of whether the pathway works.</div>
+      <div class="row three">
+        <div class="f">
+          <label for="arrived">Arrival</label>
+          <select id="arrived">
+            <option value="UNK">Not yet known</option>
+            <option value="Y">Confirmed arrived</option>
+            <option value="N">Did not arrive</option>
+            <option value="DECL">Person declined the referral</option>
+          </select>
+        </div>
+        <div class="f">
+          <label for="arrDate">Date confirmed <span class="opt">— if known</span></label>
+          <input type="date" id="arrDate">
+        </div>
+        <div class="f">
+          <label for="confBy">Confirmed how <span class="opt">— optional</span></label>
+          <select id="confBy">
+            <option value="">— choose —</option>
+            <option value="RECV">Receiving service told us</option>
+            <option value="PERS">The person told us</option>
+            <option value="FAM">A family member told us</option>
+            <option value="OTH">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="f">
+        <label for="barrier">If they did not arrive, what got in the way? <span class="opt">— optional</span></label>
+        <select id="barrier">
+          <option value="">— choose —</option>
+          <option value="DIST">Distance or no transport</option>
+          <option value="COST">Cost</option>
+          <option value="CLOSED">Service was closed or full</option>
+          <option value="STIG">Stigma or family objection</option>
+          <option value="LOST">Lost contact with the person</option>
+          <option value="OTH">Other</option>
+        </select>
+        <div class="help">The barrier list is what turns a broken pathway into something fixable.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="step"><span class="n">5</span><h2>Save</h2></div>
+      <div id="errs"></div>
+      <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
+        <button type="submit" class="btn">Save this referral</button>
+        <button type="button" class="btn ghost" id="csvBtn">Export CSV</button>
+        <button type="button" class="btn grey" id="clearBtn">Clear everything on this device</button>
+        <span class="xs" id="count"></span>
+      </div>
+      <div class="f" style="margin-top:16px">
+        <label>What would be sent, if there were anywhere to send it</label>
+        <pre id="payload" class="pay">—</pre>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script src="../hub/assets/codes.js"></script>
+<script src="../hub/assets/l1.js"></script>
+<script src="../hub/assets/fb-config.js"></script>
+<script src="../hub/assets/fb.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = window.CODES, L = window.L1, KIND = "referral";
+  var $ = function (id) { return document.getElementById(id); };
+
+  var REASONS = [
+    { code: "DISTRESS", name: "Severe distress not settling with support" },
+    { code: "SUSPMNS",  name: "Possible mental disorder needing clinical assessment" },
+    { code: "MEDS",     name: "Medication review or continuation" },
+    { code: "PREEX",    name: "Pre-existing condition interrupted by the disaster" },
+    { code: "SUBST",    name: "Alcohol or substance use" },
+    { code: "EPIL",     name: "Seizures / epilepsy" },
+    { code: "SOCIAL",   name: "Social, documentation or livelihood need" },
+    { code: "OTH",      name: "Other" }
+  ];
+
+  L.fillSelect($("org"), C.ORGS.concat([{ code: "OTHER", name: "Other — not listed", np: "अन्य — सूचीमा नभएको", np_src: "draft" }]));
+  L.fillSelect($("cadre"), C.CADRES);
+  L.fillSelect($("district"), C.DISTRICTS);
+  L.fillSelect($("tgroup"), C.TARGET_GROUPS);
+  L.fillSelect($("reason"), REASONS);
+  $("dateAD").value = L.today();
+  ["org", "cadre", "focalPhone", "district"].forEach(function (id) {
+    var v = L.recall(id); if (v) $(id).value = v;
+    $(id).addEventListener("change", function () { L.remember(id, $(id).value); });
+  });
+
+  function refreshSites() {
+    var d = $("district").value;
+    var list = C.FORM_SITES.filter(function (s) { return s.source !== "escape" && (!d || s.district === d); });
+    L.fillSelect($("site"), list.concat([{ code: "OTHER", name: "Other — not on the roster" }]));
+  }
+  $("district").addEventListener("change", function () { refreshSites(); payload(); });
+  refreshSites();
+
+  function record() {
+    return {
+      schema: "mhpss-np-referral/0.1.0-draft",
+      kind: "referral",
+      org: $("org").value,
+      referred_by: $("cadre").value,
+      referrer_phone: $("focalPhone").value.trim(),
+      date_ad: $("dateAD").value,
+      district: $("district").value,
+      site_from: $("site").value,
+      contact_code: $("ccode").value.trim().toUpperCase(),
+      sex: $("sex").value,
+      age_band: $("ageband").value,
+      target_group: $("tgroup").value,
+      safeguarding_confirmed: $("notgbv").checked,
+      excludes_gbv_uasc_lifethreat: $("notgbv").checked,
+      reason: $("reason").value,
+      direction: $("direction").value,
+      urgency: $("urgency").value,
+      to_service_type: $("toType").value,
+      to_service_name: $("toName").value.trim(),
+      arrived: $("arrived").value,
+      arrival_confirmed_date: $("arrDate").value,
+      confirmed_by: $("confBy").value,
+      barrier: $("barrier").value
+    };
+  }
+  var COLS = Object.keys(record()).concat(["_saved"]);
+  function payload() { $("payload").textContent = JSON.stringify(record(), null, 2); }
+
+  function problems(r) {
+    var e = [];
+    if (!r.org) e.push("Choose the referring organisation.");
+    if (!r.referred_by) e.push("Say who made the referral.");
+    if (!r.date_ad) e.push("Give the date.");
+    if (r.date_ad && r.date_ad > L.today()) e.push("The referral date is in the future.");
+    if (!r.district) e.push("Choose the district.");
+    if (!r.site_from) e.push("Choose the site.");
+    if (!r.contact_code) e.push("Give the contact code.");
+    if (r.contact_code && !/^NP-[0-9A-Z]{5}-[0-9A-Z]{5}$/.test(r.contact_code))
+      e.push("The contact code should look like NP-ABCDE-12345.");
+    if (!r.age_band) e.push("Choose the age band.");
+    if (!r.target_group) e.push("Choose the target group.");
+    if (!r.safeguarding_confirmed)
+      e.push("The safeguarding check is not ticked. If this is a GBV case, an unaccompanied or separated child, or an immediate risk to life, it must not be recorded here at all.");
+    if (!r.reason) e.push("Say what the referral is for.");
+    if (!r.direction) e.push("Say whether the referral is out or in.");
+    if (!r.urgency) e.push("Choose the urgency.");
+    if (!r.to_service_type) e.push("Choose the type of service referred to.");
+    if (r.arrived === "Y" && !r.arrival_confirmed_date)
+      e.push("If arrival is confirmed, give the date it was confirmed.");
+    if (r.arrival_confirmed_date && r.arrival_confirmed_date < r.date_ad)
+      e.push("Arrival cannot be confirmed before the referral was made.");
+    if (r.arrived === "N" && !r.barrier)
+      e.push("If the person did not arrive, say what got in the way — that is the point of recording it.");
+    return e;
+  }
+
+  function showCount() {
+    var n = L.all(KIND).length;
+    $("count").textContent = n ? n + " referral(s) on this device" : "nothing saved on this device yet";
+  }
+  showCount();
+
+  Array.prototype.forEach.call(document.querySelectorAll("input,select"), function (el) {
+    el.addEventListener("change", payload);
+    if (el.tagName === "INPUT" && el.type === "text") el.addEventListener("input", payload);
+  });
+
+  $("f").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var r = record(), e = problems(r);
+    if (e.length) {
+      $("errs").innerHTML = '<div class="banner stop"><b>Not saved.</b><ul><li>' + e.join("</li><li>") + "</li></ul></div>";
+      $("errs").scrollIntoView({ block: "center" });
+      return;
+    }
+    var res = L.save(KIND, r);
+    $("errs").innerHTML = '<div class="banner ok"><b>Saved on this device.</b> ' +
+      (res.persisted ? "" : "Storage is blocked — export before closing. ") +
+      "Nothing was sent anywhere. Come back to update whether the person arrived.</div>";
+    showCount();
+  });
+
+  $("csvBtn").addEventListener("click", function () {
+    var list = L.all(KIND);
+    if (!list.length) { alert("Nothing saved on this device yet."); return; }
+    L.download("mhpss_np_referrals_" + L.stamp() + ".csv", L.toCSV(list, COLS), "text/csv");
+  });
+  $("clearBtn").addEventListener("click", function () {
+    if (!L.all(KIND).length) { alert("Nothing saved on this device yet."); return; }
+    if (confirm("Delete every referral held in this browser? This cannot be undone.")) {
+      L.clear(KIND); showCount(); $("errs").innerHTML = '<div class="banner"><b>Cleared.</b></div>';
+    }
+  });
+
+  payload();
+})();
+</script>
+<script src="pwa.js"></script>
+<!-- The bilingual engine. On a page that is not yet keyed up it still earns
+     its place: it sets data-lang, which is what makes the Nepali words in
+     the code lists appear in the dropdowns, and it mounts the ENG/NEP
+     toggle and an honest notice saying the prose is still English. -->
+<script src="../hub/assets/mark.js"></script>
+<script src="../hub/assets/icons.js"></script>
+<script src="../hub/assets/i18n-strings.js"></script>
+<script src="../hub/assets/i18n.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+# Operational data must never enter this repository.
+*.xlsx
+*.xls
+*.xlsm
+*.csv
+*.tsv
+*.json
+!data/demo.json
+!package.json
+
+# Working files
+shot-*.png
+v[0-9].png
+p[0-9].png
+d[0-9].png
+shot.py
+.DS_Store
+node_modules/
+chk-*.png
+check.py
+v-*.png
+verify_l1.py
+proto-*.png
+pwa_test.py
+final_check.py
+icon-sheet.png
+
+# ---- credentials: never, under any circumstances, in a public repo ----
+# A service-account key reads and writes everything and ignores the security
+# rules. If one of these is ever committed, revoke it in the Firebase console
+# immediately -- removing the commit is not enough, because it is public the
+# moment it is pushed.
+service_account.json
+*service_account*.json
+*-serviceaccount*.json
+*.pem
+*.p12
+*.key
+firebase-adminsdk*.json
+snapshots/
+backup_log.csv

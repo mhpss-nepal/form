@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MHPSS Activity Report — Nepal Flood Response</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Lora + Manrope. design.css declares Georgia / system fallbacks, so a
+     failed font request costs typography and never legibility -- which
+     matters on the field forms, where there may be no signal at all. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Manrope:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="../hub/assets/app.css">
+<link rel="stylesheet" href="../hub/assets/design.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1d1d1b">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MHPSS Field">
+</head>
+<body>
+<div style="background:#d03b3b;color:#fff;font:700 12.5px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;letter-spacing:.02em;text-align:center;padding:7px 16px;padding-top:calc(7px + env(safe-area-inset-top,0px))">DEMONSTRATION INSTRUMENT — NOT THE LIVE REPORTING SYSTEM <span style="font-weight:400;opacity:.92">· draft, not agreed with EDCD or the MHPSS Technical Working Group · any data you enter stays in this browser and is sent nowhere</span></div>
+
+
+<div class="top">
+  <div>
+    <div class="brand">MHPSS Activity Report</div>
+    <div class="sub">Rasuwa / Bhote Koshi flood response</div>
+  </div>
+  <div class="spacer"></div>
+  <a href="../hub/">← Hub</a>
+  <a href="../hub/coverage.html">Dashboard</a>
+</div>
+
+<div class="wrap">
+
+  <h1>Daily / periodic MHPSS activity report</h1>
+  <p class="lede">One row per activity, per site, per day. Do not add subtotal or summary rows — totals are calculated in the dashboard, never entered here.</p>
+
+  <div class="banner stop">
+    <b>This form records services, not people.</b> Never enter a beneficiary's name, phone number, date of birth, identity number, diagnosis, assessment score, or any detail that could identify an individual. There is no field for it, and none is to be added. If someone needs individual follow-up, refer them — do not record them here.
+  </div>
+
+  <div class="banner">
+    <b>Works offline.</b> Reports are saved in this browser as you submit them. Nothing is sent anywhere. When you have signal, export the file and send it to the coordination focal point. <span id="storeWarn"></span>
+  </div>
+
+  <form id="f" autocomplete="off" novalidate>
+
+    <!-- 1 · WHO IS REPORTING -->
+    <div class="card">
+      <div class="step"><span class="n">1</span><h2>Who is reporting</h2><span class="hint">saved for next time</span></div>
+
+      <div class="row">
+        <div class="f">
+          <label for="org">Reporting organisation</label>
+          <select id="org" name="org"></select>
+        </div>
+        <div class="f" id="orgOtherWrap" hidden>
+          <label for="orgOther">Name of organisation</label>
+          <input type="text" id="orgOther" name="orgOther" placeholder="Full name, as it should appear in reports">
+        </div>
+      </div>
+
+      <div class="row three">
+        <div class="f">
+          <label for="focalName">Focal point name</label>
+          <input type="text" id="focalName" name="focalName" placeholder="Person submitting this report">
+          <div class="help">A staff member, not a service user.</div>
+        </div>
+        <div class="f">
+          <label for="focalPhone">Focal point phone</label>
+          <input type="tel" id="focalPhone" name="focalPhone" placeholder="98XXXXXXXX">
+        </div>
+        <div class="f">
+          <label for="focalEmail">Focal point email <span class="opt">— optional</span></label>
+          <input type="email" id="focalEmail" name="focalEmail" placeholder="name@organisation.org">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="f">
+          <label data-i18n="f4.donorsLab">Funding source <span class="opt">— optional, tick all that apply</span></label>
+          <div class="chks" id="donors"></div>
+          <div class="help" data-i18n="f4.donorsHelp">Recorded so that one organisation reporting under two donors is not mistaken for two organisations. An activity funded by two donors carries both.</div>
+        </div>
+        <div class="f">
+          <label for="cadre">Cadre delivering the activity</label>
+          <select id="cadre" name="cadre"></select>
+          <div class="help">Missing from the current form — which is why counsellors, psychologists and psychiatrists cannot be counted apart.</div>
+        </div>
+      </div>
+
+      <div class="f">
+        <label for="partners" data-i18n="f4.partnersLab">Joint activity with <span class="opt">— optional</span></label>
+        <input type="text" id="partners" name="partners" autocomplete="off" placeholder="Other organisations this activity was done with, separated by commas">
+        <div class="help" data-i18n="f4.partnersHelp">Organisations that did this activity with you — not the funder, which goes above. Item C of the IASC 4Ws.</div>
+      </div>
+    </div>
+
+    <!-- 2 · WHEN AND WHERE -->
+    <div class="card">
+      <div class="step"><span class="n">2</span><h2>When and where</h2></div>
+
+      <div class="row three">
+        <div class="f">
+          <label for="dateAD">Date — Gregorian (AD)</label>
+          <input type="date" id="dateAD" name="dateAD">
+          <div class="help">This is the date the system sorts and groups on.</div>
+        </div>
+        <div class="f">
+          <label for="dateBS">Date — Bikram Sambat <span class="opt">— optional</span></label>
+          <input type="text" id="dateBS" name="dateBS" placeholder="2083-05-28" pattern="\d{4}-\d{2}-\d{2}">
+          <div class="help">Typed as reported. <b>Not converted automatically</b> — automatic conversion needs a verified BS calendar table, which has not been obtained.</div>
+        </div>
+        <div class="f">
+          <label for="district">District</label>
+          <select id="district" name="district"></select>
+        </div>
+      </div>
+
+      <div class="f">
+        <label for="site">Site</label>
+        <select id="site" name="site"></select>
+        <div class="help" id="siteHelp">Choose from the holding-centre roster. Only pick “Other” if the site genuinely is not listed — every “Other” has to be reconciled by hand later.</div>
+      </div>
+
+      <div class="f" id="siteOtherWrap" hidden>
+        <label for="siteOther">Name of site</label>
+        <input type="text" id="siteOther" name="siteOther" placeholder="Site name, ward, municipality">
+        <div class="help">Flagged for review, so it can be added to the roster or matched to an existing entry.</div>
+      </div>
+
+      <div class="f" id="palikaWrap" hidden>
+        <label for="palika" data-i18n="f4.palikaLab">Palika (local level)</label>
+        <select id="palika" name="palika"></select>
+        <div class="help" data-i18n="f4.palikaHelp">Named after the official list of local levels. A palika-level report is counted at palika level and never as a site, so it cannot close a gap on the roster.</div>
+      </div>
+
+      <div class="f">
+        <label for="modality">Modality</label>
+        <select id="modality" name="modality"></select>
+      </div>
+    </div>
+
+    <!-- 3 · WHAT -->
+    <div class="card">
+      <div class="step"><span class="n">3</span><h2>What was done</h2></div>
+
+      <div class="row">
+        <div class="f">
+          <label for="activity">Activity</label>
+          <select id="activity" name="activity"></select>
+          <div class="help">One activity per report. If two different activities happened at one site on one day, submit two reports. <span id="iascHint"></span></div>
+        </div>
+        <div class="f">
+          <label for="status">Status</label>
+          <select id="status" name="status"></select>
+        </div>
+      </div>
+
+      <div class="f">
+        <label>Target group — select all that apply</label>
+        <div class="chks" id="tgs"></div>
+      </div>
+
+      <div class="f">
+        <label for="description">One-line description <span class="opt">— optional</span></label>
+        <textarea id="description" name="description" maxlength="220" placeholder="What happened, in one sentence. No names, no clinical detail."></textarea>
+        <div class="help"><span id="descCount">0</span>/220 characters.</div>
+      </div>
+    </div>
+
+    <!-- 4 · HOW MANY -->
+    <div class="card">
+      <div class="step"><span class="n">4</span><h2 data-i18n="f4.h4">How many</h2><span class="hint" data-i18n="f4.h4hint">counts only, never a list</span></div>
+
+      <div class="f" style="max-width:260px">
+        <label for="reachedTotal" data-i18n="f4.reachLab">Total reached</label>
+        <input type="number" id="reachedTotal" name="reachedTotal" min="0" step="1" inputmode="numeric" placeholder="0">
+        <div class="help" data-i18n="f4.reachHelp">Enter the figure your organisation already records. The next question asks what it counts, so nothing has to be converted first.</div>
+      </div>
+
+      <!-- The counting basis. This is the single field that decides whether
+           any figure in this system can go into the 5W at all: the cleaned
+           backlog holds 11,973 SERVICE CONTACTS, and the form used to say
+           "people, count them once", so the two series could not be joined
+           and neither could be labelled honestly. Recording the basis makes
+           both possible; deciding it for the partner makes neither.
+           R-U1 (NDRRMA / EDCD) still rules on what goes into the 5W. -->
+      <div class="f" style="max-width:420px">
+        <label for="countBasis" data-i18n="f4.basisLab">What does that number count?</label>
+        <select id="countBasis" name="countBasis">
+          <option value="" data-i18n="f4.basisPick">— choose —</option>
+          <option value="CONTACTS" data-i18n="f4.basisContacts">Service contacts — each time someone was seen</option>
+          <option value="PEOPLE" data-i18n="f4.basisPeople">Distinct people — this organisation, this period</option>
+          <option value="UNSURE" data-i18n="f4.basisUnsure">Not sure</option>
+        </select>
+        <div class="help" data-i18n="f4.basisHelp">Both are legitimate and they are not the same figure, so the system keeps them apart instead of adding them together. Neither answer deduplicates across organisations.</div>
+      </div>
+
+      <div class="f" id="distinctWrap" hidden style="max-width:300px">
+        <label for="distinctPeople" data-i18n="f4.distLab" data-i18n-html>Distinct people, if you know it <span class="opt">— optional</span></label>
+        <input type="number" id="distinctPeople" name="distinctPeople" min="0" step="1" inputmode="numeric" placeholder="—">
+        <div class="help" data-i18n="f4.distHelp">If your organisation has already removed its own repeat visits, put that figure here. It is kept beside the contact count, never in place of it.</div>
+      </div>
+
+      <label style="margin-top:6px" data-i18n="f4.disLabel" data-i18n-html>Disaggregation <span class="opt">— optional, but leave a row blank rather than partly filled</span></label>
+      <div class="dis">
+        <table>
+          <thead><tr>
+            <th data-i18n="f4.hAge">Age</th>
+            <th data-i18n="f4.hFemale">Female</th>
+            <th data-i18n="f4.hMale">Male</th>
+            <th data-i18n="f4.hOther">Not recorded</th>
+            <th class="rt" data-i18n="f4.hRow">Total</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td><b>0–4</b></td>
+              <td><input type="number" id="f04" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Female, age 0 to 4"></td>
+              <td><input type="number" id="m04" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Male, age 0 to 4"></td>
+              <td><input type="number" id="o04" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Sex not recorded, age 0 to 4"></td>
+              <td class="rt"><span id="r04">—</span></td>
+            </tr>
+            <tr>
+              <td><b>5–17</b></td>
+              <td><input type="number" id="f517" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Female, age 5 to 17"></td>
+              <td><input type="number" id="m517" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Male, age 5 to 17"></td>
+              <td><input type="number" id="o517" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Sex not recorded, age 5 to 17"></td>
+              <td class="rt"><span id="r517">—</span></td>
+            </tr>
+            <tr>
+              <td><b>18–59</b></td>
+              <td><input type="number" id="f1859" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Female, age 18 to 59"></td>
+              <td><input type="number" id="m1859" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Male, age 18 to 59"></td>
+              <td><input type="number" id="o1859" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Sex not recorded, age 18 to 59"></td>
+              <td class="rt"><span id="r1859">—</span></td>
+            </tr>
+            <tr>
+              <td><b>60+</b></td>
+              <td><input type="number" id="f60" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Female, age 60 and over"></td>
+              <td><input type="number" id="m60" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Male, age 60 and over"></td>
+              <td><input type="number" id="o60" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Sex not recorded, age 60 and over"></td>
+              <td class="rt"><span id="r60">—</span></td>
+            </tr>
+          </tbody>
+          <tfoot><tr>
+            <td data-i18n="f4.colTotal">All ages</td>
+            <td class="rt"><span id="cF">—</span></td>
+            <td class="rt"><span id="cM">—</span></td>
+            <td class="rt"><span id="cO">—</span></td>
+            <td class="rt"><span id="cAll">—</span></td>
+          </tr></tfoot>
+        </table>
+        <div class="tally" id="tally"><span data-i18n="f4.tally">Disaggregated sum</span><span id="tallyVal">0</span></div>
+      </div>
+
+      <!-- The rollup is shown on the form on purpose. The team asked for an
+           under-5 figure; the official 5Ws has only <18 / 18+. Putting the
+           fold on screen is how a reporter can see that filling four bands
+           answers both, so nobody has to collect this twice. -->
+      <div class="rollup">
+        <span data-i18n="f4.rollLabel">Rolls up to the official 5Ws bands</span>
+        <span class="rollv"><b id="rollU18">—</b> <span data-i18n="f4.rollU18">under 18</span> &nbsp;·&nbsp; <b id="roll18">—</b> <span data-i18n="f4.roll18">18 and over</span></span>
+      </div>
+
+      <div class="ofwhom">
+        <p class="ofw-h" data-i18n="f4.ofwHead" data-i18n-html>Of whom <span>— already counted above, <b>never added to it</b></span></p>
+        <div class="ofw-g">
+          <div>
+            <label for="ofPwd" data-i18n="f4.ofPwd">Persons with disabilities</label>
+            <input type="number" id="ofPwd" min="0" step="1" inputmode="numeric" placeholder="—">
+          </div>
+          <div>
+            <label for="ofPreg" data-i18n="f4.ofPreg">Pregnant or postpartum</label>
+            <input type="number" id="ofPreg" min="0" step="1" inputmode="numeric" placeholder="—">
+          </div>
+        </div>
+        <p class="ofw-n" data-i18n="f4.ofwNote">One person can be in both, and is in a band above as well. These two are checked against the total but are never summed with it or with each other.</p>
+      </div>
+
+      <div class="help" style="margin-top:8px" data-i18n="f4.disHelp">Reports in the current workbook carry breakdowns typed into the provider column — a “women 18+ = 12, men 18+ = 9” where an organisation name should be — because the form has nowhere else to put them. Here they have somewhere, the parts are checked against the total, and the four bands fold to the two the official 5Ws asks for.</div>
+    </div>
+
+    <!-- 5 · SUBMIT -->
+    <div class="card">
+      <div class="step"><span class="n">5</span><h2>Check and submit</h2></div>
+      <div id="problems"></div>
+      <div class="btns">
+        <button type="submit" class="btn">Save report</button>
+        <button type="button" class="btn grey" id="reset">Clear the form</button>
+      </div>
+      <div class="help" style="margin-top:9px">Submitting the same site, date, activity and organisation twice updates that report rather than creating a second one.</div>
+    </div>
+  </form>
+
+  <!-- SAVED -->
+  <h2>Saved on this device <span class="xs" id="cnt"></span></h2>
+  <div class="btns" style="margin-bottom:12px">
+    <button type="button" class="btn ghost sm" id="expCsv">Export CSV</button>
+    <button type="button" class="btn ghost sm" id="expJson">Export JSON</button>
+    <button type="button" class="btn grey sm" id="wipe">Clear all saved reports</button>
+  </div>
+  <div class="tbl-wrap">
+    <table class="data" id="tbl">
+      <thead><tr><th>Date</th><th>Site</th><th>Organisation</th><th>Activity</th><th class="n">Reached</th><th>ID</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <div class="empty" id="emptyMsg">No reports saved on this device yet.</div>
+  </div>
+
+  <p class="xs" style="margin-top:22px">Draft instrument, version <span id="ver"></span>. Site list derived from the holding-centre roster of the daily reporting workbook; activity list consolidated from activities partners have actually submitted. IASC 4Ws activity codes are not yet filled in — the official code list must be obtained from the manual. Not agreed with EDCD or the MHPSS Technical Working Group.</p>
+</div>
+
+<div id="toast"></div>
+
+<script src="../hub/assets/codes.js"></script>
+<script src="../hub/assets/store.js"></script>
+<script src="../hub/assets/fb-config.js"></script>
+<script src="../hub/assets/fb.js"></script>
+<script>
+(function () {
+  var C = window.CODES, S = window.STORE;
+  var $ = function (id) { return document.getElementById(id); };
+
+  function fill(sel, items, valueKey, labelFn, placeholder) {
+    sel.innerHTML = "";
+    if (placeholder) {
+      var o = document.createElement("option");
+      o.value = ""; o.textContent = C.ph(placeholder); sel.appendChild(o);
+    }
+    items.forEach(function (it) {
+      var o = document.createElement("option");
+      o.value = typeof it === "string" ? it : it[valueKey];
+      /* CODES.label, not it.name, so a list with a Nepali label shows it on
+         the Nepali page rather than staying in English. */
+      o.textContent = labelFn ? labelFn(it)
+        : (typeof it === "string" ? it : C.label(it));
+      sel.appendChild(o);
+    });
+    sel._refill = function () { fill(sel, items, valueKey, labelFn, placeholder); };
+  }
+
+  function toast(msg, warn) {
+    var t = $("toast");
+    t.textContent = msg;
+    t.className = warn ? "show warn" : "show";
+    clearTimeout(t._h);
+    t._h = setTimeout(function () { t.className = ""; }, 3400);
+  }
+
+  /* ---------- populate ---------- */
+  fill($("org"), C.ORGS, "code", null, "Select…");
+  fill($("cadre"), C.CADRES, "code", null, "Select…");
+  fill($("district"), C.DISTRICTS, "code", null, "All districts");
+  fill($("modality"), C.MODALITIES, "code", null, "Select…");
+  fill($("status"), C.STATUS, "code", null, "Ongoing");
+  fill($("activity"), C.ACTIVITIES, "code",
+       function (a) { return C.label(a) + "  ·  " + C.label({ name: a.group, np: a.groupNp }); },
+       "Select…");
+
+  /* Funding tags as a tick list: one report in the current workbook is
+     funded by two donors at once, and a single select could not say so.
+     "Not specified" is the absence of a tick, not a tick of its own. */
+  function fillDonors(keep) {
+    var picked = keep || [];
+    $("donors").querySelectorAll("input:checked").forEach(function (i) { picked.push(i.value); });
+    $("donors").innerHTML = "";
+    C.DONORS.filter(function (d) { return d !== "Not specified"; }).forEach(function (d) {
+      var l = document.createElement("label");
+      l.className = "chk";
+      l.innerHTML = '<input type="checkbox" value="' + d + '"><span>' + d + "</span>";
+      $("donors").appendChild(l);
+    });
+    picked.forEach(function (v) {
+      var i = $("donors").querySelector('input[value="' + v.replace(/"/g, "") + '"]');
+      if (i) i.checked = true;
+    });
+  }
+  fillDonors();
+  function fillTargetGroups() {
+    var picked = [];
+    $("tgs").querySelectorAll("input:checked").forEach(function (i) { picked.push(i.value); });
+    $("tgs").innerHTML = "";
+    C.TARGET_GROUPS.forEach(function (g) {
+      var l = document.createElement("label");
+      l.className = "chk";
+      l.innerHTML = '<input type="checkbox" value="' + g.code + '"><span>' + C.label(g) + "</span>";
+      $("tgs").appendChild(l);
+    });
+    /* put the ticks back -- a half-filled form has to survive a language switch */
+    picked.forEach(function (v) {
+      var i = $("tgs").querySelector('input[value="' + v + '"]');
+      if (i) i.checked = true;
+    });
+  }
+  fillTargetGroups();
+  document.addEventListener("i18n:changed", function () {
+    var sels = document.querySelectorAll("select");
+    for (var i = 0; i < sels.length; i++) {
+      var el = sels[i];
+      if (typeof el._refill !== "function") continue;
+      var had = el.value; el._refill(); if (had) el.value = had;
+    }
+    fillTargetGroups();
+    fillDonors();
+  });
+
+  /* what the dropdown says after a site that is not on the roster */
+  var SITE_TAG = { reported: "  ·  not on roster", "gov-list": "  ·  district list, not on roster" };
+  function siteLabel(s) {
+    var pop = s.pop === null || s.pop === undefined ? "" : "  ·  " + s.pop + " people";
+    return C.label(s) + pop + (SITE_TAG[s.source] || "");
+  }
+  /* Not a site: a report that covers a palika and no single place. It is
+     offered after the sites and before "Other", and it is what a share of
+     the backlog actually looks like -- partners report "Bidur Municipality"
+     rather than a holding centre. Coded at palika level, never as a site. */
+  var PALIKA_ITEM = { code: "PALIKA", name: "Palika level — no specific site" };
+  function refreshSites() {
+    var d = $("district").value;
+    /* FORM_SITES: a retired code stays in the list so old records resolve, but is never a choice */
+    var sites = C.FORM_SITES.filter(function (s) { return s.code !== "OTHER" && (!d || s.district === d); });
+    var list = sites.concat([PALIKA_ITEM, C.siteByCode.OTHER]);
+    var keep = $("site").value;
+    fill($("site"), list, "code", siteLabel, "Select…");
+    if (keep && list.some(function (s) { return s.code === keep; })) $("site").value = keep;
+    refreshPalikas();
+    var v = $("site").value, s = C.siteByCode[v];
+    $("siteHelp").innerHTML = v === "PALIKA"
+      ? "Use this only when the report covers a <b>palika and no single site</b>. It is counted at palika level and never as a site, so it cannot close a gap on the roster."
+      : s && s.source === "reported"
+      ? "This site appears in submitted reports but is <b>not on the holding-centre roster</b>. It is recorded, and flagged so it can be confirmed or matched."
+      : s && s.source === "gov-list"
+      ? "This site is on the <b>District Administration Office list</b> for Nuwakot but not on the holding-centre roster. It is recorded; whether it counts towards coverage is still to be decided."
+      : "Choose from the holding-centre roster. Only pick “Other” if the site genuinely is not listed — every “Other” has to be reconciled by hand later.";
+  }
+  /* The palika list follows the district. Shown for a palika-level report
+     (required) and for an unlisted site (optional -- it is what lets the
+     site be placed later). A named site carries its own palika. */
+  function refreshPalikas() {
+    var d = $("district").value, v = $("site").value;
+    var list = C.PALIKAS.filter(function (p) { return !d || p.district === d; });
+    var keep = $("palika").value;
+    fill($("palika"), list, "pcode", function (p) { return C.label(p); }, "Select…");
+    if (keep && list.some(function (p) { return p.pcode === keep; })) $("palika").value = keep;
+    $("palikaWrap").hidden = !(v === "PALIKA" || v === "OTHER");
+  }
+  $("district").addEventListener("change", refreshSites);
+  $("site").addEventListener("change", function () {
+    $("siteOtherWrap").hidden = this.value !== "OTHER";
+    refreshSites();
+  });
+  /* The IASC subcode is derived from the activity, never typed. Shown so the
+     reporter sees what the choice maps to; a conditional one says so. */
+  function iascHint() {
+    var a = C.activityByCode[$("activity").value], el = $("iascHint");
+    if (!a) { el.textContent = ""; return; }
+    el.textContent = a.iasc ? "IASC 4Ws subcode " + a.iasc + "."
+      : a.iasc_of ? "IASC subcode " + a.iasc_of.join(" or ") + " — assigned at coordination from the cadre and content."
+      : "";
+  }
+  $("activity").addEventListener("change", iascHint);
+  $("org").addEventListener("change", function () { $("orgOtherWrap").hidden = this.value !== "OTHER"; });
+  refreshSites();
+
+  $("dateAD").max = new Date().toISOString().slice(0, 10);
+  $("ver").textContent = C.META.version;
+  $("description").addEventListener("input", function () { $("descCount").textContent = this.value.length; });
+
+  /* ---------- live tally ----------
+     The band table comes from store.js, not from a second list here. A
+     copy of the band definition in the page is how the form and the
+     export drift apart, which is the defect the whole form exists to
+     stop. */
+  var BANDS = S.BANDS;
+  var partIds = S.PART_IDS;
+  var v = function (id) { var n = parseInt($(id).value, 10); return isFinite(n) && n >= 0 ? n : 0; };
+  var filled = function (id) { return $(id).value !== ""; };
+  var show = function (id, n, any) { $(id).textContent = any ? n.toLocaleString() : "—"; };
+
+  function tally() {
+    var any = partIds.some(filled);
+
+    /* row totals */
+    BANDS.forEach(function (b) {
+      var rowAny = filled(b.f) || filled(b.m) || filled(b.o);
+      show("r" + b.key, v(b.f) + v(b.m) + v(b.o), rowAny);
+    });
+
+    /* column totals */
+    var cF = 0, cM = 0, cO = 0;
+    BANDS.forEach(function (b) { cF += v(b.f); cM += v(b.m); cO += v(b.o); });
+    show("cF", cF, any); show("cM", cM, any); show("cO", cO, any);
+    show("cAll", cF + cM + cO, any);
+
+    /* the official fold, on screen */
+    var u18 = 0, o18 = 0;
+    BANDS.forEach(function (b) {
+      var t = v(b.f) + v(b.m) + v(b.o);
+      if (b.child) { u18 += t; } else { o18 += t; }
+    });
+    show("rollU18", u18, any); show("roll18", o18, any);
+
+    /* the sum check */
+    var sum = cF + cM + cO;
+    var total = parseInt($("reachedTotal").value, 10);
+    var box = $("tally");
+    box.className = "tally";
+    $("tallyVal").textContent = sum;
+    if (sum === 0) { $("tallyVal").textContent = any ? "0" : "—"; return; }
+    if (!isFinite(total)) { return; }
+    if (sum > total) { box.className = "tally bad"; $("tallyVal").textContent = sum + " — more than the total of " + total; }
+    else if (sum < total) { box.className = "tally bad"; $("tallyVal").textContent = sum + " of " + total + " — " + (total - sum) + " unaccounted"; }
+    else { box.className = "tally good"; $("tallyVal").textContent = sum + " — matches the total"; }
+  }
+  partIds.concat(S.OF_WHOM, ["reachedTotal"]).forEach(function (id) { $(id).addEventListener("input", tally); });
+
+  /* The distinct-people box only means anything when the figure above is a
+     contact count -- asked for distinct people, a partner has already given
+     them. */
+  function basisChanged() {
+    var c = $("countBasis").value === "CONTACTS";
+    $("distinctWrap").hidden = !c;
+    if (!c) { $("distinctPeople").value = ""; }
+  }
+  $("countBasis").addEventListener("change", basisChanged);
+  basisChanged();
+
+  /* ---------- remember the reporter, not the report ---------- */
+  var RK = "mhpss-np-reporter";
+  function loadReporter() {
+    try {
+      var r = JSON.parse(localStorage.getItem(RK) || "{}");
+      ["org", "orgOther", "focalName", "focalPhone", "focalEmail", "cadre", "district"].forEach(function (k) {
+        if (r[k]) { $(k).value = r[k]; }
+      });
+      fillDonors(Array.isArray(r.donors) ? r.donors : (r.donor ? [r.donor] : []));
+      $("orgOtherWrap").hidden = $("org").value !== "OTHER";
+      refreshSites();
+    } catch (e) { /* storage unavailable — carry on */ }
+  }
+  function saveReporter() {
+    try {
+      var r = {};
+      ["org", "orgOther", "focalName", "focalPhone", "focalEmail", "cadre", "district"].forEach(function (k) { r[k] = $(k).value; });
+      r.donors = pickedDonors();
+      localStorage.setItem(RK, JSON.stringify(r));
+    } catch (e) { /* ignore */ }
+  }
+
+  /* ---------- collect ---------- */
+  function pickedDonors() {
+    return [].slice.call(document.querySelectorAll("#donors input:checked")).map(function (i) { return i.value; });
+  }
+  function collect() {
+    var siteCode = $("site").value, site = C.siteByCode[siteCode];
+    var act = C.activityByCode[$("activity").value];
+    /* the palika: from the site when one is named, from the reporter when
+       the report is palika-level or the site is unlisted */
+    var palika = site && site.palika ? site.palika
+               : (siteCode === "PALIKA" || siteCode === "OTHER") ? $("palika").value : "";
+    var rec = {
+      dateAD: $("dateAD").value,
+      dateBS: $("dateBS").value.trim(),
+      district: $("district").value,
+      palika: palika || "",
+      site: siteCode,
+      siteOther: $("siteOther").value.trim(),
+      siteSource: siteCode === "PALIKA" ? "palika-level" : site ? site.source : "",
+      org: $("org").value,
+      orgOther: $("orgOther").value.trim(),
+      donors: pickedDonors(),
+      partners: $("partners").value.split(",").map(function (x) { return x.trim(); }).filter(Boolean),
+      iascSub: act && act.iasc ? act.iasc : "",
+      focalName: $("focalName").value.trim(),
+      focalPhone: $("focalPhone").value.trim(),
+      focalEmail: $("focalEmail").value.trim(),
+      cadre: $("cadre").value,
+      activity: $("activity").value,
+      modality: $("modality").value,
+      status: $("status").value || "ONG",
+      targetGroups: [].slice.call(document.querySelectorAll("#tgs input:checked")).map(function (i) { return i.value; }),
+      description: $("description").value.trim(),
+      reachedTotal: $("reachedTotal").value,
+      countBasis: $("countBasis").value,
+      distinctPeople: $("distinctPeople").value
+    };
+    /* The four bands as collected. The official two are NOT stored: they
+       are folded at export and at read, so there is one figure, not two
+       that can disagree. */
+    S.PART_IDS.forEach(function (id) { rec[id] = $(id).value; });
+    S.OF_WHOM.forEach(function (id) { rec[id] = $(id).value; });
+    return rec;
+  }
+
+  /* ---------- submit ---------- */
+  $("f").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var rec = collect();
+    var problems = S.validate(rec);
+    var box = $("problems");
+    if (problems.length) {
+      box.innerHTML = '<div class="banner warn"><b>' + problems.length + (problems.length === 1 ? " thing needs" : " things need") +
+        " fixing before this can be saved.</b><ul style='margin:8px 0 0;padding-left:18px'>" +
+        problems.map(function (p) { return "<li>" + p + "</li>"; }).join("") + "</ul></div>";
+      box.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    box.innerHTML = "";
+    var res = S.save(rec);
+    saveReporter();
+    if (!res.persisted) toast("Saved for this page only — this browser is blocking storage. Export before closing.", true);
+    else if (res.duplicateOf) toast("Report updated — this site, date and activity were already recorded (" + res.record.id + ")");
+    else toast("Report saved · " + res.record.id);
+    softReset();
+    render();
+  });
+
+  function softReset() {
+    ["dateBS", "site", "siteOther", "palika", "partners", "activity", "description", "reachedTotal"].concat(partIds).forEach(function (id) { $(id).value = ""; });
+    document.querySelectorAll("#tgs input:checked").forEach(function (i) { i.checked = false; });
+    $("siteOtherWrap").hidden = true; $("palikaWrap").hidden = true;
+    refreshSites(); tally(); iascHint();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  $("reset").addEventListener("click", function () { softReset(); $("problems").innerHTML = ""; });
+
+  /* ---------- saved list ---------- */
+  function label(code, map, other) {
+    if (code === "OTHER" && other) return other + " (other)";
+    var m = map[code];
+    return m ? m.name : code || "—";
+  }
+  function siteCell(r) {
+    if (r.site === "PALIKA") return (C.palikaName(r.palika) || "palika not stated") + " (palika level)";
+    return label(r.site, C.siteByCode, r.siteOther);
+  }
+  function render() {
+    var rows = S.active();
+    var tb = $("tbl").querySelector("tbody");
+    tb.innerHTML = "";
+    $("emptyMsg").hidden = rows.length > 0;
+    $("cnt").textContent = rows.length ? "— " + rows.length + (rows.length === 1 ? " report" : " reports") : "";
+    rows.slice(0, 60).forEach(function (r) {
+      var tr = document.createElement("tr");
+      tr.innerHTML =
+        "<td>" + (r.dateAD || "—") + (r.dateBS ? '<div class="xs">BS ' + r.dateBS + "</div>" : "") + "</td>" +
+        "<td>" + siteCell(r) + "</td>" +
+        "<td>" + label(r.org, C.orgByCode, r.orgOther) + (S.donorsOf(r).length ? '<div class="xs">' + S.donorsOf(r).join(", ") + "</div>" : "") + "</td>" +
+        "<td>" + label(r.activity, C.activityByCode) + "</td>" +
+        '<td class="n">' + (r.reachedTotal === "" ? "—" : r.reachedTotal) + "</td>" +
+        '<td class="xs">' + r.id + (r.revision ? " · rev " + r.revision : "") + "</td>";
+      tb.appendChild(tr);
+    });
+  }
+
+  $("expCsv").addEventListener("click", function () {
+    var rows = S.active();
+    if (!rows.length) return toast("Nothing to export yet", true);
+    S.download("mhpss_np_4ws_" + S.stamp() + ".csv", S.toCSV(rows), "text/csv");
+  });
+  $("expJson").addEventListener("click", function () {
+    var rows = S.active();
+    if (!rows.length) return toast("Nothing to export yet", true);
+    S.download("mhpss_np_4ws_" + S.stamp() + ".json",
+      JSON.stringify({ exported: new Date().toISOString(), schemaVersion: S.SCHEMA_VERSION, codesVersion: C.META.version, count: rows.length, records: rows }, null, 2),
+      "application/json");
+  });
+  $("wipe").addEventListener("click", function () {
+    if (!S.active().length) return toast("Nothing saved on this device", true);
+    var box = $("problems");
+    box.innerHTML = '<div class="banner warn"><b>Clear every report saved in this browser?</b> Export first if you have not sent them on — this cannot be undone.' +
+      '<div class="btns" style="margin-top:9px"><button type="button" class="btn sm" id="wipeYes">Yes, clear them</button>' +
+      '<button type="button" class="btn grey sm" id="wipeNo">Cancel</button></div></div>';
+    $("wipeYes").onclick = function () { S.clearAll(); box.innerHTML = ""; render(); toast("Cleared"); };
+    $("wipeNo").onclick = function () { box.innerHTML = ""; };
+    box.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+
+  /* storage availability notice */
+  try {
+    localStorage.setItem("__t", "1"); localStorage.removeItem("__t");
+  } catch (e) {
+    $("storeWarn").innerHTML = "<b>This browser is blocking storage</b> (private window, or site data disabled) — reports will be held only until you close this page. Export before closing.";
+  }
+
+  loadReporter();
+  tally();
+  render();
+})();
+</script>
+<script src="pwa.js"></script>
+<!-- The bilingual engine. On a page that is not yet keyed up it still earns
+     its place: it sets data-lang, which is what makes the Nepali words in
+     the code lists appear in the dropdowns, and it mounts the ENG/NEP
+     toggle and an honest notice saying the prose is still English. -->
+<script src="../hub/assets/mark.js"></script>
+<script src="../hub/assets/icons.js"></script>
+<script src="../hub/assets/i18n-strings.js"></script>
+<script src="../hub/assets/i18n.js"></script>
+</body>
+</html>
