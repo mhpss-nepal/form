@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Manrope:wght@400;600;700;800&display=swap">
 <link rel="stylesheet" href="../hub/assets/app.css">
 <link rel="stylesheet" href="../hub/assets/design.css">
+<link rel="stylesheet" href="../hub/assets/form.css">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#1d1d1b">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -19,8 +20,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MHPSS Field">
 </head>
-<body>
-<div style="background:#d03b3b;color:#fff;font:700 12.5px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;letter-spacing:.02em;text-align:center;padding:7px 16px;padding-top:calc(7px + env(safe-area-inset-top,0px))">DEMONSTRATION INSTRUMENT — NOT THE LIVE REPORTING SYSTEM <span style="font-weight:400;opacity:.92">· draft, not agreed with EDCD or the MHPSS Technical Working Group · nothing you enter is sent anywhere</span></div>
+<body class="fx">
+<div class="ribbon">Revised draft for field piloting <span>· saved on this phone, sent to the coordination register when there is signal</span></div>
 
 <div class="top">
   <div>
@@ -48,8 +49,7 @@
   </div>
 
   <div class="banner">
-    <b>Works with no signal.</b> Records are held in this browser as you save them, and you export a file
-    when you next have connection. <span id="storeWarn"></span>
+    <b>Works with no signal.</b> Records are held on this phone as you save them and sent to the coordination register on their own when there is signal. The export remains for a copy of your own. <span id="storeWarn"></span>
   </div>
 
   <form id="f" autocomplete="off" novalidate>
@@ -463,8 +463,8 @@
     refreshCode();
     $("errs").innerHTML = '<div class="banner ok"><b>Saved on this device.</b> ' +
       (res.persisted ? "" : "Storage is blocked, so it is only in memory — export before closing. ") +
-      "The name details have been cleared; the contact code is kept. Nothing was sent anywhere, because " +
-      "there is nowhere to send it.</div>";
+      "The name details have been cleared; the contact code is kept. The record goes to the coordination register " +
+      "when there is signal; the code, never the name.</div>";
     showCount();
   });
 

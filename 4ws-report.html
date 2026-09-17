@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Manrope:wght@400;600;700;800&display=swap">
 <link rel="stylesheet" href="../hub/assets/app.css">
 <link rel="stylesheet" href="../hub/assets/design.css">
+<link rel="stylesheet" href="../hub/assets/form.css">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#1d1d1b">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -19,21 +20,27 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MHPSS Field">
 </head>
-<body>
-<div style="background:#d03b3b;color:#fff;font:700 12.5px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;letter-spacing:.02em;text-align:center;padding:7px 16px;padding-top:calc(7px + env(safe-area-inset-top,0px))">DEMONSTRATION INSTRUMENT — NOT THE LIVE REPORTING SYSTEM <span style="font-weight:400;opacity:.92">· draft, not agreed with EDCD or the MHPSS Technical Working Group · any data you enter stays in this browser and is sent nowhere</span></div>
-
+<body class="fx">
+<div class="ribbon">Revised draft for field piloting <span>· saved on this phone, sent to the coordination register when there is signal</span></div>
 
 <div class="top">
   <div>
     <div class="brand">MHPSS Activity Report</div>
-    <div class="sub">Rasuwa / Bhote Koshi flood response</div>
+    <div class="sub">Rasuwa – Bhote Koshi flood response · daily 4Ws</div>
   </div>
   <div class="spacer"></div>
-  <a href="../hub/">← Hub</a>
+  <a href="index.html">All forms</a>
   <a href="../hub/coverage.html">Dashboard</a>
 </div>
 
 <div class="wrap">
+  <nav class="steps" id="steps" aria-label="Steps">
+    <a href="#s1" data-step="s1"><i>1</i>Who</a>
+    <a href="#s2" data-step="s2"><i>2</i>Where</a>
+    <a href="#s3" data-step="s3"><i>3</i>What</a>
+    <a href="#s4" data-step="s4"><i>4</i>How many</a>
+    <a href="#s5" data-step="s5"><i>5</i>Save</a>
+  </nav>
 
   <h1>Daily / periodic MHPSS activity report</h1>
   <p class="lede">One row per activity, per site, per day. Do not add subtotal or summary rows — totals are calculated in the dashboard, never entered here.</p>
@@ -43,13 +50,13 @@
   </div>
 
   <div class="banner">
-    <b>Works offline.</b> Reports are saved in this browser as you submit them. Nothing is sent anywhere. When you have signal, export the file and send it to the coordination focal point. <span id="storeWarn"></span>
+    <b>Works offline.</b> Reports are saved on this phone as you submit them and sent to the coordination register on their own when you have signal. The export buttons below remain for a copy of your own. <span id="storeWarn"></span>
   </div>
 
   <form id="f" autocomplete="off" novalidate>
 
     <!-- 1 · WHO IS REPORTING -->
-    <div class="card">
+    <div class="card" id="s1">
       <div class="step"><span class="n">1</span><h2>Who is reporting</h2><span class="hint">saved for next time</span></div>
 
       <div class="row">
@@ -92,14 +99,14 @@
       </div>
 
       <div class="f">
-        <label for="partners" data-i18n="f4.partnersLab">Joint activity with <span class="opt">— optional</span></label>
+        <label for="partners" data-i18n="f4.partnersLab" data-i18n-html>Joint activity with <span class="opt">— optional</span></label>
         <input type="text" id="partners" name="partners" autocomplete="off" placeholder="Other organisations this activity was done with, separated by commas">
         <div class="help" data-i18n="f4.partnersHelp">Organisations that did this activity with you — not the funder, which goes above. Item C of the IASC 4Ws.</div>
       </div>
     </div>
 
     <!-- 2 · WHEN AND WHERE -->
-    <div class="card">
+    <div class="card" id="s2">
       <div class="step"><span class="n">2</span><h2>When and where</h2></div>
 
       <div class="row three">
@@ -154,7 +161,7 @@
     </div>
 
     <!-- 3 · WHAT -->
-    <div class="card">
+    <div class="card" id="s3">
       <div class="step"><span class="n">3</span><h2>What was done</h2></div>
 
       <div class="row">
@@ -190,7 +197,7 @@
     </div>
 
     <!-- 4 · HOW MANY -->
-    <div class="card">
+    <div class="card" id="s4">
       <div class="step"><span class="n">4</span><h2 data-i18n="f4.h4">How many</h2><span class="hint" data-i18n="f4.h4hint">counts only, never a list</span></div>
 
       <div class="f" style="max-width:260px">
@@ -209,8 +216,8 @@
       <div class="f" style="max-width:420px">
         <label for="countBasis" data-i18n="f4.basisLab">What does that number count?</label>
         <select id="countBasis" name="countBasis">
-          <option value="PEOPLE" data-i18n="f4.basisPeople">People who attended — each person once</option>
-          <option value="CONTACTS" data-i18n="f4.basisContacts">Service contacts — each time someone was seen, if that is all you can count</option>
+          <option value="PEOPLE" data-i18n="f4.basisPeople">People who attended (each person once)</option>
+          <option value="CONTACTS" data-i18n="f4.basisContacts">Service contacts (each time someone was seen)</option>
         </select>
         <div class="help" data-i18n="f4.basisHelp">Both are legitimate and they are not the same figure, so the system keeps them apart instead of adding them together. Neither answer deduplicates across organisations.</div>
       </div>
@@ -319,18 +326,20 @@
     </div>
 
     <!-- 5 · SUBMIT -->
-    <div class="card">
-      <div class="step"><span class="n">5</span><h2>Check and submit</h2></div>
+    <div class="card" id="s5">
+      <div class="step"><span class="n">5</span><h2>Check and save</h2></div>
       <div id="problems"></div>
-      <div class="btns">
-        <button type="submit" class="btn">Save report</button>
-        <button type="button" class="btn grey" id="reset">Clear the form</button>
-      </div>
-      <div class="help" style="margin-top:9px">Submitting the same site, date, activity and organisation twice updates that report rather than creating a second one.</div>
+      <div class="help">Saving the same site, date, activity and organisation twice updates that report rather than creating a second one. The report is kept on this phone and sent to the coordination register when there is signal.</div>
     </div>
   </form>
 
+  <div class="actions">
+    <button type="submit" class="btn" form="f">Save report</button>
+    <button type="button" class="btn grey" id="reset">Clear</button>
+  </div>
+
   <!-- SAVED -->
+  <section class="saved">
   <h2>Saved on this device <span class="xs" id="cnt"></span></h2>
   <div class="btns" style="margin-bottom:12px">
     <button type="button" class="btn ghost sm" id="expCsv">Export CSV</button>
@@ -344,8 +353,9 @@
     </table>
     <div class="empty" id="emptyMsg">No reports saved on this device yet.</div>
   </div>
+  </section>
 
-  <p class="xs" style="margin-top:22px">Draft instrument, version <span id="ver"></span>. Site list derived from the holding-centre roster of the daily reporting workbook, to be replaced by the official list when it arrives; age groups, service settings and cadre list as agreed with EDCD on 17 September 2026; activity list under revision on the IASC layers. Revised draft for field piloting.</p>
+  <p class="xs" style="margin:18px 6px 0">Draft instrument, version <span id="ver"></span>. Site list derived from the holding-centre roster of the daily reporting workbook, to be replaced by the official list when it arrives; age groups, service settings and cadre list as agreed with EDCD on 17 September 2026; activity list under revision on the IASC layers. Revised draft for field piloting.</p>
 </div>
 
 <div id="toast"></div>
@@ -496,6 +506,35 @@
 
   /* the device's local date, never UTC: Nepal is UTC+05:45 (see store.js) */
   $("dateAD").max = S.todayLocal();
+
+  /* the step rail follows the reader: the card most in view is "on" */
+  (function rail() {
+    var links = [].slice.call(document.querySelectorAll("#steps a"));
+    var cards = links.map(function (a) { return document.getElementById(a.getAttribute("data-step")); });
+    if (!cards.every(Boolean)) return;
+    var current = 0;
+    function paint(i) {
+      current = i;
+      links.forEach(function (a, k) { a.classList.toggle("on", k === i); a.classList.toggle("done", k < i); });
+    }
+    if ("IntersectionObserver" in window) {
+      var ratios = cards.map(function () { return 0; });
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { ratios[cards.indexOf(e.target)] = e.isIntersecting ? e.intersectionRatio : 0; });
+        var best = 0; ratios.forEach(function (r, k) { if (r > ratios[best]) best = k; });
+        if (ratios[best] > 0) paint(best);
+      }, { rootMargin: "-120px 0px -45% 0px", threshold: [0, .1, .25, .5, .75, 1] });
+      cards.forEach(function (c) { io.observe(c); });
+    }
+    links.forEach(function (a, k) {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        cards[k].scrollIntoView({ behavior: "smooth", block: "start" });
+        paint(k);
+      });
+    });
+    paint(0);
+  })();
   $("ver").textContent = C.META.version;
   $("description").addEventListener("input", function () { $("descCount").textContent = this.value.length; });
 
