@@ -19,7 +19,7 @@
    old validation, and (16 Sep 2026) a version of store.js that did not sync
    to the register at all. The fix was deployed and had no effect on any
    device until this line changed. */
-const CACHE = "mhpss-np-field-v28";
+const CACHE = "mhpss-np-field-v29";
 
 const PRECACHE = [
   "./",
