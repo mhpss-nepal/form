@@ -17,7 +17,7 @@
   ],
   "shortcuts": [
     { "name": "Service contact", "url": "contact.html" },
-    { "name": "Activity report", "url": "4ws-report.html" },
+    { "name": "Activity report (5Ws)", "url": "5ws-report.html" },
     { "name": "Referral", "url": "referral.html" }
   ]
 }

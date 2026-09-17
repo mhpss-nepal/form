@@ -26,7 +26,7 @@ CONF = os.path.join(ROOT, "tools", "site.conf")
 # key -> path under the base. The key is what form/index.html asks for.
 TARGETS = [
     ("master",   "/form/"),
-    ("4ws",      "/form/4ws-report.html"),
+    ("5ws",      "/form/5ws-report.html"),
     ("contact",  "/form/contact.html"),
     ("phq9",     "/form/phq9.html"),
     ("referral", "/form/referral.html"),
