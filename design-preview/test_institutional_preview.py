@@ -157,6 +157,11 @@ class InstitutionalPreviewContractTest(unittest.TestCase):
         self.assertIn('href="#s1"', self.current_text[start_at : start_at + 240])
         self.assertIn('body.institutional-utility #pwabar .x', self.current_text)
 
+    def test_mobile_step_hints_wrap_within_the_viewport(self) -> None:
+        self.assertIn('body.institutional-utility .step .hint{', self.current_text)
+        self.assertIn('width:auto; max-width:calc(100% - 38px)', self.current_text)
+        self.assertNotIn('width:max-content', self.current_text)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

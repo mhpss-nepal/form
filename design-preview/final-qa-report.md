@@ -11,13 +11,13 @@
 
 ## Verified
 
-- Contract regression suite: 17 tests passed.
+- Contract regression suite: 18 tests passed.
 - Repository text-setting static gate passed.
 - Independent review blockers were fixed: no new status-layer storage writes; text wrapping follows the repo rule; Clear removes the error outline; keyboard Tab focus is never covered by the sticky action footer; Nepali validation now uses existing translated field labels and explicitly flags the remaining English validation detail; an empty toast is hidden and cannot obscure operational guidance.
 - Exact existing form-control tuple list remains equivalent to baseline (element/type/id/name/form owner).
 - Runtime script/style call sites remain equivalent to baseline.
 - `pwa.js`, `sw.js`, and `manifest.webmanifest` remain byte-identical to baseline.
-- Mobile/desktop reflow checked at 320×720, 390×844, 768×900, and 1280×900 with no document-level horizontal overflow.
+- Mobile/desktop reflow checked at 320×720, 320×844, 390×844, 768×900, and 1280×900 with no document-level horizontal overflow; the Step 4 hint wraps within the 320 px viewport.
 - Primary controls and target-group labels meet the 44 px touch-target requirement; compact checkbox glyphs sit inside 44+ px clickable labels.
 - Empty submit exposes all nine existing validation failures, moves keyboard focus to the assertive summary, scrolls the summary into view, and adds a visible 3 px error outline.
 - A complete synthetic report saved through the existing `STORE.save()` path while the remote adapter was stubbed. One device record appeared, queue count remained zero, then QA records and reporter defaults were cleared.
