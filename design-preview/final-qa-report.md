@@ -44,7 +44,8 @@
 
 ## Artifacts
 
-- Final mobile screenshot: `design-preview/5ws-institutional-phone-390-final.png`
+- Final narrow-mobile screenshot: `design-preview/5ws-institutional-phone-320-final.png`
+- Final standard-mobile screenshot: `design-preview/5ws-institutional-phone-390-final.png`
 - Validation state: `design-preview/5ws-institutional-validation-mobile.png`
 - Synthetic device-saved state: `design-preview/5ws-institutional-saved-mobile.png`
 - Contract test: `design-preview/test_institutional_preview.py`
