@@ -13,6 +13,337 @@
 <link rel="stylesheet" href="../hub/assets/app.css">
 <link rel="stylesheet" href="../hub/assets/design.css">
 <link rel="stylesheet" href="../hub/assets/form.css">
+<style id="institutional-utility-preview">
+/* Direction B — Institutional Utility.
+   Preview-only presentation layer: all field/runtime contracts remain in the
+   existing markup and scripts below. No storage, queue, sync, cache, or
+   submission behavior is implemented in this style block. */
+body.institutional-utility{
+  --iu-ink:#172b34; --iu-muted:#52666e; --iu-line:#cbd6da;
+  --iu-line-soft:#e5eaec; --iu-paper:#fff; --iu-bg:#f2f4f3;
+  --iu-cyan:#00a4d6; --iu-cyan-dark:#006d91; --iu-cyan-soft:#e7f5f8;
+  --iu-navy:#183039; --iu-warn:#744814; --iu-warn-bg:#fff7e9;
+  --iu-danger:#8e2929; --iu-danger-bg:#fff1f0;
+  --iu-ok:#285e4a; --iu-ok-bg:#edf6f1;
+  margin:0; background:var(--iu-bg); color:var(--iu-ink);
+  font-family:"Manrope","Noto Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:16px; line-height:1.5;
+}
+body.institutional-utility .ribbon,
+body.institutional-utility #fbbar{display:none!important}
+body.institutional-utility #pwabar{
+  position:static!important; padding:10px 14px!important;
+  border:0!important; border-bottom:1px solid var(--iu-line)!important;
+  background:var(--iu-cyan-soft)!important; color:#245666!important;
+  font:600 12px/1.45 "Manrope","Noto Sans",system-ui,sans-serif!important;
+}
+body.institutional-utility #pwabar.off{
+  background:var(--iu-warn-bg)!important; color:var(--iu-warn)!important;
+}
+body.institutional-utility #pwabar button{
+  min-width:44px!important; min-height:44px!important; border-radius:3px!important;
+}
+body.institutional-utility #pwabar .x{
+  min-width:44px!important; min-height:44px!important; color:#244b58!important;
+  font-size:22px!important; font-weight:800!important;
+}
+body.institutional-utility .top{
+  position:static; min-height:72px; padding:12px max(18px,env(safe-area-inset-left));
+  background:var(--iu-navy); border:0; border-bottom:4px solid var(--iu-cyan);
+  box-shadow:none; gap:12px;
+}
+body.institutional-utility .top .brand{
+  font:800 18px/1.2 "Manrope","Noto Sans",system-ui,sans-serif;
+  letter-spacing:-.02em;
+}
+body.institutional-utility .top .sub{
+  margin-top:3px; color:#bcd8e1; font-size:11px; letter-spacing:.07em;
+}
+body.institutional-utility .top a{
+  min-height:44px; display:inline-flex; align-items:center; padding:8px 12px;
+  border:1px solid rgba(255,255,255,.35); border-radius:4px;
+  background:transparent; color:#fff; font-size:13px;
+}
+body.institutional-utility .wrap{
+  max-width:1040px; margin:0 auto; padding:18px 20px 112px;
+}
+body.institutional-utility .iu-preview-notice{
+  display:flex; align-items:flex-start; gap:10px; margin:0 0 12px;
+  padding:11px 13px; border:1px solid #9ccbd9; border-radius:4px;
+  background:var(--iu-cyan-soft); color:#214a59; font-size:13px; line-height:1.45;
+}
+body.institutional-utility .iu-preview-notice::before{
+  content:"PREVIEW"; flex:0 0 auto; margin-top:1px; padding:2px 6px;
+  border-radius:2px; background:var(--iu-cyan-dark); color:#fff;
+  font-size:9px; line-height:1.5; font-weight:900; letter-spacing:.08em;
+}
+body.institutional-utility .iu-sync{
+  display:grid; grid-template-columns:14px minmax(0,1fr); gap:3px 10px;
+  margin:0 0 14px; padding:12px 13px; border:1px solid #d6b98f;
+  border-radius:4px; background:var(--iu-warn-bg); color:var(--iu-warn);
+}
+body.institutional-utility .iu-sync::before{
+  content:""; grid-row:1 / span 2; width:10px; height:10px; margin-top:4px;
+  border-radius:50%; background:currentColor;
+}
+body.institutional-utility .iu-sync b{font-size:13px; line-height:1.35}
+body.institutional-utility .iu-sync span{font-size:12px; line-height:1.45}
+body.institutional-utility .iu-sync button{
+  grid-column:2; justify-self:start; min-height:44px; margin-top:5px;
+  padding:8px 13px; border:1.5px solid currentColor; border-radius:3px;
+  background:#fff; color:inherit; font:800 12px/1.2 inherit; cursor:pointer;
+}
+body.institutional-utility .iu-sync[data-state="connected"]{
+  border-color:#98c7d5; background:var(--iu-cyan-soft); color:#245666;
+}
+body.institutional-utility .iu-sync[data-state="memory"]{
+  border-color:#d9a5a5; background:var(--iu-danger-bg); color:var(--iu-danger);
+}
+body.institutional-utility .steps{
+  position:sticky; top:0; z-index:45; display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr)); gap:0;
+  margin:0 0 18px; padding:0; overflow:visible; border:1px solid var(--iu-line);
+  border-radius:4px; background:rgba(255,255,255,.98); backdrop-filter:none;
+  box-shadow:0 3px 12px rgba(23,43,52,.08);
+}
+body.institutional-utility .steps a{
+  min-width:0; min-height:48px; justify-content:center; padding:8px 5px;
+  border:0; border-right:1px solid var(--iu-line); border-radius:0;
+  background:transparent; color:var(--iu-muted); font-size:11px;
+  letter-spacing:.04em; text-transform:uppercase;
+}
+body.institutional-utility .steps a:last-child{border-right:0}
+body.institutional-utility .steps a i{
+  width:22px; height:22px; border-radius:2px; background:#e8edef;
+  color:var(--iu-muted); font-size:11px;
+}
+body.institutional-utility .steps a.on{
+  background:var(--iu-cyan-dark); border-color:var(--iu-cyan-dark); color:#fff;
+}
+body.institutional-utility .steps a.on i{background:#fff; color:var(--iu-cyan-dark)}
+body.institutional-utility .steps a.done i{background:var(--iu-ok); color:#fff}
+body.institutional-utility .wrap > h1{
+  margin:4px 0 5px; color:var(--iu-navy);
+  font:800 clamp(25px,3.5vw,34px)/1.16 "Manrope","Noto Sans",system-ui,sans-serif;
+  letter-spacing:-.035em;
+}
+body.institutional-utility .lede{
+  margin:0 0 16px; color:var(--iu-muted); font-size:14px; line-height:1.55;
+}
+body.institutional-utility .iu-start{
+  display:none; margin:-3px 0 14px; min-height:48px; align-items:center;
+  justify-content:center; padding:10px 16px; border:2px solid var(--iu-cyan-dark);
+  border-radius:3px; background:#fff; color:var(--iu-cyan-dark);
+  font-size:14px; font-weight:900; text-decoration:none;
+}
+body.institutional-utility .banner{
+  margin:0 0 13px; padding:12px 14px; border:1px solid var(--iu-line);
+  border-left:4px solid var(--iu-cyan-dark); border-radius:3px;
+  background:#fff; box-shadow:none; color:var(--iu-ink); font-size:13px;
+}
+body.institutional-utility .banner.stop{
+  border-color:#e4b5b5; border-left-color:var(--iu-danger); background:var(--iu-danger-bg);
+}
+body.institutional-utility .banner.warn{
+  border-color:#dfc7a4; border-left-color:var(--iu-warn); background:var(--iu-warn-bg);
+}
+body.institutional-utility .banner.ok{
+  border-color:#acd3c1; border-left-color:var(--iu-ok); background:var(--iu-ok-bg);
+}
+body.institutional-utility .card,
+body.institutional-utility .saved{
+  margin:0 0 15px; padding:19px 20px 15px; border:1px solid var(--iu-line);
+  border-radius:6px; background:var(--iu-paper); box-shadow:none;
+  scroll-margin-top:68px;
+}
+body.institutional-utility .step{
+  margin:0 -20px 16px; padding:0 20px 12px; gap:10px;
+  border-bottom:2px solid var(--iu-cyan-dark); align-items:center;
+}
+body.institutional-utility .step .n{
+  width:28px; height:28px; border-radius:3px; background:var(--iu-cyan-dark);
+  box-shadow:none; font-size:12px;
+}
+body.institutional-utility .step h2{
+  color:var(--iu-navy); font-size:18px; font-weight:800;
+}
+body.institutional-utility .step .hint{
+  margin-left:auto; padding:3px 7px; border:1px solid #a7c6cd;
+  border-radius:2px; background:#f3fafb; color:#355f69;
+  font-size:10px; letter-spacing:.05em;
+}
+body.institutional-utility .row{gap:12px 16px}
+body.institutional-utility .f{margin:0 0 15px}
+body.institutional-utility .f > label,
+body.institutional-utility .card > label{
+  margin:0 0 6px; color:#344b54; font-size:11px; line-height:1.35;
+  font-weight:800; letter-spacing:.055em; text-transform:uppercase;
+}
+body.institutional-utility label .opt{
+  color:var(--iu-muted); font-size:10px; letter-spacing:0; text-transform:none;
+}
+body.institutional-utility input[type=text],
+body.institutional-utility input[type=date],
+body.institutional-utility input[type=time],
+body.institutional-utility input[type=tel],
+body.institutional-utility input[type=email],
+body.institutional-utility input[type=number],
+body.institutional-utility select,
+body.institutional-utility textarea{
+  min-height:48px; padding:11px 12px; border:1.5px solid #aab9bf;
+  border-radius:3px; background:#fff; color:var(--iu-ink); font-size:16px;
+  box-shadow:none;
+}
+body.institutional-utility textarea{min-height:88px}
+body.institutional-utility input:focus,
+body.institutional-utility select:focus,
+body.institutional-utility textarea:focus,
+body.institutional-utility button:focus-visible,
+body.institutional-utility a:focus-visible{
+  outline:3px solid var(--iu-cyan-dark); outline-offset:2px;
+  border-color:var(--iu-cyan-dark); box-shadow:none;
+}
+body.institutional-utility .help{
+  margin-top:5px; color:var(--iu-muted); font-size:12px; line-height:1.45;
+}
+body.institutional-utility .radios,
+body.institutional-utility .chks{gap:7px}
+body.institutional-utility .radios label,
+body.institutional-utility label.chk{
+  min-height:44px; margin:0; padding:9px 12px; border:1.5px solid #aab9bf;
+  border-radius:3px; background:#fff; color:var(--iu-ink); font-size:13px;
+}
+body.institutional-utility .radios label:has(input:checked),
+body.institutional-utility label.chk:has(input:checked){
+  border-color:var(--iu-cyan-dark); background:var(--iu-cyan-soft);
+  color:#16495b;
+}
+body.institutional-utility label.chk input{
+  min-width:22px; min-height:22px; margin:0 7px 0 0;
+}
+body.institutional-utility .dis{
+  border-color:var(--iu-line); border-radius:4px;
+}
+body.institutional-utility .dis th{
+  background:#edf2f3; color:#40555d; font-size:10px;
+}
+body.institutional-utility .dis input{min-height:44px; border-radius:3px}
+body.institutional-utility .tally,
+body.institutional-utility .rollup{border-radius:3px}
+body.institutional-utility .ofwhom{
+  border-radius:4px; border-left-color:var(--iu-cyan-dark);
+}
+body.institutional-utility .actions{
+  display:none; position:sticky; bottom:0; z-index:40; margin:0 -20px;
+  padding:10px 20px calc(10px + env(safe-area-inset-bottom,0px));
+  border-top:1px solid var(--iu-line); border-radius:0;
+  background:rgba(24,48,57,.98); backdrop-filter:none;
+}
+body.institutional-utility.iu-entry-active .actions{display:flex}
+body.institutional-utility:has(#f :focus-visible) .actions{display:none}
+body.institutional-utility .actions .btn{min-height:48px; border-radius:3px}
+body.institutional-utility .btn{
+  min-height:44px; padding:11px 16px; border-radius:3px; box-shadow:none;
+  font-size:14px;
+}
+body.institutional-utility .btn.sm{
+  min-height:44px; padding:9px 13px; border-radius:3px; font-size:13px;
+}
+body.institutional-utility .btn:not(.ghost):not(.sec):not(.grey){
+  background:var(--iu-cyan); border-color:var(--iu-cyan); color:#102b35;
+}
+body.institutional-utility .btn:not(.ghost):not(.sec):not(.grey):hover{
+  background:#20b4df; border-color:#20b4df;
+}
+body.institutional-utility .btn.grey,
+body.institutional-utility .btn.ghost{
+  background:#fff; border-color:#81969e; color:#314850;
+}
+body.institutional-utility .saved h2{
+  margin:0 0 8px; color:var(--iu-navy); font-size:18px;
+}
+body.institutional-utility .saved .help a{
+  display:inline-flex; min-height:44px; align-items:center; padding:0 4px;
+  font-weight:800;
+}
+body.institutional-utility .tbl-wrap{border-radius:3px}
+body.institutional-utility table.data th{background:var(--iu-navy)}
+body.institutional-utility #i18nbar button{
+  min-width:52px!important; min-height:44px!important; padding:10px 13px!important;
+}
+body.institutional-utility .iu-language-note{
+  display:block; margin-top:7px; color:#714416; font-size:11px; font-weight:800;
+}
+body.institutional-utility #problems.has-errors{
+  outline:3px solid var(--iu-danger); outline-offset:3px;
+}
+body.institutional-utility #toast{bottom:82px; border-radius:4px}
+body.institutional-utility #toast:empty:not(.show){display:none}
+body.institutional-utility .xs{color:var(--iu-muted)}
+@media (max-width:720px){
+  body.institutional-utility .top{padding:10px 14px}
+  body.institutional-utility .top .spacer{display:none}
+  body.institutional-utility .top a{flex:1 1 auto; justify-content:center}
+  body.institutional-utility .wrap{padding:12px 12px 106px}
+  body.institutional-utility .iu-start{display:flex}
+  body.institutional-utility .steps{margin:0 0 14px}
+  body.institutional-utility .steps a{flex-direction:column; gap:3px; min-height:58px; font-size:11px; letter-spacing:0}
+  body.institutional-utility .card,
+  body.institutional-utility .saved{padding:16px 14px 13px}
+  body.institutional-utility .step{margin:0 -14px 14px; padding:0 14px 11px}
+  body.institutional-utility .row,
+  body.institutional-utility .row.three,
+  body.institutional-utility .row.four{grid-template-columns:1fr}
+  body.institutional-utility .step .hint{margin-left:38px; flex-basis:100%; width:max-content}
+  body.institutional-utility .actions{margin:0 -12px; padding-left:12px; padding-right:12px}
+  body.institutional-utility .actions .btn.grey{flex:0 0 96px}
+  body.institutional-utility .dis table{table-layout:fixed}
+  body.institutional-utility .dis th:first-child,
+  body.institutional-utility .dis td:first-child{width:46px}
+  body.institutional-utility .dis th:last-child,
+  body.institutional-utility .dis td:last-child{width:42px}
+  body.institutional-utility .dis input{min-width:44px; width:100%}
+  body.institutional-utility table.data{min-width:0; display:block}
+  body.institutional-utility table.data thead{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+  body.institutional-utility table.data tbody{display:grid; gap:9px; padding:9px}
+  body.institutional-utility table.data tr{
+    display:grid; grid-template-columns:1fr 1fr; gap:7px 12px;
+    padding:11px; border:1px solid var(--iu-line); border-radius:3px; background:#fff;
+  }
+  body.institutional-utility table.data td{
+    display:block; min-width:0; padding:0; border:0; background:transparent!important;
+    font-size:12px; overflow-wrap:break-word;
+  }
+  body.institutional-utility table.data td::before{
+    display:block; margin-bottom:2px; color:var(--iu-muted); font-size:9px;
+    line-height:1.3; font-weight:800; letter-spacing:.06em; text-transform:uppercase;
+  }
+  body.institutional-utility table.data td:nth-child(1)::before{content:"Date"}
+  body.institutional-utility table.data td:nth-child(2)::before{content:"Site"}
+  body.institutional-utility table.data td:nth-child(3)::before{content:"Organisation"}
+  body.institutional-utility table.data td:nth-child(4)::before{content:"Activity"}
+  body.institutional-utility table.data td:nth-child(5)::before{content:"Attended"}
+  body.institutional-utility table.data td:nth-child(6){display:none}
+  html[data-lang="ne"] body.institutional-utility table.data td:nth-child(1)::before{content:"मिति"}
+  html[data-lang="ne"] body.institutional-utility table.data td:nth-child(2)::before{content:"स्थान"}
+  html[data-lang="ne"] body.institutional-utility table.data td:nth-child(3)::before{content:"संस्था"}
+  html[data-lang="ne"] body.institutional-utility table.data td:nth-child(4)::before{content:"गतिविधि"}
+  html[data-lang="ne"] body.institutional-utility table.data td:nth-child(5)::before{content:"उपस्थित"}
+}
+@media (max-width:380px){
+  body.institutional-utility .steps a span{max-width:54px; overflow:hidden; text-overflow:ellipsis}
+  body.institutional-utility .iu-preview-notice{display:block}
+  body.institutional-utility .iu-preview-notice::before{display:inline-block; margin:0 7px 4px 0}
+}
+@media (prefers-reduced-motion:reduce){
+  body.institutional-utility *,body.institutional-utility *::before,body.institutional-utility *::after{
+    scroll-behavior:auto!important; transition:none!important; animation:none!important;
+  }
+}
+</style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#1d1d1b">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -20,7 +351,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MHPSS Field">
 </head>
-<body class="fx">
+<body class="fx institutional-utility">
 <div class="ribbon"><span data-i18n="banner.trial">Revised draft for field piloting</span><span data-i18n="banner.trialSub"> · saved on this phone, sent to the coordination register when there is signal</span></div>
 
 <div class="top">
@@ -34,6 +365,13 @@
 </div>
 
 <div class="wrap">
+  <div class="iu-preview-notice" id="iuPreviewNotice" role="note">
+    <span><b>Institutional Utility design preview.</b> Use demonstration or non-identifiable data only. New interface-only copy remains in English pending human-reviewed Nepali wording.</span>
+  </div>
+  <div class="iu-sync" id="iuSyncStatus" role="status" aria-live="polite" aria-atomic="true" data-state="waiting">
+    <b>Checking device and connection state…</b>
+    <span>Saving on this device is different from delivery. During the supervised pilot, confirm delivery by finding the record in the Hub.</span>
+  </div>
   <nav class="steps" id="steps" aria-label="Steps">
     <a href="#s1" data-step="s1"><i>1</i><span data-i18n="f4.step1">Who</span></a>
     <a href="#s2" data-step="s2"><i>2</i><span data-i18n="f4.step2">Where</span></a>
@@ -44,10 +382,11 @@
 
   <h1 data-i18n="f4.h1">MHPSS activity report — the 5Ws</h1>
   <p class="lede" data-i18n="f4.lede">Who did what, where and when, and for whom. One report per session: one activity, at one place, on one day, with how many people took part. Totals are calculated in the dashboard, never entered here.</p>
+  <a class="iu-start" href="#s1">Begin report · Who is reporting</a>
 
   <div class="banner stop" data-i18n="f4.stop" data-i18n-html><b>This form records services, not people.</b> Never enter a beneficiary's name, phone number, date of birth, identity number, diagnosis, assessment score, or any detail that could identify an individual. There is no field for it, and none is to be added. If someone needs individual follow-up, refer them — do not record them here.</div>
 
-  <div class="banner" data-i18n="f4.offline" data-i18n-html><b>Works offline.</b> Reports are saved on this phone as you submit them and sent to the coordination register on their own when you have signal. The export buttons below remain for a copy of your own. <span id="storeWarn"></span></div>
+  <div class="banner" data-iu-operational-copy="offline"><b>Offline entry is available.</b> Reliability after reconnection is still being validated and strengthened. Keep this page open after internet returns; wait for the sync status; do not repeatedly resubmit or clear browser storage when status is unclear. A record appearing in the Hub confirms delivery for the supervised pilot. <span id="storeWarn"></span><span class="iu-language-note">English operational wording pending human-reviewed Nepali translation.</span></div>
 
   <form id="f" autocomplete="off" novalidate>
 
@@ -58,7 +397,7 @@
       <div class="row">
         <div class="f">
           <label for="org" data-i18n="f4.orgLab">Reporting organisation</label>
-          <select id="org" name="org"></select>
+          <select id="org" name="org" aria-required="true"></select>
         </div>
         <div class="f" id="orgOtherWrap" hidden>
           <label for="orgOther" data-i18n="f4.orgOtherLab">Name of organisation</label>
@@ -69,12 +408,12 @@
       <div class="row three">
         <div class="f">
           <label for="focalName" data-i18n="f4.focalLab">Focal point name</label>
-          <input type="text" id="focalName" name="focalName" placeholder="Person submitting this report" data-i18n-ph="f4.phFocal">
+          <input type="text" id="focalName" name="focalName" placeholder="Person submitting this report" data-i18n-ph="f4.phFocal" aria-required="true">
           <div class="help" data-i18n="f4.focalHelp">A staff member, not a service user.</div>
         </div>
         <div class="f">
           <label for="focalPhone" data-i18n="f4.phoneLab">Focal point phone</label>
-          <input type="tel" id="focalPhone" name="focalPhone" placeholder="98XXXXXXXX">
+          <input type="tel" id="focalPhone" name="focalPhone" placeholder="98XXXXXXXX" aria-required="true">
         </div>
         <div class="f">
           <label for="focalEmail" data-i18n="f4.emailLab" data-i18n-html>Focal point email <span class="opt">— optional</span></label>
@@ -108,7 +447,7 @@
       <div class="row three">
         <div class="f">
           <label for="dateAD" data-i18n="f4.dateLab">Date — Gregorian (AD)</label>
-          <input type="date" id="dateAD" name="dateAD">
+          <input type="date" id="dateAD" name="dateAD" aria-required="true">
           <div class="help" data-i18n="f4.dateHelp">This is the date the system sorts and groups on.</div>
         </div>
         <div class="f">
@@ -134,7 +473,7 @@
 
       <div class="f">
         <label for="site" data-i18n="f4.siteLab">Site</label>
-        <select id="site" name="site"></select>
+        <select id="site" name="site" aria-required="true"></select>
         <div class="help" id="siteHelp">Choose from the holding-centre roster. Only pick “Other” if the site genuinely is not listed — every “Other” has to be reconciled by hand later.</div>
       </div>
 
@@ -152,7 +491,7 @@
 
       <div class="f">
         <label for="modality" data-i18n="f4.modLab">Service setting — where the activity took place</label>
-        <select id="modality" name="modality"></select>
+        <select id="modality" name="modality" aria-required="true"></select>
         <div class="help" data-i18n="f4.modHelp">Holding centre (temporary, during the response), outreach in the community, a facility (health facility, school, hospital, OCMC, other government facility), or by telephone / helpline.</div>
       </div>
       <div class="f" id="modalityOtherWrap" hidden>
@@ -167,7 +506,7 @@
 
       <div class="f">
         <label for="activity" data-i18n="f4.actLab">Activity</label>
-        <select id="activity" name="activity"></select>
+        <select id="activity" name="activity" aria-required="true"></select>
         <!-- The list shows plain words only. The IASC layer and the 4Ws
              subcode behind each option live in codes.js and are read by the
              register, the dashboard and the exports -- one code, two readings
@@ -198,7 +537,7 @@
 
       <div class="f">
         <label data-i18n="f4.tgLab">Target group — select all that apply</label>
-        <div class="chks" id="tgs"></div>
+        <div class="chks" id="tgs" role="group" aria-required="true"></div>
       </div>
       <div class="f" id="tgOtherWrap" hidden>
         <label for="targetGroupOther" data-i18n="f4.tgOtherLab">Which other group?</label>
@@ -213,7 +552,7 @@
            people will come from the optional attendance list, not from here. -->
       <div class="f" style="max-width:300px">
         <label for="reachedTotal" data-i18n="f4.reachLab">Attendance</label>
-        <input type="number" id="reachedTotal" name="reachedTotal" min="0" step="1" inputmode="numeric" placeholder="0">
+        <input type="number" id="reachedTotal" name="reachedTotal" min="0" step="1" inputmode="numeric" placeholder="0" aria-required="true">
         <div class="help" data-i18n="f4.reachHelp">Everyone who took part in this session, counted once. A person who comes to another session is counted there again.</div>
       </div>
 
@@ -317,8 +656,8 @@
     <!-- 5 · SUBMIT -->
     <div class="card" id="s5">
       <div class="step"><span class="n">5</span><h2 data-i18n="f4.h5check">Check and save</h2></div>
-      <div id="problems"></div>
-      <div class="help" data-i18n="f4.saveHelp">Saving the same organisation, place, date, activity and start time twice updates that report rather than creating a second one. The report is kept on this phone and sent to the coordination register when there is signal.</div>
+      <div id="problems" role="alert" aria-live="assertive" tabindex="-1"></div>
+      <div class="help" data-iu-operational-copy="save">Saving the same organisation, place, date, activity and start time twice updates that report rather than creating a second one. The report is kept on this device. After internet returns, keep this page open and wait for sync status; confirm delivery in the Hub.<span class="iu-language-note">English operational wording pending human-reviewed Nepali translation.</span></div>
     </div>
   </form>
 
@@ -330,7 +669,7 @@
   <!-- SAVED -->
   <section class="saved">
   <h2 data-i18n="f4.savedH" data-i18n-html>Saved on this device <span class="xs" id="cnt"></span></h2>
-  <p class="help" style="margin:0 0 10px" data-i18n="f4.savedHelp" data-i18n-html>This list is the copy on this phone. Every report also goes to the coordination register when there is signal; the full list of reports received, from every phone, is on the dashboard under <a href="../hub/#reports">Reports received</a>.</p>
+  <p class="help" style="margin:0 0 10px" data-iu-operational-copy="saved">This list is the copy on this device; it does not by itself confirm remote delivery. After internet returns, keep this page open and wait for sync status. For the supervised pilot, confirm delivery under <a href="../hub/#reports">Reports received</a> in the Hub.<span class="iu-language-note">English operational wording pending human-reviewed Nepali translation.</span></p>
   <div class="btns" style="margin-bottom:12px">
     <button type="button" class="btn ghost sm" id="expCsv" data-i18n="f4.expCsv">Export CSV</button>
     <button type="button" class="btn ghost sm" id="expJson" data-i18n="f4.expJson">Export JSON</button>
@@ -348,7 +687,7 @@
   <p class="xs" style="margin:18px 6px 0" data-i18n="f4.foot" data-i18n-html>Draft instrument, version <span id="ver"></span>. Site list derived from the holding-centre roster of the daily reporting workbook, to be replaced by the official list when it arrives; age groups, service settings, cadre list and activity list as agreed on 17 September 2026 (the activity list on the IASC layers, subject to the Ministry's subject expert). Revised draft for field piloting.</p>
 </div>
 
-<div id="toast"></div>
+<div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
 <script src="../hub/assets/codes.js"></script>
 <script src="../hub/assets/store.js"></script>
@@ -358,6 +697,24 @@
 (function () {
   var C = window.CODES, S = window.STORE;
   var $ = function (id) { return document.getElementById(id); };
+  var f = $("f");
+  function activateEntry() { document.body.classList.add("iu-entry-active"); }
+  function keepFocusVisible(e) {
+    var target = e.target;
+    window.setTimeout(function afterNativeFocusScroll() {
+      var actions = document.querySelector(".actions");
+      if (!actions || getComputedStyle(actions).display === "none") return;
+      var targetBox = target.getBoundingClientRect();
+      var actionsBox = actions.getBoundingClientRect();
+      if (targetBox.bottom > actionsBox.top - 12) {
+        target.scrollIntoView({ block: "center", behavior: "auto" });
+      }
+    }, 0);
+  }
+  f.addEventListener("focusin", activateEntry);
+  f.addEventListener("focusin", keepFocusVisible);
+  f.addEventListener("input", activateEntry);
+  f.addEventListener("change", activateEntry);
 
   function fill(sel, items, valueKey, labelFn, placeholder) {
     sel.innerHTML = "";
@@ -718,6 +1075,46 @@
     return rec;
   }
 
+  function problemField(problem) {
+    var rules = [
+      [/^Reporting organisation|^Name the organisation/, "org"],
+      [/^Site is required|^Name the site/, "site"],
+      [/^Date is required|^Date is in the future/, "dateAD"],
+      [/^Activity is required|^Choose an activity|^Describe the activity/, "activity"],
+      [/^Modality is required|^Say where the activity/, "modality"],
+      [/^Focal point name/, "focalName"],
+      [/^Focal point phone/, "focalPhone"],
+      [/^Say which cadre/, "cadre"],
+      [/^Name the district/, "district"],
+      [/^Start time/, "sessionTime"],
+      [/^Say which other group|^Select at least one target group/, "tgs"],
+      [/^Choose the palika|^Palika must/, "palika"],
+      [/^Joint-activity partners/, "partners"],
+      [/^Attendance is required|^Disaggregated figures|^Distinct people|^Count basis/, "reachedTotal"]
+    ];
+    for (var i = 0; i < rules.length; i++) if (rules[i][0].test(problem)) return rules[i][1];
+    return "";
+  }
+  function fieldLabel(id) {
+    if (id === "tgs") {
+      var targetLabel = document.querySelector('[data-i18n="f4.tgLab"]');
+      return targetLabel ? targetLabel.textContent.trim() : "";
+    }
+    var el = $(id);
+    return el && el.labels && el.labels[0] ? el.labels[0].textContent.trim() : "";
+  }
+  function escapeHtml(text) {
+    var span = document.createElement("span");
+    span.textContent = text; return span.innerHTML;
+  }
+  function validationItem(problem) {
+    if (!isNe()) return "<li>" + escapeHtml(problem) + "</li>";
+    var label = fieldLabel(problemField(problem));
+    return "<li>" + (label ? "<b>" + escapeHtml(label) + ":</b> " : "") +
+      '<span lang="en">' + escapeHtml(problem) + "</span>" +
+      '<span class="iu-language-note">English validation guidance — Nepali translation pending review.</span></li>';
+  }
+
   /* ---------- submit ---------- */
   $("f").addEventListener("submit", function (e) {
     e.preventDefault();
@@ -727,10 +1124,13 @@
     if (problems.length) {
       box.innerHTML = '<div class="banner warn"><b>' + problems.length + (problems.length === 1 ? tx("fixOne") : tx("fixMany")) +
         "</b><ul style='margin:8px 0 0;padding-left:18px'>" +
-        problems.map(function (p) { return "<li>" + p + "</li>"; }).join("") + "</ul></div>";
-      box.scrollIntoView({ behavior: "smooth", block: "center" });
+        problems.map(validationItem).join("") + "</ul></div>";
+      box.classList.add("has-errors");
+      box.focus({ preventScroll: true });
+      box.scrollIntoView({ behavior: "auto", block: "center" });
       return;
     }
+    box.classList.remove("has-errors");
     box.innerHTML = "";
     var res = S.save(rec);
     saveReporter();
@@ -750,7 +1150,9 @@
     refreshSites(); tally(); activityHelp();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
-  $("reset").addEventListener("click", function () { softReset(); $("problems").innerHTML = ""; });
+  $("reset").addEventListener("click", function () {
+    softReset(); $("problems").classList.remove("has-errors"); $("problems").innerHTML = "";
+  });
 
   /* ---------- saved list ---------- */
   function label(code, map, other) {
@@ -814,6 +1216,95 @@
   loadReporter();
   tally();
   render();
+})();
+</script>
+<script id="institutional-utility-status">
+(function () {
+  "use strict";
+  var box = document.getElementById("iuSyncStatus");
+  if (!box) return;
+
+  var COPY = {
+    en: {
+      checkingTitle: "Checking device and connection state…",
+      checkingBody: "Saving on this device is different from delivery. During the supervised pilot, confirm delivery by finding the record in the Hub.",
+      memoryTitle: "Device storage is blocked",
+      memoryBody: "A save may last only while this page remains open. Export before closing. Remote delivery is not confirmed here.",
+      offlineTitle: "Offline · local entry available",
+      offlineBody: "A saved report stays on this device and may wait in the queue. Keep this page open when internet returns; do not repeatedly resubmit or clear browser storage when status is unclear.",
+      queuedTitle: function (n) { return n + (n === 1 ? " report waiting to sync" : " reports waiting to sync"); },
+      queuedBody: "Keep this page open while internet is available. A report appearing in the Hub is the supervised-pilot confirmation.",
+      readyTitle: "Online · queue empty; delivery not confirmed",
+      readyBody: "Saving on this device is separate from remote delivery. After saving, wait for the sync status and confirm the record in the Hub.",
+      unavailableTitle: "Remote delivery is not available",
+      unavailableBody: "Reports can remain on this device for export. This page does not confirm remote delivery."
+    },
+    ne: {
+      checkingTitle: "Checking device and connection state…",
+      checkingBody: "Saving on this device is different from delivery. During the supervised pilot, confirm delivery by finding the record in the Hub.",
+      memoryTitle: "Device storage is blocked",
+      memoryBody: "A save may last only while this page remains open. Export before closing. Remote delivery is not confirmed here.",
+      offlineTitle: "Offline · local entry available",
+      offlineBody: "A saved report stays on this device and may wait in the queue. Keep this page open when internet returns; do not repeatedly resubmit or clear browser storage when status is unclear.",
+      queuedTitle: function (n) { return n + (n === 1 ? " report waiting to sync" : " reports waiting to sync"); },
+      queuedBody: "Keep this page open while internet is available. A report appearing in the Hub is the supervised-pilot confirmation.",
+      readyTitle: "Online · queue empty; delivery not confirmed",
+      readyBody: "Saving on this device is separate from remote delivery. After saving, wait for the sync status and confirm the record in the Hub.",
+      unavailableTitle: "Remote delivery is not available",
+      unavailableBody: "Reports can remain on this device for export. This page does not confirm remote delivery."
+    }
+  };
+
+  function lang() {
+    return document.documentElement.getAttribute("data-lang") === "ne" ? "ne" : "en";
+  }
+  function storageWorks() {
+    var warning = document.getElementById("storeWarn");
+    return !(warning && warning.textContent.trim());
+  }
+  function show(state, title, body) {
+    box.setAttribute("data-state", state);
+    box.querySelector("b").textContent = title;
+    box.querySelector("span").textContent = body;
+    var old = box.querySelector("button");
+    if (old) old.remove();
+  }
+  function updateUntranslatedCopy() {
+    var marker = "English operational text — Nepali translation pending review.";
+    var isNepali = lang() === "ne";
+    box.setAttribute("data-language-note", isNepali ? marker : "");
+    box.setAttribute("aria-description", isNepali ? marker : "");
+  }
+  function paint(status) {
+    var t = COPY[lang()];
+    updateUntranslatedCopy();
+    if (!storageWorks()) {
+      show("memory", t.memoryTitle, t.memoryBody); return;
+    }
+    if (!navigator.onLine) {
+      show("waiting", t.offlineTitle, t.offlineBody); return;
+    }
+    if (status && status.pending > 0) {
+      show("waiting", t.queuedTitle(status.pending), t.queuedBody);
+      return;
+    }
+    if (status && status.configured && status.ready) {
+      show("connected", t.readyTitle, t.readyBody); return;
+    }
+    if (status && !status.configured) {
+      show("memory", t.unavailableTitle, t.unavailableBody); return;
+    }
+    show("waiting", t.checkingTitle, t.checkingBody);
+  }
+  function repaint() {
+    paint(window.FB && typeof window.FB.status === "function" ? window.FB.status() : null);
+  }
+  window.InstitutionalPreviewStatus = { paint: paint, storageWorks: storageWorks };
+  window.addEventListener("online", repaint);
+  window.addEventListener("offline", repaint);
+  document.addEventListener("i18n:changed", repaint);
+  if (window.FB && typeof window.FB.onStatus === "function") window.FB.onStatus(paint);
+  else repaint();
 })();
 </script>
 <script src="pwa.js"></script>
