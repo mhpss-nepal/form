@@ -13,7 +13,7 @@
 
 - Contract regression suite: 18 tests passed.
 - Repository text-setting static gate passed.
-- Independent review blockers were fixed: no new status-layer storage writes; text wrapping follows the repo rule; Clear removes the error outline; keyboard Tab focus is never covered by the sticky action footer; Nepali validation now uses existing translated field labels and explicitly flags the remaining English validation detail; an empty toast is hidden and cannot obscure operational guidance.
+- Independent review blockers were fixed: no new status-layer storage writes; text wrapping follows the repo rule; Clear removes the error outline; the mobile action bar remains in normal flow so keyboard Tab focus is never covered; Nepali validation now uses existing translated field labels and explicitly flags the remaining English validation detail; an empty toast is hidden and cannot obscure operational guidance.
 - Exact existing form-control tuple list remains equivalent to baseline (element/type/id/name/form owner).
 - Runtime script/style call sites remain equivalent to baseline.
 - `pwa.js`, `sw.js`, and `manifest.webmanifest` remain byte-identical to baseline.

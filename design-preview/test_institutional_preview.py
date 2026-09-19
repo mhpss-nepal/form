@@ -139,8 +139,11 @@ class InstitutionalPreviewContractTest(unittest.TestCase):
         self.assertIn('body.institutional-utility #toast:empty:not(.show)', self.current_text)
         self.assertIn('display:none', self.current_text)
 
-    def test_keyboard_focus_is_kept_above_the_sticky_action_bar(self) -> None:
-        self.assertIn('body.institutional-utility:has(#f :focus-visible) .actions', self.current_text)
+    def test_keyboard_focus_is_kept_above_the_action_bar(self) -> None:
+        self.assertIn('body.institutional-utility:has(#f :focus) .actions', self.current_text)
+        self.assertNotIn('body.institutional-utility:has(#f :focus-visible) .actions', self.current_text)
+        self.assertIn('body.institutional-utility .actions{', self.current_text)
+        self.assertIn('position:static; margin:0 -12px', self.current_text)
         self.assertIn("keepFocusVisible", self.current_text)
         self.assertIn("afterNativeFocusScroll", self.current_text)
         self.assertIn('target.scrollIntoView({ block: "center", behavior: "auto" })', self.current_text)
@@ -160,6 +163,7 @@ class InstitutionalPreviewContractTest(unittest.TestCase):
     def test_mobile_step_hints_wrap_within_the_viewport(self) -> None:
         self.assertIn('body.institutional-utility .step .hint{', self.current_text)
         self.assertIn('width:auto; max-width:calc(100% - 38px)', self.current_text)
+        self.assertIn('white-space:normal', self.current_text)
         self.assertNotIn('width:max-content', self.current_text)
 
 

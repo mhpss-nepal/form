@@ -240,7 +240,7 @@ body.institutional-utility .actions{
   background:rgba(24,48,57,.98); backdrop-filter:none;
 }
 body.institutional-utility.iu-entry-active .actions{display:flex}
-body.institutional-utility:has(#f :focus-visible) .actions{display:none}
+body.institutional-utility:has(#f :focus) .actions{display:none}
 body.institutional-utility .actions .btn{min-height:48px; border-radius:3px}
 body.institutional-utility .btn{
   min-height:44px; padding:11px 16px; border-radius:3px; box-shadow:none;
@@ -296,9 +296,11 @@ body.institutional-utility .xs{color:var(--iu-muted)}
   body.institutional-utility .row.four{grid-template-columns:1fr}
   body.institutional-utility .step .hint{
     margin-left:38px; flex:0 1 calc(100% - 38px);
-    width:auto; max-width:calc(100% - 38px); min-width:0;
+    width:auto; max-width:calc(100% - 38px); min-width:0; white-space:normal;
   }
-  body.institutional-utility .actions{margin:0 -12px; padding-left:12px; padding-right:12px}
+  body.institutional-utility .actions{
+    position:static; margin:0 -12px; padding-left:12px; padding-right:12px;
+  }
   body.institutional-utility .actions .btn.grey{flex:0 0 96px}
   body.institutional-utility .dis table{table-layout:fixed}
   body.institutional-utility .dis th:first-child,
