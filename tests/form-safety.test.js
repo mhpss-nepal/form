@@ -333,6 +333,7 @@ test("cards state offline storage and delivery conditionally in both languages",
   const source = page("cards.html");
   assert.doesNotMatch(source, /Nothing is lost/i);
   assert.doesNotMatch(source, /sends by itself|आफै पठाउँछ/i);
+  assert.doesNotMatch(source, /every form on it works offline afterwards|It also works with no signal/i);
   assert.match(source, /saves offline[\s\S]*depends|depends[\s\S]*offline storage/i);
   assert.match(source, /saved or queued status is not delivery confirmation/i);
   assert.match(source, /check the status/i);
