@@ -19,9 +19,33 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MHPSS Field">
+<style>
+/* Presentation-only pilot preview. Sync behaviour remains in shared assets. */
+body.fx #fbbar{padding:9px 16px;font-size:13px}
+body.fx #fbbar .m{text-align:left}
+/* Offline with an empty queue otherwise shows a contradictory “Connected”. */
+body.fx #pwabar.off + #fbbar:not(.warn){display:none}
+body.fx .ribbon .sync-claim{display:none}
+body.fx .pilot-brief{margin:0 6px 14px;padding:14px 16px;border:1px solid #c7d9e2;
+  border-left:4px solid var(--fx-blue-d);border-radius:var(--fx-rs);background:#f7fbfd;
+  color:var(--fx-slate);font-size:13.5px;line-height:1.55;box-shadow:var(--fx-shadow)}
+body.fx .pilot-brief strong{display:block;margin-bottom:3px;color:var(--fx-blue-dd);
+  font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+@media (max-width:620px){
+  body.fx p,body.fx .help,body.fx .lede,body.fx .banner,body.fx .hint,body.fx .ofw-n,
+  body.fx .xs,body.fx .pilot-brief{text-align:left}
+  body.fx .top{gap:8px}
+  body.fx .top .spacer{flex-basis:100%;height:0}
+  body.fx .top a{display:inline-flex;align-items:center;min-height:40px;box-sizing:border-box}
+  body.fx .banner,body.fx .pilot-brief{font-size:14px}
+  /* Keep Save after the five steps on a phone; an early sticky action covered
+     the pilot note before the worker had reached a single field. */
+  body.fx .actions{position:static;margin:0 0 14px;border-radius:var(--fx-r)}
+}
+</style>
 </head>
 <body class="fx">
-<div class="ribbon"><span data-i18n="banner.trial">Revised draft for field piloting</span><span data-i18n="banner.trialSub"> · saved on this phone, sent to the coordination register when there is signal</span></div>
+<div class="ribbon"><span data-i18n="banner.trial">Revised draft for field piloting</span><span class="sync-claim" data-i18n="banner.trialSub"> · saved on this phone, sent to the coordination register when there is signal</span></div>
 
 <div class="top">
   <div>
@@ -44,6 +68,11 @@
 
   <h1 data-i18n="f4.h1">MHPSS activity report — the 5Ws</h1>
   <p class="lede" data-i18n="f4.lede">Who did what, where and when, and for whom. One report per session: one activity, at one place, on one day, with how many people took part. Totals are calculated in the dashboard, never entered here.</p>
+
+  <div class="pilot-brief" role="note" lang="en">
+    <strong>Field pilot · revised draft</strong>
+    Use test data unless an approved pilot protocol says otherwise. Save keeps a device copy first. “Waiting to send” means not received; no warning is not proof of review. Confirm receipt or export before clearing.
+  </div>
 
   <div class="banner stop" data-i18n="f4.stop" data-i18n-html><b>This form records services, not people.</b> Never enter a beneficiary's name, phone number, date of birth, identity number, diagnosis, assessment score, or any detail that could identify an individual. There is no field for it, and none is to be added. If someone needs individual follow-up, refer them — do not record them here.</div>
 
