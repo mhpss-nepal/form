@@ -406,7 +406,9 @@
       note: $("notes").value.trim()
     };
   }
-  var COLS = Object.keys(record()).concat(["_saved"]);
+  /* L.save adds the immutable remote id before either storage or queueing.
+     Export it so import/re-export cannot turn one contact into a new event. */
+  var COLS = Object.keys(record()).concat(["_rid", "_saved"]);
 
   function refreshPayload() {
     var r = record();
@@ -455,14 +457,21 @@
       return;
     }
     var res = L.save(KIND, r);
-    /* the four identifying boxes are cleared here — they were only ever
-       inputs to the code, and the code is already in the saved record */
+    if (!res.persisted) {
+      $("errs").innerHTML = '<div class="banner stop"><b>Not saved on this device.</b> ' +
+        'This contact exists only in this open page. Export CSV now and keep the file for recovery. ' +
+        'It was not queued and will not be sent automatically.</div>';
+      $("count").textContent = "latest contact is only in this open page — export before closing";
+      $("errs").scrollIntoView({ block: "center" });
+      return;
+    }
+    /* Clear identifying inputs only after durable persistence. If storage
+       failed they stay visible so the worker can verify and export recovery. */
     ["ini", "byear", "mun"].forEach(function (id) { $(id).value = ""; });
     $("sex").value = ""; $("mins").value = ""; $("notes").value = "";
     document.querySelectorAll('input[name="nr"]').forEach(function (i) { i.checked = false; });
     refreshCode();
     $("errs").innerHTML = '<div class="banner ok"><b>Saved on this device.</b> ' +
-      (res.persisted ? "" : "Storage is blocked, so it is only in memory — export before closing. ") +
       "The name details have been cleared; the contact code is kept. The record goes to the coordination register " +
       "when there is signal; the code, never the name.</div>";
     showCount();

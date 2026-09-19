@@ -191,7 +191,8 @@
       free_text_reviewed_by_human: false
     };
   }
-  var COLS = Object.keys(record()).concat(["_saved"]);
+  /* L.save adds the immutable remote id before either storage or queueing. */
+  var COLS = Object.keys(record()).concat(["_rid", "_saved"]);
 
   function showCount() {
     var n = L.all(KIND).length;
@@ -209,7 +210,15 @@
       $("errs").innerHTML = '<div class="banner stop"><b>Not sent.</b><ul><li>' + e.join("</li><li>") + "</li></ul></div>";
       return;
     }
-    L.save(KIND, r);
+    var res = L.save(KIND, r);
+    if (!res.persisted) {
+      $("errs").innerHTML = '<div class="banner stop"><b>Not saved on this device.</b> ' +
+        'Your answer exists only in this open page. Keep this page open and ask a worker to export CSV now ' +
+        'for recovery. It was not queued and will not be delivered automatically.</div>';
+      $("count").textContent = "latest answer is only in this open page — export before closing";
+      $("errs").scrollIntoView({ block: "center" });
+      return;
+    }
     $("errs").innerHTML = '<div class="banner ok"><b>Thank you.</b> Your answer was saved on this device, ' +
       'with nothing attached to it that could identify you. Remember that nobody can contact you about ' +
       'it — if you want support, speak to a worker at this site.</div>';

@@ -304,7 +304,8 @@
       is_diagnosis: false
     };
   }
-  var COLS = Object.keys(record()).concat(["_saved"]);
+  /* L.save adds the immutable remote id before either storage or queueing. */
+  var COLS = Object.keys(record()).concat(["_rid", "_saved"]);
   function payload() { $("payload").textContent = JSON.stringify(record(), null, 2); }
 
   function problems(r) {
@@ -348,8 +349,15 @@
       return;
     }
     var res = L.save(KIND, r);
+    if (!res.persisted) {
+      $("errs").innerHTML = '<div class="banner stop"><b>Not saved on this device.</b> ' +
+        'This administration exists only in this open page. Export CSV now and keep the file for recovery. ' +
+        'It was not queued and will not be sent automatically.</div>';
+      $("count").textContent = "latest administration is only in this open page — export before closing";
+      $("errs").scrollIntoView({ block: "center" });
+      return;
+    }
     $("errs").innerHTML = '<div class="banner ok"><b>Saved on this device.</b> ' +
-      (res.persisted ? "" : "Storage is blocked, so it is only in memory — export before closing. ") +
       "The record goes to the coordination register when there is signal.</div>";
     showCount();
   });
