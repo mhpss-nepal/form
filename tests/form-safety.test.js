@@ -24,9 +24,74 @@ function formScript(name) {
   return source;
 }
 
+function submitCallSite(name, saveResult) {
+  const source = name === "5ws-report.html" ? page(name) : formScript(name);
+  const start = source.indexOf('$("f").addEventListener("submit", function');
+  assert.notEqual(start, -1, `${name}: submit call site not found`);
+  const endMarker = name === "5ws-report.html"
+    ? "\n\n  function softReset()"
+    : '\n\n  $("csvBtn").addEventListener';
+  const end = source.indexOf(endMarker, start);
+  assert.notEqual(end, -1, `${name}: submit call site end not found`);
+
+  const elements = new Map();
+  const element = (id) => {
+    if (!elements.has(id)) {
+      const handlers = {};
+      elements.set(id, {
+        id, checked: true, hidden: false, innerHTML: "", textContent: "", value: "sensitive",
+        addEventListener(type, handler) { handlers[type] = handler; this[`_${type}`] = handler; },
+        scrollIntoView() {},
+      });
+    }
+    return elements.get(id);
+  };
+  let resetCalls = 0;
+  let renderCalls = 0;
+  let successCalls = 0;
+  const toasts = [];
+  const selectedInputs = [{ checked: true, value: "sensitive" }];
+  const document = {
+    querySelector() { return { checked: true, value: "sensitive" }; },
+    querySelectorAll() { return selectedInputs; },
+  };
+  ["ini", "byear", "say", "ageband"].forEach(element);
+  const context = vm.createContext({
+    $: element,
+    KIND: name === "selfreport.html" ? "selfreport" : name.replace(".html", ""),
+    L: {
+      save() { return saveResult; },
+      all() { return [{ marker: "recovery" }]; },
+    },
+    S: {
+      save() { return saveResult; },
+      validate() { return []; },
+    },
+    collect() { return { marker: "sensitive" }; },
+    problems() { return []; },
+    record() {
+      return { marker: "sensitive", site: "SITE", coping: "OK", knows_where: "Y" };
+    },
+    saveReporter() {},
+    showCount() { successCalls += 1; },
+    refreshCode() { successCalls += 1; },
+    softReset() { resetCalls += 1; },
+    render() { renderCalls += 1; },
+    toast(message, warning) { toasts.push({ message, warning }); },
+    tx(key) { return key; },
+    document,
+    Array,
+  });
+  vm.runInContext(source.slice(start, end), context, { filename: `${name}#submit-call-site` });
+  const handler = element("f")._submit;
+  assert.equal(typeof handler, "function", `${name}: submit handler was not registered`);
+  handler({ preventDefault() {} });
+  return { elements, resetCalls, renderCalls, successCalls, toasts, selectedInputs };
+}
+
 function failedPersistenceBranch(source, name) {
-  const start = source.indexOf("if (!res.persisted)");
-  assert.notEqual(start, -1, `${name}: persisted:false branch not found`);
+  const start = source.indexOf("if (!res.sourcePersisted)");
+  assert.notEqual(start, -1, `${name}: sourcePersisted:false branch not found`);
   const end = source.indexOf("\n    }", start);
   assert.notEqual(end, -1, `${name}: persisted:false branch end not found`);
   return source.slice(start, end + 6);
@@ -138,8 +203,8 @@ for (const name of ["contact.html", "referral.html", "phq9.html"]) {
 test("self-report keeps the answers visible and exportable when persistence fails", () => {
   const source = formScript("selfreport.html");
   const branch = failedPersistenceBranch(source, "selfreport.html");
-  const failure = source.indexOf("if (!res.persisted)");
-  const success = source.indexOf("Your answer was saved on this device", failure);
+  const failure = source.indexOf("if (!res.sourcePersisted)");
+  const success = source.indexOf("Your answer was saved and queued on this device", failure);
   const reset = source.indexOf("input[type=radio]", failure);
 
   assert.match(branch, /Not saved on this device/i);
@@ -156,7 +221,7 @@ test("self-report keeps the answers visible and exportable when persistence fail
 
 test("contact clears identifying inputs only after persistence succeeds", () => {
   const source = formScript("contact.html");
-  const failure = source.indexOf("if (!res.persisted)");
+  const failure = source.indexOf("if (!res.sourcePersisted)");
   const branch = failedPersistenceBranch(source, "contact.html");
   const clearInputs = source.indexOf('["ini", "byear", "mun"].forEach', failure);
   assert.notEqual(clearInputs, -1);
@@ -164,10 +229,102 @@ test("contact clears identifying inputs only after persistence succeeds", () => 
     "identifying inputs must remain available in the persistence-failure branch");
 });
 
-test("5Ws keeps its existing persisted:false message accurate", () => {
-  const source = page("5ws-report.html");
-  assert.match(source, /if \(!res\.persisted\) toast\("Saved for this page only[^\n]+Export before closing\.", true\)/);
-  assert.doesNotMatch(source, /if \(!res\.persisted\)[^\n]*Saved on this device/);
+for (const name of FORM_PAGES) {
+  test(`${name} executed call site fails closed when source persisted but queue did not`, () => {
+    const outcome = submitCallSite(name, {
+      persisted: true,
+      sourcePersisted: true,
+      queuePersisted: false,
+      acknowledged: false,
+      deliveryState: "not-queued",
+      recoveryRequired: true,
+    });
+
+    assert.match(outcome.elements.get("errs").innerHTML, /not queued/i);
+    assert.match(outcome.elements.get("errs").innerHTML, /export/i);
+    assert.doesNotMatch(outcome.elements.get("errs").innerHTML, /goes to|will be (?:sent|delivered)/i);
+    assert.equal(outcome.successCalls, 0);
+    if (name === "contact.html") {
+      assert.equal(outcome.elements.get("ini").value, "sensitive");
+      assert.equal(outcome.elements.get("byear").value, "sensitive");
+    }
+    if (name === "selfreport.html") {
+      assert.equal(outcome.elements.get("say").value, "sensitive");
+      assert.equal(outcome.selectedInputs[0].checked, true);
+    }
+  });
+}
+
+for (const name of FORM_PAGES) {
+  test(`${name} successful call site distinguishes queueing from acknowledgement`, () => {
+    const outcome = submitCallSite(name, {
+      persisted: true,
+      sourcePersisted: true,
+      queuePersisted: true,
+      acknowledged: false,
+      deliveryState: "queued",
+      recoveryRequired: false,
+    });
+
+    assert.match(outcome.elements.get("errs").innerHTML, /queued/i);
+    assert.match(outcome.elements.get("errs").innerHTML, /acknowledg/i);
+    assert.doesNotMatch(outcome.elements.get("errs").innerHTML, /goes to|will be (?:sent|delivered)|when there is signal/i);
+  });
+}
+
+test("5Ws successful call site distinguishes queueing from acknowledgement", () => {
+  const outcome = submitCallSite("5ws-report.html", {
+    persisted: true,
+    sourcePersisted: true,
+    queuePersisted: true,
+    acknowledged: false,
+    deliveryState: "queued",
+    recoveryRequired: false,
+    record: { id: "R1" },
+  });
+
+  assert.equal(outcome.resetCalls, 1);
+  assert.equal(outcome.renderCalls, 1);
+  assert.match(outcome.toasts[0].message, /queued/i);
+  assert.match(outcome.toasts[0].message, /acknowledg/i);
+  assert.doesNotMatch(outcome.toasts[0].message, /goes to|will be (?:sent|delivered)|when there is signal/i);
+});
+
+test("5Ws executed call site returns before reset or durable-save render on source failure", () => {
+  const outcome = submitCallSite("5ws-report.html", {
+    persisted: false,
+    sourcePersisted: false,
+    queuePersisted: false,
+    acknowledged: false,
+    deliveryState: "volatile",
+    recoveryRequired: true,
+    record: { id: "R1" },
+  });
+
+  assert.equal(outcome.resetCalls, 0);
+  assert.equal(outcome.renderCalls, 0);
+  assert.equal(outcome.toasts.length, 1);
+  assert.match(outcome.toasts[0].message, /export/i);
+  assert.doesNotMatch(outcome.toasts[0].message, /Report saved|Report updated/i);
+});
+
+test("5Ws executed call site returns before reset or durable-save render on queue failure", () => {
+  const outcome = submitCallSite("5ws-report.html", {
+    persisted: true,
+    sourcePersisted: true,
+    queuePersisted: false,
+    acknowledged: false,
+    deliveryState: "not-queued",
+    recoveryRequired: true,
+    record: { id: "R1" },
+  });
+
+  assert.equal(outcome.resetCalls, 0);
+  assert.equal(outcome.renderCalls, 0);
+  assert.equal(outcome.toasts.length, 1);
+  assert.match(outcome.toasts[0].message, /not queued/i);
+  assert.match(outcome.toasts[0].message, /export/i);
+  assert.doesNotMatch(outcome.toasts[0].message, /Report saved|Report updated/i);
 });
 
 test("an already-installed cache upgrades to the form safety release", async () => {
@@ -204,6 +361,10 @@ test("an already-installed cache upgrades to the form safety release", async () 
               : path.join(ROOT, key);
           precacheModes.set(key, request.cache);
           stores.get(name).set(key, fs.readFileSync(local, "utf8"));
+        },
+        async match(request) {
+          const key = cacheKey(request);
+          return stores.get(name).has(key) ? new Response(stores.get(name).get(key)) : undefined;
         },
         async put(request, response) { stores.get(name).set(cacheKey(request), await response.text()); },
       };
@@ -262,4 +423,66 @@ test("an already-installed cache upgrades to the form safety release", async () 
   assert.match(html, /Not saved on this device/);
   assert.match(html, /_rid/);
   assert.doesNotMatch(html, /old cached form/);
+});
+
+test("a failed v40 precache keeps installed v39 active and removes partial v40", async () => {
+  const source = fs.readFileSync(path.join(ROOT, "sw.js"), "utf8");
+  const listeners = {};
+  const stores = new Map([["mhpss-np-field-v39", new Map([["contact.html", "working v39 form"]])]]);
+  const deleted = [];
+  let skipped = false;
+  let claimed = false;
+  const cacheKey = (request) => {
+    const raw = typeof request === "string" ? request : request.url;
+    return raw.replace(/^\.\//, "");
+  };
+  class Request {
+    constructor(url, options) { this.url = url; this.cache = options && options.cache; }
+  }
+  const caches = {
+    async open(name) {
+      if (!stores.has(name)) stores.set(name, new Map());
+      return {
+        async add(request) {
+          const key = cacheKey(request);
+          if (key === "contact.html") throw new Error("required response failed");
+          stores.get(name).set(key, `v40:${key}`);
+        },
+        async match(request) {
+          const key = cacheKey(request);
+          return stores.get(name).has(key) ? new Response(stores.get(name).get(key)) : undefined;
+        },
+        async put(request, response) { stores.get(name).set(cacheKey(request), await response.text()); },
+      };
+    },
+    async keys() { return Array.from(stores.keys()); },
+    async delete(name) { deleted.push(name); return stores.delete(name); },
+    async match(request) {
+      const key = cacheKey(request);
+      for (const store of stores.values()) {
+        if (store.has(key)) return new Response(store.get(key));
+      }
+      return undefined;
+    },
+  };
+  const self = {
+    addEventListener(type, listener) { listeners[type] = listener; },
+    skipWaiting() { skipped = true; },
+    clients: { async claim() { claimed = true; } },
+    location: { origin: "https://example.test" },
+  };
+  vm.runInContext(source, vm.createContext({ caches, console, fetch: async () => {}, Request, Response, self, URL }), {
+    filename: path.join(ROOT, "sw.js"),
+  });
+
+  let installWork;
+  listeners.install({ waitUntil(work) { installWork = work; } });
+  await assert.rejects(installWork, /required response failed|precache/i);
+
+  assert.equal(skipped, false, "failed worker must not call skipWaiting");
+  assert.equal(claimed, false, "failed worker must not claim installed clients");
+  assert.equal(stores.has("mhpss-np-field-v39"), true, "active v39 cache must remain");
+  assert.equal(stores.get("mhpss-np-field-v39").get("contact.html"), "working v39 form");
+  assert.equal(stores.has("mhpss-np-field-v40"), false, "partial v40 cache must be removed");
+  assert.deepEqual(deleted, ["mhpss-np-field-v40"]);
 });

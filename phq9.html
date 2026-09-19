@@ -21,7 +21,7 @@
 <meta name="apple-mobile-web-app-title" content="MHPSS Field">
 </head>
 <body class="fx">
-<div class="ribbon">Revised draft <span>· English items only — the validated Nepali text has not been obtained · saved on this phone, sent to the coordination register when there is signal</span></div>
+<div class="ribbon">Revised draft <span>· English items only — the validated Nepali text has not been obtained · device save, send queue and delivery acknowledgement are reported separately</span></div>
 
 <div class="top">
   <div>
@@ -349,7 +349,7 @@
       return;
     }
     var res = L.save(KIND, r);
-    if (!res.persisted) {
+    if (!res.sourcePersisted) {
       $("errs").innerHTML = '<div class="banner stop"><b>Not saved on this device.</b> ' +
         'This administration exists only in this open page. Export CSV now and keep the file for recovery. ' +
         'It was not queued and will not be sent automatically.</div>';
@@ -357,8 +357,15 @@
       $("errs").scrollIntoView({ block: "center" });
       return;
     }
-    $("errs").innerHTML = '<div class="banner ok"><b>Saved on this device.</b> ' +
-      "The record goes to the coordination register when there is signal.</div>";
+    if (!res.queuePersisted) {
+      $("errs").innerHTML = '<div class="banner stop"><b>Saved on this device, but not queued.</b> ' +
+        'Keep this form open and export CSV now for recovery. Delivery is not automatic.</div>';
+      $("count").textContent = "latest administration was saved but not queued — export it now";
+      $("errs").scrollIntoView({ block: "center" });
+      return;
+    }
+    $("errs").innerHTML = '<div class="banner ok"><b>Saved and queued on this device.</b> ' +
+      "Check the status strip for delivery acknowledgement.</div>";
     showCount();
   });
 

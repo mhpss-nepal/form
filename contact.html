@@ -21,7 +21,7 @@
 <meta name="apple-mobile-web-app-title" content="MHPSS Field">
 </head>
 <body class="fx">
-<div class="ribbon">Revised draft for field piloting <span>· saved on this phone, sent to the coordination register when there is signal</span></div>
+<div class="ribbon">Revised draft for field piloting <span>· device save, send queue and delivery acknowledgement are reported separately</span></div>
 
 <div class="top">
   <div>
@@ -49,7 +49,7 @@
   </div>
 
   <div class="banner">
-    <b>Works with no signal.</b> Records are held on this phone as you save them and sent to the coordination register on their own when there is signal. The export remains for a copy of your own. <span id="storeWarn"></span>
+    <b>Works with no signal.</b> Each save reports whether the device copy and send queue were both stored. The status strip reports delivery acknowledgement; export remains available for recovery. <span id="storeWarn"></span>
   </div>
 
   <form id="f" autocomplete="off" novalidate>
@@ -457,11 +457,18 @@
       return;
     }
     var res = L.save(KIND, r);
-    if (!res.persisted) {
+    if (!res.sourcePersisted) {
       $("errs").innerHTML = '<div class="banner stop"><b>Not saved on this device.</b> ' +
         'This contact exists only in this open page. Export CSV now and keep the file for recovery. ' +
         'It was not queued and will not be sent automatically.</div>';
       $("count").textContent = "latest contact is only in this open page — export before closing";
+      $("errs").scrollIntoView({ block: "center" });
+      return;
+    }
+    if (!res.queuePersisted) {
+      $("errs").innerHTML = '<div class="banner stop"><b>Saved on this device, but not queued.</b> ' +
+        'Keep these inputs as they are and export CSV now for recovery. Delivery is not automatic.</div>';
+      $("count").textContent = "latest contact was saved but not queued — export it now";
       $("errs").scrollIntoView({ block: "center" });
       return;
     }
@@ -471,9 +478,8 @@
     $("sex").value = ""; $("mins").value = ""; $("notes").value = "";
     document.querySelectorAll('input[name="nr"]').forEach(function (i) { i.checked = false; });
     refreshCode();
-    $("errs").innerHTML = '<div class="banner ok"><b>Saved on this device.</b> ' +
-      "The name details have been cleared; the contact code is kept. The record goes to the coordination register " +
-      "when there is signal; the code, never the name.</div>";
+    $("errs").innerHTML = '<div class="banner ok"><b>Saved and queued on this device.</b> ' +
+      "The name details have been cleared; the contact code is kept. Check the status strip for delivery acknowledgement.</div>";
     showCount();
   });
 

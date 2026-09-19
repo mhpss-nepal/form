@@ -20,3 +20,14 @@ and none is to be added. Focal-point contact details are kept on the handset
 and never reach the register.
 
 Draft instruments, not agreed with EDCD or the MHPSS Technical Working Group.
+
+## Deployment blocker — atomic Form/Hub release required
+
+**Unresolved B6 blocker:** this Form repository and the separate Hub repository
+cannot be deployed safely as independent releases. Forms load moving shared
+assets from `../hub/assets/`, so a partially completed rollout can pair new Form
+call sites with an old Hub persistence contract, or old Form call sites with new
+Hub behavior. These safety branches may be review- or PR-ready, but **must not be
+merged or deployed** until Form and Hub are released atomically from one
+monorepo, or an equivalent rollout verifies the exact content of every paired
+Form and Hub asset before activation and can roll the pair back together.

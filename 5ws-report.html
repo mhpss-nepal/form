@@ -21,7 +21,7 @@
 <meta name="apple-mobile-web-app-title" content="MHPSS Field">
 </head>
 <body class="fx">
-<div class="ribbon"><span data-i18n="banner.trial">Revised draft for field piloting</span><span data-i18n="banner.trialSub"> · saved on this phone, sent to the coordination register when there is signal</span></div>
+<div class="ribbon"><span data-i18n="banner.trial">Revised draft for field piloting</span><span data-i18n="banner.trialSub"> · device save, send queue and delivery acknowledgement are reported separately</span></div>
 
 <div class="top">
   <div>
@@ -47,7 +47,7 @@
 
   <div class="banner stop" data-i18n="f4.stop" data-i18n-html><b>This form records services, not people.</b> Never enter a beneficiary's name, phone number, date of birth, identity number, diagnosis, assessment score, or any detail that could identify an individual. There is no field for it, and none is to be added. If someone needs individual follow-up, refer them — do not record them here.</div>
 
-  <div class="banner" data-i18n="f4.offline" data-i18n-html><b>Works offline.</b> Reports are saved on this phone as you submit them and sent to the coordination register on their own when you have signal. The export buttons below remain for a copy of your own. <span id="storeWarn"></span></div>
+  <div class="banner" data-i18n="f4.offline" data-i18n-html><b>Works offline.</b> Each save reports whether the device copy and send queue were both stored. The status strip reports delivery acknowledgement; export remains available for recovery. <span id="storeWarn"></span></div>
 
   <form id="f" autocomplete="off" novalidate>
 
@@ -318,7 +318,7 @@
     <div class="card" id="s5">
       <div class="step"><span class="n">5</span><h2 data-i18n="f4.h5check">Check and save</h2></div>
       <div id="problems"></div>
-      <div class="help" data-i18n="f4.saveHelp">Saving the same organisation, place, date, activity and start time twice updates that report rather than creating a second one. The report is kept on this phone and sent to the coordination register when there is signal.</div>
+      <div class="help" data-i18n="f4.saveHelp">Saving the same organisation, place, date, activity and start time twice updates that report rather than creating a second one. After saving, check the result for device storage and queue durability, then the status strip for delivery acknowledgement.</div>
     </div>
   </form>
 
@@ -330,7 +330,7 @@
   <!-- SAVED -->
   <section class="saved">
   <h2 data-i18n="f4.savedH" data-i18n-html>Saved on this device <span class="xs" id="cnt"></span></h2>
-  <p class="help" style="margin:0 0 10px" data-i18n="f4.savedHelp" data-i18n-html>This list is the copy on this phone. Every report also goes to the coordination register when there is signal; the full list of reports received, from every phone, is on the dashboard under <a href="../hub/#reports">Reports received</a>.</p>
+  <p class="help" style="margin:0 0 10px" data-i18n="f4.savedHelp" data-i18n-html>This list is the source copy on this phone; it is not proof of queueing or delivery. Check the status strip for pending or acknowledged delivery, and the dashboard under <a href="../hub/#reports">Reports received</a> for records actually received.</p>
   <div class="btns" style="margin-bottom:12px">
     <button type="button" class="btn ghost sm" id="expCsv" data-i18n="f4.expCsv">Export CSV</button>
     <button type="button" class="btn ghost sm" id="expJson" data-i18n="f4.expJson">Export JSON</button>
@@ -734,9 +734,16 @@
     box.innerHTML = "";
     var res = S.save(rec);
     saveReporter();
-    if (!res.persisted) toast("Saved for this page only — this browser is blocking storage. Export before closing.", true);
-    else if (res.duplicateOf) toast(tx("updated") + res.record.id + ")");
-    else toast(tx("saved") + res.record.id);
+    if (!res.sourcePersisted) {
+      toast("Not saved on this device — held only in this page. Export before closing; it was not queued.", true);
+      return;
+    }
+    if (!res.queuePersisted) {
+      toast("Saved on this device, but not queued. Keep this form open and export now for recovery.", true);
+      return;
+    }
+    if (res.duplicateOf) toast(tx("updated") + res.record.id + ") · queued; check the status strip for acknowledgement");
+    else toast(tx("saved") + res.record.id + " · queued; check the status strip for acknowledgement");
     softReset();
     render();
   });

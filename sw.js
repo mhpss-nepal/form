@@ -77,14 +77,27 @@ const PRECACHE = [
 
 self.addEventListener("install", (e) => {
   e.waitUntil((async () => {
-    const c = await caches.open(CACHE);
-    /* one at a time: a single 404 must not fail the whole install and
-       leave the worker with no cache at all */
-    await Promise.all(PRECACHE.map(async (u) => {
-      try { await c.add(new Request(u, { cache: "reload" })); }
-      catch (err) { /* keep going — logged below on first fetch miss */ }
-    }));
-    self.skipWaiting();
+    try {
+      const c = await caches.open(CACHE);
+      /* Every entry is required. An installed v39 client must keep its complete
+         cache unless v40 has fetched and verified the whole offline set. */
+      /* Sequential adds leave no in-flight cache writes behind if one fails;
+         cleanup below therefore removes the complete partial candidate. */
+      for (const u of PRECACHE) {
+        await c.add(new Request(u, { cache: "reload" }));
+      }
+      for (const u of PRECACHE) {
+        if (!(await c.match(u, { ignoreSearch: true }))) {
+          throw new Error("Required precache entry is missing: " + u);
+        }
+      }
+      await self.skipWaiting();
+    } catch (err) {
+      /* cache.add() may already have written siblings before one request fails.
+         Remove that partial candidate and reject install; do not touch v39. */
+      await caches.delete(CACHE);
+      throw err;
+    }
   })());
 });
 

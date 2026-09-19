@@ -211,7 +211,7 @@
       return;
     }
     var res = L.save(KIND, r);
-    if (!res.persisted) {
+    if (!res.sourcePersisted) {
       $("errs").innerHTML = '<div class="banner stop"><b>Not saved on this device.</b> ' +
         'Your answer exists only in this open page. Keep this page open and ask a worker to export CSV now ' +
         'for recovery. It was not queued and will not be delivered automatically.</div>';
@@ -219,9 +219,16 @@
       $("errs").scrollIntoView({ block: "center" });
       return;
     }
-    $("errs").innerHTML = '<div class="banner ok"><b>Thank you.</b> Your answer was saved on this device, ' +
-      'with nothing attached to it that could identify you. Remember that nobody can contact you about ' +
-      'it — if you want support, speak to a worker at this site.</div>';
+    if (!res.queuePersisted) {
+      $("errs").innerHTML = '<div class="banner stop"><b>Saved on this device, but not queued.</b> ' +
+        'Keep these answers visible and ask a worker to export CSV now for recovery. Delivery is not automatic.</div>';
+      $("count").textContent = "latest answer was saved but not queued — export it now";
+      $("errs").scrollIntoView({ block: "center" });
+      return;
+    }
+    $("errs").innerHTML = '<div class="banner ok"><b>Thank you.</b> Your answer was saved and queued on this device, ' +
+      'with nothing attached to it that could identify you. Check the status strip for delivery acknowledgement. ' +
+      'Nobody can contact you about it — if you want support, speak to a worker at this site.</div>';
     /* reset so the next person starts clean and cannot see the previous answer */
     Array.prototype.forEach.call(document.querySelectorAll('input[type=radio]'), function (i) { i.checked = false; });
     $("say").value = ""; $("ageband").value = "";
