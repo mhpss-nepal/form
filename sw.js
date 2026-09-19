@@ -19,7 +19,7 @@
    old validation, and (16 Sep 2026) a version of store.js that did not sync
    to the register at all. The fix was deployed and had no effect on any
    device until this line changed. */
-const CACHE = "mhpss-np-field-v40";
+const CACHE = "mhpss-np-field-v41";
 
 const PRECACHE = [
   "./",
@@ -79,8 +79,8 @@ self.addEventListener("install", (e) => {
   e.waitUntil((async () => {
     try {
       const c = await caches.open(CACHE);
-      /* Every entry is required. An installed v39 client must keep its complete
-         cache unless v40 has fetched and verified the whole offline set. */
+      /* Every entry is required. An installed v40 client must keep its complete
+         cache unless v41 has fetched and verified the whole offline set. */
       /* Sequential adds leave no in-flight cache writes behind if one fails;
          cleanup below therefore removes the complete partial candidate. */
       for (const u of PRECACHE) {

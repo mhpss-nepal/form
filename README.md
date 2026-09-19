@@ -24,10 +24,12 @@ Draft instruments, not agreed with EDCD or the MHPSS Technical Working Group.
 ## Deployment blocker — atomic Form/Hub release required
 
 **Unresolved B6 blocker:** this Form repository and the separate Hub repository
-cannot be deployed safely as independent releases. Forms load moving shared
-assets from `../hub/assets/`, so a partially completed rollout can pair new Form
-call sites with an old Hub persistence contract, or old Form call sites with new
-Hub behavior. These safety branches may be review- or PR-ready, but **must not be
-merged or deployed** until Form and Hub are released atomically from one
-monorepo, or an equivalent rollout verifies the exact content of every paired
-Form and Hub asset before activation and can roll the pair back together.
+are review artifacts only. They cannot be merged or deployed as independent
+releases. Forms load moving shared assets from `../hub/assets/`, so a partially
+completed rollout can pair new Form call sites with an old Hub persistence
+contract, or old Form call sites with new Hub behavior. The machine-verifiable
+release contract produced with this review identifies the exact Hub commit,
+Form commit, precache asset fingerprint and cache version that a later monorepo
+integration must consume as one atomic pair. That contract does **not** resolve
+rollout: the pair **must not be merged or deployed** until it is integrated and
+verified atomically in the monorepo with one rollback boundary.

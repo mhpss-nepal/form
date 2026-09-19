@@ -106,6 +106,8 @@ function exportColumns(name) {
 function sharedHubContext() {
   const data = new Map();
   const localStorage = {
+    get length() { return data.size; },
+    key(index) { return Array.from(data.keys())[index] ?? null; },
     getItem(key) { return data.has(key) ? data.get(key) : null; },
     setItem(key, value) { data.set(key, String(value)); },
     removeItem(key) { data.delete(key); },
@@ -327,9 +329,20 @@ test("5Ws executed call site returns before reset or durable-save render on queu
   assert.doesNotMatch(outcome.toasts[0].message, /Report saved|Report updated/i);
 });
 
+test("cards state offline storage and delivery conditionally in both languages", () => {
+  const source = page("cards.html");
+  assert.doesNotMatch(source, /Nothing is lost/i);
+  assert.doesNotMatch(source, /sends by itself|आफै पठाउँछ/i);
+  assert.match(source, /saves offline[\s\S]*depends|depends[\s\S]*offline storage/i);
+  assert.match(source, /saved or queued status is not delivery confirmation/i);
+  assert.match(source, /check the status/i);
+  assert.match(source, /warning[\s\S]*export|export[\s\S]*warning/i);
+  assert.match(source, /Nepali.*abbreviated|नेपाली.*संक्षिप्त/i);
+});
+
 test("an already-installed cache upgrades to the form safety release", async () => {
   const source = fs.readFileSync(path.join(ROOT, "sw.js"), "utf8");
-  assert.match(source, /const CACHE = "mhpss-np-field-v40";/);
+  assert.match(source, /const CACHE = "mhpss-np-field-v41";/);
   assert.equal(
     fs.readFileSync(path.join(ROOT, "tools", "precache.sha"), "utf8").trim(),
     precacheFingerprint(source),
@@ -393,8 +406,8 @@ test("an already-installed cache upgrades to the form safety release", async () 
   listeners.install({ waitUntil(work) { installWork = work; } });
   await installWork;
   assert.equal(skipped, true);
-  assert.equal(stores.has("mhpss-np-field-v40"), true);
-  const refreshed = stores.get("mhpss-np-field-v40");
+  assert.equal(stores.has("mhpss-np-field-v41"), true);
+  const refreshed = stores.get("mhpss-np-field-v41");
   for (const name of FORM_PAGES) {
     assert.equal(refreshed.has(name), true, name);
     assert.equal(precacheModes.get(name), "reload", name);
@@ -425,10 +438,10 @@ test("an already-installed cache upgrades to the form safety release", async () 
   assert.doesNotMatch(html, /old cached form/);
 });
 
-test("a failed v40 precache keeps installed v39 active and removes partial v40", async () => {
+test("a failed v41 precache keeps installed v40 active and removes partial v41", async () => {
   const source = fs.readFileSync(path.join(ROOT, "sw.js"), "utf8");
   const listeners = {};
-  const stores = new Map([["mhpss-np-field-v39", new Map([["contact.html", "working v39 form"]])]]);
+  const stores = new Map([["mhpss-np-field-v40", new Map([["contact.html", "working v40 form"]])]]);
   const deleted = [];
   let skipped = false;
   let claimed = false;
@@ -481,8 +494,8 @@ test("a failed v40 precache keeps installed v39 active and removes partial v40",
 
   assert.equal(skipped, false, "failed worker must not call skipWaiting");
   assert.equal(claimed, false, "failed worker must not claim installed clients");
-  assert.equal(stores.has("mhpss-np-field-v39"), true, "active v39 cache must remain");
-  assert.equal(stores.get("mhpss-np-field-v39").get("contact.html"), "working v39 form");
-  assert.equal(stores.has("mhpss-np-field-v40"), false, "partial v40 cache must be removed");
-  assert.deepEqual(deleted, ["mhpss-np-field-v40"]);
+  assert.equal(stores.has("mhpss-np-field-v40"), true, "active v40 cache must remain");
+  assert.equal(stores.get("mhpss-np-field-v40").get("contact.html"), "working v40 form");
+  assert.equal(stores.has("mhpss-np-field-v41"), false, "partial v41 cache must be removed");
+  assert.deepEqual(deleted, ["mhpss-np-field-v41"]);
 });
