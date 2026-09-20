@@ -109,6 +109,16 @@ def main() -> int:
 
     human = set((meta.get("source") or {}).get("human") or [])
 
+    # The team decided (2026-09-20) that everything is machine-translated so it
+    # can be reviewed on the live pages, then corrected from feedback. So the
+    # protected prefixes (phq9./consent./safeguard./clinical.) are written too
+    # when --include-provisional is passed -- but each such value keeps its
+    # `provisional: true` flag in i18n-ne-fill.json, and the review file lists
+    # them, so nobody mistakes them for checked wording. Without the flag this
+    # script still refuses to touch them.
+    include_provisional = "--include-provisional" in sys.argv
+    protected = () if include_provisional else PROTECTED_PREFIXES
+
     to_add, skipped = {}, []
     for k, row in drafts.items():
         if k in ne and str(ne[k]).strip():
@@ -117,7 +127,7 @@ def main() -> int:
         if k in human:
             skipped.append((k, "marked human-reviewed: not overwriting"))
             continue
-        if k.startswith(PROTECTED_PREFIXES):
+        if k.startswith(protected):
             skipped.append((k, "protected prefix: never machine-translated"))
             continue
         v = str(row.get("ne") or "").strip()
