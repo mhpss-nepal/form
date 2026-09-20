@@ -95,6 +95,30 @@ extractor additionally counts the keys the page mints in JavaScript (14 more:
 the nine items, four scale labels, the item-9 instruction), which the gate's
 HTML scanner cannot see — see the browser proof below, which covers them.
 
+**Correction (same day, found during the reconciliation run).** The block above
+is only reproducible if the gate reads the dictionary this change was made
+against, and it did not say which file that was. `tools/i18n-check.py` reads a
+**sibling** `../hub/assets/i18n-strings.js` — an untracked staging copy on this
+host — and that copy was later left at the **pre-keying** revision while the
+three pages were keyed against the new one. Running the same command then
+produced the opposite result: three pages FAIL and the six `professionalOnly`
+prefixes reported as matching no key, i.e. it looked like the historic
+0-of-204 bug had returned. It had not; the gate was reading a stale file.
+
+Three things now prevent that, and every count below must be read with them:
+
+1. `tools/i18n-dictionary-sync-check.py` compares the gate's dictionary against
+   the canonical tracked one by sha256 and exits 1 on drift.
+2. `tools/i18n-check.py` prints the dictionary path and its sha256, and warns
+   when that file is not under version control — so no count is printed without
+   the artifact it was counted from.
+3. The staging copy is byte-identical to the canonical dictionary
+   (`6ef1aa00…40fa`); `tools/i18n_dictionary_failing_first.py` proves both
+   conditions are caught by reverting the copy and by planting a dead prefix.
+
+The exact run for this task, with the dictionary named, is in
+`RECONCILIATION-t_2cfc3bab.md` and `TRANSLATION-KEYING-EVIDENCE.md`.
+
 ---
 
 ## Stage B — safety classification

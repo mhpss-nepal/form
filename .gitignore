@@ -10,6 +10,8 @@
 
 # Working files
 shot-*.png
+__pycache__/
+*.pyc
 v[0-9].png
 p[0-9].png
 d[0-9].png

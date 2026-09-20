@@ -29,6 +29,7 @@ Run from the repository root:  python3 tools/i18n-check.py
 ================================================================================
 """
 import csv
+import hashlib
 import json
 import io
 import os
@@ -333,6 +334,36 @@ def main(argv):
     pages = load_pages()
     fail = []
     print("MHPSS Nepal — bilingual gate")
+    # Name the file this run actually read, and its digest. On this host the
+    # gate reads a sibling `hub/` staging copy; when that copy was stale it
+    # reported the three keyed pages as failures AND the six professionalOnly
+    # prefixes as matching no key -- i.e. it appeared to reproduce the historic
+    # 0-of-204 bug. It had not: the gate was reading an old dictionary. A count
+    # is only meaningful alongside the artifact it was counted from.
+    print("  dictionary: %s" % os.path.relpath(STRINGS, ROOT))
+    try:
+        with open(STRINGS, "rb") as _handle:
+            _digest = hashlib.sha256(_handle.read()).hexdigest()
+        print("  dictionary sha256: %s" % _digest)
+        # Is the file the gate read under version control at all? The staging
+        # copy at ../hub/ is not, so a run against it is a run against a file
+        # nobody reviews -- say so rather than printing a bare, confident count.
+        _probe = os.path.dirname(os.path.abspath(STRINGS))
+        _tracked = False
+        while True:
+            if os.path.exists(os.path.join(_probe, ".git")):
+                _tracked = True
+                break
+            _parent = os.path.dirname(_probe)
+            if _parent == _probe:
+                break
+            _probe = _parent
+        if not _tracked:
+            print("  WARNING: this file is not under version control. It is a")
+            print("           staging copy, so it can be older than the tracked")
+            print("           dictionary; the counts below describe this copy.")
+    except OSError:
+        pass
     print("  English strings: %d   Nepali strings: %d" % (len(d["en"]), len(d["ne"])))
 
     cl = code_list_coverage()

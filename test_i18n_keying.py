@@ -17,6 +17,7 @@ What keying is allowed to do to a page, and nothing else:
 It must NOT change any field id/name/value, any script, or any other markup.
 """
 import re
+import sys
 import unittest
 from html.parser import HTMLParser
 from pathlib import Path
@@ -171,6 +172,67 @@ class I18nKeyingContract(unittest.TestCase):
         # no protected key may carry Nepali
         leaked = [k for k in ne if any(k.startswith(p) for p in pro) and ne[k].strip()]
         self.assertEqual(leaked, [], "protected keys with Nepali: %s" % leaked)
+
+
+class DictionaryIntegrity(unittest.TestCase):
+    """The gate must read the dictionary the change was made against.
+
+    On this host tools/i18n-check.py reads a SIBLING `hub/` staging copy that is
+    not under version control. On 20 Sep 2026 that copy was still at the
+    pre-keying revision while the three pages were keyed against the new
+    dictionary, and the gate reported (a) the three keyed pages as failures and
+    (b) the six professionalOnly prefixes as matching no key -- the historic
+    0-of-204 bug, apparently back. It was not back; the gate was reading a stale
+    file. These tests make both readings impossible to reach unnoticed.
+    """
+
+    def test_gate_dictionary_is_the_canonical_tracked_one(self):
+        import subprocess
+        result = subprocess.run(
+            [sys.executable, "tools/i18n-dictionary-sync-check.py"],
+            cwd=ROOT, capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0,
+                         "the bilingual gate is reading a dictionary that is not "
+                         "the canonical tracked one:\n" + result.stdout + result.stderr)
+
+    def test_every_professional_only_prefix_matches_a_live_key(self):
+        """The task's headline count, per page, asserted rather than reported."""
+        import subprocess
+        result = subprocess.run(
+            [sys.executable, "tools/i18n-protection-report.py"],
+            cwd=ROOT, capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        # the three pages this task keyed must each be named in the report
+        for page in PAGES:
+            self.assertIn(page, result.stdout)
+        self.assertIn("9 of 9 prefixes match a live key", result.stdout)
+
+    def test_phq9_protected_keys_really_render_english(self):
+        """Stage B, rendered: a real browser, on the Nepali page.
+
+        The proof is RUN here, not read from a file left behind by an earlier
+        run -- a test that reads a stale artifact passes for the wrong reason,
+        which is the very failure mode this class exists to prevent.
+        """
+        import json
+        import subprocess
+        result = subprocess.run(
+            [sys.executable, "tools/i18n_safety_proof_file_url.py"],
+            cwd=ROOT, capture_output=True, text=True, timeout=600)
+        self.assertTrue(result.stdout.strip(),
+                        "the rendered proof produced no output:\n" + result.stderr)
+        data = json.loads(Path("/tmp/i18n-safety-proof-file.json")
+                          .read_text(encoding="utf-8"))
+        self.assertEqual(data["failures"], 0,
+                         "safety property violated: %s"
+                         % [c for c in data["checks"] if not c["ok"]])
+        self.assertGreater(data["phq9"]["kept"], 0,
+                           "no element on the Nepali PHQ-9 page is held in English")
+        # the protected wording must be ENGLISH, not merely present
+        for key in ("phq9.item9", "phq9.scale0", "consent.phq9"):
+            text = data["phq9"]["elements"][key]["text"]
+            self.assertTrue(any("a" <= ch.lower() <= "z" for ch in text),
+                            "%s rendered as %r, which is not English" % (key, text))
 
 
 if __name__ == "__main__":
