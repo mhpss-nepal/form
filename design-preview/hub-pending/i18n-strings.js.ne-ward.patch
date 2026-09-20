@@ -1,5 +1,5 @@
---- /tmp/hub_main_i18n.js	2026-09-20 16:50:11.611297491 +0000
-+++ hub/assets/i18n-strings.js	2026-09-20 16:29:30.004191014 +0000
+--- a/assets/i18n-strings.js
++++ b/assets/i18n-strings.js
 @@ -32,7 +32,7 @@
        { code: "ne", label: "NEP", name: "नेपाली",   html: "ne" }
      ],
