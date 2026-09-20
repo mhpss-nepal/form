@@ -7,6 +7,11 @@
 *.json
 !data/demo.json
 !package.json
+# Translation WORK PRODUCT is not operational data: the evidence a reviewer
+# has to be able to read (readings, decisions, back-translations) is versioned
+# on purpose. Everything else stays ignored.
+!tools/*.json
+!tools/fixtures/*.json
 
 # Working files
 shot-*.png

@@ -1,0 +1,713 @@
+{
+  "held": {
+    "phq9.p001": {
+      "english": "PHQ-9 follow-up measure — MHPSS Nepal",
+      "lane_A": "PHQ-9 फलोअप मापन — MHPSS Nepal",
+      "lane_B": "PHQ-9 अनुगमन मापन — MHPSS नेपाल",
+      "page": "phq9.html",
+      "reason": "both 'फलोअप' and 'अनुगमन' appear in the material; a word is added or dropped"
+    },
+    "phq9.p002": {
+      "english": "Revised draft <span>· English items only — the validated Nepali text has not been obtained · saved on this phone, sent to the coordination register when there is signal</span>",
+      "lane_A": "संशोधित मस्यौदा <span>· अंग्रेजी प्रश्न मात्र — प्रमाणित नेपाली पाठ प्राप्त भएको छैन · यही फोनमा सुरक्षित, सिग्नल भएपछि समन्वय दर्तामा पठाइने</span>",
+      "lane_B": "संशोधित मस्यौदा <span>· अंग्रेजी प्रश्न मात्र — प्रमाणित नेपाली पाठ अझै प्राप्त भएको छैन · यही फोनमा सुरक्षित, सिग्नल भएपछि समन्वय रजिस्टरमा पठाइन्छ</span>",
+      "page": "phq9.html",
+      "reason": "a word is added or dropped; both 'दर्ता' and 'रजिस्टर' appear in the material; both 'पठाइने' and 'पठाइन्छ' appear in the material"
+    },
+    "phq9.p003": {
+      "english": "PHQ-9 · follow-up measure",
+      "lane_A": "PHQ-9 · फलोअप मापन",
+      "lane_B": "PHQ-9 · अनुगमन मापन",
+      "page": "phq9.html",
+      "reason": "both 'फलोअप' and 'अनुगमन' appear in the material"
+    },
+    "phq9.p007": {
+      "english": "Following one person over time",
+      "lane_A": "एक व्यक्तिलाई समयक्रममा पछ्याउने",
+      "lane_B": "एकै व्यक्तिलाई समयक्रममा पछ्याउने",
+      "page": "phq9.html",
+      "reason": "both 'एक' and 'एकै' appear in the material"
+    },
+    "phq9.p008": {
+      "english": "This measure exists to answer one question the 14 September briefing asked: does a person move from acute distress towards a clinical disorder, or away from it? It is for repeating with <b>someone already in care</b>, so the second score can be compared with the first.",
+      "lane_A": "यो मापन 14 सेप्टेम्बरको ब्रिफिङले सोधेको एउटा प्रश्नको उत्तर दिन राखिएको हो: व्यक्ति तीव्र व्याकुलताबाट क्लिनिकल विकारतिर जान्छ कि त्यसबाट टाढा हुन्छ? यो <b>पहिले नै उपचारमा रहेको व्यक्ति</b>सँग दोहोर्याउनका लागि हो, जसले दोस्रो स्कोरलाई पहिलोसँग तुलना गर्न सकियोस्।",
+      "lane_B": "यो मापन सेप्टेम्बर १४ को ब्रिफिङले सोधेको एउटै प्रश्नको जवाफ दिन राखिएको हो: व्यक्ति तीव्र पीडाबाट क्लिनिकल विकारतिर बढ्छ कि त्यसबाट टाढा जान्छ? यो <b>पहिल्यै उपचारमा रहेको व्यक्ति</b>सँग दोहोर्याउनका लागि हो, ताकि दोस्रो अङ्कलाई पहिलोसँग तुलना गर्न सकियोस्।",
+      "page": "phq9.html",
+      "reason": "a word is added or dropped; both 'एउटा' and 'एउटै' appear in the material; neither 'उत्तर' nor 'जवाफ' is published for this English; neither 'व्याकुलता' nor 'पीडाबाट' is published for this English; both 'जान्छ' and 'बढ्छ' appear in the material; both 'हुन्छ' and 'जान्छ' appear in the material; a word is added or dropped; both 'जसले' and 'ताकि' appear in the material; both 'स्कोर' and 'अङ्क' appear in the material"
+    },
+    "phq9.p011": {
+      "english": "Administered by",
+      "lane_A": "सञ्चालन गर्ने",
+      "lane_B": "मापन गर्ने",
+      "page": "phq9.html",
+      "reason": "both 'सञ्चालन' and 'मापन' appear in the material"
+    },
+    "phq9.p012": {
+      "english": "A measure like this belongs with a counsellor or clinician, not a volunteer.",
+      "lane_A": "यस्तो मापन परामर्शदाता वा क्लिनिसियनको जिम्मामा हुनुपर्छ, स्वयंसेवकको होइन।",
+      "lane_B": "यस्तो मापन परामर्शदाता वा क्लिनिसियनको जिम्मामा हुन्छ, स्वयंसेवकको होइन।",
+      "page": "phq9.html",
+      "reason": "both 'हुनुपर्छ' and 'हुन्छ' appear in the material"
+    },
+    "phq9.p015": {
+      "english": "Paste the code from the person's <a href=\"contact.html\">service contact record</a>, so the two scores can be lined up without a name.",
+      "lane_A": "व्यक्तिको <a href=\"contact.html\">सेवा सम्पर्क अभिलेख</a>बाट कोड टाँस्नुहोस्, जसले नामबिनै दुई स्कोर मिलाउन सकियोस्।",
+      "lane_B": "व्यक्तिको <a href=\"contact.html\">सेवा सम्पर्क अभिलेख</a>बाट कोड टाँस्नुहोस्, ताकि नामबिनै दुई अङ्क मिलाउन सकियोस्।",
+      "page": "phq9.html",
+      "reason": "both 'जसले' and 'ताकि' appear in the material; both 'स्कोर' and 'अङ्क' appear in the material"
+    },
+    "phq9.p016": {
+      "english": "Which administration is this?",
+      "lane_A": "यो कुन पटकको सञ्चालन हो?",
+      "lane_B": "यो कुन पटकको मापन हो?",
+      "page": "phq9.html",
+      "reason": "both 'सञ्चालन' and 'मापन' appear in the material"
+    },
+    "phq9.p018": {
+      "english": "First — baseline",
+      "lane_A": "पहिलो — आधाररेखा",
+      "lane_B": "पहिलो — आधारभूत",
+      "page": "phq9.html",
+      "reason": "both 'आधाररेखा' and 'आधारभूत' appear in the material"
+    },
+    "phq9.p019": {
+      "english": "Follow-up",
+      "lane_A": "फलोअप",
+      "lane_B": "अनुगमन",
+      "page": "phq9.html",
+      "reason": "both 'फलोअप' and 'अनुगमन' appear in the material"
+    },
+    "phq9.p026": {
+      "english": "Another language",
+      "lane_A": "अरू भाषा",
+      "lane_B": "अर्को भाषा",
+      "page": "phq9.html",
+      "reason": "both 'अरू' and 'अर्को' appear in the material"
+    },
+    "phq9.p027": {
+      "english": "Recorded because it changes what the score means.",
+      "lane_A": "स्कोरको अर्थ बदल्ने भएकाले अभिलेख गरिन्छ।",
+      "lane_B": "अङ्कको अर्थ बदलिने भएकाले यो अभिलेख गरिन्छ।",
+      "page": "phq9.html",
+      "reason": "both 'स्कोर' and 'अङ्क' appear in the material; neither 'बदल्ने' nor 'बदलिने' is published for this English; a word is added or dropped"
+    },
+    "phq9.p028": {
+      "english": "The nine items",
+      "lane_A": "नौ प्रश्न",
+      "lane_B": "ती नौ प्रश्न",
+      "page": "phq9.html",
+      "reason": "a word is added or dropped"
+    },
+    "phq9.p029": {
+      "english": "Difficulty, and the score",
+      "lane_A": "कठिनाइ, र स्कोर",
+      "lane_B": "कठिनाइ, र अङ्क",
+      "page": "phq9.html",
+      "reason": "both 'स्कोर' and 'अङ्क' appear in the material"
+    },
+    "phq9.p032": {
+      "english": "answer all nine items",
+      "lane_A": "नौ प्रश्न सबैको उत्तर दिनुहोस्",
+      "lane_B": "सबै नौ प्रश्नको जवाफ दिनुहोस्",
+      "page": "phq9.html",
+      "reason": "a word is added or dropped; a word is added or dropped"
+    },
+    "phq9.p034": {
+      "english": "Save this administration",
+      "lane_A": "यो सञ्चालन सुरक्षित गर्नुहोस्",
+      "lane_B": "यो मापन सुरक्षित गर्नुहोस्",
+      "page": "phq9.html",
+      "reason": "both 'सञ्चालन' and 'मापन' appear in the material"
+    },
+    "phq9.p036": {
+      "english": "Clear everything on this device",
+      "lane_A": "यो यन्त्रमा सबै मेटाउनुहोस्",
+      "lane_B": "यो यन्त्रमा भएको सबै मेटाउनुहोस्",
+      "page": "phq9.html",
+      "reason": "a word is added or dropped"
+    },
+    "phq9.p037": {
+      "english": "What would be sent, if there were anywhere to send it",
+      "lane_A": "पठाउने ठाउँ भए के पठाइन्थ्यो",
+      "lane_B": "कतै पठाउने ठाउँ भए के पठाइन्थ्यो",
+      "page": "phq9.html",
+      "reason": "a word is added or dropped"
+    },
+    "phq9.p038": {
+      "english": "Item-by-item answers are kept because a total alone cannot be re-checked, and because item 9 has to be auditable. There is no name, no phone number and no date of birth.",
+      "lane_A": "प्रश्नैपिच्छेका उत्तर राखिन्छन्, किनकि जम्मा स्कोर मात्र पुनः जाँच्न सकिँदैन, र प्रश्न 9 लेखापरीक्षणयोग्य हुनुपर्छ। यसमा कुनै नाम, फोन नम्बर र जन्म मिति छैन।",
+      "lane_B": "प्रश्न-प्रश्नको जवाफ राखिन्छ, किनकि जम्मा अङ्कबाट मात्र पुनः जाँच गर्न सकिँदैन र प्रश्न ९ को लेखापरीक्षण हुनुपर्छ। यसमा नाम, फोन नम्बर र जन्ममिति कुनै छैन।",
+      "page": "phq9.html",
+      "reason": "a word is added or dropped; both 'स्कोर' and 'अङ्क' appear in the material; a word is added or dropped; a word is added or dropped; a word is added or dropped; both 'जन्म' and 'जन्ममिति' appear in the material; both 'मिति' and 'कुनै' appear in the material"
+    },
+    "phq9.p040": {
+      "english": "PHQ-9 was developed by Drs Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke and colleagues, with an educational grant from Pfizer Inc. The instrument carries the statement: <i>“No permission required to reproduce, translate, display or distribute.”</i> The items above are reproduced verbatim on that basis. The Nepali adaptation was made and validated through the Programme for Improving Mental Health Care (PRIME) consortium, funded by UK aid — and is <b>not</b> included here, for the reason given at the top of this page.",
+      "lane_A": "PHQ-9 डा. Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke र सहकर्मीहरूले Pfizer Inc.को शैक्षिक अनुदानसहित विकास गरेका थिए। यो उपकरणमा यो कथन छ: <i>“पुनरुत्पादन, अनुवाद, प्रदर्शन वा वितरण गर्न कुनै अनुमति आवश्यक पर्दैन।”</i> माथिका प्रश्नहरू सोही आधारमा शब्दशः पुनरुत्पादन गरिएका हुन्। नेपाली अनुकूलन Programme for Improving Mental Health Care (PRIME) कन्सोर्टियममार्फत गरिएको र प्रमाणित गरिएको हो, जसलाई UK aid ले सहयोग गरेको थियो — र यो पृष्ठको सुरुमा दिइएको कारणले यहाँ समावेश गरिएको <b>छैन</b>।",
+      "lane_B": "PHQ-9 डा. Robert L. Spitzer, डा. Janet B.W. Williams, डा. Kurt Kroenke र सहकर्मीहरूले Pfizer Inc. को शैक्षिक अनुदानमा विकास गर्नुभएको हो। यो उपकरणसँग यो वाक्य छ: <i>“No permission required to reproduce, translate, display or distribute.”</i> माथिका प्रश्नहरू सोही आधारमा जस्ताको तस्तै राखिएका छन्। नेपाली रूपान्तरण Programme for Improving Mental Health Care (PRIME) कन्सोर्टियममार्फत, UK aid को सहयोगमा गरिएको र प्रमाणित गरिएको हो — तर यो पृष्ठको सुरुमा दिइएको कारणले यहाँ <b>समावेश गरिएको छैन</b>।",
+      "page": "phq9.html",
+      "reason": "a word is added or dropped; neither 'अनुदानसहित' nor 'अनुदान' is published for this English; neither 'गरेका' nor 'गर्नुभए' is published for this English; both 'थिए।' and 'हो।' appear in the material; both 'कथन' and 'वाक्य' appear in the material; a word is added or dropped; neither 'शब्दशः' nor 'जस्ता' is published for this English; neither 'पुनरुत्पादन' nor 'तस्तै' is published for this English; both 'गरिए' and 'राखिए' appear in the material; both 'हुन्।' and 'छन्।' appear in the material; both 'अनुकूलन' and 'रूपान्तरण' appear in the material; a word is added or dropped; a word is added or dropped"
+    },
+    "ref.p001": {
+      "english": "Referral record — MHPSS Nepal",
+      "lane_A": "रेफरल अभिलेख — MHPSS Nepal",
+      "lane_B": "प्रेषण अभिलेख — MHPSS नेपाल",
+      "page": "referral.html",
+      "reason": "both 'रेफरल' and 'प्रेषण' appear in the material; a word is added or dropped"
+    },
+    "ref.p002": {
+      "english": "Revised draft for field piloting <span>· saved on this phone, sent to the coordination register when there is signal</span>",
+      "lane_A": "फिल्ड परीक्षणका लागि संशोधित मस्यौदा <span>· यही फोनमा सुरक्षित, सिग्नल भएपछि समन्वय दर्तामा पठाइने</span>",
+      "lane_B": "फिल्ड परीक्षणका लागि संशोधित मस्यौदा <span>· यही फोनमा सुरक्षित, सिग्नल भएपछि समन्वय रजिस्टरमा पठाइन्छ</span>",
+      "page": "referral.html",
+      "reason": "both 'दर्ता' and 'रजिस्टर' appear in the material; both 'पठाइने' and 'पठाइन्छ' appear in the material"
+    },
+    "ref.p003": {
+      "english": "Referral record",
+      "lane_A": "रेफरल अभिलेख",
+      "lane_B": "प्रेषण अभिलेख",
+      "page": "referral.html",
+      "reason": "both 'रेफरल' and 'प्रेषण' appear in the material"
+    },
+    "ref.p008": {
+      "english": "On 14 September the briefing recorded that around 5,000 psychosocial counselling cases had been logged, but that once a person reaches a health facility their case goes into HMIS and is no longer visible here. This form is the join. Without it, “continuum of care” is a claim rather than something anyone can show.",
+      "lane_A": "14 सेप्टेम्बरको ब्रिफिङमा करिब 5,000 मनोसामाजिक परामर्शका घटना अभिलेख भएको उल्लेख थियो, तर व्यक्ति स्वास्थ्य संस्थामा पुगेपछि उनको घटना HMIS मा जान्छ र यहाँ देखिँदैन। यो फारम नै जोड्ने कडी हो। योबिना “निरन्तर उपचार” एउटा दाबी मात्र हो, कसैले देखाउन सक्ने कुरा होइन।",
+      "lane_B": "सेप्टेम्बर १४ को ब्रिफिङमा करिब ५,००० मनोसामाजिक परामर्श केस अभिलेख भएको, तर व्यक्ति स्वास्थ्य संस्थामा पुगेपछि उसको विवरण HMIS मा गई यहाँ नदेखिने उल्लेख थियो। यो फारम त्यसैको जोड्नी कडी हो। यो बिना “निरन्तर उपचार” देखाउन सकिने कुरा होइन, दाबी मात्र हुन्छ।",
+      "page": "referral.html",
+      "reason": "a word is added or dropped; a word is added or dropped; neither 'घटना' nor 'केस' is published for this English; a word is added or dropped; neither 'उनको' nor 'उसको' is published for this English; 'विवरण' [terminology-lock/by_english] is the established word; 'घटना' is not in the material at all; a word is added or dropped; a word is added or dropped; both 'नै' and 'त्यसै' appear in the material; neither 'जोड्ने' nor 'जोड्नी' is published for this English; a word is added or dropped; a word is added or dropped; a word is added or dropped"
+    },
+    "ref.p009": {
+      "english": "Who is referring",
+      "lane_A": "कसले रेफर गर्दैछ",
+      "lane_B": "को प्रेषण गर्दै हुनुहुन्छ",
+      "page": "referral.html",
+      "reason": "a word is added or dropped"
+    },
+    "ref.p011": {
+      "english": "Referring organisation",
+      "lane_A": "रेफर गर्ने संस्था",
+      "lane_B": "प्रेषण गर्ने संस्था",
+      "page": "referral.html",
+      "reason": "both 'रेफर' and 'प्रेषण' appear in the material"
+    },
+    "ref.p012": {
+      "english": "Referred by",
+      "lane_A": "रेफर गर्ने व्यक्ति",
+      "lane_B": "प्रेषण गर्ने व्यक्ति",
+      "page": "referral.html",
+      "reason": "both 'रेफर' and 'प्रेषण' appear in the material"
+    },
+    "ref.p013": {
+      "english": "Date of referral (AD)",
+      "lane_A": "रेफरल मिति (AD)",
+      "lane_B": "प्रेषण मिति (AD)",
+      "page": "referral.html",
+      "reason": "both 'रेफरल' and 'प्रेषण' appear in the material"
+    },
+    "ref.p015": {
+      "english": "Site referred from",
+      "lane_A": "रेफर गरिएको स्थल",
+      "lane_B": "जहाँबाट प्रेषण गरियो",
+      "page": "referral.html",
+      "reason": "both 'रेफर' and 'जहाँ' appear in the material; both 'गरिए' and 'प्रेषण' appear in the material; both 'स्थल' and 'गरियो' appear in the material"
+    },
+    "ref.p016": {
+      "english": "Referrer phone <span class=\"opt\">— optional</span>",
+      "lane_A": "रेफर गर्नेको फोन <span class=\"opt\">— ऐच्छिक</span>",
+      "lane_B": "प्रेषकको फोन <span class=\"opt\">— ऐच्छिक</span>",
+      "page": "referral.html",
+      "reason": "a word is added or dropped"
+    },
+    "ref.p017": {
+      "english": "So the receiving service can close the loop with you.",
+      "lane_A": "जसले गर्दा सेवा दिने संस्थाले तपाईंसँग सम्पर्क पूरा गर्न सकोस्।",
+      "lane_B": "ताकि सेवा दिने पक्षले तपाईंलाई जवाफ फर्काउन सकोस्।",
+      "page": "referral.html",
+      "reason": "a word is added or dropped; both 'संस्था' and 'पक्ष' appear in the material; a word is added or dropped"
+    },
+    "ref.p018": {
+      "english": "Who is being referred",
+      "lane_A": "कसलाई रेफर गरिँदैछ",
+      "lane_B": "कसको प्रेषण गरिँदै छ",
+      "page": "referral.html",
+      "reason": "a word is added or dropped"
+    },
+    "ref.p019": {
+      "english": "<b>No name, no phone number, no date of birth.</b> A referral needs those to work, and they are handed over <b>person to person or on paper</b> between the referring worker and the receiving service. What is recorded here is only what coordination needs in order to see whether referrals are being made and completed.",
+      "lane_A": "<b>नाम छैन, फोन नम्बर छैन, जन्म मिति छैन।</b> रेफरल काम गर्नका लागि यी चाहिन्छन्, र यी रेफर गर्ने कर्मचारी र सेवा दिने संस्थाबीच <b>व्यक्तिबाट व्यक्ति वा कागजमा</b> हस्तान्तरण हुन्छन्। यहाँ अभिलेख गरिने भनेको रेफरल भइरहेको छ कि छैन र पूरा भयो कि भएन भन्ने हेर्न समन्वयलाई जे चाहिन्छ, त्यति मात्र हो।",
+      "lane_B": "<b>नाम छैन, फोन नम्बर छैन, जन्ममिति छैन।</b> प्रेषण चल्नका लागि यी चाहिन्छन्, र ती प्रेषण गर्ने कर्मचारी र सेवा दिने संस्थाबीच <b>व्यक्तिबाट व्यक्ति वा कागजमा</b> बुझाइन्छन्। यहाँ अभिलेख हुने भनेको प्रेषण भइरहेको छ र पूरा भएको छ कि भन्ने देख्न समन्वयलाई चाहिने कुरा मात्र हो।",
+      "page": "referral.html",
+      "reason": "a word is added or dropped; a word is added or dropped; both 'यी' and 'ती' appear in the material; both 'रेफर' and 'प्रेषण' appear in the material; a word is added or dropped; both 'गरिने' and 'हुने' appear in the material; both 'रेफरल' and 'प्रेषण' appear in the material; a word is added or dropped; a word is added or dropped; a word is added or dropped; 'देख्न' [terminology-lock/by_english] is the established word; 'हेर्न' is not in the material at all; a word is added or dropped"
+    },
+    "ref.p027": {
+      "english": "Not stated",
+      "lane_A": "खुलाइएको छैन",
+      "lane_B": "भनिएको छैन",
+      "page": "referral.html",
+      "reason": "neither 'खुलाइए' nor 'भनिए' is published for this English"
+    },
+    "ref.p031": {
+      "english": "Not stated",
+      "lane_A": "खुलाइएको छैन",
+      "lane_B": "भनिएको छैन",
+      "page": "referral.html",
+      "reason": "neither 'खुलाइए' nor 'भनिए' is published for this English"
+    },
+    "ref.p033": {
+      "english": "The referral",
+      "lane_A": "रेफरल",
+      "lane_B": "प्रेषण",
+      "page": "referral.html",
+      "reason": "both 'रेफरल' and 'प्रेषण' appear in the material"
+    },
+    "ref.p034": {
+      "english": "Referred for",
+      "lane_A": "कुन कारणले रेफर",
+      "lane_B": "प्रेषणको उद्देश्य",
+      "page": "referral.html",
+      "reason": "a word is added or dropped"
+    },
+    "ref.p037": {
+      "english": "Out — we sent them elsewhere",
+      "lane_A": "बाहिर — हामीले उनलाई अन्यत्र पठायौँ",
+      "lane_B": "बाहिर — हामीले अन्तै पठायौँ",
+      "page": "referral.html",
+      "reason": "a word is added or dropped"
+    },
+    "ref.p038": {
+      "english": "In — they were sent to us",
+      "lane_A": "भित्र — उनलाई हामीकहाँ पठाइयो",
+      "lane_B": "भित्र — उनीहरूलाई हामीकहाँ पठाइयो",
+      "page": "referral.html",
+      "reason": "neither 'उनलाई' nor 'उनीहरू' is published for this English"
+    },
+    "ref.p041": {
+      "english": "Same day",
+      "lane_A": "सोही दिन",
+      "lane_B": "उही दिन",
+      "page": "referral.html",
+      "reason": "both 'सोही' and 'उही' appear in the material"
+    },
+    "ref.p043": {
+      "english": "Routine",
+      "lane_A": "नियमित",
+      "lane_B": "सामान्य",
+      "page": "referral.html",
+      "reason": "both 'नियमित' and 'सामान्य' appear in the material"
+    },
+    "ref.p044": {
+      "english": "Type of service referred to",
+      "lane_A": "रेफर गरिएको सेवाको प्रकार",
+      "lane_B": "प्रेषण गरिएको सेवाको प्रकार",
+      "page": "referral.html",
+      "reason": "both 'रेफर' and 'प्रेषण' appear in the material"
+    },
+    "ref.p055": {
+      "english": "Free text for now. The agreed directory of services does not exist yet — it is still the single Excel sheet noted on 14 September, which is why this is not a dropdown.",
+      "lane_A": "अहिलेका लागि स्वतन्त्र पाठ। सहमति भएको सेवा निर्देशिका अझै छैन — अझै पनि 14 सेप्टेम्बरमा उल्लेख गरिएको एउटै Excel पाना हो, त्यसैले यो ड्रपडाउन होइन।",
+      "lane_B": "अहिले खुला लेखाइ। सेवाहरूको सहमत निर्देशिका अझै बनेको छैन — सेप्टेम्बर १४ मा उल्लेख गरिएको एउटै Excel पाना नै हो, त्यसैले यो ड्रपडाउन होइन।",
+      "page": "referral.html",
+      "reason": "a word is added or dropped; a word is added or dropped; a word is added or dropped; a word is added or dropped; a word is added or dropped"
+    },
+    "ref.p057": {
+      "english": "<b>This is the field that will be empty, and that is the finding.</b> A referral is only complete when the receiving service confirms the person arrived. Nobody can fill this in from the referring side alone. Leave it as “not yet known” and come back — the proportion that stays unknown is the honest measure of whether the pathway works.",
+      "lane_A": "<b>यही क्षेत्र खाली रहनेछ, र त्यही नै निष्कर्ष हो।</b> सेवा दिने संस्थाले व्यक्ति पुगेको पुष्टि गरेपछि मात्र रेफरल पूरा हुन्छ। रेफर गर्ने पक्षबाट मात्र कसैले यो भर्न सक्दैन। यसलाई “अझै थाहा छैन” राख्नुहोस् र पछि फर्केर आउनुहोस् — अज्ञात रहने अनुपात नै बाटोले काम गर्छ कि गर्दैन भन्ने इमानदार मापन हो।",
+      "lane_B": "<b>यो नै खाली रहने खण्ड हो, र त्यही निष्कर्ष हो।</b> सेवा दिने संस्थाले व्यक्ति पुगेको पुष्टि गरेपछि मात्र प्रेषण पूरा हुन्छ। प्रेषण गर्ने पक्षले मात्र यो भर्न सक्दैन। “अझै थाहा छैन” राख्नुहोस् र फेरि आउनुहोस् — थाहा नभएको अनुपात नै बाटो चल्छ कि चल्दैन भन्ने इमानदार मापन हो।",
+      "page": "referral.html",
+      "reason": "both 'यही' and 'यो' appear in the material; 'क्षेत्र' [terminology-lock/by_english] is the established word; 'नै' is not in the material at all; a word is added or dropped; a word is added or dropped; both 'रेफरल' and 'प्रेषण' appear in the material; both 'रेफर' and 'प्रेषण' appear in the material; a word is added or dropped; a word is added or dropped; a word is added or dropped; both 'अज्ञात' and 'थाहा' appear in the material; 'नभए' [dictionary/placeholders, terminology-lock/by_english] is the established word; 'रहने' is not in the material at all; a word is added or dropped; neither 'गर्दैन' nor 'चल्दैन' is published for this English"
+    },
+    "ref.p058": {
+      "english": "Arrival",
+      "lane_A": "पुगाइ",
+      "lane_B": "आगमन",
+      "page": "referral.html",
+      "reason": "neither 'पुगाइ' nor 'आगमन' is published for this English"
+    },
+    "ref.p060": {
+      "english": "Confirmed arrived",
+      "lane_A": "पुगेको पुष्टि",
+      "lane_B": "पुगेको पुष्टि भयो",
+      "page": "referral.html",
+      "reason": "a word is added or dropped"
+    },
+    "ref.p062": {
+      "english": "Person declined the referral",
+      "lane_A": "व्यक्तिले रेफरल अस्वीकार गरे",
+      "lane_B": "व्यक्तिले प्रेषण अस्वीकार गरे",
+      "page": "referral.html",
+      "reason": "both 'रेफरल' and 'प्रेषण' appear in the material"
+    },
+    "ref.p063": {
+      "english": "Date confirmed <span class=\"opt\">— if known</span>",
+      "lane_A": "पुष्टि भएको मिति <span class=\"opt\">— थाहा भएमा</span>",
+      "lane_B": "पुष्टि भएको मिति <span class=\"opt\">— थाहा भए</span>",
+      "page": "referral.html",
+      "reason": "both 'भएमा' and 'भए' appear in the material"
+    },
+    "ref.p066": {
+      "english": "Receiving service told us",
+      "lane_A": "सेवा दिने संस्थाले हामीलाई भन्यो",
+      "lane_B": "सेवा दिने संस्थाले भन्यो",
+      "page": "referral.html",
+      "reason": "a word is added or dropped"
+    },
+    "ref.p067": {
+      "english": "The person told us",
+      "lane_A": "व्यक्तिले हामीलाई भने",
+      "lane_B": "व्यक्तिले आफैँ भने",
+      "page": "referral.html",
+      "reason": "both 'हामीलाई' and 'आफैँ' appear in the material"
+    },
+    "ref.p068": {
+      "english": "A family member told us",
+      "lane_A": "परिवारका सदस्यले हामीलाई भने",
+      "lane_B": "परिवारका सदस्यले भने",
+      "page": "referral.html",
+      "reason": "a word is added or dropped"
+    },
+    "ref.p070": {
+      "english": "If they did not arrive, what got in the way? <span class=\"opt\">— optional</span>",
+      "lane_A": "उनी पुगेनन् भने के कुराले रोक्यो? <span class=\"opt\">— ऐच्छिक</span>",
+      "lane_B": "पुग्न नसकेको भए बाटोमा के अड्कियो? <span class=\"opt\">— ऐच्छिक</span>",
+      "page": "referral.html",
+      "reason": "a word is added or dropped; a word is added or dropped"
+    },
+    "ref.p072": {
+      "english": "Distance or no transport",
+      "lane_A": "दूरी वा सवारी साधन नभएको",
+      "lane_B": "दूरी वा सवारी नभएको",
+      "page": "referral.html",
+      "reason": "a word is added or dropped"
+    },
+    "ref.p075": {
+      "english": "Stigma or family objection",
+      "lane_A": "भेदभाव वा परिवारको आपत्ति",
+      "lane_B": "सामाजिक कलंक वा परिवारको आपत्ति",
+      "page": "referral.html",
+      "reason": "a word is added or dropped"
+    },
+    "ref.p078": {
+      "english": "The barrier list is what turns a broken pathway into something fixable.",
+      "lane_A": "अवरोधको सूचीले नै टुटेको बाटोलाई सुधार्न सकिने कुरा बनाउँछ।",
+      "lane_B": "अवरोधको सूचीले बिग्रेको बाटोलाई सुधार्न सकिने कुरामा बदल्छ।",
+      "page": "referral.html",
+      "reason": "a word is added or dropped; both 'कुरा' and 'कुरामा' appear in the material; neither 'बनाउँछ।' nor 'बदल्छ।' is published for this English"
+    },
+    "ref.p080": {
+      "english": "Save this referral",
+      "lane_A": "यो रेफरल सुरक्षित गर्नुहोस्",
+      "lane_B": "यो प्रेषण सुरक्षित गर्नुहोस्",
+      "page": "referral.html",
+      "reason": "both 'रेफरल' and 'प्रेषण' appear in the material"
+    },
+    "ref.p082": {
+      "english": "Clear everything on this device",
+      "lane_A": "यो यन्त्रमा सबै मेटाउनुहोस्",
+      "lane_B": "यो यन्त्रमा भएको सबै मेटाउनुहोस्",
+      "page": "referral.html",
+      "reason": "a word is added or dropped"
+    },
+    "ref.p083": {
+      "english": "What would be sent, if there were anywhere to send it",
+      "lane_A": "पठाउने ठाउँ भए के पठाइन्थ्यो",
+      "lane_B": "कतै पठाउने ठाउँ भए के पठाइन्थ्यो",
+      "page": "referral.html",
+      "reason": "a word is added or dropped"
+    },
+    "ref.p084": {
+      "english": "Facility or organisation",
+      "lane_A": "संस्था वा संगठन",
+      "lane_B": "सेवा केन्द्र वा संस्था",
+      "page": "referral.html",
+      "reason": "a word is added or dropped; a word is added or dropped"
+    },
+    "svc.p001": {
+      "english": "Service contact record — MHPSS Nepal",
+      "lane_A": "सेवा सम्पर्क अभिलेख — MHPSS Nepal",
+      "lane_B": "सेवा सम्पर्क अभिलेख — MHPSS नेपाल",
+      "page": "contact.html",
+      "reason": "a word is added or dropped"
+    },
+    "svc.p002": {
+      "english": "Revised draft for field piloting <span>· saved on this phone, sent to the coordination register when there is signal</span>",
+      "lane_A": "फिल्ड परीक्षणका लागि संशोधित मस्यौदा <span>· यही फोनमा सुरक्षित, सिग्नल भएपछि समन्वय दर्तामा पठाइने</span>",
+      "lane_B": "फिल्ड परीक्षणका लागि संशोधित मस्यौदा <span>· यही फोनमा सुरक्षित, सिग्नल भएपछि समन्वय रजिस्टरमा पठाइन्छ</span>",
+      "page": "contact.html",
+      "reason": "both 'दर्ता' and 'रजिस्टर' appear in the material; both 'पठाइने' and 'पठाइन्छ' appear in the material"
+    },
+    "svc.p008": {
+      "english": "Use this when you have seen, spoken to or supported a specific person. For a group activity or a day's total, use the <a href=\"5ws-report.html\">activity report</a> instead — this form is deliberately one record per person per contact, because that is the only way a returning person can be recognised instead of counted twice.",
+      "lane_A": "तपाईंले कुनै निश्चित व्यक्तिलाई भेटे, कुरा गरे वा सहयोग गरेको बेला यो प्रयोग गर्नुहोस्। समूह गतिविधि वा एक दिनको जम्मा संख्याका लागि <a href=\"5ws-report.html\">गतिविधि प्रतिवेदन</a> प्रयोग गर्नुहोस् — यो फारम जानाजान एक व्यक्ति, एक सम्पर्कका लागि एक अभिलेख राखिएको हो, किनकि फर्केर आउने व्यक्तिलाई दुई पटक गन्नुको सट्टा चिन्ने एउटै तरिका त्यही हो।",
+      "lane_B": "कुनै निश्चित व्यक्तिलाई देख्नु, कुरा गर्नु वा सहयोग गर्नु भएमा यही भर्नुहोस्। समूह गतिविधि वा दिनभरको जम्मा संख्याका लागि <a href=\"5ws-report.html\">गतिविधि प्रतिवेदन</a> प्रयोग गर्नुहोस् — यो फारम जानाजानी एक व्यक्तिको एक सम्पर्कमा एक अभिलेख राख्छ, किनकि फेरि आउने व्यक्तिलाई दुई पटक गन्नुभन्दा चिन्ने एउटै उपाय त्यही हो।",
+      "page": "contact.html",
+      "reason": "a word is added or dropped; neither 'भेटे' nor 'देख्नु' is published for this English; neither 'गरे' nor 'गर्नु' is published for this English; a word is added or dropped; a word is added or dropped; both 'जानाजान' and 'जानाजानी' appear in the material; a word is added or dropped; a word is added or dropped; both 'फर्केर' and 'फेरि' appear in the material; a word is added or dropped; neither 'तरिका' nor 'उपाय' is published for this English"
+    },
+    "svc.p009": {
+      "english": "<b>The person's name and phone number stay on this handset.</b> You type a few details so the phone can work out a <b>contact code</b>; the details are used for that calculation and then discarded. Only the code is saved. Nobody downstream — not the coordination view, not the dashboard, not this site — ever receives the name, the number, or a date of birth.",
+      "lane_A": "<b>व्यक्तिको नाम र फोन नम्बर यही ह्यान्डसेटमा रहन्छ।</b> फोनले <b>सम्पर्क कोड</b> निकाल्न सकोस् भनेर तपाईंले केही विवरण टाइप गर्नुहुन्छ; ती विवरण सोही गणनाका लागि प्रयोग भई हटाइन्छन्। केवल कोड मात्र सुरक्षित हुन्छ। तलतिर कसैले — समन्वय दृश्य, ड्यासबोर्ड वा यो साइटले पनि — नाम, नम्बर वा जन्म मिति कहिल्यै प्राप्त गर्दैन।",
+      "lane_B": "<b>व्यक्तिको नाम र फोन नम्बर यही ह्यान्डसेटमै रहन्छ।</b> फोनले <b>सम्पर्क कोड</b> निकाल्न सक्ने गरी तपाईंले केही विवरण टाइप गर्नुहुन्छ; ती विवरण गणनाका लागि मात्र प्रयोग भई हटाइन्छन्। सुरक्षित हुने कोड मात्र हो। तल्लो तहमा कोही पनि — समन्वय दृश्य, ड्यासबोर्ड, यो साइटसमेत — लाई नाम, नम्बर वा जन्ममिति कहिल्यै पुग्दैन।",
+      "page": "contact.html",
+      "reason": "neither 'ह्यान्डसेट' nor 'ह्यान्डसेटमै' is published for this English; both 'सकोस्' and 'सक्ने' appear in the material; neither 'भनेर' nor 'गरी' is published for this English; a word is added or dropped; a word is added or dropped; a word is added or dropped; a word is added or dropped; a word is added or dropped; neither 'साइट' nor 'साइटसमेत' is published for this English; both 'पनि' and 'लाई' appear in the material; a word is added or dropped; a word is added or dropped"
+    },
+    "svc.p010": {
+      "english": "<b>Works with no signal.</b> Records are held on this phone as you save them and sent to the coordination register on their own when there is signal. The export remains for a copy of your own. <span id=\"storeWarn\"></span>",
+      "lane_A": "<b>सिग्नल बिनै पनि काम गर्छ।</b> तपाईंले सुरक्षित गर्दा अभिलेखहरू यही फोनमा रहन्छन् र सिग्नल भएपछि आफैं समन्वय दर्तामा पठाइन्छन्। तपाईंको आफ्नै प्रतिका लागि निर्यात रहन्छ। <span id=\"storeWarn\"></span>",
+      "lane_B": "<b>सिग्नल नभए पनि चल्छ।</b> सुरक्षित गर्दा अभिलेख यही फोनमा रहन्छ र सिग्नल आएपछि आफैँ समन्वय रजिस्टरमा पठाइन्छ। आफ्नो प्रतिका लागि निर्यात हुँदै रहन्छ। <span id=\"storeWarn\"></span>",
+      "page": "contact.html",
+      "reason": "both 'बिनै' and 'नभए' appear in the material; a word is added or dropped; both 'रहन्छन्' and 'रहन्छ' appear in the material; both 'भएपछि' and 'आएपछि' appear in the material; both 'आफैं' and 'आफैँ' appear in the material; a word is added or dropped; a word is added or dropped"
+    },
+    "svc.p016": {
+      "english": "A staff member, never a service user.",
+      "lane_A": "कर्मचारी, कहिल्यै सेवाग्राही होइन।",
+      "lane_B": "कर्मचारी, सेवाग्राही होइन।",
+      "page": "contact.html",
+      "reason": "a word is added or dropped"
+    },
+    "svc.p019": {
+      "english": "Who actually delivered this contact. Asked for on 15 September so that counsellors, psychologists and psychiatrists can be counted apart.",
+      "lane_A": "यो सम्पर्क वास्तवमा कसले गर्यो। परामर्शदाता, मनोवैज्ञानिक र मनोचिकित्सकलाई छुट्टाछुट्टै गन्न सकियोस् भनेर 15 सेप्टेम्बरमा सोधिएको।",
+      "lane_B": "यो सम्पर्क वास्तवमा कसले दिनुभयो। सेप्टेम्बर १५ मा सोधिएको, ताकि परामर्शदाता, मनोवैज्ञानिक र मनोचिकित्सक छुट्टाछुट्टै गन्न सकियोस्।",
+      "page": "contact.html",
+      "reason": "a word is added or dropped; a word is added or dropped"
+    },
+    "svc.p024": {
+      "english": "Typed as reported. <b>Not converted automatically</b> — that needs a verified BS calendar table, which has not been obtained.",
+      "lane_A": "भनिएअनुसार नै टाइप गरिन्छ। <b>स्वतः रूपान्तरण हुँदैन</b> — त्यसका लागि प्रमाणित वि.सं. पात्रो तालिका चाहिन्छ, जो प्राप्त भएको छैन।",
+      "lane_B": "भनिएको जस्तै टाइप गरिएको। <b>स्वतः परिवर्तन गरिँदैन</b> — त्यसका लागि प्रमाणित विक्रम संवत् पात्रो तालिका चाहिन्छ, जो प्राप्त भएको छैन।",
+      "page": "contact.html",
+      "reason": "neither 'भनिएअनुसार' nor 'भनिए' is published for this English; both 'नै' and 'जस्तै' appear in the material; neither 'गरिन्छ।' nor 'गरिएको।' is published for this English; both 'रूपान्तरण' and 'परिवर्तन' appear in the material; both 'हुँदैन' and 'गरिँदैन' appear in the material; both 'वि' and 'विक्रम' appear in the material; both 'सं' and 'संवत्' appear in the material"
+    },
+    "svc.p027": {
+      "english": "From the holding-centre roster. Only choose “Other” if the site genuinely is not listed — every “Other” has to be reconciled by hand later.",
+      "lane_A": "होल्डिङ सेन्टरको नामावलीबाट। स्थल साँच्चै सूचीमा नभएमा मात्र “अन्य” छान्नुहोस् — प्रत्येक “अन्य” लाई पछि हातैले मिलाउनुपर्छ।",
+      "lane_B": "होल्डिङ सेन्टरको सूचीबाट। स्थान सूचीमा साँच्चै नभएमा मात्र “अन्य” छान्नुहोस् — हरेक “अन्य” पछि हातैले मिलाउनुपर्छ।",
+      "page": "contact.html",
+      "reason": "a word is added or dropped; a word is added or dropped; both 'प्रत्येक' and 'हरेक' appear in the material; a word is added or dropped"
+    },
+    "svc.p029": {
+      "english": "Asked for on 15 September as province / subdistrict. Free text for now: the agreed municipality and ward code list has not been obtained.",
+      "lane_A": "15 सेप्टेम्बरमा प्रदेश / उपजिल्लाका रूपमा सोधिएको। अहिलेका लागि स्वतन्त्र पाठ: सहमति भएको नगरपालिका र वडा कोड सूची प्राप्त भएको छैन।",
+      "lane_B": "सेप्टेम्बर १५ मा प्रदेश / उपजिल्लाका रूपमा सोधिएको। अहिले खुला लेखाइ: सहमत नगरपालिका र वडा कोड सूची प्राप्त भएको छैन।",
+      "page": "contact.html",
+      "reason": "a word is added or dropped; a word is added or dropped"
+    },
+    "svc.p033": {
+      "english": "Recorded to three decimal places — a grid of roughly 100 m. Enough to put the site on a map; not enough to point at a household. A precise pin, a small count and a target group together identify people even with no name attached, which is why the precision is reduced here rather than in the dashboard.",
+      "lane_A": "तीन दशमलव स्थानसम्म अभिलेख गरिन्छ — करिब १०० मिटरको ग्रिड। स्थललाई नक्सामा राख्न पर्याप्त; घर देखाउन पर्याप्त होइन। ठ्याक्कै पिन, सानो संख्या र लक्षित समूह मिलेर नाम नभए पनि व्यक्ति पहिचान गर्न सकिन्छ, त्यसैले ड्यासबोर्डमा नभई यहाँ शुद्धता घटाइएको हो।",
+      "lane_B": "तीन दशमलव स्थानसम्म अभिलेख — करिब १०० मिटरको ग्रिड। स्थान नक्सामा राख्न पर्याप्त; घर देखाउन पर्याप्त होइन। एकदमै नजिकको पिन, थोरै संख्या र लक्षित समूह मिल्दा नाम नभए पनि व्यक्ति चिनिन सकिन्छ, त्यसैले परिशुद्धता यहीँ घटाइएको छ, ड्यासबोर्डमा होइन।",
+      "page": "contact.html",
+      "reason": "a word is added or dropped; 'स्थान' [dictionary/placeholders, terminology-lock/by_english] is the established word; 'स्थल' is not in the material at all; a word is added or dropped; neither 'सानो' nor 'थोरै' is published for this English; both 'मिलेर' and 'मिल्दा' appear in the material; a word is added or dropped; a word is added or dropped; a word is added or dropped"
+    },
+    "svc.p035": {
+      "english": "Is this the first time your organisation has recorded this person?",
+      "lane_A": "तपाईंको संस्थाले यो व्यक्तिलाई पहिलो पटक अभिलेख गरेको हो?",
+      "lane_B": "यो व्यक्ति तपाईंको संस्थाले पहिलो पटक अभिलेख गरेको हो?",
+      "page": "contact.html",
+      "reason": "a word is added or dropped; a word is added or dropped"
+    },
+    "svc.p037": {
+      "english": "Returning — seen before",
+      "lane_A": "फर्केको — पहिले देखिएको",
+      "lane_B": "पुरानो — पहिले देखिएको",
+      "page": "contact.html",
+      "reason": "neither 'फर्के' nor 'पुरानो' is published for this English"
+    },
+    "svc.p039": {
+      "english": "This is the question that makes the cumulative figure mean something. On 15 September the reported total was over 9,000 with duplication nobody could size.",
+      "lane_A": "यही प्रश्नले जम्मा हुँदै गएको संख्यालाई अर्थपूर्ण बनाउँछ। 15 सेप्टेम्बरमा जनाइएको जम्मा 9,000 भन्दा बढी थियो, तर दोहोरो गणना कति थियो कसैले अनुमान गर्न सकेन।",
+      "lane_B": "यही प्रश्नले जम्मा संख्यालाई अर्थपूर्ण बनाउँछ। सेप्टेम्बर १५ मा भनिएको जम्मा ९,००० भन्दा बढी थियो, तर कति दोहोरो परेको हो कसैले अनुमान गर्न सकेन।",
+      "page": "contact.html",
+      "reason": "a word is added or dropped; a word is added or dropped; a word is added or dropped; a word is added or dropped; a word is added or dropped"
+    },
+    "svc.p040": {
+      "english": "<b>These four boxes are not saved.</b> They are read, combined into a code, and cleared when you save. Type them the same way each time and the same person gets the same code.",
+      "lane_A": "<b>यी चार बाकस सुरक्षित हुँदैनन्।</b> तिनीहरू पढेर कोडमा जोडिन्छन् र तपाईंले सुरक्षित गर्दा मेटाइन्छन्। हरेक पटक उही तरिकाले टाइप गर्नुहोस्, तब एउटै व्यक्तिको एउटै कोड आउँछ।",
+      "lane_B": "<b>यी चार खण्ड सुरक्षित हुँदैनन्।</b> ती पढिन्छन्, जोडेर कोड बनाइन्छ, र सुरक्षित गर्दा हटाइन्छ। हरेक पटक उही तरिकाले टाइप गर्नुभयो भने एउटै व्यक्तिले एउटै कोड पाउँछ।",
+      "page": "contact.html",
+      "reason": "neither 'बाकस' nor 'खण्ड' is published for this English; a word is added or dropped; a word is added or dropped; neither 'मेटाइन्छन्।' nor 'हटाइन्छ।' is published for this English; 'गर्नुहोस्' [terminology-lock/by_english] is the established word; 'गर्नुभयो' is not in the material at all; neither 'तब' nor 'भने' is published for this English; neither 'आउँछ।' nor 'पाउँछ।' is published for this English"
+    },
+    "svc.p044": {
+      "english": "Year only — never a full date.",
+      "lane_A": "वर्ष मात्र — पूर्ण मिति कहिल्यै होइन।",
+      "lane_B": "वर्ष मात्र — पूरा मिति कहिल्यै होइन।",
+      "page": "contact.html",
+      "reason": "both 'पूर्ण' and 'पूरा' appear in the material"
+    },
+    "svc.p050": {
+      "english": "Not stated",
+      "lane_A": "खुलाइएको छैन",
+      "lane_B": "भनिएको छैन",
+      "page": "contact.html",
+      "reason": "neither 'खुलाइए' nor 'भनिए' is published for this English"
+    },
+    "svc.p052": {
+      "english": "Where the person is from, not where you met them.",
+      "lane_A": "व्यक्ति कहाँका हुन्, तपाईंले भेटेको ठाउँ होइन।",
+      "lane_B": "व्यक्ति कहाँको हो, तपाईंले भेटेको ठाउँ होइन।",
+      "page": "contact.html",
+      "reason": "neither 'हुन्' nor 'हो' is published for this English"
+    },
+    "svc.p054": {
+      "english": "— fill the four boxes above —",
+      "lane_A": "— माथिका चार बाकस भर्नुहोस् —",
+      "lane_B": "— माथिका चार खण्ड भर्नुहोस् —",
+      "page": "contact.html",
+      "reason": "neither 'बाकस' nor 'खण्ड' is published for this English"
+    },
+    "svc.p055": {
+      "english": "This is the only part that is saved. It is a <b>pseudonym, not an anonymous token</b>: the four inputs vary little, so someone holding a list of candidate names could test them against a code. Adequate for agreeing these questions; a live register needs the code mixed with a secret this handset never holds, which means a server.",
+      "lane_A": "सुरक्षित हुने भनेको यही भाग मात्र हो। यो <b>छद्म नाम हो, अज्ञात टोकन होइन</b>: ती चार इनपुट थोरै मात्र फरक पर्छन्, त्यसैले सम्भावित नामको सूची भएको कसैले कोडसँग भिडाएर जाँच्न सक्छ। यी प्रश्नमा सहमति जनाउन यति पर्याप्त छ; जीवन्त दर्ताका लागि कोडलाई यही ह्यान्डसेटले कहिल्यै नराख्ने गोप्य कुरासँग मिसाउनुपर्छ, जसका लागि सर्भर चाहिन्छ।",
+      "lane_B": "सुरक्षित हुने भनेको यही मात्र हो। यो <b>छद्मनाम हो, अज्ञात टोकन होइन</b>: चारै हाल्ने कुरा थोरै फरक पर्ने हुनाले, सम्भावित नामको सूची भएको कसैले ती कोडसँग जाँच्न सक्छ। यी प्रश्नमा सहमति जुटाउन यत्ति पर्याप्त छ; जीवित रजिस्टरका लागि कोडलाई यो ह्यान्डसेटसँग कहिल्यै नरहने गोप्य कुरासँग मिसाउनुपर्छ, जसका लागि सर्भर चाहिन्छ।",
+      "page": "contact.html",
+      "reason": "a word is added or dropped; a word is added or dropped; neither 'ती' nor 'चारै' is published for this English; neither 'चार' nor 'हाल्ने' is published for this English; both 'इनपुट' and 'कुरा' appear in the material; a word is added or dropped; neither 'पर्छन्' nor 'पर्ने' is published for this English; both 'त्यसै' and 'हुनाले' appear in the material; a word is added or dropped; a word is added or dropped; neither 'जनाउन' nor 'जुटाउन' is published for this English; neither 'यति' nor 'यत्ति' is published for this English; neither 'जीवन्त' nor 'जीवित' is published for this English; both 'दर्ता' and 'रजिस्टर' appear in the material; both 'यही' and 'यो' appear in the material; neither 'नराख्ने' nor 'नरहने' is published for this English"
+    },
+    "svc.p059": {
+      "english": "Not stated",
+      "lane_A": "खुलाइएको छैन",
+      "lane_B": "भनिएको छैन",
+      "page": "contact.html",
+      "reason": "neither 'खुलाइए' nor 'भनिए' is published for this English"
+    },
+    "svc.p061": {
+      "english": "Disability reported <span class=\"opt\">— optional</span>",
+      "lane_A": "अपाङ्गता जनाइएको <span class=\"opt\">— ऐच्छिक</span>",
+      "lane_B": "अपाङ्गता भनिएको <span class=\"opt\">— ऐच्छिक</span>",
+      "page": "contact.html",
+      "reason": "neither 'जनाइए' nor 'भनिए' is published for this English"
+    },
+    "svc.p063": {
+      "english": "Yes, reported",
+      "lane_A": "हो, जनाइएको",
+      "lane_B": "हो, भनिएको",
+      "page": "contact.html",
+      "reason": "neither 'जनाइए' nor 'भनिए' is published for this English"
+    },
+    "svc.p066": {
+      "english": "What was provided",
+      "lane_A": "के प्रदान गरियो",
+      "lane_B": "के दिइयो",
+      "page": "contact.html",
+      "reason": "a word is added or dropped"
+    },
+    "svc.p068": {
+      "english": "Draft list. The agreed service list is an <b>open action item</b> from 15 September and is not settled.",
+      "lane_A": "मस्यौदा सूची। सहमति भएको सेवा सूची 15 सेप्टेम्बरको <b>खुला कार्यबिन्दु</b> हो र टुङ्गो लागेको छैन।",
+      "lane_B": "मस्यौदा सूची। सहमत सेवा सूची सेप्टेम्बर १५ को <b>खुला कार्यबुँदा</b> हो र टुङ्गो लागेको छैन।",
+      "page": "contact.html",
+      "reason": "a word is added or dropped; a word is added or dropped; neither 'कार्यबिन्दु' nor 'कार्यबुँदा' is published for this English"
+    },
+    "svc.p069": {
+      "english": "Modality",
+      "lane_A": "सेवा विधि",
+      "lane_B": "सेवा दिने तरिका",
+      "page": "contact.html",
+      "reason": "a word is added or dropped"
+    },
+    "svc.p074": {
+      "english": "Follow-up arranged with us",
+      "lane_A": "हामीसँग फलोअप मिलाइयो",
+      "lane_B": "हामीसँग पुनः भेट्ने मिलाइयो",
+      "page": "contact.html",
+      "reason": "a word is added or dropped"
+    },
+    "svc.p075": {
+      "english": "Referred on — record it on the referral form",
+      "lane_A": "अगाडि रेफर — यसलाई रेफरल फारममा अभिलेख गर्नुहोस्",
+      "lane_B": "अन्तै प्रेषण — प्रेषण फारममा अभिलेख गर्नुहोस्",
+      "page": "contact.html",
+      "reason": "a word is added or dropped"
+    },
+    "svc.p076": {
+      "english": "Support declined",
+      "lane_A": "सहयोग अस्वीकार गरे",
+      "lane_B": "सहयोग अस्वीकार गरियो",
+      "page": "contact.html",
+      "reason": "both 'गरे' and 'गरियो' appear in the material"
+    },
+    "svc.p079": {
+      "english": "Never a clinical detail, a diagnosis, or anything that would identify someone.",
+      "lane_A": "कहिल्यै क्लिनिकल विवरण, निदान वा कसैलाई चिनाउने कुरा नलेख्नुहोस्।",
+      "lane_B": "क्लिनिकल विवरण, निदान वा कसैलाई चिनाउने कुरा कहिल्यै होइन।",
+      "page": "contact.html",
+      "reason": "a word is added or dropped; a word is added or dropped"
+    },
+    "svc.p084": {
+      "english": "Clear everything on this device",
+      "lane_A": "यो यन्त्रमा सबै मेटाउनुहोस्",
+      "lane_B": "यो यन्त्रमा भएको सबै मेटाउनुहोस्",
+      "page": "contact.html",
+      "reason": "a word is added or dropped"
+    },
+    "svc.p085": {
+      "english": "What would be sent, if there were anywhere to send it",
+      "lane_A": "पठाउने ठाउँ भए के पठाइन्थ्यो",
+      "lane_B": "कतै पठाउने ठाउँ भए के पठाइन्थ्यो",
+      "page": "contact.html",
+      "reason": "a word is added or dropped"
+    },
+    "svc.p086": {
+      "english": "Shown so the Technical Working Group can see exactly what leaves the handset before agreeing to collect anything. Note what is <i>not</i> in it.",
+      "lane_A": "केही सङ्कलन गर्न सहमति जनाउनुअघि प्राविधिक कार्यदलले ह्यान्डसेटबाट ठ्याक्कै के जान्छ देख्न सकोस् भनेर देखाइएको। यसमा के <i>छैन</i> भन्नेमा ध्यान दिनुहोस्।",
+      "lane_B": "केही संकलन गर्न सहमति दिनुअघि ह्यान्डसेटबाट ठ्याक्कै के जान्छ भनी प्राविधिक कार्य समूहले देख्न सकोस् भनेर देखाइएको। यसमा <i>के छैन</i> भन्ने कुरामा पनि ध्यान दिनुहोस्।",
+      "page": "contact.html",
+      "reason": "neither 'सङ्कलन' nor 'संकलन' is published for this English; a word is added or dropped; a word is added or dropped; a word is added or dropped"
+    }
+  },
+  "settled": {
+    "phq9.p009": {
+      "english": "Who, and which visit",
+      "lane_A": "को, र कुन भ्रमण",
+      "lane_B": "कसको, र कुन भ्रमण",
+      "np": "को, र कुन भ्रमण",
+      "page": "phq9.html",
+      "reason": "R3 terminology: 'को' [terminology-lock/by_english] is the established word; 'कसको' is not in the material at all"
+    },
+    "phq9.p023": {
+      "english": "English, directly",
+      "lane_A": "अंग्रेजी, सिधै",
+      "lane_B": "अंग्रेजीमा, सिधै",
+      "np": "अंग्रेजी, सिधै",
+      "page": "phq9.html",
+      "reason": "R4 the two readings are the same words up to inflection, markup or punctuation"
+    },
+    "ref.p050": {
+      "english": "Protection services",
+      "lane_A": "संरक्षण सेवाहरू",
+      "lane_B": "संरक्षण सेवा",
+      "np": "संरक्षण सेवा",
+      "page": "referral.html",
+      "reason": "R3 terminology: 'सेवा' [terminology-lock/codes] is the established word; 'सेवाहरू' is not in the material at all"
+    },
+    "svc.p007": {
+      "english": "One contact with one person",
+      "lane_A": "एक व्यक्तिसँग एक सम्पर्क",
+      "lane_B": "एक व्यक्तिसँगको एक सम्पर्क",
+      "np": "एक व्यक्तिसँग एक सम्पर्क",
+      "page": "contact.html",
+      "reason": "R4 the two readings are the same words up to inflection, markup or punctuation"
+    },
+    "svc.p031": {
+      "english": "Location pin <span class=\"opt\">— optional</span>",
+      "lane_A": "स्थान पिन <span class=\"opt\">— ऐच्छिक</span>",
+      "lane_B": "स्थानको पिन <span class=\"opt\">— ऐच्छिक</span>",
+      "np": "स्थान पिन <span class=\"opt\">— ऐच्छिक</span>",
+      "page": "contact.html",
+      "reason": "R4 the two readings are the same words up to inflection, markup or punctuation"
+    },
+    "svc.p070": {
+      "english": "Length in minutes <span class=\"opt\">— optional</span>",
+      "lane_A": "अवधि मिनेटमा <span class=\"opt\">— ऐच्छिक</span>",
+      "lane_B": "अवधि (मिनेट) <span class=\"opt\">— ऐच्छिक</span>",
+      "np": "अवधि मिनेटमा <span class=\"opt\">— ऐच्छिक</span>",
+      "page": "contact.html",
+      "reason": "R4 the two readings are the same words up to inflection, markup or punctuation"
+    },
+    "svc.p093": {
+      "english": "About the service or the site — not about the person",
+      "lane_A": "सेवा वा स्थलबारे — व्यक्तिबारे होइन",
+      "lane_B": "सेवा वा स्थानबारे — व्यक्तिबारे होइन",
+      "np": "सेवा वा स्थानबारे — व्यक्तिबारे होइन",
+      "page": "contact.html",
+      "reason": "R3 terminology: 'स्थान' [dictionary/placeholders, terminology-lock/by_english] is the established word; 'स्थल' is not in the material at all"
+    }
+  }
+}

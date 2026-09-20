@@ -1,0 +1,44 @@
+{
+  "phq9.p009": {
+    "english": "Who, and which visit",
+    "np": "को, र कुन भ्रमण",
+    "page": "phq9.html",
+    "reason": "R3 terminology: 'को' [terminology-lock/by_english] is the established word; 'कसको' is not in the material at all"
+  },
+  "phq9.p023": {
+    "english": "English, directly",
+    "np": "अंग्रेजी, सिधै",
+    "page": "phq9.html",
+    "reason": "R4 the two readings are the same words up to inflection, markup or punctuation"
+  },
+  "ref.p050": {
+    "english": "Protection services",
+    "np": "संरक्षण सेवा",
+    "page": "referral.html",
+    "reason": "R3 terminology: 'सेवा' [terminology-lock/codes] is the established word; 'सेवाहरू' is not in the material at all"
+  },
+  "svc.p007": {
+    "english": "One contact with one person",
+    "np": "एक व्यक्तिसँग एक सम्पर्क",
+    "page": "contact.html",
+    "reason": "R4 the two readings are the same words up to inflection, markup or punctuation"
+  },
+  "svc.p031": {
+    "english": "Location pin <span class=\"opt\">— optional</span>",
+    "np": "स्थान पिन <span class=\"opt\">— ऐच्छिक</span>",
+    "page": "contact.html",
+    "reason": "R4 the two readings are the same words up to inflection, markup or punctuation"
+  },
+  "svc.p070": {
+    "english": "Length in minutes <span class=\"opt\">— optional</span>",
+    "np": "अवधि मिनेटमा <span class=\"opt\">— ऐच्छिक</span>",
+    "page": "contact.html",
+    "reason": "R4 the two readings are the same words up to inflection, markup or punctuation"
+  },
+  "svc.p093": {
+    "english": "About the service or the site — not about the person",
+    "np": "सेवा वा स्थानबारे — व्यक्तिबारे होइन",
+    "page": "contact.html",
+    "reason": "R3 terminology: 'स्थान' [dictionary/placeholders, terminology-lock/by_english] is the established word; 'स्थल' is not in the material at all"
+  }
+}
