@@ -81,23 +81,58 @@ class TrialScopeContractTest(unittest.TestCase):
                 f"{relative} changed even though this task does not edit form content or pwa.js",
             )
 
-    def test_only_the_trial_form_declares_a_language_default(self) -> None:
-        """The card's core rule, machine-checked.
+    # Pages that open in Nepali, and the ONLY ones allowed to. This is the
+    # per-layer decision applied to Layer 1: Nepali for the field surface a
+    # Nepali-speaking officer reads, English everywhere the coordination
+    # team works. It is a declared LIST rather than a rule about one file,
+    # because the decision is about which pages a reader stands in front of,
+    # not about a particular filename.
+    #
+    #   index.html       the Layer 1 landing page a field officer opens first
+    #   5ws-report.html  the trial activity report
+    #   all-forms.html   the review listing, whose reader is the reviewer
+    #
+    # Everything else declares nothing and therefore opens in English. That
+    # includes contact, referral, phq9, selfreport and the b2 preview: a page
+    # that is not fully keyed must not open in Nepali, and 5ws-report-b2 is a
+    # derived demonstration surface.
+    NEPALI_DEFAULT_PAGES = ("index.html", "5ws-report.html", "all-forms.html")
 
-        `5ws-report.html` is the only page that may declare a per-layer default:
-        it is the trial form and the only fully-translated page. Every other
-        page must declare nothing, because a page that is not fully translated
-        must not open in Nepali.
+    def test_only_the_declared_pages_open_in_nepali(self) -> None:
+        """Adib's per-layer decision, machine-checked against the real pages.
+
+        Nepali is for the Layer 1 field surface, English for the coordination
+        team. The declaration is what decides, so the check is: every declared
+        page is on the list, every listed page declares, and no other page
+        declares anything.
+
+        A source-text check alone is not proof the page OPENS in Nepali -- the
+        engine decides that at runtime. tools/per-layer-default-render-check.py
+        drives a real browser for that half.
         """
-        for page in sorted(ROOT.glob("*.html")):
+        pages = sorted(ROOT.glob("*.html"))
+        self.assertTrue(pages, "no HTML pages found; the check would be vacuous")
+
+        for page in pages:
             declares = 'data-i18n-default' in page.read_text(encoding="utf-8")
-            if page.name == "5ws-report.html":
-                self.assertTrue(declares, "the trial form must declare its Nepali default")
+            if page.name in self.NEPALI_DEFAULT_PAGES:
+                self.assertTrue(
+                    declares,
+                    f"{page.name} must declare its Nepali default, or a field "
+                    f"officer opens it in English",
+                )
             else:
                 self.assertFalse(
                     declares,
-                    f"{page.name} declares a language default; only 5ws-report.html may",
+                    f"{page.name} declares a language default but is not on the "
+                    f"Nepali list; a page that is not fully keyed must not open "
+                    f"in Nepali",
                 )
+
+        # The list is worthless if it names a page that does not exist.
+        present = {page.name for page in pages}
+        for name in self.NEPALI_DEFAULT_PAGES:
+            self.assertIn(name, present, f"the Nepali list names a missing page: {name}")
 
     def test_landing_exposes_exactly_one_form_and_no_unapproved_entrypoint(self) -> None:
         parser = LandingParser()

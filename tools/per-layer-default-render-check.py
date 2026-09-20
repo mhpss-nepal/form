@@ -39,7 +39,7 @@ CASES = [
     ("5ws report, no ?lang=",      "form-frontend/5ws-report.html",  "ne", True, "engine"),
     ("5ws report ?lang=en",        "form-frontend/5ws-report.html?lang=en", "en", False, "engine"),
     ("Hub home",                   "hub/index.html",                 "en", False, "engine"),
-    ("form landing (index.html)",  "form-frontend/index.html",       "en", False, "engine"),
+    ("form landing (index.html)",  "form-frontend/index.html",        "ne", True,  "engine"),
     # Defensive: every OTHER form page must keep declaring nothing -> English.
     ("b2 derived preview",         "form-frontend/5ws-report-b2.html", "en", False, "engine"),
     ("contact",                    "form-frontend/contact.html",     "en", False, "engine"),
