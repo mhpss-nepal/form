@@ -25,8 +25,12 @@
    v42 follows the shared bilingual engine (../hub/assets/i18n.js), which now
    reads a per-page language default: 5ws-report.html declares Nepali. The
    engine is precached, so a phone holding v41 would keep the previous engine
-   and would not open the form in Nepali. */
-const CACHE = "mhpss-np-field-v42";
+   and would not open the form in Nepali.
+   v43 follows the same engine again: the trial wording-feedback channel keeps
+   its reports in durable device storage and its reason picker fits a phone
+   viewport. A phone holding v42 would keep the older engine, so a reviewer
+   would lose unexported reports when the tab closed. */
+const CACHE = "mhpss-np-field-v43";
 
 const PRECACHE = [
   "./",
