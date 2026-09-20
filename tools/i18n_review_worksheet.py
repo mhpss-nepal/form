@@ -1,43 +1,69 @@
 #!/usr/bin/env python3
-"""Turn the held keys into a minimal human-decision worksheet.
+"""Turn the 100 held keys into a minimal human-decision worksheet.
 
 The parent run left 100 keys in English with both machine readings recorded.
-This review settled 7 against the project's own published vocabulary and held
-93. Those 93 are not 93 separate questions: most turn on one term the two lanes
-chose differently, and deciding that term once settles every key it blocks.
+All 100 remain in English: published vocabulary may inform a human reviewer,
+but it cannot itself adjudicate a disagreement. The worksheet groups repeated
+term choices so one human decision can settle every key it blocks.
 
-The alignment used is the same one the adjudicator uses, so a key is counted
-here as "one term" only if, after aligning the two readings word for word,
-exactly one aligned position differs -- no word added or dropped anywhere. A
-key that needs more than that is not one decision and is listed separately.
+A key is counted under "one term" only if, after aligning the two readings word
+for word, exactly one aligned position differs -- no word added or dropped
+anywhere. A key that needs more than that is listed separately.
 
 Output: tools/i18n-ne-review-worksheet.json
+
+This script is self-contained: it does not import the adjudicator, so changing
+the adjudicator's policy cannot silently change what the worksheet claims.
 """
 import collections
-import importlib.util
+import difflib
 import json
 import os
+import re
 
 FORM = "/root/mhpss-nepal-work/form-translation"
 
-spec = importlib.util.spec_from_file_location(
-    "adj", os.path.join(FORM, "tools", "i18n_review_adjudicate.py"))
-adj = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(adj)
+DEV = re.compile(r"[\u0900-\u097F]+")
+TAG = re.compile(r"<[^>]+>")
+SUFFIX = ["हरूलाई", "हरूबाट", "हरूको", "हरूमा", "हरूले", "हरू", "बारे", "सँग", "लाई", "बाट",
+          "को", "का", "की", "मा", "ले", "पछि", "भित्र", "सम्म", "तिर"]
+
+
+def dev_words(v):
+    return DEV.findall(TAG.sub(" ", v))
+
+
+def base_letters(t):
+    return sum(1 for ch in t if "\u0900" <= ch <= "\u093d")
+
+
+def stem(t):
+    changed = True
+    while changed and base_letters(t) >= 3:
+        changed = False
+        for s in SUFFIX:
+            if t.endswith(s) and base_letters(t[: -len(s)]) >= 3:
+                t = t[: -len(s)]
+                changed = True
+                break
+    return t
+
+
+def stems(v):
+    return [stem(t) for t in dev_words(v)]
 
 
 def single_term_difference(a, b):
     """(term_A, term_B) if the only difference is one aligned position, else
     None -- with the added/dropped case reported separately."""
-    import difflib
-    sa, sb = adj.stems(a), adj.stems(b)
+    sa, sb = stems(a), stems(b)
     if sa == sb:
         return None
     sm = difflib.SequenceMatcher(a=sa, b=sb, autojunk=False)
     ops = [o for o in sm.get_opcodes() if o[0] != "equal"]
     if len(ops) != 1 or ops[0][0] != "replace":
         return None
-    tag, i1, i2, j1, j2 = ops[0]
+    _, i1, i2, j1, j2 = ops[0]
     if (i2 - i1) != (j2 - j1) or (i2 - i1) != 1:
         return None
     return sa[i1], sb[j1]
@@ -70,9 +96,9 @@ def main():
         })
 
     out = {
-        "note": ("Keys left in English because no authority in the project's own material "
-                 "settles the difference between the two independent machine lanes. This "
-                 "run decided nothing here; these are the questions for a Nepali speaker or "
+        "note": ("Keys left in English because the two independent machine lanes disagree "
+                 "and no human adjudication was obtained. Published project vocabulary is "
+                 "context, not a decision. These are the questions for a Nepali speaker or "
                  "the Ministry terminology owner. Every key settled by one answer is "
                  "listed under it, so one word decided once clears a whole batch."),
         "single_term_decisions": decisions,

@@ -2,466 +2,501 @@
   "phq9.p001": {
     "english": "PHQ-9 follow-up measure — MHPSS Nepal",
     "page": "phq9.html",
-    "reason": "both 'फलोअप' and 'अनुगमन' appear in the material; a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "phq9.p002": {
     "english": "Revised draft <span>· English items only — the validated Nepali text has not been obtained · saved on this phone, sent to the coordination register when there is signal</span>",
     "page": "phq9.html",
-    "reason": "a word is added or dropped; both 'दर्ता' and 'रजिस्टर' appear in the material; both 'पठाइने' and 'पठाइन्छ' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "phq9.p003": {
     "english": "PHQ-9 · follow-up measure",
     "page": "phq9.html",
-    "reason": "both 'फलोअप' and 'अनुगमन' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "phq9.p007": {
     "english": "Following one person over time",
     "page": "phq9.html",
-    "reason": "both 'एक' and 'एकै' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "phq9.p008": {
     "english": "This measure exists to answer one question the 14 September briefing asked: does a person move from acute distress towards a clinical disorder, or away from it? It is for repeating with <b>someone already in care</b>, so the second score can be compared with the first.",
     "page": "phq9.html",
-    "reason": "a word is added or dropped; both 'एउटा' and 'एउटै' appear in the material; neither 'उत्तर' nor 'जवाफ' is published for this English; neither 'व्याकुलता' nor 'पीडाबाट' is published for this English; both 'जान्छ' and 'बढ्छ' appear in the material; both 'हुन्छ' and 'जान्छ' appear in the material; a word is added or dropped; both 'जसले' and 'ताकि' appear in the material; both 'स्कोर' and 'अङ्क' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
+  },
+  "phq9.p009": {
+    "english": "Who, and which visit",
+    "page": "phq9.html",
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "phq9.p011": {
     "english": "Administered by",
     "page": "phq9.html",
-    "reason": "both 'सञ्चालन' and 'मापन' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "phq9.p012": {
     "english": "A measure like this belongs with a counsellor or clinician, not a volunteer.",
     "page": "phq9.html",
-    "reason": "both 'हुनुपर्छ' and 'हुन्छ' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "phq9.p015": {
     "english": "Paste the code from the person's <a href=\"contact.html\">service contact record</a>, so the two scores can be lined up without a name.",
     "page": "phq9.html",
-    "reason": "both 'जसले' and 'ताकि' appear in the material; both 'स्कोर' and 'अङ्क' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "phq9.p016": {
     "english": "Which administration is this?",
     "page": "phq9.html",
-    "reason": "both 'सञ्चालन' and 'मापन' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "phq9.p018": {
     "english": "First — baseline",
     "page": "phq9.html",
-    "reason": "both 'आधाररेखा' and 'आधारभूत' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "phq9.p019": {
     "english": "Follow-up",
     "page": "phq9.html",
-    "reason": "both 'फलोअप' and 'अनुगमन' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
+  },
+  "phq9.p023": {
+    "english": "English, directly",
+    "page": "phq9.html",
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "phq9.p026": {
     "english": "Another language",
     "page": "phq9.html",
-    "reason": "both 'अरू' and 'अर्को' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "phq9.p027": {
     "english": "Recorded because it changes what the score means.",
     "page": "phq9.html",
-    "reason": "both 'स्कोर' and 'अङ्क' appear in the material; neither 'बदल्ने' nor 'बदलिने' is published for this English; a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "phq9.p028": {
     "english": "The nine items",
     "page": "phq9.html",
-    "reason": "a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "phq9.p029": {
     "english": "Difficulty, and the score",
     "page": "phq9.html",
-    "reason": "both 'स्कोर' and 'अङ्क' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "phq9.p032": {
     "english": "answer all nine items",
     "page": "phq9.html",
-    "reason": "a word is added or dropped; a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "phq9.p034": {
     "english": "Save this administration",
     "page": "phq9.html",
-    "reason": "both 'सञ्चालन' and 'मापन' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "phq9.p036": {
     "english": "Clear everything on this device",
     "page": "phq9.html",
-    "reason": "a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "phq9.p037": {
     "english": "What would be sent, if there were anywhere to send it",
     "page": "phq9.html",
-    "reason": "a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "phq9.p038": {
     "english": "Item-by-item answers are kept because a total alone cannot be re-checked, and because item 9 has to be auditable. There is no name, no phone number and no date of birth.",
     "page": "phq9.html",
-    "reason": "a word is added or dropped; both 'स्कोर' and 'अङ्क' appear in the material; a word is added or dropped; a word is added or dropped; a word is added or dropped; both 'जन्म' and 'जन्ममिति' appear in the material; both 'मिति' and 'कुनै' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "phq9.p040": {
     "english": "PHQ-9 was developed by Drs Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke and colleagues, with an educational grant from Pfizer Inc. The instrument carries the statement: <i>“No permission required to reproduce, translate, display or distribute.”</i> The items above are reproduced verbatim on that basis. The Nepali adaptation was made and validated through the Programme for Improving Mental Health Care (PRIME) consortium, funded by UK aid — and is <b>not</b> included here, for the reason given at the top of this page.",
     "page": "phq9.html",
-    "reason": "a word is added or dropped; neither 'अनुदानसहित' nor 'अनुदान' is published for this English; neither 'गरेका' nor 'गर्नुभए' is published for this English; both 'थिए।' and 'हो।' appear in the material; both 'कथन' and 'वाक्य' appear in the material; a word is added or dropped; neither 'शब्दशः' nor 'जस्ता' is published for this English; neither 'पुनरुत्पादन' nor 'तस्तै' is published for this English; both 'गरिए' and 'राखिए' appear in the material; both 'हुन्।' and 'छन्।' appear in the material; both 'अनुकूलन' and 'रूपान्तरण' appear in the material; a word is added or dropped; a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p001": {
     "english": "Referral record — MHPSS Nepal",
     "page": "referral.html",
-    "reason": "both 'रेफरल' and 'प्रेषण' appear in the material; a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p002": {
     "english": "Revised draft for field piloting <span>· saved on this phone, sent to the coordination register when there is signal</span>",
     "page": "referral.html",
-    "reason": "both 'दर्ता' and 'रजिस्टर' appear in the material; both 'पठाइने' and 'पठाइन्छ' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p003": {
     "english": "Referral record",
     "page": "referral.html",
-    "reason": "both 'रेफरल' and 'प्रेषण' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p008": {
     "english": "On 14 September the briefing recorded that around 5,000 psychosocial counselling cases had been logged, but that once a person reaches a health facility their case goes into HMIS and is no longer visible here. This form is the join. Without it, “continuum of care” is a claim rather than something anyone can show.",
     "page": "referral.html",
-    "reason": "a word is added or dropped; a word is added or dropped; neither 'घटना' nor 'केस' is published for this English; a word is added or dropped; neither 'उनको' nor 'उसको' is published for this English; 'विवरण' [terminology-lock/by_english] is the established word; 'घटना' is not in the material at all; a word is added or dropped; a word is added or dropped; both 'नै' and 'त्यसै' appear in the material; neither 'जोड्ने' nor 'जोड्नी' is published for this English; a word is added or dropped; a word is added or dropped; a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p009": {
     "english": "Who is referring",
     "page": "referral.html",
-    "reason": "a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p011": {
     "english": "Referring organisation",
     "page": "referral.html",
-    "reason": "both 'रेफर' and 'प्रेषण' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p012": {
     "english": "Referred by",
     "page": "referral.html",
-    "reason": "both 'रेफर' and 'प्रेषण' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p013": {
     "english": "Date of referral (AD)",
     "page": "referral.html",
-    "reason": "both 'रेफरल' and 'प्रेषण' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p015": {
     "english": "Site referred from",
     "page": "referral.html",
-    "reason": "both 'रेफर' and 'जहाँ' appear in the material; both 'गरिए' and 'प्रेषण' appear in the material; both 'स्थल' and 'गरियो' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p016": {
     "english": "Referrer phone <span class=\"opt\">— optional</span>",
     "page": "referral.html",
-    "reason": "a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p017": {
     "english": "So the receiving service can close the loop with you.",
     "page": "referral.html",
-    "reason": "a word is added or dropped; both 'संस्था' and 'पक्ष' appear in the material; a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p018": {
     "english": "Who is being referred",
     "page": "referral.html",
-    "reason": "a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p019": {
     "english": "<b>No name, no phone number, no date of birth.</b> A referral needs those to work, and they are handed over <b>person to person or on paper</b> between the referring worker and the receiving service. What is recorded here is only what coordination needs in order to see whether referrals are being made and completed.",
     "page": "referral.html",
-    "reason": "a word is added or dropped; a word is added or dropped; both 'यी' and 'ती' appear in the material; both 'रेफर' and 'प्रेषण' appear in the material; a word is added or dropped; both 'गरिने' and 'हुने' appear in the material; both 'रेफरल' and 'प्रेषण' appear in the material; a word is added or dropped; a word is added or dropped; a word is added or dropped; 'देख्न' [terminology-lock/by_english] is the established word; 'हेर्न' is not in the material at all; a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p027": {
     "english": "Not stated",
     "page": "referral.html",
-    "reason": "neither 'खुलाइए' nor 'भनिए' is published for this English"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p031": {
     "english": "Not stated",
     "page": "referral.html",
-    "reason": "neither 'खुलाइए' nor 'भनिए' is published for this English"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p033": {
     "english": "The referral",
     "page": "referral.html",
-    "reason": "both 'रेफरल' and 'प्रेषण' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p034": {
     "english": "Referred for",
     "page": "referral.html",
-    "reason": "a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p037": {
     "english": "Out — we sent them elsewhere",
     "page": "referral.html",
-    "reason": "a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p038": {
     "english": "In — they were sent to us",
     "page": "referral.html",
-    "reason": "neither 'उनलाई' nor 'उनीहरू' is published for this English"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p041": {
     "english": "Same day",
     "page": "referral.html",
-    "reason": "both 'सोही' and 'उही' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p043": {
     "english": "Routine",
     "page": "referral.html",
-    "reason": "both 'नियमित' and 'सामान्य' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p044": {
     "english": "Type of service referred to",
     "page": "referral.html",
-    "reason": "both 'रेफर' and 'प्रेषण' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
+  },
+  "ref.p050": {
+    "english": "Protection services",
+    "page": "referral.html",
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p055": {
     "english": "Free text for now. The agreed directory of services does not exist yet — it is still the single Excel sheet noted on 14 September, which is why this is not a dropdown.",
     "page": "referral.html",
-    "reason": "a word is added or dropped; a word is added or dropped; a word is added or dropped; a word is added or dropped; a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p057": {
     "english": "<b>This is the field that will be empty, and that is the finding.</b> A referral is only complete when the receiving service confirms the person arrived. Nobody can fill this in from the referring side alone. Leave it as “not yet known” and come back — the proportion that stays unknown is the honest measure of whether the pathway works.",
     "page": "referral.html",
-    "reason": "both 'यही' and 'यो' appear in the material; 'क्षेत्र' [terminology-lock/by_english] is the established word; 'नै' is not in the material at all; a word is added or dropped; a word is added or dropped; both 'रेफरल' and 'प्रेषण' appear in the material; both 'रेफर' and 'प्रेषण' appear in the material; a word is added or dropped; a word is added or dropped; a word is added or dropped; both 'अज्ञात' and 'थाहा' appear in the material; 'नभए' [dictionary/placeholders, terminology-lock/by_english] is the established word; 'रहने' is not in the material at all; a word is added or dropped; neither 'गर्दैन' nor 'चल्दैन' is published for this English"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p058": {
     "english": "Arrival",
     "page": "referral.html",
-    "reason": "neither 'पुगाइ' nor 'आगमन' is published for this English"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p060": {
     "english": "Confirmed arrived",
     "page": "referral.html",
-    "reason": "a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p062": {
     "english": "Person declined the referral",
     "page": "referral.html",
-    "reason": "both 'रेफरल' and 'प्रेषण' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p063": {
     "english": "Date confirmed <span class=\"opt\">— if known</span>",
     "page": "referral.html",
-    "reason": "both 'भएमा' and 'भए' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p066": {
     "english": "Receiving service told us",
     "page": "referral.html",
-    "reason": "a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p067": {
     "english": "The person told us",
     "page": "referral.html",
-    "reason": "both 'हामीलाई' and 'आफैँ' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p068": {
     "english": "A family member told us",
     "page": "referral.html",
-    "reason": "a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p070": {
     "english": "If they did not arrive, what got in the way? <span class=\"opt\">— optional</span>",
     "page": "referral.html",
-    "reason": "a word is added or dropped; a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p072": {
     "english": "Distance or no transport",
     "page": "referral.html",
-    "reason": "a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p075": {
     "english": "Stigma or family objection",
     "page": "referral.html",
-    "reason": "a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p078": {
     "english": "The barrier list is what turns a broken pathway into something fixable.",
     "page": "referral.html",
-    "reason": "a word is added or dropped; both 'कुरा' and 'कुरामा' appear in the material; neither 'बनाउँछ।' nor 'बदल्छ।' is published for this English"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p080": {
     "english": "Save this referral",
     "page": "referral.html",
-    "reason": "both 'रेफरल' and 'प्रेषण' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p082": {
     "english": "Clear everything on this device",
     "page": "referral.html",
-    "reason": "a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p083": {
     "english": "What would be sent, if there were anywhere to send it",
     "page": "referral.html",
-    "reason": "a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "ref.p084": {
     "english": "Facility or organisation",
     "page": "referral.html",
-    "reason": "a word is added or dropped; a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p001": {
     "english": "Service contact record — MHPSS Nepal",
     "page": "contact.html",
-    "reason": "a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p002": {
     "english": "Revised draft for field piloting <span>· saved on this phone, sent to the coordination register when there is signal</span>",
     "page": "contact.html",
-    "reason": "both 'दर्ता' and 'रजिस्टर' appear in the material; both 'पठाइने' and 'पठाइन्छ' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
+  },
+  "svc.p007": {
+    "english": "One contact with one person",
+    "page": "contact.html",
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p008": {
     "english": "Use this when you have seen, spoken to or supported a specific person. For a group activity or a day's total, use the <a href=\"5ws-report.html\">activity report</a> instead — this form is deliberately one record per person per contact, because that is the only way a returning person can be recognised instead of counted twice.",
     "page": "contact.html",
-    "reason": "a word is added or dropped; neither 'भेटे' nor 'देख्नु' is published for this English; neither 'गरे' nor 'गर्नु' is published for this English; a word is added or dropped; a word is added or dropped; both 'जानाजान' and 'जानाजानी' appear in the material; a word is added or dropped; a word is added or dropped; both 'फर्केर' and 'फेरि' appear in the material; a word is added or dropped; neither 'तरिका' nor 'उपाय' is published for this English"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p009": {
     "english": "<b>The person's name and phone number stay on this handset.</b> You type a few details so the phone can work out a <b>contact code</b>; the details are used for that calculation and then discarded. Only the code is saved. Nobody downstream — not the coordination view, not the dashboard, not this site — ever receives the name, the number, or a date of birth.",
     "page": "contact.html",
-    "reason": "neither 'ह्यान्डसेट' nor 'ह्यान्डसेटमै' is published for this English; both 'सकोस्' and 'सक्ने' appear in the material; neither 'भनेर' nor 'गरी' is published for this English; a word is added or dropped; a word is added or dropped; a word is added or dropped; a word is added or dropped; a word is added or dropped; neither 'साइट' nor 'साइटसमेत' is published for this English; both 'पनि' and 'लाई' appear in the material; a word is added or dropped; a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p010": {
     "english": "<b>Works with no signal.</b> Records are held on this phone as you save them and sent to the coordination register on their own when there is signal. The export remains for a copy of your own. <span id=\"storeWarn\"></span>",
     "page": "contact.html",
-    "reason": "both 'बिनै' and 'नभए' appear in the material; a word is added or dropped; both 'रहन्छन्' and 'रहन्छ' appear in the material; both 'भएपछि' and 'आएपछि' appear in the material; both 'आफैं' and 'आफैँ' appear in the material; a word is added or dropped; a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p016": {
     "english": "A staff member, never a service user.",
     "page": "contact.html",
-    "reason": "a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p019": {
     "english": "Who actually delivered this contact. Asked for on 15 September so that counsellors, psychologists and psychiatrists can be counted apart.",
     "page": "contact.html",
-    "reason": "a word is added or dropped; a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p024": {
     "english": "Typed as reported. <b>Not converted automatically</b> — that needs a verified BS calendar table, which has not been obtained.",
     "page": "contact.html",
-    "reason": "neither 'भनिएअनुसार' nor 'भनिए' is published for this English; both 'नै' and 'जस्तै' appear in the material; neither 'गरिन्छ।' nor 'गरिएको।' is published for this English; both 'रूपान्तरण' and 'परिवर्तन' appear in the material; both 'हुँदैन' and 'गरिँदैन' appear in the material; both 'वि' and 'विक्रम' appear in the material; both 'सं' and 'संवत्' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p027": {
     "english": "From the holding-centre roster. Only choose “Other” if the site genuinely is not listed — every “Other” has to be reconciled by hand later.",
     "page": "contact.html",
-    "reason": "a word is added or dropped; a word is added or dropped; both 'प्रत्येक' and 'हरेक' appear in the material; a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p029": {
     "english": "Asked for on 15 September as province / subdistrict. Free text for now: the agreed municipality and ward code list has not been obtained.",
     "page": "contact.html",
-    "reason": "a word is added or dropped; a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
+  },
+  "svc.p031": {
+    "english": "Location pin <span class=\"opt\">— optional</span>",
+    "page": "contact.html",
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p033": {
     "english": "Recorded to three decimal places — a grid of roughly 100 m. Enough to put the site on a map; not enough to point at a household. A precise pin, a small count and a target group together identify people even with no name attached, which is why the precision is reduced here rather than in the dashboard.",
     "page": "contact.html",
-    "reason": "a word is added or dropped; 'स्थान' [dictionary/placeholders, terminology-lock/by_english] is the established word; 'स्थल' is not in the material at all; a word is added or dropped; neither 'सानो' nor 'थोरै' is published for this English; both 'मिलेर' and 'मिल्दा' appear in the material; a word is added or dropped; a word is added or dropped; a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p035": {
     "english": "Is this the first time your organisation has recorded this person?",
     "page": "contact.html",
-    "reason": "a word is added or dropped; a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p037": {
     "english": "Returning — seen before",
     "page": "contact.html",
-    "reason": "neither 'फर्के' nor 'पुरानो' is published for this English"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p039": {
     "english": "This is the question that makes the cumulative figure mean something. On 15 September the reported total was over 9,000 with duplication nobody could size.",
     "page": "contact.html",
-    "reason": "a word is added or dropped; a word is added or dropped; a word is added or dropped; a word is added or dropped; a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p040": {
     "english": "<b>These four boxes are not saved.</b> They are read, combined into a code, and cleared when you save. Type them the same way each time and the same person gets the same code.",
     "page": "contact.html",
-    "reason": "neither 'बाकस' nor 'खण्ड' is published for this English; a word is added or dropped; a word is added or dropped; neither 'मेटाइन्छन्।' nor 'हटाइन्छ।' is published for this English; 'गर्नुहोस्' [terminology-lock/by_english] is the established word; 'गर्नुभयो' is not in the material at all; neither 'तब' nor 'भने' is published for this English; neither 'आउँछ।' nor 'पाउँछ।' is published for this English"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p044": {
     "english": "Year only — never a full date.",
     "page": "contact.html",
-    "reason": "both 'पूर्ण' and 'पूरा' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p050": {
     "english": "Not stated",
     "page": "contact.html",
-    "reason": "neither 'खुलाइए' nor 'भनिए' is published for this English"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p052": {
     "english": "Where the person is from, not where you met them.",
     "page": "contact.html",
-    "reason": "neither 'हुन्' nor 'हो' is published for this English"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p054": {
     "english": "— fill the four boxes above —",
     "page": "contact.html",
-    "reason": "neither 'बाकस' nor 'खण्ड' is published for this English"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p055": {
     "english": "This is the only part that is saved. It is a <b>pseudonym, not an anonymous token</b>: the four inputs vary little, so someone holding a list of candidate names could test them against a code. Adequate for agreeing these questions; a live register needs the code mixed with a secret this handset never holds, which means a server.",
     "page": "contact.html",
-    "reason": "a word is added or dropped; a word is added or dropped; neither 'ती' nor 'चारै' is published for this English; neither 'चार' nor 'हाल्ने' is published for this English; both 'इनपुट' and 'कुरा' appear in the material; a word is added or dropped; neither 'पर्छन्' nor 'पर्ने' is published for this English; both 'त्यसै' and 'हुनाले' appear in the material; a word is added or dropped; a word is added or dropped; neither 'जनाउन' nor 'जुटाउन' is published for this English; neither 'यति' nor 'यत्ति' is published for this English; neither 'जीवन्त' nor 'जीवित' is published for this English; both 'दर्ता' and 'रजिस्टर' appear in the material; both 'यही' and 'यो' appear in the material; neither 'नराख्ने' nor 'नरहने' is published for this English"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p059": {
     "english": "Not stated",
     "page": "contact.html",
-    "reason": "neither 'खुलाइए' nor 'भनिए' is published for this English"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p061": {
     "english": "Disability reported <span class=\"opt\">— optional</span>",
     "page": "contact.html",
-    "reason": "neither 'जनाइए' nor 'भनिए' is published for this English"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p063": {
     "english": "Yes, reported",
     "page": "contact.html",
-    "reason": "neither 'जनाइए' nor 'भनिए' is published for this English"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p066": {
     "english": "What was provided",
     "page": "contact.html",
-    "reason": "a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p068": {
     "english": "Draft list. The agreed service list is an <b>open action item</b> from 15 September and is not settled.",
     "page": "contact.html",
-    "reason": "a word is added or dropped; a word is added or dropped; neither 'कार्यबिन्दु' nor 'कार्यबुँदा' is published for this English"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p069": {
     "english": "Modality",
     "page": "contact.html",
-    "reason": "a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
+  },
+  "svc.p070": {
+    "english": "Length in minutes <span class=\"opt\">— optional</span>",
+    "page": "contact.html",
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p074": {
     "english": "Follow-up arranged with us",
     "page": "contact.html",
-    "reason": "a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p075": {
     "english": "Referred on — record it on the referral form",
     "page": "contact.html",
-    "reason": "a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p076": {
     "english": "Support declined",
     "page": "contact.html",
-    "reason": "both 'गरे' and 'गरियो' appear in the material"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p079": {
     "english": "Never a clinical detail, a diagnosis, or anything that would identify someone.",
     "page": "contact.html",
-    "reason": "a word is added or dropped; a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p084": {
     "english": "Clear everything on this device",
     "page": "contact.html",
-    "reason": "a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p085": {
     "english": "What would be sent, if there were anywhere to send it",
     "page": "contact.html",
-    "reason": "a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
   },
   "svc.p086": {
     "english": "Shown so the Technical Working Group can see exactly what leaves the handset before agreeing to collect anything. Note what is <i>not</i> in it.",
     "page": "contact.html",
-    "reason": "neither 'सङ्कलन' nor 'संकलन' is published for this English; a word is added or dropped; a word is added or dropped; a word is added or dropped"
+    "reason": "two machine lanes disagree; a human decision is required"
+  },
+  "svc.p093": {
+    "english": "About the service or the site — not about the person",
+    "page": "contact.html",
+    "reason": "two machine lanes disagree; a human decision is required"
   }
 }
