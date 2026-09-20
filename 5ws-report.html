@@ -901,6 +901,14 @@ body.institutional-utility .empty{color:var(--iu-muted)}
       : s && s.source === "reported" ? tx("siteReported")
       : s && s.source === "gov-list" ? tx("siteGov")
       : tx("siteDefault");
+    /* The site picker caches the option list when it is built, so filtering the
+       real <select> is not enough -- the visible list has to be rebuilt or it
+       keeps showing every district's sites. */
+    if (window.IUPreview && window.IUPreview._api && window.IUPreview._api.pickers
+        && window.IUPreview._api.pickers["site"]) {
+      window.IUPreview._api.pickers["site"].rebuild();
+      window.IUPreview._api.sync();
+    }
   }
   /* The palika list follows the district. Shown for a palika-level report
      (required) and for an unlisted site (optional -- it is what lets the
@@ -944,6 +952,14 @@ body.institutional-utility .empty{color:var(--iu-muted)}
     }
     if (keep && n && Number(keep) <= n) sel.value = keep;
     $("wardWrap").hidden = !n;
+    /* Same caching issue as the site picker: the palika picker holds its own
+       copy of the option list, and the palika list is filtered by district, so
+       it has to be rebuilt when the district changes. */
+    if (window.IUPreview && window.IUPreview._api && window.IUPreview._api.pickers
+        && window.IUPreview._api.pickers["palika"]) {
+      window.IUPreview._api.pickers["palika"].rebuild();
+      window.IUPreview._api.sync();
+    }
   }
   $("district").addEventListener("change", refreshSites);
   /* The ward list depends on the palika, not the district, so it has to be
