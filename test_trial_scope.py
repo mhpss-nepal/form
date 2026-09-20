@@ -91,8 +91,13 @@ class TrialScopeContractTest(unittest.TestCase):
 
     def test_service_worker_and_manifest_do_not_advertise_unapproved_pages(self) -> None:
         sw = (ROOT / "sw.js").read_text(encoding="utf-8")
-        for page in UNAPPROVED_PAGES:
+        for page in FORMS:
             self.assertNotIn(f'"{page}"', sw)
+
+        # 4ws-report.html is a content-free redirect kept for already-printed
+        # cards. It must be cached for offline resolution but not advertised
+        # by any landing, manifest, card, or generated QR entrypoint.
+        self.assertIn('"4ws-report.html"', sw)
 
         manifest = json.loads((ROOT / "manifest.webmanifest").read_text(encoding="utf-8"))
         self.assertEqual(manifest["shortcuts"], [
