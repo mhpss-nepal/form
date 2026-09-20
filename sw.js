@@ -21,8 +21,12 @@
    device until this line changed.
    v41 adds the under-1-KB 4Ws redirect stub to protect the address on cards
    already distributed in the field; without a bump installed phones keep
-   v40's incomplete offline precache. */
-const CACHE = "mhpss-np-field-v41";
+   v40's incomplete offline precache.
+   v42 follows the shared bilingual engine (../hub/assets/i18n.js), which now
+   reads a per-page language default: 5ws-report.html declares Nepali. The
+   engine is precached, so a phone holding v41 would keep the previous engine
+   and would not open the form in Nepali. */
+const CACHE = "mhpss-np-field-v42";
 
 const PRECACHE = [
   "./",

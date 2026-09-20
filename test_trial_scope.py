@@ -44,8 +44,27 @@ class LandingParser(HTMLParser):
 
 
 class TrialScopeContractTest(unittest.TestCase):
+    # The one change this task is allowed to make to a field-form page: declare
+    # the page's own language default. It is a single attribute on <html>, so
+    # the byte pin below is narrowed by exactly that substitution and nothing
+    # else -- 5ws-report.html still has to be byte-identical to its base apart
+    # from this, and the four unapproved pages and pwa.js stay untouched.
+    DECLARED_DEFAULT = 'data-i18n-default="ne"'
+    DEFAULT_SUB = ('<html lang="en">', '<html lang="en" data-i18n-default="ne">')
+
     def test_form_pages_and_unrelated_pwa_runtime_keep_byte_parity(self) -> None:
-        for relative in ("5ws-report.html", *UNAPPROVED_PAGES, "pwa.js"):
+        base_html = subprocess.run(
+            ["git", "show", f"{BASE}:5ws-report.html"],
+            cwd=ROOT, capture_output=True, check=True,
+        ).stdout.decode("utf-8")
+        allowed = base_html.replace(*self.DEFAULT_SUB)
+        self.assertNotEqual(allowed, base_html,
+                            "the authorized default declaration did not apply")
+        self.assertEqual((ROOT / "5ws-report.html").read_text(encoding="utf-8"),
+                         allowed,
+                         "5ws-report.html changed beyond declaring its language default")
+
+        for relative in (*UNAPPROVED_PAGES, "pwa.js"):
             baseline = subprocess.run(
                 ["git", "show", f"{BASE}:{relative}"],
                 cwd=ROOT,
