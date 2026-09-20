@@ -280,6 +280,7 @@ body.institutional-utility #problems.has-errors{
 body.institutional-utility #toast{bottom:82px; border-radius:4px}
 body.institutional-utility #toast:empty:not(.show){display:none}
 body.institutional-utility .xs{color:var(--iu-muted)}
+body.institutional-utility .empty{color:var(--iu-muted)}
 @media (max-width:720px){
   body.institutional-utility .top{padding:10px 14px}
   body.institutional-utility .top .spacer{display:none}
@@ -541,8 +542,8 @@ body.institutional-utility .xs{color:var(--iu-muted)}
       <div class="step"><span class="n">4</span><h2 data-i18n="f4.h4">For whom</h2><span class="hint" data-i18n="f4.h4hint">counts only, never a list</span></div>
 
       <div class="f">
-        <label data-i18n="f4.tgLab">Target group — select all that apply</label>
-        <div class="chks" id="tgs" role="group" aria-required="true"></div>
+        <label data-i18n="f4.tgLab" id="tgsLab">Target group — select all that apply</label>
+        <div class="chks" id="tgs" role="group" aria-labelledby="tgsLab"></div>
       </div>
       <div class="f" id="tgOtherWrap" hidden>
         <label for="targetGroupOther" data-i18n="f4.tgOtherLab">Which other group?</label>
