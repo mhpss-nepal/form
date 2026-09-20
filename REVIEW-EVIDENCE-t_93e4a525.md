@@ -6,10 +6,14 @@ This **supersedes** the earlier `REVIEW-EVIDENCE-t_93e4a525.md` produced two
 commits ago, which published 7 strings chosen by an automated heuristic. That
 artifact was rejected in review round 1; this is the corrected evidence.
 
-| repo | worktree | branch | base | parent head | this head |
+| repo | worktree | branch | base | parent head | corrected head |
 |---|---|---|---|---|---|
-| form | `/root/mhpss-nepal-work/form-translation` | `task/t_2cfc3bab` | `9032bb7` | `ebae7b7` | `1cc93b6` + this commit |
+| form | `/root/mhpss-nepal-work/form-translation` | `task/t_2cfc3bab` | `9032bb7` | `ebae7b7` | `b95a3d3` + evidence pointer |
 | hub | `/root/mhpss-nepal-work/hub-translation` | `task/t_2cfc3bab-i18n` | `ff2d4e2` | `3b82f12` | `f454803` |
+
+The rejected artifact was form `1cc93b6` (hub `5beeaf8`). This correction
+withdraws it: form `b95a3d3` (adjudicator, worksheet, evidence dumps) plus a
+`TRANSLATION-EVIDENCE.md` pointer, and hub `f454803` (dictionary restored).
 
 Production refs unchanged (public `68bf197`, form `9032bb7`, hub `ff2d4e2`).
 No push, PR, merge or deploy. Synthetic data only.
