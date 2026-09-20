@@ -1,0 +1,46 @@
+--- a/forms.html
++++ b/forms.html
+@@ -159,6 +159,7 @@
+ 
+   <h1>Where each form's entries land</h1>
+   <p class="lede">Every form in Layer 1 has a home here: the entries made on it, the checks that need a person, and an export. The forms themselves are on the phones — this is what comes back from them. The activity report (5Ws) has its home on the <a href="./#reports">dashboard</a>, because every figure there is computed from it.</p>
++  <p class="note"><b>Supervised trial.</b> Only the activity report (5Ws) is open in the field. The other four instruments are shown below so their entries, checks and exports can be read here, and a reviewer can open all of them together on the <a href="../form/all-forms.html">review page</a> &mdash; one page, every form, nothing sent to a phone. No default Hub link opens an unapproved instrument directly.</p>
+ 
+   <div class="livestrip" id="strip"><span class="dot" aria-hidden="true"></span><span id="stripTxt">Checking the register…</span></div>
+   <div id="livePanel"></div>
+@@ -176,7 +177,7 @@
+     <h2 class="sechead">Service contact</h2>
+     <p class="secsay">One row per person seen, with the contact code that lets a returning person be recognised without a name being recorded.</p>
+     <div class="btns" style="margin-bottom:14px;flex-wrap:wrap">
+-      <a class="btn ghost sm" href="../form/contact.html">Open the form &rarr;</a>
++      <span class="btn ghost sm" title="Opens from the review page, not from field navigation">Review on the review page</span>
+       <label class="btn ghost sm" style="cursor:pointer">Import a file<input type="file" class="pick" multiple accept=".json,.csv" hidden></label>
+       <button type="button" class="btn ghost sm exp" data-k="service_contact">Export these as CSV</button>
+     </div>
+@@ -194,7 +195,7 @@
+     <h2 class="sechead">Referral</h2>
+     <p class="secsay">Who was sent where, and whether the receiving service ever confirmed the person arrived.</p>
+     <div class="btns" style="margin-bottom:14px;flex-wrap:wrap">
+-      <a class="btn ghost sm" href="../form/referral.html">Open the form &rarr;</a>
++      <span class="btn ghost sm" title="Opens from the review page, not from field navigation">Review on the review page</span>
+       <label class="btn ghost sm" style="cursor:pointer">Import a file<input type="file" class="pick" multiple accept=".json,.csv" hidden></label>
+       <button type="button" class="btn ghost sm exp" data-k="referral">Export these as CSV</button>
+     </div>
+@@ -212,7 +213,7 @@
+     <h2 class="sechead">PHQ-9 follow-up</h2>
+     <p class="secsay">Repeat measures for people already in care, and the item 9 audit.</p>
+     <div class="btns" style="margin-bottom:14px;flex-wrap:wrap">
+-      <a class="btn ghost sm" href="../form/phq9.html">Open the form &rarr;</a>
++      <span class="btn ghost sm" title="Opens from the review page, not from field navigation">Review on the review page</span>
+       <label class="btn ghost sm" style="cursor:pointer">Import a file<input type="file" class="pick" multiple accept=".json,.csv" hidden></label>
+       <button type="button" class="btn ghost sm exp" data-k="phq9">Export these as CSV</button>
+     </div>
+@@ -230,7 +231,7 @@
+     <h2 class="sechead">Self-report</h2>
+     <p class="secsay">What people say about their own situation, anonymously, in their own words.</p>
+     <div class="btns" style="margin-bottom:14px;flex-wrap:wrap">
+-      <a class="btn ghost sm" href="../form/selfreport.html">Open the form &rarr;</a>
++      <span class="btn ghost sm" title="Opens from the review page, not from field navigation">Review on the review page</span>
+       <label class="btn ghost sm" style="cursor:pointer">Import a file<input type="file" class="pick" multiple accept=".json,.csv" hidden></label>
+       <button type="button" class="btn ghost sm exp" data-k="self_report">Export these as CSV</button>
+     </div>

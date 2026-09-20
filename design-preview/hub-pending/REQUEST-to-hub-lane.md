@@ -24,7 +24,7 @@ Neither can reach production from the form side alone, because the form pages lo
 | 2 | three UI strings for the new Ward field (`f4.wardLab`, `f4.wardHelp`, `f4.optional`) | hub `assets/i18n-strings.js` | `i18n-strings.js.ward-only.patch` |
 | 3 | four missing palika ward counts | hub `assets/codes.js` | `codes.js.ward-counts.patch` |
 | 4 | the per-layer default engine | hub `assets/i18n.js` | **already built** — land `t_2449fe51`, branch `task/t_2449fe51-i18n-per-layer-default`, HEAD `8273e90` |
-| 5 | an "all forms" listing that includes every instrument | hub `forms.html` | **needs your decision** — see below |
+| 5 | an "all forms" listing that includes every instrument | hub `forms.html` | `forms.html.review-listing.*.patch` — see below |
 
 ### 1–3: apply and go
 
@@ -76,22 +76,68 @@ opens in Nepali with no further form change**:
 | `form/5ws-report.html` | `ne` | Nepali |
 | `form/selfreport.html` · `phq9` · `referral` · `contact` · `cards` | nothing | English, as decided |
 
-### 5: the all-forms listing — your call
+### 5: the all-forms listing — built, in two variants, and it fixes a live violation
 
-Commit `15d35b3` in `hub/forms.html` (*"Hub: offer only the approved 5Ws form
-during the trial"*) replaced every *"Open the form →"* with *"Not open during the
-trial"*, and `form/index.html` was cut from five cards to one. Both were deliberate
-trial scope: only the 5Ws is approved for field use.
+**`hub/forms.html` on `origin/main` currently breaks the hub lane's own rule.** It
+carries four direct links to unapproved forms (`../form/contact.html`,
+`referral.html`, `phq9.html`, `selfreport.html`), which its own
+`tools/hub-trial-scope-render-check.py` fails on: *anything under `/form/` other
+than `/form` and `/form/5ws-report.html` fails*. The fix for that is written but
+only on a branch (`15d35b3`, task `t_46e4cb25`). So there are two bases, and a
+patch for each:
 
-**The form lane did not undo that.** It added `form/all-forms.html`, a review-only
-page that lists all five instruments and opens each through the existing review
-frame (`preview.html?preview_form=<file>`) — a surface the repo already had and
-already keeps out of the field app. `form/index.html` gained one link to it.
+| variant | base | produces |
+|---|---|---|
+| `forms.html.review-listing.from-main.patch` | hub `origin/main` | 0 direct form links, 1 review link |
+| `forms.html.review-listing.from-trialscope.patch` | after `15d35b3` (the "Not open during the trial" spans) | 0 direct form links, 5 review links |
 
-If the Hub should also offer a review listing, the form lane will produce the
-`hub/forms.html` patch on request, under the same rule that applies on the form
-side: **a link that goes through a review frame is allowed; a link that addresses
-an unapproved form directly, or any QR or card-sheet entry for one, is not.**
+```bash
+# pick the one whose base matches your tree
+git apply /path/to/form/design-preview/hub-pending/forms.html.review-listing.from-main.patch
+# or
+git apply /path/to/form/design-preview/hub-pending/forms.html.review-listing.from-trialscope.patch
+```
+
+Both verified by applying to a scratch copy of their own base and checking the
+rendered-equivalent result: **0 direct links to an unapproved form, and the review
+page is linked**. Both pass `git apply --check` against their base.
+
+What the patch does:
+
+- adds one line to `forms.html`: a *Supervised trial* note saying only the 5Ws is
+  open in the field, and that a reviewer can open all of them together on the
+  review page;
+- points every per-form button at `../form/all-forms.html` — the **review page**
+  — instead of at the instrument itself.
+
+**No direct link to `contact.html` / `phq9.html` / `referral.html` /
+`selfreport.html` is added anywhere, and no default Hub navigation or rail entry
+changes.** The four sections still describe the instruments and read what comes
+back from them. The rail group is untouched, so the hub's rail assertion (exactly
+`["./#reports", "forms.html", "../form/"]`) still holds.
+
+```bash
+# the checks this must keep passing
+python3 tools/hub-trial-scope-render-check.py   # 0 offenders at 390 and 1280
+python3 -m unittest test_trial_scope             # the static + render rule tests
+```
+
+### 5a: one prerequisite in the form repository — please read
+
+The review link resolves to `/form/all-forms.html`, which **is not in
+`form/origin/main` yet**; it is on `form`'s `design/preview-isolation` branch
+(`55b3196`), together with the review frame it uses (`preview.html`,
+`preview-mode.js`, `preview-shell.js`, `preview-shell.css` — none of these are in
+`form/origin/main` either).
+
+So **land the form branch before or with this patch**, or the Hub's review link
+will 404. The form pages themselves do not otherwise depend on the Hub, so the
+ordering within this request is flexible; this one is not.
+
+The build was verified on the form side by a real browser at 390 and 1280: the
+landing page still exposes exactly one actionable form card, the card sheet still
+carries only the `5ws` QR, and the review page opens all five instruments through
+the frame with no direct address and no unapproved QR.
 
 ## What must not happen
 

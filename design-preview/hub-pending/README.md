@@ -5,10 +5,7 @@
 > the verification. It supersedes the older narrative below where they differ.
 
 Status: **NOT APPLIED.** This session does not own `mhpss-nepal/hub` and has applied
-nothing to it. Both patches below pass `git apply --check` against `origin/main`
-(`ff2d4e2`) but are **held**, because applying them as-is would overwrite another
-lane's deliberate decision and would land a language mechanism a running task is
-already doing correctly and differently.
+nothing to it. Every patch below passes `git apply --check` against its own base.
 
 ## 1. What the form branch needs (safe, uncontested)
 

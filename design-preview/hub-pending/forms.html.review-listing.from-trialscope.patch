@@ -1,0 +1,46 @@
+--- a/forms.html
++++ b/forms.html
+@@ -156,6 +156,7 @@
+ 
+   <h1>Where each form's entries land</h1>
+   <p class="lede">Every form in Layer 1 has a home here: the entries made on it, the checks that need a person, and an export. The forms themselves are on the phones — this is what comes back from them. The activity report (5Ws) has its home on the <a href="./#reports">dashboard</a>, because every figure there is computed from it.</p>
++  <p class="note"><b>Supervised trial.</b> Only the activity report (5Ws) is open in the field. The other four instruments are shown below so their entries, checks and exports can be read here, and a reviewer can open all of them together on the <a href="../form/all-forms.html">review page</a> &mdash; one page, every form, nothing sent to a phone. No default Hub link opens an unapproved instrument directly.</p>
+   <p class="note"><b>Supervised trial.</b> Only the activity report (5Ws) is approved for field use, and it is the one instrument this Hub links to. The four sections below describe the other instruments and read what comes back from them; nothing here opens them, and no default Hub navigation points at them, until they are approved. The 5Ws link in the rail opens the approved form.</p>
+ 
+   <div class="livestrip" id="strip"><span class="dot" aria-hidden="true"></span><span id="stripTxt">Checking the register…</span></div>
+@@ -174,7 +175,7 @@
+     <h2 class="sechead">Service contact</h2>
+     <p class="secsay">One row per person seen, with the contact code that lets a returning person be recognised without a name being recorded.</p>
+     <div class="btns" style="margin-bottom:14px;flex-wrap:wrap">
+-      <span class="btn ghost sm" title="Not approved for the supervised trial">Not open during the trial</span>
++      <a class="btn ghost sm" href="../form/all-forms.html" title="Opens from the review page, not from field navigation">Review on the review page &rarr;</a>
+       <label class="btn ghost sm" style="cursor:pointer">Import a file<input type="file" class="pick" multiple accept=".json,.csv" hidden></label>
+       <button type="button" class="btn ghost sm exp" data-k="service_contact">Export these as CSV</button>
+     </div>
+@@ -192,7 +193,7 @@
+     <h2 class="sechead">Referral</h2>
+     <p class="secsay">Who was sent where, and whether the receiving service ever confirmed the person arrived.</p>
+     <div class="btns" style="margin-bottom:14px;flex-wrap:wrap">
+-      <span class="btn ghost sm" title="Not approved for the supervised trial">Not open during the trial</span>
++      <a class="btn ghost sm" href="../form/all-forms.html" title="Opens from the review page, not from field navigation">Review on the review page &rarr;</a>
+       <label class="btn ghost sm" style="cursor:pointer">Import a file<input type="file" class="pick" multiple accept=".json,.csv" hidden></label>
+       <button type="button" class="btn ghost sm exp" data-k="referral">Export these as CSV</button>
+     </div>
+@@ -210,7 +211,7 @@
+     <h2 class="sechead">PHQ-9 follow-up</h2>
+     <p class="secsay">Repeat measures for people already in care, and the item 9 audit.</p>
+     <div class="btns" style="margin-bottom:14px;flex-wrap:wrap">
+-      <span class="btn ghost sm" title="Not approved for the supervised trial">Not open during the trial</span>
++      <a class="btn ghost sm" href="../form/all-forms.html" title="Opens from the review page, not from field navigation">Review on the review page &rarr;</a>
+       <label class="btn ghost sm" style="cursor:pointer">Import a file<input type="file" class="pick" multiple accept=".json,.csv" hidden></label>
+       <button type="button" class="btn ghost sm exp" data-k="phq9">Export these as CSV</button>
+     </div>
+@@ -228,7 +229,7 @@
+     <h2 class="sechead">Self-report</h2>
+     <p class="secsay">What people say about their own situation, anonymously, in their own words.</p>
+     <div class="btns" style="margin-bottom:14px;flex-wrap:wrap">
+-      <span class="btn ghost sm" title="Not approved for the supervised trial">Not open during the trial</span>
++      <a class="btn ghost sm" href="../form/all-forms.html" title="Opens from the review page, not from field navigation">Review on the review page &rarr;</a>
+       <label class="btn ghost sm" style="cursor:pointer">Import a file<input type="file" class="pick" multiple accept=".json,.csv" hidden></label>
+       <button type="button" class="btn ghost sm exp" data-k="self_report">Export these as CSV</button>
+     </div>
