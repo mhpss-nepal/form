@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MHPSS Activity Report (5Ws) — Nepal Flood Response</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Lora + Manrope. design.css declares Georgia / system fallbacks, so a
+     failed font request costs typography and never legibility -- which
+     matters on the field forms, where there may be no signal at all. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Manrope:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="../hub/assets/app.css">
+<link rel="stylesheet" href="../hub/assets/design.css">
+<link rel="stylesheet" href="../hub/assets/form.css">
+<link rel="stylesheet" href="design-preview/5ws-preview.css?h=d9feaeb4ad">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1d1d1b">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MHPSS Field">
+<script src="design-preview/5ws-preview-core.js?h=105b7bd128"></script>
+</head>
+<body class="fx iu" data-iu-preview="B2">
+
+<div class="iu-previewbar" role="note">
+  <b>B2 Institutional App — design preview.</b>
+  Demonstration / non-identifiable data only. New interface copy is English pending human-reviewed Nepali wording.
+</div>
+
+<header class="iu-top">
+  <button type="button" class="iu-back" data-iu-back>&#8249; All forms</button>
+  <div class="iu-brandwrap">
+    <div class="iu-brand">MHPSS Activity Report</div>
+    <div class="iu-brandsub">Rasuwa &ndash; Bhote Koshi flood response</div>
+  </div>
+  <div class="iu-lang" id="i18nbar"></div>
+</header>
+
+<main class="iu-main">
+  <div class="iu-sync" id="iuSyncStatus" role="status" aria-live="polite" aria-atomic="true" data-state="waiting">
+    <b>Checking device and connection state&hellip;</b>
+    <span>Checking device and connection state&hellip;</span>
+  </div>
+
+<form id="f" autocomplete="off" novalidate>
+
+    <!-- 1 · WHO IS REPORTING -->
+    <div class="card" id="s1">
+      <div class="step"><span class="n">1</span><h2 data-i18n="f4.h1who">Who is reporting</h2><span class="hint" data-i18n="f4.h1hint">saved for next time</span></div>
+
+      <div class="row">
+        <div class="f">
+          <label for="org" data-i18n="f4.orgLab">Reporting organisation</label>
+          <select id="org" name="org" aria-required="true"></select>
+        </div>
+        <div class="f" id="orgOtherWrap" hidden>
+          <label for="orgOther" data-i18n="f4.orgOtherLab">Name of organisation</label>
+          <input type="text" id="orgOther" name="orgOther" placeholder="Full name, as it should appear in reports" data-i18n-ph="f4.phOrgOther">
+        </div>
+      </div>
+
+      <div class="row three">
+        <div class="f">
+          <label for="focalName" data-i18n="f4.focalLab">Focal point name</label>
+          <input type="text" id="focalName" name="focalName" placeholder="Person submitting this report" data-i18n-ph="f4.phFocal" aria-required="true">
+          <div class="help" data-i18n="f4.focalHelp">A staff member, not a service user.</div>
+        </div>
+        <div class="f">
+          <label for="focalPhone" data-i18n="f4.phoneLab">Focal point phone</label>
+          <input type="tel" id="focalPhone" name="focalPhone" placeholder="98XXXXXXXX" aria-required="true">
+        </div>
+        <div class="f">
+          <label for="focalEmail" data-i18n="f4.emailLab" data-i18n-html>Focal point email <span class="opt">— optional</span></label>
+          <input type="email" id="focalEmail" name="focalEmail" placeholder="name@organisation.org">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="f">
+          <label for="cadre" data-i18n="f4.cadreLab">Cadre delivering the activity</label>
+          <select id="cadre" name="cadre"></select>
+          <div class="help" data-i18n="f4.cadreHelp">One standard list for health and protection partners, so the same role is never counted under two names.</div>
+        </div>
+        <div class="f" id="cadreOtherWrap" hidden>
+          <label for="cadreOther" data-i18n="f4.cadreOtherLab">Which cadre?</label>
+          <input type="text" id="cadreOther" name="cadreOther" placeholder="Role, as your organisation names it" data-i18n-ph="f4.phCadreOther">
+        </div>
+      </div>
+
+      <div class="f">
+        <label for="partners" data-i18n="f4.partnersLab" data-i18n-html>Joint activity with <span class="opt">— optional</span></label>
+        <input type="text" id="partners" name="partners" autocomplete="off" placeholder="Other organisations this activity was done with, separated by commas" data-i18n-ph="f4.phPartners">
+        <div class="help" data-i18n="f4.partnersHelp">Organisations that did this activity with you. Item C of the IASC 4Ws.</div>
+      </div>
+    </div>
+
+    <!-- 2 · WHEN AND WHERE -->
+    <div class="card" id="s2">
+      <div class="step"><span class="n">2</span><h2 data-i18n="f4.h2where">Where and when</h2></div>
+
+      <div class="row three">
+        <div class="f">
+          <label for="dateAD" data-i18n="f4.dateLab">Date — Gregorian (AD)</label>
+          <input type="date" id="dateAD" name="dateAD" aria-required="true">
+          <div class="help" data-i18n="f4.dateHelp">This is the date the system sorts and groups on.</div>
+        </div>
+        <div class="f">
+          <label for="sessionTime" data-i18n="f4.timeLab" data-i18n-html>Start time <span class="opt">— optional</span></label>
+          <input type="time" id="sessionTime" name="sessionTime">
+          <div class="help" data-i18n="f4.timeHelp">Give it when the same activity runs more than once at one place on one day, so each session is kept as its own report.</div>
+        </div>
+        <div class="f">
+          <label for="dateBS" data-i18n="f4.bsLab" data-i18n-html>Date — Bikram Sambat <span class="opt">— optional</span></label>
+          <input type="text" id="dateBS" name="dateBS" placeholder="2083-05-28" pattern="\d{4}-\d{2}-\d{2}">
+          <div class="help" data-i18n="f4.bsHelp" data-i18n-html>Typed as reported. <b>Not converted automatically</b> — automatic conversion needs a verified BS calendar table, which has not been obtained.</div>
+        </div>
+        <div class="f">
+          <label for="district" data-i18n="f4.distLab">District</label>
+          <select id="district" name="district"></select>
+          <div class="help" data-i18n="f4.distHelp2">Choosing a district shortens the site list below to that district.</div>
+        </div>
+        <div class="f" id="districtOtherWrap" hidden>
+          <label for="districtOther" data-i18n="f4.distOtherLab">Which district?</label>
+          <input type="text" id="districtOther" name="districtOther" placeholder="District name" data-i18n-ph="f4.phDistOther">
+        </div>
+      </div>
+
+      <div class="f">
+        <label for="site" data-i18n="f4.siteLab">Site</label>
+        <select id="site" name="site" aria-required="true"></select>
+        <div class="help" id="siteHelp">Choose from the holding-centre roster. Only pick “Other” if the site genuinely is not listed — every “Other” has to be reconciled by hand later.</div>
+      </div>
+
+      <div class="f" id="siteOtherWrap" hidden>
+        <label for="siteOther" data-i18n="f4.siteOtherLab">Name of site</label>
+        <input type="text" id="siteOther" name="siteOther" placeholder="Site name, ward, municipality" data-i18n-ph="f4.phSiteOther">
+        <div class="help" data-i18n="f4.siteOtherHelp">Flagged for review, so it can be added to the roster or matched to an existing entry.</div>
+      </div>
+
+      <div class="f" id="palikaWrap" hidden>
+        <label for="palika" data-i18n="f4.palikaLab">Palika (local level)</label>
+        <select id="palika" name="palika"></select>
+        <div class="help" data-i18n="f4.palikaHelp">Named after the official list of local levels. A palika-level report is counted at palika level and never as a site, so it cannot close a gap on the roster.</div>
+      </div>
+
+      <div class="f">
+        <label for="modality" data-i18n="f4.modLab">Service setting — where the activity took place</label>
+        <select id="modality" name="modality" aria-required="true"></select>
+        <div class="help" data-i18n="f4.modHelp">Holding centre (temporary, during the response), outreach in the community, a facility (health facility, school, hospital, OCMC, other government facility), or by telephone / helpline.</div>
+      </div>
+      <div class="f" id="modalityOtherWrap" hidden>
+        <label for="modalityOther" data-i18n="f4.modOtherLab">Where was it?</label>
+        <input type="text" id="modalityOther" name="modalityOther" placeholder="Describe the setting" data-i18n-ph="f4.phModOther">
+      </div>
+    </div>
+
+    <!-- 3 · WHAT -->
+    <div class="card" id="s3">
+      <div class="step"><span class="n">3</span><h2 data-i18n="f4.h3what">What was done</h2></div>
+
+      <div class="f">
+        <label for="activity" data-i18n="f4.actLab">Activity</label>
+        <select id="activity" name="activity" aria-required="true"></select>
+        <!-- The list shows plain words only. The IASC layer and the 4Ws
+             subcode behind each option live in codes.js and are read by the
+             register, the dashboard and the exports -- one code, two readings
+             (17 Sep 2026). Nothing IASC is shown to the reporter. -->
+        <div class="help" id="activityHelp" data-i18n="f4.actHelp">One activity per report. Two different activities in one session are two reports.</div>
+      </div>
+      <div class="f" id="activityOtherWrap" hidden>
+        <label for="activityOther" data-i18n="f4.actOtherLab">Describe the activity</label>
+        <input type="text" id="activityOther" name="activityOther" placeholder="What was done — no names" data-i18n-ph="f4.phActOther">
+      </div>
+      <div class="row">
+        <div class="f">
+          <label for="status" data-i18n="f4.statusLab">Status</label>
+          <select id="status" name="status"></select>
+        </div>
+      </div>
+
+      <div class="f">
+        <label for="description" data-i18n="f4.descLab" data-i18n-html>One-line description <span class="opt">— optional</span></label>
+        <textarea id="description" name="description" maxlength="220" placeholder="What happened, in one sentence. No names, no clinical detail." data-i18n-ph="f4.phDesc"></textarea>
+        <div class="help" data-i18n="f4.descHelp" data-i18n-html><span id="descCount">0</span>/220 characters.</div>
+      </div>
+    </div>
+
+    <!-- 4 · FOR WHOM -->
+    <div class="card" id="s4">
+      <div class="step"><span class="n">4</span><h2 data-i18n="f4.h4">For whom</h2><span class="hint" data-i18n="f4.h4hint">counts only, never a list</span></div>
+
+      <div class="f">
+        <label data-i18n="f4.tgLab">Target group — select all that apply</label>
+        <div class="chks" id="tgs" role="group" aria-required="true"></div>
+      </div>
+      <div class="f" id="tgOtherWrap" hidden>
+        <label for="targetGroupOther" data-i18n="f4.tgOtherLab">Which other group?</label>
+        <input type="text" id="targetGroupOther" name="targetGroupOther" placeholder="Name the group — never a person" data-i18n-ph="f4.phTgOther">
+      </div>
+
+      <!-- Attendance. Since 17 Sep 2026 (afternoon) the form no longer asks
+           what the figure counts: a report is one session and the figure is
+           everyone who took part in it, once. Summed across sessions that is
+           a count of attendances (service contacts), which is what the
+           record says (basis CONTACTS, set by the form, never asked). Distinct
+           people will come from the optional attendance list, not from here. -->
+      <div class="f" style="max-width:300px">
+        <label for="reachedTotal" data-i18n="f4.reachLab">Attendance</label>
+        <input type="number" id="reachedTotal" name="reachedTotal" min="0" step="1" inputmode="numeric" placeholder="0" aria-required="true">
+        <div class="help" data-i18n="f4.reachHelp">Everyone who took part in this session, counted once. A person who comes to another session is counted there again.</div>
+      </div>
+
+      <label style="margin-top:6px" data-i18n="f4.disLabel" data-i18n-html>Disaggregation <span class="opt">— optional, but leave a row blank rather than partly filled</span></label>
+      <div class="dis">
+        <table>
+          <thead><tr>
+            <th data-i18n="f4.hAge">Age</th>
+            <th data-i18n="f4.hFemale">Female</th>
+            <th data-i18n="f4.hMale">Male</th>
+            <th data-i18n="f4.hOther">Not recorded</th>
+            <th class="rt" data-i18n="f4.hRow">Total</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td><b>0–4</b></td>
+              <td><input type="number" id="f04" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Female, age 0 to 4"></td>
+              <td><input type="number" id="m04" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Male, age 0 to 4"></td>
+              <td><input type="number" id="o04" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Sex not recorded, age 0 to 4"></td>
+              <td class="rt"><span id="r04">—</span></td>
+            </tr>
+            <tr>
+              <td><b>5–14</b></td>
+              <td><input type="number" id="f514" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Female, age 5 to 14"></td>
+              <td><input type="number" id="m514" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Male, age 5 to 14"></td>
+              <td><input type="number" id="o514" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Sex not recorded, age 5 to 14"></td>
+              <td class="rt"><span id="r514">—</span></td>
+            </tr>
+            <tr>
+              <td><b>15–49</b></td>
+              <td><input type="number" id="f1549" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Female, age 15 to 49"></td>
+              <td><input type="number" id="m1549" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Male, age 15 to 49"></td>
+              <td><input type="number" id="o1549" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Sex not recorded, age 15 to 49"></td>
+              <td class="rt"><span id="r1549">—</span></td>
+            </tr>
+            <tr>
+              <td><b>50–59</b></td>
+              <td><input type="number" id="f5059" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Female, age 50 to 59"></td>
+              <td><input type="number" id="m5059" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Male, age 50 to 59"></td>
+              <td><input type="number" id="o5059" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Sex not recorded, age 50 to 59"></td>
+              <td class="rt"><span id="r5059">—</span></td>
+            </tr>
+            <tr>
+              <td><b>60+</b></td>
+              <td><input type="number" id="f60" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Female, age 60 and over"></td>
+              <td><input type="number" id="m60" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Male, age 60 and over"></td>
+              <td><input type="number" id="o60" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Sex not recorded, age 60 and over"></td>
+              <td class="rt"><span id="r60">—</span></td>
+            </tr>
+          </tbody>
+          <tfoot><tr>
+            <td data-i18n="f4.colTotal">All ages</td>
+            <td class="rt"><span id="cF">—</span></td>
+            <td class="rt"><span id="cM">—</span></td>
+            <td class="rt"><span id="cO">—</span></td>
+            <td class="rt"><span id="cAll">—</span></td>
+          </tr></tfoot>
+        </table>
+        <div class="tally" id="tally"><span data-i18n="f4.tally">Disaggregated sum</span><span id="tallyVal">0</span></div>
+      </div>
+
+      <!-- The rollup is shown on the form on purpose, labelled by the age
+           where the five groups split (15), never as "under 18": two of the
+           groups agreed on 17 Sep 2026 cross the 18-year line, and how the
+           national return is compiled from them is a ruling still to come. -->
+      <div class="rollup">
+        <span data-i18n="f4.rollLabel">Adds up to</span>
+        <span class="rollv"><b id="rollU18">—</b> <span data-i18n="f4.rollU18">aged 0–14</span> &nbsp;·&nbsp; <b id="roll18">—</b> <span data-i18n="f4.roll18">aged 15 and over</span></span>
+      </div>
+
+      <div class="ofwhom">
+        <p class="ofw-h" data-i18n="f4.ofwHead" data-i18n-html>Seen at the session <span>— count what you can see; already inside the total, <b>never added to it</b></span></p>
+        <div class="ofw-g">
+          <div>
+            <label for="ofChildAlone" data-i18n="f4.ofChildAlone">Children without an adult with them</label>
+            <input type="number" id="ofChildAlone" min="0" step="1" inputmode="numeric" placeholder="—">
+          </div>
+          <div>
+            <label for="ofPreg" data-i18n="f4.ofPreg">Pregnant women or women with an infant</label>
+            <input type="number" id="ofPreg" min="0" step="1" inputmode="numeric" placeholder="—">
+          </div>
+          <div>
+            <label for="ofPwd" data-i18n="f4.ofPwd">Visible disability or needing help to move</label>
+            <input type="number" id="ofPwd" min="0" step="1" inputmode="numeric" placeholder="—">
+          </div>
+          <div>
+            <label for="ofInjured" data-i18n="f4.ofInjured">Visibly injured or unwell</label>
+            <input type="number" id="ofInjured" min="0" step="1" inputmode="numeric" placeholder="—">
+          </div>
+          <div>
+            <label for="ofDistress" data-i18n="f4.ofDistress">In acute distress — needed one-to-one attention</label>
+            <input type="number" id="ofDistress" min="0" step="1" inputmode="numeric" placeholder="—">
+          </div>
+        </div>
+        <p class="ofw-n" data-i18n="f4.ofwNote">Five things a PFA provider can count by looking, without asking. One person can be on more than one line and is in an age group above as well; these are checked against the total but never summed with it or with each other. Leave blank what you did not see.</p>
+      </div>
+
+      <div class="help" style="margin-top:8px" data-i18n="f4.disHelp">Five age groups, as agreed with EDCD on 17 September 2026. Leave a row blank rather than partly filled; the parts are checked against the attendance.</div>
+    </div>
+
+    <!-- 5 · SUBMIT -->
+    <div class="card" id="s5">
+      <div class="step"><span class="n">5</span><h2 data-i18n="f4.h5check">Check and save</h2></div>
+      <div id="problems" role="alert" aria-live="assertive" tabindex="-1"></div>
+      <div class="help" data-iu-operational-copy="save">Saving the same organisation, place, date, activity and start time twice updates that report rather than creating a second one. The report is kept on this device. After internet returns, keep this page open and wait for sync status; confirm delivery in the Hub.<span class="iu-language-note">English operational wording pending human-reviewed Nepali translation.</span></div>
+    </div>
+  </form>
+
+<div class="actions">
+    <button type="submit" class="btn" form="f" data-i18n="f4.btnSave">Save report</button>
+    <button type="button" class="btn grey" id="reset" data-i18n="f4.btnClear">Clear</button>
+  </div>
+
+  
+
+  <section class="iu-saved">
+<!-- SAVED -->
+  <section class="saved">
+  <h2 data-i18n="f4.savedH" data-i18n-html>Saved on this device <span class="xs" id="cnt"></span></h2>
+  <p class="help" style="margin:0 0 10px" data-iu-operational-copy="saved">This list is the copy on this device; it does not by itself confirm remote delivery. After internet returns, keep this page open and wait for sync status. For the supervised pilot, confirm delivery under <a href="../hub/#reports">Reports received</a> in the Hub.<span class="iu-language-note">English operational wording pending human-reviewed Nepali translation.</span></p>
+  <div class="btns" style="margin-bottom:12px">
+    <button type="button" class="btn ghost sm" id="expCsv" data-i18n="f4.expCsv">Export CSV</button>
+    <button type="button" class="btn ghost sm" id="expJson" data-i18n="f4.expJson">Export JSON</button>
+    <button type="button" class="btn grey sm" id="wipe" data-i18n="f4.wipe">Clear all saved reports</button>
+  </div>
+  <div class="tbl-wrap">
+    <table class="data" id="tbl">
+      <thead><tr><th data-i18n="f4.thDate">Date</th><th data-i18n="f4.thSite">Site</th><th data-i18n="f4.thOrg">Organisation</th><th data-i18n="f4.thAct">Activity</th><th class="n" data-i18n="f4.thAtt">Attended</th><th>ID</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <div class="empty" id="emptyMsg" data-i18n="f4.empty">No reports saved on this device yet.</div>
+  </div>
+  </section>
+
+  <p class="xs" style="margin:18px 6px 0" data-i18n="f4.foot" data-i18n-html>Draft instrument, version <span id="ver"></span>. Site list derived from the holding-centre roster of the daily reporting workbook, to be replaced by the official list when it arrives; age groups, service settings, cadre list and activity list as agreed on 17 September 2026 (the activity list on the IASC layers, subject to the Ministry's subject expert). Revised draft for field piloting.</p>
+</div>
+
+<div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+
+  </section>
+</main>
+
+<script src="design-preview/5ws-preview-status.js?h=76d7f4d8c1"></script>
+<script src="../hub/assets/codes.js"></script>
+<script src="../hub/assets/store.js"></script>
+<script src="../hub/assets/fb-config.js"></script>
+<script src="../hub/assets/fb.js"></script>
+<script>
+(function () {
+  var C = window.CODES, S = window.STORE;
+  var $ = function (id) { return document.getElementById(id); };
+  var f = $("f");
+  function activateEntry() { document.body.classList.add("iu-entry-active"); }
+  function keepFocusVisible(e) {
+    var target = e.target;
+    window.setTimeout(function afterNativeFocusScroll() {
+      var actions = document.querySelector(".actions");
+      if (!actions || getComputedStyle(actions).display === "none") return;
+      var targetBox = target.getBoundingClientRect();
+      var actionsBox = actions.getBoundingClientRect();
+      if (targetBox.bottom > actionsBox.top - 12) {
+        target.scrollIntoView({ block: "center", behavior: "auto" });
+      }
+    }, 0);
+  }
+  f.addEventListener("focusin", activateEntry);
+  f.addEventListener("focusin", keepFocusVisible);
+  f.addEventListener("input", activateEntry);
+  f.addEventListener("change", activateEntry);
+
+  function fill(sel, items, valueKey, labelFn, placeholder) {
+    sel.innerHTML = "";
+    if (placeholder) {
+      var o = document.createElement("option");
+      o.value = ""; o.textContent = C.ph(placeholder); sel.appendChild(o);
+    }
+    /* EVERY LIST IN ALPHABETICAL ORDER of what the reader sees (the
+       Coordinator's rule, 17 Sep 2026) -- in the language the page is in,
+       so a Nepali list sorts by its Nepali labels. "Other" and the
+       palika-level escape stay last, where a reader expects them. */
+    items = sortForForm(items, function (it) { return labelFn ? labelFn(it) : (typeof it === "string" ? it : C.label(it)); },
+                        function (it) { return typeof it === "string" ? it : it[valueKey]; });
+    items.forEach(function (it) {
+      var o = document.createElement("option");
+      o.value = typeof it === "string" ? it : it[valueKey];
+      /* CODES.label, not it.name, so a list with a Nepali label shows it on
+         the Nepali page rather than staying in English. */
+      o.textContent = labelFn ? labelFn(it)
+        : (typeof it === "string" ? it : C.label(it));
+      sel.appendChild(o);
+    });
+    sel._refill = function () { fill(sel, items, valueKey, labelFn, placeholder); };
+  }
+
+  var ESCAPE_CODES = { OTH: 1, OTHER: 1, "TG-OTH": 1, PALIKA: 2 };   /* 2 sorts before 1: palika-level, then Other */
+  function isNe() { return document.documentElement.getAttribute("data-lang") === "ne"; }
+  function sortForForm(items, labelOf, valueOf) {
+    var lang = isNe() ? "ne" : "en";
+    return items.slice().sort(function (a, b) {
+      var ea = ESCAPE_CODES[valueOf(a)] || 0, eb = ESCAPE_CODES[valueOf(b)] || 0;
+      if (ea !== eb) return ea ? (eb ? eb - ea : 1) : -1;
+      return String(labelOf(a)).localeCompare(String(labelOf(b)), lang, { sensitivity: "base", numeric: true });
+    });
+  }
+  /* the few strings the page writes itself, in both languages */
+  var T = {
+    palikaItem:  { en: "Palika level — no specific site", ne: "पालिका स्तर — कुनै निश्चित स्थान छैन" },
+    siteDefault: { en: "Choose from the holding-centre roster. Only pick “Other” if the site genuinely is not listed — every “Other” has to be reconciled by hand later.",
+                   ne: "होल्डिङ सेन्टर सूचीबाट छान्नुहोस्। स्थान साँच्चै सूचीमा नभए मात्र “अन्य” छान्नुहोस् — हरेक “अन्य” पछि हातैले मिलाउनुपर्छ।" },
+    sitePalika:  { en: "Use this only when the report covers a <b>palika and no single site</b>. It is counted at palika level and never as a site, so it cannot close a gap on the roster.",
+                   ne: "प्रतिवेदनले <b>कुनै एक स्थान होइन, पूरै पालिका</b> समेट्दा मात्र यो छान्नुहोस्। यो पालिका स्तरमा गनिन्छ, स्थानका रूपमा होइन, त्यसैले यसले सूचीको रिक्तता पूरा गर्दैन।" },
+    siteReported:{ en: "This site appears in submitted reports but is <b>not on the holding-centre roster</b>. It is recorded, and flagged so it can be confirmed or matched.",
+                   ne: "यो स्थान पेस गरिएका प्रतिवेदनमा छ तर <b>होल्डिङ सेन्टर सूचीमा छैन</b>। अभिलेख गरिन्छ र पुष्टि वा मिलान गर्न चिह्नित हुन्छ।" },
+    siteGov:     { en: "This site is on the <b>District Administration Office list</b> for Nuwakot but not on the holding-centre roster. It is recorded; whether it counts towards coverage is still to be decided.",
+                   ne: "यो स्थान नुवाकोटको <b>जिल्ला प्रशासन कार्यालयको सूचीमा</b> छ तर होल्डिङ सेन्टर सूचीमा छैन। अभिलेख गरिन्छ; कभरेजमा गनिने कि नगनिने अझै निर्णय हुन बाँकी छ।" },
+    people:      { en: " people", ne: " जना" },
+    notRoster:   { en: "  ·  not on roster", ne: "  ·  सूचीमा छैन" },
+    govList:     { en: "  ·  district list, not on roster", ne: "  ·  जिल्ला सूचीमा, होल्डिङ सूचीमा छैन" },
+    saved:       { en: "Report saved · ", ne: "प्रतिवेदन सुरक्षित भयो · " },
+    updated:     { en: "Report updated — this site, date and activity were already recorded (", ne: "प्रतिवेदन अद्यावधिक भयो — यो स्थान, मिति र गतिविधि पहिले नै अभिलेख थियो (" },
+    fixOne:      { en: " thing needs fixing before this can be saved.", ne: " कुरा मिलाउनुपर्छ, त्यसपछि मात्र सुरक्षित हुन्छ।" },
+    fixMany:     { en: " things need fixing before this can be saved.", ne: " कुरा मिलाउनुपर्छ, त्यसपछि मात्र सुरक्षित हुन्छ।" },
+    nothing:     { en: "Nothing to export yet", ne: "निर्यात गर्न अहिलेसम्म केही छैन" },
+    reports1:    { en: " report", ne: " प्रतिवेदन" }, reportsN: { en: " reports", ne: " प्रतिवेदन" }
+  };
+  function tx(k) { return T[k][isNe() ? "ne" : "en"]; }
+
+  function toast(msg, warn) {
+    var t = $("toast");
+    t.textContent = msg;
+    t.className = warn ? "show warn" : "show";
+    clearTimeout(t._h);
+    t._h = setTimeout(function () { t.className = ""; }, 3400);
+  }
+
+  /* ---------- populate ---------- */
+  var live = function (list) { return list.filter(function (x) { return !x.retired; }); };
+  fill($("org"), C.ORGS, "code", null, "Select…");
+  fill($("cadre"), live(C.CADRES), "code", null, "Select…");
+  fill($("district"), C.DISTRICTS, "code", null, "All districts");
+  fill($("modality"), live(C.MODALITIES), "code", null, "Select…");
+  fill($("status"), C.STATUS, "code", null, null); $("status").value = "ONG";   /* alphabetical list, Ongoing preselected */
+  /* The activity list, grouped by its five headings. Only what the reporter
+     needs to choose: the plain label, under its heading. The IASC layer and
+     the 4Ws subcode behind each option are read from the same code by the
+     register and the dashboard, never shown here. */
+  function fillActivities() {
+    var sel = $("activity"), keep = sel.value;
+    sel.innerHTML = "";
+    var o = document.createElement("option");
+    o.value = ""; o.textContent = C.ph("Select…"); sel.appendChild(o);
+    C.ACTIVITY_GROUPS.forEach(function (g) {
+      var items = C.ACTIVITIES.filter(function (a) { return a.group === g.code && !a.retired; });
+      if (!items.length) return;
+      var og = document.createElement("optgroup");
+      og.label = g.code + " · " + C.label(g);
+      /* alphabetical within the heading, by the label the reader sees; the
+         code follows the label so the sort reads naturally; "Other" last */
+      items = items.slice().sort(function (a, b) {
+        if (!!a.other !== !!b.other) return a.other ? 1 : -1;
+        return C.label(a).localeCompare(C.label(b), isNe() ? "ne" : "en", { sensitivity: "base" });
+      });
+      items.forEach(function (a) {
+        var op = document.createElement("option");
+        op.value = a.code; op.textContent = C.label(a) + "  ·  " + a.code;
+        og.appendChild(op);
+      });
+      sel.appendChild(og);
+    });
+    if (keep) sel.value = keep;
+    sel._refill = fillActivities;
+  }
+  fillActivities();
+
+  /* Funding source is no longer asked on the field form (EDCD, 17 Sep
+     2026): funding is collected from the organisations. The record keeps an
+     empty donors list so exports and older readers see the same columns. */
+  function fillTargetGroups() {
+    var picked = [];
+    $("tgs").querySelectorAll("input:checked").forEach(function (i) { picked.push(i.value); });
+    $("tgs").innerHTML = "";
+    sortForForm(C.TARGET_GROUPS, function (g) { return C.label(g); }, function (g) { return g.code; }).forEach(function (g) {
+      var l = document.createElement("label");
+      l.className = "chk";
+      l.innerHTML = '<input type="checkbox" value="' + g.code + '"><span>' + C.label(g) + "</span>";
+      $("tgs").appendChild(l);
+    });
+    /* put the ticks back -- a half-filled form has to survive a language switch */
+    picked.forEach(function (v) {
+      var i = $("tgs").querySelector('input[value="' + v + '"]');
+      if (i) i.checked = true;
+    });
+  }
+  fillTargetGroups();
+  document.addEventListener("i18n:changed", function () {
+    var sels = document.querySelectorAll("select");
+    for (var i = 0; i < sels.length; i++) {
+      var el = sels[i];
+      if (typeof el._refill !== "function") continue;
+      var had = el.value; el._refill(); if (had) el.value = had;
+    }
+    fillTargetGroups();
+    refreshSites(); activityHelp(); render();
+  });
+  /* the "Other" text boxes, one per list (the activity list has its own
+     rule below: "Other (describe)" is x.9 within a layer, or 9) */
+  var OTHER_WRAP = { cadre: "cadreOtherWrap", modality: "modalityOtherWrap", district: "districtOtherWrap" };
+  Object.keys(OTHER_WRAP).forEach(function (id) {
+    var sync = function () { $(OTHER_WRAP[id]).hidden = !($(id).value === "OTH" || $(id).value === "OTHER"); };
+    $(id).addEventListener("change", sync); sync();
+  });
+  $("tgs").addEventListener("change", function () {
+    var other = $("tgs").querySelector('input[value="TG-OTH"]');
+    $("tgOtherWrap").hidden = !(other && other.checked);
+  });
+
+  /* what the dropdown says after a site that is not on the roster */
+  function siteLabel(s) {
+    var pop = s.pop === null || s.pop === undefined ? "" : "  ·  " + s.pop + tx("people");
+    var tag = s.source === "reported" ? tx("notRoster") : s.source === "gov-list" ? tx("govList") : "";
+    return C.label(s) + pop + tag;
+  }
+  /* Not a site: a report that covers a palika and no single place. It is
+     offered after the sites and before "Other", and it is what a share of
+     the backlog actually looks like -- partners report "Bidur Municipality"
+     rather than a holding centre. Coded at palika level, never as a site. */
+  var PALIKA_ITEM = { code: "PALIKA", get name() { return T.palikaItem.en; }, get np() { return T.palikaItem.ne; } };
+  function refreshSites() {
+    var d = $("district").value;
+    /* FORM_SITES: a retired code stays in the list so old records resolve, but is never a choice */
+    var sites = C.FORM_SITES.filter(function (s) { return s.code !== "OTHER" && (!d || s.district === d); });
+    var list = sites.concat([PALIKA_ITEM, C.siteByCode.OTHER]);
+    var keep = $("site").value;
+    fill($("site"), list, "code", siteLabel, "Select…");
+    if (keep && list.some(function (s) { return s.code === keep; })) $("site").value = keep;
+    refreshPalikas();
+    var v = $("site").value, s = C.siteByCode[v];
+    $("siteHelp").innerHTML = v === "PALIKA" ? tx("sitePalika")
+      : s && s.source === "reported" ? tx("siteReported")
+      : s && s.source === "gov-list" ? tx("siteGov")
+      : tx("siteDefault");
+  }
+  /* The palika list follows the district. Shown for a palika-level report
+     (required) and for an unlisted site (optional -- it is what lets the
+     site be placed later). A named site carries its own palika. */
+  function refreshPalikas() {
+    var d = $("district").value, v = $("site").value;
+    var list = C.PALIKAS.filter(function (p) { return !d || p.district === d; });
+    var keep = $("palika").value;
+    fill($("palika"), list, "pcode", function (p) { return C.label(p); }, "Select…");
+    if (keep && list.some(function (p) { return p.pcode === keep; })) $("palika").value = keep;
+    $("palikaWrap").hidden = !(v === "PALIKA" || v === "OTHER");
+  }
+  $("district").addEventListener("change", refreshSites);
+  $("site").addEventListener("change", function () {
+    $("siteOtherWrap").hidden = this.value !== "OTHER";
+    refreshSites();
+  });
+  /* The help line under the activity follows the choice: the option's own
+     plain-language note from codes.js. An "Other (describe)" option opens
+     the description box. */
+  function activityHelp() {
+    var a = C.activityByCode[$("activity").value], el = $("activityHelp");
+    var h = a ? (isNe() && a.help_np ? a.help_np : a.help) : "";
+    var dflt = (window.I18N_STRINGS && window.I18N_STRINGS[isNe() ? "ne" : "en"] || {})["f4.actHelp"] || "One activity per report. Two different activities in one session are two reports.";
+    el.textContent = h ? h + (isNe() ? "।" : ".") : dflt;
+    $("activityOtherWrap").hidden = !(a && a.other);
+  }
+  $("activity").addEventListener("change", activityHelp);
+  $("org").addEventListener("change", function () { $("orgOtherWrap").hidden = this.value !== "OTHER"; });
+  refreshSites(); activityHelp();
+
+  /* the device's local date, never UTC: Nepal is UTC+05:45 (see store.js) */
+  $("dateAD").max = S.todayLocal();
+
+  /* the step rail follows the reader: the card most in view is "on" */
+  (function rail() {
+    var links = [].slice.call(document.querySelectorAll("#steps a"));
+    var cards = links.map(function (a) { return document.getElementById(a.getAttribute("data-step")); });
+    if (!cards.every(Boolean)) return;
+    var current = 0;
+    function paint(i) {
+      current = i;
+      links.forEach(function (a, k) { a.classList.toggle("on", k === i); a.classList.toggle("done", k < i); });
+    }
+    if ("IntersectionObserver" in window) {
+      var ratios = cards.map(function () { return 0; });
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { ratios[cards.indexOf(e.target)] = e.isIntersecting ? e.intersectionRatio : 0; });
+        var best = 0; ratios.forEach(function (r, k) { if (r > ratios[best]) best = k; });
+        if (ratios[best] > 0) paint(best);
+      }, { rootMargin: "-120px 0px -45% 0px", threshold: [0, .1, .25, .5, .75, 1] });
+      cards.forEach(function (c) { io.observe(c); });
+    }
+    links.forEach(function (a, k) {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        cards[k].scrollIntoView({ behavior: "smooth", block: "start" });
+        paint(k);
+      });
+    });
+    paint(0);
+  })();
+  $("ver").textContent = C.META.version;
+  $("description").addEventListener("input", function () { $("descCount").textContent = this.value.length; });
+
+  /* ---------- live tally ----------
+     The band table comes from store.js, not from a second list here. A
+     copy of the band definition in the page is how the form and the
+     export drift apart, which is the defect the whole form exists to
+     stop. */
+  var BANDS = S.BANDS;
+  var partIds = S.PART_IDS;
+  var v = function (id) { var n = parseInt($(id).value, 10); return isFinite(n) && n >= 0 ? n : 0; };
+  var filled = function (id) { return $(id).value !== ""; };
+  var show = function (id, n, any) { $(id).textContent = any ? n.toLocaleString() : "—"; };
+
+  function tally() {
+    var any = partIds.some(filled);
+
+    /* row totals */
+    BANDS.forEach(function (b) {
+      var rowAny = filled(b.f) || filled(b.m) || filled(b.o);
+      show("r" + b.key, v(b.f) + v(b.m) + v(b.o), rowAny);
+    });
+
+    /* column totals */
+    var cF = 0, cM = 0, cO = 0;
+    BANDS.forEach(function (b) { cF += v(b.f); cM += v(b.m); cO += v(b.o); });
+    show("cF", cF, any); show("cM", cM, any); show("cO", cO, any);
+    show("cAll", cF + cM + cO, any);
+
+    /* the official fold, on screen */
+    var u18 = 0, o18 = 0;
+    BANDS.forEach(function (b) {
+      var t = v(b.f) + v(b.m) + v(b.o);
+      if (b.child) { u18 += t; } else { o18 += t; }
+    });
+    show("rollU18", u18, any); show("roll18", o18, any);
+
+    /* the sum check */
+    var sum = cF + cM + cO;
+    var total = parseInt($("reachedTotal").value, 10);
+    var box = $("tally");
+    box.className = "tally";
+    $("tallyVal").textContent = sum;
+    if (sum === 0) { $("tallyVal").textContent = any ? "0" : "—"; return; }
+    if (!isFinite(total)) { return; }
+    if (sum > total) { box.className = "tally bad"; $("tallyVal").textContent = sum + " — more than the total of " + total; }
+    else if (sum < total) { box.className = "tally bad"; $("tallyVal").textContent = sum + " of " + total + " — " + (total - sum) + " unaccounted"; }
+    else { box.className = "tally good"; $("tallyVal").textContent = sum + " — matches the total"; }
+  }
+  partIds.concat(S.OF_WHOM, ["reachedTotal"]).forEach(function (id) { $(id).addEventListener("input", tally); });
+
+  /* ---------- remember the reporter, not the report ---------- */
+  var RK = "mhpss-np-reporter";
+  function loadReporter() {
+    try {
+      var r = JSON.parse(localStorage.getItem(RK) || "{}");
+      ["org", "orgOther", "focalName", "focalPhone", "focalEmail", "cadre", "cadreOther", "district", "districtOther"].forEach(function (k) {
+        if (r[k]) { $(k).value = r[k]; }
+      });
+      $("orgOtherWrap").hidden = $("org").value !== "OTHER";
+      $("cadreOtherWrap").hidden = $("cadre").value !== "OTH";
+      $("districtOtherWrap").hidden = $("district").value !== "OTH";
+      refreshSites();
+    } catch (e) { /* storage unavailable — carry on */ }
+  }
+  function saveReporter() {
+    try {
+      var r = {};
+      ["org", "orgOther", "focalName", "focalPhone", "focalEmail", "cadre", "cadreOther", "district", "districtOther"].forEach(function (k) { r[k] = $(k).value; });
+      localStorage.setItem(RK, JSON.stringify(r));
+    } catch (e) { /* ignore */ }
+  }
+
+  /* ---------- collect ---------- */
+  function collect() {
+    var siteCode = $("site").value, site = C.siteByCode[siteCode];
+    var act = C.activityByCode[$("activity").value];
+    /* the palika: from the site when one is named, from the reporter when
+       the report is palika-level or the site is unlisted */
+    var palika = site && site.palika ? site.palika
+               : (siteCode === "PALIKA" || siteCode === "OTHER") ? $("palika").value : "";
+    var rec = {
+      dateAD: $("dateAD").value,
+      sessionTime: $("sessionTime").value,
+      dateBS: $("dateBS").value.trim(),
+      district: $("district").value,
+      palika: palika || "",
+      site: siteCode,
+      siteOther: $("siteOther").value.trim(),
+      siteSource: siteCode === "PALIKA" ? "palika-level" : site ? site.source : "",
+      org: $("org").value,
+      orgOther: $("orgOther").value.trim(),
+      donors: [],                                   /* not asked on the field form since 17 Sep 2026 */
+      districtOther: $("districtOther").value.trim(),
+      cadreOther: $("cadreOther").value.trim(),
+      modalityOther: $("modalityOther").value.trim(),
+      activityOther: $("activityOther").value.trim(),
+      targetGroupOther: $("targetGroupOther").value.trim(),
+      partners: $("partners").value.split(",").map(function (x) { return x.trim(); }).filter(Boolean),
+      /* the backend reading of the activity: the 4Ws subcode travels on the
+         record only when the match is direct; otherwise it is set at
+         coordination from the description (list v3, 17 Sep 2026) */
+      iascSub: act && act.iasc_sub ? act.iasc_sub : "",
+      focalName: $("focalName").value.trim(),
+      focalPhone: $("focalPhone").value.trim(),
+      focalEmail: $("focalEmail").value.trim(),
+      cadre: $("cadre").value,
+      activity: $("activity").value,
+      modality: $("modality").value,
+      status: $("status").value || "ONG",
+      targetGroups: [].slice.call(document.querySelectorAll("#tgs input:checked")).map(function (i) { return i.value; }),
+      description: $("description").value.trim(),
+      reachedTotal: $("reachedTotal").value,
+      /* one session, its attendance: an attendance count is a count of
+         service contacts once summed across sessions -- said once, here */
+      countBasis: "CONTACTS",
+      distinctPeople: ""
+    };
+    /* The five age groups as collected. The two-way fold is NOT stored: it
+       is computed at export and at read, so there is one figure, not two
+       that can disagree. */
+    S.PART_IDS.forEach(function (id) { rec[id] = $(id).value; });
+    S.OF_WHOM.forEach(function (id) { rec[id] = $(id).value; });
+    return rec;
+  }
+
+  function problemField(problem) {
+    var rules = [
+      [/^Reporting organisation|^Name the organisation/, "org"],
+      [/^Site is required|^Name the site/, "site"],
+      [/^Date is required|^Date is in the future/, "dateAD"],
+      [/^Activity is required|^Choose an activity|^Describe the activity/, "activity"],
+      [/^Modality is required|^Say where the activity/, "modality"],
+      [/^Focal point name/, "focalName"],
+      [/^Focal point phone/, "focalPhone"],
+      [/^Say which cadre/, "cadre"],
+      [/^Name the district/, "district"],
+      [/^Start time/, "sessionTime"],
+      [/^Say which other group|^Select at least one target group/, "tgs"],
+      [/^Choose the palika|^Palika must/, "palika"],
+      [/^Joint-activity partners/, "partners"],
+      [/^Attendance is required|^Disaggregated figures|^Distinct people|^Count basis/, "reachedTotal"]
+    ];
+    for (var i = 0; i < rules.length; i++) if (rules[i][0].test(problem)) return rules[i][1];
+    return "";
+  }
+  function fieldLabel(id) {
+    if (id === "tgs") {
+      var targetLabel = document.querySelector('[data-i18n="f4.tgLab"]');
+      return targetLabel ? targetLabel.textContent.trim() : "";
+    }
+    var el = $(id);
+    return el && el.labels && el.labels[0] ? el.labels[0].textContent.trim() : "";
+  }
+  function escapeHtml(text) {
+    var span = document.createElement("span");
+    span.textContent = text; return span.innerHTML;
+  }
+  function validationItem(problem) {
+    if (!isNe()) return "<li>" + escapeHtml(problem) + "</li>";
+    var label = fieldLabel(problemField(problem));
+    return "<li>" + (label ? "<b>" + escapeHtml(label) + ":</b> " : "") +
+      '<span lang="en">' + escapeHtml(problem) + "</span>" +
+      '<span class="iu-language-note">English validation guidance — Nepali translation pending review.</span></li>';
+  }
+
+  /* ---------- submit ---------- */
+  $("f").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var rec = collect();
+    var problems = S.validate(rec);
+    var box = $("problems");
+    if (problems.length) {
+      box.innerHTML = '<div class="banner warn"><b>' + problems.length + (problems.length === 1 ? tx("fixOne") : tx("fixMany")) +
+        "</b><ul style='margin:8px 0 0;padding-left:18px'>" +
+        problems.map(validationItem).join("") + "</ul></div>";
+      box.classList.add("has-errors");
+      box.focus({ preventScroll: true });
+      box.scrollIntoView({ behavior: "auto", block: "center" });
+      return;
+    }
+    box.classList.remove("has-errors");
+    box.innerHTML = "";
+    var res = S.save(rec);
+    saveReporter();
+    if (!res.persisted) toast("Saved for this page only — this browser is blocking storage. Export before closing.", true);
+    else if (res.duplicateOf) toast(tx("updated") + res.record.id + ")");
+    else toast(tx("saved") + res.record.id);
+    softReset();
+    render();
+  });
+
+  function softReset() {
+    ["sessionTime", "dateBS", "site", "siteOther", "palika", "partners", "activity", "activityOther", "modalityOther", "targetGroupOther", "description", "reachedTotal"].concat(partIds, S.OF_WHOM).forEach(function (id) { $(id).value = ""; });
+    document.querySelectorAll("#tgs input:checked").forEach(function (i) { i.checked = false; });
+    $("siteOtherWrap").hidden = true; $("palikaWrap").hidden = true;
+    $("activityOtherWrap").hidden = true; $("modalityOtherWrap").hidden = true; $("tgOtherWrap").hidden = true;
+    $("status").value = "ONG";
+    refreshSites(); tally(); activityHelp();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  $("reset").addEventListener("click", function () {
+    softReset(); $("problems").classList.remove("has-errors"); $("problems").innerHTML = "";
+  });
+
+  /* ---------- saved list ---------- */
+  function label(code, map, other) {
+    if (code === "OTHER" && other) return other + " (other)";
+    var m = map[code];
+    return m ? m.name : code || "—";
+  }
+  function siteCell(r) {
+    if (r.site === "PALIKA") return (C.palikaName(r.palika) || "palika not stated") + " (palika level)";
+    return label(r.site, C.siteByCode, r.siteOther);
+  }
+  function render() {
+    var rows = S.active();
+    var tb = $("tbl").querySelector("tbody");
+    tb.innerHTML = "";
+    $("emptyMsg").hidden = rows.length > 0;
+    $("cnt").textContent = rows.length ? "— " + rows.length + (rows.length === 1 ? tx("reports1") : tx("reportsN")) : "";
+    rows.slice(0, 60).forEach(function (r) {
+      var tr = document.createElement("tr");
+      tr.innerHTML =
+        "<td>" + (r.dateAD || "—") + (r.dateBS ? '<div class="xs">BS ' + r.dateBS + "</div>" : "") + "</td>" +
+        "<td>" + siteCell(r) + "</td>" +
+        "<td>" + label(r.org, C.orgByCode, r.orgOther) + (S.donorsOf(r).length ? '<div class="xs">' + S.donorsOf(r).join(", ") + "</div>" : "") + "</td>" +
+        "<td>" + (function () { var a = C.activityByCode[r.activity]; return a ? (a.retired ? "" : a.code + " ") + C.label(a) : (r.activity || "—"); })() + "</td>" +
+        '<td class="n">' + (r.reachedTotal === "" ? "—" : r.reachedTotal) + "</td>" +
+        '<td class="xs">' + r.id + (r.revision ? " · rev " + r.revision : "") + "</td>";
+      tb.appendChild(tr);
+    });
+  }
+
+  $("expCsv").addEventListener("click", function () {
+    var rows = S.active();
+    if (!rows.length) return toast(tx("nothing"), true);
+    S.download("mhpss_np_5ws_" + S.stamp() + ".csv", S.toCSV(rows), "text/csv");
+  });
+  $("expJson").addEventListener("click", function () {
+    var rows = S.active();
+    if (!rows.length) return toast(tx("nothing"), true);
+    S.download("mhpss_np_5ws_" + S.stamp() + ".json",
+      JSON.stringify({ exported: new Date().toISOString(), schemaVersion: S.SCHEMA_VERSION, codesVersion: C.META.version, count: rows.length, records: rows }, null, 2),
+      "application/json");
+  });
+  $("wipe").addEventListener("click", function () {
+    if (!S.active().length) return toast("Nothing saved on this device", true);
+    var box = $("problems");
+    box.innerHTML = '<div class="banner warn"><b>Clear every report saved in this browser?</b> Export first if you have not sent them on — this cannot be undone.' +
+      '<div class="btns" style="margin-top:9px"><button type="button" class="btn sm" id="wipeYes">Yes, clear them</button>' +
+      '<button type="button" class="btn grey sm" id="wipeNo">Cancel</button></div></div>';
+    $("wipeYes").onclick = function () { S.clearAll(); box.innerHTML = ""; render(); toast("Cleared"); };
+    $("wipeNo").onclick = function () { box.innerHTML = ""; };
+    box.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+
+  /* storage availability notice */
+  try {
+    localStorage.setItem("__t", "1"); localStorage.removeItem("__t");
+  } catch (e) {
+    $("storeWarn").innerHTML = "<b>This browser is blocking storage</b> (private window, or site data disabled) — reports will be held only until you close this page. Export before closing.";
+  }
+
+  loadReporter();
+  tally();
+  render();
+})();
+</script>
+<script src="pwa.js"></script>
+<!-- The bilingual engine. On a page that is not yet keyed up it still earns
+     its place: it sets data-lang, which is what makes the Nepali words in
+     the code lists appear in the dropdowns, and it mounts the ENG/NEP
+     toggle and an honest notice saying the prose is still English. -->
+<script src="../hub/assets/mark.js"></script>
+<script src="../hub/assets/icons.js"></script>
+<script src="../hub/assets/i18n-strings.js"></script>
+<script src="../hub/assets/i18n.js"></script>
+
+</body>
+</html>
