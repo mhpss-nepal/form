@@ -9,6 +9,14 @@ body.iu {
   color: var(--ink, #24313a);
   font-family: "Manrope", "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   -webkit-text-size-adjust: 100%;
+  /* Contrast tokens. Every one of these clears WCAG AA (4.5:1) for normal
+     text on the surfaces this preview uses, which the shared tokens did not:
+     the shared --fx-mute measured 4.42:1 and the app.css hint 4.22:1.
+     Computed ratios are recorded beside each value. */
+  --iu-navy: #17323c;
+  --iu-muted-oncard: #55636c;   /* 6.20:1 on #ffffff */
+  --iu-muted-onwash: #4f5d66;   /* 6.56:1 on #fbfbf8 */
+  --iu-teal-ink: #23605c;       /* 6.44:1 on #e8f4f3 */
 }
 
 /* The page's original banner chrome is superseded by the app header. */
@@ -475,7 +483,142 @@ body.iu #f .ofwhom input {
   color: #fff;
 }
 
-/* ------------------------------------------------------------------ picker */
+/* ------------------------------------------------------- date: never squeeze */
+/* The date control and the year jump sit side by side only while the FIELD is
+   wide enough to hold both. A fixed two-column grid squeezed the native date
+   input to ~37px on layouts where this field is narrow (it shares a row with
+   start time), so the row wraps instead: each part takes a full line when
+   there is no room, and they pair up when there is. container-aware, so no
+   media query can get it wrong. */
+.iu-date-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.iu-year {
+  flex: 1 1 170px;
+  min-width: 150px;
+  font-variant-numeric: tabular-nums;
+}
+.iu-date-input {
+  flex: 1 1 200px;
+  min-width: 170px;
+  min-height: 48px;
+}
+.iu-date-quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 8px;
+}
+/* A side-by-side field pair (start time / BS date) is only safe when the
+   field itself is comfortable; keep one column on narrow layouts. */
+@media (max-width: 620px) {
+  body.iu .iu-screen .row,
+  body.iu .iu-screen .row.three,
+  body.iu .iu-screen .row.four {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ------------------------------------------- disaggregation counts that fit */
+/* The five age-group rows put three cells (female / male / not recorded) in a
+   table that shares the width with the row label. Without a fixed layout the
+   male column can shrink under the 44px tap-target minimum. `table-layout:
+   fixed` plus a minimum input width keeps every cell reachable, and the row
+   label column is wide enough not to squash the inputs. */
+body.iu .iu-screen .dis table {
+  table-layout: fixed;
+}
+body.iu .iu-screen .dis input {
+  min-height: 44px;
+  min-width: 44px;
+  width: 100%;
+}
+@media (max-width: 560px) {
+  body.iu .iu-screen .dis th:first-child,
+  body.iu .iu-screen .dis td:first-child {
+    width: 46px;
+  }
+  body.iu .iu-screen .dis th:last-child,
+  body.iu .iu-screen .dis td:last-child {
+    width: 42px;
+  }
+}
+
+/* ------------------------------------------------ saved records on a phone */
+/* app.css gives `table.data { min-width: 640px }`, which makes the saved list
+   a 640px horizontal scroll region and, because the region then has focusable
+   content but no tabindex, an axe `scrollable-region-focusable` failure.
+   The saved list therefore never scrolls sideways: it becomes a stack of
+   cards at every width, so every value stays visible with its own label.
+   Only the part that is genuinely six-column data is stacked; the earlier
+   layout rules that made other tables block-level are left alone. */
+body.iu .iu-saved table.data {
+  min-width: 0;
+  display: block;
+}
+body.iu .iu-saved table.data thead {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+body.iu .iu-saved table.data tbody {
+  display: grid;
+  gap: 9px;
+}
+body.iu .iu-saved table.data tr {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px 12px;
+  padding: 11px;
+  border: 1px solid #ded9cd;
+  border-radius: 6px;
+  background: #fff;
+}
+body.iu .iu-saved table.data td {
+  display: block;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent !important;
+  font-size: 12.5px;
+  overflow-wrap: break-word;
+}
+body.iu .iu-saved table.data td::before {
+  display: block;
+  margin-bottom: 2px;
+  color: #55636c;
+  font-size: 9.5px;
+  line-height: 1.3;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+body.iu .iu-saved table.data td:nth-child(1)::before { content: "Date"; }
+body.iu .iu-saved table.data td:nth-child(2)::before { content: "Site"; }
+body.iu .iu-saved table.data td:nth-child(3)::before { content: "Organisation"; }
+body.iu .iu-saved table.data td:nth-child(4)::before { content: "Activity"; }
+body.iu .iu-saved table.data td:nth-child(5)::before { content: "Attended"; }
+body.iu .iu-saved table.data td:nth-child(6) { display: none; }
+html[data-lang="ne"] body.iu .iu-saved table.data td:nth-child(1)::before { content: "मिति"; }
+html[data-lang="ne"] body.iu .iu-saved table.data td:nth-child(2)::before { content: "स्थान"; }
+html[data-lang="ne"] body.iu .iu-saved table.data td:nth-child(3)::before { content: "संस्था"; }
+html[data-lang="ne"] body.iu .iu-saved table.data td:nth-child(4)::before { content: "गतिविधि"; }
+html[data-lang="ne"] body.iu .iu-saved table.data td:nth-child(5)::before { content: "उपस्थित"; }
+/* One column on the narrowest phones, so a long organisation name and the
+   activity label never have to share a 130px cell. */
+@media (max-width: 420px) {
+  body.iu .iu-saved table.data tr {
+    grid-template-columns: 1fr;
+  }
+}
 .iu-picker {
   position: relative;
 }
@@ -496,7 +639,7 @@ body.iu #f .ofwhom input {
   cursor: pointer;
 }
 .iu-picker-btn.is-empty .iu-picker-val {
-  color: #8b959a;
+  color: var(--iu-muted-onwash);
 }
 .iu-picker-val {
   min-width: 0;
@@ -567,25 +710,10 @@ body.iu #f .ofwhom input {
 }
 
 /* ---------------------------------------------------------------------- date */
+/* The date row layout lives in the "date: never squeeze" block above. These
+   two rules only cover the wrapper and the small buttons. */
 .iu-date {
   display: block;
-}
-.iu-date-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 140px;
-  gap: 8px;
-}
-.iu-year {
-  font-variant-numeric: tabular-nums;
-}
-.iu-date-input {
-  min-width: 0;
-}
-.iu-date-quick {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-  margin-top: 8px;
 }
 .iu-btn-sm {
   min-height: 44px;
@@ -640,7 +768,32 @@ body.iu .iu-saved .help a {
 /* Keep the saved-list help copy above the AA contrast floor: the shared
    --fx-mute (#6b7a85) measures 4.42:1 on white at this size. */
 body.iu .iu-saved .help {
-  color: #5b6b76;
+  color: var(--iu-muted-oncard);
+}
+/* The saved-list empty message inherits the same light shared token. */
+body.iu .iu-saved .empty {
+  color: var(--iu-muted-oncard);
+}
+
+/* Help and hint copy inherit lighter shared tokens that measure under AA.
+   These carry body.iu + #f so they win, and cover every such block at once
+   instead of only the saved list. */
+body.iu #f .help,
+body.iu #f .f .help {
+  color: var(--iu-muted-oncard);
+}
+body.iu #f .opt,
+body.iu #f label .opt {
+  color: var(--iu-muted-oncard);
+}
+body.iu #f .step .hint {
+  color: var(--iu-teal-ink);
+  background: #e8f4f3;
+  border-color: #b6d5d2;
+}
+body.iu #f .f > label,
+body.iu #f .card > label {
+  color: #344b54;
 }
 
 .iu-counts {
@@ -804,7 +957,7 @@ body.iu .iu-saved .help {
 }
 .iu-stepnote {
   margin-right: auto;
-  color: #7d878d;
+  color: var(--iu-muted-onwash);
   font-size: 11.5px;
   font-weight: 700;
 }
@@ -883,9 +1036,6 @@ body.iu #toast:empty:not(.show) {
   }
   .iu-steps {
     top: 62px;
-  }
-  .iu-date-row {
-    grid-template-columns: minmax(0, 1fr) 96px;
   }
 }
 @media (max-width: 380px) {
