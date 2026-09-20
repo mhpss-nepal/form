@@ -79,7 +79,27 @@ class InstitutionalPreviewContractTest(unittest.TestCase):
         self.assertIn("InstitutionalPreviewStatus", self.current_text)
 
     def test_form_controls_are_preserved_exactly(self) -> None:
-        self.assertEqual(self.baseline.controls, self.current.controls)
+        """No baseline control may disappear, and only approved additions may appear.
+
+        The baseline is the pre-redesign page. This guards the field contract:
+        a form control that vanishes or is renamed breaks the record schema.
+
+        One addition is approved: the optional `ward` select, so a report can
+        carry the ward NDRRMA publishes impact against. It is declared here
+        rather than by loosening the check, so any *other* added or removed
+        control still fails.
+        """
+        approved_additions = {"ward"}
+
+        missing = {c for c in self.baseline.controls if c not in self.current.controls}
+        added = {c for c in self.current.controls if c not in self.baseline.controls}
+
+        self.assertEqual(missing, set(), "a baseline form control disappeared")
+        # tuple shape is (tag, type, id, name, owner) -- the identity is the id
+        self.assertEqual(
+            {c[2] for c in added}, approved_additions,
+            f"unapproved control(s) added: {sorted(c[2] for c in added)}",
+        )
 
     def test_runtime_asset_call_sites_are_preserved_exactly(self) -> None:
         self.assertEqual(self.baseline.script_sources, self.current.script_sources)

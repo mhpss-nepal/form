@@ -175,14 +175,22 @@ class B2PreviewContractTest(unittest.TestCase):
             self.assertIn(f"{name}?h={h}", self.b2,
                           f"{name} is not stamped with its current content hash")
 
-    def test_direction_b_page_html_is_not_modified(self) -> None:
-        """Direction B and the production page stay as committed."""
+    def test_direction_b_page_html_is_committed(self) -> None:
+        """The production page must be committed, and the B2 form must match it.
+
+        This used to assert the page was *unmodified*. It now asserts it is
+        *committed and equal to the B2 embed*, because the page legitimately
+        changes: the optional `ward` field was approved and added. The property
+        worth guarding is that the B2 preview still embeds exactly the
+        committed form (checked byte-for-byte in
+        test_form_is_byte_identical_to_committed_page) and that nothing is left
+        uncommitted, so a preview can never diverge from production silently.
+        """
         for f in ("5ws-report.html",):
-            self.assertEqual(
-                subprocess.run(["git", "status", "--porcelain", "--", f], cwd=REPO,
-                               capture_output=True, text=True).stdout.strip(),
-                "", f"{f} has uncommitted changes",
-            )
+            status = subprocess.run(
+                ["git", "status", "--porcelain", "--", f], cwd=REPO,
+                capture_output=True, text=True).stdout.strip()
+            self.assertEqual(status, "", f"{f} has uncommitted changes")
 
     def test_year_jump_reaches_the_deep_years(self) -> None:
         self.assertIn("YEAR_MIN = 1940", self.core)
