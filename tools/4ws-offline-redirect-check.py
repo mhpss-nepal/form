@@ -10,6 +10,7 @@ navigates to 4ws-report.html for the first time with the network disabled.
 Exit 0 redirected to the form with query/hash intact / 1 regression / 2 cannot run.
 """
 import json
+import re
 import sys
 from urllib.parse import parse_qs, urlparse
 
@@ -48,15 +49,19 @@ def main(argv):
         install.wait_for_function("navigator.serviceWorker.controller !== null")
 
         # The redirect stub must not have been requested before offline mode.
-        cached_before = install.evaluate("""async () => {
-          const keys = await caches.keys();
-          const rows = [];
-          for (const key of keys) {
-            const cache = await caches.open(key);
-            for (const request of await cache.keys()) rows.push(request.url);
-          }
-          return rows;
-        }""")
+        cache_name = re.search(
+            r'const\s+CACHE\s*=\s*"([^"]+)"',
+            (install.evaluate("fetch('sw.js').then(r => r.text())")),
+        )
+        if cache_name is None:
+            print("cannot find CACHE name in served sw.js")
+            context.close()
+            browser.close()
+            return 2
+        cached_before = install.evaluate("""async (name) => {
+          const cache = await caches.open(name);
+          return (await cache.keys()).map(request => request.url);
+        }""", cache_name.group(1))
         if not any(urlparse(url).path.endswith("/4ws-report.html") for url in cached_before):
             problems.append("4ws-report.html was not precached before the first offline navigation")
 
@@ -65,11 +70,15 @@ def main(argv):
         page.on("console", on_console)
         page.on("pageerror", lambda error: errors.append(str(error)))
         requested = scope + "4ws-report.html?" + QUERY + "#" + HASH
+        responses = []
+        page.on("response", lambda item: responses.append(item))
         page.goto(requested, wait_until="load")
-        page.wait_for_timeout(900)
+        page.wait_for_url("**/5ws-report.html?" + QUERY + "#" + HASH)
+        page.locator("#f").wait_for(state="attached")
 
         parsed = urlparse(page.url)
         data = page.evaluate("""() => JSON.stringify({
+          controlled: navigator.serviceWorker.controller !== null,
           hasForm: !!document.getElementById('f'),
           formNames: document.querySelectorAll('#f [name]').length,
           search: location.search,
@@ -84,6 +93,13 @@ def main(argv):
             problems.append("redirect did not preserve query: %s" % data["search"])
         if parsed.fragment != HASH:
             problems.append("redirect did not preserve hash: %s" % data["hash"])
+        if not data["controlled"]:
+            problems.append("the fresh offline page was not controlled by a service worker")
+        navigations = [item for item in responses if item.request.is_navigation_request()]
+        served_paths = [urlparse(item.url).path for item in navigations if item.from_service_worker]
+        for expected in ("/4ws-report.html", "/5ws-report.html"):
+            if not any(path.endswith(expected) for path in served_paths):
+                problems.append("%s was not served by the service worker" % expected.lstrip("/"))
         if not data["hasForm"] or data["formNames"] == 0:
             problems.append("redirect target did not render the 5Ws form")
         if errors:
@@ -91,6 +107,8 @@ def main(argv):
 
         print("  requested : %s" % requested)
         print("  resolved  : %s" % page.url)
+        print("  worker    : controlled=%s served=%s" %
+              (data["controlled"], [path.rsplit("/", 1)[-1] for path in served_paths]))
         print("  form      : %s (%d named controls)" % (data["hasForm"], data["formNames"]))
         print("  query/hash: %s %s" % (data["search"], data["hash"]))
         context.close()

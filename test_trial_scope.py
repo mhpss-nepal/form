@@ -106,6 +106,28 @@ class TrialScopeContractTest(unittest.TestCase):
         for shortcut in manifest["shortcuts"]:
             self.assertNotIn(shortcut["url"], UNAPPROVED_PAGES)
 
+    def test_precache_fingerprint_matches_current_form_and_hub_assets(self) -> None:
+        import hashlib
+
+        sw = (ROOT / "sw.js").read_text(encoding="utf-8")
+        match = re.search(r"const\s+PRECACHE\s*=\s*\[(.*?)\]\s*;", sw, re.DOTALL)
+        if match is None:
+            self.fail("PRECACHE list is missing from sw.js")
+        entries = re.findall(r'"([^"]+)"', match.group(1))
+        digest = hashlib.sha256()
+        for entry in entries:
+            if entry == "./":
+                asset = ROOT / "index.html"
+            elif entry.startswith("../hub/"):
+                asset = HUB / entry.removeprefix("../hub/")
+            else:
+                asset = ROOT / entry
+            digest.update(entry.encode("utf-8"))
+            digest.update(asset.read_bytes())
+
+        recorded = (ROOT / "tools" / "precache.sha").read_text(encoding="utf-8").strip()
+        self.assertEqual(recorded, digest.hexdigest())
+
     def test_qr_generator_and_card_check_are_trial_scoped(self) -> None:
         builder = (ROOT / "tools" / "qr-build.py").read_text(encoding="utf-8")
         targets = re.search(r"TARGETS\s*=\s*\[(.*?)\]", builder, re.DOTALL)
