@@ -206,12 +206,10 @@ and the browser proof).
 
 > **Followed up 20 Sep 2026 by task `t_93e4a525` — see
 > `REVIEW-EVIDENCE-t_93e4a525.md`.** The 100 disagreements this stage left for
-> a human were adjudicated against the project's own published vocabulary
-> (`codes.js`, the terminology lock, the dictionary's placeholders): 7 were
-> settled by that material, 93 were held in English and reduced to 22 term
-> decisions plus 58 sentence-level reviews. All 7 settled keys were
-> back-translated; the native-speaker proofread below is still **NOT
-> OBTAINED**, so `_meta.source.human` remains empty.
+> a human stay in English: an automated heuristic must not adjudicate them, so
+> 0 were settled and all 100 are reported, reduced to 25 term decisions that
+> clear 38 keys plus 62 sentence-level reviews. The native-speaker proofread
+> below is still **NOT OBTAINED**, so `_meta.source.human` remains empty.
 
 ### Two independent translators, then a comparison
 
