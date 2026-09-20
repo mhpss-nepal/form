@@ -222,6 +222,17 @@ it.
   reconciled. Recorded here as **outstanding on the Hub lane**, not silently accepted.
 - **The `hub/assets/i18n.js` production line is still `DEFAULT = "en"`, no declaration reader.**
   Nothing about the per-layer default is in effect on the live site.
+- **A direct conflict with the Hub lane's §1 table row for `5ws-report-b2.html` — flagged, not
+  resolved unilaterally.** `hub-real/PER-LAYER-DEFAULT-EVIDENCE.md` §1 now lists
+  `form/5ws-report-b2.html` as defaulting to **Nepali**, "because the builder copies the source
+  `<head>`". **This card requires the opposite**: `5ws-report-b2.html` is one of the pages that
+  "must keep declaring nothing", because it is not fully translated — its own B2 chrome (the
+  "New interface copy is English pending human-reviewed Nepali wording" bar, the status strip) is
+  English-only. This task therefore **strips the declaration in the builder**, so the derived page
+  declares nothing. That is a deliberate divergence from the Hub lane's note, taken because the
+  card's rule is explicit and the page genuinely is not fully translated. **The Hub lane should
+  correct §1's B2 row** (and the "copies the source `<head>` — so it declares the same `ne`"
+  reasoning, which no longer holds).
 
 ## 8. Boundaries respected
 
