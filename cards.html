@@ -238,7 +238,7 @@ body{background:var(--grey-1);font-family:var(--sans);color:var(--hc-ink);margin
        collision squeezed the address to three characters a line. */
     if (d) el.textContent = d.url.replace(/^https:\/\//, '');
   });
-  if (missing) console.error('[cards] ' + missing + ' QR matrices missing from assets/qr.js');
+  if (missing) console.error('[cards] ' + missing + ' QR matrices missing from qr-trial.js');
 
   var h = location.host, host = document.getElementById('cardHost');
   if (host) host.textContent = h ? h : '';

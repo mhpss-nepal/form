@@ -73,10 +73,13 @@ class TrialScopeContractTest(unittest.TestCase):
     def test_trial_landing_does_not_route_through_hub_form_advertising(self) -> None:
         landing = (ROOT / "index.html").read_text(encoding="utf-8")
         self.assertNotIn("../hub/forms.html", landing)
-        hub_forms = HUB / "forms.html"
-        if hub_forms.is_file():
-            advertised = hub_forms.read_text(encoding="utf-8")
-            self.assertTrue(any(page in advertised for page in FORMS))
+        self.assertNotIn("forms.html", landing)
+        # The trial landing page must not embed the Hub's form catalogue, which
+        # advertises the unapproved pages, and must not describe the card sheet
+        # as carrying every form.
+        self.assertNotIn("ml.p031", landing)
+        self.assertNotIn("ml.p077", landing)
+        self.assertNotIn("ml.p079", landing)
 
     def test_printable_card_sheet_emits_only_the_5ws_code(self) -> None:
         cards = (ROOT / "cards.html").read_text(encoding="utf-8")

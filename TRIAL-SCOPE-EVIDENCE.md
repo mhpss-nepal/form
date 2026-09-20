@@ -29,6 +29,11 @@ Also removed the Hub Inbox navigation link because the Hub form inbox advertises
 the unapproved form pages. The landing page keeps only the general Hub and
 coordination links, neither of which is a form catalogue.
 
+Three further strings were dropped from `index.html` because they described the
+old five-form build: `ml.p031` (which carried a link to `../hub/forms.html`),
+`ml.p077` ("...a field worker has all the forms...") and `ml.p079` ("...every
+form's QR on it..."). The dictionary entries themselves are untouched.
+
 From `cards.html`, removed **5** printable cards:
 
 - landing-page/master card labelled “All five forms”
@@ -75,6 +80,18 @@ The page files remain unchanged in the repository for explicitly internal review
 - `test_trial_scope.py`, where the filenames are forbidden-value assertions.
 
 No unapproved page is linked from `index.html`, printed by `cards.html`, advertised by the manifest, included in `qr-trial.js`, or precached by `sw.js`.
+
+One item on `index.html` names unapproved instruments but is documentation, not a
+path: the "Where each form comes from" provenance table (`ml.p049`–`ml.p069`)
+carries no link, no QR payload, no button and no save. It is left in place with
+the form pages themselves, and is flagged here rather than silently kept.
+
+Two shared dictionary strings are now *inaccurate* for the trial build and are
+left for the separate dictionary task rather than edited here (the text lives in
+`hub/assets/i18n-strings.js`, outside this repository): `ml.p036` ("One link,
+every form a field worker needs"), the landing-page heading, and `ml.p011`, whose
+closing sentence still says the questions "go to the field for piloting". This
+does not create a path to any unapproved form; it is a wording follow-up.
 
 ## Residual path — outside this task's scope (recorded, not silently accepted)
 
