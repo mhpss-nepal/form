@@ -1,8 +1,10 @@
 # Patch: default the MHPSS Nepal interface to Nepali
 
 **Status:** PENDING — must be applied in the hub repository, not here.
-**Applies to:** `hub/assets/i18n.js` (one line)
+**Applies to:** `hub/assets/i18n.js` (two changes)
 **Requested by:** Adib, 2026-09-20
+**Why the hub repo and not this one:** the `form` repository tracks no `hub/` paths, and `hub/`
+has no git repository on this host at all. This file is a local staging copy.
 
 ## Why this patch exists instead of a direct commit
 
@@ -15,7 +17,9 @@ A one-line change to the default language is an **interface change** with a
 visible effect on every field page, so it must not be delivered from a
 untracked staging copy. It is written here as a reviewable patch instead.
 
-## The change
+## The changes
+
+### 1. Nepali becomes the default language
 
 ```diff
 --- a/assets/i18n.js
@@ -41,6 +45,19 @@ untracked staging copy. It is written here as a reviewable patch instead.
  
    /* ---------- which language ------------------------------------------
       The URL wins, so a link can be shared in either language and the
+```
+
+### 2. The machine-translation notice's buttons become a real tap target
+
+Found by `design-preview/check_a11y_geometry.py`, not by any human review: this notice is injected
+at runtime by this same file, so its buttons appear on **every** page once the notice shows. They
+measured **27.8px** — below the project's own 44px rule.
+
+```diff
+       "#mtnote button,#mtnote a{font:700 11.5px/1.2 'Noto Sans',system-ui,sans-serif;" +
++      "min-height:44px;display:inline-flex;align-items:center;justify-content:center;" +
+       "border:1px solid #c9a94f;background:#fff;color:#6b4d16;border-radius:5px;" +
+       "padding:6px 10px;cursor:pointer;text-decoration:none}" +
 ```
 
 ## Resolution order after the patch (unchanged)
