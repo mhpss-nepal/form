@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-default="ne">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MHPSS Nepal — All forms</title>
+<meta name="description" content="Every field form and what each one is for, opened in the review frame. For review, not field distribution.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="../hub/assets/app.css">
+<link rel="stylesheet" href="../hub/assets/design.css">
+<link rel="stylesheet" href="../hub/assets/form.css">
+<link rel="stylesheet" href="../hub/assets/brand.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="topbar">
+    <a href="./">← <span data-i18n="nav.hub"></span></a>
+    <div data-i18n-toggle></div>
+  </header>
+
+  <div class="banner warn" data-i18n="live.preview" data-i18n-html></div>
+
+  <h1 data-i18n="ml.p040"></h1>
+  <p class="lede" data-i18n="ml.p077"></p>
+
+  <div class="ml-grid">
+
+    <div class="ml-card svc">
+      <div class="tag" data-i18n="ml.p010"></div>
+      <h3 data-i18n="ml.p048"></h3>
+      <p data-i18n="ml.p029" data-i18n-html></p>
+      <p class="src" data-i18n="ml.p028"></p>
+      <div class="ml-actions">
+        <a data-form="5ws-report.html" data-i18n="ml.act.open"></a>
+      </div>
+    </div>
+
+    <div class="ml-card svc">
+      <div class="tag" data-i18n="ml.p009"></div>
+      <h3 data-i18n="ml.p047"></h3>
+      <p data-i18n="ml.p027" data-i18n-html></p>
+      <p class="src" data-i18n="ml.p026"></p>
+      <div class="ml-actions">
+        <a data-form="contact.html" data-i18n="ml.act.open"></a>
+      </div>
+    </div>
+
+    <div class="ml-card clin">
+      <div class="tag" data-i18n="ml.p008"></div>
+      <h3 data-i18n="ml.p046"></h3>
+      <p data-i18n="ml.p025" data-i18n-html></p>
+      <p class="src" data-i18n="ml.p024"></p>
+      <div class="ml-actions">
+        <a data-form="phq9.html" data-i18n="ml.act.open"></a>
+      </div>
+    </div>
+
+    <div class="ml-card ref">
+      <div class="tag" data-i18n="ml.p007"></div>
+      <h3 data-i18n="ml.p045"></h3>
+      <p data-i18n="ml.p023"></p>
+      <p class="src" data-i18n="ml.p022"></p>
+      <div class="ml-actions">
+        <a data-form="referral.html" data-i18n="ml.act.open"></a>
+      </div>
+    </div>
+
+    <div class="ml-card selfr">
+      <div class="tag" data-i18n="ml.p006"></div>
+      <h3 data-i18n="ml.p044"></h3>
+      <p data-i18n="ml.p021"></p>
+      <p class="src" data-i18n="ml.p020"></p>
+      <div class="ml-actions">
+        <a data-form="selfreport.html" data-i18n="ml.act.open"></a>
+      </div>
+    </div>
+
+  </div>
+
+  <h2 data-i18n="ml.p038"></h2>
+  <p class="lede" data-i18n="ml.p013"></p>
+
+  <div class="banner stop" data-i18n="ml.p011" data-i18n-html></div>
+
+</div>
+
+<script src="../hub/assets/codes.js"></script>
+<script src="../hub/assets/i18n-strings.js"></script>
+<script src="../hub/assets/i18n.js"></script>
+<script src="../hub/assets/brand.js"></script>
+<script>
+/* Each card opens its form through the review frame, so the review surface has
+   one shape. The href is built here, relative to this page's own address, so it
+   keeps working on whatever address the site is served from -- the same reason
+   index.html resolves its copy-links at click time rather than baking them in.
+
+   The data-form attribute above is the only place a form's name appears, so
+   adding or removing a form here cannot leave a stale address behind. */
+(function () {
+  var cards = document.querySelectorAll('[data-form]');
+  for (var i = 0; i < cards.length; i++) {
+    var name = cards[i].getAttribute('data-form');
+    cards[i].setAttribute('href', 'preview.html?preview_form=' + name);
+  }
+})();
+</script>
+</body>
+</html>
