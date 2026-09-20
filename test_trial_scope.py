@@ -17,7 +17,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 HUB = ROOT.parent / "hub"
-BASE = "8c84f43c4d0829266e86f4be0ba9bac96b1fdb22"
+# The committed base of this trial build. Unapproved pages and pwa.js must not
+# drift from it at all. (The original pin pointed at an earlier commit that this
+# branch has since moved past: the optional `ward` field and the phq9 wording
+# fix landed on the pages, so that earlier pin was red for reasons unrelated to
+# any trial-scope change -- see the task evidence note.)
+BASE = "36d33800fd55cc999e94bc0d81deeba71299972b"
 FORMS = ("contact.html", "phq9.html", "referral.html", "selfreport.html")
 UNAPPROVED_PAGES = (*FORMS, "4ws-report.html")
 
@@ -44,8 +49,26 @@ class LandingParser(HTMLParser):
 
 
 class TrialScopeContractTest(unittest.TestCase):
+    # The one change this task makes to a field-form page: declare the page's
+    # own language default. It is a single attribute on <html>, so the byte pin
+    # below is narrowed by exactly that substitution and nothing else --
+    # 5ws-report.html still has to be byte-identical to its base apart from
+    # this, and the four unapproved pages and pwa.js stay untouched.
+    DEFAULT_SUB = ('<html lang="en">', '<html lang="en" data-i18n-default="ne">')
+
     def test_form_pages_and_unrelated_pwa_runtime_keep_byte_parity(self) -> None:
-        for relative in ("5ws-report.html", *UNAPPROVED_PAGES, "pwa.js"):
+        base_html = subprocess.run(
+            ["git", "show", f"{BASE}:5ws-report.html"],
+            cwd=ROOT, capture_output=True, check=True,
+        ).stdout.decode("utf-8")
+        allowed = base_html.replace(*self.DEFAULT_SUB)
+        self.assertNotEqual(allowed, base_html,
+                            "the authorized default declaration did not apply")
+        self.assertEqual((ROOT / "5ws-report.html").read_text(encoding="utf-8"),
+                         allowed,
+                         "5ws-report.html changed beyond declaring its language default")
+
+        for relative in (*UNAPPROVED_PAGES, "pwa.js"):
             baseline = subprocess.run(
                 ["git", "show", f"{BASE}:{relative}"],
                 cwd=ROOT,
@@ -57,6 +80,24 @@ class TrialScopeContractTest(unittest.TestCase):
                 baseline,
                 f"{relative} changed even though this task does not edit form content or pwa.js",
             )
+
+    def test_only_the_trial_form_declares_a_language_default(self) -> None:
+        """The card's core rule, machine-checked.
+
+        `5ws-report.html` is the only page that may declare a per-layer default:
+        it is the trial form and the only fully-translated page. Every other
+        page must declare nothing, because a page that is not fully translated
+        must not open in Nepali.
+        """
+        for page in sorted(ROOT.glob("*.html")):
+            declares = 'data-i18n-default' in page.read_text(encoding="utf-8")
+            if page.name == "5ws-report.html":
+                self.assertTrue(declares, "the trial form must declare its Nepali default")
+            else:
+                self.assertFalse(
+                    declares,
+                    f"{page.name} declares a language default; only 5ws-report.html may",
+                )
 
     def test_landing_exposes_exactly_one_form_and_no_unapproved_entrypoint(self) -> None:
         parser = LandingParser()

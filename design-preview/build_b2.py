@@ -108,6 +108,14 @@ def build(ref: str | None = None) -> Path:
     head = re.sub(r'\n<style id="institutional-utility-preview">[\s\S]*?</style>\n', "\n", head)
     tail = re.sub(r'<script id="institutional-utility-status">[\s\S]*?</script>\n?', "", tail)
 
+    # The source page declares its own language default (data-i18n-default="ne")
+    # because it is the trial form and is fully translated. This derived preview
+    # is NOT: its own chrome (the B2 banner, the status strip) is English-only
+    # until the new copy has human-reviewed Nepali. A page that is not fully
+    # translated must not default to Nepali, so the declaration is stripped from
+    # the copied <head>. Without this the rebuild would silently inherit it.
+    head = re.sub(r'\s+data-i18n-default="[^"]*"', "", head, count=1)
+
     # Keep the page's own runtime scripts untouched.
     cut = tail.index("<script")
     tail_markup, tail_scripts = tail[:cut], tail[cut:]

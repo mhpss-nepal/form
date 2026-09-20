@@ -21,8 +21,14 @@
    device until this line changed.
    v41 adds the under-1-KB 4Ws redirect stub to protect the address on cards
    already distributed in the field; without a bump installed phones keep
-   v40's incomplete offline precache. */
-const CACHE = "mhpss-np-field-v41";
+   v40's incomplete offline precache.
+   v42 follows the change to a precached page: 5ws-report.html now declares its
+   own language default (data-i18n-default="ne"), read by the shared engine at
+   ../hub/assets/i18n.js. The PAGE is in this precache, so a phone holding v41
+   would keep the declaration-free page and would still open in English. The
+   declaration only takes effect once the engine that reads it is also
+   precached here -- see the note below. */
+const CACHE = "mhpss-np-field-v42";
 
 const PRECACHE = [
   "./",
