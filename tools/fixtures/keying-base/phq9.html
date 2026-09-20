@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title data-i18n="phq9.p001">PHQ-9 follow-up measure — MHPSS Nepal</title>
+<title>PHQ-9 follow-up measure — MHPSS Nepal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Lora + Manrope. design.css declares Georgia / system fallbacks, so a
@@ -21,26 +21,26 @@
 <meta name="apple-mobile-web-app-title" content="MHPSS Field">
 </head>
 <body class="fx">
-<div class="ribbon" data-i18n="phq9.p002" data-i18n-html>Revised draft <span>· English items only — the validated Nepali text has not been obtained · saved on this phone, sent to the coordination register when there is signal</span></div>
+<div class="ribbon">Revised draft <span>· English items only — the validated Nepali text has not been obtained · saved on this phone, sent to the coordination register when there is signal</span></div>
 
 <div class="top">
   <div>
-    <div class="brand" data-i18n="phq9.p003">PHQ-9 · follow-up measure</div>
-    <div class="sub" data-i18n="phq9.p004">Layer 1 · Rasuwa / Bhote Koshi</div>
+    <div class="brand">PHQ-9 · follow-up measure</div>
+    <div class="sub">Layer 1 · Rasuwa / Bhote Koshi</div>
   </div>
   <div class="spacer"></div>
-  <a href="index.html" data-i18n="phq9.p005">← Forms</a>
-  <a href="../hub/" data-i18n="phq9.p006">Hub</a>
+  <a href="index.html">← Forms</a>
+  <a href="../hub/">Hub</a>
 </div>
 
 <div class="wrap">
 
-  <h1 data-i18n="phq9.p007">Following one person over time</h1>
-  <p class="lede" data-i18n="phq9.p008" data-i18n-html>This measure exists to answer one question the 14 September briefing asked: does a person
+  <h1>Following one person over time</h1>
+  <p class="lede">This measure exists to answer one question the 14 September briefing asked: does a person
     move from acute distress towards a clinical disorder, or away from it? It is for repeating with
     <b>someone already in care</b>, so the second score can be compared with the first.</p>
 
-  <div class="banner stop" data-i18n="phq9.cutoff.useWarning" data-i18n-html>
+  <div class="banner stop">
     <b>Do not use this to screen a shelter.</b> In the Nepali validation the cut-off of 10 or more had a
     positive predictive value of 0.42 — in that primary-care sample, fewer than half of the people who
     screened positive turned out to have a depressive episode. Run it across a displaced population and
@@ -48,7 +48,7 @@
     that is not true. Use it where someone has already been identified and referred.
   </div>
 
-  <div class="banner warn" data-i18n="clinical.phq9ValidatedTextWarning" data-i18n-html>
+  <div class="banner warn">
     <b>The Nepali text is missing, and this form is not ready for field use without it.</b> The Nepali
     version validated by the PRIME consortium exists, but the copy available is typeset in a legacy
     non-Unicode Nepali font, so the characters cannot be transferred here without risking a corrupted
@@ -61,88 +61,88 @@
   <form id="f" autocomplete="off" novalidate>
 
     <div class="card">
-      <div class="step"><span class="n">1</span><h2 data-i18n="phq9.p009">Who, and which visit</h2></div>
+      <div class="step"><span class="n">1</span><h2>Who, and which visit</h2></div>
       <div class="row three">
         <div class="f">
-          <label for="org" data-i18n="phq9.p010">Organisation</label>
+          <label for="org">Organisation</label>
           <select id="org"></select>
         </div>
         <div class="f">
-          <label for="cadre" data-i18n="phq9.p011">Administered by</label>
+          <label for="cadre">Administered by</label>
           <select id="cadre"></select>
-          <div class="help" data-i18n="phq9.p012">A measure like this belongs with a counsellor or clinician, not a volunteer.</div>
+          <div class="help">A measure like this belongs with a counsellor or clinician, not a volunteer.</div>
         </div>
         <div class="f">
-          <label for="dateAD" data-i18n="phq9.p013">Date — Gregorian (AD)</label>
+          <label for="dateAD">Date — Gregorian (AD)</label>
           <input type="date" id="dateAD">
         </div>
       </div>
       <div class="row three">
         <div class="f">
-          <label for="ccode" data-i18n="phq9.p014">Contact code</label>
-          <input type="text" id="ccode" placeholder="NP-XXXXX-XXXXX" style="font-family:ui-monospace,Menlo,monospace" data-i18n-skip>
-          <div class="help" data-i18n="phq9.p015" data-i18n-html>Paste the code from the person's <a href="contact.html">service contact
+          <label for="ccode">Contact code</label>
+          <input type="text" id="ccode" placeholder="NP-XXXXX-XXXXX" style="font-family:ui-monospace,Menlo,monospace">
+          <div class="help">Paste the code from the person's <a href="contact.html">service contact
             record</a>, so the two scores can be lined up without a name.</div>
         </div>
         <div class="f">
-          <label for="visit" data-i18n="phq9.p016">Which administration is this?</label>
+          <label for="visit">Which administration is this?</label>
           <select id="visit">
-            <option value="" data-i18n="phq9.p017">— choose —</option>
-            <option value="1" data-i18n="phq9.p018">First — baseline</option>
-            <option value="2" data-i18n="phq9.p019">Follow-up</option>
-            <option value="X" data-i18n="phq9.p020">Not recorded</option>
+            <option value="">— choose —</option>
+            <option value="1">First — baseline</option>
+            <option value="2">Follow-up</option>
+            <option value="X">Not recorded</option>
           </select>
         </div>
         <div class="f">
-          <label for="lang" data-i18n="phq9.p021">Language used</label>
+          <label for="lang">Language used</label>
           <select id="lang">
-            <option value="" data-i18n="phq9.p022">— choose —</option>
-            <option value="EN" data-i18n="phq9.p023">English, directly</option>
-            <option value="NE-INT" data-i18n="phq9.p024">Nepali, through an interpreter</option>
-            <option value="NE-VAL" data-i18n="phq9.p025">Validated Nepali form on paper</option>
-            <option value="OTH" data-i18n="phq9.p026">Another language</option>
+            <option value="">— choose —</option>
+            <option value="EN">English, directly</option>
+            <option value="NE-INT">Nepali, through an interpreter</option>
+            <option value="NE-VAL">Validated Nepali form on paper</option>
+            <option value="OTH">Another language</option>
           </select>
-          <div class="help" data-i18n="phq9.p027">Recorded because it changes what the score means.</div>
+          <div class="help">Recorded because it changes what the score means.</div>
         </div>
       </div>
       <div class="f">
-        <label data-i18n="consent.label">Consent</label>
+        <label>Consent</label>
         <div class="radios">
-          <label><input type="checkbox" id="consent"> <span data-i18n="consent.phq9">The person was told what this is for and agreed to answer</span></label>
+          <label><input type="checkbox" id="consent"> The person was told what this is for and agreed to answer</label>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="step"><span class="n">2</span><h2 data-i18n="phq9.p028">The nine items</h2><span class="hint" id="answered"></span></div>
-      <p class="lede" style="margin-bottom:14px"><b data-i18n="phq9.itemInstruction">Over the last 2 weeks, how often have you been bothered
+      <div class="step"><span class="n">2</span><h2>The nine items</h2><span class="hint" id="answered"></span></div>
+      <p class="lede" style="margin-bottom:14px"><b>Over the last 2 weeks, how often have you been bothered
         by any of the following problems?</b></p>
       <div class="scale" id="items"></div>
     </div>
 
     <div class="card">
-      <div class="step"><span class="n">3</span><h2 data-i18n="phq9.p029">Difficulty, and the score</h2></div>
+      <div class="step"><span class="n">3</span><h2>Difficulty, and the score</h2></div>
       <div class="f">
-        <label for="fx" data-i18n="phq9.itemDifficulty">If you checked off any problems, how difficult have these problems made it for you
+        <label for="fx">If you checked off any problems, how difficult have these problems made it for you
           to do your work, take care of things at home, or get along with other people?</label>
         <select id="fx">
-          <option value="" data-i18n="phq9.p030">— choose —</option>
-          <option value="0" data-i18n="phq9.scaleDifficulty0">Not difficult at all</option>
-          <option value="1" data-i18n="phq9.scaleDifficulty1">Somewhat difficult</option>
-          <option value="2" data-i18n="phq9.scaleDifficulty2">Very difficult</option>
-          <option value="3" data-i18n="phq9.scaleDifficulty3">Extremely difficult</option>
+          <option value="">— choose —</option>
+          <option value="0">Not difficult at all</option>
+          <option value="1">Somewhat difficult</option>
+          <option value="2">Very difficult</option>
+          <option value="3">Extremely difficult</option>
         </select>
       </div>
 
       <div class="score" id="score">
         <span class="big" id="sNum">—</span>
-        <span class="of" data-i18n="phq9.p031">out of 27</span>
-        <span class="band" id="sBand" data-i18n="phq9.p032">answer all nine items</span>
+        <span class="of">out of 27</span>
+        <span class="band" id="sBand">answer all nine items</span>
       </div>
 
       <div id="risk"></div>
 
-      <div class="help" style="margin-top:12px" data-i18n="phq9.cutoff.interpretation" data-i18n-html>
+      <div class="help" style="margin-top:12px">
         Bands are the standard PHQ-9 cut-points (Kroenke, Spitzer &amp; Williams, 2001): 0–4 minimal,
         5–9 mild, 10–14 moderate, 15–19 moderately severe, 20–27 severe. The action threshold of
         <b>10 or more</b> is the one validated in Nepal (Kohrt et al., 2016; sensitivity 0.94,
@@ -152,26 +152,26 @@
     </div>
 
     <div class="card">
-      <div class="step"><span class="n">4</span><h2 data-i18n="phq9.p033">Save</h2></div>
+      <div class="step"><span class="n">4</span><h2>Save</h2></div>
       <div id="errs"></div>
       <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
-        <button type="submit" class="btn" data-i18n="phq9.p034">Save this administration</button>
-        <button type="button" class="btn ghost" id="csvBtn" data-i18n="phq9.p035">Export CSV</button>
-        <button type="button" class="btn grey" id="clearBtn" data-i18n="phq9.p036">Clear everything on this device</button>
+        <button type="submit" class="btn">Save this administration</button>
+        <button type="button" class="btn ghost" id="csvBtn">Export CSV</button>
+        <button type="button" class="btn grey" id="clearBtn">Clear everything on this device</button>
         <span class="xs" id="count"></span>
       </div>
       <div class="f" style="margin-top:16px">
-        <label data-i18n="phq9.p037">What would be sent, if there were anywhere to send it</label>
+        <label>What would be sent, if there were anywhere to send it</label>
         <pre id="payload" class="pay">—</pre>
-        <div class="help" data-i18n="phq9.p038">Item-by-item answers are kept because a total alone cannot be re-checked, and
+        <div class="help">Item-by-item answers are kept because a total alone cannot be re-checked, and
           because item 9 has to be auditable. There is no name, no phone number and no date of birth.</div>
       </div>
     </div>
 
   </form>
 
-  <h2 data-i18n="phq9.p039">Attribution</h2>
-  <div class="banner" data-i18n="phq9.p040" data-i18n-html>
+  <h2>Attribution</h2>
+  <div class="banner">
     PHQ-9 was developed by Drs Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke and colleagues, with
     an educational grant from Pfizer Inc. The instrument carries the statement: <i>“No permission required
     to reproduce, translate, display or distribute.”</i> The items above are reproduced verbatim on that
@@ -192,27 +192,23 @@
   var $ = function (id) { return document.getElementById(id); };
 
   /* Verbatim PHQ-9 items. Do not paraphrase, reorder or shorten these —
-     a reworded PHQ-9 is no longer the validated instrument.
-     They are keyed (phq9.item1..9) but the key is under a professionalOnly
-     prefix, so the engine renders them in ENGLISH even on the Nepali page:
-     the Nepali PHQ-9 is a separately validated wording and a machine
-     rendering of these words is not the instrument. */
+     a reworded PHQ-9 is no longer the validated instrument. */
   var ITEMS = [
-    { key: "phq9.item1", text: "Little interest or pleasure in doing things" },
-    { key: "phq9.item2", text: "Feeling down, depressed, or hopeless" },
-    { key: "phq9.item3", text: "Trouble falling or staying asleep, or sleeping too much" },
-    { key: "phq9.item4", text: "Feeling tired or having little energy" },
-    { key: "phq9.item5", text: "Poor appetite or overeating" },
-    { key: "phq9.item6", text: "Feeling bad about yourself — or that you are a failure or have let yourself or your family down" },
-    { key: "phq9.item7", text: "Trouble concentrating on things, such as reading the newspaper or watching television" },
-    { key: "phq9.item8", text: "Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual" },
-    { key: "phq9.item9", text: "Thoughts that you would be better off dead or of hurting yourself in some way" }
+    "Little interest or pleasure in doing things",
+    "Feeling down, depressed, or hopeless",
+    "Trouble falling or staying asleep, or sleeping too much",
+    "Feeling tired or having little energy",
+    "Poor appetite or overeating",
+    "Feeling bad about yourself — or that you are a failure or have let yourself or your family down",
+    "Trouble concentrating on things, such as reading the newspaper or watching television",
+    "Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual",
+    "Thoughts that you would be better off dead or of hurting yourself in some way"
   ];
   var OPTS = [
-    { v: 0, key: "phq9.scale0", l: "Not at all" },
-    { v: 1, key: "phq9.scale1", l: "Several days" },
-    { v: 2, key: "phq9.scale2", l: "More than half the days" },
-    { v: 3, key: "phq9.scale3", l: "Nearly every day" }
+    { v: 0, l: "Not at all" },
+    { v: 1, l: "Several days" },
+    { v: 2, l: "More than half the days" },
+    { v: 3, l: "Nearly every day" }
   ];
 
   L.fillSelect($("org"), C.ORGS.concat([{ code: "OTHER", name: "Other — not listed", np: "अन्य — सूचीमा नभएको", np_src: "draft" }]));
@@ -224,31 +220,17 @@
   });
 
   /* render items */
-  function renderItems() {
-    var html = ITEMS.map(function (t, i) {
-      var opts = OPTS.map(function (o) {
-        return '<label><input type="radio" name="q' + i + '" value="' + o.v + '"> ' +
-               '<span data-i18n="' + o.key + '">' + o.l + '</span>' +
-               ' <span style="color:var(--mute)">(' + o.v + ')</span></label>';
-      }).join("");
-      /* The item text sits in its own keyed span, so the number stays outside
-         it and the engine can fill the text without eating the numbering. The
-         key is under a professionalOnly prefix, so on the Nepali page this
-         fills with the ENGLISH wording -- the validated Nepali items have not
-         been obtained, and inventing them would be a different instrument. */
-      return '<div class="q" id="qw' + i + '"><div class="qt">' + (i + 1) + '. ' +
-             '<span data-i18n="' + t.key + '">' +
-             t.text.replace(/&/g, "&amp;").replace(/</g, "&lt;") + '</span>' +
-             '<span class="np">Nepali text not obtained — see the warning above.</span></div>' +
-             '<div class="opts">' + opts + '</div></div>';
+  var html = ITEMS.map(function (t, i) {
+    var opts = OPTS.map(function (o) {
+      return '<label><input type="radio" name="q' + i + '" value="' + o.v + '"> ' + o.l +
+             ' <span style="color:var(--mute)">(' + o.v + ')</span></label>';
     }).join("");
-    $("items").innerHTML = html;
-    /* The radio labels were built after the engine's first pass, so they have
-       to be filled too -- otherwise the scale would show English on a page
-       the reader has switched to Nepali. */
-    if (window.I18N) window.I18N.apply($("items"));
-  }
-  renderItems();
+    return '<div class="q" id="qw' + i + '"><div class="qt">' + (i + 1) + '. ' +
+           t.replace(/&/g, "&amp;").replace(/</g, "&lt;") +
+           '<span class="np">Nepali text not obtained — see the warning above.</span></div>' +
+           '<div class="opts">' + opts + '</div></div>';
+  }).join("");
+  $("items").innerHTML = html;
 
   function answers() {
     return ITEMS.map(function (_, i) {
@@ -282,22 +264,15 @@
       $("sBand").style.color = "";
     }
 
-    /* item 9 — asking this question creates a duty to act on the answer.
-       The wording is a named, protected key (phq9.item9Instruction): it is a
-       safety instruction, and on the Nepali page it must still render in
-       ENGLISH, because a machine-drafted suicide-safety instruction is not
-       the validated one. The key has to exist in the dictionary or the engine
-       shows [phq9.item9Instruction] in its place, so this is asserted by
-       test_i18n_keying.test_item9_instruction_key_exists. */
+    /* item 9 — asking this question creates a duty to act on the answer */
     if (a[8] !== null && a[8] > 0) {
-      $("risk").innerHTML = '<div class="banner stop" style="margin:14px 0 0" data-i18n="phq9.item9Instruction"><b>Item 9 is positive. ' +
+      $("risk").innerHTML = '<div class="banner stop" style="margin:14px 0 0"><b>Item 9 is positive. ' +
         'Do not close this form and move on.</b> Stay with the person, ask directly about thoughts of ' +
         'suicide and about means and plan, and follow your organisation\'s referral pathway now — record ' +
         'it on the <a href="referral.html">referral form</a>. If your organisation has no pathway for ' +
         'this, that is the gap to raise at the Technical Working Group, and it should be raised before this ' +
         'instrument is used in the field at all. The answer to item 9 is kept in the record so that a ' +
         'positive answer can be audited against whether a referral followed.</div>';
-      if (window.I18N) window.I18N.apply($("risk"));
     } else {
       $("risk").innerHTML = "";
     }

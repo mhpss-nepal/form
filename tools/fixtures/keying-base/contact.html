@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title data-i18n="svc.p001">Service contact record — MHPSS Nepal</title>
+<title>Service contact record — MHPSS Nepal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Lora + Manrope. design.css declares Georgia / system fallbacks, so a
@@ -21,34 +21,34 @@
 <meta name="apple-mobile-web-app-title" content="MHPSS Field">
 </head>
 <body class="fx">
-<div class="ribbon" data-i18n="svc.p002" data-i18n-html>Revised draft for field piloting <span>· saved on this phone, sent to the coordination register when there is signal</span></div>
+<div class="ribbon">Revised draft for field piloting <span>· saved on this phone, sent to the coordination register when there is signal</span></div>
 
 <div class="top">
   <div>
-    <div class="brand" data-i18n="svc.p003">Service contact record</div>
-    <div class="sub" data-i18n="svc.p004">Layer 1 · Rasuwa / Bhote Koshi</div>
+    <div class="brand">Service contact record</div>
+    <div class="sub">Layer 1 · Rasuwa / Bhote Koshi</div>
   </div>
   <div class="spacer"></div>
-  <a href="index.html" data-i18n="svc.p005">← Forms</a>
-  <a href="../hub/" data-i18n="svc.p006">Hub</a>
+  <a href="index.html">← Forms</a>
+  <a href="../hub/">Hub</a>
 </div>
 
 <div class="wrap">
 
-  <h1 data-i18n="svc.p007">One contact with one person</h1>
-  <p class="lede" data-i18n="svc.p008" data-i18n-html>Use this when you have seen, spoken to or supported a specific person. For a group
+  <h1>One contact with one person</h1>
+  <p class="lede">Use this when you have seen, spoken to or supported a specific person. For a group
     activity or a day's total, use the <a href="5ws-report.html">activity report</a> instead — this form
     is deliberately one record per person per contact, because that is the only way a returning person can
     be recognised instead of counted twice.</p>
 
-  <div class="banner stop" data-i18n="svc.p009" data-i18n-html>
+  <div class="banner stop">
     <b>The person's name and phone number stay on this handset.</b> You type a few details so the phone can
     work out a <b>contact code</b>; the details are used for that calculation and then discarded. Only the
     code is saved. Nobody downstream — not the coordination view, not the dashboard, not this site — ever
     receives the name, the number, or a date of birth.
   </div>
 
-  <div class="banner" data-i18n="svc.p010" data-i18n-html>
+  <div class="banner">
     <b>Works with no signal.</b> Records are held on this phone as you save them and sent to the coordination register on their own when there is signal. The export remains for a copy of your own. <span id="storeWarn"></span>
   </div>
 
@@ -56,31 +56,31 @@
 
     <!-- 1 -->
     <div class="card">
-      <div class="step"><span class="n">1</span><h2 data-i18n="svc.p011">Who is reporting</h2><span class="hint" data-i18n="svc.p012">remembered for next time</span></div>
+      <div class="step"><span class="n">1</span><h2>Who is reporting</h2><span class="hint">remembered for next time</span></div>
       <div class="row">
         <div class="f">
-          <label for="org" data-i18n="svc.p013">Reporting organisation</label>
+          <label for="org">Reporting organisation</label>
           <select id="org"></select>
         </div>
         <div class="f" id="orgOtherWrap" hidden>
-          <label for="orgOther" data-i18n="svc.p014">Name of organisation</label>
-          <input type="text" id="orgOther" placeholder="Full name, as it should appear in reports" data-i18n-ph="svc.p087">
+          <label for="orgOther">Name of organisation</label>
+          <input type="text" id="orgOther" placeholder="Full name, as it should appear in reports">
         </div>
       </div>
       <div class="row three">
         <div class="f">
-          <label for="focalName" data-i18n="svc.p015">Focal point name</label>
-          <input type="text" id="focalName" placeholder="You — the person recording this" data-i18n-ph="svc.p088">
-          <div class="help" data-i18n="svc.p016">A staff member, never a service user.</div>
+          <label for="focalName">Focal point name</label>
+          <input type="text" id="focalName" placeholder="You — the person recording this">
+          <div class="help">A staff member, never a service user.</div>
         </div>
         <div class="f">
-          <label for="focalPhone" data-i18n="svc.p017">Focal point phone</label>
-          <input type="tel" id="focalPhone" placeholder="98XXXXXXXX" data-i18n-skip>
+          <label for="focalPhone">Focal point phone</label>
+          <input type="tel" id="focalPhone" placeholder="98XXXXXXXX">
         </div>
         <div class="f">
-          <label for="cadre" data-i18n="svc.p018">Type of service provider</label>
+          <label for="cadre">Type of service provider</label>
           <select id="cadre"></select>
-          <div class="help" data-i18n="svc.p019">Who actually delivered this contact. Asked for on 15 September so that
+          <div class="help">Who actually delivered this contact. Asked for on 15 September so that
             counsellors, psychologists and psychiatrists can be counted apart.</div>
         </div>
       </div>
@@ -88,49 +88,49 @@
 
     <!-- 2 -->
     <div class="card">
-      <div class="step"><span class="n">2</span><h2 data-i18n="svc.p020">When and where</h2></div>
+      <div class="step"><span class="n">2</span><h2>When and where</h2></div>
       <div class="row three">
         <div class="f">
-          <label for="dateAD" data-i18n="svc.p021">Date — Gregorian (AD)</label>
+          <label for="dateAD">Date — Gregorian (AD)</label>
           <input type="date" id="dateAD">
-          <div class="help" data-i18n="svc.p022">This is the date the system sorts and groups on.</div>
+          <div class="help">This is the date the system sorts and groups on.</div>
         </div>
         <div class="f">
-          <label for="dateBS" data-i18n="svc.p023" data-i18n-html>Date — Bikram Sambat <span class="opt">— optional</span></label>
-          <input type="text" id="dateBS" placeholder="2083-05-29" pattern="\d{4}-\d{2}-\d{2}" data-i18n-skip>
-          <div class="help" data-i18n="svc.p024" data-i18n-html>Typed as reported. <b>Not converted automatically</b> — that needs a verified
+          <label for="dateBS">Date — Bikram Sambat <span class="opt">— optional</span></label>
+          <input type="text" id="dateBS" placeholder="2083-05-29" pattern="\d{4}-\d{2}-\d{2}">
+          <div class="help">Typed as reported. <b>Not converted automatically</b> — that needs a verified
             BS calendar table, which has not been obtained.</div>
         </div>
         <div class="f">
-          <label for="district" data-i18n="svc.p025">District</label>
+          <label for="district">District</label>
           <select id="district"></select>
         </div>
       </div>
       <div class="row">
         <div class="f">
-          <label for="site" data-i18n="svc.p026">Site</label>
+          <label for="site">Site</label>
           <select id="site"></select>
-          <div class="help" id="siteHelp" data-i18n="svc.p027">From the holding-centre roster. Only choose “Other” if the site
+          <div class="help" id="siteHelp">From the holding-centre roster. Only choose “Other” if the site
             genuinely is not listed — every “Other” has to be reconciled by hand later.</div>
         </div>
         <div class="f">
-          <label for="ward" data-i18n="svc.p028" data-i18n-html>Municipality and ward <span class="opt">— optional</span></label>
-          <input type="text" id="ward" placeholder="e.g. Uttargaya, ward 4" data-i18n-ph="svc.p089">
-          <div class="help" data-i18n="svc.p029">Asked for on 15 September as province / subdistrict. Free text for now: the
+          <label for="ward">Municipality and ward <span class="opt">— optional</span></label>
+          <input type="text" id="ward" placeholder="e.g. Uttargaya, ward 4">
+          <div class="help">Asked for on 15 September as province / subdistrict. Free text for now: the
             agreed municipality and ward code list has not been obtained.</div>
         </div>
       </div>
       <div class="f" id="siteOtherWrap" hidden>
-        <label for="siteOther" data-i18n="svc.p030">Name of site</label>
-        <input type="text" id="siteOther" placeholder="Site name, ward, municipality" data-i18n-ph="svc.p090">
+        <label for="siteOther">Name of site</label>
+        <input type="text" id="siteOther" placeholder="Site name, ward, municipality">
       </div>
       <div class="f">
-        <label data-i18n="svc.p031" data-i18n-html>Location pin <span class="opt">— optional</span></label>
+        <label>Location pin <span class="opt">— optional</span></label>
         <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-          <button type="button" class="btn ghost sm" id="geoBtn" data-i18n="svc.p032">📍 Use my location</button>
+          <button type="button" class="btn ghost sm" id="geoBtn">📍 Use my location</button>
           <span id="geoOut" class="xs" style="flex:1 1 200px;min-width:0"></span>
         </div>
-        <div class="help" data-i18n="svc.p033">Recorded to three decimal places — a grid of roughly 100 m. Enough to put the
+        <div class="help">Recorded to three decimal places — a grid of roughly 100 m. Enough to put the
           site on a map; not enough to point at a household. A precise pin, a small count and a target
           group together identify people even with no name attached, which is why the precision is
           reduced here rather than in the dashboard.</div>
@@ -139,54 +139,54 @@
 
     <!-- 3 -->
     <div class="card">
-      <div class="step"><span class="n">3</span><h2 data-i18n="svc.p034">The person</h2></div>
+      <div class="step"><span class="n">3</span><h2>The person</h2></div>
       <div class="f">
-        <label data-i18n="svc.p035">Is this the first time your organisation has recorded this person?</label>
+        <label>Is this the first time your organisation has recorded this person?</label>
         <div class="radios" id="newRet">
-          <label><input type="radio" name="nr" value="NEW"> <span data-i18n="svc.p036">New — first contact</span></label>
-          <label><input type="radio" name="nr" value="RET"> <span data-i18n="svc.p037">Returning — seen before</span></label>
-          <label><input type="radio" name="nr" value="UNK"> <span data-i18n="svc.p038">Not known</span></label>
+          <label><input type="radio" name="nr" value="NEW"> New — first contact</label>
+          <label><input type="radio" name="nr" value="RET"> Returning — seen before</label>
+          <label><input type="radio" name="nr" value="UNK"> Not known</label>
         </div>
-        <div class="help" data-i18n="svc.p039">This is the question that makes the cumulative figure mean something. On
+        <div class="help">This is the question that makes the cumulative figure mean something. On
           15 September the reported total was over 9,000 with duplication nobody could size.</div>
       </div>
 
       <div id="codeWrap">
-        <div class="banner" style="margin-top:4px" data-i18n="svc.p040" data-i18n-html>
+        <div class="banner" style="margin-top:4px">
           <b>These four boxes are not saved.</b> They are read, combined into a code, and cleared when you
           save. Type them the same way each time and the same person gets the same code.
         </div>
         <div class="row four">
           <div class="f">
-            <label for="ini" data-i18n="svc.p041">Initials</label>
-            <input type="text" id="ini" maxlength="4" placeholder="e.g. RB" data-i18n-ph="svc.p091">
-            <div class="help" data-i18n="svc.p042">First letters of the name, as the person says it.</div>
+            <label for="ini">Initials</label>
+            <input type="text" id="ini" maxlength="4" placeholder="e.g. RB">
+            <div class="help">First letters of the name, as the person says it.</div>
           </div>
           <div class="f">
-            <label for="byear" data-i18n="svc.p043">Year of birth</label>
-            <input type="text" id="byear" inputmode="numeric" maxlength="4" placeholder="1990" pattern="\d{4}" data-i18n-skip>
-            <div class="help" data-i18n="svc.p044">Year only — never a full date.</div>
+            <label for="byear">Year of birth</label>
+            <input type="text" id="byear" inputmode="numeric" maxlength="4" placeholder="1990" pattern="\d{4}">
+            <div class="help">Year only — never a full date.</div>
           </div>
           <div class="f">
-            <label for="sex" data-i18n="svc.p045">Sex</label>
+            <label for="sex">Sex</label>
             <select id="sex">
-              <option value="" data-i18n="svc.p046">— choose —</option>
-              <option value="F" data-i18n="svc.p047">Female</option>
-              <option value="M" data-i18n="svc.p048">Male</option>
-              <option value="O" data-i18n="svc.p049">Other</option>
-              <option value="NS" data-i18n="svc.p050">Not stated</option>
+              <option value="">— choose —</option>
+              <option value="F">Female</option>
+              <option value="M">Male</option>
+              <option value="O">Other</option>
+              <option value="NS">Not stated</option>
             </select>
           </div>
           <div class="f">
-            <label for="mun" data-i18n="svc.p051">Municipality</label>
-            <input type="text" id="mun" placeholder="e.g. Uttargaya" data-i18n-ph="svc.p092">
-            <div class="help" data-i18n="svc.p052">Where the person is from, not where you met them.</div>
+            <label for="mun">Municipality</label>
+            <input type="text" id="mun" placeholder="e.g. Uttargaya">
+            <div class="help">Where the person is from, not where you met them.</div>
           </div>
         </div>
         <div class="f">
-          <label data-i18n="svc.p053">Contact code</label>
-          <div id="codeOut" class="codebox" data-i18n="svc.p054">— fill the four boxes above —</div>
-          <div class="help" data-i18n="svc.p055" data-i18n-html>This is the only part that is saved. It is a <b>pseudonym, not an anonymous
+          <label>Contact code</label>
+          <div id="codeOut" class="codebox">— fill the four boxes above —</div>
+          <div class="help">This is the only part that is saved. It is a <b>pseudonym, not an anonymous
             token</b>: the four inputs vary little, so someone holding a list of candidate names could
             test them against a code. Adequate for agreeing these questions; a live register needs the
             code mixed with a secret this handset never holds, which means a server.</div>
@@ -195,29 +195,29 @@
 
       <div class="row three">
         <div class="f">
-          <label for="ageband" data-i18n="svc.p056">Age band</label>
+          <label for="ageband">Age band</label>
           <select id="ageband">
-            <option value="" data-i18n="svc.p057">— choose —</option>
+            <option value="">— choose —</option>
             <option value="0-4">0–4</option>
             <option value="5-11">5–11</option>
             <option value="12-17">12–17</option>
             <option value="18-24">18–24</option>
             <option value="25-59">25–59</option>
-            <option value="60+" data-i18n="svc.p058">60 and over</option>
-            <option value="NS" data-i18n="svc.p059">Not stated</option>
+            <option value="60+">60 and over</option>
+            <option value="NS">Not stated</option>
           </select>
         </div>
         <div class="f">
-          <label for="tgroup" data-i18n="svc.p060">Target group</label>
+          <label for="tgroup">Target group</label>
           <select id="tgroup"></select>
         </div>
         <div class="f">
-          <label for="disab" data-i18n="svc.p061" data-i18n-html>Disability reported <span class="opt">— optional</span></label>
+          <label for="disab">Disability reported <span class="opt">— optional</span></label>
           <select id="disab">
-            <option value="" data-i18n="svc.p062">— choose —</option>
-            <option value="Y" data-i18n="svc.p063">Yes, reported</option>
-            <option value="N" data-i18n="svc.p064">No</option>
-            <option value="NS" data-i18n="svc.p065">Not asked</option>
+            <option value="">— choose —</option>
+            <option value="Y">Yes, reported</option>
+            <option value="N">No</option>
+            <option value="NS">Not asked</option>
           </select>
         </div>
       </div>
@@ -225,58 +225,58 @@
 
     <!-- 4 -->
     <div class="card">
-      <div class="step"><span class="n">4</span><h2 data-i18n="svc.p066">What was provided</h2></div>
+      <div class="step"><span class="n">4</span><h2>What was provided</h2></div>
       <div class="row three">
         <div class="f">
-          <label for="service" data-i18n="svc.p067">Service at this contact</label>
+          <label for="service">Service at this contact</label>
           <select id="service"></select>
-          <div class="help" data-i18n="svc.p068" data-i18n-html>Draft list. The agreed service list is an <b>open action item</b> from
+          <div class="help">Draft list. The agreed service list is an <b>open action item</b> from
             15 September and is not settled.</div>
         </div>
         <div class="f">
-          <label for="modality" data-i18n="svc.p069">Modality</label>
+          <label for="modality">Modality</label>
           <select id="modality"></select>
         </div>
         <div class="f">
-          <label for="mins" data-i18n="svc.p070" data-i18n-html>Length in minutes <span class="opt">— optional</span></label>
-          <input type="text" id="mins" inputmode="numeric" placeholder="30" pattern="\d{1,4}" data-i18n-skip>
+          <label for="mins">Length in minutes <span class="opt">— optional</span></label>
+          <input type="text" id="mins" inputmode="numeric" placeholder="30" pattern="\d{1,4}">
         </div>
       </div>
       <div class="row">
         <div class="f">
-          <label for="outcome" data-i18n="svc.p071">Outcome of this contact</label>
+          <label for="outcome">Outcome of this contact</label>
           <select id="outcome">
-            <option value="" data-i18n="svc.p072">— choose —</option>
-            <option value="CLOSE" data-i18n="svc.p073">Supported, no further contact planned</option>
-            <option value="FOLLOW" data-i18n="svc.p074">Follow-up arranged with us</option>
-            <option value="REFER" data-i18n="svc.p075">Referred on — record it on the referral form</option>
-            <option value="DECL" data-i18n="svc.p076">Support declined</option>
-            <option value="OTH" data-i18n="svc.p077">Other</option>
+            <option value="">— choose —</option>
+            <option value="CLOSE">Supported, no further contact planned</option>
+            <option value="FOLLOW">Follow-up arranged with us</option>
+            <option value="REFER">Referred on — record it on the referral form</option>
+            <option value="DECL">Support declined</option>
+            <option value="OTH">Other</option>
           </select>
         </div>
         <div class="f">
-          <label for="notes" data-i18n="svc.p078" data-i18n-html>Anything the coordination team needs to know <span class="opt">— optional</span></label>
-          <input type="text" id="notes" maxlength="200" placeholder="About the service or the site — not about the person" data-i18n-ph="svc.p093">
-          <div class="help" data-i18n="svc.p079">Never a clinical detail, a diagnosis, or anything that would identify someone.</div>
+          <label for="notes">Anything the coordination team needs to know <span class="opt">— optional</span></label>
+          <input type="text" id="notes" maxlength="200" placeholder="About the service or the site — not about the person">
+          <div class="help">Never a clinical detail, a diagnosis, or anything that would identify someone.</div>
         </div>
       </div>
     </div>
 
     <!-- 5 -->
     <div class="card">
-      <div class="step"><span class="n">5</span><h2 data-i18n="svc.p080">Save</h2></div>
+      <div class="step"><span class="n">5</span><h2>Save</h2></div>
       <div id="errs"></div>
       <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
-        <button type="submit" class="btn" data-i18n="svc.p081">Save this contact</button>
-        <button type="button" class="btn ghost" id="csvBtn" data-i18n="svc.p082">Export CSV</button>
-        <button type="button" class="btn ghost" id="jsonBtn" data-i18n="svc.p083">Export JSON</button>
-        <button type="button" class="btn grey" id="clearBtn" data-i18n="svc.p084">Clear everything on this device</button>
+        <button type="submit" class="btn">Save this contact</button>
+        <button type="button" class="btn ghost" id="csvBtn">Export CSV</button>
+        <button type="button" class="btn ghost" id="jsonBtn">Export JSON</button>
+        <button type="button" class="btn grey" id="clearBtn">Clear everything on this device</button>
         <span class="xs" id="count"></span>
       </div>
       <div class="f" style="margin-top:16px">
-        <label data-i18n="svc.p085">What would be sent, if there were anywhere to send it</label>
+        <label>What would be sent, if there were anywhere to send it</label>
         <pre id="payload" class="pay">—</pre>
-        <div class="help" data-i18n="svc.p086" data-i18n-html>Shown so the Technical Working Group can see exactly what leaves the handset before
+        <div class="help">Shown so the Technical Working Group can see exactly what leaves the handset before
           agreeing to collect anything. Note what is <i>not</i> in it.</div>
       </div>
     </div>

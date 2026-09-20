@@ -1,5 +1,15 @@
 # Which pages the bilingual gate enforces in this repository.
 #   keyed   = no loose English allowed; Nepali still awaited
+#   enforced = keyed AND every key has Nepali
 #   pending = not yet migrated; counted and reported, not blocked
 index.html keyed
 selfreport.html keyed
+# Keyed 20 Sep 2026, in the same sweep as the referral/contact/PHQ-9 work.
+#   referral.html  the referral record, including the safeguarding gate
+#   contact.html   the one-contact-per-person record
+#   phq9.html      the follow-up measure; its clinical wording is held in
+#                  English under _meta.professionalOnly, so it can stay
+#                  `keyed` and never needs a Nepali entry
+referral.html keyed
+contact.html keyed
+phq9.html keyed

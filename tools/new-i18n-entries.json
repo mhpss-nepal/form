@@ -1,0 +1,1478 @@
+[
+  {
+    "key": "clinical.phq9ValidatedTextWarning",
+    "en": "<b>The Nepali text is missing, and this form is not ready for field use without it.</b> The Nepali version validated by the PRIME consortium exists, but the copy available is typeset in a legacy non-Unicode Nepali font, so the characters cannot be transferred here without risking a corrupted questionnaire. <b>Nothing has been translated or approximated.</b> Before any real use, obtain the Unicode Nepali items from the PRIME / Kohrt source and have them checked by a Nepali-speaking clinician. Administering the English items to a Nepali speaker through an untrained interpreter is not the same instrument and the cut-off does not carry over.",
+    "html": true,
+    "page": "phq9.html"
+  },
+  {
+    "key": "consent.label",
+    "en": "Consent",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "consent.phq9",
+    "en": "The person was told what this is for and agreed to answer",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.cutoff.interpretation",
+    "en": "Bands are the standard PHQ-9 cut-points (Kroenke, Spitzer &amp; Williams, 2001): 0–4 minimal, 5–9 mild, 10–14 moderate, 15–19 moderately severe, 20–27 severe. The action threshold of <b>10 or more</b> is the one validated in Nepal (Kohrt et al., 2016; sensitivity 0.94, specificity 0.80, in 125 primary-care patients in Chitwan). A score is not a diagnosis and must not be recorded as one.",
+    "html": true,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.cutoff.useWarning",
+    "en": "<b>Do not use this to screen a shelter.</b> In the Nepali validation the cut-off of 10 or more had a positive predictive value of 0.42 — in that primary-care sample, fewer than half of the people who screened positive turned out to have a depressive episode. Run it across a displaced population and most positives will be wrong, while the people you flag will have been told something about themselves that is not true. Use it where someone has already been identified and referred.",
+    "html": true,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.item1",
+    "en": "Little interest or pleasure in doing things",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.item2",
+    "en": "Feeling down, depressed, or hopeless",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.item3",
+    "en": "Trouble falling or staying asleep, or sleeping too much",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.item4",
+    "en": "Feeling tired or having little energy",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.item5",
+    "en": "Poor appetite or overeating",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.item6",
+    "en": "Feeling bad about yourself — or that you are a failure or have let yourself or your family down",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.item7",
+    "en": "Trouble concentrating on things, such as reading the newspaper or watching television",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.item8",
+    "en": "Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.item9",
+    "en": "Thoughts that you would be better off dead or of hurting yourself in some way",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.item9Instruction",
+    "en": "<b>Item 9 is positive. Do not close this form and move on.</b> Stay with the person, ask directly about thoughts of suicide and about means and plan, and follow your organisation's referral pathway now — record it on the <a href=\"referral.html\">referral form</a>. If your organisation has no pathway for this, that is the gap to raise at the Technical Working Group, and it should be raised before this instrument is used in the field at all. The answer to item 9 is kept in the record so that a positive answer can be audited against whether a referral followed.",
+    "html": true,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.itemDifficulty",
+    "en": "If you checked off any problems, how difficult have these problems made it for you to do your work, take care of things at home, or get along with other people?",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.itemInstruction",
+    "en": "Over the last 2 weeks, how often have you been bothered by any of the following problems?",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p001",
+    "en": "PHQ-9 follow-up measure — MHPSS Nepal",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p002",
+    "en": "Revised draft <span>· English items only — the validated Nepali text has not been obtained · saved on this phone, sent to the coordination register when there is signal</span>",
+    "html": true,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p003",
+    "en": "PHQ-9 · follow-up measure",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p004",
+    "en": "Layer 1 · Rasuwa / Bhote Koshi",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p005",
+    "en": "← Forms",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p006",
+    "en": "Hub",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p007",
+    "en": "Following one person over time",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p008",
+    "en": "This measure exists to answer one question the 14 September briefing asked: does a person move from acute distress towards a clinical disorder, or away from it? It is for repeating with <b>someone already in care</b>, so the second score can be compared with the first.",
+    "html": true,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p009",
+    "en": "Who, and which visit",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p010",
+    "en": "Organisation",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p011",
+    "en": "Administered by",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p012",
+    "en": "A measure like this belongs with a counsellor or clinician, not a volunteer.",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p013",
+    "en": "Date — Gregorian (AD)",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p014",
+    "en": "Contact code",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p015",
+    "en": "Paste the code from the person's <a href=\"contact.html\">service contact record</a>, so the two scores can be lined up without a name.",
+    "html": true,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p016",
+    "en": "Which administration is this?",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p017",
+    "en": "— choose —",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p018",
+    "en": "First — baseline",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p019",
+    "en": "Follow-up",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p020",
+    "en": "Not recorded",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p021",
+    "en": "Language used",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p022",
+    "en": "— choose —",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p023",
+    "en": "English, directly",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p024",
+    "en": "Nepali, through an interpreter",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p025",
+    "en": "Validated Nepali form on paper",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p026",
+    "en": "Another language",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p027",
+    "en": "Recorded because it changes what the score means.",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p028",
+    "en": "The nine items",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p029",
+    "en": "Difficulty, and the score",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p030",
+    "en": "— choose —",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p031",
+    "en": "out of 27",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p032",
+    "en": "answer all nine items",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p033",
+    "en": "Save",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p034",
+    "en": "Save this administration",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p035",
+    "en": "Export CSV",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p036",
+    "en": "Clear everything on this device",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p037",
+    "en": "What would be sent, if there were anywhere to send it",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p038",
+    "en": "Item-by-item answers are kept because a total alone cannot be re-checked, and because item 9 has to be auditable. There is no name, no phone number and no date of birth.",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p039",
+    "en": "Attribution",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.p040",
+    "en": "PHQ-9 was developed by Drs Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke and colleagues, with an educational grant from Pfizer Inc. The instrument carries the statement: <i>“No permission required to reproduce, translate, display or distribute.”</i> The items above are reproduced verbatim on that basis. The Nepali adaptation was made and validated through the Programme for Improving Mental Health Care (PRIME) consortium, funded by UK aid — and is <b>not</b> included here, for the reason given at the top of this page.",
+    "html": true,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.scale0",
+    "en": "Not at all",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.scale1",
+    "en": "Several days",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.scale2",
+    "en": "More than half the days",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.scale3",
+    "en": "Nearly every day",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.scaleDifficulty0",
+    "en": "Not difficult at all",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.scaleDifficulty1",
+    "en": "Somewhat difficult",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.scaleDifficulty2",
+    "en": "Very difficult",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.scaleDifficulty3",
+    "en": "Extremely difficult",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "ref.p001",
+    "en": "Referral record — MHPSS Nepal",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p002",
+    "en": "Revised draft for field piloting <span>· saved on this phone, sent to the coordination register when there is signal</span>",
+    "html": true,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p003",
+    "en": "Referral record",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p004",
+    "en": "Layer 1 · Rasuwa / Bhote Koshi",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p005",
+    "en": "← Forms",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p006",
+    "en": "Hub",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p007",
+    "en": "Where a person was sent, and whether they arrived",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p008",
+    "en": "On 14 September the briefing recorded that around 5,000 psychosocial counselling cases had been logged, but that once a person reaches a health facility their case goes into HMIS and is no longer visible here. This form is the join. Without it, “continuum of care” is a claim rather than something anyone can show.",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p009",
+    "en": "Who is referring",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p010",
+    "en": "remembered",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p011",
+    "en": "Referring organisation",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p012",
+    "en": "Referred by",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p013",
+    "en": "Date of referral (AD)",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p014",
+    "en": "District",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p015",
+    "en": "Site referred from",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p016",
+    "en": "Referrer phone <span class=\"opt\">— optional</span>",
+    "html": true,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p017",
+    "en": "So the receiving service can close the loop with you.",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p018",
+    "en": "Who is being referred",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p019",
+    "en": "<b>No name, no phone number, no date of birth.</b> A referral needs those to work, and they are handed over <b>person to person or on paper</b> between the referring worker and the receiving service. What is recorded here is only what coordination needs in order to see whether referrals are being made and completed.",
+    "html": true,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p020",
+    "en": "Contact code",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p021",
+    "en": "From the <a href=\"contact.html\">contact record</a>.",
+    "html": true,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p022",
+    "en": "Sex",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p023",
+    "en": "— choose —",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p024",
+    "en": "Female",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p025",
+    "en": "Male",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p026",
+    "en": "Other",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p027",
+    "en": "Not stated",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p028",
+    "en": "Age band",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p029",
+    "en": "— choose —",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p030",
+    "en": "60 and over",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p031",
+    "en": "Not stated",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p032",
+    "en": "Target group",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p033",
+    "en": "The referral",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p034",
+    "en": "Referred for",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p035",
+    "en": "Direction",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p036",
+    "en": "— choose —",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p037",
+    "en": "Out — we sent them elsewhere",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p038",
+    "en": "In — they were sent to us",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p039",
+    "en": "Urgency",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p040",
+    "en": "— choose —",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p041",
+    "en": "Same day",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p042",
+    "en": "Within a week",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p043",
+    "en": "Routine",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p044",
+    "en": "Type of service referred to",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p045",
+    "en": "— choose —",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p046",
+    "en": "Psychosocial counselling",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p047",
+    "en": "Health post / primary care",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p048",
+    "en": "Hospital — general",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p049",
+    "en": "Psychiatric service",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p050",
+    "en": "Protection services",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p051",
+    "en": "Legal or documentation support",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p052",
+    "en": "Livelihood or cash support",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p053",
+    "en": "Other",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p054",
+    "en": "Name of receiving service <span class=\"opt\">— optional</span>",
+    "html": true,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p055",
+    "en": "Free text for now. The agreed directory of services does not exist yet — it is still the single Excel sheet noted on 14 September, which is why this is not a dropdown.",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p056",
+    "en": "Did they arrive?",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p057",
+    "en": "<b>This is the field that will be empty, and that is the finding.</b> A referral is only complete when the receiving service confirms the person arrived. Nobody can fill this in from the referring side alone. Leave it as “not yet known” and come back — the proportion that stays unknown is the honest measure of whether the pathway works.",
+    "html": true,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p058",
+    "en": "Arrival",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p059",
+    "en": "Not yet known",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p060",
+    "en": "Confirmed arrived",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p061",
+    "en": "Did not arrive",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p062",
+    "en": "Person declined the referral",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p063",
+    "en": "Date confirmed <span class=\"opt\">— if known</span>",
+    "html": true,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p064",
+    "en": "Confirmed how <span class=\"opt\">— optional</span>",
+    "html": true,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p065",
+    "en": "— choose —",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p066",
+    "en": "Receiving service told us",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p067",
+    "en": "The person told us",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p068",
+    "en": "A family member told us",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p069",
+    "en": "Other",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p070",
+    "en": "If they did not arrive, what got in the way? <span class=\"opt\">— optional</span>",
+    "html": true,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p071",
+    "en": "— choose —",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p072",
+    "en": "Distance or no transport",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p073",
+    "en": "Cost",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p074",
+    "en": "Service was closed or full",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p075",
+    "en": "Stigma or family objection",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p076",
+    "en": "Lost contact with the person",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p077",
+    "en": "Other",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p078",
+    "en": "The barrier list is what turns a broken pathway into something fixable.",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p079",
+    "en": "Save",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p080",
+    "en": "Save this referral",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p081",
+    "en": "Export CSV",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p082",
+    "en": "Clear everything on this device",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p083",
+    "en": "What would be sent, if there were anywhere to send it",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "ref.p084",
+    "en": "Facility or organisation",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "safeguard.checkLabel",
+    "en": "Safeguarding check",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "safeguard.confirmation",
+    "en": "This is not a GBV case, not an unaccompanied or separated child, and not an immediate risk to life",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "safeguard.consequence",
+    "en": "If you cannot tick this, close the form and use the specialised pathway.",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "safeguard.referralExclusion",
+    "en": "<b>Three kinds of case do not belong on this form. Stop and use the proper pathway.</b> <ul> <li><b>Gender-based violence.</b> GBV cases follow the specialised, survivor-centred pathway of the protection cluster, with its own consent and its own confidential system. Never record a GBV referral in a shared coordination form, not even coded.</li> <li><b>An unaccompanied or separated child.</b> These go to child-protection case management. Around 200 were reported in one area alone on 14 September; each one is a case file, not a row.</li> <li><b>Immediate risk to life.</b> Act first. Record afterwards, if at all.</li> </ul> Recording these here would put people at risk and would break the consent under which they spoke to you. The count of such referrals can be reported to coordination as a number, by the pathway that holds them — never as records here.",
+    "html": true,
+    "page": "referral.html"
+  },
+  {
+    "key": "svc.p001",
+    "en": "Service contact record — MHPSS Nepal",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p002",
+    "en": "Revised draft for field piloting <span>· saved on this phone, sent to the coordination register when there is signal</span>",
+    "html": true,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p003",
+    "en": "Service contact record",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p004",
+    "en": "Layer 1 · Rasuwa / Bhote Koshi",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p005",
+    "en": "← Forms",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p006",
+    "en": "Hub",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p007",
+    "en": "One contact with one person",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p008",
+    "en": "Use this when you have seen, spoken to or supported a specific person. For a group activity or a day's total, use the <a href=\"5ws-report.html\">activity report</a> instead — this form is deliberately one record per person per contact, because that is the only way a returning person can be recognised instead of counted twice.",
+    "html": true,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p009",
+    "en": "<b>The person's name and phone number stay on this handset.</b> You type a few details so the phone can work out a <b>contact code</b>; the details are used for that calculation and then discarded. Only the code is saved. Nobody downstream — not the coordination view, not the dashboard, not this site — ever receives the name, the number, or a date of birth.",
+    "html": true,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p010",
+    "en": "<b>Works with no signal.</b> Records are held on this phone as you save them and sent to the coordination register on their own when there is signal. The export remains for a copy of your own. <span id=\"storeWarn\"></span>",
+    "html": true,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p011",
+    "en": "Who is reporting",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p012",
+    "en": "remembered for next time",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p013",
+    "en": "Reporting organisation",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p014",
+    "en": "Name of organisation",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p015",
+    "en": "Focal point name",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p016",
+    "en": "A staff member, never a service user.",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p017",
+    "en": "Focal point phone",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p018",
+    "en": "Type of service provider",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p019",
+    "en": "Who actually delivered this contact. Asked for on 15 September so that counsellors, psychologists and psychiatrists can be counted apart.",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p020",
+    "en": "When and where",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p021",
+    "en": "Date — Gregorian (AD)",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p022",
+    "en": "This is the date the system sorts and groups on.",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p023",
+    "en": "Date — Bikram Sambat <span class=\"opt\">— optional</span>",
+    "html": true,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p024",
+    "en": "Typed as reported. <b>Not converted automatically</b> — that needs a verified BS calendar table, which has not been obtained.",
+    "html": true,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p025",
+    "en": "District",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p026",
+    "en": "Site",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p027",
+    "en": "From the holding-centre roster. Only choose “Other” if the site genuinely is not listed — every “Other” has to be reconciled by hand later.",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p028",
+    "en": "Municipality and ward <span class=\"opt\">— optional</span>",
+    "html": true,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p029",
+    "en": "Asked for on 15 September as province / subdistrict. Free text for now: the agreed municipality and ward code list has not been obtained.",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p030",
+    "en": "Name of site",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p031",
+    "en": "Location pin <span class=\"opt\">— optional</span>",
+    "html": true,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p032",
+    "en": "📍 Use my location",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p033",
+    "en": "Recorded to three decimal places — a grid of roughly 100 m. Enough to put the site on a map; not enough to point at a household. A precise pin, a small count and a target group together identify people even with no name attached, which is why the precision is reduced here rather than in the dashboard.",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p034",
+    "en": "The person",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p035",
+    "en": "Is this the first time your organisation has recorded this person?",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p036",
+    "en": "New — first contact",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p037",
+    "en": "Returning — seen before",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p038",
+    "en": "Not known",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p039",
+    "en": "This is the question that makes the cumulative figure mean something. On 15 September the reported total was over 9,000 with duplication nobody could size.",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p040",
+    "en": "<b>These four boxes are not saved.</b> They are read, combined into a code, and cleared when you save. Type them the same way each time and the same person gets the same code.",
+    "html": true,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p041",
+    "en": "Initials",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p042",
+    "en": "First letters of the name, as the person says it.",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p043",
+    "en": "Year of birth",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p044",
+    "en": "Year only — never a full date.",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p045",
+    "en": "Sex",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p046",
+    "en": "— choose —",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p047",
+    "en": "Female",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p048",
+    "en": "Male",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p049",
+    "en": "Other",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p050",
+    "en": "Not stated",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p051",
+    "en": "Municipality",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p052",
+    "en": "Where the person is from, not where you met them.",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p053",
+    "en": "Contact code",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p054",
+    "en": "— fill the four boxes above —",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p055",
+    "en": "This is the only part that is saved. It is a <b>pseudonym, not an anonymous token</b>: the four inputs vary little, so someone holding a list of candidate names could test them against a code. Adequate for agreeing these questions; a live register needs the code mixed with a secret this handset never holds, which means a server.",
+    "html": true,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p056",
+    "en": "Age band",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p057",
+    "en": "— choose —",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p058",
+    "en": "60 and over",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p059",
+    "en": "Not stated",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p060",
+    "en": "Target group",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p061",
+    "en": "Disability reported <span class=\"opt\">— optional</span>",
+    "html": true,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p062",
+    "en": "— choose —",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p063",
+    "en": "Yes, reported",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p064",
+    "en": "No",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p065",
+    "en": "Not asked",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p066",
+    "en": "What was provided",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p067",
+    "en": "Service at this contact",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p068",
+    "en": "Draft list. The agreed service list is an <b>open action item</b> from 15 September and is not settled.",
+    "html": true,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p069",
+    "en": "Modality",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p070",
+    "en": "Length in minutes <span class=\"opt\">— optional</span>",
+    "html": true,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p071",
+    "en": "Outcome of this contact",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p072",
+    "en": "— choose —",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p073",
+    "en": "Supported, no further contact planned",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p074",
+    "en": "Follow-up arranged with us",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p075",
+    "en": "Referred on — record it on the referral form",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p076",
+    "en": "Support declined",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p077",
+    "en": "Other",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p078",
+    "en": "Anything the coordination team needs to know <span class=\"opt\">— optional</span>",
+    "html": true,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p079",
+    "en": "Never a clinical detail, a diagnosis, or anything that would identify someone.",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p080",
+    "en": "Save",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p081",
+    "en": "Save this contact",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p082",
+    "en": "Export CSV",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p083",
+    "en": "Export JSON",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p084",
+    "en": "Clear everything on this device",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p085",
+    "en": "What would be sent, if there were anywhere to send it",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p086",
+    "en": "Shown so the Technical Working Group can see exactly what leaves the handset before agreeing to collect anything. Note what is <i>not</i> in it.",
+    "html": true,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p087",
+    "en": "Full name, as it should appear in reports",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p088",
+    "en": "You — the person recording this",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p089",
+    "en": "e.g. Uttargaya, ward 4",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p090",
+    "en": "Site name, ward, municipality",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p091",
+    "en": "e.g. RB",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p092",
+    "en": "e.g. Uttargaya",
+    "html": false,
+    "page": "contact.html"
+  },
+  {
+    "key": "svc.p093",
+    "en": "About the service or the site — not about the person",
+    "html": false,
+    "page": "contact.html"
+  }
+]

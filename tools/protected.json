@@ -1,0 +1,176 @@
+[
+  {
+    "key": "clinical.phq9ValidatedTextWarning",
+    "en": "<b>The Nepali text is missing, and this form is not ready for field use without it.</b> The Nepali version validated by the PRIME consortium exists, but the copy available is typeset in a legacy non-Unicode Nepali font, so the characters cannot be transferred here without risking a corrupted questionnaire. <b>Nothing has been translated or approximated.</b> Before any real use, obtain the Unicode Nepali items from the PRIME / Kohrt source and have them checked by a Nepali-speaking clinician. Administering the English items to a Nepali speaker through an untrained interpreter is not the same instrument and the cut-off does not carry over.",
+    "html": true,
+    "page": "phq9.html"
+  },
+  {
+    "key": "consent.label",
+    "en": "Consent",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "consent.phq9",
+    "en": "The person was told what this is for and agreed to answer",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.cutoff.interpretation",
+    "en": "Bands are the standard PHQ-9 cut-points (Kroenke, Spitzer &amp; Williams, 2001): 0–4 minimal, 5–9 mild, 10–14 moderate, 15–19 moderately severe, 20–27 severe. The action threshold of <b>10 or more</b> is the one validated in Nepal (Kohrt et al., 2016; sensitivity 0.94, specificity 0.80, in 125 primary-care patients in Chitwan). A score is not a diagnosis and must not be recorded as one.",
+    "html": true,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.cutoff.useWarning",
+    "en": "<b>Do not use this to screen a shelter.</b> In the Nepali validation the cut-off of 10 or more had a positive predictive value of 0.42 — in that primary-care sample, fewer than half of the people who screened positive turned out to have a depressive episode. Run it across a displaced population and most positives will be wrong, while the people you flag will have been told something about themselves that is not true. Use it where someone has already been identified and referred.",
+    "html": true,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.item1",
+    "en": "Little interest or pleasure in doing things",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.item2",
+    "en": "Feeling down, depressed, or hopeless",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.item3",
+    "en": "Trouble falling or staying asleep, or sleeping too much",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.item4",
+    "en": "Feeling tired or having little energy",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.item5",
+    "en": "Poor appetite or overeating",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.item6",
+    "en": "Feeling bad about yourself — or that you are a failure or have let yourself or your family down",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.item7",
+    "en": "Trouble concentrating on things, such as reading the newspaper or watching television",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.item8",
+    "en": "Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.item9",
+    "en": "Thoughts that you would be better off dead or of hurting yourself in some way",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.item9Instruction",
+    "en": "<b>Item 9 is positive. Do not close this form and move on.</b> Stay with the person, ask directly about thoughts of suicide and about means and plan, and follow your organisation's referral pathway now — record it on the <a href=\"referral.html\">referral form</a>. If your organisation has no pathway for this, that is the gap to raise at the Technical Working Group, and it should be raised before this instrument is used in the field at all. The answer to item 9 is kept in the record so that a positive answer can be audited against whether a referral followed.",
+    "html": true,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.itemDifficulty",
+    "en": "If you checked off any problems, how difficult have these problems made it for you to do your work, take care of things at home, or get along with other people?",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.itemInstruction",
+    "en": "Over the last 2 weeks, how often have you been bothered by any of the following problems?",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.scale0",
+    "en": "Not at all",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.scale1",
+    "en": "Several days",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.scale2",
+    "en": "More than half the days",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.scale3",
+    "en": "Nearly every day",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.scaleDifficulty0",
+    "en": "Not difficult at all",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.scaleDifficulty1",
+    "en": "Somewhat difficult",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.scaleDifficulty2",
+    "en": "Very difficult",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "phq9.scaleDifficulty3",
+    "en": "Extremely difficult",
+    "html": false,
+    "page": "phq9.html"
+  },
+  {
+    "key": "safeguard.checkLabel",
+    "en": "Safeguarding check",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "safeguard.confirmation",
+    "en": "This is not a GBV case, not an unaccompanied or separated child, and not an immediate risk to life",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "safeguard.consequence",
+    "en": "If you cannot tick this, close the form and use the specialised pathway.",
+    "html": false,
+    "page": "referral.html"
+  },
+  {
+    "key": "safeguard.referralExclusion",
+    "en": "<b>Three kinds of case do not belong on this form. Stop and use the proper pathway.</b> <ul> <li><b>Gender-based violence.</b> GBV cases follow the specialised, survivor-centred pathway of the protection cluster, with its own consent and its own confidential system. Never record a GBV referral in a shared coordination form, not even coded.</li> <li><b>An unaccompanied or separated child.</b> These go to child-protection case management. Around 200 were reported in one area alone on 14 September; each one is a case file, not a row.</li> <li><b>Immediate risk to life.</b> Act first. Record afterwards, if at all.</li> </ul> Recording these here would put people at risk and would break the consent under which they spoke to you. The count of such referrals can be reported to coordination as a number, by the pathway that holds them — never as records here.",
+    "html": true,
+    "page": "referral.html"
+  }
+]
