@@ -29,8 +29,12 @@
    v43 follows the same engine again: the trial wording-feedback channel keeps
    its reports in durable device storage and its reason picker fits a phone
    viewport. A phone holding v42 would keep the older engine, so a reviewer
-   would lose unexported reports when the tab closed. */
-const CACHE = "mhpss-np-field-v43";
+   would lose unexported reports when the tab closed.
+   v44 is the same engine one edit later: a report's identity now includes the
+   keyed surface, so a placeholder complaint no longer swallows a separate
+   sentence complaint on the same key. Any engine edit needs its own bump, or
+   a phone keeps the previous engine. */
+const CACHE = "mhpss-np-field-v44";
 
 const PRECACHE = [
   "./",
