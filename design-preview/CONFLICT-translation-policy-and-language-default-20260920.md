@@ -56,3 +56,19 @@ A global `DEFAULT = "ne"` had been applied by this lane on the earlier reading t
 whole interface should default to Nepali. That reading was superseded by the per-layer
 decision above. It was **not** re-applied; the file currently in the staging tree should
 be treated as carrying the wrong mechanism.
+
+
+## Update — Adib resolved conflict A the same day
+
+Adib ruled: **machine English→Nepali translation is authorised** for the field forms,
+with the human team reviewing the Nepali on the live pages and sending corrections
+afterwards. The ruling was recorded on the translation lane's own cards
+(`t_2cfc3bab` comment 60, `t_93e4a525` comment 61) **without modifying their branch**.
+
+Consequence for the ship: the machine dictionary is no longer contested *by policy*,
+but it is still delivered separately from the three strings the form strictly needs
+(`design-preview/hub-pending/i18n-strings.js.ward-only.patch`), so the safe subset can
+land first.
+
+Conflict B stands as written: the form pages declare their own
+`data-i18n-default="ne"`, and no global default is flipped.

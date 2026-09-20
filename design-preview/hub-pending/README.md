@@ -24,7 +24,19 @@ apply with `git apply` from the repo root.
 | file | what | contested? |
 |---|---|---|
 | `codes.js.ward-counts.patch` | the four missing palika `wards` counts | **no** — apply freely |
-| `i18n-strings.js.ne-971.patch` | `f4.ward*` (needed) **plus** 677 machine Nepali values | **yes** — see conflict A |
+| `i18n.js.notice-44px.patch` | 44px min-height on the machine-translation notice buttons | **no** — accessibility fix |
+| `i18n-strings.js.ward-only.patch` | just the three `f4.ward*` / `f4.optional` strings | **no** — needed by the Ward label |
+
+Adib ruled on conflict A on 2026-09-20 (machine Nepali authorised, human review after),
+and the ruling was recorded on the translation lane's own cards (`t_2cfc3bab`,
+`t_93e4a525`) without touching their branch. **The 677 machine values are therefore no
+longer held by this lane**, but they are still delivered separately from the three
+strings the form strictly needs, so whoever applies the patch can take the safe subset
+first and the dictionary on the lane's word.
+
+A superseded patch, `i18n-strings.js.ne-971.patch`, was replaced by the surgical
+`ward-only` patch: writing the whole dictionary produced a 2,700-line diff where a
+7-line diff does the same job.
 
 `codes.js` patch: uncontested. Verified read-only; the hub tree was not modified.
 
