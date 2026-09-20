@@ -182,8 +182,32 @@ self.assertEqual((ROOT / "5ws-report.html").read_text(), allowed)
    that sibling. **This is a pre-existing repository-layout defect, not caused here, and it is
    not fully repaired here**; the note preserves it rather than disguising it.
 
-## 6. What to hand back to the Hub lane
+## 6. Commands and counts at the committed head
 
+Head `d01f7143618d1b0264499ef26d57b44e79a4ab33` (the commit that contains this note; the file
+cannot contain its own hash without being one commit stale).
+
+| Command | Result |
+|---|---|
+| `python3 -m unittest -q test_trial_scope` | **9 passed** (8 before + the new only-the-trial-form guard) |
+| `python3 test_preview_isolation.py` | **9 passed** |
+| `python3 -m unittest discover -s design-preview -p 'test_*.py'` | **48 passed** |
+| `python3 tools/i18n-check.py` | exit 0 — gate open |
+| `python3 tools/qr-check.py` | exit 0 |
+| `python3 tools/sw-precache-check.py` | exit 0 |
+| `python3 tools/per-layer-default-render-check.py http://127.0.0.1:8931` | **exit 0** — 11 cases, table above |
+| `python3 tools/trial-scope-render-check.py http://127.0.0.1:8931` | exit 0 |
+| `python3 tools/4ws-offline-redirect-check.py http://127.0.0.1:8931` | exit 0 |
+| `python3 tools/5ws-still-works.py http://127.0.0.1:8931` | exit 1 — **pre-existing**, not caused here |
+
+The `5ws-still-works.py` failure is `the agreed select ids changed: [… ward …]`. Its
+`SELECT_IDS` list predates the optional `ward` field (adjacent task `t_e26d775b`); it reports the
+same failure against the untouched base tree served at `127.0.0.1:8932`. The form itself is fine:
+`lang=ne`, the ENG/NEP switch present, the 25-name contract matches. Left as-is rather than
+edited here, because the `ward` field is another task's — narrowing that tool's list belongs with
+it.
+
+## 7. What to hand back to the Hub lane
 - **The Hub engine must land for this to have any effect.** `5ws-report.html` now declares
   `data-i18n-default="ne"`; the engine that honours it exists only in
   `/root/mhpss-nepal-work/hub-real` (`task/t_2449fe51-i18n-per-layer-default`). Until
@@ -199,7 +223,7 @@ self.assertEqual((ROOT / "5ws-report.html").read_text(), allowed)
 - **The `hub/assets/i18n.js` production line is still `DEFAULT = "en"`, no declaration reader.**
   Nothing about the per-layer default is in effect on the live site.
 
-## 7. Boundaries respected
+## 8. Boundaries respected
 
 - **Hub worktree untouched** (`/root/mhpss-nepal-work/hub-real` not modified by this task).
 - **No files hand-copied** between repositories; no cross-repo write.
@@ -209,7 +233,7 @@ self.assertEqual((ROOT / "5ws-report.html").read_text(), allowed)
 - The `ward` field and the two pending hub patches (`t_e26d775b`) were **not** folded in here.
 - Browser tooling **was** available and used; the rendered evidence above is from a real DOM.
 
-## 8. Base / head
+## 9. Base / head
 
 - Repository `/root/mhpss-nepal-audit-20260918/form` (branch `main`, `9032bb7`).
 - Worktree `/root/mhpss-nepal-work/form-frontend`, branch **`design/preview-isolation`**.

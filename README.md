@@ -31,6 +31,9 @@ Guard rails for the trial scope:
 - `tools/5ws-still-works.py` — the one approved form still loads with its full
   `name=` contract, its eight pickers, its count and target-group controls and
   its ENG/NEP switch.
+- `tools/per-layer-default-render-check.py` — the taught language default, in a
+  real browser: `5ws-report.html` opens **Nepali** with no `?lang=`, `?lang=en`
+  still gives English, and the Hub plus every other form page stay English.
 
 Run them with both repositories under one served root, because the pages load
 `../hub/assets/*`:
