@@ -36,13 +36,44 @@ def check(label: str, ok: bool, detail: str = "") -> None:
 
 # ---------------------------------------------------------------- rule 1: default
 i18n = I18N.read_text(encoding="utf-8")
+# The default is layered, not global: Layer 1 (the field forms) opens in Nepali,
+# Layer 2 and Layer 3 stay English. A single global DEFAULT cannot say that, and
+# the Hub pages load the same i18n.js, so a global "ne" would turn Layer 2 Nepali.
+# So i18n.js keeps DEFAULT = "en" and each page declares its own:
+#   <html lang="en" data-i18n-default="ne">
 m = re.search(r'var DEFAULT = "(\w+)"', i18n)
 check("i18n.js declares a default language", bool(m), m.group(1) if m else "not found")
 check(
-    "the default language is Nepali",
-    bool(m) and m.group(1) == "ne",
+    "the engine reads a per-page declaration",
+    "data-i18n-default" in i18n and "DECLARED" in i18n,
+    "i18n.js must read data-i18n-default from the page",
+)
+check(
+    "the global default stays English, so Layer 2 and Layer 3 do not follow Layer 1",
+    bool(m) and m.group(1) == "en",
     f'found DEFAULT = "{m.group(1)}"' if m else "",
 )
+
+# Every Layer 1 page that should open in Nepali must carry the declaration on its
+# own <html>, and the pages that must stay English must not carry a Nepali one.
+NEPALI_PAGES = ["5ws-report.html", "index.html"]
+ENGLISH_PAGES = ["selfreport.html", "phq9.html", "referral.html", "contact.html"]
+for page in NEPALI_PAGES:
+    text = (REPO / page).read_text(encoding="utf-8", errors="ignore")
+    tag = re.search(r"<html[^>]*>", text)
+    check(
+        f"{page} declares a Nepali default of its own",
+        bool(tag) and 'data-i18n-default="ne"' in tag.group(0),
+        tag.group(0) if tag else "no <html> tag",
+    )
+for page in ENGLISH_PAGES:
+    text = (REPO / page).read_text(encoding="utf-8", errors="ignore")
+    tag = re.search(r"<html[^>]*>", text)
+    check(
+        f"{page} does not force Nepali on a page the decision keeps English",
+        bool(tag) and 'data-i18n-default="ne"' not in tag.group(0),
+        tag.group(0) if tag else "no <html> tag",
+    )
 
 # English must remain selectable and the URL must still win.
 # The offered languages are declared in i18n-strings.js, not in i18n.js.
