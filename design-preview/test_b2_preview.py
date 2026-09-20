@@ -13,6 +13,7 @@ from __future__ import annotations
 import hashlib
 import re
 import subprocess
+import sys
 import unittest
 from pathlib import Path
 
@@ -221,6 +222,33 @@ class B2PreviewContractTest(unittest.TestCase):
     def test_repo_text_setting_rule_is_respected(self) -> None:
         self.assertNotIn("overflow-wrap: anywhere", self.css)
         self.assertNotIn("overflow-wrap:anywhere", self.css)
+
+    # -------------------------------------------------------- build & language
+    def test_language_slot_is_a_toggle_slot_not_a_reserved_id(self) -> None:
+        """i18n.js skips mounting the ENG/NEP switch when id="i18nbar" exists.
+
+        Giving the slot that id therefore removed the language switch entirely
+        from the page. The slot must be [data-i18n-toggle].
+        """
+        import re as _re
+        self.assertRegex(self.b2, r'<[a-zA-Z][^>]*\bdata-i18n-toggle\b')
+        self.assertIsNone(
+            _re.search(r'<[a-zA-Z][^>]*\bid="i18nbar"', self.b2),
+            "the language slot must not own id=i18nbar",
+        )
+
+    def test_build_script_reproduces_the_committed_page(self) -> None:
+        """The page is generated, so a rebuild must be deterministic."""
+        before = self.b2
+        subprocess.run([sys.executable, "design-preview/build_b2.py"], cwd=REPO,
+                       capture_output=True, text=True, check=True)
+        after = (REPO / "5ws-report-b2.html").read_text(encoding="utf-8")
+        self.assertEqual(before, after, "rebuilding the page produced a different file")
+
+    def test_build_script_guards_the_form_block(self) -> None:
+        src = (REPO / "design-preview" / "build_b2.py").read_text(encoding="utf-8")
+        self.assertIn("is not byte-identical", src)
+        self.assertIn("duplicate ids", src)
 
 
 if __name__ == "__main__":

@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="../hub/assets/app.css">
 <link rel="stylesheet" href="../hub/assets/design.css">
 <link rel="stylesheet" href="../hub/assets/form.css">
-<link rel="stylesheet" href="design-preview/5ws-preview.css?h=d9feaeb4ad">
+<link rel="stylesheet" href="design-preview/5ws-preview.css?h=7ef0576126">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#1d1d1b">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -25,7 +25,7 @@
 <body class="fx iu" data-iu-preview="B2">
 
 <div class="iu-previewbar" role="note">
-  <b>B2 Institutional App — design preview.</b>
+  <b>B2 Institutional App &mdash; design preview.</b>
   Demonstration / non-identifiable data only. New interface copy is English pending human-reviewed Nepali wording.
 </div>
 
@@ -35,7 +35,10 @@
     <div class="iu-brand">MHPSS Activity Report</div>
     <div class="iu-brandsub">Rasuwa &ndash; Bhote Koshi flood response</div>
   </div>
-  <div class="iu-lang" id="i18nbar"></div>
+  <!-- The bilingual engine mounts its ENG / NEP switch into this slot. It must
+       stay a [data-i18n-toggle] slot and must NOT be given id="i18nbar": the
+       engine skips mounting when an element with that id already exists. -->
+  <div class="iu-lang" data-i18n-toggle></div>
 </header>
 
 <main class="iu-main">

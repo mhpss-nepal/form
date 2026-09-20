@@ -81,26 +81,32 @@ body.iu .wrap {
   text-overflow: ellipsis;
 }
 .iu-lang {
-  display: flex;
-  gap: 4px;
+  display: inline-flex;
+  align-items: center;
 }
-.iu-lang button,
-#i18nbar button {
+/* The bilingual engine injects #i18nbar into the [data-i18n-toggle] slot. */
+.iu-top #i18nbar,
+.iu-lang #i18nbar {
+  display: inline-flex;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.iu-top #i18nbar button,
+.iu-lang #i18nbar button {
   min-width: 46px !important;
   min-height: 44px !important;
   padding: 6px 9px !important;
-  border: 1px solid rgba(255, 255, 255, 0.4) !important;
-  border-radius: 6px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
   background: transparent !important;
-  color: #fff !important;
+  color: #cfe6f2 !important;
   font: 800 11px/1 inherit !important;
   cursor: pointer;
 }
-.iu-lang button[aria-pressed="true"],
-.iu-lang button.on,
-#i18nbar button[aria-pressed="true"] {
+.iu-top #i18nbar button[aria-pressed="true"],
+.iu-lang #i18nbar button[aria-pressed="true"] {
   background: #12a3c9 !important;
-  border-color: #12a3c9 !important;
   color: #06222b !important;
 }
 
