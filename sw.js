@@ -18,18 +18,27 @@
    a phone that has already opened the form keeps running the OLD code --
    old validation, and (16 Sep 2026) a version of store.js that did not sync
    to the register at all. The fix was deployed and had no effect on any
-   device until this line changed. */
-const CACHE = "mhpss-np-field-v39";
+   device until this line changed.
+   v41 adds the under-1-KB 4Ws redirect stub to protect the address on cards
+   already distributed in the field; without a bump installed phones keep
+   v40's incomplete offline precache.
+   v42 follows the change to a precached page: 5ws-report.html now declares its
+   own language default (data-i18n-default="ne"), read by the shared engine at
+   ../hub/assets/i18n.js. The PAGE is in this precache, so a phone holding v41
+   would keep the declaration-free page and would still open in English. The
+   declaration only takes effect once the engine that reads it is also
+   precached here -- see the note below. */
+const CACHE = "mhpss-np-field-v42";
 
 const PRECACHE = [
   "./",
   "index.html",
   "5ws-report.html",
+  /* the under-1-KB redirect behind 4Ws cards already distributed in the
+     field. Without this stub a first scan with no signal falls back to the
+     landing page instead of the form. It records nothing and is not an
+     instrument, so caching it opens no path to an unapproved form. */
   "4ws-report.html",
-  "contact.html",
-  "phq9.html",
-  "referral.html",
-  "selfreport.html",
   /* the printable QR card sheet: asked for on 16 Sep and flagged urgent.
      It is precached because the person printing it may be doing so from a
      district office with the same bad connection as the field. */
@@ -43,7 +52,7 @@ const PRECACHE = [
   "../hub/assets/form.css",
   "../hub/assets/codes.js",
   "../hub/assets/l1.js",
-  "../hub/assets/qr.js",
+  "qr-trial.js",
   "../hub/assets/store.js",
   "../hub/assets/fb-config.js",
   "../hub/assets/fb.js",

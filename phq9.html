@@ -21,7 +21,7 @@
 <meta name="apple-mobile-web-app-title" content="MHPSS Field">
 </head>
 <body class="fx">
-<div class="ribbon">Revised draft <span>· English items only — the validated Nepali text has not been obtained · saved on this phone, sent to the coordination register when there is signal</span></div>
+<div class="ribbon">Revised draft <span>· validated Nepali items included — Nepali mode shows the wording published by Kohrt et al. (2016) · saved on this phone, sent to the coordination register when there is signal</span></div>
 
 <div class="top">
   <div>
@@ -49,13 +49,17 @@
   </div>
 
   <div class="banner warn">
-    <b>The Nepali text is missing, and this form is not ready for field use without it.</b> The Nepali
-    version validated by the PRIME consortium exists, but the copy available is typeset in a legacy
-    non-Unicode Nepali font, so the characters cannot be transferred here without risking a corrupted
-    questionnaire. <b>Nothing has been translated or approximated.</b> Before any real use, obtain the
-    Unicode Nepali items from the PRIME / Kohrt source and have them checked by a Nepali-speaking
-    clinician. Administering the English items to a Nepali speaker through an untrained interpreter is
-    not the same instrument and the cut-off does not carry over.
+    <b>Use the Nepali wording in Nepali mode.</b> This page shows two different things, and they are
+    not interchangeable. In <b>English mode</b> you see the standard English PHQ-9 items. In
+    <b>Nepali mode</b> you see the Nepali wording published and validated by Kohrt et al. (2016) —
+    which is not a translation of the English: it rephrases each item as a question, and it uses a
+    different response scale (never / sometimes / usually / always) because test participants could
+    not work with &ldquo;more than half the days&rdquo;. <b>The action threshold of 10 or more belongs to the
+    Nepali wording with that scale.</b> Do not mix the two: an English item scored on the Nepali scale,
+    or the Nepali wording scored against the English cut-off, is no longer the validated instrument.
+    The Nepali was recovered from the published source, which is typeset in a legacy non-Unicode font,
+    converted, and cross-checked against two independent converters; a Nepali-speaking clinician should
+    still confirm the wording before field use.
   </div>
 
   <form id="f" autocomplete="off" novalidate>
@@ -98,8 +102,8 @@
           <select id="lang">
             <option value="">— choose —</option>
             <option value="EN">English, directly</option>
+            <option value="NE-VAL">Validated Nepali wording (this form, Nepali mode)</option>
             <option value="NE-INT">Nepali, through an interpreter</option>
-            <option value="NE-VAL">Validated Nepali form on paper</option>
             <option value="OTH">Another language</option>
           </select>
           <div class="help">Recorded because it changes what the score means.</div>
@@ -161,7 +165,10 @@
         <span class="xs" id="count"></span>
       </div>
       <div class="f" style="margin-top:16px">
-        <label>What would be sent, if there were anywhere to send it</label>
+        <label>Data preview — exactly what this form would store</label>
+        <div class="help" style="margin:0 0 8px">This block is shown on purpose. It is the only way to
+          see precisely what the form records, and to check that nothing identifying is in it — so it is
+          not an error message and not unfinished code. It updates as you answer.</div>
         <pre id="payload" class="pay">—</pre>
         <div class="help">Item-by-item answers are kept because a total alone cannot be re-checked, and
           because item 9 has to be auditable. There is no name, no phone number and no date of birth.</div>
@@ -176,8 +183,10 @@
     an educational grant from Pfizer Inc. The instrument carries the statement: <i>“No permission required
     to reproduce, translate, display or distribute.”</i> The items above are reproduced verbatim on that
     basis. The Nepali adaptation was made and validated through the Programme for Improving Mental Health
-    Care (PRIME) consortium, funded by UK aid — and is <b>not</b> included here, for the reason given at
-    the top of this page.
+    Care (PRIME) consortium, funded by UK aid. The validated Nepali wording is reproduced in this form in
+    Nepali mode — recovered from that published source, which is typeset in a legacy non-Unicode font,
+    converted and cross-verified against two independent converters. A Nepali-speaking clinician should
+    still confirm the wording before field use.
   </div>
 </div>
 
@@ -204,11 +213,42 @@
     "Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual",
     "Thoughts that you would be better off dead or of hurting yourself in some way"
   ];
+
+  /* THE VALIDATED NEPALI ITEMS — not a translation of the English above.
+
+     Source: Kohrt BA, Luitel NP, Acharya P, Jordans MJD. BMC Psychiatry
+     2016;16:58 (PMC4782581), Additional file 1, "Nepal PHQ-9 Primary Care
+     Depression Screening Tool". The published file is typeset in a legacy
+     non-Unicode font; these were converted and cross-verified (two
+     independent mappers produce identical Devanagari) — see
+     design-preview/references/phq9-nepal-REVIEW.md.
+
+     These are NOT translations of ITEMS. The validated Nepali rephrases every
+     item as a question, so it is one sentence per item, not a rendering of
+     the English phrasing. Items 1-9 here are in the validated order.
+
+     STATUS: awaiting a Nepali speaker's confirmation of the conversion. */
+  var ITEMS_NE = [
+    "गएको २ हप्तामा तपाईं अन्य व्यक्तिहरू जति रमाउँछन्, त्यत्तिको रमाउन नसक्ने/खुसी हुन नसक्ने वा काम गर्न मन नलाग्ने कत्तिको भएको थियो ?",
+    "गएको २ हप्तामा तपाईंलाई दिक्क लाग्ने, निरास हुने वा केही गर्न सक्दिन जस्तो लाग्ने कत्तिको भएको थियो ?",
+    "गएको २ हप्तामा तपाईं राम्ररी सुत्न नसक्ने वा निन्द्रा मस्त नआउने वा अघिपछि भन्दा धेरै सुत्ने वा धेरै निन्द्रा लाग्ने कत्तिको भएको थियो ?",
+    "गएको २ हप्तामा तपाईंलाई थकान महशुस हुने, शक्ति वा तागत् कम हुने कत्तिको महशुस भएको थियो ?",
+    "गएको २ हप्तामा तपाईंलाई खानाखान मन नलाग्ने वा रुचि नहुने वा अघिपछि भन्दा धेरै खान मन लाग्ने कत्तिको भएको थियो ?",
+    "गएको २ हप्तामा तपाईं आफूले आफूलाई दोषी ठान्ने वा आफ्नो कारणले गर्दा आफू असफल भएको वा परिवार तल परेको कत्तिको महशुस गर्नु भएको थियो ? (जस्तैः आफ्नो कारणले गर्दा समुदायमा आफ्नो तथा आफ्नो परिवारको ईज्जत गुमेको महशुस गर्ने)",
+    "गएको २ हप्तामा तपाईंलाई ध्यान केन्द्रित गर्न वा एक चित्त हुन वा एक सुरले काम गर्न गाह्रो हुने कत्तिको भएको थियो ? (जस्तैः पत्रपत्रिका पढ्न वा टी.भी. हेर्न, चामल केलाउन, पात गाँस्न, तरकारी पकाउन, घाँस काट्न, ध्यान दिएर कुनै पनि काम गर्न आदि)",
+    "गएको २ हप्तामा अरू व्यक्तिले पनि याद गर्ने गरी तपाईं बिस्तारै बोल्ने वा हिँड्ने गर्नुभएको अथवा छट्पटी भएर चाहिने भन्दा बढी हिँडडुल गर्ने कत्तिको गर्नुभएको थियो ?",
+    "गएको २ हप्तामा तपाईंलाई मरौं मरौं जस्तो लाग्ने, आफ्नो ज्यान आफैं लिने वा आत्महत्या गर्ने खालका विचारहरू कत्तिको आयो ? (जस्तैः हात काट्ने, विष सेवन गर्ने, हामफाल्ने, भित्तामा टाउको ठोक्काउने आदि)"
+  ];
+
+  /* The validated response scale. NOT "several days / more than half the days
+     / nearly every day": in the Nepali validation the response options were
+     changed to these four, because test participants could not work with
+     "more than half the days". The cut-off ≥10 belongs to this scale. */
   var OPTS = [
-    { v: 0, l: "Not at all" },
-    { v: 1, l: "Several days" },
-    { v: 2, l: "More than half the days" },
-    { v: 3, l: "Nearly every day" }
+    { v: 0, l: "Not at all", np: "कत्ति पनि भएन" },
+    { v: 1, l: "Sometimes", np: "कहिलेकाहीं भयो" },
+    { v: 2, l: "Usually", np: "धेरै जसो भयो" },
+    { v: 3, l: "Always", np: "सधै जसो भयो" }
   ];
 
   L.fillSelect($("org"), C.ORGS.concat([{ code: "OTHER", name: "Other — not listed", np: "अन्य — सूचीमा नभएको", np_src: "draft" }]));
@@ -219,18 +259,42 @@
     $(id).addEventListener("change", function () { L.remember(id, $(id).value); });
   });
 
-  /* render items */
-  var html = ITEMS.map(function (t, i) {
-    var opts = OPTS.map(function (o) {
-      return '<label><input type="radio" name="q' + i + '" value="' + o.v + '"> ' + o.l +
-             ' <span style="color:var(--mute)">(' + o.v + ')</span></label>';
+  /* render items.
+     Nepali is shown when the interface language is Nepali, and the validated
+     Nepali items are used rather than a translation of the English ones. The
+     English stays authoritative and authoritative English is shown in English
+     mode. `data-lang` is set by i18n.js, so this follows the toggle; the
+     i18n:changed listener re-renders on a language switch. */
+  function isNepali() {
+    return document.documentElement.getAttribute("data-lang") === "ne";
+  }
+
+  function renderItems() {
+    var nep = isNepali();
+    var html = ITEMS.map(function (t, i) {
+      var opts = OPTS.map(function (o) {
+        var lab = (nep && o.np) ? o.np : o.l;
+        return '<label><input type="radio" name="q' + i + '" value="' + o.v + '"> ' + lab +
+               ' <span style="color:var(--mute)">(' + o.v + ')</span></label>';
+      }).join("");
+      var nepText = ITEMS_NE[i] || "";
+      var shown = (nep && nepText) ? nepText : t;
+      var note = "";
+      if (!nep) {
+        /* English mode: say plainly that the Nepali shown elsewhere is the
+           validated instrument, so the two are not confused. */
+        note = nepText ? ' <span class="np">Nepali mode shows the validated Nepali wording.</span>' : "";
+      }
+      return '<div class="q" id="qw' + i + '"><div class="qt">' + (i + 1) + '. ' +
+             shown.replace(/&/g, "&amp;").replace(/</g, "&lt;") +
+             note + '</div>' +
+             '<div class="opts">' + opts + '</div></div>';
     }).join("");
-    return '<div class="q" id="qw' + i + '"><div class="qt">' + (i + 1) + '. ' +
-           t.replace(/&/g, "&amp;").replace(/</g, "&lt;") +
-           '<span class="np">Nepali text not obtained — see the warning above.</span></div>' +
-           '<div class="opts">' + opts + '</div></div>';
-  }).join("");
-  $("items").innerHTML = html;
+    $("items").innerHTML = html;
+  }
+
+  renderItems();
+  document.addEventListener("i18n:changed", renderItems);
 
   function answers() {
     return ITEMS.map(function (_, i) {
@@ -287,7 +351,12 @@
       kind: "phq9",
       instrument: "PHQ-9",
       item_language: $("lang").value,
-      nepali_validated_text_used: $("lang").value === "NE-VAL",
+      /* True only when the validated Nepali wording was actually the wording
+         used. Choosing "validated Nepali wording" means this form was read in
+         Nepali mode; the flag guard prevents claiming it while the page is in
+         English, where the standard English items are the ones on screen. */
+      nepali_validated_text_used: $("lang").value === "NE-VAL"
+        && document.documentElement.getAttribute("data-lang") === "ne",
       org: $("org").value,
       administered_by: $("cadre").value,
       date_ad: $("dateAD").value,

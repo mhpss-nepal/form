@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-i18n-default="ne">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -32,7 +32,6 @@
   <div class="spacer"></div>
   <a href="../hub/">← <span data-i18n="nav.hub"></span></a>
   <a href="../hub/"><span data-i18n="nav.coordination"></span></a>
-  <a href="../hub/forms.html"><span data-i18n="nav.inbox"></span></a>
 </div>
 
 <div class="wrap">
@@ -45,10 +44,8 @@
       <button class="pb" id="copyAll" data-url="./" data-i18n="ml.p076"></button>
       <button class="pb" id="qrAll" data-i18n="ml.p075"></button>
       <a class="pb" href="cards.html" data-i18n="ml.p078"></a>
-      <span class="pn" data-i18n="ml.p077"></span>
     </div>
     <div class="qrbox" id="qrAllBox" hidden></div>
-    <p class="pn" style="margin-top:8px" data-i18n="ml.p079"></p>
   </div>
 
   <div class="banner stop" data-i18n="ml.p011" data-i18n-html></div>
@@ -66,58 +63,6 @@
         <a href="5ws-report.html" data-i18n="ml.act.open"></a>
         <button class="sec" data-url="5ws-report.html" onclick="COPY(this)" data-i18n="ml.p074"></button>
         <button class="sec" data-qr="5ws" onclick="QRT(this)" data-i18n="ml.act.qr"></button>
-      </div>
-      <div class="qrbox" hidden></div>
-    </div>
-
-    <div class="ml-card svc">
-      <div class="tag" data-i18n="ml.p009"></div>
-      <h3 data-i18n="ml.p047"></h3>
-      <p data-i18n="ml.p027" data-i18n-html></p>
-      <p class="src" data-i18n="ml.p026"></p>
-      <div class="ml-actions">
-        <a href="contact.html" data-i18n="ml.act.open"></a>
-        <button class="sec" data-url="contact.html" onclick="COPY(this)" data-i18n="ml.p073"></button>
-        <button class="sec" data-qr="contact" onclick="QRT(this)" data-i18n="ml.act.qr"></button>
-      </div>
-      <div class="qrbox" hidden></div>
-    </div>
-
-    <div class="ml-card clin">
-      <div class="tag" data-i18n="ml.p008"></div>
-      <h3 data-i18n="ml.p046"></h3>
-      <p data-i18n="ml.p025" data-i18n-html></p>
-      <p class="src" data-i18n="ml.p024"></p>
-      <div class="ml-actions">
-        <a href="phq9.html" data-i18n="ml.act.open"></a>
-        <button class="sec" data-url="phq9.html" onclick="COPY(this)" data-i18n="ml.p072"></button>
-        <button class="sec" data-qr="phq9" onclick="QRT(this)" data-i18n="ml.act.qr"></button>
-      </div>
-      <div class="qrbox" hidden></div>
-    </div>
-
-    <div class="ml-card ref">
-      <div class="tag" data-i18n="ml.p007"></div>
-      <h3 data-i18n="ml.p045"></h3>
-      <p data-i18n="ml.p023"></p>
-      <p class="src" data-i18n="ml.p022"></p>
-      <div class="ml-actions">
-        <a href="referral.html" data-i18n="ml.act.open"></a>
-        <button class="sec" data-url="referral.html" onclick="COPY(this)" data-i18n="ml.p071"></button>
-        <button class="sec" data-qr="referral" onclick="QRT(this)" data-i18n="ml.act.qr"></button>
-      </div>
-      <div class="qrbox" hidden></div>
-    </div>
-
-    <div class="ml-card selfr">
-      <div class="tag" data-i18n="ml.p006"></div>
-      <h3 data-i18n="ml.p044"></h3>
-      <p data-i18n="ml.p021"></p>
-      <p class="src" data-i18n="ml.p020"></p>
-      <div class="ml-actions">
-        <a href="selfreport.html" data-i18n="ml.act.open"></a>
-        <button class="sec" data-url="selfreport.html" onclick="COPY(this)" data-i18n="ml.p070"></button>
-        <button class="sec" data-qr="self" onclick="QRT(this)" data-i18n="ml.act.qr"></button>
       </div>
       <div class="qrbox" hidden></div>
     </div>
@@ -152,7 +97,6 @@
       <li data-i18n="ml.p034" data-i18n-html></li>
       <li data-i18n="ml.p033" data-i18n-html></li>
       <li data-i18n="ml.p032" data-i18n-html></li>
-      <li data-i18n="ml.p031" data-i18n-html></li>
     </ul>
   </div>
 
@@ -203,7 +147,7 @@
   <div class="attrib"></div>
 </div>
 
-<script src="../hub/assets/qr.js"></script>
+<script src="qr-trial.js"></script>
 <script src="../hub/assets/fb-config.js"></script>
 <script src="../hub/assets/fb.js"></script>
 <script>

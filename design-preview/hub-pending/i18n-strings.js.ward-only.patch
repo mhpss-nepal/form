@@ -1,0 +1,22 @@
+--- a/assets/i18n-strings.js
++++ b/assets/i18n-strings.js
+@@ -307,6 +307,9 @@
+   },
+ 
+   en: {
++    "f4.wardLab": "Ward <span class=\"opt\">— optional</span>",
++    "f4.wardHelp": "Optional. NDRRMA reports impact by ward, so recording it lets this report be compared with the official affected-area list. Leave it blank if the activity covered the whole palika or you are not sure.",
++    "f4.optional": "— optional",
+     /* ---- shared chrome ---- */
+     "nav.hub":            "Hub",
+     "nav.forms":          "Field forms",
+@@ -1130,6 +1133,9 @@
+      general translation engine cannot do that, and would invent its own
+      vocabulary that then fails to match the national one. */
+   ne: {
++    "f4.wardLab": "वडा <span class=\"opt\">— ऐच्छिक</span>",
++    "f4.wardHelp": "ऐच्छिक। NDRRMA ले वडा अनुसार प्रभाव सार्वजनिक गर्छ, त्यसैले यो राख्दा प्रतिवेदनलाई आधिकारिक प्रभावित क्षेत्र सूचीसँग तुलना गर्न सकिन्छ। गतिविधि सम्पूर्ण पालिकामा भएको भए वा थाहा नभए खाली छोड्नुहोस्।",
++    "f4.optional": "— ऐच्छिक",
+     /* ---- 5Ws form (machine drafts, 17 Sep 2026 -- to be checked by a Nepali speaker) ---- */
+     "f4.brand": "MHPSS गतिविधि प्रतिवेदन",
+     "f4.brandSub": "रसुवा – भोटेकोशी बाढी प्रतिकार्य · 5Ws · एक सत्र, एक प्रतिवेदन",

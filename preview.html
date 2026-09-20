@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Review preview — MHPSS Nepal field forms</title>
+<!-- Direct URL only, for reviewers. This page is NOT linked from the field
+     landing page (index.html) and is NOT in the service-worker precache.
+     It renders a committed form page inside a review frame; see
+     preview-shell.js for what is isolated and why. -->
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="preview-shell.css">
+</head>
+<body>
+
+<header id="shell-head">
+  <div id="shell-topline">
+    <span class="tag">REVIEW INDEX</span>
+    <div id="shellLang" role="group" aria-label="Preview language"></div>
+  </div>
+  <h1 id="shellTitle">Review preview</h1>
+  <p id="shellLede"></p>
+  <nav id="shellNav" aria-label="Review pages"></nav>
+</header>
+
+<main id="shellMain" aria-live="polite"></main>
+
+<footer id="shell-foot">
+  <p>
+    The instrument above is the committed form page, unmodified: the same markup, validation,
+    storage and sync path a field worker would get. Only the collection it may write to is
+    different, and the field service worker is not registered here.
+    <a href="design-preview/translation-review-index.html">All forms (review index)</a>.
+  </p>
+</footer>
+
+<script src="preview-mode.js"></script>
+<script src="preview-shell.js"></script>
+</body>
+</html>

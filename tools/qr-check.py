@@ -3,7 +3,7 @@
 """
 MHPSS Nepal -- the QR integrity check
 =====================================
-The QR codes in assets/qr.js are PRE-COMPUTED BIT MATRICES, on purpose: no CDN
+The QR codes in qr-trial.js are PRE-COMPUTED BIT MATRICES, on purpose: no CDN
 library, so they render on a phone with no signal. The consequence is easy to
 miss and expensive.
 
@@ -30,9 +30,13 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# the matrices are shared code, in the hub repository one folder over
-QRJS = os.path.join(ROOT, "..", "hub", "assets", "qr.js")
+QRJS = os.path.join(ROOT, "qr-trial.js")
 CONF = os.path.join(ROOT, "tools", "site.conf")
+ALLOWED_CARD_KEYS = {"5ws"}
+ALLOWED_QR_URLS = {
+    "master": "/form/",
+    "5ws": "/form/5ws-report.html",
+}
 
 ENTRY = re.compile(
     r'"([A-Za-z0-9_-]+)":\s*\{\s*"n":\s*(\d+)\s*,'
@@ -55,7 +59,7 @@ def declared_base(argv):
 
 def main(argv):
     if not os.path.isfile(QRJS):
-        print("  cannot read ../hub/assets/qr.js")
+        print("  cannot read qr-trial.js")
         return 2
 
     base = declared_base(argv)
@@ -87,6 +91,17 @@ def main(argv):
     if not entries:
         print("  no matrices found -- the file format changed; check the regex")
         return 2
+
+    entry_urls = {key: url for key, _n, url, _sha, _m in entries}
+    expected_urls = {
+        key: (base + path if base else path)
+        for key, path in ALLOWED_QR_URLS.items()
+    }
+    if set(entry_urls) != set(ALLOWED_QR_URLS) or entry_urls != expected_urls:
+        print("  QR ASSET SCOPE MISMATCH")
+        print("  expected exactly: %s" % ", ".join(sorted(ALLOWED_QR_URLS)))
+        print("  found: %s" % (", ".join(sorted(entry_urls)) or "(none)"))
+        return 1
 
     problems = []
     det = cv2.QRCodeDetector() if cv2 else None
@@ -170,11 +185,14 @@ def cards():
         return 0, "no card sheet"
     html = open(card, encoding="utf-8").read()
     want = re.findall(r'data-qr="([a-z0-9]+)"', html)
-    qr = open(os.path.join(root, "..", "hub", "assets", "qr.js"), encoding="utf-8").read()
+    qr = open(os.path.join(root, "qr-trial.js"), encoding="utf-8").read()
     have = set(re.findall(r'^"([a-z0-9]+)":\{', qr, re.M))
+    unexpected = [k for k in want if k not in ALLOWED_CARD_KEYS]
+    if unexpected:
+        return 1, "the trial card sheet exposes unapproved keys: %s" % ", ".join(unexpected)
     missing = [k for k in want if k not in have]
     if missing:
-        return 1, "the card sheet asks for %s, which assets/qr.js does not hold" % ", ".join(missing)
+        return 1, "the card sheet asks for %s, which qr-trial.js does not hold" % ", ".join(missing)
     return 0, "the card sheet's %d codes all exist" % len(want)
 
 if __name__ == "__main__":

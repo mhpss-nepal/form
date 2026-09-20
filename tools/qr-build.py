@@ -3,7 +3,7 @@
 """
 MHPSS Nepal -- regenerate the pre-computed QR matrices
 ======================================================
-Run this whenever the site address changes. It rewrites assets/qr.js with
+Run this whenever the site address changes. It rewrites qr-trial.js with
 matrices that actually encode the new address, then verifies every one of them
 by decoding it back -- because the whole failure mode here is a QR that LOOKS
 right and points somewhere dead.
@@ -20,17 +20,13 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-QRJS = os.path.join(ROOT, "..", "hub", "assets", "qr.js")
+QRJS = os.path.join(ROOT, "qr-trial.js")
 CONF = os.path.join(ROOT, "tools", "site.conf")
 
 # key -> path under the base. The key is what form/index.html asks for.
 TARGETS = [
     ("master",   "/form/"),
     ("5ws",      "/form/5ws-report.html"),
-    ("contact",  "/form/contact.html"),
-    ("phq9",     "/form/phq9.html"),
-    ("referral", "/form/referral.html"),
-    ("self",     "/form/selfreport.html"),
 ]
 
 HEADER = """/* Pre-computed QR matrices (ECC level M).
@@ -111,7 +107,7 @@ def build(base, write):
 
     io.open(QRJS, "w", encoding="utf-8").write(out)
     io.open(CONF, "w", encoding="utf-8").write("base=%s\n" % base)
-    print("\n  assets/qr.js rewritten, tools/site.conf updated.")
+    print("\n  qr-trial.js rewritten, tools/site.conf updated.")
     print("  REMEMBER: any QR already printed still points to the old address.")
     return 0
 
