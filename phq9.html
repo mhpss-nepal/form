@@ -21,7 +21,7 @@
 <meta name="apple-mobile-web-app-title" content="MHPSS Field">
 </head>
 <body class="fx">
-<div class="ribbon">Revised draft <span>· English items only — the validated Nepali text has not been obtained · saved on this phone, sent to the coordination register when there is signal</span></div>
+<div class="ribbon">Revised draft <span>· validated Nepali items included — Nepali mode shows the wording published by Kohrt et al. (2016) · saved on this phone, sent to the coordination register when there is signal</span></div>
 
 <div class="top">
   <div>
@@ -49,13 +49,17 @@
   </div>
 
   <div class="banner warn">
-    <b>The Nepali text is missing, and this form is not ready for field use without it.</b> The Nepali
-    version validated by the PRIME consortium exists, but the copy available is typeset in a legacy
-    non-Unicode Nepali font, so the characters cannot be transferred here without risking a corrupted
-    questionnaire. <b>Nothing has been translated or approximated.</b> Before any real use, obtain the
-    Unicode Nepali items from the PRIME / Kohrt source and have them checked by a Nepali-speaking
-    clinician. Administering the English items to a Nepali speaker through an untrained interpreter is
-    not the same instrument and the cut-off does not carry over.
+    <b>Use the Nepali wording in Nepali mode.</b> This page shows two different things, and they are
+    not interchangeable. In <b>English mode</b> you see the standard English PHQ-9 items. In
+    <b>Nepali mode</b> you see the Nepali wording published and validated by Kohrt et al. (2016) —
+    which is not a translation of the English: it rephrases each item as a question, and it uses a
+    different response scale (never / sometimes / usually / always) because test participants could
+    not work with &ldquo;more than half the days&rdquo;. <b>The action threshold of 10 or more belongs to the
+    Nepali wording with that scale.</b> Do not mix the two: an English item scored on the Nepali scale,
+    or the Nepali wording scored against the English cut-off, is no longer the validated instrument.
+    The Nepali was recovered from the published source, which is typeset in a legacy non-Unicode font,
+    converted, and cross-checked against two independent converters; a Nepali-speaking clinician should
+    still confirm the wording before field use.
   </div>
 
   <form id="f" autocomplete="off" novalidate>
@@ -98,8 +102,8 @@
           <select id="lang">
             <option value="">— choose —</option>
             <option value="EN">English, directly</option>
+            <option value="NE-VAL">Validated Nepali wording (this form, Nepali mode)</option>
             <option value="NE-INT">Nepali, through an interpreter</option>
-            <option value="NE-VAL">Validated Nepali form on paper</option>
             <option value="OTH">Another language</option>
           </select>
           <div class="help">Recorded because it changes what the score means.</div>
@@ -176,8 +180,10 @@
     an educational grant from Pfizer Inc. The instrument carries the statement: <i>“No permission required
     to reproduce, translate, display or distribute.”</i> The items above are reproduced verbatim on that
     basis. The Nepali adaptation was made and validated through the Programme for Improving Mental Health
-    Care (PRIME) consortium, funded by UK aid — and is <b>not</b> included here, for the reason given at
-    the top of this page.
+    Care (PRIME) consortium, funded by UK aid. The validated Nepali wording is reproduced in this form in
+    Nepali mode — recovered from that published source, which is typeset in a legacy non-Unicode font,
+    converted and cross-verified against two independent converters. A Nepali-speaking clinician should
+    still confirm the wording before field use.
   </div>
 </div>
 
@@ -342,7 +348,12 @@
       kind: "phq9",
       instrument: "PHQ-9",
       item_language: $("lang").value,
-      nepali_validated_text_used: $("lang").value === "NE-VAL",
+      /* True only when the validated Nepali wording was actually the wording
+         used. Choosing "validated Nepali wording" means this form was read in
+         Nepali mode; the flag guard prevents claiming it while the page is in
+         English, where the standard English items are the ones on screen. */
+      nepali_validated_text_used: $("lang").value === "NE-VAL"
+        && document.documentElement.getAttribute("data-lang") === "ne",
       org: $("org").value,
       administered_by: $("cadre").value,
       date_ad: $("dateAD").value,
