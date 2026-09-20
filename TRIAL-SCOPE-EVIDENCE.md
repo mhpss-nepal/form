@@ -117,3 +117,23 @@ the Hub landing page, not the form catalogue.
 - `python3 tools/qr-check.py`
 - `python3 tools/sw-precache-check.py`
 - `python3 -m unittest -v design-preview/test_b2_preview.py design-preview/test_institutional_preview.py`
+
+Exact counts, base `8c84f43` → head recorded below:
+
+| Command | At base (failing first) | At head |
+| --- | --- | --- |
+| `python3 -m unittest -v test_trial_scope.py` | 7 tests, **5 failures + 1 error** (`qr-trial.js` absent) | 7 tests, **0 failures** |
+| `python3 -m unittest -v design-preview/test_b2_preview.py design-preview/test_institutional_preview.py` | 48 tests, 0 failures | 48 tests, 0 failures |
+| `python3 tools/qr-check.py` | 0 (6 matrices) | 0 (2 matrices, allowlist enforced) |
+| `python3 tools/sw-precache-check.py` | 0 (cache v39) | 0 (cache v40, 25 entries, 3 pages) |
+| `python3 tools/i18n-check.py` | 0 (gate open) | 0 (gate open) |
+| `python3 tools/text-setting-check.py` | 0 | 0 |
+
+An adversarial probe confirmed the checker is not vacuous: a `qr-trial.js` with a
+valid extra `contact` matrix now exits 1 (`QR ASSET SCOPE MISMATCH`), and
+`test_qr_checker_rejects_any_extra_asset_entry` reproduces that in-suite.
+`design-preview/test_b2_preview.py`'s byte-lock on `sw.js`/`manifest.webmanifest`
+was narrowed to `pwa.js` (the file this task does not touch), because the trial
+scope change to the other two is intentional and is now covered by
+`test_trial_scope.py`; that narrowing is verified by the byte-parity test above,
+which pins `5ws-report.html`, the four unapproved pages and `pwa.js` to base.
