@@ -2,6 +2,35 @@
 
 Status: DONE — REVIEW ARTIFACT (not deployed)
 
+- Repository: `/root/mhpss-nepal-work/form-frontend` (branch `design/form-frontend`)
+- Base: `8c84f43c4d0829266e86f4be0ba9bac96b1fdb22`
+- Head: the commit that contains this file; its exact hash is recorded in the
+  task handoff (the file was updated by the final commit, so an in-file hash of
+  itself would immediately be a hash of the wrong commit).
+- Worktree: clean (`git status --porcelain` empty)
+- Production refs unchanged: public `68bf197`, form `9032bb7`, hub `ff2d4e2`. No push, PR, merge or deploy.
+- `hub/` paths touched: **0**. Form-page content and `pwa.js`: byte-identical to base.
+
+## What the tests do (and do not) pin
+
+`test_trial_scope.py` pins, from the code itself rather than from prose:
+
+1. `git show <base>:5ws-report.html|4ws-report.html|contact.html|phq9.html|referral.html|selfreport.html|pwa.js`
+   is byte-identical to the working tree (content must not drift).
+2. `index.html` exposes exactly one form link (`5ws-report.html`), one copy-URL
+   target (`5ws-report.html`), one QR key (`5ws`), and zero references to any of
+   the four unapproved filenames; it also contains no `forms.html` target.
+3. `cards.html` renders exactly one QR (`5ws`) and one URL label (`5ws`).
+4. `sw.js` contains none of the four unapproved filenames, and
+   `manifest.webmanifest` has exactly one shortcut, the 5Ws form.
+5. `tools/qr-build.py`'s `TARGETS` list is exactly `master` + `5ws`; `qr-trial.js`
+   holds exactly those two entries with exactly those approved URLs.
+6. `tools/qr-check.py` returns 1 for an asset that adds a valid extra `contact`
+   matrix (imported and exercised in-process, asset file untouched on disk).
+
+Not asserted (out of a static site's reach): that a `hub/`-hosted page reached by
+typing its URL cannot open an unapproved form. That is the residual path below.
+
 ## Trial entry points
 
 Remaining actionable form page: **1**
@@ -137,3 +166,69 @@ was narrowed to `pwa.js` (the file this task does not touch), because the trial
 scope change to the other two is intentional and is now covered by
 `test_trial_scope.py`; that narrowing is verified by the byte-parity test above,
 which pins `5ws-report.html`, the four unapproved pages and `pwa.js` to base.
+
+## Rendered-browser evidence (a real DOM, not source text)
+
+Source-level tests cannot see chrome a shared asset injects at runtime, or prove
+a declared QR actually drew. Two tools drive real Chromium over the served site
+(both repos under one root, so `../hub/assets/*` resolves):
+
+```
+cd /root/mhpss-nepal-work && python3 -m http.server 8791 --bind 127.0.0.1 &
+python3 tools/trial-scope-render-check.py http://127.0.0.1:8791   # exit 0
+python3 tools/5ws-still-works.py        http://127.0.0.1:8791     # exit 0
+```
+
+`trial-scope-render-check.py` at 390 px and 1280 px:
+
+```
+390 mobile     landing    cards=4 qr=['5ws'] drawn=520 sheetDrawn=0 sheetUrls=[] hrefs=['5ws-report.html', 'cards.html']
+390 mobile     card sheet cards=0 qr=['5ws'] drawn=0 sheetDrawn=299 sheetUrls=['mhpss-nepal.github.io/form/5ws-report.html'] hrefs=[]
+1280 desktop   landing    cards=4 qr=['5ws'] drawn=520 sheetDrawn=0 sheetUrls=[] hrefs=['5ws-report.html', 'cards.html']
+1280 desktop   card sheet cards=0 qr=['5ws'] drawn=0 sheetDrawn=299 sheetUrls=['mhpss-nepal.github.io/form/5ws-report.html'] hrefs=[]
+```
+
+It clicks every QR control, then asserts: no `a[href]` anywhere in the rendered
+DOM resolves to an unapproved form; no rendered `[data-qr]` is anything but `5ws`
+(or `master`); the landing page has exactly one actionable form card; the printed
+sheet draws its QR (299 rects) and prints only the 5Ws address; and there are no
+console **errors** (informational logs such as the Hub bridge's "heartbeats
+undefined" are ignored, because a check that fails on noise gets switched off).
+
+`5ws-still-works.py` renders `5ws-report.html` and compares the live DOM to the
+committed source:
+
+```
+title        : MHPSS Activity Report (5Ws) — Nepal Flood Response
+lang         : ne   i18n switch: True   toggle: ['ENG', 'NEP']
+name= in form: 24 (source expects 24) -> match
+controls     : 54 in form / 54 in document
+selects      : ['org','cadre','district','site','palika','modality','activity','status']
+counts       : 10 checkboxes, 21 numeric, 1 submit
+ids present  : f, expCsv, expJson, wipe, reset, problems, tgs
+.html hrefs  : ['index.html']
+```
+
+So the 5Ws form still resolves to Nepali by default, still mounts the ENG/NEP
+switch, keeps its full `name=` contract and all eight agreed pickers, and links
+only `index.html`. Matching is on ids and on the `name=` contract extracted from
+the committed page — never on button *text*, which is language-dependent.
+
+## Direct URL entry, with the service worker active
+
+Requirement 4 has two halves, both met: the four pages are **not precached**
+(Cache Storage after install holds exactly the 25 listed entries, none of them an
+unapproved page — verified by reading `caches.keys()`/`c.open().keys()` from the
+browser), and they are **not reachable from any in-page navigation** (no link on
+any approved page; the rendered sweep above proves it).
+
+One honest limitation remains, and it is a property of a static build, not of
+this change: a person who types the exact address, or follows an old bookmark or
+forwarded link, is served the file by the origin — GitHub Pages has no server-side
+rule to refuse it, and this task may not modify the pages themselves. Observed
+directly: with the worker active and controlling the page, `GET
+/form/contact.html|phq9.html|referral.html|selfreport.html` returned 200 for all
+four. Blocking that would need either a host rule, or a deny-list inside
+`sw.js` — which would also block the restricted Hub's legitimate internal
+"Open the form" links and belongs to that decision, not this one. It is carried
+into the Hub task (`t_46e4cb25`) rather than left implicit here.
