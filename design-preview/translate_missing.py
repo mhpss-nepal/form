@@ -21,6 +21,7 @@ Usage:  python3 design-preview/translate_missing.py [--emit]
 from __future__ import annotations
 
 import json
+import os
 import re
 import subprocess
 import sys
@@ -88,28 +89,55 @@ def main() -> int:
         return 0
 
     # ---- translate ------------------------------------------------------
+    # Greedy decoding (beams=1): measured on the longest string here, beam
+    # search cost 196s against 22s greedy for comparable output on this model.
+    # Since every value is a draft that a Nepali reviewer corrects anyway,
+    # spending 9x the CPU for a marginal gain is the wrong trade on a 2-core
+    # box. Raise --beams if a batch is worth slower, better decoding.
+    beams = "1"
+    for i, a in enumerate(sys.argv):
+        if a == "--beams" and i + 1 < len(sys.argv):
+            beams = sys.argv[i + 1]
     payload = {k: str(EN[k]) for k in missing}
     proc = subprocess.run(
-        [NMT_PY, NMT_SCRIPT], input=json.dumps(payload),
+        [NMT_PY, NMT_SCRIPT, "--beams", beams, "--batch-size", "8"],
+        input=json.dumps(payload),
         capture_output=True, text=True, timeout=3600,
+        env={**os.environ, "OMP_NUM_THREADS": "2", "MKL_NUM_THREADS": "2"},
     )
     if proc.returncode != 0:
         print("translate failed:", proc.stderr[-800:])
         return 1
     got = json.loads(proc.stdout)
 
+    # Correct the model's vocabulary toward the app's own wording. The
+    # glossary only rewrites word forms that already appear in
+    # i18n-strings.js, and records every change so a reviewer can see it.
+    sys.path.insert(0, "/root/nmt")
+    from glossary import apply as glossary_apply, audit_glossary  # noqa: E402
+
+    unattested = audit_glossary()
+    if unattested:
+        print("refusing to apply an unattested glossary:")
+        for u in unattested:
+            print("   -", u)
+        return 1
+
     table = {}
     for k in missing:
-        ne = (got.get(k) or "").strip()
-        ok = bool(ne) and bool(DEV.search(ne))
+        raw = (got.get(k) or "").strip()
+        fixed, changes = glossary_apply(raw)
+        ok = bool(fixed) and bool(DEV.search(fixed))
         table[k] = {
             "en": str(EN[k]),
-            "ne": ne,
+            "ne": fixed,
             "pages": used.get(k, []),
             "has_devanagari": ok,
             # every value here is machine-drafted and unreviewed by a person
             "provenance": "machine",
             "reviewed_by_human": False,
+            "glossary_changes": changes,
+            "ne_before_glossary": raw if changes else None,
         }
 
     bad = [k for k, v in table.items() if not v["has_devanagari"]]
