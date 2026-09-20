@@ -148,6 +148,12 @@
         <div class="help" data-i18n="f4.palikaHelp">Named after the official list of local levels. A palika-level report is counted at palika level and never as a site, so it cannot close a gap on the roster.</div>
       </div>
 
+      <div class="f" id="wardWrap" hidden>
+        <label for="ward" data-i18n="f4.wardLab">Ward <span class="opt" data-i18n="f4.optional">— optional</span></label>
+        <select id="ward" name="ward"></select>
+        <div class="help" data-i18n="f4.wardHelp">Optional. NDRRMA reports impact by ward, so recording it lets this report be compared with the official affected-area list. Leave it blank if the activity covered the whole palika or you are not sure.</div>
+      </div>
+
       <div class="f">
         <label for="modality" data-i18n="f4.modLab">Service setting — where the activity took place</label>
         <select id="modality" name="modality" aria-required="true"></select>
@@ -420,6 +426,8 @@
   /* the few strings the page writes itself, in both languages */
   var T = {
     palikaItem:  { en: "Palika level — no specific site", ne: "पालिका स्तर — कुनै निश्चित स्थान छैन" },
+    wardBlank:   { en: "— whole palika / not known —", ne: "— सम्पूर्ण पालिका / थाहा छैन —" },
+    wardNum:     { en: "Ward {n}", ne: "वडा {n}" },
     siteDefault: { en: "Choose from the holding-centre roster. Only pick “Other” if the site genuinely is not listed — every “Other” has to be reconciled by hand later.",
                    ne: "होल्डिङ सेन्टर सूचीबाट छान्नुहोस्। स्थान साँच्चै सूचीमा नभए मात्र “अन्य” छान्नुहोस् — हरेक “अन्य” पछि हातैले मिलाउनुपर्छ।" },
     sitePalika:  { en: "Use this only when the report covers a <b>palika and no single site</b>. It is counted at palika level and never as a site, so it cannot close a gap on the roster.",
@@ -565,8 +573,44 @@
     fill($("palika"), list, "pcode", function (p) { return C.label(p); }, "Select…");
     if (keep && list.some(function (p) { return p.pcode === keep; })) $("palika").value = keep;
     $("palikaWrap").hidden = !(v === "PALIKA" || v === "OTHER");
+    refreshWards();
+  }
+
+  /* WARD — optional, and deliberately not required.
+     NDRRMA publishes impact by ward (e.g. Bidur ward 1, 4, 5, 9, 10), so a
+     report that carries the ward can be compared with the official
+     affected-area list instead of only with the site name. It is optional
+     because a report may cover a whole palika or an unlisted site whose ward
+     nobody knows, and forcing an answer would produce a guessed one. The ward
+     count comes from the palika itself (C.PALIKAS[].wards), which is why the
+     list is built rather than stored. */
+  function refreshWards() {
+    var pcode = $("palika").value;
+    var p = null;
+    for (var i = 0; i < C.PALIKAS.length; i++) {
+      if (C.PALIKAS[i].pcode === pcode) { p = C.PALIKAS[i]; break; }
+    }
+    var keep = $("ward").value;
+    var sel = $("ward");
+    sel.innerHTML = "";
+    var blank = document.createElement("option");
+    blank.value = ""; blank.textContent = tx("wardBlank");
+    sel.appendChild(blank);
+    var n = p && p.wards ? p.wards : 0;
+    for (var w = 1; w <= n; w++) {
+      var o = document.createElement("option");
+      o.value = String(w);
+      o.textContent = tx("wardNum").replace("{n}", String(w));
+      sel.appendChild(o);
+    }
+    if (keep && n && Number(keep) <= n) sel.value = keep;
+    $("wardWrap").hidden = !n;
   }
   $("district").addEventListener("change", refreshSites);
+  /* The ward list depends on the palika, not the district, so it has to be
+     refreshed when the palika changes too -- otherwise choosing a palika left
+     the ward control hidden with its options never built. */
+  $("palika").addEventListener("change", refreshWards);
   $("site").addEventListener("change", function () {
     $("siteOtherWrap").hidden = this.value !== "OTHER";
     refreshSites();
@@ -703,6 +747,8 @@
       dateBS: $("dateBS").value.trim(),
       district: $("district").value,
       palika: palika || "",
+      /* ward is optional: blank means the whole palika, or not known */
+      ward: $("ward").value,
       site: siteCode,
       siteOther: $("siteOther").value.trim(),
       siteSource: siteCode === "PALIKA" ? "palika-level" : site ? site.source : "",
@@ -809,9 +855,9 @@
   });
 
   function softReset() {
-    ["sessionTime", "dateBS", "site", "siteOther", "palika", "partners", "activity", "activityOther", "modalityOther", "targetGroupOther", "description", "reachedTotal"].concat(partIds, S.OF_WHOM).forEach(function (id) { $(id).value = ""; });
+    ["sessionTime", "dateBS", "site", "siteOther", "palika", "ward", "partners", "activity", "activityOther", "modalityOther", "targetGroupOther", "description", "reachedTotal"].concat(partIds, S.OF_WHOM).forEach(function (id) { $(id).value = ""; });
     document.querySelectorAll("#tgs input:checked").forEach(function (i) { i.checked = false; });
-    $("siteOtherWrap").hidden = true; $("palikaWrap").hidden = true;
+    $("siteOtherWrap").hidden = true; $("palikaWrap").hidden = true; $("wardWrap").hidden = true;
     $("activityOtherWrap").hidden = true; $("modalityOtherWrap").hidden = true; $("tgOtherWrap").hidden = true;
     $("status").value = "ONG";
     refreshSites(); tally(); activityHelp();
