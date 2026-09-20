@@ -1,0 +1,56 @@
+/* =====================================================================
+   MHPSS Nepal — review preview shell chrome  (form/preview-shell.css)
+   ---------------------------------------------------------------------
+   Styles ONLY the review frame. The page rendered inside carries its own
+   stylesheets and is deliberately not restyled from here, so what a
+   reviewer judges is the instrument and not this frame.
+   ===================================================================== */
+:root { --pf-ink:#1d2b33; --pf-mute:#586a74; --pf-line:#d7dee1; --pf-bg:#eef1f2; }
+
+/* The UA default 8px body margin would inset the review banner and stop it
+   spanning the width, which is exactly the kind of thing that makes a
+   reviewer think the banner is decorative. The rendered check measures it. */
+html, body{margin:0; padding:0}
+
+#shell-head{
+  background:#fff; border-bottom:3px solid #183039;
+  padding:12px 16px 14px; font-family:"Manrope","Noto Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color:var(--pf-ink);
+}
+#shell-topline{display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:0 0 8px}
+#shell-head .tag{
+  display:inline-block; padding:2px 8px; border-radius:3px; background:#183039; color:#fff;
+  font-size:11px; font-weight:900; letter-spacing:.09em;
+}
+#shellLang{display:inline-flex; gap:6px}
+#shellLang .lang{
+  min-height:40px; min-width:64px; padding:8px 14px; border:1.5px solid #a9b8bf; border-radius:4px;
+  background:#fff; color:#183039; font:800 13px/1.2 inherit; cursor:pointer;
+}
+#shellLang .lang[aria-pressed="true"]{background:#006d91; border-color:#006d91; color:#fff}
+#shellTitle{margin:0 0 4px; font-size:20px; line-height:1.25; color:#183039}
+#shellLede{margin:0 0 10px; color:var(--pf-mute); font-size:13px; line-height:1.5}
+#shellLede .pill{
+  display:inline-block; margin-right:6px; padding:2px 8px; border-radius:999px;
+  background:#e7f5f8; color:#0b5168; font-size:11px; font-weight:800;
+}
+#shellLede .file{font-family:ui-monospace,Menlo,monospace; font-size:12px; color:#3c4d57}
+#shellNav{display:flex; gap:6px; flex-wrap:wrap}
+#shellNav a{
+  display:inline-flex; align-items:center; min-height:40px; padding:6px 11px; border-radius:4px;
+  border:1.5px solid var(--pf-line); background:#f7f9fa; color:#2a3d47;
+  font-size:12.5px; font-weight:700; text-decoration:none;
+}
+#shellNav a.on{background:#183039; border-color:#183039; color:#fff}
+#shellMain{background:var(--pf-bg); min-height:40vh}
+#shellMain .problems{
+  margin:18px; padding:16px 18px; border:1px solid #d9a5a5; border-left:5px solid #8e2929;
+  border-radius:4px; background:#fff6f4; color:#6d1f1f;
+  font-family:"Manrope","Noto Sans",system-ui,sans-serif; font-size:14px; line-height:1.55;
+}
+#shellMain .problems h2{margin:0 0 8px; font-size:16px}
+#shell-foot{
+  padding:14px 16px 26px; color:var(--pf-mute); font-size:12.5px; line-height:1.55;
+  font-family:"Manrope","Noto Sans",system-ui,sans-serif; background:#fff; border-top:1px solid var(--pf-line);
+}
+#shell-foot p{margin:0 0 6px; max-width:960px}

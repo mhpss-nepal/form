@@ -13,8 +13,9 @@
   h1 { font-size:22px; margin:0 0 6px; }
   .lede { color:var(--mute); margin:0 0 22px; }
   table { width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line); }
-  th, td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
-  th { background:#eef1f2; font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:#3c4d57; }
+  th, td { padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { background:#eef1f2; font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:#3c4d57; text-align:left; }
+  td { text-align:left; }
   tr:last-child td { border-bottom:0; }
   a.open { display:inline-block; min-height:44px; line-height:44px; padding:0 14px; border-radius:6px;
            background:var(--ink); color:#fff; text-decoration:none; font-weight:700; font-size:13px; }
@@ -28,6 +29,7 @@
   .note { background:#fff; border:1px solid var(--line); border-left:4px solid var(--warn);
           padding:14px 16px; margin:24px 0; border-radius:4px; }
   .note.bad { border-left-color:var(--bad); }
+  .note.ok { border-left-color:var(--ok); }
   h2 { font-size:16px; margin:28px 0 10px; }
 </style>
 </head>
@@ -39,6 +41,23 @@
 Nothing on these pages is real client data. Use <strong>NEP / ENG</strong> inside each form to
 switch language, and check that English mode contains no Devanagari.</p>
 
+<div class="note ok">
+  <strong>These links open the forms in REVIEW PREVIEW, not live.</strong>
+  Each one loads the committed form unchanged, behind a bilingual
+  <em>DEMO / REVIEW — not real data — not counted anywhere</em> banner. A record saved there goes
+  to the <code>submissions_preview</code> collection and cannot be published.
+  <br><br>
+  <strong>The Hub does not read preview records by default.</strong> Its reader names
+  <code>submissions</code> and nothing else, so a preview record is invisible to every Hub figure
+  and cannot reach <code>public_stats</code> — the collection the public site reads. That is the
+  deliberate, safer choice; making the Hub display preview rows would be a separate, labelled
+  feature and is not proposed here.
+  <br><br>
+  The bare page files (<code>form/5ws-report.html</code> and the four unapproved prototypes) still
+  exist and would write to the live register if opened directly. Review from this page, or from
+  <code>form/preview.html?preview_form=&lt;file&gt;</code>.
+</div>
+
 <div class="note bad">
   <strong>PHQ-9 — do not publish a machine translation as the validated instrument.</strong>
   The validated Nepali PHQ-9 (PRIME / Kohrt) is a specific wording, and the cut-off ≥10 belongs to
@@ -48,62 +67,62 @@ switch language, and check that English mode contains no Devanagari.</p>
 
 <table>
   <thead>
-    <tr><th>Form</th><th>Open</th><th>Translation state (measured)</th><th>Reviewer action</th></tr>
+    <tr><th>Form</th><th>Open in review preview</th><th>Translation state (measured)</th><th>Reviewer action</th></tr>
   </thead>
   <tbody>
     <tr>
       <td><strong>5Ws activity report</strong><br><code>5ws-report.html</code></td>
-      <td><a class="open" href="../form-frontend/5ws-report.html">Open form</a></td>
+      <td><a class="open" href="../preview.html?preview_form=5ws-report.html">Open form</a></td>
       <td><span class="pill p-ok">Nepali complete</span><br>91 keys, 0 missing.</td>
       <td>Read for wording quality only.</td>
     </tr>
     <tr>
       <td><strong>5Ws — B2 Institutional App</strong><br><code>5ws-report-b2.html</code></td>
-      <td><a class="open" href="../form-frontend/5ws-report-b2.html">Open preview</a></td>
+      <td><a class="open" href="../preview.html?preview_form=5ws-report-b2.html">Open preview</a></td>
       <td><span class="pill p-ok">Nepali complete</span><br>Preview only; not linked in the app.</td>
       <td>Design review. Confirm ENG mode has no Nepali.</td>
     </tr>
     <tr>
-      <td><strong>4Ws activity report</strong><br><code>4ws-report.html</code></td>
-      <td><a class="open" href="../form-frontend/4ws-report.html">Open form</a></td>
-      <td><span class="pill p-ok">Nepali complete</span><br>Keys complete.</td>
-      <td>Read for wording quality only.</td>
+      <td><strong>4Ws activity report (redirect)</strong><br><code>4ws-report.html</code></td>
+      <td><a class="open" href="../preview.html?preview_form=4ws-report.html">Open stub</a></td>
+      <td><span class="pill p-ok">No prose</span><br>Redirect only; records nothing.</td>
+      <td>Nothing to translate. Confirms already-printed cards still arrive.</td>
     </tr>
     <tr>
       <td><strong>Landing / form list</strong><br><code>index.html</code></td>
-      <td><a class="open" href="../form-frontend/">Open landing</a></td>
+      <td><a class="open" href="../index.html">Open landing</a></td>
       <td><span class="pill p-warn">82 keys awaiting</span><br>Machine drafts ready, not applied.</td>
-      <td>Review the 82 drafts in the table below.</td>
+      <td>Read-only here: the field landing page is the trial surface and is not opened in preview.</td>
     </tr>
     <tr>
       <td><strong>Self report</strong><br><code>selfreport.html</code></td>
-      <td><a class="open" href="../form-frontend/selfreport.html">Open form</a></td>
+      <td><a class="open" href="../preview.html?preview_form=selfreport.html">Open form</a></td>
       <td><span class="pill p-warn">52 keys awaiting</span><br>Machine drafts ready, not applied.</td>
       <td>Review the drafts; some are clinical wording.</td>
     </tr>
     <tr>
       <td><strong>PHQ-9 follow-up</strong><br><code>phq9.html</code></td>
-      <td><a class="open" href="../form-frontend/phq9.html">Open form</a></td>
+      <td><a class="open" href="../preview.html?preview_form=phq9.html">Open form</a></td>
       <td><span class="pill p-bad">Cannot be machine-translated</span><br>The nine items must be the
           validated Nepali text, obtained — not regenerated.</td>
       <td><strong>Obtain the PRIME / Kohrt Unicode items.</strong> Do not approve a fresh translation.</td>
     </tr>
     <tr>
       <td><strong>Referral</strong><br><code>referral.html</code></td>
-      <td><a class="open" href="../form-frontend/referral.html">Open form</a></td>
+      <td><a class="open" href="../preview.html?preview_form=referral.html">Open form</a></td>
       <td><span class="pill p-warn">Not keyed yet</span><br>Prose is inside the HTML, so it cannot be
           translated by key until it is migrated. ~668 words.</td>
       <td>Needs keying first, then translation.</td>
     </tr>
     <tr>
       <td><strong>Contact</strong><br><code>contact.html</code></td>
-      <td><a class="open" href="../form-frontend/contact.html">Open form</a></td>
+      <td><a class="open" href="../preview.html?preview_form=contact.html">Open form</a></td>
       <td><span class="pill p-warn">Not keyed yet</span><br>~765 words inside the HTML.</td>
       <td>Needs keying first, then translation.</td>
     </tr>
     <tr>
       <td><strong>QR cards</strong><br><code>cards.html</code></td>
-      <td><a class="open secondary" href="../form-frontend/cards.html">Open page</a></td>
+      <td><a class="open secondary" href="../cards.html">Open page</a></td>
       <td><span class="pill p-warn">No translation layer</span><br>Static helper page.</td>
       <td>Decide whether it needs Nepali at all.</td>
     </tr>
