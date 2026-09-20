@@ -1,0 +1,28 @@
+--- /tmp/hub_main_codes.js	2026-09-20 16:50:11.624297302 +0000
++++ hub/assets/codes.js	2026-09-20 16:39:27.078039957 +0000
+@@ -13,6 +13,10 @@
+                     Nuwakot list of 29 Bhadra 2083 (12, "gov-list"), and 8
+                     codes retired or merged, kept only so old records resolve.
+      - PALIKAS    : the 16 local levels that appear in reports or on the
++                    Ward counts for Aamachhodingmo (5), Shahid Lakhan (9), Gandaki (8) and
++                    Ichchhakamana (7) added 20 Sep 2026, each confirmed from at least two
++                    independent sources (Shahid Lakhan from its own municipal website). The
++                    other 16 came with the original list.
+                     roster, keyed by the OCHA COD-AB Nepal v02 adm3 P-code
+                     (HDX cod-ab-npl, Survey Department and UN RCO; valid from
+                     14 Mar 2024, last updated 14 Aug 2026).
+@@ -88,10 +92,10 @@
+      confirms them. Shivapuri RM (Nuwakot, NDRRMA SitRep #1) is NOT added:
+      COD-AB carries two units of that name in Nuwakot (NP0328410, NP0328596)
+      and does not say which is the rural municipality -- a ruling first. */
+-  { pcode: "NP0329401", name: "Aamachhodingmo Rural Municipality", np: "आमाछोदिङमो गाउँपालिका", type: "RM", district: "RAS", province: "Bagmati", np_src: "draft", src: "RDNA 2026; NDRRMA SitRep #1; pcode COD-AB NPL v02 (17 Sep)" },
+-  { pcode: "NP0436408", name: "Shahid Lakhan Rural Municipality", np: "शहीद लखन गाउँपालिका", type: "RM", district: "GOR", province: "Gandaki", np_src: "draft", src: "RDNA 2026; pcode COD-AB NPL v02 (17 Sep)" },
+-  { pcode: "NP0436409", name: "Gandaki Rural Municipality", np: "गण्डकी गाउँपालिका", type: "RM", district: "GOR", province: "Gandaki", np_src: "draft", src: "RDNA 2026; pcode COD-AB NPL v02 (17 Sep)" },
+-  { pcode: "NP0335401", name: "Ichchhakamana Rural Municipality", alias: "Ichchha Kamana", np: "इच्छाकामना गाउँपालिका", type: "RM", district: "CHT", province: "Bagmati", np_src: "draft", src: "RDNA 2026; pcode COD-AB NPL v02 (17 Sep), spelt Ichchha Kamana there" },
++  { pcode: "NP0329401", name: "Aamachhodingmo Rural Municipality", np: "आमाछोदिङमो गाउँपालिका", type: "RM", wards: 5, district: "RAS", province: "Bagmati", np_src: "draft", src: "RDNA 2026; NDRRMA SitRep #1; pcode COD-AB NPL v02 (17 Sep)" },
++  { pcode: "NP0436408", name: "Shahid Lakhan Rural Municipality", np: "शहीद लखन गाउँपालिका", type: "RM", wards: 9, district: "GOR", province: "Gandaki", np_src: "draft", src: "RDNA 2026; pcode COD-AB NPL v02 (17 Sep)" },
++  { pcode: "NP0436409", name: "Gandaki Rural Municipality", np: "गण्डकी गाउँपालिका", type: "RM", wards: 8, district: "GOR", province: "Gandaki", np_src: "draft", src: "RDNA 2026; pcode COD-AB NPL v02 (17 Sep)" },
++  { pcode: "NP0335401", name: "Ichchhakamana Rural Municipality", alias: "Ichchha Kamana", np: "इच्छाकामना गाउँपालिका", type: "RM", wards: 7, district: "CHT", province: "Bagmati", np_src: "draft", src: "RDNA 2026; pcode COD-AB NPL v02 (17 Sep), spelt Ichchha Kamana there" },
+   { pcode: "NP0328301", name: "Bidur Municipality", np: "विदुर नगरपालिका", type: "M", wards: 13, district: "NUW", province: "Bagmati", src: "[S3][S4][S5][S6]; pcode COD-AB NPL v02" },
+   { pcode: "NP0328302", name: "Belkotgadhi Municipality", np: "बेलकोटगढी नगरपालिका", type: "M", wards: 13, district: "NUW", province: "Bagmati", src: "[S3][S5][S6][S8]; pcode COD-AB NPL v02" },
+   { pcode: "NP0328402", name: "Kispang Rural Municipality", np: "किस्पाङ गाउँपालिका", type: "RM", wards: 5, district: "NUW", province: "Bagmati", src: "[S3][S5][S6][S8]; pcode COD-AB NPL v02" },
