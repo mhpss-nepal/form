@@ -204,11 +204,42 @@
     "Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual",
     "Thoughts that you would be better off dead or of hurting yourself in some way"
   ];
+
+  /* THE VALIDATED NEPALI ITEMS — not a translation of the English above.
+
+     Source: Kohrt BA, Luitel NP, Acharya P, Jordans MJD. BMC Psychiatry
+     2016;16:58 (PMC4782581), Additional file 1, "Nepal PHQ-9 Primary Care
+     Depression Screening Tool". The published file is typeset in a legacy
+     non-Unicode font; these were converted and cross-verified (two
+     independent mappers produce identical Devanagari) — see
+     design-preview/references/phq9-nepal-REVIEW.md.
+
+     These are NOT translations of ITEMS. The validated Nepali rephrases every
+     item as a question, so it is one sentence per item, not a rendering of
+     the English phrasing. Items 1-9 here are in the validated order.
+
+     STATUS: awaiting a Nepali speaker's confirmation of the conversion. */
+  var ITEMS_NE = [
+    "गएको २ हप्तामा तपाईं अन्य व्यक्तिहरू जति रमाउँछन्, त्यत्तिको रमाउन नसक्ने/खुसी हुन नसक्ने वा काम गर्न मन नलाग्ने कत्तिको भएको थियो ?",
+    "गएको २ हप्तामा तपाईंलाई दिक्क लाग्ने, निरास हुने वा केही गर्न सक्दिन जस्तो लाग्ने कत्तिको भएको थियो ?",
+    "गएको २ हप्तामा तपाईं राम्ररी सुत्न नसक्ने वा निन्द्रा मस्त नआउने वा अघिपछि भन्दा धेरै सुत्ने वा धेरै निन्द्रा लाग्ने कत्तिको भएको थियो ?",
+    "गएको २ हप्तामा तपाईंलाई थकान महशुस हुने, शक्ति वा तागत् कम हुने कत्तिको महशुस भएको थियो ?",
+    "गएको २ हप्तामा तपाईंलाई खानाखान मन नलाग्ने वा रुचि नहुने वा अघिपछि भन्दा धेरै खान मन लाग्ने कत्तिको भएको थियो ?",
+    "गएको २ हप्तामा तपाईं आफूले आफूलाई दोषी ठान्ने वा आफ्नो कारणले गर्दा आफू असफल भएको वा परिवार तल परेको कत्तिको महशुस गर्नु भएको थियो ? (जस्तैः आफ्नो कारणले गर्दा समुदायमा आफ्नो तथा आफ्नो परिवारको ईज्जत गुमेको महशुस गर्ने)",
+    "गएको २ हप्तामा तपाईंलाई ध्यान केन्द्रित गर्न वा एक चित्त हुन वा एक सुरले काम गर्न गाह्रो हुने कत्तिको भएको थियो ? (जस्तैः पत्रपत्रिका पढ्न वा टी.भी. हेर्न, चामल केलाउन, पात गाँस्न, तरकारी पकाउन, घाँस काट्न, ध्यान दिएर कुनै पनि काम गर्न आदि)",
+    "गएको २ हप्तामा अरू व्यक्तिले पनि याद गर्ने गरी तपाईं बिस्तारै बोल्ने वा हिँड्ने गर्नुभएको अथवा छट्पटी भएर चाहिने भन्दा बढी हिँडडुल गर्ने कत्तिको गर्नुभएको थियो ?",
+    "गएको २ हप्तामा तपाईंलाई मरौं मरौं जस्तो लाग्ने, आफ्नो ज्यान आफैं लिने वा आत्महत्या गर्ने खालका विचारहरू कत्तिको आयो ? (जस्तैः हात काट्ने, विष सेवन गर्ने, हामफाल्ने, भित्तामा टाउको ठोक्काउने आदि)"
+  ];
+
+  /* The validated response scale. NOT "several days / more than half the days
+     / nearly every day": in the Nepali validation the response options were
+     changed to these four, because test participants could not work with
+     "more than half the days". The cut-off ≥10 belongs to this scale. */
   var OPTS = [
-    { v: 0, l: "Not at all" },
-    { v: 1, l: "Several days" },
-    { v: 2, l: "More than half the days" },
-    { v: 3, l: "Nearly every day" }
+    { v: 0, l: "Not at all", np: "कत्ति पनि भएन" },
+    { v: 1, l: "Sometimes", np: "कहिलेकाहीं भयो" },
+    { v: 2, l: "Usually", np: "धेरै जसो भयो" },
+    { v: 3, l: "Always", np: "सधै जसो भयो" }
   ];
 
   L.fillSelect($("org"), C.ORGS.concat([{ code: "OTHER", name: "Other — not listed", np: "अन्य — सूचीमा नभएको", np_src: "draft" }]));
@@ -219,18 +250,42 @@
     $(id).addEventListener("change", function () { L.remember(id, $(id).value); });
   });
 
-  /* render items */
-  var html = ITEMS.map(function (t, i) {
-    var opts = OPTS.map(function (o) {
-      return '<label><input type="radio" name="q' + i + '" value="' + o.v + '"> ' + o.l +
-             ' <span style="color:var(--mute)">(' + o.v + ')</span></label>';
+  /* render items.
+     Nepali is shown when the interface language is Nepali, and the validated
+     Nepali items are used rather than a translation of the English ones. The
+     English stays authoritative and authoritative English is shown in English
+     mode. `data-lang` is set by i18n.js, so this follows the toggle; the
+     i18n:changed listener re-renders on a language switch. */
+  function isNepali() {
+    return document.documentElement.getAttribute("data-lang") === "ne";
+  }
+
+  function renderItems() {
+    var nep = isNepali();
+    var html = ITEMS.map(function (t, i) {
+      var opts = OPTS.map(function (o) {
+        var lab = (nep && o.np) ? o.np : o.l;
+        return '<label><input type="radio" name="q' + i + '" value="' + o.v + '"> ' + lab +
+               ' <span style="color:var(--mute)">(' + o.v + ')</span></label>';
+      }).join("");
+      var nepText = ITEMS_NE[i] || "";
+      var shown = (nep && nepText) ? nepText : t;
+      var note = "";
+      if (!nep) {
+        /* English mode: say plainly that the Nepali shown elsewhere is the
+           validated instrument, so the two are not confused. */
+        note = nepText ? ' <span class="np">Nepali mode shows the validated Nepali wording.</span>' : "";
+      }
+      return '<div class="q" id="qw' + i + '"><div class="qt">' + (i + 1) + '. ' +
+             shown.replace(/&/g, "&amp;").replace(/</g, "&lt;") +
+             note + '</div>' +
+             '<div class="opts">' + opts + '</div></div>';
     }).join("");
-    return '<div class="q" id="qw' + i + '"><div class="qt">' + (i + 1) + '. ' +
-           t.replace(/&/g, "&amp;").replace(/</g, "&lt;") +
-           '<span class="np">Nepali text not obtained — see the warning above.</span></div>' +
-           '<div class="opts">' + opts + '</div></div>';
-  }).join("");
-  $("items").innerHTML = html;
+    $("items").innerHTML = html;
+  }
+
+  renderItems();
+  document.addEventListener("i18n:changed", renderItems);
 
   function answers() {
     return ITEMS.map(function (_, i) {
