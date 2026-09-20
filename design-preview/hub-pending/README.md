@@ -1,5 +1,9 @@
 # Pending changes in the `hub` repository — and two conflicts a human must settle
 
+> **Start here:** `REQUEST-to-hub-lane.md` is the hand-over to the hub lane — the
+> five changes that make Layer 1 live in Nepali, in the order they must land, with
+> the verification. It supersedes the older narrative below where they differ.
+
 Status: **NOT APPLIED.** This session does not own `mhpss-nepal/hub` and has applied
 nothing to it. Both patches below pass `git apply --check` against `origin/main`
 (`ff2d4e2`) but are **held**, because applying them as-is would overwrite another
