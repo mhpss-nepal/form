@@ -232,3 +232,20 @@ four. Blocking that would need either a host rule, or a deny-list inside
 `sw.js` — which would also block the restricted Hub's legitimate internal
 "Open the form" links and belongs to that decision, not this one. It is carried
 into the Hub task (`t_46e4cb25`) rather than left implicit here.
+
+### The one accidental route that code here cannot close: already-printed cards
+
+This is the item that matters most, and it is physical. The QR matrices are
+pre-computed bit patterns with the **absolute** address baked in (see the file
+header of `qr-trial.js`: the `url` field is only a label). So a card printed from
+any pre-trial build still opens `/form/contact.html`, `/form/referral.html`,
+`/form/phq9.html` or `/form/selfreport.html` — unchanged by anything in this
+commit, and still resolvable because the page files remain on the host. A worker
+handed an old card, or scanning an old noticeboard, reaches an unapproved
+instrument by accident, which is exactly the failure this task exists to prevent.
+
+No change in this repository can revoke a code that is already in someone's hand.
+What is required is an operational action: confirm whether any card sheet was
+printed from the pre-trial build, and if so recall and destroy those cards. The
+current sheet carries a "Supervised trial" stamp and a single 5Ws card precisely
+so a printed card can be told apart from the old one at a glance.
