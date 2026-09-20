@@ -245,6 +245,24 @@ class B2PreviewContractTest(unittest.TestCase):
         after = (REPO / "5ws-report-b2.html").read_text(encoding="utf-8")
         self.assertEqual(before, after, "rebuilding the page produced a different file")
 
+    def test_saved_list_controls_beat_the_shared_sm_rule(self) -> None:
+        """`body.fx .btn.sm { min-height: 38px }` outranks a bare `.iu-saved
+        .btn.sm`, which left Export/Clear at 38 px in the first build.
+
+        The override must carry `body.iu` so it wins on specificity.
+        """
+        self.assertRegex(
+            self.css,
+            r"body\.iu \.iu-saved \.btn,|body\.iu \.iu-saved \.btn\.sm",
+            "saved-list buttons need a body.iu-qualified rule to beat `body.fx .btn.sm`",
+        )
+        self.assertIn("body.iu .iu-saved .help a", self.css)
+
+    def test_saved_help_copy_meets_the_contrast_floor(self) -> None:
+        """--fx-mute measures 4.42:1 at 12.5px, just under AA for normal text."""
+        self.assertIn("body.iu .iu-saved .help", self.css)
+        self.assertNotIn("--fx-mute", self.css.split("body.iu .iu-saved .help")[1][:120])
+
     def test_build_script_guards_the_form_block(self) -> None:
         src = (REPO / "design-preview" / "build_b2.py").read_text(encoding="utf-8")
         self.assertIn("is not byte-identical", src)

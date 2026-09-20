@@ -615,12 +615,32 @@ body.iu #f .ofwhom input {
   min-width: 100%;
 }
 
-/* --------------------------------------------------- saved list buttons */
-.iu-saved .btn,
-.iu-saved .btn.sm,
-.iu-screen .btn.sm {
+/* --------------------------------------------------- saved list controls */
+/* The shared stylesheet sets `body.fx .btn.sm { min-height: 38px }`, which is
+   one element + three classes. A plain `.iu-saved .btn.sm` (three classes)
+   therefore LOSES and the Export/Clear buttons render at 38 px. These
+   selectors carry body.iu as well, so they outrank the shared rule and the
+   row meets the 44 px tap-target minimum. */
+body.iu .iu-saved .btn,
+body.iu .iu-saved .btn.sm,
+body.iu .iu-screen .btn.sm,
+body.iu .iu-real-actions .btn {
   min-height: 44px;
   padding: 10px 14px;
+}
+/* The "Reports received" link sits inside help copy; give it a real tap area
+   without breaking the sentence it lives in. */
+body.iu .iu-saved .help a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 4px;
+  font-weight: 800;
+}
+/* Keep the saved-list help copy above the AA contrast floor: the shared
+   --fx-mute (#6b7a85) measures 4.42:1 on white at this size. */
+body.iu .iu-saved .help {
+  color: #5b6b76;
 }
 
 .iu-counts {
