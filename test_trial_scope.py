@@ -4,10 +4,13 @@ from __future__ import annotations
 
 import json
 import importlib.util
+import contextlib
+import io
 import re
 import subprocess
 import tempfile
 import unittest
+import warnings
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -138,7 +141,11 @@ class TrialScopeContractTest(unittest.TestCase):
             asset.write(mutated)
             asset.flush()
             setattr(checker, "QRJS", asset.name)
-            self.assertEqual(checker.main(["qr-check.py"]), 1)
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore", ResourceWarning)
+                with contextlib.redirect_stdout(io.StringIO()):
+                    rejected = checker.main(["qr-check.py"])
+            self.assertEqual(rejected, 1)
 
 
 if __name__ == "__main__":

@@ -76,6 +76,24 @@ The page files remain unchanged in the repository for explicitly internal review
 
 No unapproved page is linked from `index.html`, printed by `cards.html`, advertised by the manifest, included in `qr-trial.js`, or precached by `sw.js`.
 
+## Residual path — outside this task's scope (recorded, not silently accepted)
+
+One path remains, and it lives in the **Hub** repository, which requirement 7
+forbids this task from touching:
+
+- `hub/forms.html` (the Hub form inbox) links `../form/contact.html`,
+  `../form/referral.html`, `../form/phq9.html`, `../form/selfreport.html`.
+- `hub/index.html` also names Service contact, Referral, PHQ-9 and Self-report in
+  its navigation, pointing at `forms.html#…`.
+
+This is a restricted, sign-in coordination surface rather than the field QR/link
+set, so it is not the default entry point a field worker scans into. It is still
+reachable by typing a Hub URL, so it is a real remaining exposure and must be
+closed in the Hub repository (the sibling Hub task works in `/root/mhpss-nepal-work/hub-real`).
+This form task removes its own contribution to that path: the `../hub/forms.html`
+"Inbox" link is gone from `index.html`, and the two surviving Hub links point at
+the Hub landing page, not the form catalogue.
+
 ## Verification commands
 
 - `python3 -m unittest -v test_trial_scope.py`
