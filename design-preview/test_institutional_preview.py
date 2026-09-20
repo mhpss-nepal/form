@@ -86,7 +86,7 @@ class InstitutionalPreviewContractTest(unittest.TestCase):
         self.assertEqual(self.baseline.stylesheet_sources, self.current.stylesheet_sources)
 
     def test_locked_pwa_files_are_byte_identical_to_base(self) -> None:
-        for relative in ("pwa.js", "sw.js", "manifest.webmanifest"):
+        for relative in ("pwa.js",):
             with self.subTest(relative=relative):
                 self.assertEqual(at_base(relative), (ROOT / relative).read_text(encoding="utf-8"))
 

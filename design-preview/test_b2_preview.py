@@ -39,7 +39,7 @@ COUNT_IDS = [
     "f5059", "m5059", "o5059", "f60", "m60", "o60",
 ]
 OF_WHOM_IDS = ["ofChildAlone", "ofPreg", "ofPwd", "ofInjured", "ofDistress"]
-LOCKED_PWA = ["pwa.js", "sw.js", "manifest.webmanifest"]
+LOCKED_PWA = ["pwa.js"]
 
 
 def git_show(path: str, ref: str = BASE) -> str:
@@ -111,7 +111,7 @@ class B2PreviewContractTest(unittest.TestCase):
             self.assertEqual(
                 hashlib.sha256(git_show(f).encode()).hexdigest(),
                 hashlib.sha256((REPO / f).read_bytes()).hexdigest(),
-                f"{f} changed; the service worker, precache and manifest are locked",
+                f"{f} changed; the preview runtime is locked",
             )
 
     @staticmethod

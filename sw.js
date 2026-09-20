@@ -19,17 +19,12 @@
    old validation, and (16 Sep 2026) a version of store.js that did not sync
    to the register at all. The fix was deployed and had no effect on any
    device until this line changed. */
-const CACHE = "mhpss-np-field-v39";
+const CACHE = "mhpss-np-field-v40";
 
 const PRECACHE = [
   "./",
   "index.html",
   "5ws-report.html",
-  "4ws-report.html",
-  "contact.html",
-  "phq9.html",
-  "referral.html",
-  "selfreport.html",
   /* the printable QR card sheet: asked for on 16 Sep and flagged urgent.
      It is precached because the person printing it may be doing so from a
      district office with the same bad connection as the field. */
@@ -43,7 +38,7 @@ const PRECACHE = [
   "../hub/assets/form.css",
   "../hub/assets/codes.js",
   "../hub/assets/l1.js",
-  "../hub/assets/qr.js",
+  "qr-trial.js",
   "../hub/assets/store.js",
   "../hub/assets/fb-config.js",
   "../hub/assets/fb.js",

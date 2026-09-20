@@ -16,8 +16,6 @@
     { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
   "shortcuts": [
-    { "name": "Service contact", "url": "contact.html" },
-    { "name": "Activity report (5Ws)", "url": "5ws-report.html" },
-    { "name": "Referral", "url": "referral.html" }
+    { "name": "Activity report (5Ws)", "url": "5ws-report.html" }
   ]
 }

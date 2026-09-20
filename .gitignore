@@ -16,6 +16,8 @@ d[0-9].png
 shot.py
 .DS_Store
 node_modules/
+.venv/
+__pycache__/
 chk-*.png
 check.py
 v-*.png

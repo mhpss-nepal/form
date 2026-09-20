@@ -14,8 +14,8 @@
 <style>
 /* ---------------------------------------------------------------------
    A PRINT SHEET, not a web page. Asked for by the MHPSS data system review
-   of 16 September 2026 and flagged urgent there: every form's QR on one
-   page or card that a field worker can be handed.
+   of 16 September 2026 and flagged urgent there. For the supervised trial,
+   only the approved 5Ws form is present on the handout.
 
    Two deliberate departures from the rest of the site:
 
@@ -23,11 +23,10 @@
      switch; a printed card cannot switch, and the person holding it may
      read either language. So English and Nepali sit together on the card
      and assets/i18n.js is not loaded here at all.
-   · IT IS LAID OUT IN MILLIMETRES. Six cards, two by three on A4, each
-     about 92 by 82mm -- a pocket size that still leaves the QR big enough
+   · IT IS LAID OUT IN MILLIMETRES. The single trial card leaves the QR big enough
      for a cheap phone camera to read across a table.
 
-   The QR matrices come from assets/qr.js. They are pre-computed, so they
+   The QR matrices come from qr-trial.js. They are pre-computed, so they
    render with no signal, and the address is inside the matrix -- see the
    header of that file before touching anything about the addresses.
    --------------------------------------------------------------------- */
@@ -136,9 +135,8 @@ body{background:var(--grey-1);font-family:var(--sans);color:var(--hc-ink);margin
     <a href="../hub/">Dashboard</a>
   </div>
   <div class="pbar noprint">
-    One A4 sheet, six cut-out cards. Print it, cut along the dashed lines, and give
-    a card to each field worker. It also works with no signal once the form pages
-    have been opened once.
+    One approved 5Ws card. Print it and give it to field workers. It also works
+    with no signal once the 5Ws form has been opened once.
     <a class="gbtn crimson" href="#" id="printBtn">Print this sheet</a>
   </div>
 
@@ -147,29 +145,19 @@ body{background:var(--grey-1);font-family:var(--sans);color:var(--hc-ink);margin
     <div class="shead">
       <span data-mark="40"></span>
       <div class="ti">
-        <h1>MHPSS field forms &mdash; scan to open</h1>
-        <span class="np">मानसिक स्वास्थ्य र मनोसामाजिक सहयोग &mdash; फिल्ड फारम</span>
+        <h1>MHPSS 5Ws activity report &mdash; scan to open</h1>
+        <span class="np">मानसिक स्वास्थ्य र मनोसामाजिक सहयोग &mdash; ५डब्ल्यू क्रियाकलाप प्रतिवेदन</span>
         <div class="who">स्वास्थ्य तथा खाद्य स्वच्छता मन्त्रालय / Ministry of Health and Food
         Safety &middot; EDCD &middot; WHO Nepal &middot; MHPSS Technical Working Group, Health Cluster
         &middot; Rasuwa&ndash;Bhotekoshi flood response</div>
       </div>
-      <span class="stamp">Draft &middot; not agreed</span>
+      <span class="stamp">Supervised trial</span>
     </div>
 
     <div class="cards">
 
       <div class="qcard first">
-        <span class="tag">Start here</span>
-        <div class="nm">All five forms</div>
-        <div class="nmnp">सबै पाँच फारम</div>
-        <p class="use">Scan this one if you are not sure which form you need. It opens the
-        list, and every form on it works offline afterwards.</p>
-        <p class="usenp">कुन फारम चाहिने हो निश्चित नभएमा यही स्कयान गर्नुहोस्।</p>
-        <div class="qwrap" data-qr="master"></div>
-        <div class="qurl" data-qu="master"></div>
-      </div>
-
-      <div class="qcard">
+        <span class="tag">Approved for trial</span>
         <div class="nm">Activity report (5Ws)</div>
         <div class="nmnp">क्रियाकलाप प्रतिवेदन</div>
         <p class="use">One report per organisation, per site, per day. Who did what, where,
@@ -179,45 +167,6 @@ body{background:var(--grey-1);font-family:var(--sans);color:var(--hc-ink);margin
         <div class="qurl" data-qu="5ws"></div>
       </div>
 
-      <div class="qcard">
-        <div class="nm">Service contact record</div>
-        <div class="nmnp">सेवा सम्पर्क अभिलेख</div>
-        <p class="use">One record per session with a person. No name, no phone number &mdash;
-        a code, so the same person can be followed up without being identified.</p>
-        <p class="usenp">व्यक्तिसँगको प्रत्येक सत्रको एक अभिलेख। नाम वा फोन नम्बर लेख्नु पर्दैन।</p>
-        <div class="qwrap" data-qr="contact"></div>
-        <div class="qurl" data-qu="contact"></div>
-      </div>
-
-      <div class="qcard">
-        <div class="nm">PHQ-9 follow-up</div>
-        <div class="nmnp">पिएचक्यू-९ अनुगमन</div>
-        <p class="use">Only where a counsellor is already following someone up, and only with
-        their agreement. Not a screening tool to be used on everyone.</p>
-        <p class="usenp">परामर्शकर्ताले अनुगमन गरिरहेको व्यक्तिको हकमा मात्र, उनको सहमतिमा।</p>
-        <div class="qwrap" data-qr="phq9"></div>
-        <div class="qurl" data-qu="phq9"></div>
-      </div>
-
-      <div class="qcard">
-        <div class="nm">Referral record</div>
-        <div class="nmnp">प्रेषण (रेफर) अभिलेख</div>
-        <p class="use">Referral in or out: which organisation, who referred, the date, the
-        district, and whether the person arrived.</p>
-        <p class="usenp">भित्र वा बाहिर प्रेषण &mdash; संस्था, प्रेषण गर्ने, मिति, जिल्ला।</p>
-        <div class="qwrap" data-qr="referral"></div>
-        <div class="qurl" data-qu="referral"></div>
-      </div>
-
-      <div class="qcard">
-        <div class="nm">How are you coping</div>
-        <div class="nmnp">तपाईं कसरी सामना गर्दै हुनुहुन्छ</div>
-        <p class="use">For the person themselves, not for a worker to fill in. It gives them
-        something to read and a way to ask for help.</p>
-        <p class="usenp">व्यक्ति आफैंले भर्ने फारम &mdash; कार्यकर्ताले भर्ने होइन।</p>
-        <div class="qwrap" data-qr="self"></div>
-        <div class="qurl" data-qu="self"></div>
-      </div>
 
     </div>
 
@@ -227,27 +176,26 @@ body{background:var(--grey-1);font-family:var(--sans);color:var(--hc-ink);margin
           <p><b>With no signal.</b> Open a form once while you have a connection. After that
           it opens and saves on the phone with no signal at all, and sends by itself the next
           time there is one. Nothing is lost by filling a form in a holding centre.</p>
-          <p><b>No names.</b> None of these forms will accept a name, a phone number, a date
+          <p><b>No names.</b> The 5Ws form will not accept a name, a phone number, a date
           of birth or a national ID. If a field seems to want one, it does not &mdash; use the
           code.</p>
         </div>
         <div>
           <p><b>सिग्नल नभएमा।</b> इन्टरनेट भएको बेला फारम एकचोटि खोल्नुहोस्। त्यसपछि सिग्नल नभएपनि
           फारम खुल्छ र फोनमै सुरक्षित हुन्छ, र सिग्नल आउनासाथ आफै पठाउँछ।</p>
-          <p><b>नाम लेख्नु पर्दैन।</b> यी फारमहरूले नाम, फोन नम्बर, जन्म मिति वा परिचयपत्र नम्बर
+          <p><b>नाम लेख्नु पर्दैन।</b> ५डब्ल्यू फारमले नाम, फोन नम्बर, जन्म मिति वा परिचयपत्र नम्बर
           स्वीकार गर्दैनन्।</p>
         </div>
       </div>
-      <p style="margin-top:3mm"><b>Draft, September 2026.</b> These forms and the dashboard
-      behind them are not yet agreed with EDCD or the MHPSS Technical Working Group, and every figure now
-      showing in them is synthetic. Prepared for the WHO Nepal mental health team, the Ministry
+      <p style="margin-top:3mm"><b>Supervised trial, September 2026.</b> Only the 5Ws activity
+      report is approved for this trial. Every figure now showing is synthetic. Prepared for the WHO Nepal mental health team, the Ministry
       of Health and Food Safety and EDCD. &nbsp;<span id="cardHost"></span></p>
     </div>
 
   </div>
 </div>
 
-<script src="../hub/assets/qr.js"></script>
+<script src="qr-trial.js"></script>
 <script src="../hub/assets/mark.js"></script>
 <script>
 (function () {
