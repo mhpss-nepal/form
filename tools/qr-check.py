@@ -33,6 +33,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 QRJS = os.path.join(ROOT, "qr-trial.js")
 CONF = os.path.join(ROOT, "tools", "site.conf")
 ALLOWED_CARD_KEYS = {"5ws"}
+ALLOWED_QR_URLS = {
+    "master": "/form/",
+    "5ws": "/form/5ws-report.html",
+}
 
 ENTRY = re.compile(
     r'"([A-Za-z0-9_-]+)":\s*\{\s*"n":\s*(\d+)\s*,'
@@ -87,6 +91,17 @@ def main(argv):
     if not entries:
         print("  no matrices found -- the file format changed; check the regex")
         return 2
+
+    entry_urls = {key: url for key, _n, url, _sha, _m in entries}
+    expected_urls = {
+        key: (base + path if base else path)
+        for key, path in ALLOWED_QR_URLS.items()
+    }
+    if set(entry_urls) != set(ALLOWED_QR_URLS) or entry_urls != expected_urls:
+        print("  QR ASSET SCOPE MISMATCH")
+        print("  expected exactly: %s" % ", ".join(sorted(ALLOWED_QR_URLS)))
+        print("  found: %s" % (", ".join(sorted(entry_urls)) or "(none)"))
+        return 1
 
     problems = []
     det = cv2.QRCodeDetector() if cv2 else None

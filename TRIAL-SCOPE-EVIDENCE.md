@@ -25,6 +25,10 @@ From `index.html`, removed **12** controls for the four unapproved forms:
 - 4 copy-URL buttons
 - 4 QR buttons
 
+Also removed the Hub Inbox navigation link because the Hub form inbox advertises
+the unapproved form pages. The landing page keeps only the general Hub and
+coordination links, neither of which is a form catalogue.
+
 From `cards.html`, removed **5** printable cards:
 
 - landing-page/master card labelled “All five forms”
@@ -57,6 +61,8 @@ From QR generation, removed **4** unapproved payloads:
 
 The field build now loads the repository-owned `qr-trial.js`, containing only `master` and `5ws`, rather than the broader sibling Hub QR asset.
 The broader Hub asset remains outside this form repository and was not edited; neither trial page loads it.
+`tools/qr-check.py` now fails unless those are the exact two asset keys with the
+exact approved URLs, so an additional valid-but-unapproved matrix cannot pass.
 
 ## Remaining references to unapproved page files
 

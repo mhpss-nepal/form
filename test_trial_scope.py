@@ -3,18 +3,21 @@
 from __future__ import annotations
 
 import json
+import importlib.util
 import re
 import subprocess
+import tempfile
 import unittest
 from html.parser import HTMLParser
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent
+HUB = ROOT.parent / "hub"
 BASE = "8c84f43c4d0829266e86f4be0ba9bac96b1fdb22"
 FORMS = ("contact.html", "phq9.html", "referral.html", "selfreport.html")
 UNAPPROVED_PAGES = (*FORMS, "4ws-report.html")
-TRIAL_QR_KEYS = ("master", "5ws")
+
 
 
 class LandingParser(HTMLParser):
@@ -60,8 +63,17 @@ class TrialScopeContractTest(unittest.TestCase):
         self.assertEqual(parser.form_urls, ["./", "5ws-report.html"])
         self.assertEqual(parser.qr_keys, ["5ws"])
         landing = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertNotIn("../hub/forms.html", landing)
         for page in FORMS:
             self.assertNotIn(page, landing)
+
+    def test_trial_landing_does_not_route_through_hub_form_advertising(self) -> None:
+        landing = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertNotIn("../hub/forms.html", landing)
+        hub_forms = HUB / "forms.html"
+        if hub_forms.is_file():
+            advertised = hub_forms.read_text(encoding="utf-8")
+            self.assertTrue(any(page in advertised for page in FORMS))
 
     def test_printable_card_sheet_emits_only_the_5ws_code(self) -> None:
         cards = (ROOT / "cards.html").read_text(encoding="utf-8")
@@ -95,15 +107,38 @@ class TrialScopeContractTest(unittest.TestCase):
         checker = (ROOT / "tools" / "qr-check.py").read_text(encoding="utf-8")
         self.assertIn('ALLOWED_CARD_KEYS = {"5ws"}', checker)
         qr_asset = (ROOT / "qr-trial.js").read_text(encoding="utf-8")
-        self.assertEqual(
-            tuple(re.findall(r'^"([a-z0-9]+)":\{', qr_asset, re.MULTILINE)),
-            TRIAL_QR_KEYS,
+        entries = re.findall(
+            r'^"([a-z0-9]+)":\{\s*"n":\d+,\s*"url":"([^"]+)"',
+            qr_asset,
+            re.MULTILINE,
         )
+        self.assertEqual(entries, [
+            ("master", "https://mhpss-nepal.github.io/form/"),
+            ("5ws", "https://mhpss-nepal.github.io/form/5ws-report.html"),
+        ])
         self.assertNotIn("../hub/assets/qr.js", (ROOT / "index.html").read_text(encoding="utf-8"))
         self.assertNotIn("../hub/assets/qr.js", (ROOT / "cards.html").read_text(encoding="utf-8"))
         for page in UNAPPROVED_PAGES:
             self.assertNotIn(page, builder)
             self.assertNotIn(page, qr_asset)
+
+    def test_qr_checker_rejects_any_extra_asset_entry(self) -> None:
+        checker_path = ROOT / "tools" / "qr-check.py"
+        spec = importlib.util.spec_from_file_location("trial_qr_check", checker_path)
+        if spec is None or spec.loader is None:
+            self.fail("cannot load tools/qr-check.py")
+        checker = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(checker)
+
+        original = (ROOT / "qr-trial.js").read_text(encoding="utf-8")
+        five_ws = original.split('"5ws":{', 1)[1].split("\n}", 1)[0]
+        extra = '"contact":{' + five_ws
+        mutated = original.replace("\n};\nwindow.QR._base", "\n},\n" + extra + "\n};\nwindow.QR._base")
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8") as asset:
+            asset.write(mutated)
+            asset.flush()
+            setattr(checker, "QRJS", asset.name)
+            self.assertEqual(checker.main(["qr-check.py"]), 1)
 
 
 if __name__ == "__main__":
