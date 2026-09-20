@@ -622,16 +622,40 @@
     }
 
     /* --- 3. step rail before the form ----------------------------------- */
+    /* The label must be re-derived from the section heading, because that
+       heading carries its own data-i18n key and is re-rendered by i18n.js
+       whenever the reader switches language. A label snapshotted once at
+       mount would keep the language it was built in -- which is exactly
+       what happened here: the rail stayed Nepali after switching to
+       English, on a page that otherwise translated correctly. Re-deriving
+       also means the rail inherits the section heading's translation, so
+       no new Nepali has to be authored for it. */
     var form = $("f");
     var stepper = el("nav", "iu-steps");
     stepper.setAttribute("aria-label", "Report steps");
+    var stepHeads = screens.map(function (s) { return q(".step h2", s); });
+
+    function relabelSteps() {
+      qa(".iu-steplik", stepper).forEach(function (b, i) {
+        var span = b.querySelector("span");
+        var head = stepHeads[i];
+        var text = head ? (head.textContent || "").trim() : "";
+        if (span && text) span.textContent = text;
+      });
+    }
+
     screens.forEach(function (s, i) {
       var b = el("button", "iu-steplik");
       b.type = "button";
-      b.innerHTML = "<i>" + (i + 1) + "</i><span>" + txt((q(".step h2", s) || {}).textContent || "Step") + "</span>";
+      b.innerHTML = "<i>" + (i + 1) + "</i><span></span>";
       b.addEventListener("click", function () { go(i); });
       stepper.appendChild(b);
     });
+    relabelSteps();
+    /* i18n.js re-renders [data-i18n] itself and then announces the change
+       on this event, so this is the correct hook -- not a second polling
+       loop, and not a second translation of the same words. */
+    document.addEventListener("i18n:changed", function () { relabelSteps(); });
     form.parentNode.insertBefore(stepper, form);
 
     /* --- 4. enhancements over the REAL controls ------------------------- */

@@ -601,17 +601,21 @@ body.iu .iu-saved table.data td::before {
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
+/* Column crumbs. These are generated content, so i18n.js cannot re-render
+   them; the language is tracked in the selector instead. The strings match
+   the table's own header cells, so English mode shows the same words as its
+   <th>, and Nepali mode the same words as its translated <th>. */
 body.iu .iu-saved table.data td:nth-child(1)::before { content: "Date"; }
 body.iu .iu-saved table.data td:nth-child(2)::before { content: "Site"; }
 body.iu .iu-saved table.data td:nth-child(3)::before { content: "Organisation"; }
 body.iu .iu-saved table.data td:nth-child(4)::before { content: "Activity"; }
 body.iu .iu-saved table.data td:nth-child(5)::before { content: "Attended"; }
 body.iu .iu-saved table.data td:nth-child(6) { display: none; }
-html[data-lang="ne"] body.iu .iu-saved table.data td:nth-child(1)::before { content: "मिति"; }
-html[data-lang="ne"] body.iu .iu-saved table.data td:nth-child(2)::before { content: "स्थान"; }
-html[data-lang="ne"] body.iu .iu-saved table.data td:nth-child(3)::before { content: "संस्था"; }
-html[data-lang="ne"] body.iu .iu-saved table.data td:nth-child(4)::before { content: "गतिविधि"; }
-html[data-lang="ne"] body.iu .iu-saved table.data td:nth-child(5)::before { content: "उपस्थित"; }
+html[data-lang="ne"] body.iu .iu-saved table.data td:nth-child(1)::before { content: "\092E\093F\0924\093F"; }
+html[data-lang="ne"] body.iu .iu-saved table.data td:nth-child(2)::before { content: "\0938\094D\0925\093E\0928"; }
+html[data-lang="ne"] body.iu .iu-saved table.data td:nth-child(3)::before { content: "\0938\0902\0938\094D\0925\093E"; }
+html[data-lang="ne"] body.iu .iu-saved table.data td:nth-child(4)::before { content: "\0917\0924\093F\0935\093F\0927\093F"; }
+html[data-lang="ne"] body.iu .iu-saved table.data td:nth-child(5)::before { content: "\0909\092A\0938\094D\0925\093F\0924"; }
 /* One column on the narrowest phones, so a long organisation name and the
    activity label never have to share a 130px cell. */
 @media (max-width: 420px) {

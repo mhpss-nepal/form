@@ -268,6 +268,41 @@ class B2PreviewContractTest(unittest.TestCase):
         self.assertIn("is not byte-identical", src)
         self.assertIn("duplicate ids", src)
 
+    def test_step_rail_labels_follow_the_language_switch(self) -> None:
+        """The rail must re-derive its labels, not snapshot them at mount.
+
+        A label built once from `.step h2` at mount kept whichever language
+        was active then, so switching to English left the five rail labels in
+        Nepali on a page that otherwise translated correctly. The rail must
+        instead re-read the heading (which carries the data-i18n key) when
+        i18n.js announces a language change.
+        """
+        src = self.core
+        # it must listen for the announced change ...
+        self.assertTrue("i18n:changed" in src, "no i18n:changed listener")
+        # ... and re-derive the text from the heading, not store a copy
+        self.assertTrue("relabelSteps" in src, "no relabelSteps()")
+        # the rail markup must NOT embed the heading text at build time
+        snapshot = '"</i><span>" + txt('
+        self.assertTrue(
+            snapshot not in src,
+            "the rail still embeds the heading text at build time",
+        )
+
+    def test_no_hardcoded_nepali_in_the_preview_layer(self) -> None:
+        """The preview layer must carry no literal Devanagari.
+
+        Every Nepali word on the page has to come from i18n-strings.js, so
+        that switching to English cannot leave a stray Nepali string behind
+        and so that reviewers can see all copy in one file.
+        """
+        for name, src in (("core", self.core), ("status", self.status), ("css", self.css)):
+            found = re.findall(r"[\u0900-\u097F]+", src)
+            self.assertEqual(
+                found, [],
+                f"{name} contains hardcoded Devanagari: {found[:5]}",
+            )
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
