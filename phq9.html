@@ -241,14 +241,15 @@
                ' <span style="color:var(--mute)">(' + o.v + ')</span></label>';
       }).join("");
       /* The item text sits in its own keyed span, so the number stays outside
-         it and the engine can fill the text without eating the numbering. The
-         key is under a professionalOnly prefix, so on the Nepali page this
-         fills with the ENGLISH wording -- the validated Nepali items have not
-         been obtained, and inventing them would be a different instrument. */
+         it and the engine can fill the text without eating the numbering.
+         The key holds the VALIDATED Nepali (Kohrt et al. 2016, Additional
+         file 1), so on the Nepali page this shows the published instrument.
+         The item-9 instruction and the cut-off/consent lines stay English on
+         purpose and the engine marks them as untranslated. */
       return '<div class="q" id="qw' + i + '"><div class="qt">' + (i + 1) + '. ' +
              '<span data-i18n="' + t.key + '">' +
              t.text.replace(/&/g, "&amp;").replace(/</g, "&lt;") + '</span>' +
-             '<span class="np">Nepali text not obtained — see the warning above.</span></div>' +
+             '</div>' +
              '<div class="opts">' + opts + '</div></div>';
     }).join("");
     $("items").innerHTML = html;
