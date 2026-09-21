@@ -1,192 +1,132 @@
-# Request to the hub lane — 5 changes that make Layer 1 live, in Nepali
+# Request to the hub lane — what is left of the 5 changes
 
 **To:** the owner of `mhpss-nepal/hub` (Layer 2 / hub lane)
 **From:** form-frontend lane (`design/preview-isolation`, tenant `mhpss-nepal`)
-**Status:** three patches below are verified `git apply --check` clean against hub
-`origin/main` (`ff2d4e2`). **The hub tree has not been modified.** Two items are
-not patches and need the hub lane's own action.
+**Status:** re-checked against `hub` `origin/main` (`42f308c`) after the lane's own
+PRs #1 and #2. **Two changes are already in, two are still needed, one was never
+needed.** The hub tree has not been modified by this lane.
 
-Adib has closed the 5Ws case and asked for two outcomes in production:
+Adib closed the 5Ws case and asked for two outcomes in production:
 
 1. **Layer 1's landing page is Nepali by default** — his words: *"landing page
    NEPAL!"*.
-2. **Every form we have built is shown on an "all forms" page again** — they were
-   hidden, and he wants the case closed with what was agreed.
+2. **Every form we have built is shown on an "all forms" page again.**
 
-Neither can reach production from the form side alone, because the form pages load
-`../hub/assets/*` and the all-forms listing lives in `hub/forms.html`.
+## Where each change stands on `hub` `origin/main` (`42f308c`)
 
-## The five changes, in the order they must land
+| # | change | state |
+|---|---|---|
+| 1 | 44px on the machine-translation notice buttons | ❌ **still needed** — `min-height:44px` count is **0**; the live buttons measure **28px** |
+| 2 | the Nepali dictionary (775 values) | ❌ **still needed** — origin/main is `en 728 / ne 180` |
+| 3 | four missing palika ward counts | ✅ **already applied** (`e7c5a61`) — 0 palikas without wards |
+| 4 | the per-layer default engine | ✅ **already applied** — `data-i18n-default` is read from the page, global stays `"en"` |
+| 5 | the all-forms review listing | ✅ **already applied** (PR #2, `8d01dac`) — `forms.html` has 0 direct form links and 5 review links |
 
-| # | change | where | how |
-|---|---|---|---|
-| 1 | 44px min-height on the machine-translation notice buttons | hub `assets/i18n.js` | `i18n.js.notice-44px.patch` |
-| 2 | the Nepali dictionary: **775 values** (add-only) | hub `assets/i18n-strings.js` | `i18n-strings.js.add-ne-775.patch` |
-| 3 | four missing palika ward counts | hub `assets/codes.js` | `codes.js.ward-counts.patch` |
-| 4 | the per-layer default engine | hub `assets/i18n.js` | **already built** — land `t_2449fe51`, branch `task/t_2449fe51-i18n-per-layer-default`, HEAD `8273e90` |
-| 5 | an "all forms" listing that includes every instrument | hub `forms.html` | `forms.html.review-listing.*.patch` — see below |
+## The two remaining patches
 
-### 1–3: apply and go
+Both verified `git apply --check` clean against `42f308c`:
 
 ```bash
-cd /path/to/hub          # on a branch, not on main
+cd /path/to/hub            # on a branch, never straight on main
 git apply /path/to/form/design-preview/hub-pending/i18n.js.notice-44px.patch
-git apply /path/to/form/design-preview/hub-pending/i18n-strings.js.ward-only.patch
-git apply /path/to/form/design-preview/hub-pending/codes.js.ward-counts.patch
+git apply /path/to/form/design-preview/hub-pending/i18n-strings.js.add-ne-775.patch
 
-# then confirm the dictionary is still complete and grew by exactly three keys
+# confirm: complete, exactly the expected growth, nothing lost
 node -e 'global.window={};require("./assets/i18n-strings.js");
-  const S=window.I18N_STRINGS;
-  console.log(Object.keys(S.en).length,"en",Object.keys(S.ne).length,"ne");
-  console.log("ward strings:",["f4.wardLab","f4.wardHelp","f4.optional"]
-    .filter(k=>S.en[k]&&S.ne[k]).length,"of 3");'
+  const S=window.I18N_STRINGS, en=Object.keys(S.en), ne=Object.keys(S.ne);
+  console.log(en.length,"en",ne.length,"ne");
+  console.log("ne without en:",ne.filter(k=>!en.includes(k)).length,"(must be 0)");
+  console.log("en without ne:",en.filter(k=>!ne.includes(k)).length,"(must be 0)");'
+python3 tools/i18n-check.py
 ```
 
-- **#1 is an accessibility fix, not a style choice.** The buttons are created at
-  runtime by the shared engine and measured 27.8px, under the 44px minimum. They
-  sit outside the form container, so no form-side rule can reach them. Verified
-  still present on the live site (28px) after PR #1 landed.
-- **#2 is why Layer 1 opens in Nepali but reads mostly English today.** PR #1 landed
-  the per-layer default, so `form/` and `form/5ws-report.html` do serve
-  `lang="ne"`, but the live dictionary is `en 728 / ne 180` — the keys the landing
-  page needs (`ml.p036`, `ml.p030`, `ml.p049` …) have no Nepali, so the page is
-  Nepali shell, English body. Measured live: landing 8% Nepali, all-forms 9%.
-  With this patch (applied to a scratch copy of `origin/main` and driven in a real
-  browser): landing **82%**, all-forms **93%**, 5Ws 83%.
-- **#2 is add-only and cannot lose work.** Applied to a scratch copy of
-  `origin/main`: `en` 728 → 955, `ne` 180 → 955, **0 keys lost, 0 existing values
-  changed**. It does **not** carry the one key the hub lane fixed by hand:
-  `f4.wardLab`, where the hub removed the `<span class="opt">` markup because the
-  form renders it with `data-i18n` (no `-html`), so the markup would show as
-  literal text. The hub's value is preserved — the generator refuses to build if
-  any other key conflicts.
-- **#2 deliberately holds 19 strings in English.** `phq9.item*`, `consent.*`,
-  `safeguard.*` and `clinical.*` are named in the hub file's own *"strings that NO
-  machine may translate"* note. This session's values for them are machine drafts
-  (a short machine rendering of PHQ-9 item 1, marks on the suicide item 9, on
-  consent wording, and on the GBV/child-protection gate), so they are **excluded**,
-  not translated. The PHQ-9 cut-off ≥10 belongs to specific validated wording
-  (Kohrt et al. 2016), so machine wording there is a clinical risk, not a quality
-  issue. The validated instrument this session rescued from the open-access
-  supplement is a separate artifact (`references/phq9-nepal-REVIEW.md`), for the
-  team to adopt deliberately.
-- **#3 is required or the ward dropdown is hidden for four palikas.** Each count
-  was confirmed from at least two independent sources; Shahid Lakhan from its own
-  municipal website ("जम्मा वडा संख्या : ९"). A guessed count would offer ward
-  numbers that do not exist.
+### 1 — the 44px notice buttons (accessibility, not style)
 
-### 4: land `t_2449fe51`, and do NOT apply a global Nepali default
+The machine-translation notice buttons are created **at runtime** by the shared
+`assets/i18n.js`. They sit outside the form container, so no form-side rule can
+reach them. Measured on the live site after PR #1: **28px**, under the 44px
+minimum. The patch is two lines.
 
-The per-layer engine is already written and correct:
+### 2 — the Nepali dictionary
 
-```html
-<html lang="en" data-i18n-default="ne">
-```
+**This is why Layer 1 opens in Nepali but reads mostly English today.** PR #1
+landed the per-layer default, so `form/` and `form/5ws-report.html` **do** serve
+`lang="ne"`. But the live dictionary has no Nepali for the keys the landing page
+is built from (`ml.p036`, `ml.p030`, `ml.p049`, …), so the page is a Nepali shell
+around English text. Measured on the live site:
 
-with the global kept at `var DEFAULT = "en"` and *"a page that declares nothing
-keeps English"*.
-
-**A global `DEFAULT = "ne"` must not be applied.** The Hub pages load the same
-`assets/i18n.js` (`index.html`, `forms.html`, `access.html` verified), so a global
-Nepali default would turn Layer 2 Nepali, which the decision forbids. Adib's
-decision is per layer: Nepali for Layer 1, English for Layer 2 and Layer 3.
-
-The form side has already declared its own default, so **once #4 lands, Layer 1
-opens in Nepali with no further form change**:
-
-| form page | declares | result |
+| live page | Nepali body text now | with this patch |
 |---|---|---|
-| `form/index.html` | `ne` | Nepali — the landing page |
-| `form/5ws-report.html` | `ne` | Nepali |
-| `form/selfreport.html` · `phq9` · `referral` · `contact` · `cards` | nothing | English, as decided |
+| `form/` (landing) | 8% | **82%** |
+| `form/all-forms.html` | 9% | **93%** |
+| `form/5ws-report.html` | 81% | 83% |
 
-### 5: the all-forms listing — built, in two variants, and it fixes a live violation
+**Add-only by construction.** The generator refuses to build if any key it would
+touch already exists with a different value. Applied to a scratch copy of
+`origin/main` and driven in a real browser: `en` 728 → 955, `ne` 180 → 955,
+**0 keys lost, 0 existing values changed**, no key present in one table and not
+the other, `_meta` structure and rationale comments preserved verbatim.
 
-**`hub/forms.html` on `origin/main` currently breaks the hub lane's own rule.** It
-carries four direct links to unapproved forms (`../form/contact.html`,
-`referral.html`, `phq9.html`, `selfreport.html`), which its own
-`tools/hub-trial-scope-render-check.py` fails on: *anything under `/form/` other
-than `/form` and `/form/5ws-report.html` fails*. The fix for that is written but
-only on a branch (`15d35b3`, task `t_46e4cb25`). So there are two bases, and a
-patch for each:
+Two guards inside it, both from findings while building it:
 
-| variant | base | produces |
-|---|---|---|
-| `forms.html.review-listing.from-main.patch` | hub `origin/main` | 0 direct form links, 1 review link |
-| `forms.html.review-listing.from-trialscope.patch` | after `15d35b3` (the "Not open during the trial" spans) | 0 direct form links, 5 review links |
+**`f4.wardLab` is not overwritten — your value wins.** You removed the
+`<span class="opt">` markup from it because the form renders that key with
+`data-i18n` (not `data-i18n-html`), so the markup would show as literal text on
+screen. You were right; this lane's copy was wrong. It was the only value
+conflict between the two dictionaries.
 
-```bash
-# pick the one whose base matches your tree
-git apply /path/to/form/design-preview/hub-pending/forms.html.review-listing.from-main.patch
-# or
-git apply /path/to/form/design-preview/hub-pending/forms.html.review-listing.from-trialscope.patch
+**19 strings are held in English, not translated.** `phq9.item*`, `consent.*`,
+`safeguard.*` and `clinical.*` are named in your own file as *"strings that NO
+machine may translate"*. This lane's values for them are machine drafts, so they
+are excluded:
+
+```
+clinical.phq9ValidatedTextWarning   consent.label      consent.phq9
+phq9.item1 … phq9.item9             phq9.item9Instruction
+phq9.itemDifficulty                 phq9.itemInstruction
+safeguard.checkLabel                safeguard.confirmation
+safeguard.consequence               safeguard.referralExclusion
 ```
 
-Both verified by applying to a scratch copy of their own base and checking the
-rendered-equivalent result: **0 direct links to an unapproved form, and the review
-page is linked**. Both pass `git apply --check` against their base.
+The PHQ-9 cut-off ≥10 belongs to specific validated wording (Kohrt et al., BMC
+Psychiatry 2016). Machine wording there is a **clinical risk**, not a quality
+issue. The validated instrument this lane rescued from the open-access supplement
+is a separate artifact — `design-preview/references/phq9-nepal-REVIEW.md` — for
+the team to adopt deliberately, not to be merged as machine text.
 
-What the patch does:
+## Already applied, kept here only as the record
 
-- adds one line to `forms.html`: a *Supervised trial* note saying only the 5Ws is
-  open in the field, and that a reviewer can open all of them together on the
-  review page;
-- points every per-form button at `../form/all-forms.html` — the **review page**
-  — instead of at the instrument itself.
+`codes.js.ward-counts.patch` and `forms.html.review-listing.*.patch` are **no
+longer needed** — the lane applied equivalents itself. Do not re-apply them.
 
-**No direct link to `contact.html` / `phq9.html` / `referral.html` /
-`selfreport.html` is added anywhere, and no default Hub navigation or rail entry
-changes.** The four sections still describe the instruments and read what comes
-back from them. The rail group is untouched, so the hub's rail assertion (exactly
-`["./#reports", "forms.html", "../form/"]`) still holds.
-
-```bash
-# the checks this must keep passing
-python3 tools/hub-trial-scope-render-check.py   # 0 offenders at 390 and 1280
-python3 -m unittest test_trial_scope             # the static + render rule tests
-```
-
-### 5a: one prerequisite in the form repository — please read
-
-The review link resolves to `/form/all-forms.html`, which **is not in
-`form/origin/main` yet**; it is on `form`'s `design/preview-isolation` branch
-(`55b3196`), together with the review frame it uses (`preview.html`,
-`preview-mode.js`, `preview-shell.js`, `preview-shell.css` — none of these are in
-`form/origin/main` either).
-
-So **land the form branch before or with this patch**, or the Hub's review link
-will 404. The form pages themselves do not otherwise depend on the Hub, so the
-ordering within this request is flexible; this one is not.
-
-The build was verified on the form side by a real browser at 390 and 1280: the
-landing page still exposes exactly one actionable form card, the card sheet still
-carries only the `5ws` QR, and the review page opens all five instruments through
-the frame with no direct address and no unapproved QR.
+For the record of what was proposed: each ward count was confirmed from at least
+two independent sources, Shahid Lakhan from its own municipal website ("जम्मा वडा
+संख्या : ९"), because a guessed count would offer ward numbers that do not exist.
+And the review listing was written to keep the hub's own rail assertion (exactly
+`["./#reports", "forms.html", "../form/"]`) intact while removing every direct
+link to an unapproved form.
 
 ## What must not happen
 
-- no global `DEFAULT = "ne"` (see #4);
+- **no global `DEFAULT = "ne"`.** The Hub pages load the same `assets/i18n.js`
+  (`index.html`, `forms.html`, `access.html`), so a global Nepali default would
+  turn Layer 2 Nepali, against the per-layer decision. The declared
+  `<html lang="en" data-i18n-default="ne">` mechanism is the correct one and is
+  already in place;
 - no link to `contact.html` / `phq9.html` / `referral.html` / `selfreport.html`
   from default Hub navigation, a QR, or the card sheet;
 - no change to field names, value semantics, storage, queue/sync, `_rid`, the
   service worker, or the manifest — none of these patches touch them.
 
-## How this was verified on the form side
+## Not needed, and deliberately left alone
 
-- all three patches: `git apply --check` clean against hub `origin/main` `ff2d4e2`;
-- the hub tree was checked read-only and left untouched;
-- the dictionary after #2 is `en` 727 / `ne` 180 (was 725/177), i.e. **exactly the
-  three ward keys**, verified with the repo's own `tools/i18n-check.py`;
-- `tools/trial-scope-render-check.py` over a real browser at 390 and 1280: the
-  landing page still exposes exactly one actionable form card, the card sheet
-  still carries only the `5ws` QR, and the review sheet opens all five through the
-  frame with no direct address and no unapproved QR;
-- the language gate, the a11y/geometry gate, and the form test suites all pass.
+`form/cards.html` is a **print sheet**. It carries English and Nepali together on
+each card on purpose, because a printed card cannot switch language, and it does
+not load `assets/i18n.js` at all. Its side-by-side pairing is the design, so it
+needs no translation work and should not be "fixed".
 
 ## Related, already recorded
 
 - Adib's ruling that machine Nepali is authorised (human review after) is on the
   translation lane's own cards: `t_2cfc3bab` comment 60, `t_93e4a525` comment 61.
-  The hub lane should read those before deciding what to do with the 677 additional
-  machine values, which are **not** in the patches above on purpose.
-- The form branch depends on #1–#4; it is pushed at `design/preview-isolation`.
+- The form branch is pushed at `design/preview-isolation`.
