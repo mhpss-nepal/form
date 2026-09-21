@@ -27,8 +27,12 @@
    ../hub/assets/i18n.js. The PAGE is in this precache, so a phone holding v41
    would keep the declaration-free page and would still open in English. The
    declaration only takes effect once the engine that reads it is also
-   precached here -- see the note below. */
-const CACHE = "mhpss-np-field-v42";
+   precached here -- see the note below.
+   v43 follows the sibling hub's store.js header correction (hub e231549):
+   the header now describes the register bridge the file actually has.
+   store.js is a precached asset, so that change does not reach an
+   installed phone until this name changes too. */
+const CACHE = "mhpss-np-field-v43";
 
 const PRECACHE = [
   "./",
