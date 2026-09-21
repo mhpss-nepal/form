@@ -20,6 +20,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MHPSS Field">
+<style>
+  .a11y-skip{position:absolute;left:-9999px;top:0;z-index:1000;background:#fff;color:#183039;padding:10px 14px;border:2px solid #183039;border-radius:0 0 6px 0;font-weight:700;text-decoration:none}
+  .a11y-skip:focus{left:0}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+</style>
 <script src="design-preview/5ws-preview-core.js?h=2c596fdb14"></script>
 </head>
 <body class="fx iu" data-iu-preview="B2">
@@ -229,12 +234,13 @@
       <label style="margin-top:6px" data-i18n="f4.disLabel" data-i18n-html>Disaggregation <span class="opt">— optional, but leave a row blank rather than partly filled</span></label>
       <div class="dis">
         <table>
+      <caption class="sr-only">Age</caption>
           <thead><tr>
-            <th data-i18n="f4.hAge">Age</th>
-            <th data-i18n="f4.hFemale">Female</th>
-            <th data-i18n="f4.hMale">Male</th>
-            <th data-i18n="f4.hOther">Not recorded</th>
-            <th class="rt" data-i18n="f4.hRow">Total</th>
+            <th scope="col" data-i18n="f4.hAge">Age</th>
+            <th scope="col" data-i18n="f4.hFemale">Female</th>
+            <th scope="col" data-i18n="f4.hMale">Male</th>
+            <th scope="col" data-i18n="f4.hOther">Not recorded</th>
+            <th scope="col" class="rt" data-i18n="f4.hRow">Total</th>
           </tr></thead>
           <tbody>
             <tr>
@@ -293,8 +299,8 @@
         <span class="rollv"><b id="rollU18">—</b> <span data-i18n="f4.rollU20">aged 0–19</span> &nbsp;·&nbsp; <b id="roll18">—</b> <span data-i18n="f4.roll20">aged 20 and over</span></span>
       </div>
 
-      <div class="ofwhom">
-        <p class="ofw-h" data-i18n="f4.ofwHead" data-i18n-html>Seen at the session <span>— count what you can see; already inside the total, <b>never added to it</b></span></p>
+      <fieldset class="ofwhom">
+        <legend class="ofw-h" data-i18n="f4.ofwHead" data-i18n-html>Seen at the session <span>— count what you can see; already inside the total, <b>never added to it</b></span></legend>
         <div class="ofw-g">
           <div>
             <label for="ofChildAlone" data-i18n="f4.ofChildAlone">Children without an adult with them</label>
@@ -316,9 +322,41 @@
             <label for="ofDistress" data-i18n="f4.ofDistress">In acute distress — needed one-to-one attention</label>
             <input type="number" id="ofDistress" min="0" step="1" inputmode="numeric" placeholder="—">
           </div>
-        </div>
-        <p class="ofw-n" data-i18n="f4.ofwNote">Five things a PFA provider can count by looking, without asking. One person can be on more than one line and is in an age group above as well; these are checked against the total but never summed with it or with each other. Leave blank what you did not see.</p>
+        </fieldset>
       </div>
+
+      <div class="ofwhom" id="disBlock">
+        <p class="ofw-h" data-i18n="f4.disHead" data-i18n-html>Persons with disabilities <span>&mdash; asked for by CMC-Nepal, 21 September 2026</span></p>
+        <div class="f">
+          <label for="disAsked" data-i18n="f4.disAsked">Does the person identify themselves as a person with disability?</label>
+          <select id="disAsked">
+            <option value="" data-i18n="f4.disAskBlank">&mdash; not asked &mdash;</option>
+            <option value="Y" data-i18n="f4.disAskY">Yes</option>
+            <option value="N" data-i18n="f4.disAskN">No</option>
+          </select>
+          <div class="help" data-i18n="f4.disAskedHelp">Optional. Only ask this if the person is able to answer, and leave it blank rather than guess. Blank is recorded as "not asked", which is different from "No".</div>
+        </div>
+        <div class="ofw-g">
+          <div>
+            <label for="disF0_17" data-i18n="f4.disF0_17">Female, under 18</label>
+            <input type="number" id="disF0_17" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
+          </div>
+          <div>
+            <label for="disM0_17" data-i18n="f4.disM0_17">Male, under 18</label>
+            <input type="number" id="disM0_17" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
+          </div>
+          <div>
+            <label for="disF18" data-i18n="f4.disF18">Female, 18 and over</label>
+            <input type="number" id="disF18" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
+          </div>
+          <div>
+            <label for="disM18" data-i18n="f4.disM18">Male, 18 and over</label>
+            <input type="number" id="disM18" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
+          </div>
+        </div>
+        <p class="ofw-n" data-i18n="f4.disNote">Count what you can see, or what the person tells you. These are already inside the attendance total above, so they are checked against it and never added to it or to each other. The type of disability is not asked here; leave the counts blank if you are not sure.</p>
+      </div>
+
 
       <div class="help" style="margin-top:8px" data-i18n="f4.disHelp">Five age groups, as agreed with EDCD on 17 September 2026. Leave a row blank rather than partly filled; the parts are checked against the attendance.</div>
     </div>
@@ -350,7 +388,8 @@
   </div>
   <div class="tbl-wrap">
     <table class="data" id="tbl">
-      <thead><tr><th data-i18n="f4.thDate">Date</th><th data-i18n="f4.thSite">Site</th><th data-i18n="f4.thOrg">Organisation</th><th data-i18n="f4.thAct">Activity</th><th class="n" data-i18n="f4.thAtt">Attended</th><th>ID</th></tr></thead>
+      <caption class="sr-only">Date</caption>
+      <thead><tr><th scope="col" data-i18n="f4.thDate">Date</th><th scope="col" data-i18n="f4.thSite">Site</th><th scope="col" data-i18n="f4.thOrg">Organisation</th><th scope="col" data-i18n="f4.thAct">Activity</th><th scope="col" class="n" data-i18n="f4.thAtt">Attended</th><th scope="col">ID</th></tr></thead>
       <tbody></tbody>
     </table>
     <div class="empty" id="emptyMsg" data-i18n="f4.empty">No reports saved on this device yet.</div>
@@ -361,6 +400,8 @@
 </div>
 
 <div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  </main>
 
 
   </section>
@@ -763,7 +804,7 @@
     else if (sum < total) { box.className = "tally bad"; $("tallyVal").textContent = sum + " of " + total + " — " + (total - sum) + " unaccounted"; }
     else { box.className = "tally good"; $("tallyVal").textContent = sum + " — matches the total"; }
   }
-  partIds.concat(S.OF_WHOM, ["reachedTotal"]).forEach(function (id) { $(id).addEventListener("input", tally); });
+  partIds.concat(S.OF_WHOM, S.DISABILITY, ["reachedTotal"]).forEach(function (id) { $(id).addEventListener("input", tally); });
 
   /* ---------- remember the reporter, not the report ---------- */
   var RK = "mhpss-np-reporter";
@@ -839,6 +880,8 @@
        that can disagree. */
     S.PART_IDS.forEach(function (id) { rec[id] = $(id).value; });
     S.OF_WHOM.forEach(function (id) { rec[id] = $(id).value; });
+    S.DISABILITY.forEach(function (id) { rec[id] = $(id).value; });
+    rec[S.DISABILITY_ASKED] = $("disAsked").value;
     return rec;
   }
 
@@ -909,7 +952,7 @@
   });
 
   function softReset() {
-    ["sessionTime", "dateBS", "site", "siteOther", "palika", "ward", "partners", "activity", "activityOther", "modalityOther", "targetGroupOther", "description", "reachedTotal"].concat(partIds, S.OF_WHOM).forEach(function (id) { $(id).value = ""; });
+    ["sessionTime", "dateBS", "site", "siteOther", "palika", "ward", "partners", "activity", "activityOther", "modalityOther", "targetGroupOther", "description", "reachedTotal"].concat(partIds, S.OF_WHOM, S.DISABILITY, [S.DISABILITY_ASKED]).forEach(function (id) { $(id).value = ""; });
     document.querySelectorAll("#tgs input:checked").forEach(function (i) { i.checked = false; });
     $("siteOtherWrap").hidden = true; $("palikaWrap").hidden = true; $("wardWrap").hidden = true;
     $("activityOtherWrap").hidden = true; $("modalityOtherWrap").hidden = true; $("tgOtherWrap").hidden = true;
