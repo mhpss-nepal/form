@@ -119,6 +119,11 @@
           <input type="text" id="dateBS" name="dateBS" placeholder="2083-05-28" pattern="\d{4}-\d{2}-\d{2}">
           <div class="help" data-i18n="f4.bsHelp" data-i18n-html>Typed as reported. <b>Not converted automatically</b> — automatic conversion needs a verified BS calendar table, which has not been obtained.</div>
         </div>
+        <div class="f" id="provinceWrap">
+          <label for="province" data-i18n="f4.provLab">Province</label>
+          <select id="province" name="province"></select>
+          <div class="help" data-i18n="f4.provHelp">All seven provinces are listed. Choosing one shortens the district list; choosing nothing keeps every district available.</div>
+        </div>
         <div class="f">
           <label for="district" data-i18n="f4.distLab">District</label>
           <select id="district" name="district"></select>
@@ -240,25 +245,25 @@
               <td class="rt"><span id="r04">—</span></td>
             </tr>
             <tr>
-              <td><b>5–14</b></td>
-              <td><input type="number" id="f514" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Female, age 5 to 14"></td>
-              <td><input type="number" id="m514" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Male, age 5 to 14"></td>
-              <td><input type="number" id="o514" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Sex not recorded, age 5 to 14"></td>
-              <td class="rt"><span id="r514">—</span></td>
+              <td><b>5–9</b></td>
+              <td><input type="number" id="f5to9" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Female, age 5 to 9"></td>
+              <td><input type="number" id="m5to9" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Male, age 5 to 9"></td>
+              <td><input type="number" id="o5to9" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Sex not recorded, age 5 to 9"></td>
+              <td class="rt"><span id="r5to9">—</span></td>
             </tr>
             <tr>
-              <td><b>15–49</b></td>
-              <td><input type="number" id="f1549" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Female, age 15 to 49"></td>
-              <td><input type="number" id="m1549" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Male, age 15 to 49"></td>
-              <td><input type="number" id="o1549" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Sex not recorded, age 15 to 49"></td>
-              <td class="rt"><span id="r1549">—</span></td>
+              <td><b>10–19</b></td>
+              <td><input type="number" id="f10to19" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Female, age 10 to 19"></td>
+              <td><input type="number" id="m10to19" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Male, age 10 to 19"></td>
+              <td><input type="number" id="o10to19" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Sex not recorded, age 10 to 19"></td>
+              <td class="rt"><span id="r10to19">—</span></td>
             </tr>
             <tr>
-              <td><b>50–59</b></td>
-              <td><input type="number" id="f5059" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Female, age 50 to 59"></td>
-              <td><input type="number" id="m5059" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Male, age 50 to 59"></td>
-              <td><input type="number" id="o5059" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Sex not recorded, age 50 to 59"></td>
-              <td class="rt"><span id="r5059">—</span></td>
+              <td><b>20–59</b></td>
+              <td><input type="number" id="f20to59" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Female, age 20 to 59"></td>
+              <td><input type="number" id="m20to59" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Male, age 20 to 59"></td>
+              <td><input type="number" id="o20to59" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Sex not recorded, age 20 to 59"></td>
+              <td class="rt"><span id="r20to59">—</span></td>
             </tr>
             <tr>
               <td><b>60+</b></td>
@@ -285,7 +290,7 @@
            national return is compiled from them is a ruling still to come. -->
       <div class="rollup">
         <span data-i18n="f4.rollLabel">Adds up to</span>
-        <span class="rollv"><b id="rollU18">—</b> <span data-i18n="f4.rollU18">aged 0–14</span> &nbsp;·&nbsp; <b id="roll18">—</b> <span data-i18n="f4.roll18">aged 15 and over</span></span>
+        <span class="rollv"><b id="rollU18">—</b> <span data-i18n="f4.rollU20">aged 0–19</span> &nbsp;·&nbsp; <b id="roll18">—</b> <span data-i18n="f4.roll20">aged 20 and over</span></span>
       </div>
 
       <div class="ofwhom">
@@ -461,6 +466,38 @@
   fill($("org"), C.ORGS, "code", null, "Select…");
   fill($("cadre"), live(C.CADRES), "code", null, "Select…");
   fill($("district"), C.DISTRICTS, "code", null, "All districts");
+  /* Province first, then district. Country-wide per the Ministry's decision of
+     21 Sep 2026: every district is selectable, and the province picker narrows
+     the list rather than gating it -- leaving Province blank keeps all of them,
+     so a worker who does not know the province is never blocked. */
+  function refreshDistricts() {
+    var p = $("province") ? $("province").value : "";
+    var list = C.DISTRICTS.filter(function (d) { return !p || d.province === p; });
+    var keep = $("district").value;
+    fill($("district"), list, "code", null, p ? "Select…" : "All districts");
+    if (keep && list.some(function (d) { return d.code === keep; })) $("district").value = keep;
+    refreshSites();
+    if (window.IUPreview && window.IUPreview._api && window.IUPreview._api.pickers
+        && window.IUPreview._api.pickers["district"]) {
+      window.IUPreview._api.pickers["district"].rebuild();
+      window.IUPreview._api.sync();
+    }
+  }
+  if ($("province")) {
+    var provs = [];
+    C.DISTRICTS.forEach(function (d) {
+      if (d.province && provs.indexOf(d.province) === -1) provs.push(d.province);
+    });
+    fill($("province"), provs.map(function (n) { return { code: n, name: n }; }),
+         "code", null, "All provinces");
+    $("province").addEventListener("change", function () {
+      /* A district chosen under the previous province may not exist in the new
+         one. Clear it rather than leaving a hidden, wrong district selected. */
+      var p = $("province").value, d = C.districtByCode[$("district").value];
+      if (p && d && d.province !== p) $("district").value = "";
+      refreshDistricts();
+    });
+  }
   fill($("modality"), live(C.MODALITIES), "code", null, "Select…");
   fill($("status"), C.STATUS, "code", null, null); $("status").value = "ONG";   /* alphabetical list, Ongoing preselected */
   /* The activity list, grouped by its five headings. Only what the reporter
@@ -623,6 +660,7 @@
     }
   }
   $("district").addEventListener("change", refreshSites);
+  if ($("province")) $("province").addEventListener("change", refreshDistricts);
   /* The ward list depends on the palika, not the district, so it has to be
      refreshed when the palika changes too -- otherwise choosing a palika left
      the ward control hidden with its options never built. */

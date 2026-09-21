@@ -35,8 +35,13 @@ REQUIRED_CONTROLS = [
 ]
 # Count fields the schema and exports read.
 COUNT_IDS = [
-    "f04", "m04", "o04", "f514", "m514", "o514", "f1549", "m1549", "o1549",
-    "f5059", "m5059", "o5059", "f60", "m60", "o60",
+    # 0.6.0 (21 Sep 2026, Ministry): the 5Ws age groups are 0-4, 5-9, 10-19,
+    # 20-59, 60+. The ids changed with the ranges, so a stored figure keeps its
+    # meaning; the 0.4.0 ids live on in store.js BANDS_V04 for old records.
+    "f04", "m04", "o04", "f5to9", "m5to9", "o5to9", "f10to19", "m10to19",
+    "o10to19", "f20to59", "m20to59", "o20to59", "f60", "m60", "o60",
+    # 0.7.0: disability, asked for by CMC-Nepal.
+    "disAsked", "disF0_17", "disM0_17", "disF18", "disM18",
 ]
 OF_WHOM_IDS = ["ofChildAlone", "ofPreg", "ofPwd", "ofInjured", "ofDistress"]
 LOCKED_PWA = ["pwa.js"]

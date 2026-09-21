@@ -19,8 +19,14 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MHPSS Field">
+<style>
+  .a11y-skip{position:absolute;left:-9999px;top:0;z-index:1000;background:#fff;color:#183039;padding:10px 14px;border:2px solid #183039;border-radius:0 0 6px 0;font-weight:700;text-decoration:none}
+  .a11y-skip:focus{left:0}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+</style>
 </head>
 <body class="fx">
+<a class="a11y-skip" href="#main" data-i18n="a11y.skip">Skip to the form</a>
 <div class="ribbon" data-i18n="phq9.p002" data-i18n-html>Revised draft <span>· English items only — the validated Nepali text has not been obtained · saved on this phone, sent to the coordination register when there is signal</span></div>
 
 <div class="top">
@@ -34,6 +40,7 @@
 </div>
 
 <div class="wrap">
+  <main id="main">
 
   <h1 data-i18n="phq9.p007">Following one person over time</h1>
   <p class="lede" data-i18n="phq9.p008" data-i18n-html>This measure exists to answer one question the 14 September briefing asked: does a person
@@ -180,6 +187,8 @@
     the top of this page.
   </div>
 </div>
+
+  </main>
 
 <script src="../hub/assets/codes.js"></script>
 <script src="../hub/assets/l1.js"></script>

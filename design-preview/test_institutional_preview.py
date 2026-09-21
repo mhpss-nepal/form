@@ -89,13 +89,31 @@ class InstitutionalPreviewContractTest(unittest.TestCase):
         rather than by loosening the check, so any *other* added or removed
         control still fails.
         """
-        approved_additions = {"ward"}
+        # Controls added after the baseline, each a recorded decision:
+        #   ward      - optional, approved 20 Sep 2026
+        #   province  - country-wide geography, Ministry 21 Sep 2026
+        #   dis*      - disability disaggregation, CMC-Nepal 21 Sep 2026
+        # The age-band ids moved to the Ministry's groups in the same push, so
+        # the 0.4.0 ids count as removed and the 0.6.0 ids as added; store.js
+        # keeps BANDS_V04 so old records still read and export.
+        approved_additions = {
+            "ward", "province",
+            "f5to9", "m5to9", "o5to9", "f10to19", "m10to19", "o10to19",
+            "f20to59", "m20to59", "o20to59",
+            "disAsked", "disF0_17", "disM0_17", "disF18", "disM18",
+        }
+        approved_removals = {
+            "f514", "m514", "o514", "f1549", "m1549", "o1549",
+            "f5059", "m5059", "o5059",
+        }
 
         missing = {c for c in self.baseline.controls if c not in self.current.controls}
         added = {c for c in self.current.controls if c not in self.baseline.controls}
 
-        self.assertEqual(missing, set(), "a baseline form control disappeared")
         # tuple shape is (tag, type, id, name, owner) -- the identity is the id
+        lost = {c[2] for c in missing} - approved_removals
+        self.assertEqual(lost, set(),
+                         f"a baseline form control disappeared: {sorted(lost)}")
         self.assertEqual(
             {c[2] for c in added}, approved_additions,
             f"unapproved control(s) added: {sorted(c[2] for c in added)}",
