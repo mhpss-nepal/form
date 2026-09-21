@@ -88,9 +88,9 @@ class ReconciledUnionTest(unittest.TestCase):
         engine at ../hub/assets/i18n.js. A cache bump only reaches a phone if
         that engine is *precached*; and the distributed 4Ws redirect stub must
         stay precached. (The patch's own CACHE number is deliberately not pinned
-        here — v42 already went live after the engine's last edit, so it is the
-        number that ships; what must not regress is that the engine is fetched
-        at install, with one consistent cache name.)"""
+        here — it advances whenever a precached file changes, the last time to
+        v43 for the hub store.js header correction; what must not regress is
+        that the engine is fetched at install, with one consistent cache name.)"""
         sw = page("sw.js")
         self.assertIsNotNone(re.search(r'const\s+CACHE\s*=\s*"[^"]+"', sw),
                              "sw.js has no CACHE constant")
