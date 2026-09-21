@@ -56,8 +56,19 @@ check(
 
 # Every Layer 1 page that should open in Nepali must carry the declaration on its
 # own <html>, and the pages that must stay English must not carry a Nepali one.
-NEPALI_PAGES = ["5ws-report.html", "index.html"]
-ENGLISH_PAGES = ["selfreport.html", "phq9.html", "referral.html", "contact.html"]
+# THE DECISION MOVED, so this list moved with it.
+# The first decision was "Nepali for the 5Ws only". The Ministry then asked for
+# every form live in English AND Nepali, and Adib's instruction was that the
+# landing page is Nepali. So every Layer 1 FORM page now opens in Nepali, and the
+# Nepali that must NOT follow is Layer 2 and Layer 3 -- which live in the hub
+# repository and are checked there, because a global default here would have
+# turned the Hub Nepali too.
+#
+# cards.html is a PRINT SHEET: it carries both languages side by side on purpose,
+# because a printed card cannot switch, and it does not load i18n.js at all.
+NEPALI_PAGES = ["index.html", "5ws-report.html", "contact.html",
+                "referral.html", "phq9.html", "selfreport.html"]
+ENGLISH_PAGES: list = []
 for page in NEPALI_PAGES:
     text = (REPO / page).read_text(encoding="utf-8", errors="ignore")
     tag = re.search(r"<html[^>]*>", text)
