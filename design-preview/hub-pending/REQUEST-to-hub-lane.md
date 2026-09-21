@@ -21,7 +21,7 @@ Neither can reach production from the form side alone, because the form pages lo
 | # | change | where | how |
 |---|---|---|---|
 | 1 | 44px min-height on the machine-translation notice buttons | hub `assets/i18n.js` | `i18n.js.notice-44px.patch` |
-| 2 | three UI strings for the new Ward field (`f4.wardLab`, `f4.wardHelp`, `f4.optional`) | hub `assets/i18n-strings.js` | `i18n-strings.js.ward-only.patch` |
+| 2 | the Nepali dictionary: **775 values** (add-only) | hub `assets/i18n-strings.js` | `i18n-strings.js.add-ne-775.patch` |
 | 3 | four missing palika ward counts | hub `assets/codes.js` | `codes.js.ward-counts.patch` |
 | 4 | the per-layer default engine | hub `assets/i18n.js` | **already built** — land `t_2449fe51`, branch `task/t_2449fe51-i18n-per-layer-default`, HEAD `8273e90` |
 | 5 | an "all forms" listing that includes every instrument | hub `forms.html` | `forms.html.review-listing.*.patch` — see below |
@@ -44,8 +44,32 @@ node -e 'global.window={};require("./assets/i18n-strings.js");
 
 - **#1 is an accessibility fix, not a style choice.** The buttons are created at
   runtime by the shared engine and measured 27.8px, under the 44px minimum. They
-  sit outside the form container, so no form-side rule can reach them.
-- **#2 is required or the Ward label renders as the raw text `f4.wardLab`.**
+  sit outside the form container, so no form-side rule can reach them. Verified
+  still present on the live site (28px) after PR #1 landed.
+- **#2 is why Layer 1 opens in Nepali but reads mostly English today.** PR #1 landed
+  the per-layer default, so `form/` and `form/5ws-report.html` do serve
+  `lang="ne"`, but the live dictionary is `en 728 / ne 180` — the keys the landing
+  page needs (`ml.p036`, `ml.p030`, `ml.p049` …) have no Nepali, so the page is
+  Nepali shell, English body. Measured live: landing 8% Nepali, all-forms 9%.
+  With this patch (applied to a scratch copy of `origin/main` and driven in a real
+  browser): landing **82%**, all-forms **93%**, 5Ws 83%.
+- **#2 is add-only and cannot lose work.** Applied to a scratch copy of
+  `origin/main`: `en` 728 → 955, `ne` 180 → 955, **0 keys lost, 0 existing values
+  changed**. It does **not** carry the one key the hub lane fixed by hand:
+  `f4.wardLab`, where the hub removed the `<span class="opt">` markup because the
+  form renders it with `data-i18n` (no `-html`), so the markup would show as
+  literal text. The hub's value is preserved — the generator refuses to build if
+  any other key conflicts.
+- **#2 deliberately holds 19 strings in English.** `phq9.item*`, `consent.*`,
+  `safeguard.*` and `clinical.*` are named in the hub file's own *"strings that NO
+  machine may translate"* note. This session's values for them are machine drafts
+  (a short machine rendering of PHQ-9 item 1, marks on the suicide item 9, on
+  consent wording, and on the GBV/child-protection gate), so they are **excluded**,
+  not translated. The PHQ-9 cut-off ≥10 belongs to specific validated wording
+  (Kohrt et al. 2016), so machine wording there is a clinical risk, not a quality
+  issue. The validated instrument this session rescued from the open-access
+  supplement is a separate artifact (`references/phq9-nepal-REVIEW.md`), for the
+  team to adopt deliberately.
 - **#3 is required or the ward dropdown is hidden for four palikas.** Each count
   was confirmed from at least two independent sources; Shahid Lakhan from its own
   municipal website ("जम्मा वडा संख्या : ९"). A guessed count would offer ward
