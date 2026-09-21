@@ -466,6 +466,11 @@ body.institutional-utility .empty{color:var(--iu-muted)}
           <input type="text" id="dateBS" name="dateBS" placeholder="2083-05-28" pattern="\d{4}-\d{2}-\d{2}">
           <div class="help" data-i18n="f4.bsHelp" data-i18n-html>Typed as reported. <b>Not converted automatically</b> — automatic conversion needs a verified BS calendar table, which has not been obtained.</div>
         </div>
+        <div class="f" id="provinceWrap">
+          <label for="province" data-i18n="f4.provLab">Province</label>
+          <select id="province" name="province"></select>
+          <div class="help" data-i18n="f4.provHelp">All seven provinces are listed. Choosing one shortens the district list; choosing nothing keeps every district available.</div>
+        </div>
         <div class="f">
           <label for="district" data-i18n="f4.distLab">District</label>
           <select id="district" name="district"></select>
@@ -800,6 +805,38 @@ body.institutional-utility .empty{color:var(--iu-muted)}
   fill($("org"), C.ORGS, "code", null, "Select…");
   fill($("cadre"), live(C.CADRES), "code", null, "Select…");
   fill($("district"), C.DISTRICTS, "code", null, "All districts");
+  /* Province first, then district. Country-wide per the Ministry's decision of
+     21 Sep 2026: every district is selectable, and the province picker narrows
+     the list rather than gating it -- leaving Province blank keeps all of them,
+     so a worker who does not know the province is never blocked. */
+  function refreshDistricts() {
+    var p = $("province") ? $("province").value : "";
+    var list = C.DISTRICTS.filter(function (d) { return !p || d.province === p; });
+    var keep = $("district").value;
+    fill($("district"), list, "code", null, p ? "Select…" : "All districts");
+    if (keep && list.some(function (d) { return d.code === keep; })) $("district").value = keep;
+    refreshSites();
+    if (window.IUPreview && window.IUPreview._api && window.IUPreview._api.pickers
+        && window.IUPreview._api.pickers["district"]) {
+      window.IUPreview._api.pickers["district"].rebuild();
+      window.IUPreview._api.sync();
+    }
+  }
+  if ($("province")) {
+    var provs = [];
+    C.DISTRICTS.forEach(function (d) {
+      if (d.province && provs.indexOf(d.province) === -1) provs.push(d.province);
+    });
+    fill($("province"), provs.map(function (n) { return { code: n, name: n }; }),
+         "code", null, "All provinces");
+    $("province").addEventListener("change", function () {
+      /* A district chosen under the previous province may not exist in the new
+         one. Clear it rather than leaving a hidden, wrong district selected. */
+      var p = $("province").value, d = C.districtByCode[$("district").value];
+      if (p && d && d.province !== p) $("district").value = "";
+      refreshDistricts();
+    });
+  }
   fill($("modality"), live(C.MODALITIES), "code", null, "Select…");
   fill($("status"), C.STATUS, "code", null, null); $("status").value = "ONG";   /* alphabetical list, Ongoing preselected */
   /* The activity list, grouped by its five headings. Only what the reporter
@@ -962,6 +999,7 @@ body.institutional-utility .empty{color:var(--iu-muted)}
     }
   }
   $("district").addEventListener("change", refreshSites);
+  if ($("province")) $("province").addEventListener("change", refreshDistricts);
   /* The ward list depends on the palika, not the district, so it has to be
      refreshed when the palika changes too -- otherwise choosing a palika left
      the ward control hidden with its options never built. */

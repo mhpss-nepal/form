@@ -66,6 +66,7 @@
         <div class="f"><label for="dateAD">Date of referral (AD)</label><input type="date" id="dateAD"></div>
       </div>
       <div class="row three">
+        <div class="f"><label for="province" data-i18n="f4.provLab">Province</label><select id="province"></select></div>
         <div class="f"><label for="district">District</label><select id="district"></select></div>
         <div class="f">
           <label for="site">Site referred from</label><select id="site"></select>
@@ -96,7 +97,7 @@
         </div>
         <div class="f">
           <label for="ageband">Age band</label>
-          <select id="ageband"><option value="">— choose —</option><option value="0-4">0–4</option><option value="5-11">5–11</option><option value="12-17">12–17</option><option value="18-24">18–24</option><option value="25-59">25–59</option><option value="60+">60 and over</option><option value="NS">Not stated</option></select>
+          <select id="ageband"><option value="">— choose —</option><option value="0-4">0–4</option><option value="5-9">5–9</option><option value="10-19">10–19</option><option value="20-59">20–59</option><option value="60+">60 and over</option><option value="NS">Not stated</option></select>
         </div>
         <div class="f">
           <label for="tgroup">Target group</label><select id="tgroup"></select>
@@ -247,6 +248,28 @@
   L.fillSelect($("org"), C.ORGS.concat([{ code: "OTHER", name: "Other — not listed", np: "अन्य — सूचीमा नभएको", np_src: "draft" }]));
   L.fillSelect($("cadre"), C.CADRES);
   L.fillSelect($("district"), C.DISTRICTS);
+  /* Province narrows the district list; blank keeps every district. Country-wide
+     per the Ministry's decision of 21 Sep 2026. */
+  (function () {
+    var pw = $("province"), dw = $("district");
+    if (!pw) return;
+    var seen = [];
+    C.DISTRICTS.forEach(function (d) {
+      if (d.province && seen.indexOf(d.province) === -1) seen.push(d.province);
+    });
+    L.fillSelect(pw, seen.map(function (n) { return { code: n, name: n }; }));
+    var blank = document.createElement("option");
+    blank.value = ""; blank.textContent = "All provinces";
+    pw.insertBefore(blank, pw.firstChild);
+    function rebuild() {
+      var p = pw.value, keep = dw.value;
+      var list = C.DISTRICTS.filter(function (d) { return !p || d.province === p; });
+      L.fillSelect(dw, list);
+      if (keep && list.some(function (d) { return d.code === keep; })) dw.value = keep;
+      refreshSites();
+    }
+    pw.addEventListener("change", rebuild);
+  })();
   L.fillSelect($("tgroup"), C.TARGET_GROUPS);
   L.fillSelect($("reason"), REASONS);
   $("dateAD").value = L.today();
