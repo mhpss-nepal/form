@@ -20,8 +20,14 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MHPSS Field">
+<style>
+  .a11y-skip{position:absolute;left:-9999px;top:0;z-index:1000;background:#fff;color:#183039;padding:10px 14px;border:2px solid #183039;border-radius:0 0 6px 0;font-weight:700;text-decoration:none}
+  .a11y-skip:focus{left:0}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+</style>
 </head>
 <body class="fx landing">
+<a class="a11y-skip" href="#main" data-i18n="a11y.skip">Skip to the form</a>
 <div class="ribbon"><span data-i18n="banner.trial"></span><span data-i18n="banner.trialSub"></span></div>
 
 <div class="top">
@@ -35,6 +41,7 @@
 </div>
 
 <div class="wrap">
+  <main id="main">
 
   <div class="ml-hero">
     <div class="eyebrow" data-i18n="ml.p012"></div>
@@ -131,7 +138,7 @@
   <p class="lede" data-i18n="ml.p013"></p>
   <div class="tw">
   <table class="prov">
-    <tr><th data-i18n="ml.p051"></th><th data-i18n="ml.p050"></th><th data-i18n="ml.p049"></th></tr>
+    <tr><th scope="col" data-i18n="ml.p051"></th><th scope="col" data-i18n="ml.p050"></th><th scope="col" data-i18n="ml.p049"></th></tr>
     <tr>
       <td data-i18n="ml.p069"></td>
       <td data-i18n="ml.p068"></td>
@@ -173,6 +180,8 @@
        files are supplied — see that file before changing anything here. -->
   <div class="attrib"></div>
 </div>
+
+  </main>
 
 <script src="qr-trial.js"></script>
 <script src="../hub/assets/fb-config.js"></script>
