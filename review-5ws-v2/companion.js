@@ -4,8 +4,6 @@ const $=id=>document.getElementById(id),notice=text=>{$('status').textContent=te
 function authenticated(){try{return FB.webAuth().currentUser?.emailVerified===true;}catch(_){return false;}}
 function transport(){if(ENDPOINT_CONFIG.activationEnabled!==true)throw Error('Activation held: login inspection only; no cloud data request');return MHPS5WS_TRANSPORT.create({projectId:FB_CONFIG.projectId,functionURL:ENDPOINT_CONFIG.functionURL},FB.webAuth());}
 const listing={current:(org)=>transport().current(org)};
-async function signin(){await new Promise((res,rej)=>{if(FB.status().ready)return res();let n=0;const timer=setInterval(()=>{if(FB.status().ready){clearInterval(timer);res();}else if(++n>100){clearInterval(timer);rej(Error('Auth SDK unavailable'));}},100);});
-try{await FB.signIn($('em').value.trim(),$('pw').value);}finally{$('pw').value='';}notice(authenticated()?'Verified account signed in. UID: '+FB.webAuth().currentUser.uid+' · Email: '+FB.webAuth().currentUser.email+' · Organisation access remains server-controlled. No grant was created.':'Signed in but verified email is required; no delivery acknowledged.');return authenticated();}
 async function flush(){
  if(!authenticated()){notice('Signed out — immutable requests remain pending.');return SESSION_QUEUE.status();}
  const result=await SESSION_QUEUE.flush(async(token,request,digest)=>{
@@ -39,8 +37,7 @@ async function refresh(){
 $('recovery').onclick=async()=>{try{const data=await SESSION_QUEUE.recoveryExport(),blob=new Blob([JSON.stringify(data)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='restricted-device-recovery.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}catch(_){notice('Recovery unavailable; no queue removed.');}};
 SESSION_QUEUE.historical().then(q=>{$('historyStatus').textContent=q.length+' historical envelope(s) held read-only; export exact recovery. No automatic migration, dispatch or production-queue claim.';}).catch(()=>notice('Historical storage held; no migration or deletion.'));
 window.addEventListener('authority26change',async()=>{const s=await SESSION_QUEUE.status();$('historyStatus').textContent='Device authority: '+s.state+'; '+(s.pending??'unknown')+' pending. Recovery warnings are not delivery receipts; export before clearing. Legacy storage remains HOLD.';});
-window.REVIEW_BRIDGE=Object.freeze({submit,flush,signin,refresh});
-$('signin').onclick=()=>signin().catch(()=>notice('Sign-in unavailable — offline login is not supported. Nothing acknowledged; queue retained.'));
+window.REVIEW_BRIDGE=Object.freeze({submit,flush,refresh});
 $('flush').onclick=()=>flush().catch(()=>notice('Unavailable — requests retained.'));
 $('refresh').onclick=()=>refresh().catch(()=>notice('Authenticated current read unavailable — no cached report read or refresh.'));
 })();

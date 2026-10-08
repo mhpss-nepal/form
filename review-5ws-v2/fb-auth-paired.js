@@ -29,7 +29,6 @@
   var cfg = window.FB_CONFIG || {};
   var COLL = window.FB_COLLECTION || "submissions";
   var QKEY = "mhpss-np-queue-v1";
-  var LKEY = "mhpss-np-linkmail";
   /* Kept in step with isOwner() in the security rules. The rules are what
      enforce it; this copy only lets a page explain itself without a read. */
   var OWNER = "asroriadib@gmail.com";
@@ -58,7 +57,7 @@
       ready: state.ready,
       error: state.error,
       online: navigator.onLine,
-      user: state.user ? { email: state.user.email, uid: state.user.uid } : null,
+      user: state.user ? { email: state.user.email, uid: state.user.uid, emailVerified: state.user.emailVerified === true } : null,
       pending: 0
     };
   }
@@ -127,42 +126,12 @@
           limit: fsMod.limit, onSnapshot: fsMod.onSnapshot, getDocs: fsMod.getDocs,
           getDoc: fsMod.getDoc, deleteDoc: fsMod.deleteDoc,
           serverTimestamp: fsMod.serverTimestamp,
-          signIn: auMod.signInWithEmailAndPassword, signOut: auMod.signOut,
+          signOut: auMod.signOut,
           onAuth: auMod.onAuthStateChanged,
           sendLink: auMod.sendSignInLinkToEmail,
           isLink: auMod.isSignInWithEmailLink,
           signInLink: auMod.signInWithEmailLink
         };
-        /* An email link arrives as a URL on this same page. Finish the
-           sign-in before wiring anything else up, so the page renders once
-           in its final state rather than flashing a sign-in form first. */
-        try {
-          if (api.isLink(auth, window.location.href)) {
-            var pending = "";
-            try { pending = localStorage.getItem(LKEY) || ""; } catch (e) { /* ignore */ }
-            if (!pending) {
-              /* The link was opened in a different browser from the one that
-                 asked for it, so the address is not on this device. Asking
-                 for it again is the documented flow, not a failure. */
-              pending = window.prompt(
-                "To finish signing in, type the email address this link was sent to:") || "";
-            }
-            if (pending) {
-              await api.signInLink(auth, pending, window.location.href);
-              try { localStorage.removeItem(LKEY); } catch (e) { /* ignore */ }
-              /* Strip the credential out of the address bar so it is not left
-                 in history, bookmarks or a screenshot. */
-              if (window.history && window.history.replaceState) {
-                window.history.replaceState({}, document.title,
-                  window.location.pathname + window.location.search);
-              }
-            }
-          }
-        } catch (e) {
-          state.error = "sign-in link failed: " +
-            (e && e.message ? e.message.replace(/^Firebase:\s*/, "") : String(e));
-        }
-
         api.onAuth(auth, function (u) {
           state.user = u || null;
           userCbs.forEach(function (f) { try { f(state.user); } catch (e) { /* ignore */ } });
@@ -174,7 +143,7 @@
 
       } catch (e) {
         state.ready = false;
-        state.error = "could not reach Firebase: " + (e && e.message ? e.message : String(e));
+        state.error = "Auth SDK unavailable. No data request made.";
         announce();
       }
     })();
@@ -213,10 +182,7 @@
   /* ---------- read (coordination side, needs a signed-in user) -------- */
   function watch(){return function(){};}
   function watchKind(){return function(){};}
-  function signIn(email, pass) {
-    if (!state.ready) return Promise.reject(new Error("not connected"));
-    return api.signIn(auth, email, pass);
-  }
+  function signIn(){return Promise.reject(Error("Password login disabled in email-link review"));}
   function signOutNow() {
     if (!state.ready) return Promise.resolve();
     return api.signOut(auth);
@@ -272,14 +238,7 @@
      The person types their address once and clicks a link. No password is
      ever chosen, typed, shared or stored -- which also means nobody is
      holding anybody else's password. */
-  function sendLink(mail) { return Promise.reject(new Error("Outside paired review scope"));
-    if (!state.ready) return Promise.reject(new Error("not connected"));
-    try { localStorage.setItem(LKEY, mail); } catch (e) { /* ignore */ }
-    return api.sendLink(auth, mail, {
-      url: window.location.origin + window.location.pathname,
-      handleCodeInApp: true
-    });
-  }
+  function sendLink(){return Promise.reject(Error("Use explicit owner-only email-link controls"));}
 
   /* ---------- the public shelf -----------------------------------------
      public_stats is the ONLY thing the public website reads: aggregates a
