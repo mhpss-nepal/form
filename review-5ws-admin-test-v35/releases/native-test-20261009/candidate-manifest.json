@@ -1,0 +1,77 @@
+{
+  "status": "TEST_ONLY_UNPUBLISHED_NOT_REVIEWED",
+  "operationalActivation": false,
+  "pair_sha256": "8d0970d62b3c0fdd796235cba410c011f97e785b4d0030170046fc020c0152a8",
+  "release_sha256": "5151d8773677bc06391aca0b15d0aeed5d9204b95eb8f2e8b7f24da9475741c0",
+  "release_hash_basis": "canonical inventory excluding release-pins.js and manifest; pins externally hashed to avoid circularity",
+  "assets": {
+    "admin-test-contract.json": {
+      "sha256": "8d0970d62b3c0fdd796235cba410c011f97e785b4d0030170046fc020c0152a8",
+      "bytes": 3693
+    },
+    "admin-test-transport.js": {
+      "sha256": "31a21800bd734c665fc60d808d47058c32d28fb1a895c29fabb18f1527aea6e6",
+      "bytes": 3945
+    },
+    "admin-test-ui.js": {
+      "sha256": "d4975b71cf876b06b82bf36375d003f876bb27cb600c9c0b78c9a82f7ed8eed9",
+      "bytes": 4614
+    },
+    "editor-authority.js": {
+      "sha256": "ef19c361d34ffe0733b32207f51bddc44e7c92d6d310bd863293e4b31a112ee5",
+      "bytes": 7912
+    },
+    "email-link-boot.js": {
+      "sha256": "a9a2bc368d6e5a972daeb1cf566297314d1cbfb8c7cccd6d4f6b51cafcc6f3d0",
+      "bytes": 558
+    },
+    "email-link-login.js": {
+      "sha256": "124943a35392b028d29aa61e0ed7add06a7623386f664068fa9b6aedd29ced1b",
+      "bytes": 4306
+    },
+    "endpoint-config.js": {
+      "sha256": "035c08eeb72a5388b53f83290c45a2198e48a5ee5d871bb4464450cf81f54508",
+      "bytes": 120
+    },
+    "fb-auth-paired.js": {
+      "sha256": "a55326db51da8171aabcd44276ef1199983de234ef903c442c4f509bb196bba9",
+      "bytes": 14186
+    },
+    "fb-config.js": {
+      "sha256": "7756103cabd291ee4322a4c9fe63f6bfb4239cebabeba1eb702a5b0321051034",
+      "bytes": 1366
+    },
+    "form/5ws-report.html": {
+      "sha256": "fb172c3c61d40a7089eaae27f5011280875a0ddb3a9df0ba6ab34abd605c938f",
+      "bytes": 719784
+    },
+    "offline/session-queue.js": {
+      "sha256": "c9615afa73511150d135466cc3c7c2c1a34602666347b6c2595d4e356feda8c5",
+      "bytes": 10660
+    },
+    "review.html": {
+      "sha256": "ce59a1ddeb02e3b5ac4d837ac9d5f89454e8e29c2e89f49b8c347030336a21e4",
+      "bytes": 2757
+    },
+    "sdk/firebase-app.js": {
+      "sha256": "f7ec36066094ccc2cc288a5c76453daf5f8d6dcdb5063d3a3ae4392add8344a7",
+      "bytes": 102882
+    },
+    "sdk/firebase-auth.js": {
+      "sha256": "f7b4b6c2a048a971dc0468db2c234f032ccc25218f9f0a5df5df73507b279641",
+      "bytes": 150531
+    },
+    "sdk/firebase-firestore.js": {
+      "sha256": "978aee9ea886a9b66570efe20ba6f7f7a3422a0b22578a2830300d7ae446c3d7",
+      "bytes": 440170
+    },
+    "test.css": {
+      "sha256": "fdaf920fda66dae304ec714b4b7fb240b35088e357ce12964c0beb6f0d9c9bd1",
+      "bytes": 632
+    },
+    "release-pins.js": {
+      "sha256": "74be9ed89b1de7d8239eaffa74f516bd7c4762e4b4009a10f32c648676952cb0",
+      "bytes": 201
+    }
+  }
+}
