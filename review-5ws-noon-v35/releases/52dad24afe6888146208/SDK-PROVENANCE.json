@@ -1,0 +1,5 @@
+{
+  "version": "10.13.0",
+  "source": "Existing hub/assets/fb.js modular SDK",
+  "network_policy": "SDK source static only; Auth requests network-only; no tokens in CacheStorage"
+}

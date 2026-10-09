@@ -1,0 +1,785 @@
+/* =====================================================================
+   MHPSS Nepal — the design system
+   ---------------------------------------------------------------------
+   REWRITTEN 16 September 2026, after WHO's review: "improve tampilan
+   infografisnya, jgn kayak buatan AI."
+
+   That was correct, and the fault was the reference. The first version
+   borrowed the Sadar Hati public site, which is a good site -- for an
+   Indonesian foundation. Transplanted here it produced the generic
+   landing-page grammar that reads as machine-made: a gradient hero, a
+   letter-spaced uppercase kicker, three feature cards under a centred
+   heading, badge chips, soft shadows on everything, pill buttons.
+
+   The right reference was open in the browser the whole time: the
+   Ministry of Finance's own Rasuwa-Bhotekoshi flood update page. That is
+   the Government of Nepal's visual language for THIS emergency, and it is
+   built on a different grammar entirely:
+
+     · the flag's colours -- crimson #c8102e and blue #003893 -- not a
+       generic tech blue
+     · ONE typeface, Mukta, carrying both Devanagari and Latin, so the
+       Nepali view is the same document rather than a different website
+     · no serif, no gradient, hard edges, thin rules
+     · a solid nav band whose labels are BILINGUAL AND STACKED, English
+       over Nepali
+     · a status strip: live dot, both calendars, last update, the event
+     · the DATA as the hero -- a large crimson figure with a rule beside
+       it -- not a sentence about the data
+     · a card row that VARIES: plain, plain, tinted-and-outlined, solid
+       filled. The variation is what stops it reading as a template
+     · tables, dense, wherever a table is the honest form
+
+   WHO blue survives only where WHO is being credited. It is no longer
+   the identity of the page, because this is not a WHO page -- it is a
+   sub-cluster under the Nepal Health Cluster.
+
+   NO EMBLEM is used: the WHO emblem needs express written permission and
+   the Nepal national emblem belongs to the Ministry. The mark in the
+   masthead is original, drawn in assets/mark.js.
+   ===================================================================== */
+
+/* The Health Cluster's own palette, from its Visual Identity Guidelines
+   (healthcluster.who.int, "IDENTITY GUIDELINES", read 16 Sep 2026). Its two
+   PRIMARY colours are Pantone 299 C (RGB 0/159/227) and Neutral Black C
+   (RGB 29/29/27); its secondary colours are Pantone P 427 C light grey
+   (RGB 218/218/218) and Pantone P 1495 C orange (RGB 243/147/19).
+
+   The orange is LEFT OUT: the project's standing rule is no gold or yellow. If it is ever wanted it is in the guidelines, not invented.
+
+   Everything else here is Pantone 299 C held at its own hue (198 degrees) and
+   full saturation, lightened and darkened -- because 299 C itself reaches only
+   2.97:1 against white and so can never carry text. --wh-d and --wh-dd are the
+   text-safe shades; --wh is the brand mark, keylines and fills.
+
+   The Nepal flag palette this replaced was correct for a Ministry of Finance
+   page and wrong here: at a glance the page read as the MoF's own site. The
+   grammar stays -- a masthead, a solid nav band, a status strip, data as the
+   hero, dense tables. The colours are now the Health Cluster's. */
+:root{
+  --wh:#009fe3;      /* Pantone 299 C -- the brand blue: mark, keylines, fills */
+  --wh-2:#00a4eb;    /* one step brighter, for hover and the mark's gradient   */
+  --wh-3:#79bbd8;    /* light -- icons on white, links on black               */
+  --wh-b:#acd9ec;    /* borders                                               */
+  --wh-t:#eaf7fd;    /* tints                                                 */
+  --wh-d:#006996;    /* deep -- headings, links, the nav band, primary fill    */
+  --wh-dd:#004969;   /* deeper -- h1, the active nav item, the solid card      */
+  /* --wh-tx is the blue that carries TEXT on a page surface. It is the same
+     value as --wh-d in light mode, but page.css and hub.css lift it inside
+     their dark blocks; --wh-d cannot be lifted because it is also a fill
+     under white text. Keeping them apart is what let the hub's headings and
+     links go to 2.6:1 in dark mode before the sweep caught it. */
+  --wh-tx:#006996;
+  --hc-ink:#1d1d1b;  /* Neutral Black C -- body text, the footer, flagged state*/
+  --hc-mute:#5c5c5a; /* neutral grey text                                      */
+  --grey-1:#f6f6f5; --grey-2:#efefee;
+  --grey-3:#dadada;  /* Pantone P 427 C                                        */
+  --flag-t:#f2f2f1; --flag-b:#cfcfcd;
+  /* ONE PAGE FRAME.
+     Measured 16 Sep 2026: the <h1> on this site landed at ten different
+     x-positions between 109px and 416px depending on the page, because each
+     stylesheet centred a container of its own width -- .page at 1320,
+     page.css main at 960, app.css .wrap at 940, hub.css .wrap at 1760. A
+     centred block moves its own left edge whenever its width changes, so
+     every click slid the text sideways.
+     The fix is one frame for every page in the top-navigation family, with
+     narrower things LEFT-ALIGNED inside it rather than re-centred. Text stays
+     readable because the prose measure is capped in ch, not because the whole
+     page is narrow -- which is what let the canvas stay wide after the
+     Ministry-of-Finance comparison and still read as one site. */
+  --frame:1240px;
+  --gutter:28px;
+  --measure:none;      /* NO prose measure since 17 Sep 2026 (afternoon).
+                          Running text takes the full width of whatever
+                          container it stands in -- the coordinator's rule,
+                          pointed at on this very page: a paragraph that
+                          stops at 82ch while the cards beside it run to the
+                          frame is "dipotong di tengah jalan". Titles keep a
+                          short measure; a title is set, not run. */
+  --formw:940px;       /* a form column; a 1240px-wide input is not a form */
+  --sans:'Mukta',system-ui,-apple-system,'Segoe UI',Roboto,'Noto Sans',Arial,sans-serif;
+  --r-sm:3px; --r:4px; --r-md:10px; --r-lg:12px;
+  --sh-card:0 1px 2px rgba(29,29,27,.06);
+}
+
+body{font-family:var(--sans);color:var(--ink,var(--hc-ink));background:var(--paper,#fff)}
+a{color:var(--wh-tx)}
+
+/* ---------- masthead: three parts, like a ministry page -------------- */
+/* The shell. Measured 16 September 2026 against the Ministry of Finance's own
+   flood-update page at a 1920 viewport: theirs runs 1200px of content with
+   360px gutters, ours ran 1180 with 370 -- so the site was not narrower than
+   the Ministry's, but both leave a lot of glass empty. The document shell goes
+   to 1320: the tables, the figures and the card row all gain width, while prose
+   keeps its own measure below (a 1320px line of text is unreadable, so the
+   extra width goes to the data, never to the sentences).
+   The coordination hub is a different thing and takes a different width -- see
+   the rail section and hub.css. */
+/* The demonstration band. Defined here as well as in hub.css so that the
+   pages which do not load hub.css get the same 35px, rather than inheriting a
+   line-height from whichever base stylesheet they happen to use. */
+.synth{background:#a3201f;color:#fff;font-size:12.5px;line-height:1.45;font-weight:700;
+  letter-spacing:.02em;text-align:center;padding:7px 16px;
+  padding-top:calc(7px + env(safe-area-inset-top,0px));position:relative;z-index:40}
+.synth span{font-weight:400;opacity:.92}
+.gov{background:#fff;border-bottom:1px solid var(--grey-3)}
+/* The masthead rides the SAME frame as the content, so the emblem block and
+   the page title share a left edge. It was 1320 while the content frame was
+   1240, which put the masthead 48px to the left of everything under it.
+   font-size is pinned here rather than inherited: page.css sets a larger base
+   size, which wrapped the identity block onto an extra line and made the
+   masthead 111px tall on three pages and 88px on the rest -- so the title
+   visibly hopped up and down as you clicked between them. */
+.gov{font-size:15px;line-height:1.35}
+.gov .in{max-width:var(--frame);margin:0 auto;padding:13px var(--gutter);display:flex;align-items:center;
+         gap:18px;flex-wrap:wrap}
+.gov .id{display:flex;align-items:center;gap:11px;text-decoration:none;min-width:0}
+/* mark.js drops an inline SVG into [data-mark]; with no box of its own the
+   span took its height from the surrounding line box, which differed between
+   page.css and design.css and made the masthead 84px tall here and 50px
+   there -- a 26px hop in the logo and the whole nav bar on every click
+   between those pages. Pin the box and the mark cannot argue. */
+.gov .id > [data-mark]{flex:0 0 44px;width:44px;height:44px;display:block;line-height:0}
+.gov .id > [data-mark] svg,.gov .id > [data-mark] img{display:block;width:100%;height:100%}
+.gov .id .who-line{font-size:11.5px;color:var(--hc-mute);line-height:1.3}
+.gov .id b{display:block;font-size:19px;font-weight:700;color:var(--wh-d);line-height:1.2;
+           letter-spacing:-.2px}
+.gov .id .place{display:block;font-size:11.5px;color:var(--hc-mute);line-height:1.3}
+.gov .mid{flex:1 1 220px;text-align:center;min-width:0}
+.gov .mid b{display:block;font-size:17px;font-weight:700;color:var(--wh-d);line-height:1.25}
+.gov .mid span{display:block;font-size:11.5px;color:var(--hc-mute);margin-top:1px}
+.gov .right{display:flex;align-items:center;gap:10px;margin-left:auto}
+
+/* the two-cell language switch, hard-edged */
+.lang2{display:inline-flex;border:1px solid var(--wh-d);border-radius:var(--r);overflow:hidden}
+.lang2 button{border:0;background:#fff;color:var(--wh-d);font:700 12.5px/1 var(--sans);
+              padding:8px 12px;cursor:pointer;letter-spacing:.3px}
+.lang2 button[aria-pressed="true"]{background:var(--wh-d);color:#fff}
+
+/* ---------- the nav band: bilingual, stacked ------------------------- */
+.navband{background:var(--wh-d);border-bottom:3px solid var(--wh)}
+.navband .in{max-width:1320px;margin:0 auto;padding:0 20px;display:flex;flex-wrap:wrap}
+.navband a{display:flex;flex-direction:column;justify-content:center;text-decoration:none;
+           color:rgba(255,255,255,.93);padding:9px 15px;min-height:52px;
+           border-right:1px solid rgba(255,255,255,.14)}
+.navband a:first-child{border-left:1px solid rgba(255,255,255,.14)}
+.navband a b{font-size:13.5px;font-weight:700;line-height:1.2;white-space:nowrap}
+.navband a i{font-style:normal;font-size:10.5px;line-height:1.3;color:#cbe9f8;
+             white-space:nowrap}
+.navband a:hover{background:rgba(255,255,255,.1);color:#fff}
+.navband a.on{background:var(--wh-dd);box-shadow:inset 0 3px 0 var(--wh)}
+.navband a.on i{color:#cbe9f8}
+@media (max-width:820px){
+  .navband .in{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}
+  .navband a{flex:0 0 auto;min-height:46px;padding:7px 13px}
+}
+
+/* ---------- status strip --------------------------------------------- */
+.statusbar{background:var(--grey-1);border-bottom:1px solid var(--grey-3);font-size:12.5px;
+           color:var(--hc-mute)}
+.statusbar .in{max-width:1320px;margin:0 auto;padding:7px 20px;display:flex;gap:7px 18px;
+               flex-wrap:wrap;align-items:center}
+.statusbar .live{display:inline-flex;align-items:center;gap:6px;font-weight:700;
+                 color:var(--hc-ink);letter-spacing:.6px;font-size:11.5px}
+.statusbar .live::before{content:"";width:7px;height:7px;border-radius:50%;
+                         background:var(--wh-d)}
+.statusbar b{color:var(--hc-ink);font-weight:700}
+.statusbar .sep{color:#6b6b69}
+
+/* ---------- page shell ----------------------------------------------- */
+.page{max-width:var(--frame);margin:0 auto;padding:0 var(--gutter)}
+.sheet{background:var(--grey-1);border:1px solid var(--grey-3);border-radius:var(--r-lg);
+       padding:26px 28px;margin:22px 0}
+@media (max-width:620px){ .sheet{padding:20px 17px;border-radius:var(--r-md)} }
+
+/* ---------- headline block ------------------------------------------- */
+.stamp{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--hc-mute)}
+.stamp .tagpill{border:1px solid var(--grey-3);background:#fff;border-radius:20px;
+                padding:2px 10px;font-size:11px;font-weight:600}
+h1.title{font-size:clamp(25px,3.6vw,40px);font-weight:700;line-height:1.16;color:var(--wh-d);
+         letter-spacing:-.6px;margin:12px 0 0;max-width:22ch}
+.subtitle{margin:13px 0 0;font-size:16px;line-height:1.62;color:var(--hc-mute);max-width:none}
+
+/* ---------- the figure block: data as the hero ----------------------- */
+.figblock{background:#fff;border:1px solid var(--grey-3);border-radius:var(--r-md);
+          border-left:4px solid var(--wh-d);padding:17px 20px;margin-top:20px}
+.figblock .cap{font-size:13px;color:var(--hc-mute);font-weight:600}
+.figblock .big{font-size:clamp(28px,4.4vw,44px);font-weight:800;color:var(--hc-ink);
+               line-height:1.1;margin:5px 0 0;letter-spacing:-1px}
+.figblock .big.pending{font-size:clamp(19px,2.4vw,26px);color:var(--hc-mute);font-weight:700;
+                       letter-spacing:-.3px}
+.figblock .breakdown{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.bpill{font-size:12px;font-weight:600;padding:4px 11px;border-radius:16px;
+       background:var(--wh-t);border:1px solid var(--wh-b);color:var(--wh-d)}
+.bpill.crimson{background:var(--flag-t);border-color:var(--flag-b);color:var(--hc-ink)}
+.bpill.plain{background:var(--grey-2);border-color:var(--grey-3);color:var(--hc-mute)}
+
+/* ---------- the varied card row (this is the anti-template move) ----- */
+.rowcards{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));
+          margin:20px 0 0}
+.rc{border:1px solid var(--grey-3);border-radius:var(--r-md);padding:17px 18px;background:#fff;
+    position:relative;box-shadow:var(--sh-card)}
+.rc .ico{position:absolute;top:15px;right:16px;color:var(--wh-3)}
+.rc .ico svg{display:block}
+.rc h3{margin:0 0 4px;font-size:15.5px;font-weight:700;color:var(--hc-ink);
+       padding-right:34px;line-height:1.3}
+.rc .desc{margin:0;font-size:12.5px;line-height:1.5;color:var(--hc-mute)}
+.rc .num{display:block;font-size:24px;font-weight:800;color:var(--wh-d);margin:12px 0 0;
+         line-height:1.12;letter-spacing:-.5px}
+.rc .num.sm{font-size:16px;font-weight:700;color:var(--hc-mute);letter-spacing:0}
+.rc .foot{display:block;font-size:11.5px;color:var(--hc-mute);margin-top:6px;line-height:1.45}
+/* the variants — plain, tinted-outlined, solid filled */
+.rc.tint{background:var(--wh-t);border-color:var(--wh-b)}
+.rc.tint h3{color:var(--wh-dd)} .rc.tint .num{color:var(--wh-d)}
+.rc.tint .ico{color:var(--wh-d);opacity:.5}
+.rc.fill{background:var(--wh-dd);border-color:var(--wh-dd)}
+.rc.fill h3,.rc.fill .num{color:#fff}
+.rc.fill .desc,.rc.fill .foot{color:rgba(255,255,255,.78)}
+.rc.fill .ico{color:rgba(255,255,255,.55)}
+a.rc{text-decoration:none;display:block;transition:border-color .12s}
+a.rc:hover{border-color:var(--wh-d)}
+a.rc.fill:hover{border-color:#fff}
+a.rc .go{display:block;margin-top:11px;font-size:12.5px;font-weight:700;color:var(--wh-tx)}
+a.rc.fill .go{color:#fff}
+
+/* ---------- document sections ---------------------------------------- */
+.sec2{padding:30px 0;border-top:1px solid var(--grey-3)}
+.sec2:first-of-type{border-top:0}
+.sec2 > h2{display:flex;align-items:baseline;gap:11px;margin:0 0 14px;
+           font-size:20px;font-weight:700;color:var(--wh-tx);letter-spacing:-.3px}
+.sec2 > h2 .no{flex:0 0 auto;font-size:12px;font-weight:800;color:var(--hc-ink);
+               letter-spacing:1px;padding-top:2px}
+.sec2 .intro{margin:0 0 15px;font-size:15px;line-height:1.66;color:var(--hc-mute);max-width:none}
+.sec2 h3{font-size:15px;font-weight:700;color:var(--hc-ink);margin:20px 0 7px}
+.sec2 p{font-size:14.5px;line-height:1.68;color:var(--hc-ink);max-width:none;margin:0 0 11px}
+.sec2 p.muted{color:var(--hc-mute)}
+
+/* ---------- tables, because a table is often the honest form --------- */
+.t2{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:6px}
+.t2 caption{text-align:left;font-size:12px;color:var(--hc-mute);padding:0 0 8px}
+.t2 th{text-align:left;font-weight:700;font-size:11.5px;letter-spacing:.7px;
+       text-transform:uppercase;color:var(--hc-mute);border-bottom:2px solid var(--wh-d);
+       padding:8px 11px 7px;white-space:nowrap}
+.t2 td{padding:9px 11px;border-bottom:1px solid var(--grey-3);vertical-align:top;
+       line-height:1.5}
+.t2 tbody tr:nth-child(even){background:var(--grey-1)}
+.t2 td.n{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+.t2 td.pend{color:var(--hc-mute);font-style:italic}
+.t2 .k{font-weight:700;color:var(--hc-ink)}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* ---------- notes ----------------------------------------------------- */
+.adv{border:1px solid var(--hc-ink);background:var(--hc-ink);border-radius:var(--r-md);
+     padding:14px 17px;margin:16px 0 0;display:flex;gap:12px}
+.adv .m{flex:0 0 auto;width:20px;height:20px;border-radius:50%;background:var(--wh);
+        color:var(--hc-ink);font:800 13px/20px var(--sans);text-align:center}
+.adv p{margin:0;font-size:13.5px;line-height:1.62;color:#ededec;max-width:none}
+.adv b{color:#fff}
+.src{font-size:12px;color:var(--hc-mute);margin:12px 0 0;line-height:1.55}
+.src b{color:var(--hc-ink);font-weight:700}
+
+/* ---------- buttons: square-ish, like a portal ----------------------- */
+.gbtn{display:inline-block;text-decoration:none;font:700 13.5px/1.2 var(--sans);
+      padding:11px 18px;border-radius:var(--r);border:1px solid transparent;cursor:pointer}
+.gbtn.crimson{background:var(--wh-d);color:#fff}
+.gbtn.crimson:hover{background:var(--wh-dd)}
+.gbtn.blue{background:var(--wh-dd);color:#fff}
+.gbtn.blue:hover{background:#003a56}
+.gbtn.out{background:#fff;color:var(--wh-d);border-color:var(--wh-b)}
+.gbtn.out:hover{border-color:var(--wh-d)}
+
+/* ---------- footer ---------------------------------------------------- */
+.gfoot{background:var(--hc-ink);color:rgba(255,255,255,.76);margin-top:30px;
+       font-size:13px;line-height:1.66;border-top:4px solid var(--wh)}
+.gfoot .in{max-width:1320px;margin:0 auto;padding:30px 20px 34px}
+.gfoot .cols{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));
+             padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,.14);margin-bottom:20px}
+.gfoot h4{margin:0 0 5px;color:#fff;font-size:11.5px;letter-spacing:1.2px;text-transform:uppercase;
+          font-weight:700}
+.gfoot p{margin:0 0 10px;color:rgba(255,255,255,.76);max-width:none;font-size:13px}
+.gfoot a{color:var(--wh-3)}
+.tbc{color:var(--wh-3);font-weight:700}
+
+/* =====================================================================
+   THE PAGES THAT ALREADY EXIST
+   ---------------------------------------------------------------------
+   The forms and the hub were built on app.css. Their components are
+   restyled here so all ten pages pick up the change without their markup
+   being edited. Surface only -- no structure, no behaviour: these are the
+   pages a field worker uses with no signal, and they have to keep working
+   exactly as they did.
+   ===================================================================== */
+
+/* the dark chrome bar on the field and hub pages. It stays dark -- the
+   working layers should not be mistaken for the public page -- but it is
+   now the same navy as the rest of the system, with the crimson rule. */
+.top{background:var(--hc-ink);border-bottom:3px solid var(--wh);padding:11px 20px;
+     min-height:58px;gap:12px;box-shadow:none}
+.top .mk{flex:0 0 auto;display:block}
+.top .brandbox{min-width:0;display:flex;flex-direction:column;justify-content:center}
+.top .brand{font-size:16px;font-weight:700;letter-spacing:-.2px;line-height:1.2}
+.top .sub{font-size:10.5px;letter-spacing:1.4px;color:var(--wh-3);font-weight:700}
+.top a{font-size:13px;font-weight:700;padding:6px 10px;border-radius:var(--r);
+       color:var(--wh-b)}
+.top a:hover{background:rgba(255,255,255,.1);color:#fff}
+
+.wrap{padding:24px var(--gutter) 88px}
+/* 18px is a phone's gutter. On the hub, where the content now runs to the edge
+   of the space beside the rail, it read as cramped -- so the gutter opens up
+   once there is room for it. */
+@media (min-width:1000px){ body.hub .wrap{padding-left:28px;padding-right:28px} }
+/* ...but the hub's masthead and footer use .wrap too, as an inner measure
+   rather than as the page body. Given the padding above they grew 112px of
+   empty space -- which is what left a blank band under "Coordination view". */
+:is(header,footer) .wrap{padding-top:0;padding-bottom:0}
+@media (max-width:620px){ .wrap{padding:18px 15px 78px} }
+
+.card{border-radius:var(--r-md);box-shadow:var(--sh-card);padding:20px 21px;margin-bottom:17px;
+      border-color:var(--grey-3)}
+.card > h2{font-size:17px;font-weight:700;color:var(--wh-tx);letter-spacing:-.2px}
+
+/* the numbered step head: square badge, crimson, like a form section in a
+   government document rather than a circle in an app */
+.step{gap:11px;margin:0 0 16px;padding-bottom:11px;border-bottom:2px solid var(--wh-d);
+      align-items:center}
+.step .n{width:25px;height:25px;border-radius:var(--r-sm);background:var(--wh-d);
+         font-size:13px;font-weight:800;box-shadow:none}
+.step h2{font-size:16.5px;font-weight:700;color:var(--wh-tx);letter-spacing:-.2px}
+.step .hint{font-size:11px;letter-spacing:.9px;text-transform:uppercase;font-weight:700;
+            color:var(--hc-mute)}
+
+.banner{padding:13px 16px;border-radius:0 var(--r-md) var(--r-md) 0;margin-bottom:18px;
+        font-size:13.5px;line-height:1.6}
+
+/* form controls: taller for a thumb, square corners, blue focus */
+input[type=text],input[type=date],input[type=tel],input[type=email],input[type=number],
+select,textarea{padding:10px 12px;border-radius:var(--r);font-size:15px;
+  border-color:var(--grey-3);transition:border-color .12s,box-shadow .12s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--wh-d);
+  box-shadow:0 0 0 3px rgba(0,56,147,.13)}
+label{font-size:12.5px;font-weight:700;margin-bottom:5px}
+select{background-image:linear-gradient(45deg,transparent 50%,var(--hc-mute) 50%),
+                       linear-gradient(135deg,var(--hc-mute) 50%,transparent 50%);
+       background-position:calc(100% - 16px) 52%, calc(100% - 11px) 52%;
+       background-size:5px 5px,5px 5px;background-repeat:no-repeat;
+       -webkit-appearance:none;appearance:none;padding-right:32px}
+
+/* radio and checkbox rows read as pressable, square not pill */
+.radios{display:flex;flex-wrap:wrap}
+.radios label,label.chk{border:1px solid var(--grey-3);border-radius:var(--r);background:#fff;
+  padding:9px 14px;display:inline-flex;align-items:center;gap:8px;margin:0 7px 7px 0;
+  font-weight:600;font-size:14px;cursor:pointer;transition:border-color .12s,background .12s}
+.radios label:hover,label.chk:hover{border-color:var(--wh-d)}
+.radios label:has(input:checked),label.chk:has(input:checked){
+  border-color:var(--wh-d);background:var(--wh-t);color:var(--wh-d);font-weight:700}
+
+.btn{border-radius:var(--r);padding:10px 18px;font-weight:700;font-size:14px;box-shadow:none}
+.btn:not(.ghost):not(.sec):not(.grey){background:var(--wh-d);border-color:var(--wh-d);color:#fff}
+/* Hover was #002a70 -- a blue-purple left over from the palette before the
+   Health Cluster one, and the only off-palette colour left in the button set. */
+.btn:not(.ghost):not(.sec):not(.grey):hover{background:var(--wh-dd)}
+/* The ghost border was --line: 1.35:1 on white, below the 3:1 non-text
+   threshold, so the outline that makes a white button read as a button was
+   effectively absent (flagged twice on 16 Sep 2026, fixed in its own pass).
+   The border now takes the same token as the button's text, --wh-tx: 6.07:1
+   on white, and it is lifted inside the dark blocks by the same rules that
+   lift the text, so the outline never disappears against a dark surface. */
+.btn.ghost,.btn.sec{background:var(--paper,#fff);border-color:var(--wh-tx);color:var(--wh-tx)}
+/* .grey is app.css's QUIETEST variant -- the control you should be least drawn
+   to. The filled rule above matched :not(.ghost):not(.sec) at specificity
+   (0,3,0), which silently beat `.btn.grey` (0,2,0) in app.css, so every grey
+   button on all eight pages that use one rendered as a filled primary.
+   Found 16 Sep 2026 on the coverage loader, where it made "Load synthetic
+   demonstration data" the most prominent control on a page whose primary
+   action is now reading the live register. Adding .grey to the :not() chain
+   fixes all 15 of them at once.
+   The border is #939391, not --grey-3: at 1.40:1 on white --grey-3 is
+   invisible, and on a white-on-white button the border is what makes it read
+   as a button at all. #939391 is 3.08:1, the same value already checked for
+   the out-of-district square in the site chart. */
+.btn.grey{background:var(--paper,#fff);border-color:#939391;color:var(--hc-mute)}
+.btn.grey:hover{background:var(--grey-1);border-color:var(--hc-mute)}
+.btn.ghost:hover,.btn.sec:hover{border-color:var(--wh-d)}
+
+/* the demonstration band at the top of the field pages */
+body > div[style*="d03b3b"]{letter-spacing:.3px!important;
+  box-shadow:inset 0 -2px 0 rgba(0,0,0,.16)}
+
+/* ---------- print ----------------------------------------------------- */
+@media print{
+  .navband,.statusbar,#i18nwrap,#i18nbar,.gov .right{display:none!important}
+  .gov,.sheet{border-color:#bbb}
+  .sheet{background:#fff}
+  .rc,.card{box-shadow:none;break-inside:avoid;border-color:#bbb}
+  .rc.fill{background:#fff!important} .rc.fill h3,.rc.fill .num{color:#000!important}
+  .rc.fill .desc,.rc.fill .foot{color:#333!important}
+  .gfoot{background:#fff;color:#000;border-top-color:#000}
+  .gfoot h4,.gfoot p,.gfoot a{color:#000}
+  .sec2{border-top-color:#bbb}
+}
+
+/* the mark slot that mark.js inserts into the dark chrome bar */
+.top .mkslot{flex:0 0 auto;display:block;line-height:0}
+.top .mkslot svg{display:block;border-radius:8px}
+/* the coordination view's masthead tile, once the real mark is in it */
+.mast .mark.mkslot{background:none!important;border:0!important;padding:0!important;
+  width:auto!important;height:auto!important;line-height:0;box-shadow:none!important;
+  display:block;color:transparent;font-size:0}
+.mast .mark.mkslot svg{display:block;border-radius:9px}
+
+/* the language switch, mounted into the masthead's slot rather than floating */
+.langslot{display:inline-flex;align-items:center}
+#i18nbar{display:inline-flex;border:1px solid var(--wh-d);border-radius:var(--r);
+         overflow:hidden;margin:0}
+#i18nbar button{border:0;background:#fff;color:var(--wh-d);font:700 12.5px/1 var(--sans);
+         padding:9px 13px;cursor:pointer;letter-spacing:.4px}
+/* i18n.js injects its own stylesheet at runtime, so it lands AFTER this
+   file in the cascade and its rule for the active button wins on order
+   alone. !important is the honest fix here -- the alternative is editing
+   the engine's own CSS, which would put the page's colour scheme inside
+   the translation engine, where nobody would look for it. */
+#i18nbar button[aria-pressed="true"]{background:var(--wh-d)!important;color:#fff!important}
+#i18nbar button[aria-pressed="false"]{background:#fff!important;color:var(--wh-d)!important}
+#i18nwrap.float{background:rgba(20,33,61,.94);border-radius:var(--r);padding:4px 5px}
+#i18nprog{color:#9db3e3}
+
+/* masthead breathing room: the three parts stop fighting each other */
+.gov .in{gap:14px 20px}
+.gov .mid{flex:1 1 180px}
+.gov .right{flex:0 0 auto;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+@media (max-width:1040px){
+  .gov .mid{order:3;flex-basis:100%;text-align:left;border-top:1px solid var(--grey-2);
+            padding-top:9px;margin-top:2px}
+  .gov .mid b{font-size:15px}
+}
+@media (max-width:620px){
+  .gov .in{padding:11px 16px;gap:10px 12px}
+  .gov .id b{font-size:17px}
+  .gov .right{width:100%;justify-content:flex-start}
+  .gov .right .gbtn{flex:1 1 auto;text-align:center}
+}
+
+/* the mark in the breadcrumb bar on the reference pages */
+.bar .in{display:flex;align-items:center;gap:9px}
+.bar .barmark{flex:0 0 auto;line-height:0;display:block}
+.bar .barmark svg{display:block;border-radius:5px}
+
+/* =====================================================================
+   FIGURES
+   ---------------------------------------------------------------------
+   Added 16 September 2026, after WHO's second note on the review draft:
+   "improve tampilan infografisnya, jgn kayak buatan AI."
+
+   The first note was about the page's grammar and was answered above.
+   This one is about the figures themselves, and it was a different
+   fault. The figures were decoration: a ring at nought per cent, a row
+   of cards, three stacked bars. A ring at nought is a shape that could
+   sit on any page about anything -- which is precisely what makes it
+   read as machine-made.
+
+   What a figure has to do here instead is carry something that could
+   only have been drawn by someone who knows this response:
+
+     · the UNIT CHART draws one square per site code that actually
+       exists in assets/codes.js, so the count cannot drift from the
+       list the forms use, and an empty square is an honest empty -- a
+       site with nothing reported against it
+     · the IASC PYRAMID is the sector's own figure, from the 2007
+       Guidelines, with the four layers named exactly as printed there,
+       and this response's own activity groups set against them
+     · the READINESS CHECKLIST replaces the ring: three prerequisites
+       and the one outcome that needs all three, which is the real
+       shape of the dependency and not a circle cut in four
+     · the TIMELINE is dated, in AD, with the one Bikram Sambat date
+       the response has supplied and no conversion computed here
+
+   Hard edges, hairlines, tabular figures, no gradient, no shadow on a
+   figure. Crimson is reserved for the thing that is missing.
+   ===================================================================== */
+.fig{background:#fff;border:1px solid var(--grey-3);border-radius:var(--r-md);
+     padding:17px 19px 14px;margin:16px 0 0}
+.fig > h4{margin:0 0 3px;font-size:12px;letter-spacing:.8px;text-transform:uppercase;
+          color:var(--hc-mute);font-weight:700}
+.fig > .lede{margin:0 0 14px;font-size:13px;line-height:1.6;color:var(--hc-mute);max-width:none}
+.fig svg{display:block;width:100%;height:auto}
+.fig .figsrc{margin:12px 0 0;padding-top:10px;border-top:1px solid var(--grey-2);
+             font-size:11.5px;line-height:1.55;color:var(--hc-mute)}
+.fig .figsrc b{color:var(--hc-ink);font-weight:700}
+.fig .figsrc a{color:var(--wh-tx)}
+
+/* the unit chart's own legend, under the squares */
+.ukey{display:flex;gap:7px 20px;flex-wrap:wrap;margin:13px 0 0;font-size:12px;
+      color:var(--hc-mute)}
+.ukey span{display:inline-flex;align-items:center;gap:7px}
+.ukey i{width:13px;height:13px;flex:0 0 auto;display:block;background:#fff}
+.ukey i.roster{border:1.6px solid var(--wh-d)}
+.ukey i.offroster{border:1.6px solid var(--hc-ink)}
+.ukey i.govlist{border:1.6px dashed var(--hc-ink)}
+.ukey i.outside{border:1.6px solid #939391}
+.ukey i.served{border:1.6px solid var(--wh-d);background:var(--wh-d)}
+
+/* ---------- the readiness checklist (replaces the ring) -------------- */
+.gates{background:#fff;border:1px solid var(--grey-3);border-radius:var(--r-md);
+       padding:17px 19px}
+.gates h4{margin:0 0 3px;font-size:12px;letter-spacing:.8px;text-transform:uppercase;
+          color:var(--hc-mute);font-weight:700}
+.gates .count{display:flex;align-items:baseline;gap:9px;margin:6px 0 13px}
+.gates .count b{font-size:27px;font-weight:800;color:var(--hc-ink);letter-spacing:-.7px;
+                line-height:1}
+.gates .count span{font-size:12.5px;color:var(--hc-mute)}
+.gates ol{list-style:none;margin:0;padding:0}
+.gates li{display:flex;align-items:flex-start;gap:11px;padding:9px 0;
+          border-bottom:1px solid var(--grey-2)}
+.gates li:last-child{border-bottom:0;padding-bottom:0}
+.gates li.needs{border-top:2px solid var(--hc-ink);margin-top:4px;padding-top:11px}
+.gates .box{flex:0 0 auto;width:15px;height:15px;border:1.6px solid var(--hc-mute);
+            border-radius:2px;background:#fff;margin-top:2px}
+.gates li.done .box{background:var(--wh-d);border-color:var(--wh-d)}
+.gates .txt{flex:1 1 auto;min-width:0}
+.gates .txt b{display:block;font-size:13.5px;font-weight:700;color:var(--hc-ink);line-height:1.35}
+.gates .txt i{display:block;font-style:normal;font-size:11.5px;line-height:1.5;
+              color:var(--hc-mute);margin-top:1px}
+.gates .st{flex:0 0 auto;font-size:11px;font-weight:700;letter-spacing:.4px;
+           text-transform:uppercase;color:var(--wh-dd);background:var(--wh-t);
+           border:1px solid var(--wh-b);border-radius:3px;padding:2px 7px;
+           margin-top:2px;white-space:nowrap}
+.gates .st.grey{color:var(--hc-mute);background:var(--grey-2);border-color:var(--grey-3)}
+@media (max-width:420px){
+  .gates li{flex-wrap:wrap}
+  .gates .st{margin-left:26px}
+}
+
+
+/* ---------- the unit chart: elements, not a drawing ------------------ */
+/* Deliberately HTML. An SVG with a fixed viewBox shrinks its own labels
+   with the container, so a 12px label on an 860-wide drawing lands at
+   5px on a phone -- and the phone is the one screen the field uses.
+   Squares that are elements reflow, and the words stay the size set. */
+.urow{margin-top:15px}
+.urow:first-child{margin-top:2px}
+.ulab{margin:0 0 7px;font-size:13.5px;font-weight:700;color:var(--hc-ink);line-height:1.45}
+.ulab b{font-size:16.5px;font-weight:800;margin-right:4px;font-variant-numeric:tabular-nums}
+.ulab span{font-weight:400;font-size:12px;color:var(--hc-mute);margin-left:5px}
+.units{display:flex;flex-wrap:wrap;gap:5px}
+.u{width:18px;height:18px;display:block;background:#fff;border-radius:2px}
+.u.roster{border:1.6px solid var(--wh-d)}
+.u.offlist{border:1.6px solid var(--hc-ink)}
+.u.govlist{border:1.6px dashed var(--hc-ink)}
+.u.outside{border:1.6px solid #939391}
+.u.served{border:1.6px solid var(--wh-d);background:var(--wh-d)}
+
+/* ---------- the pyramid: drawing left, names right, stacking on a phone */
+.pyrgrid{display:grid;gap:24px;grid-template-columns:minmax(0,290px) minmax(0,1fr);
+         align-items:center;margin-top:4px}
+@media (max-width:760px){ .pyrgrid{grid-template-columns:1fr;gap:14px} }
+.pyrgrid > svg{width:100%;height:auto;max-width:330px;margin:0 auto}
+.playerlist{list-style:none;margin:0;padding:0}
+.playerlist li{display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--grey-2)}
+.playerlist li:last-child{border-bottom:0;padding-bottom:0}
+.playerlist .sw{flex:0 0 auto;width:22px;height:22px;border-radius:3px;
+                font:800 12px/22px var(--sans);text-align:center;color:#fff}
+.playerlist .sw.l4{background:var(--wh-dd)}
+.playerlist .sw.l3{background:var(--wh);color:var(--hc-ink)}
+.playerlist .sw.l2{background:var(--wh-b);color:var(--wh-dd)}
+.playerlist .sw.l1{background:var(--wh-t);color:var(--wh-d);
+                   border:1px solid var(--wh-b);line-height:20px}
+.playerlist b{display:block;font-size:14px;color:var(--wh-tx);line-height:1.3}
+.playerlist p{margin:2px 0 0;font-size:12.5px;line-height:1.56;color:var(--hc-mute);
+              max-width:none}
+
+/* ---------- figures that cannot reflow: swipe them, as the tables do -- */
+.fscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.fscroll > svg{min-width:640px}
+.fscroll.wide > svg{min-width:700px}
+
+/* A note set beside a label has to become its own line on a narrow screen,
+   or it wraps one word onto the row below and reads as a typo. */
+@media (max-width:640px){
+  .ulab span{display:block;margin-left:0;margin-top:2px}
+}
+/* file and field names, in prose */
+.fig code,.src code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:.92em;background:var(--grey-1);border:1px solid var(--grey-2);
+  border-radius:3px;padding:0 4px}
+
+/* ---------- the insight callout ------------------------------------- */
+/* The project's design rules (rule 5 of the visualisation lessons)
+   require a "so what" after every visualisation: do not leave the reader
+   to interpret a figure on their own. It is also the difference between a
+   chart and a finding -- anything can draw the chart. */
+.insight{border-left:3px solid var(--wh-d);background:var(--grey-1);
+         padding:11px 14px;margin:14px 0 0;border-radius:0 var(--r) var(--r) 0}
+.insight b{display:block;font-size:10.5px;letter-spacing:1.1px;text-transform:uppercase;
+           color:var(--wh-tx);font-weight:700;margin-bottom:3px}
+.insight p{margin:0;font-size:12.5px;line-height:1.62;color:var(--hc-ink);max-width:none}
+.insight.blue{border-left-color:var(--hc-ink)}
+.insight.blue b{color:var(--hc-ink)}
+
+/* =====================================================================
+   NAVIGATION — two shapes, because they are two different things
+   ---------------------------------------------------------------------
+   The public website navigates from a BAND ACROSS THE TOP. The Layer 2
+   coordination hub navigates from a RAIL DOWN THE LEFT, dark, with the
+   brand blue as its edge. The distinction was asked for so that nobody
+   glancing at a screen mistakes the working dashboard for the public
+   page -- and it also fixed the older fault, that the band's seven items
+   were all anchors into one document, so the whole site read as a single
+   page that scrolled.
+
+   Both are generated by tools/nav.py and checked by the deploy guard.
+   ===================================================================== */
+
+/* the jump strip: the sections of the long Layer 3 page, under the band */
+.jump{background:#fff;border-bottom:1px solid var(--grey-3);font-size:12.5px}
+.jump .in{max-width:1320px;margin:0 auto;padding:8px 20px;display:flex;gap:5px 16px;
+          flex-wrap:wrap;align-items:baseline}
+.jump .lab{font-size:10px;letter-spacing:1.1px;text-transform:uppercase;
+           color:var(--hc-mute);font-weight:700}
+.jump a{color:var(--wh-tx);text-decoration:none;font-weight:600}
+.jump a:hover{text-decoration:underline}
+@media (max-width:820px){
+  .jump .in{flex-wrap:nowrap;overflow-x:auto;white-space:nowrap;
+            -webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .jump .in::-webkit-scrollbar{display:none}
+}
+
+/* ---------- the hub's rail ------------------------------------------- */
+/* Structure from the Sadar Hati internal dashboard (17 Sep 2026): brand,
+   collapsible groups with a chevron, items, footer -- and, first of all, the
+   ARCHITECTURE STRIP: the three layers with the reader's own layer marked,
+   so a page never has to explain where it sits. Generated by tools/rail.py;
+   the group state is kept per browser (localStorage), the "here" group is
+   always open. */
+.rail{background:var(--hc-ink);font-family:var(--sans)}
+.rail .railid{display:flex;align-items:center;gap:10px;text-decoration:none;
+              padding:15px 16px;border-bottom:1px solid rgba(255,255,255,.13)}
+.rail .railid svg{display:block;border-radius:5px}
+.rail .railid b{display:block;color:#fff;font-size:14.5px;font-weight:700;line-height:1.2}
+.rail .railid i{display:block;font-style:normal;font-size:10px;letter-spacing:.9px;
+                text-transform:uppercase;color:var(--wh-3);font-weight:700;margin-top:2px}
+
+/* the architecture strip */
+.rail .where{padding:12px 12px 10px;border-bottom:1px solid rgba(255,255,255,.13)}
+.rail .wlab{display:block;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;
+            color:#a3a3a1;font-weight:700;padding:0 4px 8px}
+.rail .lyr{display:flex;align-items:center;gap:10px;text-decoration:none;padding:6px 8px;
+           border-radius:8px;color:#cfd3d6;margin:2px 0;border:1px solid transparent}
+.rail .lyr b{flex:0 0 22px;height:22px;border-radius:50%;background:rgba(255,255,255,.12);
+             color:#fff;font-size:11.5px;font-weight:800;display:flex;align-items:center;
+             justify-content:center}
+.rail .lyr span{display:block;font-size:12.5px;font-weight:700;line-height:1.2;color:#e2e2e0}
+.rail .lyr span i{display:block;font-style:normal;font-size:10.5px;font-weight:500;
+                  color:#9aa3a9;margin-top:2px;letter-spacing:0}
+.rail .lyr:hover{background:rgba(255,255,255,.07)}
+.rail .lyr.on{background:#0d3b52;border-color:rgba(0,159,227,.45)}
+.rail .lyr.on b{background:var(--wh);color:#fff}
+.rail .lyr.on span{color:#fff}
+.rail .lyr.on span i{color:#8fd3f4}
+
+/* groups */
+.rail nav{display:flex;flex-direction:column;padding:8px 0 4px}
+.rail .rg{margin:0 8px 4px}
+.rail .rgh{display:flex;align-items:center;gap:8px;width:100%;background:none;border:0;
+           cursor:pointer;font:inherit;color:#e8e8e6;font-size:11px;letter-spacing:1.2px;
+           text-transform:uppercase;font-weight:700;padding:9px 8px;border-radius:6px;text-align:left}
+.rail .rgh:hover{background:rgba(255,255,255,.07)}
+.rail .rgh .dot{width:8px;height:8px;border-radius:50%;flex:0 0 8px;background:#8a949a}
+.rail .rgh .dot.l1{background:#2a7f7a}
+.rail .rgh .dot.l2{background:var(--wh)}
+.rail .rgh .dot.l3{background:#b8c4cc}
+.rail .rgh em{font-style:normal;font-weight:600;letter-spacing:.4px;text-transform:none;
+              color:#8a949a;font-size:10.5px;margin-left:auto}
+.rail .rgh .chev{width:7px;height:7px;border-right:1.5px solid #a3a3a1;border-bottom:1.5px solid #a3a3a1;
+                 transform:rotate(-45deg);transition:transform .18s;flex:0 0 7px;margin-left:4px}
+.rail .rg.open > .rgh .chev{transform:rotate(45deg)}
+.rail .rgb{display:none;margin:2px 0 4px 11px;border-left:1.5px solid rgba(255,255,255,.14);padding-left:4px}
+.rail .rg.open > .rgb{display:block}
+.rail .rgb > a{display:block;color:#e2e2e0;text-decoration:none;font-size:13.5px;font-weight:600;
+               padding:7px 10px;border-radius:5px;margin:1px 0}
+.rail .rgb > a:hover{background:rgba(255,255,255,.08);color:#fff}
+.rail .rgb > a.on{background:#0d3b52;color:#fff;box-shadow:inset 3px 0 0 var(--wh)}
+.rail .rsub{display:flex;flex-direction:column;padding:1px 0 6px}
+.rail .rsub a{color:#bdbdbb;text-decoration:none;font-size:12.5px;padding:5px 10px 5px 24px}
+.rail .rsub a:hover{color:#fff;text-decoration:underline}
+.rail .rfoot{margin:0;padding:12px 16px 18px;font-size:11px;line-height:1.5;color:#b0b0ae;
+             border-top:1px solid rgba(255,255,255,.13)}
+.rail .rmenu{display:none}
+
+@media (min-width:1000px){
+  body.hub{padding-left:250px}
+  .rail{position:fixed;top:0;left:0;bottom:0;width:250px;z-index:40;overflow-y:auto;
+        border-right:3px solid var(--wh)}
+}
+@media (max-width:999px){
+  /* on a phone the rail lies across the top: brand and the architecture
+     strip stay visible, the groups hide behind a Menu button */
+  .rail{border-bottom:3px solid var(--wh)}
+  .rail .railid{border-bottom:0;padding:12px 15px}
+  .rail .where{display:flex;gap:6px;align-items:center;padding:6px 10px 8px;flex-wrap:wrap}
+  .rail .wlab{flex:0 0 100%;padding:0 4px 4px}
+  .rail .lyr{flex:1 1 0;padding:5px 7px;margin:0;gap:7px}
+  .rail .lyr span i{display:none}
+  .rail .rmenu{display:flex;align-items:center;gap:9px;margin:8px 10px;background:none;
+               border:1px solid rgba(255,255,255,.3);color:#fff;font:inherit;font-size:12.5px;
+               font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding:8px 12px;
+               border-radius:8px;cursor:pointer}
+  .rail .rmenu span{width:16px;height:2px;background:#fff;box-shadow:0 -5px 0 #fff,0 5px 0 #fff;display:block}
+  .rail nav{display:none;padding:0 0 6px;max-height:52vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .rail.menu-open nav{display:flex}
+  .rail .rfoot{display:none}
+}
+.rail .railtoggle{display:block;padding:11px 16px 2px}
+.rail .railtoggle #i18nbar{border-color:var(--wh-3)}
+@media (max-width:999px){ .rail .railtoggle{padding:6px 15px 10px} }
+
+/* A card's "read the argument" link. It is a SENTENCE, so it justifies like
+   any other paragraph -- I first set it text-align:left calling it
+   "navigation, not running text", and the sweep caught it wrapping to two
+   lines at 390px within minutes. The rule is explicit that the line count
+   does not matter; a two-line sentence is the case he corrected. */
+.more{margin:10px 0 0;font-size:13px}
+.more a{font-weight:700}
+
+/* =====================================================================
+   TEXT SETTING -- the project's text-setting rules
+   ---------------------------------------------------------------------
+   Every block of running text is flush to BOTH margins of whatever
+   container it stands in. A word is never split: one that does not fit
+   goes down to the next line whole, and the words left above spread out
+   to reach the right margin.
+
+   hyphens is none, not auto. `hyphens: auto` is the textbook companion
+   to justified text because it narrows the word gaps -- and it is
+   refused here on purpose: a word broken across a line break is harder
+   to read, and a tidier gap does not pay for that.
+
+   No line-counting logic. A last line never justifies, so a one-line
+   block is untouched by this rule already; a JavaScript line counter
+   only reintroduces the bug of treating a two-line paragraph as if it
+   were a label.
+
+   Width, since 17 Sep 2026 (afternoon): there is no prose measure any
+   more (--measure:none above). Running text fills its container and is
+   justified to it; only titles keep a short measure.
+   ===================================================================== */
+p, li, blockquote, dd, td, figcaption,
+.note, .callout, .lede, .subtitle, .help, .stand, .insight, .figsrc{
+  text-align:justify;
+  text-justify:inter-word;
+  -webkit-hyphens:none; hyphens:none;
+  overflow-wrap:normal; word-break:normal;
+}
+
+/* Labels and figures are SET, not justified. Justifying a two-word label
+   stretches it into a gappy line; justification sets paragraphs. */
+th, .mono, code, kbd, samp, .chip, .badge, .tag, .num, .eyebrow,
+.blabel, .ulab, .units, .pill, .tagpill, .stamp, .hint, .opt{
+  text-align:left;
+  -webkit-hyphens:none; hyphens:none;
+}
+
+/* A file name or a code can be longer than a narrow column.
+   break-word, NOT anywhere: `anywhere` breaks the token whenever it is
+   convenient, `break-word` only when it cannot fit a line at all.
+   Neither inserts a hyphen, so neither breaks the rule above. */
+.mono, code, kbd, samp{ overflow-wrap:break-word }
