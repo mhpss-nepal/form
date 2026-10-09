@@ -1,9 +1,9 @@
 {
-  "status": "TEST_ONLY_UNPUBLISHED_PENDING_INDEPENDENT_REVIEW_W38",
+  "status": "TEST_ONLY_UNPUBLISHED_CACHE_CANDIDATE",
   "operationalActivation": false,
   "pair_sha256": "8d0970d62b3c0fdd796235cba410c011f97e785b4d0030170046fc020c0152a8",
-  "release_sha256": "8f74facd064c257ae8739f24d1699229638a6e55e62e0a6d71f84a9e3e99d01e",
-  "release_hash_basis": "canonical inventory excluding release-pins.js and manifest; pins externally hashed to avoid circularity",
+  "release_sha256": "84da1416ef52aeb3039e54fb8019f6258845ebe5d5b4521ee0fa604bf6d10ef5",
+  "release_hash_basis": "canonical runtime inventory excluding release-pins, candidate-manifest, cache-manifest and coherent-sw; separate whole-release identity includes worker",
   "assets": {
     "admin-test-contract.json": {
       "sha256": "8d0970d62b3c0fdd796235cba410c011f97e785b4d0030170046fc020c0152a8",
@@ -16,6 +16,10 @@
     "admin-test-ui.js": {
       "sha256": "acc4400e5bd356aa04626ea9ab6424ed7a702aaa91d754d14c26ea027a052a87",
       "bytes": 5904
+    },
+    "cache-boot.js": {
+      "sha256": "740cfafe487529423e50b0c667d4909f54cb16694088dd0c7eff1b15dd81619b",
+      "bytes": 2675
     },
     "editor-authority.js": {
       "sha256": "ef19c361d34ffe0733b32207f51bddc44e7c92d6d310bd863293e4b31a112ee5",
@@ -50,8 +54,8 @@
       "bytes": 10660
     },
     "review.html": {
-      "sha256": "ce59a1ddeb02e3b5ac4d837ac9d5f89454e8e29c2e89f49b8c347030336a21e4",
-      "bytes": 2757
+      "sha256": "e5bf0249c856cddf6c25a708c095d1c06c99695ab1107107bb4c82e0309fabe0",
+      "bytes": 3227
     },
     "sdk/firebase-app.js": {
       "sha256": "f7ec36066094ccc2cc288a5c76453daf5f8d6dcdb5063d3a3ae4392add8344a7",
@@ -70,7 +74,7 @@
       "bytes": 632
     },
     "release-pins.js": {
-      "sha256": "50eef461a76269731b74c44f49e9789a2bb042593f110abaf54cb83baa346942",
+      "sha256": "10e9df217bd5b524e6d033a0fce1b266c16537d5376093552604bd567120bab3",
       "bytes": 201
     }
   }
