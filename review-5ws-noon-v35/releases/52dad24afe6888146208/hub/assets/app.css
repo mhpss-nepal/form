@@ -1,0 +1,289 @@
+/* MHPSS Nepal — shared styles.
+   Colours: Pantone 299 C #009fe3 and its text-safe shade #006996, from the
+   Health Cluster's own Visual Identity Guidelines (healthcluster.who.int),
+   read 16 September 2026. The earlier values were sampled off who.int by eye;
+   these are the published ones.
+   No emblem is used: WHO emblem use requires express written permission. */
+
+:root{
+  /* --who is the brand blue for borders, rules and accents. White text on
+     it is only 2.97:1, so anything FILLED that carries white text uses
+     --who-d, and --who-dd on hover. */
+  --who:#009fe3; --who-d:#006996; --who-dd:#004969; --who-t:#eaf7fd;
+  --ink:#20313b; --slate:#5b6b76; --mute:#636f78;
+  --line:#d8dfe4; --line-s:#eef2f5; --bg:#f4f7f9; --paper:#fff;
+  --warn:#b4541f; --warn-t:#fdf2ea;
+  --ok:#2f6b53; --ok-t:#eef5f1;
+  --stop:#9b2c2c; --stop-t:#fdeeee;
+  --r:6px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font:15px/1.55 "Noto Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+a{color:var(--who-d)}
+
+/* ---- shell ---- */
+.top{background:var(--ink); color:#fff; padding:12px 18px; position:sticky; top:0; z-index:30;
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+.top .brand{font-weight:700; font-size:15px; letter-spacing:-.01em}
+.top .sub{font-size:11.5px; color:#a9bcc7; letter-spacing:.04em; text-transform:uppercase; font-weight:600}
+.top .spacer{flex:1}
+.top a{color:#cfe6f2; text-decoration:none; font-size:13px; font-weight:600}
+.top a:hover{color:#fff}
+/* Same frame as every other top-navigation page (see --frame in design.css).
+   The form column itself stays at --formw and sits at the frame's left edge
+   rather than being re-centred, which is what used to move the page sideways
+   between a form and a document. */
+.wrap{max-width:var(--frame,1240px); margin:0 auto; padding:20px var(--gutter,28px) 80px}
+/* Cards, banners, field grids AND running text take the whole frame, so
+   every block on the page shares one right edge. The text cap that used to
+   sit here (74ch, then --measure) was removed on 17 Sep 2026: a paragraph
+   that stops short of the cards beside it is the ragged edge the rule
+   forbids -- "paragraphnya harus mengikuti lebar halaman". */
+.wrap > :is(p,.lede,.help,.hint){max-width:none}
+.wrap.wide{max-width:var(--frame,1240px)}
+
+h1{font-size:23px; line-height:1.2; margin:0 0 6px; letter-spacing:-.015em}
+h2{font-size:17px; margin:26px 0 10px; letter-spacing:-.01em}
+h3{font-size:14px; margin:0 0 6px}
+p{margin:0 0 12px}
+.lede{color:var(--slate); font-size:14.5px; margin-bottom:18px}
+.xs{font-size:12px; line-height:1.45; color:var(--slate)}
+
+/* ---- banners ---- */
+.banner{border-left:4px solid var(--who); background:var(--who-t); padding:12px 14px; border-radius:0 var(--r) var(--r) 0; margin-bottom:18px; font-size:13.5px; line-height:1.5}
+.banner.warn{border-color:var(--warn); background:var(--warn-t)}
+.banner.stop{border-color:var(--stop); background:var(--stop-t)}
+.banner.ok{border-color:var(--ok); background:var(--ok-t)}
+.banner b{font-weight:700}
+
+/* ---- cards / form ---- */
+.card{background:var(--paper); border:1px solid var(--line); border-radius:var(--r); padding:18px; margin-bottom:16px}
+.card > h2{margin-top:0}
+.step{display:flex; align-items:baseline; gap:9px; margin:0 0 14px; padding-bottom:10px; border-bottom:1px solid var(--line-s)}
+.step .n{background:var(--who-d); color:#fff; width:22px; height:22px; border-radius:50%; display:inline-flex;
+  align-items:center; justify-content:center; font-size:12px; font-weight:700; flex:none}
+.step h2{margin:0; font-size:16px}
+.step .hint{font-size:12px; color:var(--mute); margin-left:auto}
+
+.row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+.row.three{grid-template-columns:1fr 1fr 1fr}
+.f{margin-bottom:12px}
+label{display:block; font-size:12.5px; font-weight:700; margin-bottom:4px; color:var(--ink)}
+label .opt{font-weight:400; color:var(--mute)}
+input[type=text],input[type=date],input[type=tel],input[type=email],input[type=number],input[type=password],select,textarea{
+  width:100%; padding:9px 10px; border:1px solid var(--line); border-radius:5px; font:inherit; font-size:14px;
+  background:#fff; color:var(--ink)
+}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--who); outline-offset:-1px; border-color:var(--who)}
+textarea{min-height:64px; resize:vertical}
+.help{font-size:11.5px; color:var(--mute); margin-top:4px; line-height:1.4}
+.chks{display:flex; flex-wrap:wrap; gap:7px}
+.chk{display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); border-radius:16px;
+  padding:6px 11px; font-size:12.5px; cursor:pointer; background:#fff; user-select:none}
+.chk input{margin:0; accent-color:var(--who)}
+.chk:has(input:checked){background:var(--who-t); border-color:var(--who); font-weight:600}
+
+/* disaggregation grid */
+.dis{border:1px solid var(--line); border-radius:var(--r); overflow:hidden; margin-top:6px}
+.dis table{width:100%; border-collapse:collapse}
+.dis th,.dis td{padding:7px 9px; border-bottom:1px solid var(--line-s); font-size:13px; text-align:left}
+.dis th{background:#f7fafb; font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--slate)}
+.dis td:first-child{font-weight:600; white-space:nowrap}
+.dis input{padding:6px 8px; font-size:13px; text-align:right; width:100%; min-width:0}
+.dis td.rt,.dis th.rt{text-align:right; font-variant-numeric:tabular-nums}
+.dis tfoot td{background:#f7fafb; font-weight:700; border-bottom:none}
+.dis tfoot td:first-child{font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--slate); font-weight:700}
+.dis th{white-space:normal}
+/* A twelve-box grid still has to work on the one screen the field
+   actually uses. At 390px the four headers plus the row column need every
+   pixel, so the padding and the header type come down rather than the
+   table scrolling sideways -- a number you have to scroll to see is a
+   number that gets left blank. */
+@media (max-width:460px){
+  .dis th,.dis td{padding:6px 4px; font-size:12.5px}
+  .dis th{font-size:9.5px; letter-spacing:.01em}
+  .dis input{padding:5px 3px; font-size:13px}
+  .dis td:first-child{font-size:12.5px}
+}
+.tally{padding:9px 12px; background:#f7fafb; font-size:12.5px; display:flex; justify-content:space-between; gap:12px}
+.tally.bad{background:var(--warn-t); color:var(--warn); font-weight:700}
+.tally.good{background:var(--ok-t); color:var(--ok); font-weight:700}
+
+/* ---- the official fold, shown on the form ---- */
+.rollup{margin-top:7px; padding:8px 12px; border:1px dashed var(--line); border-radius:var(--r);
+  background:var(--who-t); font-size:12.5px; display:flex; flex-wrap:wrap; gap:4px 14px; justify-content:space-between}
+.rollup .rollv{font-variant-numeric:tabular-nums; color:var(--who-dd)}
+.rollup b{font-size:14px}
+
+/* ---- "of whom": inside the figures above, never added to them ----
+   Given its own box, not another row in the table, because a row in the
+   table reads as a row you add up. The whole point is that these two are
+   not. */
+.ofwhom{margin-top:10px; border:1px solid var(--line); border-left:3px solid var(--warn); border-radius:var(--r); padding:10px 12px}
+.ofw-h{margin:0 0 8px; font-size:13px; font-weight:700}
+.ofw-h span{font-weight:400; color:var(--slate)}
+.ofw-g{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px 14px}
+.ofw-g label{display:block; font-size:12.5px; font-weight:600; margin-bottom:3px}
+.ofw-g input{width:100%; max-width:120px; padding:6px 8px; font-size:13px; text-align:right}
+.ofw-n{margin:9px 0 0; font-size:11.5px; color:var(--slate); line-height:1.5}
+
+/* ---- buttons ---- */
+.btn{font:inherit; font-size:14px; font-weight:700; border:1px solid var(--who-d); background:var(--who-d); color:#fff;
+  padding:10px 20px; border-radius:5px; cursor:pointer}
+.btn:hover{background:var(--who-dd); border-color:var(--who-dd)}
+.btn.ghost{background:#fff; color:var(--who-d)}
+.btn.ghost:hover{background:var(--who-t)}
+.btn.grey{background:#fff; color:var(--slate); border-color:var(--line)}
+.btn.grey:hover{background:#f3f6f8}
+.btn.sm{padding:6px 12px; font-size:12.5px}
+.btn:disabled{opacity:.45; cursor:not-allowed}
+.btns{display:flex; gap:9px; flex-wrap:wrap; align-items:center}
+
+/* ---- tables ---- */
+.tbl-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--r); background:#fff}
+table.data{width:100%; border-collapse:collapse; font-size:13px; min-width:640px}
+table.data th{background:var(--ink); color:#fff; text-align:left; padding:8px 10px; font-size:11px;
+  text-transform:uppercase; letter-spacing:.05em; position:sticky; top:0}
+table.data td{padding:7px 10px; border-bottom:1px solid var(--line-s); vertical-align:top}
+table.data tr:nth-child(even) td{background:#fafcfd}
+/* The folded rows carry the OFFICIAL 5Ws figures, so they must read as a
+   subtotal, not as two more bands to add to the four above. Placed after
+   the zebra rule on purpose: equal specificity, so source order decides. */
+table.data tr.fold td{background:var(--who-t); border-top:2px solid var(--who-d); font-weight:600}
+table.data tr.ofw td{background:#fff; color:var(--slate)}
+table.data td.n{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+
+/* ---- stats ---- */
+.stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-bottom:18px}
+.stat{background:#fff; border:1px solid var(--line); border-radius:var(--r); padding:14px 15px}
+.stat .v{font-size:26px; font-weight:700; line-height:1; color:var(--who-d); font-variant-numeric:tabular-nums}
+.stat .k{font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--slate); font-weight:700; margin-top:6px}
+.stat .s{font-size:11.5px; color:var(--mute); margin-top:3px; line-height:1.35; text-align:justify; -webkit-hyphens:none; hyphens:none}
+.stat.alert .v{color:var(--warn)}
+.stat.good .v{color:var(--ok)}
+
+.pill{display:inline-block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em;
+  padding:2px 7px; border-radius:3px; vertical-align:middle}
+.pill.roster{background:var(--who-t); color:var(--who-d); border:1px solid #bcdcec}
+.pill.rep{background:#f4f1ea; color:#7a6f5c; border:1px solid #e0d8c8}
+.pill.zero{background:var(--warn-t); color:var(--warn); border:1px solid #f0d6c2}
+.pill.ok{background:var(--ok-t); color:var(--ok); border:1px solid #cadfd4}
+
+.empty{padding:34px 18px; text-align:center; color:var(--mute); font-size:13.5px}
+
+/* toast */
+#toast{position:fixed; left:50%; bottom:22px; transform:translateX(-50%) translateY(120%);
+  background:var(--ink); color:#fff; padding:11px 20px; border-radius:6px; font-size:13.5px; font-weight:600;
+  box-shadow:0 6px 24px rgba(0,0,0,.28); transition:transform .22s ease; z-index:60; max-width:90vw; text-align:center}
+#toast.show{transform:translateX(-50%) translateY(0)}
+#toast.warn{background:var(--warn)}
+
+@media (max-width:640px){
+  .row,.row.three,.row.four{grid-template-columns:1fr}
+  .wrap{padding:14px 12px 70px}
+  h1{font-size:20px}
+}
+
+/* ---------- Layer 1 form master list ---------- */
+.ml-hero{background:var(--paper); border:1px solid var(--line); border-radius:var(--r);
+  padding:18px 18px 16px; margin:0 0 20px}
+.ml-hero .eyebrow{font-size:11px; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--who-d); margin-bottom:7px}
+.ml-hero h1{margin-bottom:8px}
+.ml-hero .lede{margin-bottom:14px}
+.ml-phone{display:flex; gap:9px; flex-wrap:wrap; align-items:center;
+  border-top:1px solid var(--line-s); padding-top:13px}
+.ml-phone .pb{background:var(--who-t); border:1.5px solid var(--who); color:var(--who-d);
+  border-radius:var(--r); padding:8px 13px; font:700 12.5px/1.2 inherit; text-decoration:none;
+  cursor:pointer; font-family:inherit}
+.ml-phone .pb:hover{background:#fff}
+.ml-phone .pn{font-size:11.5px; color:var(--slate); flex:1 1 220px; min-width:0}
+
+.ml-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(296px,1fr)); gap:14px; margin:0 0 22px}
+.ml-card{background:var(--paper); border:1px solid var(--line); border-left:4px solid var(--who);
+  border-radius:var(--r); padding:14px 15px 13px; display:flex; flex-direction:column}
+.ml-card .tag{font-size:10.5px; font-weight:700; letter-spacing:.07em; text-transform:uppercase;
+  color:var(--who-d); margin-bottom:5px}
+.ml-card h3{font-size:15.5px; margin:0 0 6px; letter-spacing:-.01em}
+.ml-card p{font-size:13px; line-height:1.5; color:var(--slate); margin:0 0 12px; flex:1}
+.ml-card .src{font-size:11px; color:var(--mute); margin:0 0 11px; line-height:1.45}
+.ml-actions{display:flex; gap:7px; flex-wrap:wrap}
+.ml-actions button,.ml-actions a{font:700 12px/1.2 inherit; font-family:inherit; border-radius:var(--r);
+  padding:8px 11px; cursor:pointer; text-decoration:none; border:1.5px solid var(--who);
+  background:var(--who-d); color:#fff}
+.ml-actions .sec{background:var(--paper); color:var(--who-d)}
+.ml-actions .sec:hover{background:var(--who-t)}
+
+.ml-card.svc{border-left-color:#2F4858}
+.ml-card.clin{border-left-color:#1B6B70}
+.ml-card.ref{border-left-color:#7A6F5B}
+.ml-card.selfr{border-left-color:#55636B}
+.ml-card.todo{border-left-color:var(--line); background:#fafcfd}
+.ml-card.todo h3,.ml-card.todo .tag{color:var(--mute)}
+.ml-card .est{display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.05em;
+  text-transform:uppercase; color:var(--warn); background:var(--warn-t);
+  border:1px solid #e8c9b0; border-radius:3px; padding:2px 6px}
+
+.qrbox{margin-top:12px; border-top:1px solid var(--line-s); padding-top:12px}
+.qrbox svg{display:block; width:148px; height:148px; background:#fff}
+.qrbox .u{font:11.5px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace; color:var(--slate);
+  word-break:break-all; margin:8px 0 6px}
+
+.ml-note{background:var(--who-t); border:1px solid #acd9ec; border-radius:var(--r);
+  padding:14px 16px; font-size:13px; line-height:1.55; color:var(--ink)}
+.ml-note b{color:var(--who-d)}
+.ml-note ul{margin:8px 0 0; padding-left:20px}
+.ml-note li{margin-bottom:5px}
+
+table.prov{width:100%; border-collapse:collapse; font-size:12.5px; margin:10px 0 0}
+/* th and td were one rule here, and at (0,1,1) it silently beat the bare
+   `td` justification. Split: the header stays set left, the cell -- which
+   carries running prose -- inherits the justification. */
+table.prov th,table.prov td{vertical-align:top; padding:7px 9px;
+  border-bottom:1px solid var(--line-s)}
+table.prov th{text-align:left}
+table.prov th{background:var(--bg); font-size:11px; letter-spacing:.05em; text-transform:uppercase;
+  color:var(--slate); border-bottom:1px solid var(--line)}
+.tw{overflow-x:auto}
+
+/* ---------- Layer 1 form extras ---------- */
+.row.four{grid-template-columns:repeat(auto-fit,minmax(148px,1fr))}
+.radios{display:flex; flex-wrap:wrap; gap:7px}
+.radios label{display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line);
+  border-radius:16px; padding:6px 12px; font-size:12.5px; font-weight:400; cursor:pointer;
+  background:#fff; user-select:none; margin:0}
+.radios label:hover{background:var(--who-t); border-color:var(--who)}
+.radios input{margin:0}
+
+.codebox{font:700 17px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.06em;
+  background:var(--bg); border:1px dashed var(--line); border-radius:var(--r);
+  padding:11px 13px; color:var(--mute)}
+.codebox.on{background:var(--who-t); border:1px solid var(--who); color:var(--who-d)}
+
+pre.pay{font:11.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace; background:var(--ink);
+  color:#cfe6f2; border-radius:var(--r); padding:13px 15px; overflow-x:auto; margin:0;
+  max-height:340px; overflow-y:auto; white-space:pre}
+
+.banner ul{margin:7px 0 0; padding-left:20px}
+.banner li{margin-bottom:3px}
+
+.scale{display:grid; gap:7px}
+.scale .q{background:var(--paper); border:1px solid var(--line); border-radius:var(--r); padding:11px 13px}
+.scale .q > .qt{font-size:13.5px; font-weight:600; margin-bottom:8px; line-height:1.45}
+.scale .q > .qt .np{display:block; font-weight:400; color:var(--slate); font-size:12.5px; margin-top:2px}
+.scale .opts{display:flex; flex-wrap:wrap; gap:6px}
+.scale .opts label{display:inline-flex; align-items:center; gap:5px; border:1px solid var(--line);
+  border-radius:16px; padding:5px 11px; font-size:12px; font-weight:400; cursor:pointer;
+  background:#fff; margin:0; user-select:none}
+.scale .opts label:hover{background:var(--who-t); border-color:var(--who)}
+.scale .q.done{border-left:3px solid var(--ok)}
+
+.score{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;
+  background:var(--paper); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px}
+.score .big{font:700 30px/1 inherit; letter-spacing:-.02em}
+.score .of{font-size:13px; color:var(--mute)}
+.score .band{font-size:13.5px; font-weight:700}
