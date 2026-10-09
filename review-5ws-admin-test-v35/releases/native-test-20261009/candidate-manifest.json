@@ -1,8 +1,8 @@
 {
-  "status": "TEST_ONLY_UNPUBLISHED_NOT_REVIEWED",
+  "status": "TEST_ONLY_UNPUBLISHED_PENDING_INDEPENDENT_REVIEW_W38",
   "operationalActivation": false,
   "pair_sha256": "8d0970d62b3c0fdd796235cba410c011f97e785b4d0030170046fc020c0152a8",
-  "release_sha256": "5151d8773677bc06391aca0b15d0aeed5d9204b95eb8f2e8b7f24da9475741c0",
+  "release_sha256": "933b193c0499bd41540607478944c84d6cdf3c3849769a64b0eebed19dd037ad",
   "release_hash_basis": "canonical inventory excluding release-pins.js and manifest; pins externally hashed to avoid circularity",
   "assets": {
     "admin-test-contract.json": {
@@ -10,12 +10,12 @@
       "bytes": 3693
     },
     "admin-test-transport.js": {
-      "sha256": "31a21800bd734c665fc60d808d47058c32d28fb1a895c29fabb18f1527aea6e6",
-      "bytes": 3945
+      "sha256": "8cd5bee1d3353ec0227cd13fb5325c470295195f35e406b4188df2cb3bead1cf",
+      "bytes": 4387
     },
     "admin-test-ui.js": {
-      "sha256": "d4975b71cf876b06b82bf36375d003f876bb27cb600c9c0b78c9a82f7ed8eed9",
-      "bytes": 4614
+      "sha256": "d92e56e7ff77af78401b20778dc5955bad79330edf334ee2228003a3f043014e",
+      "bytes": 5681
     },
     "editor-authority.js": {
       "sha256": "ef19c361d34ffe0733b32207f51bddc44e7c92d6d310bd863293e4b31a112ee5",
@@ -70,7 +70,7 @@
       "bytes": 632
     },
     "release-pins.js": {
-      "sha256": "74be9ed89b1de7d8239eaffa74f516bd7c4762e4b4009a10f32c648676952cb0",
+      "sha256": "935e335a7a8fb64afee8419f7947994fd1ad9ceea7f1b6cd30e9200d769577ac",
       "bytes": 201
     }
   }
