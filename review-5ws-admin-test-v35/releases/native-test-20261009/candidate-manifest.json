@@ -2,7 +2,7 @@
   "status": "TEST_ONLY_UNPUBLISHED_NOT_REVIEWED",
   "operationalActivation": false,
   "pair_sha256": "8d0970d62b3c0fdd796235cba410c011f97e785b4d0030170046fc020c0152a8",
-  "release_sha256": "3a86b84665fcf43af4472d290770b594ba30b9a96173f801d286c78d0f394a4f",
+  "release_sha256": "5151d8773677bc06391aca0b15d0aeed5d9204b95eb8f2e8b7f24da9475741c0",
   "release_hash_basis": "canonical inventory excluding release-pins.js and manifest; pins externally hashed to avoid circularity",
   "assets": {
     "admin-test-contract.json": {
@@ -14,8 +14,12 @@
       "bytes": 3945
     },
     "admin-test-ui.js": {
-      "sha256": "9a2c2fe92d89e537a42305ad3723563ff22c44d748336548a1673a4b75ab2638",
-      "bytes": 8194
+      "sha256": "d4975b71cf876b06b82bf36375d003f876bb27cb600c9c0b78c9a82f7ed8eed9",
+      "bytes": 4614
+    },
+    "editor-authority.js": {
+      "sha256": "ef19c361d34ffe0733b32207f51bddc44e7c92d6d310bd863293e4b31a112ee5",
+      "bytes": 7912
     },
     "email-link-boot.js": {
       "sha256": "a9a2bc368d6e5a972daeb1cf566297314d1cbfb8c7cccd6d4f6b51cafcc6f3d0",
@@ -46,8 +50,8 @@
       "bytes": 10660
     },
     "review.html": {
-      "sha256": "e8121d0ac629b76a21ba4b19643abdaf62ba40df8f7ce6c8299e75d6e9d0a47c",
-      "bytes": 2714
+      "sha256": "ce59a1ddeb02e3b5ac4d837ac9d5f89454e8e29c2e89f49b8c347030336a21e4",
+      "bytes": 2757
     },
     "sdk/firebase-app.js": {
       "sha256": "f7ec36066094ccc2cc288a5c76453daf5f8d6dcdb5063d3a3ae4392add8344a7",
@@ -66,7 +70,7 @@
       "bytes": 632
     },
     "release-pins.js": {
-      "sha256": "91c258e4f7d3d233772fa8b0e2a762dafe1786e6bc835232ed8e2843173a5257",
+      "sha256": "74be9ed89b1de7d8239eaffa74f516bd7c4762e4b4009a10f32c648676952cb0",
       "bytes": 201
     }
   }
