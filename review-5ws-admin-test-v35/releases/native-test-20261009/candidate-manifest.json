@@ -2,7 +2,7 @@
   "status": "TEST_ONLY_UNPUBLISHED_PENDING_INDEPENDENT_REVIEW_W38",
   "operationalActivation": false,
   "pair_sha256": "8d0970d62b3c0fdd796235cba410c011f97e785b4d0030170046fc020c0152a8",
-  "release_sha256": "933b193c0499bd41540607478944c84d6cdf3c3849769a64b0eebed19dd037ad",
+  "release_sha256": "8f74facd064c257ae8739f24d1699229638a6e55e62e0a6d71f84a9e3e99d01e",
   "release_hash_basis": "canonical inventory excluding release-pins.js and manifest; pins externally hashed to avoid circularity",
   "assets": {
     "admin-test-contract.json": {
@@ -14,8 +14,8 @@
       "bytes": 4387
     },
     "admin-test-ui.js": {
-      "sha256": "d92e56e7ff77af78401b20778dc5955bad79330edf334ee2228003a3f043014e",
-      "bytes": 5681
+      "sha256": "acc4400e5bd356aa04626ea9ab6424ed7a702aaa91d754d14c26ea027a052a87",
+      "bytes": 5904
     },
     "editor-authority.js": {
       "sha256": "ef19c361d34ffe0733b32207f51bddc44e7c92d6d310bd863293e4b31a112ee5",
@@ -70,7 +70,7 @@
       "bytes": 632
     },
     "release-pins.js": {
-      "sha256": "935e335a7a8fb64afee8419f7947994fd1ad9ceea7f1b6cd30e9200d769577ac",
+      "sha256": "50eef461a76269731b74c44f49e9789a2bb042593f110abaf54cb83baa346942",
       "bytes": 201
     }
   }

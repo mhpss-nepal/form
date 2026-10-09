@@ -1,5 +1,5 @@
 /* Native UI bridge: serialized editor authority, unchanged durable TEST contracts. */
-(()=>{'use strict';const $=id=>document.getElementById(id),notice=t=>{$('status').textContent=t;};let rows=[],snapshot=null;
+(()=>{'use strict';const $=id=>document.getElementById(id),notice=t=>{$('status').textContent=t;};let rows=[],snapshot=null,listingAuthority={};
 const transport=()=>ADMIN_TEST_TRANSPORT.create(FB.webAuth());
 function synthetic(p){const f=$('form').contentWindow;if(f.INTEGRATION_REVIEW.check(p).length||p.org!=='TPO'||p.siteOther!=='SYNTHETIC community venue'||p.description!==''||p.coordinationNotes!==''||p.site!==null||p.ward!==null||p.healthFacility!==null)throw Error('TEST ONLY: approved synthetic TPO fixture required; no real details');}
 function validRows(input){for(const r of input)transport().row(r);const f=$('form').contentWindow,state=f.JOINT_HUB.load(input);if(!state.complete||state.rejected.length||state.records.length!==input.length)throw Error('Pinned joint receiving validation refused');return state;}
@@ -32,8 +32,11 @@ const authority=EDITOR_AUTHORITY.create({
 const {flush,open,retry}=authority;
 function submit(payload){try{transport().user();synthetic(payload);return authority.submit(payload);}catch(e){return Promise.reject(e);}}
 async function refresh(){
- snapshot=null;rows=[];$('myReports').replaceChildren();
- const owner=transport().user(),d=await transport().current();validRows(d.rows);
+ const ticket={};listingAuthority=ticket;snapshot=null;rows=[];$('myReports').replaceChildren();
+ const owner=transport().user();let d;
+ try{d=await transport().current();}catch(e){if(listingAuthority!==ticket)return {superseded:true};throw e;}
+ if(listingAuthority!==ticket)return {superseded:true};
+ validRows(d.rows);
  if(transport().user()!==owner)throw Error('Auth changed before snapshot installation');
  rows=d.rows;snapshot={owner,readTime:d.readTime,reportCount:rows.length};
  for(const r of rows){const li=document.createElement('li'),b=document.createElement('button'),access=ADMIN_TEST_TRANSPORT.rowAccess(r.id);b.type='button';b.disabled=access==='historical_read_only';b.textContent=(b.disabled?'Historical TEST — read/export only ':'Open TEST ')+r.payload.dateAD+' · '+r.id+' · revision '+r.revision;if(!b.disabled)b.onclick=()=>open(r.id).catch(e=>notice(String(e)));li.append(b);$('myReports').append(li);}
@@ -47,6 +50,6 @@ function csv(){
 }
 function download(data,name,type){const u=URL.createObjectURL(new Blob([data],{type})),a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);}
 $('flush').onclick=()=>flush().catch(e=>notice(String(e)));$('refresh').onclick=()=>refresh().catch(e=>notice('TEST read unavailable; no cached success. '+e));$('newReport').onclick=()=>{authority.cancel();$('form').contentWindow.document.getElementById('syntheticExample').click();notice('New synthetic fixture loaded; nothing submitted.');};$('exportCSV').onclick=()=>{try{download(csv(),'TEST-ONLY-joint.csv','text/csv');}catch(e){notice(String(e));}};$('recovery').onclick=async()=>download(JSON.stringify(await SESSION_QUEUE.recoveryExport()),'TEST-device-recovery.json','application/json');$('retryOriginal').onclick=async()=>{try{const first=(await SESSION_QUEUE.all())[0];if(!first)throw Error('No TEST envelope');await retry(first.token);}catch(e){notice(String(e));}};
-FB.onUser(()=>{authority.cancel();snapshot=null;rows=[];$('myReports').replaceChildren();});
+FB.onUser(()=>{authority.cancel();listingAuthority={};snapshot=null;rows=[];$('myReports').replaceChildren();});
 window.REVIEW_BRIDGE=Object.freeze({submit,flush,refresh});window.ADMIN_TEST_UI=Object.freeze({submit,flush,refresh,open,retry,csv,operationalActivation:false});
 })();
