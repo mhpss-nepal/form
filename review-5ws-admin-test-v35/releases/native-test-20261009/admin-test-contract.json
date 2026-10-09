@@ -1,0 +1,91 @@
+{
+  "version": "admin-synthetic-test/1",
+  "state": "FROZEN_WIRE_CONTRACT_IMPLEMENTATION_PENDING",
+  "executor": "Thar Lay/server",
+  "productionBase": "https://mhpss5ws-tdp3xtfnsq-as.a.run.app",
+  "origin": "https://mhpss-nepal.github.io",
+  "scope": "who-primary-synthetic-test",
+  "sourceClassification": "synthetic_admin_test",
+  "testBasis": "SYNTHETIC_NON_OPERATIONAL_NO_UNIQUE_PEOPLE",
+  "collection": "mhpss5wsTestReportsV1",
+  "immutablePaths": "mhpss5wsTestReportsV1/{sessionId}/events/{serverGeneratedUuid}",
+  "retryPaths": "mhpss5wsTestReportsV1/{sessionId}/retryTokens/{sha256RetryToken}",
+  "auditPaths": "mhpss5wsTestAuditV1/{serverGeneratedUuid}",
+  "auth": "Bearer Firebase ID token; existing enabled primary exact UID/email binding only, freshly rechecked transactionally. Backup identity-only. No reporter grant or selected-org authority.",
+  "syntheticHeaders": {
+    "X-Test-Basis": "SYNTHETIC_NON_OPERATIONAL_NO_UNIQUE_PEOPLE"
+  },
+  "intake": {
+    "path": "/admin/test/intake",
+    "method": "POST",
+    "headers": [
+      "Authorization",
+      "Content-Type: application/json",
+      "X-Session-Id",
+      "X-Retry-Token",
+      "X-Test-Basis"
+    ],
+    "body": {
+      "payload": "Exact unchanged native approved joint 0.4 serialized payload; synthetic fixture org TPO (native approved provider vocabulary does not contain WHO); visibly synthetic siteOther; no real data. WHO is the authenticated primary administrator, NOT a reporter/org grant.",
+      "predecessor": "null for initial; exact event_id/request_sha256/revision binding for correction"
+    },
+    "receipt": {
+      "status": "accepted",
+      "event_id": "server-generated canonical UUID",
+      "revision": "safe integer initial 1 or predecessor + 1",
+      "request_sha256": "sha256 of exact submitted UTF-8 envelope bytes"
+    },
+    "exactRetry": "Reuse same session ID, retry token and exact body bytes; same receipt even after later corrections on verified lineage. No extra receipt keys."
+  },
+  "list": {
+    "path": "/admin/test/current",
+    "method": "GET",
+    "headers": [
+      "Authorization",
+      "X-Test-Basis",
+      "X-Listing-Cursor optional"
+    ],
+    "protocol": "own-current-pages/1",
+    "scope": "who-primary-synthetic-test",
+    "pageSize": 10,
+    "responseKeys": [
+      "protocol",
+      "rows",
+      "scope",
+      "pageComplete",
+      "snapshotComplete",
+      "readTime",
+      "pageCount",
+      "nextCursor"
+    ],
+    "rowAdditions": [
+      "source_classification",
+      "test_basis"
+    ],
+    "pagination": "Pinned readTime; live control rechecked separately; cursor bound to UID, fixture TPO, test scope and exact test document path; consume until nextCursor null."
+  },
+  "read": {
+    "path": "/admin/test/report",
+    "method": "GET",
+    "headers": [
+      "Authorization",
+      "X-Test-Basis",
+      "X-Session-Id"
+    ],
+    "response": {
+      "scope": "who-primary-synthetic-test",
+      "row": "same typed verified row as list"
+    }
+  },
+  "refusals": {
+    "401": "missing bearer",
+    "403": "identity/control/synthetic basis/payload/integrity refused; retain immutable request",
+    "400": "method body headers or cursor format refused",
+    "404": "unknown route or absent own test report",
+    "503": "bounded retry/control/backend unavailable; retain immutable request"
+  },
+  "csv": "Client-only export using pinned joint reader; explicitly TEST classification/basis, session attendance and activity participations separate; never operational Hub/public feed.",
+  "activation": false,
+  "deploy": "Parent only after independent exact-hash review. No Rules/IAM/accounts/grants/operational activation.",
+  "syntheticFixtureOrg": "TPO"
+}
