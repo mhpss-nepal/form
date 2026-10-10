@@ -47,6 +47,6 @@ self.addEventListener('message',e=>e.waitUntil((async()=>{let accepted=false,rea
 self.addEventListener('activate',e=>e.waitUntil((async()=>{const s=await state();await complete(s);if(s.accepted)await self.clients.claim();/* No prefix/global deletion. No legacy/child/unrelated cache is owned by this install. */})()));
 self.addEventListener('fetch',e=>{
  const r=e.request,u=new URL(r.url);
- if(r.method!=='GET'||u.origin!==BASE.origin||u.search||u.hash||u.username||u.password||r.headers.has('Authorization')||/\/(api|auth|admin|signin)(\/|\.)/i.test(u.pathname)||!CONFIG.allowed.some(p=>u.pathname.startsWith(p)))return;
+ if(r.method!=='GET'||u.origin!==BASE.origin||u.search||u.username||u.password||r.headers.has('Authorization')||/\/(api|auth|admin|signin)(\/|\.)/i.test(u.pathname)||!CONFIG.allowed.some(p=>u.pathname.startsWith(p)))return;
  e.respondWith((async()=>{const s=await servingState();if(!s)return fetch(r,{cache:'no-store'});const c=await caches.open(s.cache),m=await manifest(await c.match(new URL('cache-manifests/'+s.manifest+'.json',BASE)),s.manifest),a=m.assets.find(x=>x.request===u.pathname);if(!a)return fetch(r,{cache:'no-store'});const hit=await c.match(new URL(a.request,BASE));await verify(hit?.clone(),a);return hit;})());
 });
