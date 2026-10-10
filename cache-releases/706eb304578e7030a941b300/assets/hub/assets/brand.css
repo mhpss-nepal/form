@@ -1,0 +1,33 @@
+/* =====================================================================
+   Attribution band — MHPSS Nepal
+   ---------------------------------------------------------------------
+   NO EMBLEM IS USED HERE, AND NONE MAY BE ADDED WITHOUT PERMISSION.
+
+   WHO Nepal's own public notice on unauthorised use of the WHO logo
+   (who.int/nepal, 1 May 2020) states that the logo "may only be used
+   with the express written permission of the WHO", that its use
+   "implies endorsement by the WHO", and that use is restricted to
+   government agencies and institutions with official collaborating
+   status, in conjunction with work they are undertaking with WHO.
+
+   So the band carries attribution in WORDS, which needs no permission,
+   plus two empty slots. To fill a slot you need, in writing:
+     1. permission from WHO Nepal for this specific site, and
+     2. the emblem file from them (not one found on the web), and
+     3. the same from MoHP / EDCD for the government emblem.
+   Then replace the .slot div with <img src="assets/logo-*.png" alt="...">
+   and delete the placeholder text. Not before.
+   ===================================================================== */
+.attrib{border-top:1px solid #d8dfe4; margin-top:34px; padding-top:18px;
+  display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap}
+.attrib .who{flex:1 1 280px; min-width:0; font-size:12.5px; line-height:1.55; color:#5b6b76}
+.attrib .who b{color:#20313b}
+.attrib .marks{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+/* The written slot is the fallback when no emblem file is present. It is
+   styled to read as a deliberate credit line, not as a broken image. */
+.attrib .slot{border-left:2px solid #d8dfe4; padding:2px 0 2px 11px; min-width:0;
+  font:400 11px/1.4 'Noto Sans',system-ui,sans-serif; color:#636f78}
+.attrib .slot span{display:block; font-weight:700; color:#20313b; font-size:12.5px;
+  letter-spacing:0; margin-top:1px}
+.attrib img.mark{height:46px; width:auto; display:block}
+@media (max-width:600px){ .attrib{gap:14px} .attrib .slot{min-width:0; flex:1 1 140px} }

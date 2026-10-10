@@ -42,6 +42,10 @@ def main():
         print("cannot read sw.js")
         return 2
     src = open(SW, encoding="utf-8").read()
+    if 'mhpss-cache-release-authority-v1' in src:
+        import runpy
+        checker = runpy.run_path(os.path.join(ROOT, 'tools', 'cache-release-check.py'))
+        return checker['main']()
     m = ARR.search(src)
     if not m:
         print("cannot find the PRECACHE array in sw.js")
