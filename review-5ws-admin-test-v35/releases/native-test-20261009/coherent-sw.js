@@ -1,4 +1,4 @@
-const CONFIG={"owner":"mhpss-field-w43","root":true,"release":null,"manifest":null,"allowed":["/form/","/hub/assets/"],"entries":["/form/","/form/index.html","/form/5ws-report.html","/form/4ws-report.html","/form/cards.html"]};
+const CONFIG={"owner":"mhpss-native-test-w43","release":null,"manifest":null,"allowed":["/form/review-5ws-admin-test-v35/releases/native-test-20261009/"],"entries":["/form/review-5ws-admin-test-v35/releases/native-test-20261009/review.html"]};
 'use strict';
 /* Ordinary trusted browser/HTTPS deployment boundary. No self-fetch claim about
  * already-executed bytes. Install verifies immutable manifest + every asset.
