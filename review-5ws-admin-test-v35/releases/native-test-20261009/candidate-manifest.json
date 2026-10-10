@@ -2,7 +2,7 @@
   "status": "TEST_ONLY_UNPUBLISHED_CACHE_CANDIDATE",
   "operationalActivation": false,
   "pair_sha256": "8d0970d62b3c0fdd796235cba410c011f97e785b4d0030170046fc020c0152a8",
-  "release_sha256": "ccd92e38ecaf558c3d03ea6477eba055ca3990133d43fcb20ea9f71455a2cfc2",
+  "release_sha256": "e4c9ab1dd7e97f128aa8b5073f7315e2c1a02b1a1b4b00b8278356f6aa783579",
   "release_hash_basis": "canonical runtime inventory excluding release-pins, candidate-manifest, cache-manifest and coherent-sw; HTTPS trust boundary",
   "assets": {
     "admin-test-contract.json": {
@@ -46,8 +46,8 @@
       "bytes": 1366
     },
     "form/5ws-report.html": {
-      "sha256": "fb172c3c61d40a7089eaae27f5011280875a0ddb3a9df0ba6ab34abd605c938f",
-      "bytes": 719784
+      "sha256": "9b0afe6176c7e19a194a73ef3ceb0222ae6bb17e3357030613e598ab75c754ce",
+      "bytes": 719801
     },
     "offline/session-queue.js": {
       "sha256": "c9615afa73511150d135466cc3c7c2c1a34602666347b6c2595d4e356feda8c5",
@@ -74,7 +74,7 @@
       "bytes": 632
     },
     "release-pins.js": {
-      "sha256": "9aeeebdf0aae73d442bd15e562f7358964beba00b83f05aa36d6ef003d889a94",
+      "sha256": "3a6a9af654d4352cb435b7ace2ef58f5092f6ff46c0216776ab2fb8602f4553f",
       "bytes": 201
     }
   }
