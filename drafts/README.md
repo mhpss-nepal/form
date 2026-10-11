@@ -12,3 +12,16 @@ typed into them can reach the retired register.
 | `provider-register.html` | Self-registration of a named provider, on consent | Service-level, but the consent wording is a draft to be settled by the Coordinator with EDCD |
 
 The Nepali in all four is a machine draft awaiting a translator.
+
+## How these four relate to the files at the repository root
+
+`contact.html` and `referral.html` at the root are the 21 September versions, and they are
+still the ones the indexes point to. `drafts/contact.html` is the later version, with the
+referral block folded into it, and `drafts/referral-outcome.html` is the short follow-up
+that took the place of the standalone referral form. The parked pair supersedes the root
+pair in design, but it supersedes it in use only once the per-organisation locked house
+exists. Until then the root files stay as they are, and this folder is the record of where
+the design went.
+
+`service-point.html` and `provider-register.html` were never on main. They enter the
+repository here for the first time.
