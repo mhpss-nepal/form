@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-default="ne">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-i18n="tr.p001">Training and orientation record — MHPSS Nepal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Manrope:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="../hub/assets/app.css">
+<link rel="stylesheet" href="../hub/assets/design.css">
+<link rel="stylesheet" href="../hub/assets/form.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1d1d1b">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MHPSS Field">
+<style>
+  .a11y-skip{position:absolute;left:-9999px;top:0;z-index:1000;background:#fff;color:#183039;padding:10px 14px;border:2px solid #183039;border-radius:0 0 6px 0;font-weight:700;text-decoration:none}
+  .a11y-skip:focus{left:0}
+  .prow{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.3fr) minmax(0,1.2fr) 74px 74px 74px;gap:8px;align-items:end;margin:8px 0}
+  .prow>*{min-width:0}.prow select,.prow input{width:100%;min-width:0}
+  .prow .lab{font-size:12px;color:#5c5c5a;display:block;margin-bottom:3px}
+  .prow .kill{grid-column:1/-1;justify-self:start}
+  @media(max-width:640px){.prow{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  .tot{background:#eef2f3;border:1px solid #cbd6da;padding:10px 12px;margin:10px 0;font-size:14px}
+</style>
+</head>
+<body class="fx">
+<!-- TRANSPORT HELD, 11 Oct 2026: the register scripts are not loaded, so nothing entered here can reach the retired register. Wire it to the new transport when the Layer 1 house is ready. -->
+<a class="a11y-skip" href="#main" data-i18n="a11y.skip">Skip to the form</a>
+<div class="ribbon" data-i18n="tr.p002" data-i18n-html>Revised draft for field piloting <span>· saved on this phone, sent to the coordination register when there is signal</span></div>
+
+<div class="top">
+  <div>
+    <div class="brand" data-i18n="tr.brand">Training and orientation record</div>
+    <div class="sub" data-i18n="tr.sub">Layer 1 · capacity building, kept out of the 5Ws</div>
+  </div>
+  <div class="spacer"></div>
+  <a href="index.html" data-i18n="tr.navAll">← Forms</a>
+  <a href="../hub/" data-i18n="tr.navHub">Hub</a>
+</div>
+
+<div class="wrap">
+  <main id="main">
+
+  <h1 data-i18n="tr.h1">One record is one training or orientation event</h1>
+  <p class="lede" data-i18n="tr.lede">Capacity building is not reported on the 5Ws. The people in this room are aid workers, not people reached by the response, and counting them as attendance would inflate every reach figure. They are counted here instead, as people trained.</p>
+
+  <div class="banner" data-i18n="tr.note" data-i18n-html><b>Count the participants by the palika they work in, not by where the training was held.</b>
+    A training in Kathmandu for staff working in Rasuwa belongs to Rasuwa. This is what lets the coordination team see where trained workers are, and what makes the referral directory able to say a place has PFA-trained staff. <span id="storeWarn"></span></div>
+
+  <form id="f" autocomplete="off" novalidate>
+
+    <!-- 1 -->
+    <div class="card">
+      <div class="step"><span class="n">1</span><h2 data-i18n="tr.h1who">Who organised it</h2></div>
+      <div class="row three">
+        <div class="f">
+          <label for="org" data-i18n="tr.orgLab">Organising organisation</label>
+          <select id="org"></select>
+        </div>
+        <div class="f" id="orgOtherWrap" hidden>
+          <label for="orgOther" data-i18n="tr.orgOtherLab">Name of organisation</label>
+          <input type="text" id="orgOther">
+        </div>
+        <div class="f">
+          <label for="focalName" data-i18n="tr.focalLab">Focal point name</label>
+          <input type="text" id="focalName">
+        </div>
+        <div class="f">
+          <label for="focalPhone" data-i18n="tr.focalPhoneLab">Focal point phone</label>
+          <input type="tel" id="focalPhone" placeholder="98XXXXXXXX" data-i18n-skip>
+        </div>
+      </div>
+      <div class="row">
+        <div class="f">
+          <label for="partners" data-i18n="tr.partnersLab" data-i18n-html>Co-organised with <span class="opt">— optional</span></label>
+          <input type="text" id="partners" placeholder="Other organisations, separated by commas" data-i18n-ph="tr.phPartners">
+        </div>
+        <div class="f">
+          <label for="reportingRole" data-i18n="tr.roleLab">Who reports the numbers for this event</label>
+          <select id="reportingRole">
+            <option value="LEAD" data-i18n="tr.roleLead">We organised it — we report the numbers</option>
+            <option value="PARTNER" data-i18n="tr.rolePartner">We co-organised — the lead organisation reports the numbers</option>
+          </select>
+          <div class="help" data-i18n="tr.roleHelp">Only the lead enters the counts, so one event is never counted twice.</div>
+        </div>
+      </div>
+      <div class="banner stop" id="roleNote" hidden data-i18n="tr.roleNote">Counts are switched off for this record. Name the lead organisation above.</div>
+    </div>
+
+    <!-- 2 -->
+    <div class="card">
+      <div class="step"><span class="n">2</span><h2 data-i18n="tr.h2">What it was</h2></div>
+      <div class="row three">
+        <div class="f">
+          <label for="kind" data-i18n="tr.kindLab">Orientation or training</label>
+          <select id="kind">
+            <option value="" data-i18n="tr.choose">— choose —</option>
+            <option value="ORIENT" data-i18n="tr.kindOrient">Orientation — a brief, one-off session</option>
+            <option value="TRAIN" data-i18n="tr.kindTrain">Training — fuller capacity building, with follow-up support</option>
+          </select>
+          <div class="help" data-i18n="tr.kindHelp">The distinction is the MSP's: orientation is brief and one-off; training requires ongoing support and supervision.</div>
+        </div>
+        <div class="f">
+          <label for="topic" data-i18n="tr.topicLab">Package or topic</label>
+          <select id="topic">
+            <option value="" data-i18n="tr.choose">— choose —</option>
+            <option value="5.1" data-i18n="tr.t51">Psychological first aid (PFA)</option>
+            <option value="5.2" data-i18n="tr.t52">Basic counselling skills</option>
+            <option value="5.3" data-i18n="tr.t53">Basic MHPSS (active listening, the multilayered model)</option>
+            <option value="5.4" data-i18n="tr.t54">mhGAP</option>
+            <option value="5.9" data-i18n="tr.t59">Other — specify</option>
+          </select>
+        </div>
+        <div class="f" id="topicOtherWrap" hidden>
+          <label for="topicOther" data-i18n="tr.topicOtherLab">Which package or topic?</label>
+          <input type="text" id="topicOther" maxlength="120">
+        </div>
+      </div>
+      <div class="row three">
+        <div class="f">
+          <label for="title" data-i18n="tr.titleLab">Title, as announced</label>
+          <input type="text" id="title" maxlength="160">
+          <div class="help" data-i18n="tr.titleHelp">The IASC code for this record is 11.3, which asks for the topic to be named.</div>
+        </div>
+        <div class="f">
+          <label for="accredited" data-i18n="tr.accLab">Accreditation</label>
+          <select id="accredited">
+            <option value="" data-i18n="tr.choose">— choose —</option>
+            <option value="NHTC" data-i18n="tr.accNhtc">Accredited by NHTC or a provincial health training centre</option>
+            <option value="NO" data-i18n="tr.accNo">Not accredited</option>
+            <option value="UNK" data-i18n="tr.accUnk">Not known</option>
+          </select>
+        </div>
+        <div class="f">
+          <label for="mode" data-i18n="tr.modeLab">How it was delivered</label>
+          <select id="mode">
+            <option value="" data-i18n="tr.choose">— choose —</option>
+            <option value="INP" data-i18n="tr.modeInp">In person</option>
+            <option value="ONL" data-i18n="tr.modeOnl">Online</option>
+            <option value="BLE" data-i18n="tr.modeBle">Blended</option>
+          </select>
+        </div>
+      </div>
+      <div class="row three">
+        <div class="f">
+          <label for="dateAD" data-i18n="tr.dateLab">Start date (AD)</label>
+          <input type="date" id="dateAD">
+        </div>
+        <div class="f">
+          <label for="days" data-i18n="tr.daysLab">Number of days</label>
+          <input type="number" id="days" min="1" step="1" inputmode="numeric" placeholder="1">
+        </div>
+        <div class="f">
+          <label for="facilitators" data-i18n="tr.facLab" data-i18n-html>Number of facilitators <span class="opt">— optional</span></label>
+          <input type="number" id="facilitators" min="0" step="1" inputmode="numeric" placeholder="—">
+        </div>
+      </div>
+      <div class="row three">
+        <div class="f">
+          <label for="venueDistrict" data-i18n="tr.venueDistLab">District where it was held</label>
+          <select id="venueDistrict"></select>
+        </div>
+        <div class="f">
+          <label for="venuePalika" data-i18n="tr.venuePalLab" data-i18n-html>Palika where it was held <span class="opt">— optional</span></label>
+          <select id="venuePalika"></select>
+        </div>
+        <div class="f">
+          <label for="facilitatorOrg" data-i18n="tr.facOrgLab" data-i18n-html>Facilitating organisation <span class="opt">— optional</span></label>
+          <select id="facilitatorOrg"></select>
+          <div class="help" data-i18n="tr.facOrgHelp">The organisation, not the trainer's name. A roster of trainers is held separately and is not part of this record.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="card">
+      <div class="step"><span class="n">3</span><h2 data-i18n="tr.h3">Who was trained, and where they work</h2></div>
+      <div class="help" data-i18n="tr.pHelp">One row per palika the participants work in. Add a row for each. Counts are people, not sessions.</div>
+      <div id="prows"></div>
+      <div style="margin:10px 0"><button type="button" class="btn ghost" id="addRow" data-i18n="tr.addRow">Add a palika</button></div>
+      <div class="tot" id="ptot">No participants entered yet.</div>
+      <div class="row three">
+        <div class="f">
+          <label for="u18" data-i18n="tr.u18Lab" data-i18n-html>Of whom under 18 <span class="opt">— optional</span></label>
+          <input type="number" id="u18" min="0" step="1" inputmode="numeric" placeholder="—">
+          <div class="help" data-i18n="tr.u18Help">Only where youth volunteers took part. Participants are otherwise adults, so no age bands are asked.</div>
+        </div>
+        <div class="f">
+          <label for="pwd" data-i18n="tr.pwdLab" data-i18n-html>Of whom participants with a disability <span class="opt">— optional</span></label>
+          <input type="number" id="pwd" min="0" step="1" inputmode="numeric" placeholder="—">
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="card">
+      <div class="step"><span class="n">4</span><h2 data-i18n="tr.h4">What follows it</h2></div>
+      <div class="row three">
+        <div class="f">
+          <label for="supervision" data-i18n="tr.supLab">Follow-up supervision</label>
+          <select id="supervision">
+            <option value="" data-i18n="tr.choose">— choose —</option>
+            <option value="PROV" data-i18n="tr.supProv">Provided — supervision is running</option>
+            <option value="PLAN" data-i18n="tr.supPlan">Planned, not started</option>
+            <option value="NONE" data-i18n="tr.supNone">None</option>
+          </select>
+          <div class="help" data-i18n="tr.supHelp">The MSP indicator counts staff trained <i>and</i> supervised. One-off training without follow-up is not recommended.</div>
+        </div>
+        <div class="f" id="supFreqWrap" hidden>
+          <label for="supFreq" data-i18n="tr.supFreqLab">How often</label>
+          <input type="text" id="supFreq" maxlength="60" placeholder="Monthly, fortnightly…" data-i18n-ph="tr.phSupFreq">
+        </div>
+        <div class="f">
+          <label for="prepost" data-i18n="tr.ppLab">Knowledge assessed before and after</label>
+          <select id="prepost">
+            <option value="" data-i18n="tr.choose">— choose —</option>
+            <option value="Y" data-i18n="tr.ppY">Yes</option>
+            <option value="N" data-i18n="tr.ppN">No</option>
+          </select>
+        </div>
+      </div>
+      <div class="f">
+        <label for="notes" data-i18n="tr.notesLab" data-i18n-html>Notes for the coordination team <span class="opt">— optional</span></label>
+        <input type="text" id="notes" maxlength="220" placeholder="Gaps, problems, what is needed next" data-i18n-ph="tr.phNotes">
+        <div class="help" data-i18n="tr.notesHelp">Never a participant's name, phone number or personal detail.</div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="card">
+      <div class="step"><span class="n">5</span><h2 data-i18n="tr.h5">Save</h2></div>
+      <div id="errs"></div>
+      <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
+        <button type="submit" class="btn" data-i18n="tr.save">Save this record</button>
+        <button type="button" class="btn ghost" id="csvBtn" data-i18n="tr.csv">Export CSV</button>
+        <button type="button" class="btn grey" id="clearBtn" data-i18n="tr.clear">Clear everything on this device</button>
+        <span class="xs" id="count"></span>
+      </div>
+      <div class="f" style="margin-top:16px">
+        <label data-i18n="tr.payLab">What would be sent, if there were anywhere to send it</label>
+        <pre id="payload" class="pay">—</pre>
+      </div>
+    </div>
+  </form>
+</div>
+
+  </main>
+
+<script src="../hub/assets/codes.js"></script>
+<script src="../hub/assets/l1.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = window.CODES, L = window.L1, KIND = "training";
+  var $ = function (id) { return document.getElementById(id); };
+  var SEX = ["female", "male", "other"];
+
+  L.fillSelect($("org"), C.ORGS.concat([{ code: "OTHER", name: "Other — not listed", np: "अन्य — सूचीमा नभएको", np_src: "draft" }]));
+  L.fillSelect($("facilitatorOrg"), C.ORGS.concat([{ code: "OTHER", name: "Other — not listed", np: "अन्य — सूचीमा नभएको", np_src: "draft" }]));
+  L.fillSelect($("venueDistrict"), C.DISTRICTS);
+  $("dateAD").value = L.today();
+
+  ["org", "focalName", "focalPhone", "venueDistrict"].forEach(function (id) {
+    var v = L.recall(id); if (v) $(id).value = v;
+    $(id).addEventListener("change", function () { L.remember(id, $(id).value); });
+  });
+
+  function palikasFor(district) {
+    return C.PALIKAS.filter(function (p) { return district && p.district === district; });
+  }
+  function venuePalikas() {
+    var list = palikasFor($("venueDistrict").value);
+    L.fillSelect($("venuePalika"), list.map(function (p) { return { code: p.pcode, name: p.name, np: p.np }; }));
+  }
+  $("venueDistrict").addEventListener("change", function () { venuePalikas(); refresh(); });
+  venuePalikas();
+
+  $("org").addEventListener("change", function () { $("orgOtherWrap").hidden = $("org").value !== "OTHER"; refresh(); });
+  $("topic").addEventListener("change", function () { $("topicOtherWrap").hidden = $("topic").value !== "5.9"; refresh(); });
+  $("supervision").addEventListener("change", function () { $("supFreqWrap").hidden = $("supervision").value !== "PROV"; refresh(); });
+
+  /* ---- participant rows: palika × cadre × sex ---- */
+  var seq = 0;
+  function addRow(prefill) {
+    seq++;
+    var row = document.createElement("div");
+    row.className = "prow"; row.dataset.row = String(seq);
+    row.innerHTML =
+      '<div><span class="lab" data-i18n="tr.cDistrict">District they work in</span><select data-f="district"></select></div>' +
+      '<div><span class="lab" data-i18n="tr.cPalika">Palika they work in</span><select data-f="palika"></select></div>' +
+      '<div><span class="lab" data-i18n="tr.cCadre">Cadre</span><select data-f="cadre"></select></div>' +
+      '<div><span class="lab" data-i18n="tr.cFemale">Female</span><input type="number" min="0" step="1" inputmode="numeric" data-f="female" placeholder="0"></div>' +
+      '<div><span class="lab" data-i18n="tr.cMale">Male</span><input type="number" min="0" step="1" inputmode="numeric" data-f="male" placeholder="0"></div>' +
+      '<div><span class="lab" data-i18n="tr.cOther">Other</span><input type="number" min="0" step="1" inputmode="numeric" data-f="other" placeholder="0"></div>' +
+      '<button type="button" class="btn grey kill" data-f="kill" data-i18n="tr.removeRow">Remove this palika</button>';
+    $("prows").append(row);
+    var d = row.querySelector('[data-f="district"]'), p = row.querySelector('[data-f="palika"]'),
+        c = row.querySelector('[data-f="cadre"]');
+    L.fillSelect(d, C.DISTRICTS);
+    L.fillSelect(c, C.CADRES.filter(function (x) { return !x.retired; }));
+    function fillP() {
+      L.fillSelect(p, palikasFor(d.value).map(function (x) { return { code: x.pcode, name: x.name, np: x.np }; }));
+    }
+    d.addEventListener("change", function () { fillP(); refresh(); });
+    row.addEventListener("input", refresh);
+    row.addEventListener("change", refresh);
+    row.querySelector('[data-f="kill"]').addEventListener("click", function () { row.remove(); refresh(); });
+    if (prefill) {
+      d.value = prefill.district; fillP(); p.value = prefill.palika; c.value = prefill.cadre;
+      SEX.forEach(function (s) { row.querySelector('[data-f="' + s + '"]').value = prefill[s]; });
+    } else { fillP(); }
+    if (window.I18N && typeof window.I18N.repaint === "function") window.I18N.repaint();
+    return row;
+  }
+  $("addRow").addEventListener("click", function () { addRow(); refresh(); });
+  addRow();
+
+  function num(el) {
+    if (!el || el.value === "") return null;
+    var v = Number(el.value);
+    return Number.isSafeInteger(v) && v >= 0 ? v : NaN;
+  }
+  function rows() {
+    return [].slice.call($("prows").querySelectorAll(".prow")).map(function (r) {
+      var o = { district: r.querySelector('[data-f="district"]').value,
+                palika: r.querySelector('[data-f="palika"]').value,
+                cadre: r.querySelector('[data-f="cadre"]').value };
+      SEX.forEach(function (s) { o[s] = num(r.querySelector('[data-f="' + s + '"]')); });
+      o.total = SEX.reduce(function (a, s) { return a + (o[s] || 0); }, 0);
+      o.empty = !o.district && !o.palika && !o.cadre && SEX.every(function (s) { return o[s] === null; });
+      return o;
+    });
+  }
+  function partner() { return $("reportingRole").value === "PARTNER"; }
+
+  function record() {
+    var rs = rows().filter(function (r) { return !r.empty; });
+    return {
+      schema: "mhpss-np-training/0.1.0-draft",
+      kind: "training",
+      iasc_sub: "11.3",
+      org: $("org").value === "OTHER" ? ($("orgOther").value.trim() || "OTHER") : $("org").value,
+      focal_name: $("focalName").value.trim(),
+      focal_phone: $("focalPhone").value.trim(),
+      partners: $("partners").value.split(",").map(function (x) { return x.trim(); }).filter(Boolean),
+      reporting_role: $("reportingRole").value,
+      counts_held_by_lead: partner(),
+      event_kind: $("kind").value,
+      topic: $("topic").value,
+      topic_other: $("topic").value === "5.9" ? $("topicOther").value.trim() : "",
+      title: $("title").value.trim(),
+      accreditation: $("accredited").value,
+      delivery_mode: $("mode").value,
+      date_ad: $("dateAD").value,
+      days: num($("days")),
+      facilitators: num($("facilitators")),
+      facilitator_org: $("facilitatorOrg").value,
+      venue_district: $("venueDistrict").value,
+      venue_palika: $("venuePalika").value,
+      participants: partner() ? [] : rs.map(function (r) {
+        return { district: r.district, palika: r.palika, cadre: r.cadre,
+                 female: r.female, male: r.male, other: r.other, total: r.total };
+      }),
+      trained_total: partner() ? 0 : rs.reduce(function (a, r) { return a + r.total; }, 0),
+      under_18: partner() ? null : num($("u18")),
+      with_disability: partner() ? null : num($("pwd")),
+      supervision: $("supervision").value,
+      supervision_frequency: $("supervision").value === "PROV" ? $("supFreq").value.trim() : "",
+      pre_post_assessed: $("prepost").value,
+      note: $("notes").value.trim()
+    };
+  }
+  var COLS = Object.keys(record()).concat(["_saved"]);
+
+  function problems(r) {
+    var e = [];
+    if (!r.org) e.push("Choose the organising organisation.");
+    if (!r.focal_name) e.push("Give the focal point name.");
+    if (!r.event_kind) e.push("Say whether this was an orientation or a training.");
+    if (!r.topic) e.push("Choose the package or topic.");
+    if (r.topic === "5.9" && !r.topic_other) e.push("Name the package or topic you chose “Other” for.");
+    if (!r.title) e.push("Give the title, as it was announced.");
+    if (!r.date_ad) e.push("Give the start date.");
+    if (r.date_ad && r.date_ad > L.today()) e.push("The start date is in the future.");
+    if (r.days === null || Number.isNaN(r.days) || r.days < 1) e.push("Give the number of days, at least one.");
+    if (!r.venue_district) e.push("Choose the district where it was held.");
+    if (!r.supervision) e.push("Say what follow-up supervision there is — the indicator counts staff trained and supervised.");
+    if (r.reporting_role === "PARTNER") {
+      if (!r.partners.length) e.push("Name the lead organisation under “Co-organised with”.");
+      return e;
+    }
+    var rs = rows().filter(function (x) { return !x.empty; });
+    if (!rs.length) e.push("Add at least one palika with participants.");
+    rs.forEach(function (x, i) {
+      var n = "row " + (i + 1);
+      if (!x.district) e.push("Choose the district the participants work in (" + n + ").");
+      if (!x.palika) e.push("Choose the palika the participants work in (" + n + ").");
+      if (!x.cadre) e.push("Choose the cadre (" + n + ").");
+      if (SEX.some(function (s) { return Number.isNaN(x[s]); })) e.push("Counts must be whole numbers, zero or more (" + n + ").");
+      if (x.total === 0) e.push("A palika row with no one in it should be removed (" + n + ").");
+    });
+    var keys = rs.map(function (x) { return x.palika + "|" + x.cadre; });
+    if (new Set(keys).size !== keys.length) e.push("The same palika and cadre appear on more than one row — put them on one row.");
+    if (r.under_18 !== null && !Number.isNaN(r.under_18) && r.under_18 > r.trained_total) e.push("Participants under 18 cannot exceed the total trained.");
+    if (r.with_disability !== null && !Number.isNaN(r.with_disability) && r.with_disability > r.trained_total) e.push("Participants with a disability cannot exceed the total trained.");
+    return e;
+  }
+
+  function roleApply() {
+    var off = partner();
+    [].slice.call($("prows").querySelectorAll("select,input")).concat([$("u18"), $("pwd")])
+      .forEach(function (el) { if (!el) return; el.disabled = off; if (off && el.value !== "") el.value = ""; });
+    $("addRow").disabled = off;
+    $("roleNote").hidden = !off;
+  }
+  function refresh() {
+    roleApply();
+    var rs = rows().filter(function (x) { return !x.empty; });
+    var total = rs.reduce(function (a, x) { return a + x.total; }, 0);
+    var places = new Set(rs.map(function (x) { return x.palika; }).filter(Boolean)).size;
+    var cadres = new Set(rs.map(function (x) { return x.cadre; }).filter(Boolean)).size;
+    $("ptot").textContent = partner()
+      ? "Counts are reported by the lead organisation."
+      : (total ? total + " people trained · " + places + " palika(s) · " + cadres + " cadre(s)"
+               : "No participants entered yet.");
+    $("payload").textContent = JSON.stringify(record(), null, 2);
+  }
+  $("f").addEventListener("input", refresh);
+  $("f").addEventListener("change", refresh);
+  $("reportingRole").addEventListener("change", refresh);
+
+  function showCount() {
+    var n = L.all(KIND).length;
+    $("count").textContent = n ? n + " record(s) held on this device" : "nothing saved on this device yet";
+  }
+  showCount();
+
+  $("f").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var r = record(), e = problems(r);
+    if (e.length) {
+      $("errs").innerHTML = '<div class="banner stop"><b>Not saved.</b><ul><li>' +
+        e.map(function (x) { return x.replace(/</g, "&lt;"); }).join("</li><li>") + "</li></ul></div>";
+      $("errs").scrollIntoView({ block: "center" });
+      return;
+    }
+    var res = L.save(KIND, r);
+    $("errs").innerHTML = '<div class="banner ok"><b>Saved on this device.</b> ' +
+      (res && res.persisted === false ? "Storage is blocked, so it is only in memory — export before closing. " : "") +
+      "It goes to the coordination register when there is signal. These people are counted as people trained, never as attendance on the 5Ws.</div>";
+    showCount();
+  });
+
+  $("csvBtn").addEventListener("click", function () {
+    var list = L.all(KIND);
+    if (!list.length) { alert("Nothing saved on this device yet."); return; }
+    L.download("mhpss_np_training_" + L.stamp() + ".csv", L.toCSV(list, COLS), "text/csv");
+  });
+  $("clearBtn").addEventListener("click", function () {
+    if (!L.all(KIND).length) { alert("Nothing saved on this device yet."); return; }
+    if (confirm("Delete every training record held in this browser? This cannot be undone.")) {
+      L.clear(KIND); showCount(); $("errs").innerHTML = '<div class="banner"><b>Cleared.</b></div>';
+    }
+  });
+
+  if (!L.storageWorks()) $("storeWarn").textContent = " This browser is blocking storage, so entries live only while this page is open.";
+  refresh();
+})();
+</script>
+<script src="pwa.js"></script>
+<script src="../hub/assets/mark.js"></script>
+<script src="../hub/assets/icons.js"></script>
+<script src="../hub/assets/i18n-strings.js"></script>
+
+<script>
+/* Draft strings for this form, new on 11 October 2026. English is the page itself;
+   the Nepali is a MACHINE DRAFT for piloting, to be validated by a translator.
+   When this form is merged, move both maps into hub/assets/i18n-strings.js and
+   delete this block. Nothing here overwrites a key the shared dictionary already has. */
+(function () {
+  var S = window.I18N_STRINGS = window.I18N_STRINGS || {};
+  S.en = S.en || {}; S.ne = S.ne || {};
+  var EN = {
+  "tr.p001": "Training and orientation record — MHPSS Nepal",
+  "tr.p002": "Revised draft for field piloting <span>· saved on this phone, sent to the coordination register when there is signal</span>",
+  "tr.brand": "Training and orientation record",
+  "tr.sub": "Layer 1 · capacity building, kept out of the 5Ws",
+  "tr.navAll": "← Forms",
+  "tr.navHub": "Hub",
+  "tr.choose": "— choose —",
+  "tr.h1": "One record is one training or orientation event",
+  "tr.lede": "Capacity building is not reported on the 5Ws. The people in this room are aid workers, not people reached by the response, and counting them as attendance would inflate every reach figure. They are counted here instead, as people trained.",
+  "tr.note": "<b>Count the participants by the palika they work in, not by where the training was held.</b> A training in Kathmandu for staff working in Rasuwa belongs to Rasuwa. This is what lets the coordination team see where trained workers are, and what makes the referral directory able to say a place has PFA-trained staff.",
+  "tr.h1who": "Who organised it",
+  "tr.orgLab": "Organising organisation",
+  "tr.orgOtherLab": "Name of organisation",
+  "tr.focalLab": "Focal point name",
+  "tr.focalPhoneLab": "Focal point phone",
+  "tr.partnersLab": "Co-organised with <span class=\"opt\">— optional</span>",
+  "tr.phPartners": "Other organisations, separated by commas",
+  "tr.roleLab": "Who reports the numbers for this event",
+  "tr.roleLead": "We organised it — we report the numbers",
+  "tr.rolePartner": "We co-organised — the lead organisation reports the numbers",
+  "tr.roleHelp": "Only the lead enters the counts, so one event is never counted twice.",
+  "tr.roleNote": "Counts are switched off for this record. Name the lead organisation above.",
+  "tr.h2": "What it was",
+  "tr.kindLab": "Orientation or training",
+  "tr.kindOrient": "Orientation — a brief, one-off session",
+  "tr.kindTrain": "Training — fuller capacity building, with follow-up support",
+  "tr.kindHelp": "The distinction is the MSP's: orientation is brief and one-off; training requires ongoing support and supervision.",
+  "tr.topicLab": "Package or topic",
+  "tr.t51": "Psychological first aid (PFA)",
+  "tr.t52": "Basic counselling skills",
+  "tr.t53": "Basic MHPSS (active listening, the multilayered model)",
+  "tr.t54": "mhGAP",
+  "tr.t59": "Other — specify",
+  "tr.topicOtherLab": "Which package or topic?",
+  "tr.titleLab": "Title, as announced",
+  "tr.titleHelp": "The IASC code for this record is 11.3, which asks for the topic to be named.",
+  "tr.accLab": "Accreditation",
+  "tr.accNhtc": "Accredited by NHTC or a provincial health training centre",
+  "tr.accNo": "Not accredited",
+  "tr.accUnk": "Not known",
+  "tr.modeLab": "How it was delivered",
+  "tr.modeInp": "In person",
+  "tr.modeOnl": "Online",
+  "tr.modeBle": "Blended",
+  "tr.dateLab": "Start date (AD)",
+  "tr.daysLab": "Number of days",
+  "tr.facLab": "Number of facilitators <span class=\"opt\">— optional</span>",
+  "tr.venueDistLab": "District where it was held",
+  "tr.venuePalLab": "Palika where it was held <span class=\"opt\">— optional</span>",
+  "tr.facOrgLab": "Facilitating organisation <span class=\"opt\">— optional</span>",
+  "tr.facOrgHelp": "The organisation, not the trainer's name. A roster of trainers is held separately and is not part of this record.",
+  "tr.h3": "Who was trained, and where they work",
+  "tr.pHelp": "One row per palika the participants work in. Add a row for each. Counts are people, not sessions.",
+  "tr.addRow": "Add a palika",
+  "tr.removeRow": "Remove this palika",
+  "tr.cDistrict": "District they work in",
+  "tr.cPalika": "Palika they work in",
+  "tr.cCadre": "Cadre",
+  "tr.cFemale": "Female",
+  "tr.cMale": "Male",
+  "tr.cOther": "Other",
+  "tr.u18Lab": "Of whom under 18 <span class=\"opt\">— optional</span>",
+  "tr.u18Help": "Only where youth volunteers took part. Participants are otherwise adults, so no age bands are asked.",
+  "tr.pwdLab": "Of whom participants with a disability <span class=\"opt\">— optional</span>",
+  "tr.h4": "What follows it",
+  "tr.supLab": "Follow-up supervision",
+  "tr.supProv": "Provided — supervision is running",
+  "tr.supPlan": "Planned, not started",
+  "tr.supNone": "None",
+  "tr.supHelp": "The MSP indicator counts staff trained <i>and</i> supervised. One-off training without follow-up is not recommended.",
+  "tr.supFreqLab": "How often",
+  "tr.phSupFreq": "Monthly, fortnightly…",
+  "tr.ppLab": "Knowledge assessed before and after",
+  "tr.ppY": "Yes",
+  "tr.ppN": "No",
+  "tr.notesLab": "Notes for the coordination team <span class=\"opt\">— optional</span>",
+  "tr.phNotes": "Gaps, problems, what is needed next",
+  "tr.notesHelp": "Never a participant's name, phone number or personal detail.",
+  "tr.h5": "Save",
+  "tr.save": "Save this record",
+  "tr.csv": "Export CSV",
+  "tr.clear": "Clear everything on this device",
+  "tr.payLab": "What would be sent, if there were anywhere to send it"
+};
+  var NE = {
+  "tr.p001": "तालिम र अभिमुखीकरण अभिलेख — MHPSS नेपाल",
+  "tr.p002": "क्षेत्रीय परीक्षणका लागि संशोधित मस्यौदा <span>· यही फोनमा सुरक्षित, सङ्केत आएपछि समन्वय रजिस्टरमा पठाइन्छ</span>",
+  "tr.brand": "तालिम र अभिमुखीकरण अभिलेख",
+  "tr.sub": "तह १ · क्षमता विकास, ५W बाहिर राखिएको",
+  "tr.navAll": "← फारमहरू",
+  "tr.navHub": "हब",
+  "tr.choose": "— छान्नुहोस् —",
+  "tr.h1": "एउटा अभिलेख भनेको एउटा तालिम वा अभिमुखीकरण कार्यक्रम",
+  "tr.lede": "क्षमता विकास ५W मा प्रतिवेदन गरिँदैन। यहाँ सहभागी हुनेहरू सहायताकर्मी हुन्, प्रतिकार्यबाट सेवा पाएका व्यक्ति होइनन्; उनीहरूलाई उपस्थितिमा गन्दा पुगेको सङ्ख्या बढ्छ। त्यसैले यहाँ तालिम पाएका व्यक्तिका रूपमा गनिन्छ।",
+  "tr.note": "<b>सहभागीलाई तालिम भएको ठाउँअनुसार होइन, उनीहरू काम गर्ने पालिकाअनुसार गन्नुहोस्।</b> काठमाडौंमा भएको तालिम भए पनि सहभागी रसुवामा काम गर्छन् भने त्यो रसुवाको हो। यसैले तालिम पाएका कर्मचारी कहाँ छन् भन्ने देखिन्छ, र रिफरल डाइरेक्टरीले कुनै ठाउँमा PFA तालिमप्राप्त कर्मचारी छन् भन्न सक्छ।",
+  "tr.h1who": "कसले आयोजना गर्‍यो",
+  "tr.orgLab": "आयोजक संस्था",
+  "tr.orgOtherLab": "संस्थाको नाम",
+  "tr.focalLab": "फोकल पर्सनको नाम",
+  "tr.focalPhoneLab": "फोकल पर्सनको फोन",
+  "tr.partnersLab": "सँगै आयोजना गर्ने <span class=\"opt\">— ऐच्छिक</span>",
+  "tr.phPartners": "अन्य संस्थाहरू, अल्पविरामले छुट्याएर",
+  "tr.roleLab": "यस कार्यक्रमको अंक कसले प्रतिवेदन गर्छ",
+  "tr.roleLead": "हामीले आयोजना गर्‍यौं — अंक हामी नै दिन्छौं",
+  "tr.rolePartner": "हामी सह-आयोजक — अंक नेतृत्व गर्ने संस्थाले दिन्छ",
+  "tr.roleHelp": "अंक केवल नेतृत्व गर्ने संस्थाले मात्र भर्छ, ताकि एउटै कार्यक्रम दुईपटक नगनियोस्।",
+  "tr.roleNote": "यस अभिलेखमा अंक बन्द गरिएको छ। माथि नेतृत्व गर्ने संस्थाको नाम लेख्नुहोस्।",
+  "tr.h2": "के थियो",
+  "tr.kindLab": "अभिमुखीकरण कि तालिम",
+  "tr.kindOrient": "अभिमुखीकरण — छोटो, एकपटकको सत्र",
+  "tr.kindTrain": "तालिम — पूर्ण क्षमता विकास, निरन्तर सहयोगसहित",
+  "tr.kindHelp": "यो भिन्नता MSP को हो: अभिमुखीकरण छोटो र एकपटकको; तालिमलाई निरन्तर सहयोग र सुपरिवेक्षण चाहिन्छ।",
+  "tr.topicLab": "प्याकेज वा विषय",
+  "tr.t51": "मनोवैज्ञानिक प्राथमिक उपचार (PFA)",
+  "tr.t52": "आधारभूत परामर्श सीप",
+  "tr.t53": "आधारभूत MHPSS (सक्रिय श्रवण, बहुतह मोडेल)",
+  "tr.t54": "mhGAP",
+  "tr.t59": "अन्य — उल्लेख गर्नुहोस्",
+  "tr.topicOtherLab": "कुन प्याकेज वा विषय?",
+  "tr.titleLab": "घोषित शीर्षक",
+  "tr.titleHelp": "यस अभिलेखको IASC कोड ११.३ हो, जसले विषय उल्लेख गर्न माग्छ।",
+  "tr.accLab": "मान्यता",
+  "tr.accNhtc": "NHTC वा प्रादेशिक स्वास्थ्य तालिम केन्द्रबाट मान्यताप्राप्त",
+  "tr.accNo": "मान्यताप्राप्त होइन",
+  "tr.accUnk": "थाहा छैन",
+  "tr.modeLab": "कसरी सञ्चालन भयो",
+  "tr.modeInp": "प्रत्यक्ष",
+  "tr.modeOnl": "अनलाइन",
+  "tr.modeBle": "मिश्रित",
+  "tr.dateLab": "सुरु मिति (AD)",
+  "tr.daysLab": "दिन सङ्ख्या",
+  "tr.facLab": "प्रशिक्षक सङ्ख्या <span class=\"opt\">— ऐच्छिक</span>",
+  "tr.venueDistLab": "कुन जिल्लामा भयो",
+  "tr.venuePalLab": "कुन पालिकामा भयो <span class=\"opt\">— ऐच्छिक</span>",
+  "tr.facOrgLab": "प्रशिक्षण दिने संस्था <span class=\"opt\">— ऐच्छिक</span>",
+  "tr.facOrgHelp": "संस्था, प्रशिक्षकको नाम होइन। प्रशिक्षकको नामावली छुट्टै राखिन्छ र यो अभिलेखको अंश होइन।",
+  "tr.h3": "कसले तालिम पायो, र उनीहरू कहाँ काम गर्छन्",
+  "tr.pHelp": "सहभागी काम गर्ने प्रत्येक पालिकाका लागि एउटा हरफ थप्नुहोस्। अंक व्यक्ति हो, सत्र होइन।",
+  "tr.addRow": "पालिका थप्नुहोस्",
+  "tr.removeRow": "यो पालिका हटाउनुहोस्",
+  "tr.cDistrict": "काम गर्ने जिल्ला",
+  "tr.cPalika": "काम गर्ने पालिका",
+  "tr.cCadre": "कार्यवर्ग",
+  "tr.cFemale": "महिला",
+  "tr.cMale": "पुरुष",
+  "tr.cOther": "अन्य",
+  "tr.u18Lab": "जसमध्ये १८ वर्षमुनि <span class=\"opt\">— ऐच्छिक</span>",
+  "tr.u18Help": "युवा स्वयंसेवक सहभागी भएको अवस्थामा मात्र। अन्यथा सहभागी वयस्क हुन्, त्यसैले उमेर समूह सोधिँदैन।",
+  "tr.pwdLab": "जसमध्ये अपाङ्गता भएका सहभागी <span class=\"opt\">— ऐच्छिक</span>",
+  "tr.h4": "त्यसपछि के हुन्छ",
+  "tr.supLab": "तालिमपछिको सुपरिवेक्षण",
+  "tr.supProv": "भइरहेको छ",
+  "tr.supPlan": "योजनामा छ, सुरु भएको छैन",
+  "tr.supNone": "छैन",
+  "tr.supHelp": "MSP सूचकले तालिम पाएका <i>र</i> सुपरिवेक्षण पाएका कर्मचारी गन्छ। निरन्तरता नभएको एकपटके तालिम सिफारिस गरिँदैन।",
+  "tr.supFreqLab": "कति पटक",
+  "tr.phSupFreq": "मासिक, पाक्षिक…",
+  "tr.ppLab": "तालिमअघि र पछि ज्ञान मूल्याङ्कन",
+  "tr.ppY": "गरियो",
+  "tr.ppN": "गरिएन",
+  "tr.notesLab": "समन्वय टोलीका लागि टिप्पणी <span class=\"opt\">— ऐच्छिक</span>",
+  "tr.phNotes": "कमी, समस्या, अब के चाहिन्छ",
+  "tr.notesHelp": "सहभागीको नाम, फोन नम्बर वा व्यक्तिगत विवरण कहिल्यै नलेख्नुहोस्।",
+  "tr.h5": "सुरक्षित गर्नुहोस्",
+  "tr.save": "यो अभिलेख सुरक्षित गर्नुहोस्",
+  "tr.csv": "CSV निर्यात",
+  "tr.clear": "यस उपकरणमा सबै कुरा खाली गर्नुहोस्",
+  "tr.payLab": "के पठाइनेछ, यदि पठाउने ठाउँ भएको भए"
+};
+  Object.keys(EN).forEach(function (k) { if (!S.en[k]) S.en[k] = EN[k]; });
+  Object.keys(NE).forEach(function (k) { if (!S.ne[k]) S.ne[k] = NE[k]; });
+})();
+</script>
+<script src="../hub/assets/i18n.js"></script>
+</body>
+</html>
