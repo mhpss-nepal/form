@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Register as a provider — MHPSS Nepal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Manrope:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="../hub/assets/app.css">
+<link rel="stylesheet" href="../hub/assets/design.css">
+<link rel="stylesheet" href="../hub/assets/form.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1d1d1b">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MHPSS Field">
+</head>
+<body class="fx">
+<!-- TRANSPORT HELD, 11 Oct 2026: the register scripts are not loaded, so nothing entered here can reach the retired register. Draft, not linked from any index. -->
+<div class="ribbon"><span data-i18n="banner.trial">Revised draft for field piloting</span><span data-i18n="banner.trialSub"> · saved on this phone, sent to the coordination register when there is signal</span></div>
+
+<div class="top">
+  <div>
+    <div class="brand" data-i18n="pr.brand">Register as a provider</div>
+    <div class="sub" data-i18n="pr.brandSub">Referral Directory · fill this in yourself, about yourself</div>
+  </div>
+  <div class="spacer"></div>
+  <a href="index.html" data-i18n="pr.navAll">All forms</a>
+  <a href="service-point.html" data-i18n="pr.navSp">Register a service point</a>
+</div>
+
+<div class="wrap">
+  <nav class="steps" id="steps" aria-label="Steps">
+    <a href="#s1" data-step="s1"><i>1</i><span data-i18n="pr.step1">You</span></a>
+    <a href="#s2" data-step="s2"><i>2</i><span data-i18n="pr.step2">Where</span></a>
+    <a href="#s3" data-step="s3"><i>3</i><span data-i18n="pr.step3">What</span></a>
+    <a href="#s4" data-step="s4"><i>4</i><span data-i18n="pr.step4">Agree and save</span></a>
+  </nav>
+
+  <h1 data-i18n="pr.h1">Be listed by name on the referral directory</h1>
+  <p class="lede" data-i18n="pr.lede">This form is filled in by the provider, about the provider. What you write here — your name, your qualification, your organisation and one number — is what a person looking for help would see. It is optional: nothing follows from not filling it in, and your service point can be listed without you.</p>
+
+  <div class="banner stop" data-i18n="pr.stop" data-i18n-html><b>Fill this in for yourself, not for a colleague.</b> An entry written by someone else is held back until that person confirms it themselves, because agreeing to be listed is theirs to give. To list a whole team, send each person this link.</div>
+
+  <div class="banner"><b>What happens next.</b> Your entry goes to the coordination team. It appears on the public directory only after a coordinator has checked it, and it is marked as registered until it is matched against the Ministry's provider list. You can ask to be taken off at any time and the page stops showing you as soon as it is republished. <span id="storeWarn"></span></div>
+
+  <form id="f" autocomplete="off" novalidate>
+
+    <!-- 1 · YOU -->
+    <div class="card" id="s1">
+      <div class="step"><span class="n">1</span><h2 data-i18n="pr.h1you">About you</h2></div>
+
+      <div class="row">
+        <div class="f">
+          <label for="providerName" data-i18n="pr.nameLab">Your name, as it should appear</label>
+          <input type="text" id="providerName" name="providerName" placeholder="The name people will see on the directory">
+        </div>
+        <div class="f">
+          <label for="qualification" data-i18n="pr.qualLab">Your qualification</label>
+          <input type="text" id="qualification" name="qualification" placeholder="Degree, licence or certificate, as written">
+        </div>
+      </div>
+
+      <div class="row three">
+        <div class="f">
+          <label for="cadre" data-i18n="pr.cadreLab">Your role</label>
+          <select id="cadre" name="cadre"></select>
+        </div>
+        <div class="f" id="cadreOtherWrap" hidden>
+          <label for="cadreOther" data-i18n="pr.cadreOtherLab">Which role?</label>
+          <input type="text" id="cadreOther" name="cadreOther" placeholder="As your organisation names it">
+        </div>
+        <div class="f">
+          <label for="org" data-i18n="pr.orgLab">Organisation you work for</label>
+          <select id="org" name="org"></select>
+        </div>
+        <div class="f" id="orgOtherWrap" hidden>
+          <label for="orgOther" data-i18n="pr.orgOtherLab">Name of organisation</label>
+          <input type="text" id="orgOther" name="orgOther" placeholder="Full name, as it should appear">
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 · WHERE -->
+    <div class="card" id="s2">
+      <div class="step"><span class="n">2</span><h2 data-i18n="pr.h2">Where you work</h2></div>
+
+      <div class="row three">
+        <div class="f">
+          <label for="district" data-i18n="pr.districtLab">District</label>
+          <select id="district" name="district"></select>
+        </div>
+        <div class="f">
+          <label for="palika" data-i18n="pr.palikaLab" data-i18n-html>Palika <span class="opt">— optional</span></label>
+          <select id="palika" name="palika"></select>
+        </div>
+        <div class="f">
+          <label for="place" data-i18n="pr.placeLab">Place of work, as printed</label>
+          <input type="text" id="place" name="place" placeholder="Hospital, health post, office, holding centre…">
+        </div>
+      </div>
+      <div class="help" data-i18n="pr.placeHelp">If you work outside the flood-affected districts, choose your district anyway — the directory lists you under "outside the affected districts".</div>
+    </div>
+
+    <!-- 3 · WHAT -->
+    <div class="card" id="s3">
+      <div class="step"><span class="n">3</span><h2 data-i18n="pr.h3">What you provide</h2></div>
+
+      <div class="f">
+        <label data-i18n="pr.svcLab">Services you can take a referral for — select all that apply</label>
+        <div class="chks" id="svcs"></div>
+      </div>
+
+      <div class="row three">
+        <div class="f">
+          <label for="modality" data-i18n="pr.modLab">Where you see people</label>
+          <select id="modality" name="modality"></select>
+        </div>
+        <div class="f">
+          <label for="languages" data-i18n="pr.langLab">Languages you work in</label>
+          <input type="text" id="languages" name="languages" placeholder="Nepali, Tamang, English…">
+        </div>
+        <div class="f">
+          <label for="hours" data-i18n="pr.hoursLab" data-i18n-html>When you are reachable <span class="opt">— optional</span></label>
+          <input type="text" id="hours" name="hours" placeholder="Sun–Fri, 10:00–17:00">
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 · CONSENT -->
+    <div class="card" id="s4">
+      <div class="step"><span class="n">4</span><h2 data-i18n="pr.h4">Your number, and your agreement</h2></div>
+
+      <div class="row">
+        <div class="f">
+          <label for="providerPhone" data-i18n="pr.phoneLab">One number people can call</label>
+          <input type="tel" id="providerPhone" name="providerPhone" placeholder="A work number, unless you choose to give your own">
+          <div class="help" data-i18n="pr.phoneHelp">This number is published. Give a work number unless you are content for your own to be seen.</div>
+        </div>
+      </div>
+
+      <div class="f">
+        <div class="chks">
+          <label class="chk"><input type="checkbox" id="okSelf"><span data-i18n="pr.okSelf">I am the person described above, and I am filling this in myself.</span></label>
+          <label class="chk"><input type="checkbox" id="okPublish"><span data-i18n="pr.okPublish">I agree that my name, qualification, organisation, place of work and the number above may be shown on the public referral directory, and I understand the page can be seen by anyone. I can ask to be removed at any time.</span></label>
+        </div>
+        <div class="help" data-i18n="pr.consentNote">Draft wording. The final wording is set by the MHPSS TWG Coordinator together with the Epidemiology and Disease Control Division before this form is used in the field.</div>
+      </div>
+
+      <div id="problems"></div>
+    </div>
+  </form>
+
+  <div class="actions">
+    <button type="submit" class="btn" form="f" data-i18n="pr.btnSave">Save my entry</button>
+    <button type="button" class="btn grey" id="reset" data-i18n="pr.btnClear">Clear</button>
+  </div>
+
+  <section class="saved">
+    <h2>Saved on this device <span class="xs" id="cnt"></span></h2>
+    <p class="help" style="margin:0 0 10px" data-i18n="pr.savedHelp">This list is the copy on this phone. Each entry also goes to the coordination register when there is signal.</p>
+    <div class="btns" style="margin-bottom:12px">
+      <button type="button" class="btn ghost sm" id="expCsv" data-i18n="pr.expCsv">Export CSV</button>
+      <button type="button" class="btn grey sm" id="wipe" data-i18n="pr.wipe">Clear all saved entries</button>
+    </div>
+    <div class="tbl-wrap">
+      <table class="data" id="tbl">
+        <thead><tr><th data-i18n="pr.thName">Name</th><th data-i18n="pr.thRole">Role</th><th data-i18n="pr.thOrg">Organisation</th><th data-i18n="pr.thPlace">Place</th><th>ID</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <div class="empty" id="emptyMsg" data-i18n="pr.empty">No entries saved on this device yet.</div>
+    </div>
+  </section>
+
+  <p class="xs" style="margin:18px 6px 0" data-i18n="pr.foot">Draft instrument, schema dir-pv-0.1.0. Roles, services, settings, districts and palikas are read from the shared code list agreed on 17 September 2026. Every entry is written as registered (source: registration) until a coordinator matches it to the Ministry's provider list. Nepali labels follow the shared list; the page's own text is English until its strings are translated. Revised draft for field piloting.</p>
+</div>
+
+<div id="toast"></div>
+
+<script src="../hub/assets/codes.js"></script>
+<script src="../hub/assets/l1.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = window.CODES, $ = function (id) { return document.getElementById(id); };
+  var KIND = "provider", SCHEMA = "dir-pv-0.1.0";
+  var live = function (list) { return list.filter(function (x) { return !x.retired; }); };
+
+  function ticked(box) {
+    return [].slice.call(box.querySelectorAll("input:checked")).map(function (i) { return i.value; });
+  }
+  function toast(msg, warn) {
+    var t = $("toast");
+    t.textContent = msg; t.className = warn ? "show warn" : "show";
+    clearTimeout(t._h); t._h = setTimeout(function () { t.className = ""; }, 3400);
+  }
+
+  function fillServices() {
+    var keep = ticked($("svcs"));
+    $("svcs").innerHTML = "";
+    C.ACTIVITY_GROUPS.forEach(function (g) {
+      var items = C.ACTIVITIES.filter(function (a) { return a.group === g.code && !a.retired && (!a.other || a.code === "9"); });
+      if (!items.length) return;
+      var h = document.createElement("div");
+      h.className = "hint";
+      h.style.cssText = "flex:0 0 100%;margin:6px 0 2px";
+      h.textContent = C.label(g);
+      $("svcs").appendChild(h);
+      items.sort(function (a, b) { return C.label(a).localeCompare(C.label(b)); });
+      items.forEach(function (a) {
+        var l = document.createElement("label");
+        l.className = "chk";
+        l.innerHTML = '<input type="checkbox" value="' + a.code + '"><span>' + C.label(a) + "</span>";
+        $("svcs").appendChild(l);
+      });
+    });
+    keep.forEach(function (v) {
+      var i = $("svcs").querySelector('input[value="' + v + '"]');
+      if (i) i.checked = true;
+    });
+  }
+
+  function refreshPalikas() {
+    var d = $("district").value, keep = $("palika").value;
+    var list = C.PALIKAS.filter(function (p) { return !d || p.district === d; });
+    L1.fillSelect($("palika"), list, { value: "pcode", placeholder: "Select…" });
+    if (keep) $("palika").value = keep;
+  }
+  function paintLists() {
+    L1.fillSelect($("cadre"), live(C.CADRES), { placeholder: "Select…" });
+    L1.fillSelect($("org"), C.ORGS, { placeholder: "Select…" });
+    L1.fillSelect($("district"), C.DISTRICTS, { placeholder: "Select…" });
+    L1.fillSelect($("modality"), live(C.MODALITIES), { placeholder: "Select…" });
+    fillServices(); refreshPalikas();
+  }
+  $("district").addEventListener("change", refreshPalikas);
+  $("org").addEventListener("change", function () { $("orgOtherWrap").hidden = this.value !== "OTHER"; });
+  $("cadre").addEventListener("change", function () { $("cadreOtherWrap").hidden = this.value !== "OTH"; });
+  document.addEventListener("codes:relabel", paintLists);
+
+  (function rail() {
+    var links = [].slice.call(document.querySelectorAll("#steps a"));
+    var cards = links.map(function (a) { return $(a.getAttribute("data-step")); });
+    function paint(i) { links.forEach(function (a, k) { a.classList.toggle("on", k === i); a.classList.toggle("done", k < i); }); }
+    if ("IntersectionObserver" in window) {
+      var ratios = cards.map(function () { return 0; });
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { ratios[cards.indexOf(e.target)] = e.isIntersecting ? e.intersectionRatio : 0; });
+        var best = 0; ratios.forEach(function (r, k) { if (r > ratios[best]) best = k; });
+        paint(best);
+      }, { threshold: [0, 0.25, 0.5] });
+      cards.forEach(function (c) { io.observe(c); });
+    }
+    paint(0);
+  })();
+
+  function collect() {
+    var rec = {
+      kind: KIND, schema: SCHEMA, source: "registration",
+      providerName: $("providerName").value.trim(), qualification: $("qualification").value.trim(),
+      cadre: $("cadre").value, cadreOther: $("cadreOther").value.trim(),
+      org: $("org").value, orgOther: $("orgOther").value.trim(),
+      district: $("district").value, palika: $("palika").value, place: $("place").value.trim(),
+      services: ticked($("svcs")), modality: $("modality").value,
+      languages: $("languages").value.trim(), hours: $("hours").value.trim(),
+      providerPhone: $("providerPhone").value.trim(),
+      selfRegistered: $("okSelf").checked,
+      consent: $("okSelf").checked && $("okPublish").checked,
+      consentAt: L1.today()
+    };
+    rec.id = "PV-" + L1.contactCode([rec.providerName, rec.org, rec.orgOther, rec.providerPhone]).slice(3);
+    return rec;
+  }
+  function validate(r) {
+    var p = [];
+    if (!r.providerName) p.push("Write your name as it should appear.");
+    if (!r.cadre) p.push("Choose your role.");
+    if (r.cadre === "OTH" && !r.cadreOther) p.push("Say which role.");
+    if (!r.org) p.push("Choose your organisation.");
+    if (r.org === "OTHER" && !r.orgOther) p.push("Write the name of the organisation.");
+    if (!r.district) p.push("Choose the district you work in.");
+    if (!r.place) p.push("Write your place of work.");
+    if (!r.services.length) p.push("Tick at least one service you can take a referral for.");
+    if (!/^[0-9+()\/.\s-]{4,}$/.test(r.providerPhone)) p.push("Give one number people can call — digits only, no words.");
+    if (!r.selfRegistered) p.push("Tick that you are filling this in about yourself.");
+    if (!r.consent) p.push("Tick that you agree to be shown on the public directory. Without it the entry is held back.");
+    return p;
+  }
+
+  $("f").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var rec = collect(), problems = validate(rec), box = $("problems");
+    if (problems.length) {
+      box.innerHTML = '<div class="banner warn"><b>' + problems.length +
+        (problems.length === 1 ? " thing needs fixing before this can be saved." : " things need fixing before this can be saved.") +
+        "</b><ul style='margin:8px 0 0;padding-left:18px'>" +
+        problems.map(function (p) { return "<li>" + p + "</li>"; }).join("") + "</ul></div>";
+      box.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    box.innerHTML = "";
+    var res = L1.save(KIND, rec);
+    if (!res.persisted) toast("Saved for this page only — this browser is blocking storage. Export before closing.", true);
+    else toast("Entry saved · " + rec.id);
+    softReset(); render();
+  });
+
+  function softReset() {
+    ["providerName", "qualification", "cadreOther", "orgOther", "place", "languages", "hours", "providerPhone"].forEach(function (id) { $(id).value = ""; });
+    $("svcs").querySelectorAll("input:checked").forEach(function (i) { i.checked = false; });
+    $("okSelf").checked = false; $("okPublish").checked = false;
+    $("cadreOtherWrap").hidden = true; $("orgOtherWrap").hidden = true;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  $("reset").addEventListener("click", function () { softReset(); $("problems").innerHTML = ""; });
+
+  function nameOf(list, code, other) {
+    if (!code) return "—";
+    var it = list.filter(function (x) { return x.code === code; })[0];
+    return it ? C.label(it) : (other || code);
+  }
+  function render() {
+    var rows = L1.all(KIND), tb = $("tbl").querySelector("tbody");
+    tb.innerHTML = "";
+    $("emptyMsg").hidden = rows.length > 0;
+    $("cnt").textContent = rows.length ? "— " + rows.length : "";
+    rows.slice().reverse().slice(0, 40).forEach(function (r) {
+      var tr = document.createElement("tr");
+      tr.innerHTML = "<td>" + (r.providerName || "—") + "</td><td>" + nameOf(C.CADRES, r.cadre, r.cadreOther) +
+        "</td><td>" + (r.org === "OTHER" ? (r.orgOther || "—") : nameOf(C.ORGS, r.org)) +
+        "</td><td>" + (r.place || "—") + "</td><td class='xs'>" + (r.id || "—") + "</td>";
+      tb.appendChild(tr);
+    });
+  }
+  $("expCsv").addEventListener("click", function () {
+    var rows = L1.all(KIND);
+    if (!rows.length) return toast("Nothing to export yet", true);
+    var cols = ["id", "providerName", "qualification", "cadre", "cadreOther", "org", "orgOther", "district", "palika",
+      "place", "services", "modality", "languages", "hours", "providerPhone", "consent", "consentAt", "source", "_saved"];
+    L1.download("mhpss_np_providers_" + L1.stamp() + ".csv", L1.toCSV(rows.map(function (r) {
+      var o = {}; cols.forEach(function (c) { o[c] = Array.isArray(r[c]) ? r[c].join(" ") : r[c]; }); return o;
+    }), cols), "text/csv");
+  });
+  $("wipe").addEventListener("click", function () { L1.clear(KIND); render(); toast("Saved entries cleared from this device"); });
+
+  if (!L1.storageWorks()) $("storeWarn").textContent = " This browser is blocking storage, so entries live only while this page is open.";
+  paintLists(); render();
+})();
+</script>
+<script src="pwa.js"></script>
+<script src="../hub/assets/mark.js"></script>
+<script src="../hub/assets/icons.js"></script>
+<script src="../hub/assets/i18n-strings.js"></script>
+<script>
+/* Draft strings for this form. English is the page itself; the Nepali is a
+   MACHINE DRAFT for piloting and is to be validated by a translator. When this
+   form is merged, move both maps into hub/assets/i18n-strings.js and delete this
+   block. Nothing here overwrites a key the shared dictionary already has. */
+(function () {
+  var S = window.I18N_STRINGS = window.I18N_STRINGS || {};
+  S.en = S.en || {}; S.ne = S.ne || {};
+  var EN = {
+  "pr.brand": "Register as a provider",
+  "pr.brandSub": "Referral Directory · fill this in yourself, about yourself",
+  "pr.navAll": "All forms",
+  "pr.navSp": "Register a service point",
+  "pr.step1": "You",
+  "pr.step2": "Where",
+  "pr.step3": "What",
+  "pr.step4": "Agree and save",
+  "pr.h1": "Be listed by name on the referral directory",
+  "pr.lede": "This form is filled in by the provider, about the provider. What you write here — your name, your qualification, your organisation and one number — is what a person looking for help would see. It is optional: nothing follows from not filling it in, and your service point can be listed without you.",
+  "pr.stop": "<b>Fill this in for yourself, not for a colleague.</b> An entry written by someone else is held back until that person confirms it themselves, because agreeing to be listed is theirs to give. To list a whole team, send each person this link.",
+  "pr.h1you": "About you",
+  "pr.nameLab": "Your name, as it should appear",
+  "pr.qualLab": "Your qualification",
+  "pr.cadreLab": "Your role",
+  "pr.cadreOtherLab": "Which role?",
+  "pr.orgLab": "Organisation you work for",
+  "pr.orgOtherLab": "Name of organisation",
+  "pr.h2": "Where you work",
+  "pr.districtLab": "District",
+  "pr.palikaLab": "Palika <span class=\"opt\">— optional</span>",
+  "pr.placeLab": "Place of work, as printed",
+  "pr.placeHelp": "If you work outside the flood-affected districts, choose your district anyway — the directory lists you under \"outside the affected districts\".",
+  "pr.h3": "What you provide",
+  "pr.svcLab": "Services you can take a referral for — select all that apply",
+  "pr.modLab": "Where you see people",
+  "pr.langLab": "Languages you work in",
+  "pr.hoursLab": "When you are reachable <span class=\"opt\">— optional</span>",
+  "pr.h4": "Your number, and your agreement",
+  "pr.phoneLab": "One number people can call",
+  "pr.phoneHelp": "This number is published. Give a work number unless you are content for your own to be seen.",
+  "pr.okSelf": "I am the person described above, and I am filling this in myself.",
+  "pr.okPublish": "I agree that my name, qualification, organisation, place of work and the number above may be shown on the public referral directory, and I understand the page can be seen by anyone. I can ask to be removed at any time.",
+  "pr.consentNote": "Draft wording. The final wording is set by the MHPSS TWG Coordinator together with the Epidemiology and Disease Control Division before this form is used in the field.",
+  "pr.btnSave": "Save my entry",
+  "pr.btnClear": "Clear",
+  "pr.savedHelp": "This list is the copy on this phone. Each entry also goes to the coordination register when there is signal.",
+  "pr.expCsv": "Export CSV",
+  "pr.wipe": "Clear all saved entries",
+  "pr.thName": "Name",
+  "pr.thRole": "Role",
+  "pr.thOrg": "Organisation",
+  "pr.thPlace": "Place",
+  "pr.empty": "No entries saved on this device yet.",
+  "pr.foot": "Draft instrument, schema dir-pv-0.1.0. Roles, services, settings, districts and palikas are read from the shared code list agreed on 17 September 2026. Every entry is written as registered (source: registration) until a coordinator matches it to the Ministry's provider list. Nepali labels follow the shared list; the page's own text is English until its strings are translated. Revised draft for field piloting."
+};
+  var NE = {
+  "pr.brand": "सेवा प्रदायक दर्ता",
+  "pr.navAll": "सबै फारम",
+  "pr.navSp": "सेवा स्थल दर्ता",
+  "pr.step1": "तपाईं",
+  "pr.step2": "कहाँ",
+  "pr.step3": "के",
+  "pr.step4": "सहमति र सुरक्षित",
+  "pr.h1": "रेफरल डाइरेक्टरीमा आफ्नो नामसहित सूचीबद्ध हुनुहोस्",
+  "pr.h1you": "तपाईंको बारेमा",
+  "pr.h2": "तपाईं कहाँ काम गर्नुहुन्छ",
+  "pr.h3": "तपाईं के सेवा दिनुहुन्छ",
+  "pr.h4": "तपाईंको नम्बर र सहमति",
+  "pr.nameLab": "तपाईंको नाम, जसरी देखिनुपर्छ",
+  "pr.qualLab": "तपाईंको योग्यता",
+  "pr.cadreLab": "तपाईंको भूमिका",
+  "pr.cadreOtherLab": "कुन भूमिका?",
+  "pr.orgLab": "तपाईं कार्यरत संस्था",
+  "pr.orgOtherLab": "संस्थाको नाम",
+  "pr.districtLab": "जिल्ला",
+  "pr.palikaLab": "पालिका <span class=\"opt\">— वैकल्पिक</span>",
+  "pr.placeLab": "कार्यस्थल, लेखिएअनुसार",
+  "pr.svcLab": "तपाईंले रेफरल लिन सक्ने सेवा — लागू हुने सबै छान्नुहोस्",
+  "pr.modLab": "तपाईं कहाँ भेट्नुहुन्छ",
+  "pr.langLab": "तपाईंले काम गर्ने भाषा",
+  "pr.hoursLab": "कहिले सम्पर्क गर्न सकिन्छ <span class=\"opt\">— वैकल्पिक</span>",
+  "pr.phoneLab": "सम्पर्क गर्न सकिने एउटा नम्बर",
+  "pr.btnSave": "मेरो प्रविष्टि सुरक्षित गर्नुहोस्",
+  "pr.btnClear": "खाली गर्नुहोस्",
+  "pr.expCsv": "CSV निर्यात",
+  "pr.wipe": "सुरक्षित सबै प्रविष्टि हटाउनुहोस्",
+  "pr.thName": "नाम",
+  "pr.thRole": "भूमिका",
+  "pr.thOrg": "संस्था",
+  "pr.thPlace": "स्थान",
+  "pr.empty": "यो यन्त्रमा अहिलेसम्म कुनै प्रविष्टि छैन।"
+};
+  Object.keys(EN).forEach(function (k) { if (S.en[k] == null) S.en[k] = EN[k]; });
+  Object.keys(NE).forEach(function (k) { if (S.ne[k] == null) S.ne[k] = NE[k]; });
+})();
+</script>
+<script src="../hub/assets/i18n.js"></script>
+</body>
+</html>
