@@ -51,7 +51,6 @@
                           note: "The GBV / child-protection / immediate-risk block is unchanged and is not weakened for review." },
     "selfreport.html":  { title: "Community self-report", status: "Unapproved · partly translated",
                           note: "Not approved for use. Opens for review; cannot write to the live register." },
-    "5ws-report-b2.html": { title: "5Ws — B2 Institutional App", status: "Design preview only",
                           note: "A presentation direction for the 5Ws form, kept out of the field build. Design review only." }
   };
   var REDIRECT_ONLY = { "4ws-report.html": "5ws-report.html" };

@@ -31,7 +31,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 DP = REPO / "design-preview"
-OUT = REPO / "5ws-report-b2.html"
+OUT = REPO / "design-preview" / "5ws-report-b2.html"
 SOURCE = "5ws-report.html"
 
 

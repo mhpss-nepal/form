@@ -1,1 +1,0 @@
-export const PINS=Object.freeze({"pair_sha256":"73975b05980888a7bec3de0b82c5ec52a9832a6366afbc1a86c719bf17829c49","release_sha256":"ae6c7c843875e1f26e7ce3f0660c9150968fe0f1368e8b499ebb2f99a9cbe012"});
