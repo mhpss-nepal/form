@@ -11,6 +11,9 @@ def check(n,v):
  assert v,n
  checks.append(n)
 m=json.loads((NEW/'candidate-manifest.json').read_text())
+tracked=set(subprocess.check_output(['git','ls-files'],cwd=R,text=True).splitlines())
+for p in NEW.rglob('*'):
+ if p.is_file():check('publication file tracked '+str(p.relative_to(NEW)),str(p.relative_to(R)) in tracked)
 for name,meta in m['assets'].items():
  b=(NEW/name).read_bytes();check('manifest '+name,sha(b)==meta['sha256'] and len(b)==meta['bytes'])
 assets={k:v for k,v in m['assets'].items() if k!='release-pins.js'}
