@@ -303,12 +303,12 @@ body.institutional-utility .empty{color:var(--iu-muted)}
     position:static; margin:0 -12px; padding-left:12px; padding-right:12px;
   }
   body.institutional-utility .actions .btn.grey{flex:0 0 96px}
-  body.institutional-utility .dis table{table-layout:fixed}
-  body.institutional-utility .dis th:first-child,
-  body.institutional-utility .dis td:first-child{width:46px}
-  body.institutional-utility .dis th:last-child,
-  body.institutional-utility .dis td:last-child{width:42px}
-  body.institutional-utility .dis input{min-width:44px; width:100%}
+  body.institutional-utility .dis:not(.actgrid) table{table-layout:fixed}
+  body.institutional-utility .dis:not(.actgrid) th:first-child,
+  body.institutional-utility .dis:not(.actgrid) td:first-child{width:46px}
+  body.institutional-utility .dis:not(.actgrid) th:last-child,
+  body.institutional-utility .dis:not(.actgrid) td:last-child{width:42px}
+  body.institutional-utility .dis:not(.actgrid) input{min-width:44px; width:100%}
   body.institutional-utility table.data{min-width:0; display:block}
   body.institutional-utility table.data thead{
     position:absolute; width:1px; height:1px; padding:0; margin:-1px;
@@ -383,6 +383,51 @@ body.institutional-utility .empty{color:var(--iu-muted)}
 .actgrid tr.mismatch td.rt span { color: #8f3b00; font-weight: 700; }
 .actgrid tfoot tr.tot td { font-weight: 700; border-top: 2px solid currentColor; }
 .actgrid input { width: 4.2rem; }
+
+/* The cell label IS the phone view. Below 900px the EDCD form in SORMAS drops
+   its header bar altogether and lets every box carry its own label, four to a
+   line, with the activity name on a line of its own. Read off
+   stgup.sormasnepal.org/sormas-ui/mhpss on 12 October 2026, where the rule is
+       @media (max-width:900px){ .mhpss-table__head      { display:none }
+                                 .mhpss-table__cell-label{ display:block }
+                                 .mhpss-table__row{ grid-template-columns:repeat(4,1fr) }
+                                 .mhpss-table__label{ grid-column:1/-1 } }
+   This form kept a ten-column table at min-width 760px and scrolled sideways
+   instead -- which is the very thing the note above the grid warns against: a
+   number you have to scroll to see is a number that gets left blank. On a
+   390px handset that was ten columns behind a horizontal scrollbar.
+   The two totals are named apart here (Total (sex) / Total (age)) because once
+   the header bar is gone, two columns both reading "Total" cannot be told
+   apart -- SORMAS names them the same way. */
+.actgrid .celllab { display: none; }
+@media (max-width: 900px) {
+  .actgrid { overflow-x: visible; }
+  .actgrid table { min-width: 0; }
+  .actgrid thead { display: none; }
+  .actgrid table, .actgrid tbody, .actgrid tfoot { display: block; width: 100%; }
+  .actgrid tbody tr, .actgrid tfoot tr {
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: .15rem .5rem; padding: .5rem .3rem;
+    border-bottom: 1px solid var(--line-s, #eef2f5);
+  }
+  .actgrid tbody tr td, .actgrid tfoot tr td {
+    display: block; border: 0; padding: .1rem 0; text-align: left;
+    min-width: 0; max-width: 100%; white-space: normal; overflow-wrap: break-word;
+  }
+  .actgrid td:first-child, .actgrid th:first-child { white-space: normal; }
+  .actgrid table, .actgrid tbody, .actgrid tfoot, .actgrid caption { max-width: 100%; }
+  /* width:100% as well as the span: the table carries table-layout:fixed, and
+     a full-span cell still collapses to a column's width without it. */
+  .actgrid td.actcol, .actgrid tr.grouphead td, .actgrid tr.describerow td {
+    grid-column: 1 / -1; min-width: 0; width: 100%; display: block;
+  }
+  .actgrid tr.grouphead, .actgrid tr.describerow { display: block; border-bottom: 0; }
+  .actgrid .celllab { display: block; font-size: .72rem; line-height: 1.25; opacity: .7; }
+  .actgrid input { width: 100%; }
+  .actgrid td.rt { align-self: end; }
+  .actgrid tfoot tr.tot td { border-top: 0; }
+  .actgrid tfoot tr.tot td.actcol, .actgrid tfoot tr.tot td:first-child { border-top: 2px solid currentColor; padding-top: .45rem; }
+}
 </style>
 </head>
 <body class="fx institutional-utility">
@@ -581,29 +626,29 @@ body.institutional-utility .empty{color:var(--iu-muted)}
               <th scope="col" data-i18n="f4.hFemale">Female</th>
               <th scope="col" data-i18n="f4.hMale">Male</th>
               <th scope="col" data-i18n="f4.hOther">Not recorded</th>
-              <th scope="col" class="rt" data-i18n="f4.hRow">Total</th>
+              <th scope="col" class="rt" data-i18n="f4.hRowSex">Total (sex)</th>
               <th scope="col">0&ndash;4</th>
               <th scope="col">5&ndash;9</th>
               <th scope="col">10&ndash;17</th>
               <th scope="col">18&ndash;59</th>
               <th scope="col">60+</th>
-              <th scope="col" class="rt" data-i18n="f4.hRow">Total</th>
+              <th scope="col" class="rt" data-i18n="f4.hRowAge">Total (age)</th>
             </tr>
           </thead>
           <tbody id="actBody"></tbody>
           <tfoot>
             <tr class="tot">
               <td data-i18n="f4.allAct">All activities</td>
-              <td class="rt"><span id="gF">&mdash;</span></td>
-              <td class="rt"><span id="gM">&mdash;</span></td>
-              <td class="rt"><span id="gO">&mdash;</span></td>
-              <td class="rt"><span id="gSex">&mdash;</span></td>
-              <td class="rt"><span id="g04">&mdash;</span></td>
-              <td class="rt"><span id="g5to9">&mdash;</span></td>
-              <td class="rt"><span id="g10to17">&mdash;</span></td>
-              <td class="rt"><span id="g18to59">&mdash;</span></td>
-              <td class="rt"><span id="g60">&mdash;</span></td>
-              <td class="rt"><span id="gAge">&mdash;</span></td>
+              <td class="rt"><span class="celllab" data-i18n="f4.hFemale">Female</span><span id="gF">&mdash;</span></td>
+              <td class="rt"><span class="celllab" data-i18n="f4.hMale">Male</span><span id="gM">&mdash;</span></td>
+              <td class="rt"><span class="celllab" data-i18n="f4.hOther">Not recorded</span><span id="gO">&mdash;</span></td>
+              <td class="rt"><span class="celllab" data-i18n="f4.hRowSex">Total (sex)</span><span id="gSex">&mdash;</span></td>
+              <td class="rt"><span class="celllab">0&ndash;4</span><span id="g04">&mdash;</span></td>
+              <td class="rt"><span class="celllab">5&ndash;9</span><span id="g5to9">&mdash;</span></td>
+              <td class="rt"><span class="celllab">10&ndash;17</span><span id="g10to17">&mdash;</span></td>
+              <td class="rt"><span class="celllab">18&ndash;59</span><span id="g18to59">&mdash;</span></td>
+              <td class="rt"><span class="celllab">60+</span><span id="g60">&mdash;</span></td>
+              <td class="rt"><span class="celllab" data-i18n="f4.hRowAge">Total (age)</span><span id="gAge">&mdash;</span></td>
             </tr>
           </tfoot>
         </table>
@@ -657,13 +702,13 @@ body.institutional-utility .empty{color:var(--iu-muted)}
                 <th scope="col" data-i18n="f4.hFemale">Female</th>
                 <th scope="col" data-i18n="f4.hMale">Male</th>
                 <th scope="col" data-i18n="f4.hOther">Not recorded</th>
-                <th scope="col" class="rt" data-i18n="f4.hRow">Total</th>
+                <th scope="col" class="rt" data-i18n="f4.hRowSex">Total (sex)</th>
                 <th scope="col">0&ndash;4</th>
                 <th scope="col">5&ndash;9</th>
                 <th scope="col">10&ndash;17</th>
                 <th scope="col">18&ndash;59</th>
                 <th scope="col">60+</th>
-                <th scope="col" class="rt" data-i18n="f4.hRow">Total</th>
+                <th scope="col" class="rt" data-i18n="f4.hRowAge">Total (age)</th>
               </tr>
             </thead>
             <tbody>
@@ -672,16 +717,16 @@ body.institutional-utility .empty{color:var(--iu-muted)}
                   <div class="actname" data-i18n="f4.disRowName">With a disability</div>
                   <div class="acthelp" data-i18n="f4.disRowHelp">Count what you can see, or what the person tells you. The type of disability is not asked.</div>
                 </td>
-                <td><input type="number" id="disF" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Female with a disability"></td>
-                <td><input type="number" id="disM" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Male with a disability"></td>
-                <td><input type="number" id="disO" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Sex not recorded, with a disability"></td>
-                <td class="rt"><span id="disST">&mdash;</span></td>
-                <td><input type="number" id="dis04" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Age 0 to 4, with a disability"></td>
-                <td><input type="number" id="dis5to9" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Age 5 to 9, with a disability"></td>
-                <td><input type="number" id="dis10to17" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Age 10 to 17, with a disability"></td>
-                <td><input type="number" id="dis18to59" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Age 18 to 59, with a disability"></td>
-                <td><input type="number" id="dis60" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Age 60 and over, with a disability"></td>
-                <td class="rt"><span id="disAT">&mdash;</span></td>
+                <td><span class="celllab" data-i18n="f4.hFemale">Female</span><input type="number" id="disF" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Female with a disability"></td>
+                <td><span class="celllab" data-i18n="f4.hMale">Male</span><input type="number" id="disM" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Male with a disability"></td>
+                <td><span class="celllab" data-i18n="f4.hOther">Not recorded</span><input type="number" id="disO" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Sex not recorded, with a disability"></td>
+                <td class="rt"><span class="celllab" data-i18n="f4.hRowSex">Total (sex)</span><span id="disST">&mdash;</span></td>
+                <td><span class="celllab">0&ndash;4</span><input type="number" id="dis04" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Age 0 to 4, with a disability"></td>
+                <td><span class="celllab">5&ndash;9</span><input type="number" id="dis5to9" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Age 5 to 9, with a disability"></td>
+                <td><span class="celllab">10&ndash;17</span><input type="number" id="dis10to17" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Age 10 to 17, with a disability"></td>
+                <td><span class="celllab">18&ndash;59</span><input type="number" id="dis18to59" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Age 18 to 59, with a disability"></td>
+                <td><span class="celllab">60+</span><input type="number" id="dis60" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Age 60 and over, with a disability"></td>
+                <td class="rt"><span class="celllab" data-i18n="f4.hRowAge">Total (age)</span><span id="disAT">&mdash;</span></td>
               </tr>
             </tbody>
           </table>
@@ -1089,8 +1134,20 @@ body.institutional-utility .empty{color:var(--iu-muted)}
         name.appendChild(hd);
       }
       tr.appendChild(name);
-      var add = function (part, aria) {
+      var LAB = function (key, text) {
+        /* buildGrid runs again on a language switch and sets its own text, so
+           the label is resolved here rather than left for the engine; the
+           data-i18n attribute stays so the engine can still correct it. */
+        var sp = document.createElement("span");
+        sp.className = "celllab";
+        if (key) sp.setAttribute("data-i18n", key);
+        var T = window.I18N_STRINGS, L = isNe() ? "ne" : "en";
+        sp.textContent = (key && T && T[L] && T[L][key]) ? T[L][key] : text;
+        return sp;
+      };
+      var add = function (part, aria, key, text) {
         var td = document.createElement("td");
+        td.appendChild(LAB(key, text));
         var inp = document.createElement("input");
         inp.type = "number"; inp.min = "0"; inp.step = "1";
         inp.inputMode = "numeric"; inp.placeholder = "—";
@@ -1099,15 +1156,19 @@ body.institutional-utility .empty{color:var(--iu-muted)}
         if (kept[inp.id] !== undefined) inp.value = kept[inp.id];
         td.appendChild(inp); tr.appendChild(td);
       };
-      add("f", "female"); add("m", "male"); add("o", "sex not recorded");
+      add("f", "female", "f4.hFemale", "Female");
+      add("m", "male", "f4.hMale", "Male");
+      add("o", "sex not recorded", "f4.hOther", "Not recorded");
       var st = document.createElement("td");
       st.className = "rt";
-      st.innerHTML = '<span id="' + actId(a.code, "st") + '">—</span>';
+      st.appendChild(LAB("f4.hRowSex", "Total (sex)"));
+      st.insertAdjacentHTML("beforeend", '<span id="' + actId(a.code, "st") + '">—</span>');
       tr.appendChild(st);
-      S.BANDS.forEach(function (b) { add(b.key, "age " + b.label); });
+      S.BANDS.forEach(function (b) { add(b.key, "age " + b.label, "", b.label); });
       var at = document.createElement("td");
       at.className = "rt";
-      at.innerHTML = '<span id="' + actId(a.code, "at") + '">—</span>';
+      at.appendChild(LAB("f4.hRowAge", "Total (age)"));
+      at.insertAdjacentHTML("beforeend", '<span id="' + actId(a.code, "at") + '">—</span>');
       tr.appendChild(at);
       body.appendChild(tr);
 

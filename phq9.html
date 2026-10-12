@@ -167,12 +167,8 @@
         <button type="button" class="btn grey" id="clearBtn" data-i18n="phq9.p036">Clear everything on this device</button>
         <span class="xs" id="count"></span>
       </div>
-      <div class="f" style="margin-top:16px">
-        <label data-i18n="phq9.p037">What would be sent, if there were anywhere to send it</label>
-        <pre id="payload" class="pay">—</pre>
-        <div class="help" data-i18n="phq9.p038">Item-by-item answers are kept because a total alone cannot be re-checked, and
+      <div class="help" style="margin-top:16px">Item-by-item answers are kept because a total alone cannot be re-checked, and
           because item 9 has to be auditable. There is no name, no phone number and no date of birth.</div>
-      </div>
     </div>
 
   </form>
@@ -340,7 +336,7 @@
     };
   }
   var COLS = Object.keys(record()).concat(["_saved"]);
-  function payload() { $("payload").textContent = JSON.stringify(record(), null, 2); }
+  function payload() { var el = $("payload"); if (el) el.textContent = JSON.stringify(record(), null, 2); }
 
   function problems(r) {
     var e = [];

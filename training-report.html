@@ -240,10 +240,7 @@
         <button type="button" class="btn grey" id="clearBtn" data-i18n="tr.clear">Clear everything on this device</button>
         <span class="xs" id="count"></span>
       </div>
-      <div class="f" style="margin-top:16px">
-        <label data-i18n="tr.payLab">What would be sent, if there were anywhere to send it</label>
-        <pre id="payload" class="pay">—</pre>
-      </div>
+      
     </div>
   </form>
 </div>
@@ -427,7 +424,7 @@
       ? "Counts are reported by the lead organisation."
       : (total ? total + " people trained · " + places + " palika(s) · " + cadres + " cadre(s)"
                : "No participants entered yet.");
-    $("payload").textContent = JSON.stringify(record(), null, 2);
+    var pv = $("payload"); if (pv) pv.textContent = JSON.stringify(record(), null, 2);
   }
   $("f").addEventListener("input", refresh);
   $("f").addEventListener("change", refresh);
