@@ -369,7 +369,13 @@ body.institutional-utility .empty{color:var(--iu-muted)}
 .actgrid table { min-width: 760px; }
 .actgrid th.grp { text-align: center; font-size: .82rem; letter-spacing: .02em; }
 .actgrid td.actcol, .actgrid th.actcol { text-align: left; min-width: 15rem; }
-.actgrid tr.grouphead td { font-weight: 700; padding-top: 1rem; background: none; }
+/* Three steps of emphasis, so the eye finds the layer, then the activity,
+   then the explanation: layer 1.04rem/800, activity .94rem/650, help .82rem
+   italic/400. */
+.actgrid tr.grouphead td { font-size: 1.04rem; font-weight: 800; letter-spacing: .005em; padding-top: 1.2rem; padding-bottom: .35rem; background: none; }
+.actgrid td.actcol .actname { font-size: .94rem; font-weight: 650; line-height: 1.3; }
+.actgrid td.actcol .acthelp { font-size: .82rem; font-style: italic; font-weight: 400; line-height: 1.35; margin-top: .15rem; opacity: .72; }
+.actgrid td.actcol { padding-top: .55rem; padding-bottom: .55rem; }
 .actgrid tr.describerow td { padding-top: 0; }
 .actgrid tr.describerow label { display: block; font-size: .85rem; margin: 0 0 .25rem 0; }
 .actgrid tr.describerow input { width: 100%; max-width: 32rem; }
@@ -623,57 +629,12 @@ body.institutional-utility .empty{color:var(--iu-muted)}
       <div class="f">
         <label data-i18n="f4.tgLab" id="tgsLab">Target group &mdash; select all that apply</label>
         <div class="chks" id="tgs" role="group" aria-labelledby="tgsLab"></div>
+        <div class="help" data-i18n="f4.tgHelp">Ticking "Persons with disabilities" opens the disability question just below, and that is the only place the disability counts are entered.</div>
       </div>
       <div class="f" id="tgOtherWrap" hidden>
         <label for="targetGroupOther" data-i18n="f4.tgOtherLab">Which other group?</label>
         <input type="text" id="targetGroupOther" name="targetGroupOther" placeholder="Name the group — never a person" data-i18n-ph="f4.phTgOther">
       </div>
-
-      <div class="f" style="max-width:340px">
-        <label for="reachedTotal" data-i18n="f4.reachLab">People here today, counted once</label>
-        <input type="number" id="reachedTotal" name="reachedTotal" min="0" step="1" inputmode="numeric" placeholder="0" aria-required="true">
-        <div class="help" data-i18n="f4.reachHelp">Everyone who took part at this site today, each person counted once however many activities they joined. It is never smaller than the largest activity row, and never larger than all the rows added together.</div>
-      </div>
-
-      <div class="f" style="max-width:340px">
-        <label for="newToday" data-i18n="f4.newLab">Of whom new today</label>
-        <input type="number" id="newToday" name="newToday" min="0" step="1" inputmode="numeric" placeholder="0" aria-required="true">
-        <div class="help" data-i18n="f4.newHelp">People here today taking part for the first time. Required every day. It sits inside the day's figure and is never added to it.</div>
-      </div>
-      <div class="help" id="countsHeld" hidden data-i18n="f4.roleHeld">The lead organisation reports the figures for this activity, so the counts are switched off here.</div>
-
-      <div class="tally" id="tally"><span data-i18n="f4.tally">Largest activity row</span><span id="tallyVal">0</span></div>
-
-      <div class="rollup">
-        <span data-i18n="f4.rollLabel">Adds up to</span>
-        <span class="rollv"><b id="rollU18">&mdash;</b> <span data-i18n="f4.rollUnder18">under 18</span> &nbsp;&middot;&nbsp; <b id="roll18">&mdash;</b> <span data-i18n="f4.rollOver18">18 and over</span></span>
-      </div>
-
-      <fieldset class="ofwhom">
-        <legend class="ofw-h" data-i18n="f4.ofwHead" data-i18n-html>Seen at the session <span>&mdash; count what you can see; already inside the day's figure, <b>never added to it</b></span></legend>
-        <div class="ofw-g">
-          <div>
-            <label for="ofChildAlone" data-i18n="f4.ofChildAlone">Children without an adult with them</label>
-            <input type="number" id="ofChildAlone" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
-          </div>
-          <div>
-            <label for="ofPreg" data-i18n="f4.ofPreg">Pregnant women or women with an infant</label>
-            <input type="number" id="ofPreg" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
-          </div>
-          <div>
-            <label for="ofPwd" data-i18n="f4.ofPwd">Visible disability or needing help to move</label>
-            <input type="number" id="ofPwd" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
-          </div>
-          <div>
-            <label for="ofInjured" data-i18n="f4.ofInjured">Visibly injured or unwell</label>
-            <input type="number" id="ofInjured" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
-          </div>
-          <div>
-            <label for="ofDistress" data-i18n="f4.ofDistress">In acute distress &mdash; needed one-to-one attention</label>
-            <input type="number" id="ofDistress" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
-          </div>
-        </div>
-      </fieldset>
 
       <fieldset class="ofwhom" id="disBlock" hidden>
         <legend class="ofw-h" data-i18n="f4.disHead" data-i18n-html>Persons with disabilities <span>&mdash; asked for by CMC-Nepal, 21 September 2026</span></legend>
@@ -708,6 +669,54 @@ body.institutional-utility .empty{color:var(--iu-muted)}
           <p class="ofw-n" data-i18n="f4.disNote">Count what you can see, or what the person tells you. These are already inside the day's figure, so they are checked against it and never added to it or to each other. The type of disability is not asked here; leave the counts blank if you are not sure.</p>
         </div>
       </fieldset>
+
+      <div class="f" style="max-width:340px">
+        <label for="reachedTotal" data-i18n="f4.reachLab">People here today, counted once</label>
+        <input type="number" id="reachedTotal" name="reachedTotal" min="0" step="1" inputmode="numeric" placeholder="0" aria-required="true">
+        <div class="help" data-i18n="f4.reachHelp">Everyone who took part at this site today, each person counted once however many activities they joined. It is never smaller than the largest activity row, and never larger than all the rows added together.</div>
+      </div>
+
+      <div class="f" style="max-width:340px">
+        <label for="newToday" data-i18n="f4.newLab">Of whom new today</label>
+        <input type="number" id="newToday" name="newToday" min="0" step="1" inputmode="numeric" placeholder="0" aria-required="true">
+        <div class="help" data-i18n="f4.newHelp">People here today taking part for the first time. Required every day. It sits inside the day's figure and is never added to it.</div>
+      </div>
+      <div class="help" id="countsHeld" hidden data-i18n="f4.roleHeld">The lead organisation reports the figures for this activity, so the counts are switched off here.</div>
+
+      <div class="tally" id="tally"><span data-i18n="f4.tally">Largest activity row</span><span id="tallyVal">0</span></div>
+
+      <div class="rollup">
+        <span data-i18n="f4.rollLabel">Adds up to</span>
+        <span class="rollv"><b id="rollU18">&mdash;</b> <span data-i18n="f4.rollUnder18">under 18</span> &nbsp;&middot;&nbsp; <b id="roll18">&mdash;</b> <span data-i18n="f4.rollOver18">18 and over</span></span>
+      </div>
+
+      <fieldset class="ofwhom">
+        <legend class="ofw-h" data-i18n="f4.ofwHead" data-i18n-html>Seen at the session <span>&mdash; count what you can see; already inside the day's figure, <b>never added to it</b></span></legend>
+        <div class="ofw-g">
+          <div>
+            <label for="ofChildAlone" data-i18n="f4.ofChildAlone">Children without an adult with them</label>
+            <input type="number" id="ofChildAlone" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
+          </div>
+          <div>
+            <label for="ofPreg" data-i18n="f4.ofPreg">Pregnant women or women with an infant</label>
+            <input type="number" id="ofPreg" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
+          </div>
+          <div>
+            <label for="ofPwd" data-i18n="f4.ofPwd">Needed help to move or get around</label>
+            <input type="number" id="ofPwd" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
+            <div class="help" data-i18n="f4.ofPwdHelp">Help needed at the time, not disability status. The disability counts are at the top, under the target groups.</div>
+          </div>
+          <div>
+            <label for="ofInjured" data-i18n="f4.ofInjured">Visibly injured or unwell</label>
+            <input type="number" id="ofInjured" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
+          </div>
+          <div>
+            <label for="ofDistress" data-i18n="f4.ofDistress">In acute distress &mdash; needed one-to-one attention</label>
+            <input type="number" id="ofDistress" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
+          </div>
+        </div>
+      </fieldset>
+
     </div>
 
     <!-- 5 · SUBMIT -->
@@ -1038,7 +1047,19 @@ body.institutional-utility .empty{color:var(--iu-muted)}
       var tr = document.createElement("tr");
       var name = document.createElement("td");
       name.className = "actcol";
-      name.textContent = C.label(a);
+      var nm = document.createElement("div");
+      nm.className = "actname";
+      nm.textContent = C.label(a);
+      name.appendChild(nm);
+      /* the one-line explanation the list already carries, in the language of
+         the page -- the same wording the EDCD form was asked to show */
+      var ht = (isNe() && a.help_np) ? a.help_np : (a.help || "");
+      if (ht) {
+        var hd = document.createElement("div");
+        hd.className = "acthelp";
+        hd.textContent = ht;
+        name.appendChild(hd);
+      }
       tr.appendChild(name);
       var add = function (part, aria) {
         var td = document.createElement("td");
