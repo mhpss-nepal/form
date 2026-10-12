@@ -428,6 +428,63 @@ body.institutional-utility .empty{color:var(--iu-muted)}
   .actgrid tfoot tr.tot td { border-top: 0; }
   .actgrid tfoot tr.tot td.actcol, .actgrid tfoot tr.tot td:first-child { border-top: 2px solid currentColor; padding-top: .45rem; }
 }
+
+/* ---------------------------------------------------------------------
+   The activity list. One activity, one small table: age down the side,
+   sex across the top, so the fifteen cells of sex-by-age are collected
+   rather than only their two margins. Two margins never give back the
+   interior -- "how many women aged 18-59 were in layer 2" cannot be
+   answered from them, which is why the ten-column row could not stay.
+   Five columns fit a 390px handset and a 1440px laptop alike; the old
+   row needed 1320px and was clipped at every desktop width.
+   Every activity starts CLOSED: at rest the form is eighteen lines, and
+   ticking one brings its table down underneath it, so the page is only
+   as long as the day was. Same gesture as the disability counts.
+   --------------------------------------------------------------------- */
+.actlist { margin-top: .4rem; }
+.actlist .layerhead { font-size: 1.04rem; font-weight: 800; letter-spacing: .005em;
+  margin: 1.3rem 0 .35rem; }
+.actlist .layerhead:first-child { margin-top: .2rem; }
+.act { border: 1px solid var(--line); border-radius: var(--r, 6px); background: var(--paper, #fff);
+  margin-bottom: .45rem; overflow: hidden; }
+.act > summary { list-style: none; cursor: pointer; padding: .7rem .85rem; display: flex;
+  gap: .7rem; align-items: flex-start; }
+.act > summary::-webkit-details-marker { display: none; }
+.act > summary:focus-visible { outline: 2px solid var(--who, #009fe3); outline-offset: -2px; }
+.act[open] > summary { border-bottom: 1px solid var(--line-s); }
+.act .tick { flex: 0 0 auto; width: 19px; height: 19px; border: 1.5px solid var(--line);
+  border-radius: 4px; margin-top: .18rem; display: grid; place-items: center;
+  font-size: 12px; line-height: 1; color: transparent; background: var(--paper, #fff); }
+.act[open] .tick { background: var(--who-d, #006996); border-color: var(--who-d, #006996); color: #fff; }
+.act .actmeta { min-width: 0; }
+.act .actname { display: block; font-size: .94rem; font-weight: 650; line-height: 1.3; }
+.act .acthelp { display: block; font-size: .82rem; font-style: italic; font-weight: 400;
+  line-height: 1.35; margin-top: .15rem; opacity: .72; }
+.act .actsum { margin-left: auto; font-size: .8rem; white-space: nowrap; padding-top: .2rem;
+  font-variant-numeric: tabular-nums; opacity: .7; }
+.act .actbody { padding: .7rem .85rem .9rem; }
+table.mx { width: 100%; border-collapse: collapse; font-size: .9rem;
+  font-variant-numeric: tabular-nums; }
+table.mx th, table.mx td { border-bottom: 1px solid var(--line-s); padding: .3rem .35rem;
+  text-align: right; }
+table.mx thead th { font-size: .72rem; letter-spacing: .05em; text-transform: uppercase;
+  font-weight: 700; border-bottom: 2px solid var(--line); opacity: .75; }
+table.mx tbody th { text-align: left; font-weight: 600; white-space: nowrap; }
+table.mx tfoot th, table.mx tfoot td { border-top: 2px solid var(--line); border-bottom: none;
+  font-weight: 700; padding-top: .45rem; }
+table.mx input { width: 100%; min-width: 0; max-width: 5rem; padding: .4rem .45rem;
+  font: inherit; font-size: .9rem; text-align: right; }
+table.mx td.t { font-weight: 700; }
+.act .describe { margin-top: .6rem; }
+.act .describe label { display: block; font-size: .85rem; margin: 0 0 .25rem; }
+.act .describe input { width: 100%; max-width: 32rem; }
+@media (max-width: 420px) {
+  table.mx th, table.mx td { padding: .25rem .15rem; }
+  table.mx thead th { font-size: .64rem; letter-spacing: 0; }
+  table.mx input { padding: .35rem .2rem; }
+  .act .actsum { display: none; }
+}
+
 </style>
 </head>
 <body class="fx institutional-utility">
@@ -609,51 +666,46 @@ body.institutional-utility .empty{color:var(--iu-muted)}
          figure is asked separately and counted once, so a person who took part
          in three activities is three row entries but one person for the day. -->
     <div class="card" id="s3">
-      <div class="step"><span class="n">3</span><h2 data-i18n="f4.h3what">What was done</h2><span class="hint" data-i18n="f4.h3hint">one row per activity that ran today</span></div>
+      <div class="step"><span class="n">3</span><h2 data-i18n="f4.h3what">What was done</h2><span class="hint" data-i18n="f4.h3hint">tick each activity that ran today</span></div>
 
-      <div class="help" data-i18n="f4.gridHelp">Fill a row for each activity that ran at this site today. Within a row, sex and age are two counts of the same people, so the two totals must agree. Leave a row blank if that activity did not run.</div>
+      <div class="help" data-i18n="f4.gridHelp">Tick each activity that ran at this site today. Its figures open underneath: how many of each age group, by sex. Both totals are worked out for you, so there is nothing to reconcile.</div>
 
-      <div class="dis actgrid">
-        <table id="actGrid">
+      <div class="actlist" id="actGrid"></div>
+      <div class="dis actgrid" id="actTotals">
+        <table>
           <caption class="sr-only" data-i18n="f4.gridCaption">Activities, with the people who took part counted by sex and by age</caption>
           <thead>
             <tr>
-              <th scope="col" rowspan="2" class="actcol" data-i18n="f4.hActivity">Activity</th>
-              <th scope="colgroup" colspan="4" class="grp" data-i18n="f4.hSexGrp">Sex</th>
-              <th scope="colgroup" colspan="6" class="grp" data-i18n="f4.hAgeGrp">Age</th>
-            </tr>
-            <tr>
+              <th scope="col" class="actcol" data-i18n="f4.allAct">All activities</th>
               <th scope="col" data-i18n="f4.hFemale">Female</th>
               <th scope="col" data-i18n="f4.hMale">Male</th>
               <th scope="col" data-i18n="f4.hOther">Not recorded</th>
-              <th scope="col" class="rt" data-i18n="f4.hRowSex">Total (sex)</th>
               <th scope="col">0&ndash;4</th>
               <th scope="col">5&ndash;9</th>
               <th scope="col">10&ndash;17</th>
               <th scope="col">18&ndash;59</th>
               <th scope="col">60+</th>
-              <th scope="col" class="rt" data-i18n="f4.hRowAge">Total (age)</th>
+              <th scope="col" class="rt" data-i18n="f4.hRow">Total</th>
             </tr>
           </thead>
-          <tbody id="actBody"></tbody>
-          <tfoot>
+          <tbody>
             <tr class="tot">
-              <td data-i18n="f4.allAct">All activities</td>
+              <td class="actcol" data-i18n="f4.allActSub">Attendances, added across the activities that ran</td>
               <td class="rt"><span class="celllab" data-i18n="f4.hFemale">Female</span><span id="gF">&mdash;</span></td>
               <td class="rt"><span class="celllab" data-i18n="f4.hMale">Male</span><span id="gM">&mdash;</span></td>
               <td class="rt"><span class="celllab" data-i18n="f4.hOther">Not recorded</span><span id="gO">&mdash;</span></td>
-              <td class="rt"><span class="celllab" data-i18n="f4.hRowSex">Total (sex)</span><span id="gSex">&mdash;</span></td>
               <td class="rt"><span class="celllab">0&ndash;4</span><span id="g04">&mdash;</span></td>
               <td class="rt"><span class="celllab">5&ndash;9</span><span id="g5to9">&mdash;</span></td>
               <td class="rt"><span class="celllab">10&ndash;17</span><span id="g10to17">&mdash;</span></td>
               <td class="rt"><span class="celllab">18&ndash;59</span><span id="g18to59">&mdash;</span></td>
               <td class="rt"><span class="celllab">60+</span><span id="g60">&mdash;</span></td>
-              <td class="rt"><span class="celllab" data-i18n="f4.hRowAge">Total (age)</span><span id="gAge">&mdash;</span></td>
+              <td class="rt"><span class="celllab" data-i18n="f4.hRow">Total</span><span id="gSex">&mdash;</span></td>
             </tr>
-          </tfoot>
+          </tbody>
         </table>
       </div>
-      <div class="help" data-i18n="f4.ageHelp">Five age groups: 0&ndash;4, 5&ndash;9, 10&ndash;17, 18&ndash;59, 60+. Leave a row blank rather than partly filled; within a row the sex total and the age total are checked against each other.</div>
+      <span id="gAge" hidden>&mdash;</span>
+      <div class="help" data-i18n="f4.ageHelp">Five age groups: 0&ndash;4, 5&ndash;9, 10&ndash;17, 18&ndash;59, 60+. Tick an activity to open its figures. Both totals are worked out for you.</div>
 
       <div class="f">
         <label for="status" data-i18n="f4.statusLab">Status</label>
@@ -1099,101 +1151,28 @@ body.institutional-utility .empty{color:var(--iu-muted)}
     });
   }
 
-  function buildGrid() {
-    var body = $("actBody");
-    if (!body) return;
-    var kept = {};
-    body.querySelectorAll("input").forEach(function (i) { if (i.value !== "") kept[i.id] = i.value; });
-    body.innerHTML = "";
-    var layerSeen = {};
-    activityRows().forEach(function (a) {
-      var layer = String(a.code).split(".")[0];
-      if (!layerSeen[layer]) {
-        layerSeen[layer] = true;
-        var hr = document.createElement("tr");
-        hr.className = "grouphead";
-        var hc = document.createElement("td");
-        hc.colSpan = 11;
-        hc.textContent = LAYER_NAME[layer] || "";
-        if (hc.textContent) { hr.appendChild(hc); body.appendChild(hr); }
-      }
-      var tr = document.createElement("tr");
-      var name = document.createElement("td");
-      name.className = "actcol";
-      var nm = document.createElement("div");
-      nm.className = "actname";
-      nm.textContent = C.label(a);
-      name.appendChild(nm);
-      /* the one-line explanation the list already carries, in the language of
-         the page -- the same wording the EDCD form was asked to show */
-      var ht = (isNe() && a.help_np) ? a.help_np : (a.help || "");
-      if (ht) {
-        var hd = document.createElement("div");
-        hd.className = "acthelp";
-        hd.textContent = ht;
-        name.appendChild(hd);
-      }
-      tr.appendChild(name);
-      var LAB = function (key, text) {
-        /* buildGrid runs again on a language switch and sets its own text, so
-           the label is resolved here rather than left for the engine; the
-           data-i18n attribute stays so the engine can still correct it. */
-        var sp = document.createElement("span");
-        sp.className = "celllab";
-        if (key) sp.setAttribute("data-i18n", key);
-        var T = window.I18N_STRINGS, L = isNe() ? "ne" : "en";
-        sp.textContent = (key && T && T[L] && T[L][key]) ? T[L][key] : text;
-        return sp;
-      };
-      var add = function (part, aria, key, text) {
-        var td = document.createElement("td");
-        td.appendChild(LAB(key, text));
-        var inp = document.createElement("input");
-        inp.type = "number"; inp.min = "0"; inp.step = "1";
-        inp.inputMode = "numeric"; inp.placeholder = "—";
-        inp.id = actId(a.code, part);
-        inp.setAttribute("aria-label", C.label(a) + " — " + aria);
-        if (kept[inp.id] !== undefined) inp.value = kept[inp.id];
-        td.appendChild(inp); tr.appendChild(td);
-      };
-      add("f", "female", "f4.hFemale", "Female");
-      add("m", "male", "f4.hMale", "Male");
-      add("o", "sex not recorded", "f4.hOther", "Not recorded");
-      var st = document.createElement("td");
-      st.className = "rt";
-      st.appendChild(LAB("f4.hRowSex", "Total (sex)"));
-      st.insertAdjacentHTML("beforeend", '<span id="' + actId(a.code, "st") + '">—</span>');
-      tr.appendChild(st);
-      S.BANDS.forEach(function (b) { add(b.key, "age " + b.label, "", b.label); });
-      var at = document.createElement("td");
-      at.className = "rt";
-      at.appendChild(LAB("f4.hRowAge", "Total (age)"));
-      at.insertAdjacentHTML("beforeend", '<span id="' + actId(a.code, "at") + '">—</span>');
-      tr.appendChild(at);
-      body.appendChild(tr);
+  /* ---------------------------------------------------------------------
+     One activity, one matrix: age down the side, sex across the top.
 
-      if (a.other) {
-        var dr = document.createElement("tr");
-        dr.className = "describerow";
-        var dc = document.createElement("td");
-        dc.colSpan = 11;
-        var lab = document.createElement("label");
-        lab.setAttribute("for", actId(a.code, "desc"));
-        lab.textContent = "Describe this activity";
-        lab.setAttribute("data-i18n", "f4.describeThis");
-        var di = document.createElement("input");
-        di.type = "text"; di.id = actId(a.code, "desc");
-        di.maxLength = 120;
-        di.placeholder = "What was done, in a few words \u2014 no names";
-        di.setAttribute("data-i18n-ph", "f4.describePh");
-        if (kept[di.id] !== undefined) di.value = kept[di.id];
-        dc.appendChild(lab); dc.appendChild(di); dr.appendChild(dc); body.appendChild(dr);
-      }
-    });
-    body.addEventListener("input", gridTally);
-    gridTally();
-  }
+     Why the shape changed. The row used to ask three sex boxes and five age
+     boxes -- the two MARGINS of a table whose fifteen interior cells were
+     never collected. Margins do not determine the interior: the same eight
+     figures fit many different tables, so "how many women aged 18-59 took
+     part in layer 2" could not be answered, and no later analysis could
+     recover it. The cells are now collected and the margins worked out from
+     them, so the two can no longer disagree and nobody types a total.
 
+     The record keeps every field it had. female / male / sexNotRecorded and
+     the five band keys are still written, now computed, so the register,
+     the export, the fold and the dashboard read exactly what they read
+     before. `cells` rides along beside them with the interior. SORMAS takes
+     the margins; cells give margins, margins never give cells.
+
+     Closed by default: at rest the form is eighteen lines. Ticking an
+     activity opens its matrix; unticking clears it, so a figure cannot
+     survive a change of mind -- the same rule as the disability counts.
+     --------------------------------------------------------------------- */
+  /* kept from the block this replaced: both are used outside it too */
   function numOf(id) {
     var el = $(id);
     if (!el) return 0;
@@ -1202,70 +1181,175 @@ body.institutional-utility .empty{color:var(--iu-muted)}
   }
   function anyOf(ids) { return ids.some(function (id) { return $(id) && $(id).value !== ""; }); }
 
-  function gridTally() {
-    var g = { f: 0, m: 0, o: 0, sex: 0, age: 0 };
-    var byBand = {};
-    S.BANDS.forEach(function (b) { byBand[b.key] = 0; });
-    var largest = 0, anyRow = false;
+  function sexKeys() { return ["f", "m", "o"]; }
+  function sexLabelKey(k) { return { f: "f4.hFemale", m: "f4.hMale", o: "f4.hOther" }[k]; }
+  function sexFallback(k) { return { f: "Female", m: "Male", o: "Not recorded" }[k]; }
+  function tr(key, fallback) {
+    var T = window.I18N_STRINGS, L = (typeof isNe === "function" && isNe()) ? "ne" : "en";
+    return (T && T[L] && T[L][key]) ? T[L][key] : fallback;
+  }
+  function cellId(code, bandKey, sexKey) { return actId(code, bandKey + "_" + sexKey); }
+  function detailId(code) { return "d_" + actKey(code); }
+
+  function buildGrid() {
+    var host = $("actGrid");
+    if (!host) return;
+    var kept = {}, openNow = {};
+    host.querySelectorAll("input").forEach(function (i) { if (i.value !== "") kept[i.id] = i.value; });
+    host.querySelectorAll("details").forEach(function (d) { openNow[d.id] = d.open; });
+    var html = "", layerSeen = {};
+
     activityRows().forEach(function (a) {
-      var sexIds = ACT_SEX.map(function (k) { return actId(a.code, k); });
-      var ageIds = ACT_AGE.map(function (k) { return actId(a.code, k); });
-      var sexSum = sexIds.reduce(function (t, id) { return t + numOf(id); }, 0);
-      var ageSum = ageIds.reduce(function (t, id) { return t + numOf(id); }, 0);
-      var filled = anyOf(sexIds.concat(ageIds));
-      var st = $(actId(a.code, "st")), at = $(actId(a.code, "at"));
-      if (st) st.textContent = filled ? sexSum.toLocaleString() : "—";
-      if (at) at.textContent = filled ? ageSum.toLocaleString() : "—";
-      var row = st && st.parentElement ? st.parentElement.parentElement : null;
-      if (row) row.classList.toggle("mismatch", filled && sexSum !== ageSum);
-      if (filled) {
+      var layer = String(a.code).split(".")[0];
+      if (!layerSeen[layer]) {
+        layerSeen[layer] = true;
+        if (LAYER_NAME[layer]) html += '<div class="layerhead">' + esc(LAYER_NAME[layer]) + "</div>";
+      }
+      var did = detailId(a.code);
+      var name = C.label(a);
+      var help = (typeof isNe === "function" && isNe() && a.help_np) ? a.help_np : (a.help || "");
+      html += '<details class="act" id="' + did + '"' + (openNow[did] ? " open" : "") + ">";
+      html += '<summary><span class="tick" aria-hidden="true">✓</span><span class="actmeta">';
+      html += '<span class="actname">' + esc(name) + "</span>";
+      if (help) html += '<span class="acthelp">' + esc(help) + "</span>";
+      html += '</span><span class="actsum" id="' + actId(a.code, "sum") + '"></span></summary>';
+      html += '<div class="actbody"><table class="mx"><thead><tr>';
+      html += '<th scope="col">' + esc(tr("f4.hAgeGrp", "Age")) + "</th>";
+      sexKeys().forEach(function (k) {
+        html += '<th scope="col">' + esc(tr(sexLabelKey(k), sexFallback(k))) + "</th>";
+      });
+      html += '<th scope="col">' + esc(tr("f4.hRow", "Total")) + "</th></tr></thead><tbody>";
+      S.BANDS.forEach(function (b) {
+        html += '<tr><th scope="row">' + esc(b.label) + "</th>";
+        sexKeys().forEach(function (k) {
+          var id = cellId(a.code, b.key, k);
+          html += '<td><input type="number" min="0" step="1" inputmode="numeric" id="' + id +
+                  '" placeholder="—" value="' + (kept[id] !== undefined ? esc(kept[id]) : "") +
+                  '" aria-label="' + esc(name + " — " + b.label + " — " + sexFallback(k)) + '"></td>';
+        });
+        html += '<td class="t" id="' + actId(a.code, "rt_" + b.key) + '">—</td></tr>';
+      });
+      html += '</tbody><tfoot><tr><th scope="row">' + esc(tr("f4.hRow", "Total")) + "</th>";
+      sexKeys().forEach(function (k) {
+        html += '<td class="t" id="' + actId(a.code, "ct_" + k) + '">—</td>';
+      });
+      html += '<td class="t" id="' + actId(a.code, "gt") + '">—</td></tr></tfoot></table>';
+      if (a.other) {
+        var dId = actId(a.code, "desc");
+        html += '<div class="describe"><label for="' + dId + '" data-i18n="f4.describeThis">Describe this activity</label>';
+        html += '<input type="text" id="' + dId + '" maxlength="120" placeholder="What was done, in a few words — no names"';
+        html += ' value="' + (kept[dId] !== undefined ? esc(kept[dId]) : "") + '"></div>';
+      }
+      html += "</div></details>";
+    });
+    host.innerHTML = html;
+
+    host.querySelectorAll("details").forEach(function (d) {
+      d.addEventListener("toggle", function () {
+        if (!d.open) {
+          /* unticked: the activity did not run, so nothing of it is kept */
+          d.querySelectorAll("input").forEach(function (i) { i.value = ""; });
+        }
+        gridTally();
+      });
+    });
+    host.addEventListener("input", gridTally);
+  }
+
+  function esc(s) {
+    return String(s === undefined || s === null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  function actOpen(code) { var d = $(detailId(code)); return !!(d && d.open); }
+
+  function actCells(code) {
+    var m = {};
+    S.BANDS.forEach(function (b) {
+      sexKeys().forEach(function (k) { m[b.key + "_" + k] = numOf(cellId(code, b.key, k)); });
+    });
+    return m;
+  }
+
+  function gridTally() {
+    var g = { f: 0, m: 0, o: 0 }, byBand = {}, grand = 0, largest = 0, anyRow = false;
+    S.BANDS.forEach(function (b) { byBand[b.key] = 0; });
+
+    activityRows().forEach(function (a) {
+      var open = actOpen(a.code), cells = actCells(a.code);
+      var col = { f: 0, m: 0, o: 0 }, rowTot = 0;
+      S.BANDS.forEach(function (b) {
+        var r = 0;
+        sexKeys().forEach(function (k) {
+          var v = cells[b.key + "_" + k];
+          r += v; col[k] += v;
+        });
+        rowTot += r;
+        var rt = $(actId(a.code, "rt_" + b.key));
+        if (rt) rt.textContent = r ? r.toLocaleString() : "—";
+        if (open) byBand[b.key] += r;
+      });
+      sexKeys().forEach(function (k) {
+        var ct = $(actId(a.code, "ct_" + k));
+        if (ct) ct.textContent = col[k] ? col[k].toLocaleString() : "—";
+        if (open) g[k] += col[k];
+      });
+      var gt = $(actId(a.code, "gt"));
+      if (gt) gt.textContent = rowTot ? rowTot.toLocaleString() : "—";
+      var sum = $(actId(a.code, "sum"));
+      if (sum) sum.textContent = open && rowTot ? rowTot.toLocaleString() : "";
+      if (open && rowTot) {
         anyRow = true;
-        ACT_SEX.forEach(function (k) { g[k] += numOf(actId(a.code, k)); });
-        S.BANDS.forEach(function (b) { byBand[b.key] += numOf(actId(a.code, b.key)); });
-        g.sex += sexSum; g.age += ageSum;
-        if (sexSum > largest) largest = sexSum;
-        if (ageSum > largest) largest = ageSum;
+        grand += rowTot;
+        if (rowTot > largest) largest = rowTot;
       }
     });
-    var show = function (id, n) { var e = $(id); if (e) e.textContent = anyRow ? n.toLocaleString() : "—"; };
-    show("gF", g.f); show("gM", g.m); show("gO", g.o); show("gSex", g.sex);
-    S.BANDS.forEach(function (b) { show("g" + b.key, byBand[b.key]); });
-    show("gAge", g.age);
 
-    /* the fold, from the age columns of the whole grid */
+    var show = function (id, n) { var e = $(id); if (e) e.textContent = anyRow ? n.toLocaleString() : "—"; };
+    show("gF", g.f); show("gM", g.m); show("gO", g.o); show("gSex", grand);
+    S.BANDS.forEach(function (b) { show("g" + b.key, byBand[b.key]); });
+    show("gAge", grand);
+
+    /* the fold, from the age side of the whole list */
     var u18 = 0, o18 = 0;
     S.BANDS.forEach(function (b) { if (b.child) { u18 += byBand[b.key]; } else { o18 += byBand[b.key]; } });
     show("rollU18", u18); show("roll18", o18);
 
-    /* the day's figure against the rows */
+    /* the day's figure against the rows -- unchanged: never below the
+       largest activity, never above every activity added together */
     var box = $("tally"), val = $("tallyVal");
-    var day = parseInt($("reachedTotal").value, 10);
+    var day = parseInt($("reachedTotal") ? $("reachedTotal").value : "", 10);
     if (val) val.textContent = anyRow ? String(largest) : "0";
     if (box) {
       box.className = "tally";
       if (!anyRow || !isFinite(day)) { /* nothing to judge yet */ }
       else if (day < largest) { box.className = "tally bad"; val.textContent = largest + " — more than the day's figure of " + day; }
-      else if (day > g.sex) { box.className = "tally bad"; val.textContent = largest + " — the day's figure of " + day + " is more than all rows together (" + g.sex + ")"; }
+      else if (day > grand) { box.className = "tally bad"; val.textContent = largest + " — the day's figure of " + day + " is more than all rows together (" + grand + ")"; }
       else { box.className = "tally good"; val.textContent = largest + " — inside the day's figure of " + day; }
     }
-    return { largest: largest, sumRows: g.sex, any: anyRow };
+    return { largest: largest, sumRows: grand, any: anyRow };
   }
 
   function collectActivities() {
     var out = [];
     activityRows().forEach(function (a) {
-      var sexIds = ACT_SEX.map(function (k) { return actId(a.code, k); });
-      var ageIds = ACT_AGE.map(function (k) { return actId(a.code, k); });
-      if (!anyOf(sexIds.concat(ageIds))) return;
+      if (!actOpen(a.code)) return;
+      var cells = actCells(a.code), total = 0;
+      Object.keys(cells).forEach(function (k) { total += cells[k]; });
+      if (!total) return;
       var row = { code: String(a.code), iascSub: a.iasc_sub || "" };
-      ACT_SEX.forEach(function (k) {
-        var el = $(actId(a.code, k));
-        row[{ f: "female", m: "male", o: "sexNotRecorded" }[k]] = el ? el.value : "";
-      });
+      /* the margins the record has always carried, now worked out */
+      var byS = { f: 0, m: 0, o: 0 };
       S.BANDS.forEach(function (b) {
-        var el = $(actId(a.code, b.key));
-        row[b.key] = el ? el.value : "";
+        var r = 0;
+        sexKeys().forEach(function (k) { r += cells[b.key + "_" + k]; byS[k] += cells[b.key + "_" + k]; });
+        row[b.key] = String(r);
       });
+      row.female = String(byS.f);
+      row.male = String(byS.m);
+      row.sexNotRecorded = String(byS.o);
+      /* and the interior, which is the thing the margins could never give */
+      row.cells = cells;
       var d = $(actId(a.code, "desc"));
       if (d) row.describe = d.value.trim();
       out.push(row);
