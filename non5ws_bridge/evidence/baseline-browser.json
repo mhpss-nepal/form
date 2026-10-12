@@ -1,0 +1,1539 @@
+[
+  {
+    "file": "training-report.html",
+    "page_errors": [],
+    "inputs": [
+      {
+        "id": "org",
+        "name": "",
+        "type": "select-one",
+        "value": "TPO",
+        "valid": true
+      },
+      {
+        "id": "orgOther",
+        "name": "",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "focalName",
+        "name": "",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "focalPhone",
+        "name": "",
+        "type": "tel",
+        "value": "0000000000",
+        "valid": true
+      },
+      {
+        "id": "partners",
+        "name": "",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "reportingRole",
+        "name": "",
+        "type": "select-one",
+        "value": "LEAD",
+        "valid": true
+      },
+      {
+        "id": "kind",
+        "name": "",
+        "type": "select-one",
+        "value": "ORIENT",
+        "valid": true
+      },
+      {
+        "id": "topic",
+        "name": "",
+        "type": "select-one",
+        "value": "5.1",
+        "valid": true
+      },
+      {
+        "id": "topicOther",
+        "name": "",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "title",
+        "name": "",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "accredited",
+        "name": "",
+        "type": "select-one",
+        "value": "NHTC",
+        "valid": true
+      },
+      {
+        "id": "mode",
+        "name": "",
+        "type": "select-one",
+        "value": "INP",
+        "valid": true
+      },
+      {
+        "id": "dateAD",
+        "name": "",
+        "type": "date",
+        "value": "2026-10-01",
+        "valid": true
+      },
+      {
+        "id": "days",
+        "name": "",
+        "type": "number",
+        "value": "1",
+        "valid": true
+      },
+      {
+        "id": "facilitators",
+        "name": "",
+        "type": "number",
+        "value": "1",
+        "valid": true
+      },
+      {
+        "id": "venueDistrict",
+        "name": "",
+        "type": "select-one",
+        "value": "RAS",
+        "valid": true
+      },
+      {
+        "id": "venuePalika",
+        "name": "",
+        "type": "select-one",
+        "value": "NP0329403",
+        "valid": true
+      },
+      {
+        "id": "facilitatorOrg",
+        "name": "",
+        "type": "select-one",
+        "value": "TPO",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "",
+        "type": "select-one",
+        "value": "RAS",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "",
+        "type": "select-one",
+        "value": "NP0329403",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "",
+        "type": "select-one",
+        "value": "PSYT",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "",
+        "type": "number",
+        "value": "1",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "",
+        "type": "number",
+        "value": "1",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "",
+        "type": "number",
+        "value": "1",
+        "valid": true
+      },
+      {
+        "id": "u18",
+        "name": "",
+        "type": "number",
+        "value": "1",
+        "valid": true
+      },
+      {
+        "id": "pwd",
+        "name": "",
+        "type": "number",
+        "value": "1",
+        "valid": true
+      },
+      {
+        "id": "supervision",
+        "name": "",
+        "type": "select-one",
+        "value": "PROV",
+        "valid": true
+      },
+      {
+        "id": "supFreq",
+        "name": "",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "prepost",
+        "name": "",
+        "type": "select-one",
+        "value": "Y",
+        "valid": true
+      },
+      {
+        "id": "notes",
+        "name": "",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      }
+    ],
+    "records": {
+      "mhpss-np-l1-training-v1": [
+        {
+          "schema": "mhpss-np-training/0.1.0-draft",
+          "kind": "training",
+          "iasc_sub": "11.3",
+          "org": "TPO",
+          "focal_name": "SYNTHETIC ONLY",
+          "focal_phone": "0000000000",
+          "partners": [
+            "SYNTHETIC ONLY"
+          ],
+          "reporting_role": "LEAD",
+          "counts_held_by_lead": false,
+          "event_kind": "ORIENT",
+          "topic": "5.1",
+          "topic_other": "",
+          "title": "SYNTHETIC ONLY",
+          "accreditation": "NHTC",
+          "delivery_mode": "INP",
+          "date_ad": "2026-10-01",
+          "days": 1,
+          "facilitators": 1,
+          "facilitator_org": "TPO",
+          "venue_district": "RAS",
+          "venue_palika": "NP0329403",
+          "participants": [
+            {
+              "district": "RAS",
+              "palika": "NP0329403",
+              "cadre": "PSYT",
+              "female": 1,
+              "male": 1,
+              "other": 1,
+              "total": 3
+            }
+          ],
+          "trained_total": 3,
+          "under_18": 1,
+          "with_disability": 1,
+          "supervision": "PROV",
+          "supervision_frequency": "SYNTHETIC ONLY",
+          "pre_post_assessed": "Y",
+          "note": "SYNTHETIC ONLY",
+          "_saved": "2026-10-12T11:46:55.871Z"
+        }
+      ]
+    },
+    "csv": "schema,kind,iasc_sub,org,focal_name,focal_phone,partners,reporting_role,counts_held_by_lead,event_kind,topic,topic_other,title,accreditation,delivery_mode,date_ad,days,facilitators,facilitator_org,venue_district,venue_palika,participants,trained_total,under_18,with_disability,supervision,supervision_frequency,pre_post_assessed,note,_saved\nmhpss-np-training/0.1.0-draft,training,11.3,TPO,SYNTHETIC ONLY,0000000000,SYNTHETIC ONLY,LEAD,false,ORIENT,5.1,,SYNTHETIC ONLY,NHTC,INP,2026-10-01,1,1,TPO,RAS,NP0329403,[object Object],3,1,1,PROV,SYNTHETIC ONLY,Y,SYNTHETIC ONLY,2026-10-12T11:46:55.871Z\n",
+    "messages": [
+      "Saved on this device. It goes to the coordination register when there is signal. These people are counted as people trained, never as attendance on the 5Ws."
+    ],
+    "saved": true,
+    "exported": true
+  },
+  {
+    "file": "drafts/contact.html",
+    "page_errors": [
+      "Cannot read properties of undefined (reading 'fillSelect')",
+      "Cannot read properties of undefined (reading 'fillSelect')"
+    ],
+    "inputs": [
+      {
+        "id": "org",
+        "name": "",
+        "type": "select-one",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "orgOther",
+        "name": "",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "focalName",
+        "name": "",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "focalPhone",
+        "name": "",
+        "type": "tel",
+        "value": "0000000000",
+        "valid": true
+      },
+      {
+        "id": "cadre",
+        "name": "",
+        "type": "select-one",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "dateAD",
+        "name": "",
+        "type": "date",
+        "value": "2026-10-01",
+        "valid": true
+      },
+      {
+        "id": "dateBS",
+        "name": "",
+        "type": "text",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "province",
+        "name": "",
+        "type": "select-one",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "district",
+        "name": "",
+        "type": "select-one",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "site",
+        "name": "",
+        "type": "select-one",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "ward",
+        "name": "",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "siteOther",
+        "name": "",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "nr",
+        "type": "radio",
+        "value": "NEW",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "nr",
+        "type": "radio",
+        "value": "RET",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "nr",
+        "type": "radio",
+        "value": "UNK",
+        "valid": true
+      },
+      {
+        "id": "ini",
+        "name": "",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "byear",
+        "name": "",
+        "type": "text",
+        "value": "2000",
+        "valid": true
+      },
+      {
+        "id": "sex",
+        "name": "",
+        "type": "select-one",
+        "value": "F",
+        "valid": true
+      },
+      {
+        "id": "mun",
+        "name": "",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "ageband",
+        "name": "",
+        "type": "select-one",
+        "value": "0-4",
+        "valid": true
+      },
+      {
+        "id": "disAsked",
+        "name": "",
+        "type": "select-one",
+        "value": "Y",
+        "valid": true
+      },
+      {
+        "id": "tgroup",
+        "name": "",
+        "type": "select-one",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "disab",
+        "name": "",
+        "type": "select-one",
+        "value": "Y",
+        "valid": true
+      },
+      {
+        "id": "service",
+        "name": "",
+        "type": "select-one",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "modality",
+        "name": "",
+        "type": "select-one",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "mins",
+        "name": "",
+        "type": "text",
+        "value": "15",
+        "valid": true
+      },
+      {
+        "id": "outcome",
+        "name": "",
+        "type": "select-one",
+        "value": "CLOSE",
+        "valid": true
+      },
+      {
+        "id": "notes",
+        "name": "",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "notgbv",
+        "name": "",
+        "type": "checkbox",
+        "value": "on",
+        "valid": true
+      },
+      {
+        "id": "reason",
+        "name": "",
+        "type": "select-one",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "urgency",
+        "name": "",
+        "type": "select-one",
+        "value": "SAME",
+        "valid": true
+      },
+      {
+        "id": "toType",
+        "name": "",
+        "type": "select-one",
+        "value": "PSC",
+        "valid": true
+      },
+      {
+        "id": "toName",
+        "name": "",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      }
+    ],
+    "records": {},
+    "csv": null,
+    "messages": [
+      ""
+    ],
+    "saved": false,
+    "exported": false
+  },
+  {
+    "file": "drafts/referral-outcome.html",
+    "page_errors": [
+      "Cannot read properties of undefined (reading 'fillSelect')",
+      "Cannot read properties of undefined (reading 'fillSelect')"
+    ],
+    "inputs": [
+      {
+        "id": "org",
+        "name": "",
+        "type": "select-one",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "direction",
+        "name": "",
+        "type": "select-one",
+        "value": "OUT",
+        "valid": true
+      },
+      {
+        "id": "dateAD",
+        "name": "",
+        "type": "date",
+        "value": "2026-10-01",
+        "valid": true
+      },
+      {
+        "id": "ccode",
+        "name": "",
+        "type": "text",
+        "value": "NP-ABCDE-12345",
+        "valid": true
+      },
+      {
+        "id": "arrived",
+        "name": "",
+        "type": "select-one",
+        "value": "Y",
+        "valid": true
+      },
+      {
+        "id": "arrDate",
+        "name": "",
+        "type": "date",
+        "value": "2026-10-02",
+        "valid": true
+      },
+      {
+        "id": "confBy",
+        "name": "",
+        "type": "select-one",
+        "value": "RECV",
+        "valid": true
+      },
+      {
+        "id": "barrier",
+        "name": "",
+        "type": "select-one",
+        "value": "DIST",
+        "valid": true
+      }
+    ],
+    "records": {},
+    "csv": null,
+    "messages": [
+      ""
+    ],
+    "saved": false,
+    "exported": false
+  },
+  {
+    "file": "drafts/service-point.html",
+    "page_errors": [
+      "L1 is not defined",
+      "L1 is not defined"
+    ],
+    "inputs": [
+      {
+        "id": "org",
+        "name": "org",
+        "type": "select-one",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "orgOther",
+        "name": "orgOther",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "orgType",
+        "name": "orgType",
+        "type": "select-one",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "focalName",
+        "name": "focalName",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "focalPhone",
+        "name": "focalPhone",
+        "type": "tel",
+        "value": "0000000000",
+        "valid": true
+      },
+      {
+        "id": "focalEmail",
+        "name": "focalEmail",
+        "type": "email",
+        "value": "synthetic@example.invalid",
+        "valid": true
+      },
+      {
+        "id": "district",
+        "name": "district",
+        "type": "select-one",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "palika",
+        "name": "palika",
+        "type": "select-one",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "site",
+        "name": "site",
+        "type": "select-one",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "siteOther",
+        "name": "siteOther",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "placeAddress",
+        "name": "placeAddress",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "languages",
+        "name": "languages",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "notTaken",
+        "name": "notTaken",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "modality",
+        "name": "modality",
+        "type": "select-one",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "modalityOther",
+        "name": "modalityOther",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "hours",
+        "name": "hours",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "access",
+        "name": "access",
+        "type": "select-one",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "cost",
+        "name": "cost",
+        "type": "select-one",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "orgPhone",
+        "name": "orgPhone",
+        "type": "tel",
+        "value": "0000000000",
+        "valid": true
+      },
+      {
+        "id": "authName",
+        "name": "authName",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "authRole",
+        "name": "authRole",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "okPublish",
+        "name": "",
+        "type": "checkbox",
+        "value": "on",
+        "valid": true
+      },
+      {
+        "id": "okCorrect",
+        "name": "",
+        "type": "checkbox",
+        "value": "on",
+        "valid": true
+      }
+    ],
+    "records": {},
+    "csv": null,
+    "messages": [
+      ""
+    ],
+    "saved": false,
+    "exported": false
+  },
+  {
+    "file": "drafts/provider-register.html",
+    "page_errors": [
+      "L1 is not defined",
+      "L1 is not defined"
+    ],
+    "inputs": [
+      {
+        "id": "providerName",
+        "name": "providerName",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "qualification",
+        "name": "qualification",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "cadre",
+        "name": "cadre",
+        "type": "select-one",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "cadreOther",
+        "name": "cadreOther",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "org",
+        "name": "org",
+        "type": "select-one",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "orgOther",
+        "name": "orgOther",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "district",
+        "name": "district",
+        "type": "select-one",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "palika",
+        "name": "palika",
+        "type": "select-one",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "place",
+        "name": "place",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "modality",
+        "name": "modality",
+        "type": "select-one",
+        "value": "",
+        "valid": true
+      },
+      {
+        "id": "languages",
+        "name": "languages",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "hours",
+        "name": "hours",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      },
+      {
+        "id": "providerPhone",
+        "name": "providerPhone",
+        "type": "tel",
+        "value": "0000000000",
+        "valid": true
+      },
+      {
+        "id": "okSelf",
+        "name": "",
+        "type": "checkbox",
+        "value": "on",
+        "valid": true
+      },
+      {
+        "id": "okPublish",
+        "name": "",
+        "type": "checkbox",
+        "value": "on",
+        "valid": true
+      }
+    ],
+    "records": {},
+    "csv": null,
+    "messages": [
+      ""
+    ],
+    "saved": false,
+    "exported": false
+  },
+  {
+    "file": "phq9.html",
+    "page_errors": [],
+    "inputs": [
+      {
+        "id": "org",
+        "name": "",
+        "type": "select-one",
+        "value": "TPO",
+        "valid": true
+      },
+      {
+        "id": "cadre",
+        "name": "",
+        "type": "select-one",
+        "value": "PSYT",
+        "valid": true
+      },
+      {
+        "id": "dateAD",
+        "name": "",
+        "type": "date",
+        "value": "2026-10-01",
+        "valid": true
+      },
+      {
+        "id": "ccode",
+        "name": "",
+        "type": "text",
+        "value": "NP-ABCDE-12345",
+        "valid": true
+      },
+      {
+        "id": "visit",
+        "name": "",
+        "type": "select-one",
+        "value": "1",
+        "valid": true
+      },
+      {
+        "id": "lang",
+        "name": "",
+        "type": "select-one",
+        "value": "EN",
+        "valid": true
+      },
+      {
+        "id": "consent",
+        "name": "",
+        "type": "checkbox",
+        "value": "on",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q0",
+        "type": "radio",
+        "value": "0",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q0",
+        "type": "radio",
+        "value": "1",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q0",
+        "type": "radio",
+        "value": "2",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q0",
+        "type": "radio",
+        "value": "3",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q1",
+        "type": "radio",
+        "value": "0",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q1",
+        "type": "radio",
+        "value": "1",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q1",
+        "type": "radio",
+        "value": "2",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q1",
+        "type": "radio",
+        "value": "3",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q2",
+        "type": "radio",
+        "value": "0",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q2",
+        "type": "radio",
+        "value": "1",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q2",
+        "type": "radio",
+        "value": "2",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q2",
+        "type": "radio",
+        "value": "3",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q3",
+        "type": "radio",
+        "value": "0",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q3",
+        "type": "radio",
+        "value": "1",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q3",
+        "type": "radio",
+        "value": "2",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q3",
+        "type": "radio",
+        "value": "3",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q4",
+        "type": "radio",
+        "value": "0",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q4",
+        "type": "radio",
+        "value": "1",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q4",
+        "type": "radio",
+        "value": "2",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q4",
+        "type": "radio",
+        "value": "3",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q5",
+        "type": "radio",
+        "value": "0",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q5",
+        "type": "radio",
+        "value": "1",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q5",
+        "type": "radio",
+        "value": "2",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q5",
+        "type": "radio",
+        "value": "3",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q6",
+        "type": "radio",
+        "value": "0",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q6",
+        "type": "radio",
+        "value": "1",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q6",
+        "type": "radio",
+        "value": "2",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q6",
+        "type": "radio",
+        "value": "3",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q7",
+        "type": "radio",
+        "value": "0",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q7",
+        "type": "radio",
+        "value": "1",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q7",
+        "type": "radio",
+        "value": "2",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q7",
+        "type": "radio",
+        "value": "3",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q8",
+        "type": "radio",
+        "value": "0",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q8",
+        "type": "radio",
+        "value": "1",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q8",
+        "type": "radio",
+        "value": "2",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "q8",
+        "type": "radio",
+        "value": "3",
+        "valid": true
+      },
+      {
+        "id": "fx",
+        "name": "",
+        "type": "select-one",
+        "value": "0",
+        "valid": true
+      }
+    ],
+    "records": {
+      "mhpss-np-l1-phq9-v1": [
+        {
+          "schema": "mhpss-np-phq9/0.1.0-draft",
+          "kind": "phq9",
+          "instrument": "PHQ-9",
+          "item_language": "EN",
+          "nepali_validated_text_used": false,
+          "org": "TPO",
+          "administered_by": "PSYT",
+          "date_ad": "2026-10-01",
+          "contact_code": "NP-ABCDE-12345",
+          "administration": "1",
+          "consent_recorded": true,
+          "q1": 1,
+          "q2": 1,
+          "q3": 1,
+          "q4": 1,
+          "q5": 1,
+          "q6": 1,
+          "q7": 1,
+          "q8": 1,
+          "q9": 1,
+          "total": 9,
+          "band": "Mild",
+          "at_or_above_nepal_threshold": false,
+          "functional_difficulty": "0",
+          "item9_positive": true,
+          "is_diagnosis": false,
+          "_saved": "2026-10-12T11:46:59.086Z"
+        }
+      ]
+    },
+    "csv": "schema,kind,instrument,item_language,nepali_validated_text_used,org,administered_by,date_ad,contact_code,administration,consent_recorded,q1,q2,q3,q4,q5,q6,q7,q8,q9,total,band,at_or_above_nepal_threshold,functional_difficulty,item9_positive,is_diagnosis,_saved\nmhpss-np-phq9/0.1.0-draft,phq9,PHQ-9,EN,false,TPO,PSYT,2026-10-01,NP-ABCDE-12345,1,true,1,1,1,1,1,1,1,1,1,9,Mild,false,0,true,false,2026-10-12T11:46:59.086Z\n",
+    "messages": [
+      "Saved on this device. The record goes to the coordination register when there is signal."
+    ],
+    "saved": true,
+    "exported": true,
+    "dictionary_sha256": "928d9bdc118ca83938de5bcbfbc161ca0d5d08849e0b00d5294fb98aca1a32eb",
+    "languages": {
+      "en": {
+        "items": [
+          {
+            "key": "phq9.item1",
+            "text": "Little interest or pleasure in doing things",
+            "dictionary": "Little interest or pleasure in doing things"
+          },
+          {
+            "key": "phq9.item2",
+            "text": "Feeling down, depressed, or hopeless",
+            "dictionary": "Feeling down, depressed, or hopeless"
+          },
+          {
+            "key": "phq9.item3",
+            "text": "Trouble falling or staying asleep, or sleeping too much",
+            "dictionary": "Trouble falling or staying asleep, or sleeping too much"
+          },
+          {
+            "key": "phq9.item4",
+            "text": "Feeling tired or having little energy",
+            "dictionary": "Feeling tired or having little energy"
+          },
+          {
+            "key": "phq9.item5",
+            "text": "Poor appetite or overeating",
+            "dictionary": "Poor appetite or overeating"
+          },
+          {
+            "key": "phq9.item6",
+            "text": "Feeling bad about yourself — or that you are a failure or have let yourself or your family down",
+            "dictionary": "Feeling bad about yourself — or that you are a failure or have let yourself or your family down"
+          },
+          {
+            "key": "phq9.item7",
+            "text": "Trouble concentrating on things, such as reading the newspaper or watching television",
+            "dictionary": "Trouble concentrating on things, such as reading the newspaper or watching television"
+          },
+          {
+            "key": "phq9.item8",
+            "text": "Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual",
+            "dictionary": "Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual"
+          },
+          {
+            "key": "phq9.item9",
+            "text": "Thoughts that you would be better off dead or of hurting yourself in some way",
+            "dictionary": "Thoughts that you would be better off dead or of hurting yourself in some way"
+          }
+        ],
+        "risk": "<div class=\"banner stop\" style=\"margin:14px 0 0\" data-i18n=\"phq9.item9Instruction\">&lt;b&gt;Item 9 is positive. Do not close this form and move on.&lt;/b&gt; Stay with the person, ask directly about thoughts of suicide and about means and plan, and follow your organisation's referral pathway now — record it on the &lt;a href=\"referral.html\"&gt;referral form&lt;/a&gt;. If your organisation has no pathway for this, that is the gap to raise at the Technical Working Group, and it should be raised before this instrument is used in the field at all. The answer to item 9 is kept in the record so that a positive answer can be audited against whether a referral followed.</div>",
+        "ribbon": "Validated Nepali instrument · Kohrt et al., 2016 · items and scale in Nepali, English on switch · saved on this phone, sent to the coordination register when there is signal"
+      },
+      "ne": {
+        "items": [
+          {
+            "key": "phq9.item1",
+            "text": "गएको २ हप्तामा तपाईं अन्य व्यक्तिहरू जति रमाउँछन्, त्यत्तिको रमाउन नसक्ने/खुसीहुन नसक्ने वा काम गर्न मन नलाग्ने कत्तिको भएको थियो ?",
+            "dictionary": "गएको २ हप्तामा तपाईं अन्य व्यक्तिहरू जति रमाउँछन्, त्यत्तिको रमाउन नसक्ने/खुसीहुन नसक्ने वा काम गर्न मन नलाग्ने कत्तिको भएको थियो ?"
+          },
+          {
+            "key": "phq9.item2",
+            "text": "गएको २ हप्तामा तपाईलार्ई, दिक्क लाग्ने, निरास हुने वा केहीगर्न सक्दिन जस्तो लाग्ने कत्तिको भएको थियो ?",
+            "dictionary": "गएको २ हप्तामा तपाईलार्ई, दिक्क लाग्ने, निरास हुने वा केहीगर्न सक्दिन जस्तो लाग्ने कत्तिको भएको थियो ?"
+          },
+          {
+            "key": "phq9.item3",
+            "text": "गएको २ हप्तामा तपाईं राम्ररी सुत्न नसक्ने वा निन्द्रा मस्त नआउने वा अघिपछि भन्दा धेरै सुत्ने वा धेरै निन्द्रा लाग्ने कत्तिको भएको थियो ?",
+            "dictionary": "गएको २ हप्तामा तपाईं राम्ररी सुत्न नसक्ने वा निन्द्रा मस्त नआउने वा अघिपछि भन्दा धेरै सुत्ने वा धेरै निन्द्रा लाग्ने कत्तिको भएको थियो ?"
+          },
+          {
+            "key": "phq9.item4",
+            "text": "गएको २ हप्तामा तपाईंलाई थकान महशुस हुने, शक्ति वा तागत् कम हुने कत्तिको महशुस भएको थियो ?",
+            "dictionary": "गएको २ हप्तामा तपाईंलाई थकान महशुस हुने, शक्ति वा तागत् कम हुने कत्तिको महशुस भएको थियो ?"
+          },
+          {
+            "key": "phq9.item5",
+            "text": "गएको २ हप्तामा तपाईंलाई खानाखान मन नलाग्ने वा रुचि नहुने वा अघिपछि भन्दा धेरै खान मन लाग्ने कत्तिको भएको थियो ?",
+            "dictionary": "गएको २ हप्तामा तपाईंलाई खानाखान मन नलाग्ने वा रुचि नहुने वा अघिपछि भन्दा धेरै खान मन लाग्ने कत्तिको भएको थियो ?"
+          },
+          {
+            "key": "phq9.item6",
+            "text": "गएको २ हप्तामा तपाईं आफूले आफूलाई दोषी ठान्ने वा आफ्नो कारणले गर्दा आफू असफल भएको वा परिवार तल परेको कत्तिको महशुस गर्नु भएको थियो ? (जस्तैःआफ्नो कारणले गर्दा समुदायमा आफ्नो तथा आफ्नो परिवारको ईज्जत गुमेको महशुस गर्ने )",
+            "dictionary": "गएको २ हप्तामा तपाईं आफूले आफूलाई दोषी ठान्ने वा आफ्नो कारणले गर्दा आफू असफल भएको वा परिवार तल परेको कत्तिको महशुस गर्नु भएको थियो ? (जस्तैःआफ्नो कारणले गर्दा समुदायमा आफ्नो तथा आफ्नो परिवारको ईज्जत गुमेको महशुस गर्ने )"
+          },
+          {
+            "key": "phq9.item7",
+            "text": "गएको २ हप्तामा तपाईंलाई ध्यान केन्द्रित गर्न वा एक चित्त हुन वा एक सुरले काम गर्न गाह्रो हुने कत्तिको भएको थियो ?(जस्तैः पत्रपत्रिका पढ्न वा टी.भी. हेर्न, चामल केलाउन, पात गााँस्न, तरकारी पकाउन, घाँस काट्न, ध्यान दिएर कुनै पनि काम गर्न आदि)",
+            "dictionary": "गएको २ हप्तामा तपाईंलाई ध्यान केन्द्रित गर्न वा एक चित्त हुन वा एक सुरले काम गर्न गाह्रो हुने कत्तिको भएको थियो ?(जस्तैः पत्रपत्रिका पढ्न वा टी.भी. हेर्न, चामल केलाउन, पात गााँस्न, तरकारी पकाउन, घाँस काट्न, ध्यान दिएर कुनै पनि काम गर्न आदि)"
+          },
+          {
+            "key": "phq9.item8",
+            "text": "गएको २ हप्तामा अरू व्यक्तिले पनि याद गर्ने गरी तपार्इं बिस्तारै बोल्ने वाहिड्ने गर्नुभएको अथवा छट्पट्टीभएर चाहिने भन्दा बढी हिंडडुल गर्नर्े कत्तिको गर्नुभएको थियो ?",
+            "dictionary": "गएको २ हप्तामा अरू व्यक्तिले पनि याद गर्ने गरी तपार्इं बिस्तारै बोल्ने वाहिड्ने गर्नुभएको अथवा छट्पट्टीभएर चाहिने भन्दा बढी हिंडडुल गर्नर्े कत्तिको गर्नुभएको थियो ?"
+          },
+          {
+            "key": "phq9.item9",
+            "text": "गएको २ हप्तामातपाईंलाई मरौं मरौं जस्तो लाग्ने, आफ्नो ज्यान आफैं लिने वा आत्महत्या गर्ने खालका विचारहरू कत्तिको आयो ? (जस्तैः हातकाट्ने, विष सेवनगर्ने, हामफाल्ने, भित्तामाटाउको ठोक्काउने आदि)",
+            "dictionary": "गएको २ हप्तामातपाईंलाई मरौं मरौं जस्तो लाग्ने, आफ्नो ज्यान आफैं लिने वा आत्महत्या गर्ने खालका विचारहरू कत्तिको आयो ? (जस्तैः हातकाट्ने, विष सेवनगर्ने, हामफाल्ने, भित्तामाटाउको ठोक्काउने आदि)"
+          }
+        ],
+        "risk": "<div class=\"banner stop i18n-kept\" style=\"margin:14px 0 0\" data-i18n=\"phq9.item9Instruction\">&lt;b&gt;Item 9 is positive. Do not close this form and move on.&lt;/b&gt; Stay with the person, ask directly about thoughts of suicide and about means and plan, and follow your organisation's referral pathway now — record it on the &lt;a href=\"referral.html\"&gt;referral form&lt;/a&gt;. If your organisation has no pathway for this, that is the gap to raise at the Technical Working Group, and it should be raised before this instrument is used in the field at all. The answer to item 9 is kept in the record so that a positive answer can be audited against whether a referral followed.</div>",
+        "ribbon": "प्रमाणीकृत नेपाली संस्करण · कोहर्त एवं अन्य, २०१६ · प्रश्न र उत्तर-विकल्प नेपालीमा, अंग्रेजीमा स्विच गर्न मिल्छ · यही फोनमा सुरक्षित, नेटवर्क भएपछि समन्वय रजिस्टरमा पठाइन्छ"
+      }
+    }
+  },
+  {
+    "file": "selfreport.html",
+    "page_errors": [],
+    "inputs": [
+      {
+        "id": "site",
+        "name": "",
+        "type": "select-one",
+        "value": "RAS-01",
+        "valid": true
+      },
+      {
+        "id": "ageband",
+        "name": "",
+        "type": "select-one",
+        "value": "0-4",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "cope",
+        "type": "radio",
+        "value": "4",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "cope",
+        "type": "radio",
+        "value": "3",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "cope",
+        "type": "radio",
+        "value": "2",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "cope",
+        "type": "radio",
+        "value": "1",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "cope",
+        "type": "radio",
+        "value": "0",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "need",
+        "type": "radio",
+        "value": "TALK",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "need",
+        "type": "radio",
+        "value": "NEWS",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "need",
+        "type": "radio",
+        "value": "SLEEP",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "need",
+        "type": "radio",
+        "value": "CHILD",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "need",
+        "type": "radio",
+        "value": "DOC",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "need",
+        "type": "radio",
+        "value": "WORK",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "need",
+        "type": "radio",
+        "value": "HEALTH",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "need",
+        "type": "radio",
+        "value": "OTH",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "know",
+        "type": "radio",
+        "value": "Y",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "know",
+        "type": "radio",
+        "value": "N",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "know",
+        "type": "radio",
+        "value": "UNS",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "reach",
+        "type": "radio",
+        "value": "Y",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "reach",
+        "type": "radio",
+        "value": "TRIED",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "reach",
+        "type": "radio",
+        "value": "N",
+        "valid": true
+      },
+      {
+        "id": "",
+        "name": "reach",
+        "type": "radio",
+        "value": "NA",
+        "valid": true
+      },
+      {
+        "id": "say",
+        "name": "",
+        "type": "text",
+        "value": "SYNTHETIC ONLY",
+        "valid": true
+      }
+    ],
+    "records": {
+      "mhpss-np-l1-selfreport-v1": [
+        {
+          "schema": "mhpss-np-selfreport/0.1.0-draft",
+          "kind": "self_report",
+          "anonymous": true,
+          "contact_code": null,
+          "site": "RAS-01",
+          "age_band": "0-4",
+          "coping": "1",
+          "need": "TALK",
+          "knows_where": "Y",
+          "could_reach": "Y",
+          "free_text": "SYNTHETIC ONLY",
+          "free_text_reviewed_by_human": false,
+          "_saved": "2026-10-12T11:46:59.893Z"
+        }
+      ]
+    },
+    "csv": "schema,kind,anonymous,contact_code,site,age_band,coping,need,knows_where,could_reach,free_text,free_text_reviewed_by_human,_saved\nmhpss-np-selfreport/0.1.0-draft,self_report,true,,RAS-01,0-4,1,TALK,Y,Y,SYNTHETIC ONLY,false,2026-10-12T11:46:59.893Z\n",
+    "messages": [
+      "Thank you. Your answer was saved on this device, with nothing attached to it that could identify you. Remember that nobody can contact you about it — if you want support, speak to a worker at this site."
+    ],
+    "saved": true,
+    "exported": true
+  }
+]

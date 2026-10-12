@@ -240,10 +240,7 @@
         <button type="button" class="btn grey" id="clearBtn" data-i18n="tr.clear">Clear everything on this device</button>
         <span class="xs" id="count"></span>
       </div>
-      <div class="f" style="margin-top:16px">
-        <label data-i18n="tr.payLab">What would be sent, if there were anywhere to send it</label>
-        <pre id="payload" class="pay">—</pre>
-      </div>
+
     </div>
   </form>
 </div>
@@ -400,7 +397,7 @@
       if (!x.district) e.push("Choose the district the participants work in (" + n + ").");
       if (!x.palika) e.push("Choose the palika the participants work in (" + n + ").");
       if (!x.cadre) e.push("Choose the cadre (" + n + ").");
-      if (SEX.some(function (s) { return Number.isNaN(x[s]); })) e.push("Counts must be whole numbers, zero or more (" + n + ").");
+      if (SEX.some(function (s) { return x[s] === null || Number.isNaN(x[s]); })) e.push("Enter every sex count explicitly, including zero; counts must be whole numbers, zero or more (" + n + ").");
       if (x.total === 0) e.push("A palika row with no one in it should be removed (" + n + ").");
     });
     var keys = rs.map(function (x) { return x.palika + "|" + x.cadre; });
@@ -427,7 +424,7 @@
       ? "Counts are reported by the lead organisation."
       : (total ? total + " people trained · " + places + " palika(s) · " + cadres + " cadre(s)"
                : "No participants entered yet.");
-    $("payload").textContent = JSON.stringify(record(), null, 2);
+    var pv = $("payload"); if (pv) pv.textContent = JSON.stringify(record(), null, 2);
   }
   $("f").addEventListener("input", refresh);
   $("f").addEventListener("change", refresh);
@@ -458,7 +455,7 @@
   $("csvBtn").addEventListener("click", function () {
     var list = L.all(KIND);
     if (!list.length) { alert("Nothing saved on this device yet."); return; }
-    L.download("mhpss_np_training_" + L.stamp() + ".csv", L.toCSV(list, COLS), "text/csv");
+    L.download("mhpss_np_training_" + L.stamp() + ".csv", L.toCSV(list.map(function (r) { var row = Object.assign({}, r); row.participants = JSON.stringify(r.participants); row.partners = JSON.stringify(r.partners); return row; }), COLS), "text/csv");
   });
   $("clearBtn").addEventListener("click", function () {
     if (!L.all(KIND).length) { alert("Nothing saved on this device yet."); return; }
