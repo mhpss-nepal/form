@@ -361,6 +361,23 @@ body.institutional-utility .empty{color:var(--iu-muted)}
   .a11y-skip:focus{left:0}
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 </style>
+<style>
+/* The activity grid. Activities down the left, sex and the five age groups
+   across the top; a row whose sex total and age total disagree is marked, so
+   the filer sees it before Save does. */
+.actgrid { overflow-x: auto; }
+.actgrid table { min-width: 760px; }
+.actgrid th.grp { text-align: center; font-size: .82rem; letter-spacing: .02em; }
+.actgrid td.actcol, .actgrid th.actcol { text-align: left; min-width: 15rem; }
+.actgrid tr.grouphead td { font-weight: 700; padding-top: 1rem; background: none; }
+.actgrid tr.describerow td { padding-top: 0; }
+.actgrid tr.describerow label { display: block; font-size: .85rem; margin: 0 0 .25rem 0; }
+.actgrid tr.describerow input { width: 100%; max-width: 32rem; }
+.actgrid tr.mismatch td.actcol { box-shadow: inset 3px 0 0 #8f3b00; }
+.actgrid tr.mismatch td.rt span { color: #8f3b00; font-weight: 700; }
+.actgrid tfoot tr.tot td { font-weight: 700; border-top: 2px solid currentColor; }
+.actgrid input { width: 4.2rem; }
+</style>
 </head>
 <body class="fx institutional-utility">
 <a class="a11y-skip" href="#main" data-i18n="a11y.skip">Skip to the form</a>
@@ -533,43 +550,78 @@ body.institutional-utility .empty{color:var(--iu-muted)}
       </div>
     </div>
 
-    <!-- 3 · WHAT -->
+    <!-- 3 · WHAT WAS DONE, AND FOR WHOM
+         One report is one day at one site. Every activity that ran that day gets
+         its own row, with the people who took part in it counted by sex and by
+         age. Sex and age are two counts of the same people, so the two row
+         totals have to agree -- the rule printed on the EDCD form. The day's own
+         figure is asked separately and counted once, so a person who took part
+         in three activities is three row entries but one person for the day. -->
     <div class="card" id="s3">
-      <div class="step"><span class="n">3</span><h2 data-i18n="f4.h3what">What was done</h2></div>
+      <div class="step"><span class="n">3</span><h2 data-i18n="f4.h3what">What was done</h2><span class="hint" data-i18n="f4.h3hint">one row per activity that ran today</span></div>
+
+      <div class="help" data-i18n="f4.gridHelp">Fill a row for each activity that ran at this site today. Within a row, sex and age are two counts of the same people, so the two totals must agree. Leave a row blank if that activity did not run.</div>
+
+      <div class="dis actgrid">
+        <table id="actGrid">
+          <caption class="sr-only" data-i18n="f4.gridCaption">Activities, with the people who took part counted by sex and by age</caption>
+          <thead>
+            <tr>
+              <th scope="col" rowspan="2" class="actcol" data-i18n="f4.hActivity">Activity</th>
+              <th scope="colgroup" colspan="4" class="grp" data-i18n="f4.hSexGrp">Sex</th>
+              <th scope="colgroup" colspan="6" class="grp" data-i18n="f4.hAgeGrp">Age</th>
+            </tr>
+            <tr>
+              <th scope="col" data-i18n="f4.hFemale">Female</th>
+              <th scope="col" data-i18n="f4.hMale">Male</th>
+              <th scope="col" data-i18n="f4.hOther">Not recorded</th>
+              <th scope="col" class="rt" data-i18n="f4.hRow">Total</th>
+              <th scope="col">0&ndash;4</th>
+              <th scope="col">5&ndash;9</th>
+              <th scope="col">10&ndash;17</th>
+              <th scope="col">18&ndash;59</th>
+              <th scope="col">60+</th>
+              <th scope="col" class="rt" data-i18n="f4.hRow">Total</th>
+            </tr>
+          </thead>
+          <tbody id="actBody"></tbody>
+          <tfoot>
+            <tr class="tot">
+              <td data-i18n="f4.allAct">All activities</td>
+              <td class="rt"><span id="gF">&mdash;</span></td>
+              <td class="rt"><span id="gM">&mdash;</span></td>
+              <td class="rt"><span id="gO">&mdash;</span></td>
+              <td class="rt"><span id="gSex">&mdash;</span></td>
+              <td class="rt"><span id="g04">&mdash;</span></td>
+              <td class="rt"><span id="g5to9">&mdash;</span></td>
+              <td class="rt"><span id="g10to17">&mdash;</span></td>
+              <td class="rt"><span id="g18to59">&mdash;</span></td>
+              <td class="rt"><span id="g60">&mdash;</span></td>
+              <td class="rt"><span id="gAge">&mdash;</span></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="help" data-i18n="f4.ageHelp">Five age groups: 0&ndash;4, 5&ndash;9, 10&ndash;17, 18&ndash;59, 60+. Leave a row blank rather than partly filled; within a row the sex total and the age total are checked against each other.</div>
 
       <div class="f">
-        <label for="activity" data-i18n="f4.actLab">Activity</label>
-        <select id="activity" name="activity" aria-required="true"></select>
-        <!-- The list shows plain words only. The IASC layer and the 4Ws
-             subcode behind each option live in codes.js and are read by the
-             register, the dashboard and the exports -- one code, two readings
-             (17 Sep 2026). Nothing IASC is shown to the reporter. -->
-        <div class="help" id="activityHelp" data-i18n="f4.actHelp">One activity per report. Two different activities in one session are two reports.</div>
-      </div>
-      <div class="f" id="activityOtherWrap" hidden>
-        <label for="activityOther" data-i18n="f4.actOtherLab">Describe the activity</label>
-        <input type="text" id="activityOther" name="activityOther" placeholder="What was done — no names" data-i18n-ph="f4.phActOther">
-      </div>
-      <div class="row">
-        <div class="f">
-          <label for="status" data-i18n="f4.statusLab">Status</label>
-          <select id="status" name="status"></select>
-        </div>
+        <label for="status" data-i18n="f4.statusLab">Status</label>
+        <select id="status" name="status"></select>
       </div>
 
       <div class="f">
-        <label for="description" data-i18n="f4.descLab" data-i18n-html>One-line description <span class="opt">— optional</span></label>
+        <label for="description" data-i18n="f4.descLab" data-i18n-html>One-line description <span class="opt">&mdash; optional</span></label>
         <textarea id="description" name="description" maxlength="220" placeholder="What happened, in one sentence. No names, no clinical detail." data-i18n-ph="f4.phDesc"></textarea>
         <div class="help" data-i18n="f4.descHelp" data-i18n-html><span id="descCount">0</span>/220 characters.</div>
       </div>
     </div>
 
-    <!-- 4 · FOR WHOM -->
+    <!-- 4 · THE DAY, AND WHO WAS THERE -->
     <div class="card" id="s4">
       <div class="step"><span class="n">4</span><h2 data-i18n="f4.h4">For whom</h2><span class="hint" data-i18n="f4.h4hint">counts only, never a list</span></div>
 
       <div class="f">
-        <label data-i18n="f4.tgLab" id="tgsLab">Target group — select all that apply</label>
+        <label data-i18n="f4.tgLab" id="tgsLab">Target group &mdash; select all that apply</label>
         <div class="chks" id="tgs" role="group" aria-labelledby="tgsLab"></div>
       </div>
       <div class="f" id="tgOtherWrap" hidden>
@@ -577,153 +629,85 @@ body.institutional-utility .empty{color:var(--iu-muted)}
         <input type="text" id="targetGroupOther" name="targetGroupOther" placeholder="Name the group — never a person" data-i18n-ph="f4.phTgOther">
       </div>
 
-      <!-- Attendance. Since 17 Sep 2026 (afternoon) the form no longer asks
-           what the figure counts: a report is one session and the figure is
-           everyone who took part in it, once. Summed across sessions that is
-           a count of attendances (service contacts), which is what the
-           record says (basis CONTACTS, set by the form, never asked). Distinct
-           people will come from the optional attendance list, not from here. -->
-      <div class="f" style="max-width:300px">
-        <label for="reachedTotal" data-i18n="f4.reachLab">Attendance</label>
+      <div class="f" style="max-width:340px">
+        <label for="reachedTotal" data-i18n="f4.reachLab">People here today, counted once</label>
         <input type="number" id="reachedTotal" name="reachedTotal" min="0" step="1" inputmode="numeric" placeholder="0" aria-required="true">
-        <div class="help" data-i18n="f4.reachHelp">Everyone who took part in this session, counted once. A person who comes to another session is counted there again.</div>
+        <div class="help" data-i18n="f4.reachHelp">Everyone who took part at this site today, each person counted once however many activities they joined. It is never smaller than the largest activity row, and never larger than all the rows added together.</div>
       </div>
 
-      <div class="f" style="max-width:300px">
+      <div class="f" style="max-width:340px">
         <label for="newToday" data-i18n="f4.newLab">Of whom new today</label>
         <input type="number" id="newToday" name="newToday" min="0" step="1" inputmode="numeric" placeholder="0" aria-required="true">
-        <div class="help" data-i18n="f4.newHelp">People at this session taking part for the first time. Required for every activity. It sits inside the attendance and is never added to it.</div>
+        <div class="help" data-i18n="f4.newHelp">People here today taking part for the first time. Required every day. It sits inside the day's figure and is never added to it.</div>
       </div>
       <div class="help" id="countsHeld" hidden data-i18n="f4.roleHeld">The lead organisation reports the figures for this activity, so the counts are switched off here.</div>
 
-      <label style="margin-top:6px" data-i18n="f4.disLabel" data-i18n-html>Disaggregation <span class="opt">— optional, but leave a row blank rather than partly filled</span></label>
-      <div class="dis">
-        <table>
-      <caption class="sr-only">Age</caption>
-          <thead><tr>
-            <th scope="col" data-i18n="f4.hAge">Age</th>
-            <th scope="col" data-i18n="f4.hFemale">Female</th>
-            <th scope="col" data-i18n="f4.hMale">Male</th>
-            <th scope="col" data-i18n="f4.hOther">Not recorded</th>
-            <th scope="col" class="rt" data-i18n="f4.hRow">Total</th>
-          </tr></thead>
-          <tbody>
-            <tr>
-              <td><b>0–4</b></td>
-              <td><input type="number" id="f04" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Female, age 0 to 4"></td>
-              <td><input type="number" id="m04" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Male, age 0 to 4"></td>
-              <td><input type="number" id="o04" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Sex not recorded, age 0 to 4"></td>
-              <td class="rt"><span id="r04">—</span></td>
-            </tr>
-            <tr>
-              <td><b>5–9</b></td>
-              <td><input type="number" id="f5to9" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Female, age 5 to 9"></td>
-              <td><input type="number" id="m5to9" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Male, age 5 to 9"></td>
-              <td><input type="number" id="o5to9" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Sex not recorded, age 5 to 9"></td>
-              <td class="rt"><span id="r5to9">—</span></td>
-            </tr>
-            <tr>
-              <td><b>10–17</b></td>
-              <td><input type="number" id="f10to17" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Female, age 10 to 17"></td>
-              <td><input type="number" id="m10to17" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Male, age 10 to 17"></td>
-              <td><input type="number" id="o10to17" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Sex not recorded, age 10 to 17"></td>
-              <td class="rt"><span id="r10to17">—</span></td>
-            </tr>
-            <tr>
-              <td><b>18–59</b></td>
-              <td><input type="number" id="f18to59" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Female, age 18 to 59"></td>
-              <td><input type="number" id="m18to59" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Male, age 18 to 59"></td>
-              <td><input type="number" id="o18to59" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Sex not recorded, age 18 to 59"></td>
-              <td class="rt"><span id="r18to59">—</span></td>
-            </tr>
-            <tr>
-              <td><b>60+</b></td>
-              <td><input type="number" id="f60" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Female, age 60 and over"></td>
-              <td><input type="number" id="m60" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Male, age 60 and over"></td>
-              <td><input type="number" id="o60" min="0" step="1" inputmode="numeric" placeholder="—" aria-label="Sex not recorded, age 60 and over"></td>
-              <td class="rt"><span id="r60">—</span></td>
-            </tr>
-          </tbody>
-          <tfoot><tr>
-            <td data-i18n="f4.colTotal">All ages</td>
-            <td class="rt"><span id="cF">—</span></td>
-            <td class="rt"><span id="cM">—</span></td>
-            <td class="rt"><span id="cO">—</span></td>
-            <td class="rt"><span id="cAll">—</span></td>
-          </tr></tfoot>
-        </table>
-        <div class="help" data-i18n="f4.ageHelp">Five age groups: 0–4, 5–9, 10–17, 18–59, 60+. Leave a row blank rather than partly filled; the parts are checked against the attendance.</div>
-        <div class="tally" id="tally"><span data-i18n="f4.tally">Disaggregated sum</span><span id="tallyVal">0</span></div>
-      </div>
+      <div class="tally" id="tally"><span data-i18n="f4.tally">Largest activity row</span><span id="tallyVal">0</span></div>
 
-      <!-- The rollup is shown on the form on purpose, labelled by the age
-           where the five groups split (15), never as "under 18": two of the
-           groups agreed on 17 Sep 2026 cross the 18-year line, and how the
-           national return is compiled from them is a ruling still to come. -->
       <div class="rollup">
         <span data-i18n="f4.rollLabel">Adds up to</span>
-        <span class="rollv"><b id="rollU18">—</b> <span data-i18n="f4.rollUnder18">under 18</span> &nbsp;·&nbsp; <b id="roll18">—</b> <span data-i18n="f4.rollOver18">18 and over</span></span>
+        <span class="rollv"><b id="rollU18">&mdash;</b> <span data-i18n="f4.rollUnder18">under 18</span> &nbsp;&middot;&nbsp; <b id="roll18">&mdash;</b> <span data-i18n="f4.rollOver18">18 and over</span></span>
       </div>
 
       <fieldset class="ofwhom">
-        <legend class="ofw-h" data-i18n="f4.ofwHead" data-i18n-html>Seen at the session <span>— count what you can see; already inside the total, <b>never added to it</b></span></legend>
+        <legend class="ofw-h" data-i18n="f4.ofwHead" data-i18n-html>Seen at the session <span>&mdash; count what you can see; already inside the day's figure, <b>never added to it</b></span></legend>
         <div class="ofw-g">
           <div>
             <label for="ofChildAlone" data-i18n="f4.ofChildAlone">Children without an adult with them</label>
-            <input type="number" id="ofChildAlone" min="0" step="1" inputmode="numeric" placeholder="—">
+            <input type="number" id="ofChildAlone" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
           </div>
           <div>
             <label for="ofPreg" data-i18n="f4.ofPreg">Pregnant women or women with an infant</label>
-            <input type="number" id="ofPreg" min="0" step="1" inputmode="numeric" placeholder="—">
+            <input type="number" id="ofPreg" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
           </div>
           <div>
             <label for="ofPwd" data-i18n="f4.ofPwd">Visible disability or needing help to move</label>
-            <input type="number" id="ofPwd" min="0" step="1" inputmode="numeric" placeholder="—">
+            <input type="number" id="ofPwd" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
           </div>
           <div>
             <label for="ofInjured" data-i18n="f4.ofInjured">Visibly injured or unwell</label>
-            <input type="number" id="ofInjured" min="0" step="1" inputmode="numeric" placeholder="—">
+            <input type="number" id="ofInjured" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
           </div>
           <div>
-            <label for="ofDistress" data-i18n="f4.ofDistress">In acute distress — needed one-to-one attention</label>
-            <input type="number" id="ofDistress" min="0" step="1" inputmode="numeric" placeholder="—">
+            <label for="ofDistress" data-i18n="f4.ofDistress">In acute distress &mdash; needed one-to-one attention</label>
+            <input type="number" id="ofDistress" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
           </div>
-        </fieldset>
-      </div>
+        </div>
+      </fieldset>
 
       <fieldset class="ofwhom" id="disBlock" hidden>
         <legend class="ofw-h" data-i18n="f4.disHead" data-i18n-html>Persons with disabilities <span>&mdash; asked for by CMC-Nepal, 21 September 2026</span></legend>
         <div class="f">
-          <label for="disAsked" data-i18n="f4.disSession">Were the people at this session asked about disability?</label>
+          <label for="disAsked" data-i18n="f4.disSession">Were the people here today asked about disability?</label>
           <select id="disAsked">
             <option value="" data-i18n="f4.disAskBlank">&mdash; not asked &mdash;</option>
             <option value="Y" data-i18n="f4.disAskY">Yes</option>
             <option value="N" data-i18n="f4.disAskN">No</option>
           </select>
-          <div class="help" data-i18n="f4.disSessionHelp">One answer for the whole session, because this report covers many people. The per-person question, "Does the person identify themselves as a person with a disability?", is asked on the service-contact record, where one row is one person. Blank is recorded as "not asked", which is different from "No".</div>
+          <div class="help" data-i18n="f4.disSessionHelp">One answer for the whole day, because this report covers many people. The per-person question, "Does the person identify themselves as a person with a disability?", is asked on the service-contact record, where one row is one person. Blank is recorded as "not asked", which is different from "No".</div>
         </div>
-        <div class="ofw-g">
-          <div>
-            <label for="disF0_17" data-i18n="f4.disF0_17">Female, under 18</label>
-            <input type="number" id="disF0_17" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
+        <div id="disCounts" hidden>
+          <div class="ofw-g">
+            <div>
+              <label for="disF0_17" data-i18n="f4.disF0_17">Female, under 18</label>
+              <input type="number" id="disF0_17" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
+            </div>
+            <div>
+              <label for="disM0_17" data-i18n="f4.disM0_17">Male, under 18</label>
+              <input type="number" id="disM0_17" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
+            </div>
+            <div>
+              <label for="disF18" data-i18n="f4.disF18">Female, 18 and over</label>
+              <input type="number" id="disF18" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
+            </div>
+            <div>
+              <label for="disM18" data-i18n="f4.disM18">Male, 18 and over</label>
+              <input type="number" id="disM18" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
+            </div>
           </div>
-          <div>
-            <label for="disM0_17" data-i18n="f4.disM0_17">Male, under 18</label>
-            <input type="number" id="disM0_17" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
-          </div>
-          <div>
-            <label for="disF18" data-i18n="f4.disF18">Female, 18 and over</label>
-            <input type="number" id="disF18" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
-          </div>
-          <div>
-            <label for="disM18" data-i18n="f4.disM18">Male, 18 and over</label>
-            <input type="number" id="disM18" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
-          </div>
+          <p class="ofw-n" data-i18n="f4.disNote">Count what you can see, or what the person tells you. These are already inside the day's figure, so they are checked against it and never added to it or to each other. The type of disability is not asked here; leave the counts blank if you are not sure.</p>
         </div>
-        <p class="ofw-n" data-i18n="f4.disNote">Count what you can see, or what the person tells you. These are already inside the attendance total above, so they are checked against it and never added to it or to each other. The type of disability is not asked here; leave the counts blank if you are not sure.</p>
       </fieldset>
-
-
     </div>
 
     <!-- 5 · SUBMIT -->
@@ -918,34 +902,6 @@ body.institutional-utility .empty{color:var(--iu-muted)}
      needs to choose: the plain label, under its heading. The IASC layer and
      the 4Ws subcode behind each option are read from the same code by the
      register and the dashboard, never shown here. */
-  function fillActivities() {
-    var sel = $("activity"), keep = sel.value;
-    sel.innerHTML = "";
-    var o = document.createElement("option");
-    o.value = ""; o.textContent = C.ph("Select…"); sel.appendChild(o);
-    C.ACTIVITY_GROUPS.forEach(function (g) {
-      var items = C.ACTIVITIES.filter(function (a) { return a.group === g.code && !a.retired; });
-      if (!items.length) return;
-      var og = document.createElement("optgroup");
-      og.label = g.code + " · " + C.label(g);
-      /* alphabetical within the heading, by the label the reader sees; the
-         code follows the label so the sort reads naturally; "Other" last */
-      items = items.slice().sort(function (a, b) {
-        if (!!a.other !== !!b.other) return a.other ? 1 : -1;
-        return C.label(a).localeCompare(C.label(b), isNe() ? "ne" : "en", { sensitivity: "base" });
-      });
-      items.forEach(function (a) {
-        var op = document.createElement("option");
-        op.value = a.code; op.textContent = C.label(a) + "  ·  " + a.code;
-        og.appendChild(op);
-      });
-      sel.appendChild(og);
-    });
-    if (keep) sel.value = keep;
-    sel._refill = fillActivities;
-  }
-  fillActivities();
-
   /* Funding source is no longer asked on the field form (EDCD, 17 Sep
      2026): funding is collected from the organisations. The record keeps an
      empty donors list so exports and older readers see the same columns. */
@@ -976,7 +932,8 @@ body.institutional-utility .empty{color:var(--iu-muted)}
     }
     fillTargetGroups();
     disApply();
-    refreshSites(); activityHelp(); render();
+    buildGrid();
+    refreshSites(); render();
   });
   /* the "Other" text boxes, one per list (the activity list has its own
      rule below: "Other (describe)" is x.9 within a layer, or 9) */
@@ -999,7 +956,7 @@ body.institutional-utility .empty{color:var(--iu-muted)}
       el.disabled = partner;
     });
     $("countsHeld").hidden = !partner;
-    tally();
+    gridTally();
   }
   /* The disability detail is asked only when the disability target group is
      ticked (Adib, 27 Sep 2026): ticking it opens the counts, unticking it
@@ -1009,13 +966,211 @@ body.institutional-utility .empty{color:var(--iu-muted)}
     var on = !!(box && box.checked);
     $("disBlock").hidden = !on;
     if (!on) { ["disAsked", "disF0_17", "disM0_17", "disF18", "disM18"].forEach(function (id) { if ($(id)) $(id).value = ""; }); }
+    disCounts();
   }
+  /* The counts are asked only when the answer is Yes (Adib, 12 Oct 2026):
+     "not asked" and "No" both leave the boxes away, so a blank cannot be
+     read as a zero. Switching off Yes clears whatever was typed. */
+  function disCounts() {
+    var yes = $("disAsked") && $("disAsked").value === "Y";
+    var wrap = $("disCounts");
+    if (wrap) wrap.hidden = !yes;
+    if (!yes) { ["disF0_17", "disM0_17", "disF18", "disM18"].forEach(function (id) { if ($(id)) $(id).value = ""; }); }
+  }
+  /* ------------------------------------------------------------------
+     The activity grid (Adib, 12 Oct 2026, after the SORMAS layout read on
+     27 September): activities down the left, sex and then the five age
+     groups across the top. One report is one day at one site.
+
+     Within a row, sex and age are two counts of the same people, so the two
+     row totals must agree -- the rule printed above the EDCD grid. Across
+     rows nothing is added, because one person can take part in several
+     activities; the day's own figure is asked once, separately.
+     ------------------------------------------------------------------ */
+  /* The plain labels the form shows for the IASC layers. The IASC terms stay
+     in the backend, as agreed on 17 September; these are the same words the
+     EDCD form carries. */
+  var LAYER_NAME = {
+    "1": "1 \u00b7 Information and basic services",
+    "2": "2 \u00b7 Community and family activities",
+    "3": "3 \u00b7 Support for individuals and families",
+    "4": "4 \u00b7 Specialist mental health care",
+    "9": "9 \u00b7 Other activity"
+  };
+  var ACT_SEX = ["f", "m", "o"];
+  var ACT_AGE = S.BANDS.map(function (b) { return b.key; });
+  function actKey(code) { return "a" + String(code).replace(/\./g, "_"); }
+  function actId(code, part) { return actKey(code) + "_" + part; }
+
+  function activityRows() {
+    /* the current list, in the order the form shows it: grouped by layer,
+       alphabetical inside the layer, Other last -- the same ordering rule
+       every other list on this form follows */
+    var byLayer = sortForForm(C.ACTIVITIES, function (a) { return C.label(a); }, function (a) { return a.code; });
+    /* layer first, then the alphabetical order inside it, Other last within
+       the layer -- the display rule of 17 September applied to a grid */
+    return byLayer.slice().sort(function (x, y) {
+      var lx = String(x.code).split(".")[0], ly = String(y.code).split(".")[0];
+      if (lx !== ly) return lx < ly ? -1 : 1;
+      if (!!x.other !== !!y.other) return x.other ? 1 : -1;
+      return byLayer.indexOf(x) - byLayer.indexOf(y);
+    });
+  }
+
+  function buildGrid() {
+    var body = $("actBody");
+    if (!body) return;
+    var kept = {};
+    body.querySelectorAll("input").forEach(function (i) { if (i.value !== "") kept[i.id] = i.value; });
+    body.innerHTML = "";
+    var layerSeen = {};
+    activityRows().forEach(function (a) {
+      var layer = String(a.code).split(".")[0];
+      if (!layerSeen[layer]) {
+        layerSeen[layer] = true;
+        var hr = document.createElement("tr");
+        hr.className = "grouphead";
+        var hc = document.createElement("td");
+        hc.colSpan = 11;
+        hc.textContent = LAYER_NAME[layer] || "";
+        if (hc.textContent) { hr.appendChild(hc); body.appendChild(hr); }
+      }
+      var tr = document.createElement("tr");
+      var name = document.createElement("td");
+      name.className = "actcol";
+      name.textContent = C.label(a);
+      tr.appendChild(name);
+      var add = function (part, aria) {
+        var td = document.createElement("td");
+        var inp = document.createElement("input");
+        inp.type = "number"; inp.min = "0"; inp.step = "1";
+        inp.inputMode = "numeric"; inp.placeholder = "—";
+        inp.id = actId(a.code, part);
+        inp.setAttribute("aria-label", C.label(a) + " — " + aria);
+        if (kept[inp.id] !== undefined) inp.value = kept[inp.id];
+        td.appendChild(inp); tr.appendChild(td);
+      };
+      add("f", "female"); add("m", "male"); add("o", "sex not recorded");
+      var st = document.createElement("td");
+      st.className = "rt";
+      st.innerHTML = '<span id="' + actId(a.code, "st") + '">—</span>';
+      tr.appendChild(st);
+      S.BANDS.forEach(function (b) { add(b.key, "age " + b.label); });
+      var at = document.createElement("td");
+      at.className = "rt";
+      at.innerHTML = '<span id="' + actId(a.code, "at") + '">—</span>';
+      tr.appendChild(at);
+      body.appendChild(tr);
+
+      if (a.other) {
+        var dr = document.createElement("tr");
+        dr.className = "describerow";
+        var dc = document.createElement("td");
+        dc.colSpan = 11;
+        var lab = document.createElement("label");
+        lab.setAttribute("for", actId(a.code, "desc"));
+        lab.textContent = "Describe this activity";
+        lab.setAttribute("data-i18n", "f4.describeThis");
+        var di = document.createElement("input");
+        di.type = "text"; di.id = actId(a.code, "desc");
+        di.maxLength = 120;
+        di.placeholder = "What was done, in a few words \u2014 no names";
+        di.setAttribute("data-i18n-ph", "f4.describePh");
+        if (kept[di.id] !== undefined) di.value = kept[di.id];
+        dc.appendChild(lab); dc.appendChild(di); dr.appendChild(dc); body.appendChild(dr);
+      }
+    });
+    body.addEventListener("input", gridTally);
+    gridTally();
+  }
+
+  function numOf(id) {
+    var el = $(id);
+    if (!el) return 0;
+    var n = parseInt(el.value, 10);
+    return isFinite(n) && n >= 0 ? n : 0;
+  }
+  function anyOf(ids) { return ids.some(function (id) { return $(id) && $(id).value !== ""; }); }
+
+  function gridTally() {
+    var g = { f: 0, m: 0, o: 0, sex: 0, age: 0 };
+    var byBand = {};
+    S.BANDS.forEach(function (b) { byBand[b.key] = 0; });
+    var largest = 0, anyRow = false;
+    activityRows().forEach(function (a) {
+      var sexIds = ACT_SEX.map(function (k) { return actId(a.code, k); });
+      var ageIds = ACT_AGE.map(function (k) { return actId(a.code, k); });
+      var sexSum = sexIds.reduce(function (t, id) { return t + numOf(id); }, 0);
+      var ageSum = ageIds.reduce(function (t, id) { return t + numOf(id); }, 0);
+      var filled = anyOf(sexIds.concat(ageIds));
+      var st = $(actId(a.code, "st")), at = $(actId(a.code, "at"));
+      if (st) st.textContent = filled ? sexSum.toLocaleString() : "—";
+      if (at) at.textContent = filled ? ageSum.toLocaleString() : "—";
+      var row = st && st.parentElement ? st.parentElement.parentElement : null;
+      if (row) row.classList.toggle("mismatch", filled && sexSum !== ageSum);
+      if (filled) {
+        anyRow = true;
+        ACT_SEX.forEach(function (k) { g[k] += numOf(actId(a.code, k)); });
+        S.BANDS.forEach(function (b) { byBand[b.key] += numOf(actId(a.code, b.key)); });
+        g.sex += sexSum; g.age += ageSum;
+        if (sexSum > largest) largest = sexSum;
+        if (ageSum > largest) largest = ageSum;
+      }
+    });
+    var show = function (id, n) { var e = $(id); if (e) e.textContent = anyRow ? n.toLocaleString() : "—"; };
+    show("gF", g.f); show("gM", g.m); show("gO", g.o); show("gSex", g.sex);
+    S.BANDS.forEach(function (b) { show("g" + b.key, byBand[b.key]); });
+    show("gAge", g.age);
+
+    /* the fold, from the age columns of the whole grid */
+    var u18 = 0, o18 = 0;
+    S.BANDS.forEach(function (b) { if (b.child) { u18 += byBand[b.key]; } else { o18 += byBand[b.key]; } });
+    show("rollU18", u18); show("roll18", o18);
+
+    /* the day's figure against the rows */
+    var box = $("tally"), val = $("tallyVal");
+    var day = parseInt($("reachedTotal").value, 10);
+    if (val) val.textContent = anyRow ? String(largest) : "0";
+    if (box) {
+      box.className = "tally";
+      if (!anyRow || !isFinite(day)) { /* nothing to judge yet */ }
+      else if (day < largest) { box.className = "tally bad"; val.textContent = largest + " — more than the day's figure of " + day; }
+      else if (day > g.sex) { box.className = "tally bad"; val.textContent = largest + " — the day's figure of " + day + " is more than all rows together (" + g.sex + ")"; }
+      else { box.className = "tally good"; val.textContent = largest + " — inside the day's figure of " + day; }
+    }
+    return { largest: largest, sumRows: g.sex, any: anyRow };
+  }
+
+  function collectActivities() {
+    var out = [];
+    activityRows().forEach(function (a) {
+      var sexIds = ACT_SEX.map(function (k) { return actId(a.code, k); });
+      var ageIds = ACT_AGE.map(function (k) { return actId(a.code, k); });
+      if (!anyOf(sexIds.concat(ageIds))) return;
+      var row = { code: String(a.code), iascSub: a.iasc_sub || "" };
+      ACT_SEX.forEach(function (k) {
+        var el = $(actId(a.code, k));
+        row[{ f: "female", m: "male", o: "sexNotRecorded" }[k]] = el ? el.value : "";
+      });
+      S.BANDS.forEach(function (b) {
+        var el = $(actId(a.code, b.key));
+        row[b.key] = el ? el.value : "";
+      });
+      var d = $(actId(a.code, "desc"));
+      if (d) row.describe = d.value.trim();
+      out.push(row);
+    });
+    return out;
+  }
+
   $("tgs").addEventListener("change", function () {
     var other = $("tgs").querySelector('input[value="TG-OTH"]');
     $("tgOtherWrap").hidden = !(other && other.checked);
       disApply();
   });
   $("reportingRole").addEventListener("change", roleApply);
+  $("reachedTotal").addEventListener("input", gridTally);
+  $("disAsked").addEventListener("change", disCounts);
 
   /* what the dropdown says after a site that is not on the roster */
   function siteLabel(s) {
@@ -1115,16 +1270,7 @@ body.institutional-utility .empty{color:var(--iu-muted)}
   /* The help line under the activity follows the choice: the option's own
      plain-language note from codes.js. An "Other (describe)" option opens
      the description box. */
-  function activityHelp() {
-    var a = C.activityByCode[$("activity").value], el = $("activityHelp");
-    var h = a ? (isNe() && a.help_np ? a.help_np : a.help) : "";
-    var dflt = (window.I18N_STRINGS && window.I18N_STRINGS[isNe() ? "ne" : "en"] || {})["f4.actHelp"] || "One activity per report. Two different activities in one session are two reports.";
-    el.textContent = h ? h + (isNe() ? "।" : ".") : dflt;
-    $("activityOtherWrap").hidden = !(a && a.other);
-  }
-  $("activity").addEventListener("change", activityHelp);
-  $("org").addEventListener("change", function () { $("orgOtherWrap").hidden = this.value !== "OTHER"; });
-  refreshSites(); activityHelp();
+  refreshSites();
 
   /* the device's local date, never UTC: Nepal is UTC+05:45 (see store.js) */
   $("dateAD").max = S.todayLocal();
@@ -1171,42 +1317,10 @@ body.institutional-utility .empty{color:var(--iu-muted)}
   var filled = function (id) { return $(id).value !== ""; };
   var show = function (id, n, any) { $(id).textContent = any ? n.toLocaleString() : "—"; };
 
-  function tally() {
-    var any = partIds.some(filled);
-
-    /* row totals */
-    BANDS.forEach(function (b) {
-      var rowAny = filled(b.f) || filled(b.m) || filled(b.o);
-      show("r" + b.key, v(b.f) + v(b.m) + v(b.o), rowAny);
-    });
-
-    /* column totals */
-    var cF = 0, cM = 0, cO = 0;
-    BANDS.forEach(function (b) { cF += v(b.f); cM += v(b.m); cO += v(b.o); });
-    show("cF", cF, any); show("cM", cM, any); show("cO", cO, any);
-    show("cAll", cF + cM + cO, any);
-
-    /* the official fold, on screen */
-    var u18 = 0, o18 = 0;
-    BANDS.forEach(function (b) {
-      var t = v(b.f) + v(b.m) + v(b.o);
-      if (b.child) { u18 += t; } else { o18 += t; }
-    });
-    show("rollU18", u18, any); show("roll18", o18, any);
-
-    /* the sum check */
-    var sum = cF + cM + cO;
-    var total = parseInt($("reachedTotal").value, 10);
-    var box = $("tally");
-    box.className = "tally";
-    $("tallyVal").textContent = sum;
-    if (sum === 0) { $("tallyVal").textContent = any ? "0" : "—"; return; }
-    if (!isFinite(total)) { return; }
-    if (sum > total) { box.className = "tally bad"; $("tallyVal").textContent = sum + " — more than the total of " + total; }
-    else if (sum < total) { box.className = "tally bad"; $("tallyVal").textContent = sum + " of " + total + " — " + (total - sum) + " unaccounted"; }
-    else { box.className = "tally good"; $("tallyVal").textContent = sum + " — matches the total"; }
-  }
-  partIds.concat(S.OF_WHOM, S.DISABILITY, ["reachedTotal"]).forEach(function (id) { $(id).addEventListener("input", tally); });
+  /* the grid has its own listener; these are the report-level figures */
+  S.OF_WHOM.concat(S.DISABILITY, ["reachedTotal", "newToday"]).forEach(function (id) {
+    var el = $(id); if (el) el.addEventListener("input", gridTally);
+  });
 
   /* ---------- remember the reporter, not the report ---------- */
   var RK = "mhpss-np-reporter";
@@ -1233,7 +1347,6 @@ body.institutional-utility .empty{color:var(--iu-muted)}
   /* ---------- collect ---------- */
   function collect() {
     var siteCode = $("site").value, site = C.siteByCode[siteCode];
-    var act = C.activityByCode[$("activity").value];
     /* the palika: from the site when one is named, from the reporter when
        the report is palika-level or the site is unlisted */
     var palika = site && site.palika ? site.palika
@@ -1255,18 +1368,15 @@ body.institutional-utility .empty{color:var(--iu-muted)}
       districtOther: $("districtOther").value.trim(),
       cadreOther: $("cadreOther").value.trim(),
       modalityOther: $("modalityOther").value.trim(),
-      activityOther: $("activityOther").value.trim(),
       targetGroupOther: $("targetGroupOther").value.trim(),
       partners: $("partners").value.split(",").map(function (x) { return x.trim(); }).filter(Boolean),
-      /* the backend reading of the activity: the 4Ws subcode travels on the
-         record only when the match is direct; otherwise it is set at
-         coordination from the description (list v3, 17 Sep 2026) */
-      iascSub: act && act.iasc_sub ? act.iasc_sub : "",
+      /* one row per activity that ran today, each with its own sex and age
+         counts; the 4Ws subcode travels per row when the match is direct */
+      activities: collectActivities(),
       focalName: $("focalName").value.trim(),
       focalPhone: $("focalPhone").value.trim(),
       focalEmail: $("focalEmail").value.trim(),
       cadre: $("cadre").value,
-      activity: $("activity").value,
       modality: $("modality").value,
       status: $("status").value || "ONG",
       targetGroups: [].slice.call(document.querySelectorAll("#tgs input:checked")).map(function (i) { return i.value; }),
@@ -1281,10 +1391,6 @@ body.institutional-utility .empty{color:var(--iu-muted)}
       countsHeldByLead: $("reportingRole").value === "PARTNER",
       distinctPeople: ""
     };
-    /* The five age groups as collected. The two-way fold is NOT stored: it
-       is computed at export and at read, so there is one figure, not two
-       that can disagree. */
-    S.PART_IDS.forEach(function (id) { rec[id] = $(id).value; });
     S.OF_WHOM.forEach(function (id) { rec[id] = $(id).value; });
     S.DISABILITY.forEach(function (id) { rec[id] = $(id).value; });
     rec[S.DISABILITY_ASKED] = $("disAsked").value;
@@ -1296,7 +1402,7 @@ body.institutional-utility .empty{color:var(--iu-muted)}
       [/^Reporting organisation|^Name the organisation/, "org"],
       [/^Site is required|^Name the site/, "site"],
       [/^Date is required|^Date is in the future/, "dateAD"],
-      [/^Activity is required|^Choose an activity|^Describe the activity/, "activity"],
+      [/^Enter at least one activity|^Sex and age|^Describe the activity/, "actGrid"],
       [/^Modality is required|^Say where the activity/, "modality"],
       [/^Focal point name/, "focalName"],
       [/^Focal point phone/, "focalPhone"],
@@ -1309,7 +1415,7 @@ body.institutional-utility .empty{color:var(--iu-muted)}
       [/^New people today/, "newToday"],
       [/^Say whether you led|^A partner report carries/, "reportingRole"],
       [/^Name the organisation that led/, "partners"],
-      [/^Attendance is required|^Disaggregated figures|^Distinct people|^Count basis/, "reachedTotal"]
+      [/^The day|^Attendance is required|^Distinct people|^Count basis/, "reachedTotal"]
     ];
     for (var i = 0; i < rules.length; i++) if (rules[i][0].test(problem)) return rules[i][1];
     return "";
@@ -1364,9 +1470,9 @@ body.institutional-utility .empty{color:var(--iu-muted)}
     ["sessionTime", "dateBS", "site", "siteOther", "palika", "ward", "partners", "activity", "activityOther", "modalityOther", "targetGroupOther", "description", "reachedTotal"].concat(partIds, S.OF_WHOM, S.DISABILITY, [S.DISABILITY_ASKED]).forEach(function (id) { $(id).value = ""; });
     document.querySelectorAll("#tgs input:checked").forEach(function (i) { i.checked = false; });
     $("siteOtherWrap").hidden = true; $("palikaWrap").hidden = true; $("wardWrap").hidden = true;
-    $("activityOtherWrap").hidden = true; $("modalityOtherWrap").hidden = true; $("tgOtherWrap").hidden = true;
+    $("modalityOtherWrap").hidden = true; $("tgOtherWrap").hidden = true;
     $("status").value = "ONG";
-    refreshSites(); tally(); activityHelp();
+    refreshSites(); buildGrid(); gridTally();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
   $("reset").addEventListener("click", function () {
@@ -1433,7 +1539,8 @@ body.institutional-utility .empty{color:var(--iu-muted)}
   }
 
   loadReporter();
-  tally();
+  buildGrid();
+  gridTally();
   roleApply();
   render();
 })();
@@ -1535,6 +1642,9 @@ body.institutional-utility .empty{color:var(--iu-muted)}
 <script src="../hub/assets/mark.js"></script>
 <script src="../hub/assets/icons.js"></script>
 <script src="../hub/assets/i18n-strings.js"></script>
+<!-- The strings hub does not carry yet, and the few whose wording changed
+     with the grid. See the header of lib/strings.js. -->
+<script src="lib/strings.js"></script>
 <script src="../hub/assets/i18n.js"></script>
 </body>
 </html>
