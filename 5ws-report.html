@@ -485,6 +485,12 @@ table.mx td.t { font-weight: 700; }
   .act .actsum { display: none; }
 }
 
+
+/* The disability counts use the same matrix as an activity -- one shape on
+   this form, not two. The ten-column table it replaces ran past the right
+   edge of its own card at every width. */
+.dismx { margin-top: .5rem; }
+.dismx table.mx { width: 100%; max-width: 34rem; }
 </style>
 </head>
 <body class="fx institutional-utility">
@@ -741,47 +747,64 @@ table.mx td.t { font-weight: 700; }
            never added to it. -->
       <fieldset class="ofwhom" id="disBlock" hidden>
         <legend class="ofw-h" data-i18n="f4.disHead" data-i18n-html>Persons with disabilities <span>&mdash; asked for by CMC-Nepal, 21 September 2026</span></legend>
-        <div class="dis actgrid">
-          <table>
+        <div class="dismx">
+          <table class="mx">
             <caption class="sr-only" data-i18n="f4.disCaption">Persons with disabilities here today, by sex and by age</caption>
             <thead>
               <tr>
-                <th scope="col" rowspan="2" class="actcol" data-i18n="f4.disWho">Of the people here today</th>
-                <th scope="colgroup" colspan="4" class="grp" data-i18n="f4.hSexGrp">Sex</th>
-                <th scope="colgroup" colspan="6" class="grp" data-i18n="f4.hAgeGrp">Age</th>
-              </tr>
-              <tr>
+                <th scope="col" data-i18n="f4.hAgeGrp">Age</th>
                 <th scope="col" data-i18n="f4.hFemale">Female</th>
                 <th scope="col" data-i18n="f4.hMale">Male</th>
                 <th scope="col" data-i18n="f4.hOther">Not recorded</th>
-                <th scope="col" class="rt" data-i18n="f4.hRowSex">Total (sex)</th>
-                <th scope="col">0&ndash;4</th>
-                <th scope="col">5&ndash;9</th>
-                <th scope="col">10&ndash;17</th>
-                <th scope="col">18&ndash;59</th>
-                <th scope="col">60+</th>
-                <th scope="col" class="rt" data-i18n="f4.hRowAge">Total (age)</th>
+                <th scope="col" data-i18n="f4.hRow">Total</th>
               </tr>
             </thead>
             <tbody>
-              <tr id="disRow">
-                <td class="actcol">
-                  <div class="actname" data-i18n="f4.disRowName">With a disability</div>
-                  <div class="acthelp" data-i18n="f4.disRowHelp">Count what you can see, or what the person tells you. The type of disability is not asked.</div>
-                </td>
-                <td><span class="celllab" data-i18n="f4.hFemale">Female</span><input type="number" id="disF" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Female with a disability"></td>
-                <td><span class="celllab" data-i18n="f4.hMale">Male</span><input type="number" id="disM" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Male with a disability"></td>
-                <td><span class="celllab" data-i18n="f4.hOther">Not recorded</span><input type="number" id="disO" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Sex not recorded, with a disability"></td>
-                <td class="rt"><span class="celllab" data-i18n="f4.hRowSex">Total (sex)</span><span id="disST">&mdash;</span></td>
-                <td><span class="celllab">0&ndash;4</span><input type="number" id="dis04" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Age 0 to 4, with a disability"></td>
-                <td><span class="celllab">5&ndash;9</span><input type="number" id="dis5to9" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Age 5 to 9, with a disability"></td>
-                <td><span class="celllab">10&ndash;17</span><input type="number" id="dis10to17" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Age 10 to 17, with a disability"></td>
-                <td><span class="celllab">18&ndash;59</span><input type="number" id="dis18to59" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Age 18 to 59, with a disability"></td>
-                <td><span class="celllab">60+</span><input type="number" id="dis60" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Age 60 and over, with a disability"></td>
-                <td class="rt"><span class="celllab" data-i18n="f4.hRowAge">Total (age)</span><span id="disAT">&mdash;</span></td>
-              </tr>
+              <tr><th scope="row">0&ndash;4</th>
+                <td><input type="number" id="disc_04_f" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="0-4, Female, with a disability"></td>
+                <td><input type="number" id="disc_04_m" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="0-4, Male, with a disability"></td>
+                <td><input type="number" id="disc_04_o" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="0-4, Not recorded, with a disability"></td>
+                <td class="t" id="disrt_04">&mdash;</td></tr>
+              <tr><th scope="row">5&ndash;9</th>
+                <td><input type="number" id="disc_5to9_f" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="5-9, Female, with a disability"></td>
+                <td><input type="number" id="disc_5to9_m" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="5-9, Male, with a disability"></td>
+                <td><input type="number" id="disc_5to9_o" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="5-9, Not recorded, with a disability"></td>
+                <td class="t" id="disrt_5to9">&mdash;</td></tr>
+              <tr><th scope="row">10&ndash;17</th>
+                <td><input type="number" id="disc_10to17_f" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="10-17, Female, with a disability"></td>
+                <td><input type="number" id="disc_10to17_m" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="10-17, Male, with a disability"></td>
+                <td><input type="number" id="disc_10to17_o" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="10-17, Not recorded, with a disability"></td>
+                <td class="t" id="disrt_10to17">&mdash;</td></tr>
+              <tr><th scope="row">18&ndash;59</th>
+                <td><input type="number" id="disc_18to59_f" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="18-59, Female, with a disability"></td>
+                <td><input type="number" id="disc_18to59_m" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="18-59, Male, with a disability"></td>
+                <td><input type="number" id="disc_18to59_o" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="18-59, Not recorded, with a disability"></td>
+                <td class="t" id="disrt_18to59">&mdash;</td></tr>
+              <tr><th scope="row">60+</th>
+                <td><input type="number" id="disc_60_f" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="60+, Female, with a disability"></td>
+                <td><input type="number" id="disc_60_m" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="60+, Male, with a disability"></td>
+                <td><input type="number" id="disc_60_o" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="60+, Not recorded, with a disability"></td>
+                <td class="t" id="disrt_60">&mdash;</td></tr>
             </tbody>
+            <tfoot>
+              <tr><th scope="row" data-i18n="f4.hRow">Total</th>
+                <td class="t" id="disct_f">&mdash;</td>
+                <td class="t" id="disct_m">&mdash;</td>
+                <td class="t" id="disct_o">&mdash;</td>
+                <td class="t" id="disAT">&mdash;</td></tr>
+            </tfoot>
           </table>
+          <!-- the eight figures the record has always carried, worked out from
+               the cells above so every reader keeps reading what it read before -->
+          <input type="hidden" id="disF">
+          <input type="hidden" id="disM">
+          <input type="hidden" id="disO">
+          <input type="hidden" id="dis04">
+          <input type="hidden" id="dis5to9">
+          <input type="hidden" id="dis10to17">
+          <input type="hidden" id="dis18to59">
+          <input type="hidden" id="dis60">
+          <span id="disST" hidden>&mdash;</span>
         </div>
         <p class="ofw-n" data-i18n="f4.disNote">Sex and age are two counts of the same people here too, so the two totals are checked against each other. They sit inside the day’s figure and are never added to it or to the activity rows.</p>
       </fieldset>
@@ -1094,22 +1117,48 @@ table.mx td.t { font-weight: 700; }
     var box = $("tgs").querySelector('input[value="TG-PWD"]');
     var on = !!(box && box.checked);
     $("disBlock").hidden = !on;
-    if (!on) { disFields().forEach(function (id) { if ($(id)) $(id).value = ""; }); }
+    if (!on) { disFields().concat(disCellIds()).forEach(function (id) { if ($(id)) $(id).value = ""; }); }
     disTally();
   }
   /* literals, not hoisted vars: disApply runs at start-up, before the
      assignments further down this script would have happened */
+  function disBands() { return ["04", "5to9", "10to17", "18to59", "60"]; }
+  function disCellIds() {
+    var out = [];
+    disBands().forEach(function (b) { ["f", "m", "o"].forEach(function (k) { out.push("disc_" + b + "_" + k); }); });
+    return out;
+  }
   function disSexIds() { return ["disF", "disM", "disO"]; }
   function disAgeIds() { return ["dis04", "dis5to9", "dis10to17", "dis18to59", "dis60"]; }
   function disFields() { return disSexIds().concat(disAgeIds()); }
   function disTally() {
-    var sex = disSexIds().reduce(function (t, id) { return t + numOf(id); }, 0);
-    var age = disAgeIds().reduce(function (t, id) { return t + numOf(id); }, 0);
-    var filled = anyOf(disFields());
-    if ($("disST")) $("disST").textContent = filled ? sex.toLocaleString() : "\u2014";
-    if ($("disAT")) $("disAT").textContent = filled ? age.toLocaleString() : "\u2014";
-    var row = $("disRow");
-    if (row) row.classList.toggle("mismatch", filled && sex !== age);
+    /* The cells are what is typed; the eight figures the record carries are
+       worked out from them and written into the hidden inputs, so the record,
+       the validation, the export and the reset are untouched. */
+    var col = { f: 0, m: 0, o: 0 }, grand = 0, filled = anyOf(disCellIds());
+    disBands().forEach(function (b) {
+      var row = 0;
+      ["f", "m", "o"].forEach(function (k) {
+        var v = numOf("disc_" + b + "_" + k);
+        row += v; col[k] += v;
+      });
+      grand += row;
+      var rt = $("disrt_" + b);
+      if (rt) rt.textContent = row ? row.toLocaleString() : "\u2014";
+      var hid = $({ "04": "dis04", "5to9": "dis5to9", "10to17": "dis10to17", "18to59": "dis18to59", "60": "dis60" }[b]);
+      if (hid) hid.value = filled ? String(row) : "";
+    });
+    ["f", "m", "o"].forEach(function (k) {
+      var ct = $("disct_" + k);
+      if (ct) ct.textContent = col[k] ? col[k].toLocaleString() : "\u2014";
+      var hid = $({ f: "disF", m: "disM", o: "disO" }[k]);
+      if (hid) hid.value = filled ? String(col[k]) : "";
+    });
+    var at = $("disAT");
+    if (at) at.textContent = filled ? grand.toLocaleString() : "\u2014";
+    var st = $("disST");
+    if (st) st.textContent = filled ? grand.toLocaleString() : "\u2014";
+    return { total: grand, filled: filled };
   }
   /* ------------------------------------------------------------------
      The activity grid (Adib, 12 Oct 2026, after the SORMAS layout read on
@@ -1514,7 +1563,7 @@ table.mx td.t { font-weight: 700; }
   S.OF_WHOM.concat(["reachedTotal", "newToday"]).forEach(function (id) {
     var el = $(id); if (el) el.addEventListener("input", gridTally);
   });
-  disFields().forEach(function (id) {
+  disFields().concat(disCellIds()).forEach(function (id) {
     var el = $(id); if (el) el.addEventListener("input", function () { disTally(); gridTally(); });
   });
 
@@ -1588,7 +1637,7 @@ table.mx td.t { font-weight: 700; }
       distinctPeople: ""
     };
     S.OF_WHOM.forEach(function (id) { rec[id] = $(id).value; });
-    disFields().forEach(function (id) { rec[id] = $(id).value; });
+    disFields().concat(disCellIds()).forEach(function (id) { rec[id] = $(id).value; });
     /* the tick is the answer, so the old yes-or-no field is set from it */
     rec[S.DISABILITY_ASKED] = (rec.targetGroups || []).indexOf("TG-PWD") >= 0 ? "Y" : "";
     return rec;
@@ -1664,7 +1713,7 @@ table.mx td.t { font-weight: 700; }
   });
 
   function softReset() {
-    ["sessionTime", "dateBS", "site", "siteOther", "palika", "ward", "partners", "activity", "activityOther", "modalityOther", "targetGroupOther", "description", "reachedTotal"].concat(S.OF_WHOM, disFields()).forEach(function (id) { $(id).value = ""; });
+    ["sessionTime", "dateBS", "site", "siteOther", "palika", "ward", "partners", "activity", "activityOther", "modalityOther", "targetGroupOther", "description", "reachedTotal"].concat(S.OF_WHOM, disFields(), disCellIds()).forEach(function (id) { $(id).value = ""; });
     document.querySelectorAll("#tgs input:checked").forEach(function (i) { i.checked = false; });
     $("siteOtherWrap").hidden = true; $("palikaWrap").hidden = true; $("wardWrap").hidden = true;
     $("modalityOtherWrap").hidden = true; $("tgOtherWrap").hidden = true;
