@@ -662,7 +662,7 @@ body.institutional-utility .empty{color:var(--iu-muted)}
            national return is compiled from them is a ruling still to come. -->
       <div class="rollup">
         <span data-i18n="f4.rollLabel">Adds up to</span>
-        <span class="rollv"><b id="rollU18">—</b> <span data-i18n="f4.rollU18">under 18</span> &nbsp;·&nbsp; <b id="roll18">—</b> <span data-i18n="f4.roll18">18 and over</span></span>
+        <span class="rollv"><b id="rollU18">—</b> <span data-i18n="f4.rollUnder18">under 18</span> &nbsp;·&nbsp; <b id="roll18">—</b> <span data-i18n="f4.rollOver18">18 and over</span></span>
       </div>
 
       <fieldset class="ofwhom">
@@ -766,7 +766,23 @@ body.institutional-utility .empty{color:var(--iu-muted)}
   </main>
 
 <script src="../hub/assets/codes.js"></script>
-<script src="../hub/assets/store.js"></script>
+<script>
+/* Display wording only, pending the same correction in hub/assets/codes.js:
+   person-first language, IASC Guidelines on Inclusion of Persons with
+   Disabilities in Humanitarian Action 2019 p. 17. The codes are untouched
+   because records already carry them. */
+(function () {
+  var fix = {
+    "TG-PWD": "Persons with disabilities",
+    "TG-PEX": "Persons with a pre-existing mental health condition"
+  };
+  var groups = (window.CODES && window.CODES.TARGET_GROUPS) || [];
+  groups.forEach(function (g) { if (fix[g.code]) g.name = fix[g.code]; });
+})();
+</script>
+<!-- The 5Ws form reads its own copy of the store: the age bands live there and
+     had to move while hub was left alone. See the header of lib/store.js. -->
+<script src="lib/store.js"></script>
 <script src="../hub/assets/fb-config.js"></script>
 <script src="../hub/assets/fb.js"></script>
 <script>
