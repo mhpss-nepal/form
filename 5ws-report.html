@@ -629,45 +629,64 @@ body.institutional-utility .empty{color:var(--iu-muted)}
       <div class="f">
         <label data-i18n="f4.tgLab" id="tgsLab">Target group &mdash; select all that apply</label>
         <div class="chks" id="tgs" role="group" aria-labelledby="tgsLab"></div>
-        <div class="help" data-i18n="f4.tgHelp">Ticking "Persons with disabilities" opens the disability question just below, and that is the only place the disability counts are entered.</div>
+        <div class="help" data-i18n="f4.tgHelp">Ticking "Persons with disabilities" opens the counts for them just below. That is the only place they are entered.</div>
       </div>
       <div class="f" id="tgOtherWrap" hidden>
         <label for="targetGroupOther" data-i18n="f4.tgOtherLab">Which other group?</label>
         <input type="text" id="targetGroupOther" name="targetGroupOther" placeholder="Name the group — never a person" data-i18n-ph="f4.phTgOther">
       </div>
 
+      <!-- Persons with disabilities. Ticking the target group is the answer:
+           there is no second yes-or-no question, because the tick already says
+           they were here. The row has the same shape as an activity row -- sex
+           and the five age groups, two counts of the same people -- so it reads
+           and checks the same way. These sit inside the day's figure and are
+           never added to it. -->
       <fieldset class="ofwhom" id="disBlock" hidden>
         <legend class="ofw-h" data-i18n="f4.disHead" data-i18n-html>Persons with disabilities <span>&mdash; asked for by CMC-Nepal, 21 September 2026</span></legend>
-        <div class="f">
-          <label for="disAsked" data-i18n="f4.disSession">Were the people here today asked about disability?</label>
-          <select id="disAsked">
-            <option value="" data-i18n="f4.disAskBlank">&mdash; not asked &mdash;</option>
-            <option value="Y" data-i18n="f4.disAskY">Yes</option>
-            <option value="N" data-i18n="f4.disAskN">No</option>
-          </select>
-          <div class="help" data-i18n="f4.disSessionHelp">One answer for the whole day, because this report covers many people. The per-person question, "Does the person identify themselves as a person with a disability?", is asked on the service-contact record, where one row is one person. Blank is recorded as "not asked", which is different from "No".</div>
+        <div class="dis actgrid">
+          <table>
+            <caption class="sr-only" data-i18n="f4.disCaption">Persons with disabilities here today, by sex and by age</caption>
+            <thead>
+              <tr>
+                <th scope="col" rowspan="2" class="actcol" data-i18n="f4.disWho">Of the people here today</th>
+                <th scope="colgroup" colspan="4" class="grp" data-i18n="f4.hSexGrp">Sex</th>
+                <th scope="colgroup" colspan="6" class="grp" data-i18n="f4.hAgeGrp">Age</th>
+              </tr>
+              <tr>
+                <th scope="col" data-i18n="f4.hFemale">Female</th>
+                <th scope="col" data-i18n="f4.hMale">Male</th>
+                <th scope="col" data-i18n="f4.hOther">Not recorded</th>
+                <th scope="col" class="rt" data-i18n="f4.hRow">Total</th>
+                <th scope="col">0&ndash;4</th>
+                <th scope="col">5&ndash;9</th>
+                <th scope="col">10&ndash;17</th>
+                <th scope="col">18&ndash;59</th>
+                <th scope="col">60+</th>
+                <th scope="col" class="rt" data-i18n="f4.hRow">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="disRow">
+                <td class="actcol">
+                  <div class="actname" data-i18n="f4.disRowName">With a disability</div>
+                  <div class="acthelp" data-i18n="f4.disRowHelp">Count what you can see, or what the person tells you. The type of disability is not asked.</div>
+                </td>
+                <td><input type="number" id="disF" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Female with a disability"></td>
+                <td><input type="number" id="disM" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Male with a disability"></td>
+                <td><input type="number" id="disO" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Sex not recorded, with a disability"></td>
+                <td class="rt"><span id="disST">&mdash;</span></td>
+                <td><input type="number" id="dis04" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Age 0 to 4, with a disability"></td>
+                <td><input type="number" id="dis5to9" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Age 5 to 9, with a disability"></td>
+                <td><input type="number" id="dis10to17" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Age 10 to 17, with a disability"></td>
+                <td><input type="number" id="dis18to59" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Age 18 to 59, with a disability"></td>
+                <td><input type="number" id="dis60" min="0" step="1" inputmode="numeric" placeholder="&mdash;" aria-label="Age 60 and over, with a disability"></td>
+                <td class="rt"><span id="disAT">&mdash;</span></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div id="disCounts" hidden>
-          <div class="ofw-g">
-            <div>
-              <label for="disF0_17" data-i18n="f4.disF0_17">Female, under 18</label>
-              <input type="number" id="disF0_17" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
-            </div>
-            <div>
-              <label for="disM0_17" data-i18n="f4.disM0_17">Male, under 18</label>
-              <input type="number" id="disM0_17" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
-            </div>
-            <div>
-              <label for="disF18" data-i18n="f4.disF18">Female, 18 and over</label>
-              <input type="number" id="disF18" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
-            </div>
-            <div>
-              <label for="disM18" data-i18n="f4.disM18">Male, 18 and over</label>
-              <input type="number" id="disM18" min="0" step="1" inputmode="numeric" placeholder="&mdash;">
-            </div>
-          </div>
-          <p class="ofw-n" data-i18n="f4.disNote">Count what you can see, or what the person tells you. These are already inside the day's figure, so they are checked against it and never added to it or to each other. The type of disability is not asked here; leave the counts blank if you are not sure.</p>
-        </div>
+        <p class="ofw-n" data-i18n="f4.disNote">Sex and age are two counts of the same people here too, so the two totals are checked against each other. They sit inside the day’s figure and are never added to it or to the activity rows.</p>
       </fieldset>
 
       <div class="f" style="max-width:340px">
@@ -956,9 +975,9 @@ body.institutional-utility .empty{color:var(--iu-muted)}
      session is never counted twice. */
   function roleApply() {
     var partner = $("reportingRole").value === "PARTNER";
-    var ids = ["reachedTotal", "newToday"].concat(S.PART_IDS)
+    var ids = ["reachedTotal", "newToday"]
       .concat(["ofChildAlone", "ofPreg", "ofPwd", "ofInjured", "ofDistress"])
-      .concat(["disAsked", "disF0_17", "disM0_17", "disF18", "disM18"]);
+      .concat(disFields());
     ids.forEach(function (id) {
       var el = $(id); if (!el) return;
       if (partner) el.value = "";
@@ -970,21 +989,30 @@ body.institutional-utility .empty{color:var(--iu-muted)}
   /* The disability detail is asked only when the disability target group is
      ticked (Adib, 27 Sep 2026): ticking it opens the counts, unticking it
      clears them so a stray number cannot survive a change of mind. */
+  /* Ticking the target group IS the answer (Adib, 12 Oct 2026): it already says
+     persons with disabilities were here, so the form does not ask again. The
+     counts open on the tick, and unticking clears them. disAsked is kept on the
+     record, set from the tick, so readers of older records see the same field. */
   function disApply() {
     var box = $("tgs").querySelector('input[value="TG-PWD"]');
     var on = !!(box && box.checked);
     $("disBlock").hidden = !on;
-    if (!on) { ["disAsked", "disF0_17", "disM0_17", "disF18", "disM18"].forEach(function (id) { if ($(id)) $(id).value = ""; }); }
-    disCounts();
+    if (!on) { disFields().forEach(function (id) { if ($(id)) $(id).value = ""; }); }
+    disTally();
   }
-  /* The counts are asked only when the answer is Yes (Adib, 12 Oct 2026):
-     "not asked" and "No" both leave the boxes away, so a blank cannot be
-     read as a zero. Switching off Yes clears whatever was typed. */
-  function disCounts() {
-    var yes = $("disAsked") && $("disAsked").value === "Y";
-    var wrap = $("disCounts");
-    if (wrap) wrap.hidden = !yes;
-    if (!yes) { ["disF0_17", "disM0_17", "disF18", "disM18"].forEach(function (id) { if ($(id)) $(id).value = ""; }); }
+  /* literals, not hoisted vars: disApply runs at start-up, before the
+     assignments further down this script would have happened */
+  function disSexIds() { return ["disF", "disM", "disO"]; }
+  function disAgeIds() { return ["dis04", "dis5to9", "dis10to17", "dis18to59", "dis60"]; }
+  function disFields() { return disSexIds().concat(disAgeIds()); }
+  function disTally() {
+    var sex = disSexIds().reduce(function (t, id) { return t + numOf(id); }, 0);
+    var age = disAgeIds().reduce(function (t, id) { return t + numOf(id); }, 0);
+    var filled = anyOf(disFields());
+    if ($("disST")) $("disST").textContent = filled ? sex.toLocaleString() : "\u2014";
+    if ($("disAT")) $("disAT").textContent = filled ? age.toLocaleString() : "\u2014";
+    var row = $("disRow");
+    if (row) row.classList.toggle("mismatch", filled && sex !== age);
   }
   /* ------------------------------------------------------------------
      The activity grid (Adib, 12 Oct 2026, after the SORMAS layout read on
@@ -1191,7 +1219,6 @@ body.institutional-utility .empty{color:var(--iu-muted)}
   });
   $("reportingRole").addEventListener("change", roleApply);
   $("reachedTotal").addEventListener("input", gridTally);
-  $("disAsked").addEventListener("change", disCounts);
 
   /* what the dropdown says after a site that is not on the roster */
   function siteLabel(s) {
@@ -1339,8 +1366,11 @@ body.institutional-utility .empty{color:var(--iu-muted)}
   var show = function (id, n, any) { $(id).textContent = any ? n.toLocaleString() : "—"; };
 
   /* the grid has its own listener; these are the report-level figures */
-  S.OF_WHOM.concat(S.DISABILITY, ["reachedTotal", "newToday"]).forEach(function (id) {
+  S.OF_WHOM.concat(["reachedTotal", "newToday"]).forEach(function (id) {
     var el = $(id); if (el) el.addEventListener("input", gridTally);
+  });
+  disFields().forEach(function (id) {
+    var el = $(id); if (el) el.addEventListener("input", function () { disTally(); gridTally(); });
   });
 
   /* ---------- remember the reporter, not the report ---------- */
@@ -1413,8 +1443,9 @@ body.institutional-utility .empty{color:var(--iu-muted)}
       distinctPeople: ""
     };
     S.OF_WHOM.forEach(function (id) { rec[id] = $(id).value; });
-    S.DISABILITY.forEach(function (id) { rec[id] = $(id).value; });
-    rec[S.DISABILITY_ASKED] = $("disAsked").value;
+    disFields().forEach(function (id) { rec[id] = $(id).value; });
+    /* the tick is the answer, so the old yes-or-no field is set from it */
+    rec[S.DISABILITY_ASKED] = (rec.targetGroups || []).indexOf("TG-PWD") >= 0 ? "Y" : "";
     return rec;
   }
 
@@ -1488,7 +1519,7 @@ body.institutional-utility .empty{color:var(--iu-muted)}
   });
 
   function softReset() {
-    ["sessionTime", "dateBS", "site", "siteOther", "palika", "ward", "partners", "activity", "activityOther", "modalityOther", "targetGroupOther", "description", "reachedTotal"].concat(partIds, S.OF_WHOM, S.DISABILITY, [S.DISABILITY_ASKED]).forEach(function (id) { $(id).value = ""; });
+    ["sessionTime", "dateBS", "site", "siteOther", "palika", "ward", "partners", "activity", "activityOther", "modalityOther", "targetGroupOther", "description", "reachedTotal"].concat(S.OF_WHOM, disFields()).forEach(function (id) { $(id).value = ""; });
     document.querySelectorAll("#tgs input:checked").forEach(function (i) { i.checked = false; });
     $("siteOtherWrap").hidden = true; $("palikaWrap").hidden = true; $("wardWrap").hidden = true;
     $("modalityOtherWrap").hidden = true; $("tgOtherWrap").hidden = true;
