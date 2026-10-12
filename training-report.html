@@ -28,9 +28,9 @@
 </style>
 </head>
 <body class="fx">
-<!-- TRANSPORT HELD, 11 Oct 2026: the register scripts are not loaded, so nothing entered here can reach the retired register. Wire it to the new transport when the Layer 1 house is ready. -->
+<!-- Training-only authenticated transport. No legacy Firebase writer or clinical activation. -->
 <a class="a11y-skip" href="#main" data-i18n="a11y.skip">Skip to the form</a>
-<div class="ribbon" data-i18n="tr.p002" data-i18n-html>Revised draft for field piloting <span>· saved on this phone, sent to the coordination register when there is signal</span></div>
+<div class="ribbon" data-i18n="tr.p002" data-i18n-html>Training records <span>· pending on this device until an exact server receipt confirms delivery</span></div>
 
 <div class="top">
   <div>
@@ -39,7 +39,8 @@
   </div>
   <div class="spacer"></div>
   <a href="index.html" data-i18n="tr.navAll">← Forms</a>
-  <a href="../hub/" data-i18n="tr.navHub">Hub</a>
+  <a href="../hub/" data-i18n="tr.navHub">← Back to Home</a>
+  <a href="../hub/training.html?view=own">My training history</a>
 </div>
 
 <div class="wrap">
@@ -51,6 +52,7 @@
   <div class="banner" data-i18n="tr.note" data-i18n-html><b>Count the participants by the palika they work in, not by where the training was held.</b>
     A training in Kathmandu for staff working in Rasuwa belongs to Rasuwa. This is what lets the coordination team see where trained workers are, and what makes the referral directory able to say a place has PFA-trained staff. <span id="storeWarn"></span></div>
 
+  <div class="banner"><p id="trainingStatus" role="status">Restoring your persistent sign-in. Training has separate approved access.</p><button id="trainingRetry" type="button" class="btn ghost" disabled>Retry pending training</button> <button id="trainingRestore" type="button" class="btn ghost">Restore my training draft</button> <button id="trainingNew" type="button" class="btn ghost">Start new training event</button><p>Save and send retries the current event, even after receipt. For a distinct event (including identical fields), choose Start new training event; current fields are kept for review. This never deletes old receipts or pending reports. Submitted fields are immutable here: editing them is not a correction; correction editing is unsupported. Legacy device records below remain local and are never automatically uploaded.</p></div>
   <form id="f" autocomplete="off" novalidate>
 
     <!-- 1 -->
@@ -235,15 +237,12 @@
       <div class="step"><span class="n">5</span><h2 data-i18n="tr.h5">Save</h2></div>
       <div id="errs"></div>
       <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
-        <button type="submit" class="btn" data-i18n="tr.save">Save this record</button>
+        <button type="submit" class="btn" data-i18n="tr.save">Save and send training record</button>
         <button type="button" class="btn ghost" id="csvBtn" data-i18n="tr.csv">Export CSV</button>
         <button type="button" class="btn grey" id="clearBtn" data-i18n="tr.clear">Clear everything on this device</button>
         <span class="xs" id="count"></span>
       </div>
-      <div class="f" style="margin-top:16px">
-        <label data-i18n="tr.payLab">What would be sent, if there were anywhere to send it</label>
-        <pre id="payload" class="pay">—</pre>
-      </div>
+
     </div>
   </form>
 </div>
@@ -252,6 +251,10 @@
 
 <script src="../hub/assets/codes.js"></script>
 <script src="../hub/assets/l1.js"></script>
+<script src="../hub/review-current-v51/fb-config.js"></script>
+<script src="../hub/review-current-v51/current-auth.js"></script>
+<script src="../hub/assets/training-api.js"></script>
+<script src="../hub/assets/training-form.js"></script>
 <script>
 (function () {
   "use strict";
@@ -400,7 +403,7 @@
       if (!x.district) e.push("Choose the district the participants work in (" + n + ").");
       if (!x.palika) e.push("Choose the palika the participants work in (" + n + ").");
       if (!x.cadre) e.push("Choose the cadre (" + n + ").");
-      if (SEX.some(function (s) { return Number.isNaN(x[s]); })) e.push("Counts must be whole numbers, zero or more (" + n + ").");
+      if (SEX.some(function (s) { return x[s] === null || Number.isNaN(x[s]); })) e.push("Enter every sex count explicitly, including zero; counts must be whole numbers, zero or more (" + n + ").");
       if (x.total === 0) e.push("A palika row with no one in it should be removed (" + n + ").");
     });
     var keys = rs.map(function (x) { return x.palika + "|" + x.cadre; });
@@ -427,7 +430,7 @@
       ? "Counts are reported by the lead organisation."
       : (total ? total + " people trained · " + places + " palika(s) · " + cadres + " cadre(s)"
                : "No participants entered yet.");
-    $("payload").textContent = JSON.stringify(record(), null, 2);
+    var pv = $("payload"); if (pv) pv.textContent = JSON.stringify(record(), null, 2);
   }
   $("f").addEventListener("input", refresh);
   $("f").addEventListener("change", refresh);
@@ -448,17 +451,14 @@
       $("errs").scrollIntoView({ block: "center" });
       return;
     }
-    var res = L.save(KIND, r);
-    $("errs").innerHTML = '<div class="banner ok"><b>Saved on this device.</b> ' +
-      (res && res.persisted === false ? "Storage is blocked, so it is only in memory — export before closing. " : "") +
-      "It goes to the coordination register when there is signal. These people are counted as people trained, never as attendance on the 5Ws.</div>";
-    showCount();
+    $("errs").replaceChildren();
+    TrainingForm.submit(r);
   });
 
   $("csvBtn").addEventListener("click", function () {
     var list = L.all(KIND);
     if (!list.length) { alert("Nothing saved on this device yet."); return; }
-    L.download("mhpss_np_training_" + L.stamp() + ".csv", L.toCSV(list, COLS), "text/csv");
+    L.download("mhpss_np_training_" + L.stamp() + ".csv", L.toCSV(list.map(function (r) { var row = Object.assign({}, r); row.participants = JSON.stringify(r.participants); row.partners = JSON.stringify(r.partners); return row; }), COLS), "text/csv");
   });
   $("clearBtn").addEventListener("click", function () {
     if (!L.all(KIND).length) { alert("Nothing saved on this device yet."); return; }
@@ -486,11 +486,11 @@
   S.en = S.en || {}; S.ne = S.ne || {};
   var EN = {
   "tr.p001": "Training and orientation record — MHPSS Nepal",
-  "tr.p002": "Revised draft for field piloting <span>· saved on this phone, sent to the coordination register when there is signal</span>",
+  "tr.p002": "Training records <span>· pending on this device until an exact server receipt confirms delivery</span>",
   "tr.brand": "Training and orientation record",
   "tr.sub": "Layer 1 · capacity building, kept out of the 5Ws",
   "tr.navAll": "← Forms",
-  "tr.navHub": "Hub",
+  "tr.navHub": "← Back to Home",
   "tr.choose": "— choose —",
   "tr.h1": "One record is one training or orientation event",
   "tr.lede": "Capacity building is not reported on the 5Ws. The people in this room are aid workers, not people reached by the response, and counting them as attendance would inflate every reach figure. They are counted here instead, as people trained.",
@@ -564,18 +564,18 @@
   "tr.phNotes": "Gaps, problems, what is needed next",
   "tr.notesHelp": "Never a participant's name, phone number or personal detail.",
   "tr.h5": "Save",
-  "tr.save": "Save this record",
-  "tr.csv": "Export CSV",
-  "tr.clear": "Clear everything on this device",
-  "tr.payLab": "What would be sent, if there were anywhere to send it"
+  "tr.save": "Save and send training record",
+  "tr.csv": "Export legacy device CSV",
+  "tr.clear": "Clear legacy device records only",
+  "tr.payLab": "Current training payload — delivery requires an exact receipt"
 };
   var NE = {
   "tr.p001": "तालिम र अभिमुखीकरण अभिलेख — MHPSS नेपाल",
-  "tr.p002": "क्षेत्रीय परीक्षणका लागि संशोधित मस्यौदा <span>· यही फोनमा सुरक्षित, सङ्केत आएपछि समन्वय रजिस्टरमा पठाइन्छ</span>",
+  "tr.p002": "Training records <span>· pending on this device until an exact server receipt confirms delivery (English delivery status)</span>",
   "tr.brand": "तालिम र अभिमुखीकरण अभिलेख",
   "tr.sub": "तह १ · क्षमता विकास, ५W बाहिर राखिएको",
   "tr.navAll": "← फारमहरू",
-  "tr.navHub": "हब",
+  "tr.navHub": "← Back to Home",
   "tr.choose": "— छान्नुहोस् —",
   "tr.h1": "एउटा अभिलेख भनेको एउटा तालिम वा अभिमुखीकरण कार्यक्रम",
   "tr.lede": "क्षमता विकास ५W मा प्रतिवेदन गरिँदैन। यहाँ सहभागी हुनेहरू सहायताकर्मी हुन्, प्रतिकार्यबाट सेवा पाएका व्यक्ति होइनन्; उनीहरूलाई उपस्थितिमा गन्दा पुगेको सङ्ख्या बढ्छ। त्यसैले यहाँ तालिम पाएका व्यक्तिका रूपमा गनिन्छ।",
@@ -649,10 +649,10 @@
   "tr.phNotes": "कमी, समस्या, अब के चाहिन्छ",
   "tr.notesHelp": "सहभागीको नाम, फोन नम्बर वा व्यक्तिगत विवरण कहिल्यै नलेख्नुहोस्।",
   "tr.h5": "सुरक्षित गर्नुहोस्",
-  "tr.save": "यो अभिलेख सुरक्षित गर्नुहोस्",
-  "tr.csv": "CSV निर्यात",
-  "tr.clear": "यस उपकरणमा सबै कुरा खाली गर्नुहोस्",
-  "tr.payLab": "के पठाइनेछ, यदि पठाउने ठाउँ भएको भए"
+  "tr.save": "Save and send training record",
+  "tr.csv": "Export legacy device CSV",
+  "tr.clear": "Clear legacy device records only",
+  "tr.payLab": "Current training payload — delivery requires an exact receipt"
 };
   Object.keys(EN).forEach(function (k) { if (!S.en[k]) S.en[k] = EN[k]; });
   Object.keys(NE).forEach(function (k) { if (!S.ne[k]) S.ne[k] = NE[k]; });
