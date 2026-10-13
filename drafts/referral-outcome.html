@@ -154,6 +154,18 @@
 <script>
 (function () {
   "use strict";
+  if (window.__syntheticDraftBoundary !== true) {
+    var unavailable = document.createElement("section");
+    unavailable.id = "syntheticDraftUnavailable";
+    unavailable.className = "banner stop";
+    unavailable.setAttribute("role", "alert");
+    unavailable.textContent = "Synthetic preview unavailable. Its safety helpers did not finish loading. No existing device records were read or changed. Reload to try again; do not enter real details.";
+    var previewForm = document.getElementById("f");
+    previewForm.before(unavailable);
+    previewForm.addEventListener("submit", function (event) { event.preventDefault(); });
+    document.querySelectorAll("form input, form select, form textarea, form button, #csvBtn, #jsonBtn, #clearBtn, #expCsv, #wipe, #reset").forEach(function (control) { control.disabled = true; });
+    return;
+  }
   var C = window.CODES, L = window.L1, KIND = "referral";
   var $ = function (id) { return document.getElementById(id); };
 
