@@ -3,13 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src https://mhpss5ws-tdp3xtfnsq-as.a.run.app; form-action 'none'; base-uri 'none'; object-src 'none'">
 <title>How are you coping — MHPSS Nepal</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Lora + Manrope. design.css declares Georgia / system fallbacks, so a
      failed font request costs typography and never legibility -- which
      matters on the field forms, where there may be no signal at all. -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Manrope:wght@400;600;700;800&display=swap">
 <link rel="stylesheet" href="../hub/assets/app.css">
 <link rel="stylesheet" href="../hub/assets/design.css">
 <link rel="stylesheet" href="../hub/assets/form.css">
@@ -62,7 +61,7 @@
   </div>
 
   <h1 data-i18n="sr.p035"></h1>
-  <p class="lede" data-i18n="sr.p032" data-i18n-html></p>
+  <p class="lede">For people living at a site, not staff. No name, contact details or account are requested. A random submission receipt identifies this answer, not a person. Nobody can follow up from it. Do not include names or contact details in your answer. Service operators may see IP addresses and transport metadata: anonymity is not absolute. Private human review only; public aggregates are held.</p>
 
   <div class="banner warn" data-i18n="sr.p007" data-i18n-html></div>
 
@@ -143,14 +142,14 @@
     </div>
 
     <div class="card">
-      <div id="errs"></div>
+      <p id="selfreportStatus" role="status" aria-live="polite">Engineering candidate · operational intake held. No answer sent.</p>
       <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
         <button type="submit" class="btn" data-i18n="sr.p040"></button>
-        <button type="button" class="btn ghost" id="csvBtn" data-i18n="sr.p039"></button>
-        <button type="button" class="btn grey" id="clearBtn" data-i18n="sr.p038"></button>
-        <span class="xs" id="count"></span>
+        <button type="button" class="btn ghost" id="selfreportRetry" disabled>Retry exact pending submission</button>
+        <button type="button" class="btn grey" id="clearBtn">New person · reset</button>
+        <span class="xs">No respondent history or raw export here.</span>
       </div>
-      <div class="help" style="margin-top:10px" data-i18n="sr.p002"></div>
+      <div class="help" style="margin-top:10px">Send attempts anonymous delivery. Only a verified receipt confirms storage. Pending answers stay in this open page, not browser history; closing/reloading loses them. Existing legacy browser records are untouched and never automatically sent. New operational notices remain English pending translation review.</div>
     </div>
   </form>
 
@@ -169,81 +168,10 @@
 
 <script src="../hub/assets/codes.js"></script>
 <script src="../hub/assets/l1.js"></script>
-<script src="../hub/assets/fb-config.js"></script>
-<script src="../hub/assets/fb.js"></script>
 <script>
-(function () {
-  "use strict";
-  var C = window.CODES, L = window.L1, KIND = "selfreport";
-  var $ = function (id) { return document.getElementById(id); };
-
-  L.fillSelect($("site"), C.FORM_SITES.filter(function (s) { return s.source !== "escape"; })
-                            .concat([{ code: "OTHER", name: "Somewhere else", np: "अन्य कतै", np_src: "draft" }]),
-               { placeholder: "— choose your site —" });
-
-  function pick(name) {
-    var r = document.querySelector('input[name="' + name + '"]:checked');
-    return r ? r.value : "";
-  }
-  function record() {
-    return {
-      schema: "mhpss-np-selfreport/0.1.0-draft",
-      kind: "self_report",
-      anonymous: true,
-      contact_code: null,
-      site: $("site").value,
-      age_band: $("ageband").value,
-      coping: pick("cope"),
-      need: pick("need"),
-      knows_where: pick("know"),
-      could_reach: pick("reach"),
-      free_text: $("say").value.trim(),
-      free_text_reviewed_by_human: false
-    };
-  }
-  var COLS = Object.keys(record()).concat(["_saved"]);
-
-  function showCount() {
-    var n = L.all(KIND).length;
-    $("count").textContent = n ? n + " answer(s) on this device" : "nothing saved on this device yet";
-  }
-  showCount();
-
-  $("f").addEventListener("submit", function (ev) {
-    ev.preventDefault();
-    var r = record(), e = [];
-    if (!r.site) e.push("Please choose the site you are at.");
-    if (!r.coping) e.push("Please answer question 1.");
-    if (!r.knows_where) e.push("Please answer question 3.");
-    if (e.length) {
-      $("errs").innerHTML = '<div class="banner stop"><b>Not sent.</b><ul><li>' + e.join("</li><li>") + "</li></ul></div>";
-      return;
-    }
-    L.save(KIND, r);
-    $("errs").innerHTML = '<div class="banner ok"><b>Thank you.</b> Your answer was saved on this device, ' +
-      'with nothing attached to it that could identify you. Remember that nobody can contact you about ' +
-      'it — if you want support, speak to a worker at this site.</div>';
-    /* reset so the next person starts clean and cannot see the previous answer */
-    Array.prototype.forEach.call(document.querySelectorAll('input[type=radio]'), function (i) { i.checked = false; });
-    $("say").value = ""; $("ageband").value = "";
-    showCount();
-    $("errs").scrollIntoView({ block: "center" });
-  });
-
-  $("csvBtn").addEventListener("click", function () {
-    var list = L.all(KIND);
-    if (!list.length) { alert("Nothing saved on this device yet."); return; }
-    L.download("mhpss_np_selfreport_" + L.stamp() + ".csv", L.toCSV(list, COLS), "text/csv");
-  });
-  $("clearBtn").addEventListener("click", function () {
-    if (!L.all(KIND).length) { alert("Nothing saved on this device yet."); return; }
-    if (confirm("Delete every answer held in this browser? This cannot be undone.")) {
-      L.clear(KIND); showCount(); $("errs").innerHTML = '<div class="banner"><b>Cleared.</b></div>';
-    }
-  });
-})();
+L1.fillSelect(document.getElementById('site'),CODES.FORM_SITES.filter(s=>s.source!=='escape').concat([{code:'OTHER',name:'Somewhere else',np:'अन्य कतै',np_src:'draft'}]),{placeholder:'— choose your site —'});
 </script>
-<script src="pwa.js"></script>
+<script src="lib/selfreport-intake.js"></script>
 <!-- The bilingual engine. On a page that is not yet keyed up it still earns
      its place: it sets data-lang, which is what makes the Nepali words in
      the code lists appear in the dropdowns, and it mounts the ENG/NEP
