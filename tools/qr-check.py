@@ -41,8 +41,8 @@ ALLOWED_QR_URLS = {
     "training": "/form/training-report.html",
     "contact": "/form/review/contact.html",
     "referral": "/form/review/referral-outcome.html",
-    "provider": "/form/review/provider-register.html",
-    "servicepoint": "/form/review/service-point.html",
+    "provider": "/form/provider-register.html",
+    "servicepoint": "/form/service-point.html",
 }
 
 ENTRY = re.compile(
