@@ -67,9 +67,9 @@
       <p data-i18n="ml.p029" data-i18n-html></p>
       <p class="src" data-i18n="ml.p028"></p>
       <div class="ml-actions">
-        <a href="5ws-report.html" data-i18n="ml.act.open"></a>
-        <button class="sec" data-url="5ws-report.html" onclick="COPY(this)" data-i18n="ml.p074"></button>
-        <button class="sec" data-qr="5ws" onclick="QRT(this)" data-i18n="ml.act.qr"></button>
+        <a href="5ws-report.html" data-i18n="dir.open"></a>
+        <button class="sec" data-url="5ws-report.html" onclick="COPY(this)" data-i18n="dir.copy"></button>
+        <button class="sec" data-qr="5ws" onclick="QRT(this)" data-i18n="dir.qr"></button>
       </div>
       <div class="qrbox" hidden></div>
     </div>
@@ -79,9 +79,9 @@
       <p data-i18n="ml.p025" data-i18n-html></p>
       <p class="src" data-i18n="ml.p024"></p>
       <div class="ml-actions">
-        <a href="phq9.html" data-i18n="ml.act.open"></a>
-        <button class="sec" data-url="phq9.html" onclick="COPY(this)" data-i18n="ml.p074"></button>
-        <button class="sec" data-qr="phq9" onclick="QRT(this)" data-i18n="ml.act.qr"></button>
+        <a href="phq9.html" data-i18n="dir.open"></a>
+        <button class="sec" data-url="phq9.html" onclick="COPY(this)" data-i18n="dir.copy"></button>
+        <button class="sec" data-qr="phq9" onclick="QRT(this)" data-i18n="dir.qr"></button>
       </div>
       <div class="qrbox" hidden></div>
     </div>
@@ -91,18 +91,68 @@
       <p data-i18n="ml.p021" data-i18n-html></p>
       <p class="src" data-i18n="ml.p020"></p>
       <div class="ml-actions">
-        <a href="selfreport.html" data-i18n="ml.act.open"></a>
-        <button class="sec" data-url="selfreport.html" onclick="COPY(this)" data-i18n="ml.p074"></button>
-        <button class="sec" data-qr="self" onclick="QRT(this)" data-i18n="ml.act.qr"></button>
+        <a href="selfreport.html" data-i18n="dir.open"></a>
+        <button class="sec" data-url="selfreport.html" onclick="COPY(this)" data-i18n="dir.copy"></button>
+        <button class="sec" data-qr="self" onclick="QRT(this)" data-i18n="dir.qr"></button>
       </div>
       <div class="qrbox" hidden></div>
     </div>
 
-    <div class="ml-card svc" data-directory-kind="training"><div class="tag" data-i18n="dir.training.tag">TRAINING</div><h3 data-i18n="dir.training.title">Training & orientation</h3><p data-i18n="dir.training.status">Separate approved training access is required to send reports.</p><div class="ml-actions"><a href="training-report.html" data-i18n="dir.training.action">Open form</a></div></div>
-    <div class="ml-card svc" data-directory-kind="contacts"><div class="tag" data-i18n="dir.contacts.tag">AWAITING ACTIVATION</div><h3 data-i18n="dir.contacts.title">Service contacts & referrals</h3><p data-i18n="dir.contacts.status">Individual collection is not activated.</p><div class="ml-actions"><a href="../hub/?view=dashboard&house=contacts" data-i18n="dir.contacts.action">Open dashboard home</a></div></div>
-    <div class="ml-card svc" data-directory-kind="referrals"><div class="tag" data-i18n="dir.referrals.tag">AWAITING ACTIVATION</div><h3 data-i18n="dir.referrals.title">Referral outcomes</h3><p data-i18n="dir.referrals.status">Follow-up collection is not activated.</p><div class="ml-actions"><a href="../hub/?view=dashboard&house=referrals" data-i18n="dir.referrals.action">Open dashboard home</a></div></div>
-    <div class="ml-card svc" data-directory-kind="providers"><div class="tag" data-i18n="dir.providers.tag">AWAITING ACTIVATION</div><h3 data-i18n="dir.providers.title">Provider registration</h3><p data-i18n="dir.providers.status">Registration and publication review are not activated.</p><div class="ml-actions"><a href="../hub/?view=dashboard&house=providers" data-i18n="dir.providers.action">Open dashboard home</a></div></div>
-    <div class="ml-card svc" data-directory-kind="servicepoints"><div class="tag" data-i18n="dir.servicepoints.tag">AWAITING ACTIVATION</div><h3 data-i18n="dir.servicepoints.title">Service-point registration</h3><p data-i18n="dir.servicepoints.status">Registration and publication review are not activated.</p><div class="ml-actions"><a href="../hub/?view=dashboard&house=servicepoints" data-i18n="dir.servicepoints.action">Open dashboard home</a></div></div>
+    <div class="ml-card svc" data-directory-kind="training">
+      <div class="tag" data-i18n="dir.training.tag"></div>
+      <h3 data-i18n="dir.training.title"></h3>
+      <p data-i18n="dir.training.status"></p>
+      <div class="ml-actions">
+        <a href="training-report.html" data-i18n="dir.open"></a>
+        <button class="sec" data-url="training-report.html" onclick="COPY(this)" data-i18n="dir.copy"></button>
+        <button class="sec" data-qr="training" onclick="QRT(this)" data-i18n="dir.qr"></button>
+      </div>
+      <div class="qrbox" hidden></div>
+    </div>
+    <div class="ml-card svc" data-directory-kind="contacts">
+      <div class="tag" data-i18n="dir.contacts.tag"></div>
+      <h3 data-i18n="dir.contacts.title"></h3>
+      <p data-i18n="dir.contacts.status"></p>
+      <div class="ml-actions">
+        <a href="review/contact.html" data-i18n="dir.open"></a>
+        <button class="sec" data-url="review/contact.html" onclick="COPY(this)" data-i18n="dir.copy"></button>
+        <button class="sec" data-qr="contact" onclick="QRT(this)" data-i18n="dir.qr"></button>
+      </div>
+      <div class="qrbox" hidden></div>
+    </div>
+    <div class="ml-card svc" data-directory-kind="referrals">
+      <div class="tag" data-i18n="dir.referrals.tag"></div>
+      <h3 data-i18n="dir.referrals.title"></h3>
+      <p data-i18n="dir.referrals.status"></p>
+      <div class="ml-actions">
+        <a href="review/referral-outcome.html" data-i18n="dir.open"></a>
+        <button class="sec" data-url="review/referral-outcome.html" onclick="COPY(this)" data-i18n="dir.copy"></button>
+        <button class="sec" data-qr="referral" onclick="QRT(this)" data-i18n="dir.qr"></button>
+      </div>
+      <div class="qrbox" hidden></div>
+    </div>
+    <div class="ml-card svc" data-directory-kind="providers">
+      <div class="tag" data-i18n="dir.providers.tag"></div>
+      <h3 data-i18n="dir.providers.title"></h3>
+      <p data-i18n="dir.providers.status"></p>
+      <div class="ml-actions">
+        <a href="review/provider-register.html" data-i18n="dir.open"></a>
+        <button class="sec" data-url="review/provider-register.html" onclick="COPY(this)" data-i18n="dir.copy"></button>
+        <button class="sec" data-qr="provider" onclick="QRT(this)" data-i18n="dir.qr"></button>
+      </div>
+      <div class="qrbox" hidden></div>
+    </div>
+    <div class="ml-card svc" data-directory-kind="servicepoints">
+      <div class="tag" data-i18n="dir.servicepoints.tag"></div>
+      <h3 data-i18n="dir.servicepoints.title"></h3>
+      <p data-i18n="dir.servicepoints.status"></p>
+      <div class="ml-actions">
+        <a href="review/service-point.html" data-i18n="dir.open"></a>
+        <button class="sec" data-url="review/service-point.html" onclick="COPY(this)" data-i18n="dir.copy"></button>
+        <button class="sec" data-qr="servicepoint" onclick="QRT(this)" data-i18n="dir.qr"></button>
+      </div>
+      <div class="qrbox" hidden></div>
+    </div>
   </div>
 
   <h2 data-i18n="ml.p039"></h2>
@@ -111,7 +161,7 @@
       <li data-i18n="ml.p035" data-i18n-html></li>
       <li data-i18n="dir.copyHelp" data-i18n-html></li>
       <li data-i18n="ml.p033" data-i18n-html></li>
-      <li data-i18n="ml.p032" data-i18n-html></li>
+      <li data-i18n="dir.offlineHelp" data-i18n-html></li>
     </ul>
   </div>
 
@@ -148,7 +198,7 @@
     <tr>
       <td data-i18n="ml.p054"></td>
       <td data-i18n="ml.p053" data-i18n-html></td>
-      <td data-i18n="ml.p052"></td>
+      <td data-i18n="dir.provenance"></td>
     </tr>
   </table>
   </div>
@@ -165,8 +215,7 @@
   </main>
 
 <script src="qr-trial.js"></script>
-<script src="../hub/assets/fb-config.js"></script>
-<script src="../hub/assets/fb.js"></script>
+<!-- Directory navigation does not initialise a delivery bridge. -->
 <script>
 function flash(btn, text){
   var old = btn.textContent; btn.textContent = text;
@@ -193,7 +242,7 @@ function COPY(btn){
 function svgFor(key){
   var d = window.QR && window.QR[key];
   if (!d) return '<p class="xs">QR not available for this form.</p>';
-  var rows = d.m.split(','), n = d.n, q = 2, size = n + 2*q, r = '';
+  var rows = d.m.split(','), n = d.n, q = 4, size = n + 2*q, r = '';
   for (var y = 0; y < n; y++) {
     var row = rows[y], x = 0;
     while (x < n) {
