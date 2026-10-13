@@ -28,7 +28,7 @@
 <body class="fx">
 <!-- TRANSPORT HELD, 11 Oct 2026: the register scripts are not loaded, so nothing entered here can reach the retired register. Draft, not linked from any index. -->
 <a class="a11y-skip" href="#main" data-i18n="a11y.skip">Skip to the form</a>
-<div class="ribbon" data-i18n="svc.p002" data-i18n-html>Revised draft for field piloting <span>· saved on this phone, sent to the coordination register when there is signal</span></div>
+<div class="ribbon">Clinical source candidate · production collection held · open-page memory only</div>
 
 <div class="top">
   <div>
@@ -36,7 +36,7 @@
     <div class="sub" data-i18n="svc.p004">Layer 1 · Rasuwa / Bhote Koshi</div>
   </div>
   <div class="spacer"></div>
-  <a href="index.html" data-i18n="svc.p005">← Forms</a>
+  <a href="../index.html" data-i18n="svc.p005">← Forms</a>
   <a href="../../hub/" data-i18n="svc.p006">Hub</a>
 </div>
 
@@ -49,16 +49,9 @@
     is deliberately one record per person per contact, because that is the only way a returning person can
     be recognised instead of counted twice.</p>
 
-  <div class="banner stop" data-i18n="svc.p009" data-i18n-html>
-    <b>The person's name and phone number stay on this handset.</b> You type a few details so the phone can
-    work out a <b>contact code</b>; the details are used for that calculation and then discarded. Only the
-    code is saved. Nobody downstream — not the coordination view, not the dashboard, not this site — ever
-    receives the name, the number, or a date of birth.
-  </div>
+  <div class="banner">Restricted pseudonymous engineering candidate. No clinical record is persisted on this device. Legacy records remain untouched; reload loses open-page drafts. Institutional basis, structured consent and disability-asked adaptation remain unresolved.</div>
 
-  <div class="banner" data-i18n="svc.p010" data-i18n-html>
-    <b>Works with no signal.</b> Records are held on this phone as you save them and sent to the coordination register on their own when there is signal. The export remains for a copy of your own. <span id="storeWarn"></span>
-  </div>
+  <div class="banner">Restricted pseudonymous engineering candidate. No clinical record is persisted on this device. Legacy records remain untouched; reload loses open-page drafts. Institutional basis, structured consent and disability-asked adaptation remain unresolved.</div>
 
   <form id="f" autocomplete="off" novalidate>
 
@@ -348,7 +341,7 @@
       <div class="step"><span class="n">6</span><h2 data-i18n="svc.p080">Save</h2></div>
       <div id="errs"></div>
       <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
-        <button type="submit" class="btn" data-i18n="svc.p081">Save this contact</button>
+        <button type="submit" disabled class="btn" data-i18n="svc.p081">Save this contact</button>
         <button type="button" class="btn ghost" id="csvBtn" data-i18n="svc.p082">Export CSV</button>
         <button type="button" class="btn ghost" id="jsonBtn" data-i18n="svc.p083">Export JSON</button>
         <button type="button" class="btn grey" id="clearBtn" data-i18n="svc.p084">Clear everything on this device</button>
@@ -368,7 +361,8 @@
   </main>
 
 <script src="../../hub/assets/codes.js"></script>
-<script src="../../hub/assets/l1.js"></script>
+
+<script src="../lib/clinical-plumbing.js"></script>
 <script>
 (function () {
   "use strict";
@@ -415,14 +409,8 @@
   $("dateAD").value = L.today();
 
   /* remembered fields */
-  ["org", "focalName", "focalPhone", "cadre"].forEach(function (id) {
-    var v = L.recall(id); if (v) $(id).value = v;
-    $(id).addEventListener("change", function () { L.remember(id, $(id).value); });
-  });
-  if (!L.storageWorks()) {
-    $("storeWarn").innerHTML = "<b>This browser is not keeping records</b> — private mode, or site data " +
-      "is blocked. Export before you close the tab.";
-  }
+
+
 
   /* site list follows district */
   function refreshSites() {
@@ -588,61 +576,13 @@
     return e;
   }
 
-  function showCount() {
-    var n = L.all(KIND).length;
-    $("count").textContent = n ? n + " contact(s) held on this device" : "nothing saved on this device yet";
-  }
-  showCount();
 
-  $("f").addEventListener("submit", function (ev) {
-    ev.preventDefault();
-    var r = record(), e = problems(r);
-    if (e.length) {
-      $("errs").innerHTML = '<div class="banner stop"><b>Not saved.</b><ul><li>' +
-        e.map(function (x) { return x.replace(/</g, "&lt;"); }).join("</li><li>") + "</li></ul></div>";
-      $("errs").scrollIntoView({ block: "center" });
-      return;
-    }
-    var res = L.save(KIND, r);
-    /* the four identifying boxes are cleared here — they were only ever
-       inputs to the code, and the code is already in the saved record */
-    ["ini", "byear", "mun"].forEach(function (id) { $(id).value = ""; });
-    $("sex").value = ""; $("mins").value = ""; $("notes").value = "";
-    /* the safeguarding check is per person: it is never carried to the next one */
-    $("outcome").value = ""; $("service").value = ""; refToggle();
-    document.querySelectorAll('input[name="nr"]').forEach(function (i) { i.checked = false; });
-    refreshCode();
-    $("errs").innerHTML = '<div class="banner ok"><b>Saved on this device.</b> ' +
-      (res.persisted ? "" : "Storage is blocked, so it is only in memory — export before closing. ") +
-      "The name details have been cleared; the contact code is kept. The record goes to the coordination register " +
-      "when there is signal; the code, never the name." +
-      (r.referral_made ? " This contact carried a referral: when you know whether the person arrived, record it on the referral outcome form." : "") +
-      "</div>";
-    showCount();
-  });
 
-  $("csvBtn").addEventListener("click", function () {
-    var list = L.all(KIND);
-    if (!list.length) { alert("Nothing saved on this device yet."); return; }
-    L.download("mhpss_np_contacts_" + L.stamp() + ".csv", L.toCSV(list, COLS), "text/csv");
-  });
-  $("jsonBtn").addEventListener("click", function () {
-    var list = L.all(KIND);
-    if (!list.length) { alert("Nothing saved on this device yet."); return; }
-    L.download("mhpss_np_contacts_" + L.stamp() + ".json", JSON.stringify(list, null, 2), "application/json");
-  });
-  $("clearBtn").addEventListener("click", function () {
-    if (!L.all(KIND).length) { alert("Nothing saved on this device yet."); return; }
-    if (confirm("Delete every contact held in this browser? Export first if you need them — this cannot be undone.")) {
-      L.clear(KIND); showCount();
-      $("errs").innerHTML = '<div class="banner"><b>Cleared.</b></div>';
-    }
-  });
-
+  window.ClinicalCollector = Object.freeze({kind:"contacts",collect:record,problems,clearPrivate:()=>{geo=null;}});
   refreshCode();
 })();
 </script>
-<script src="pwa.js"></script>
+
 <!-- The bilingual engine. On a page that is not yet keyed up it still earns
      its place: it sets data-lang, which is what makes the Nepali words in
      the code lists appear in the dropdowns, and it mounts the ENG/NEP
@@ -675,5 +615,5 @@
 })();
 </script>
 <script src="../../hub/assets/i18n.js"></script>
-</body>
+<script src="../../hub/review-current-v51/fb-config.js"></script><script src="../../hub/review-current-v51/current-auth.js"></script><script src="../lib/clinical-api.js"></script><script src="../lib/clinical-form.js"></script></body>
 </html>

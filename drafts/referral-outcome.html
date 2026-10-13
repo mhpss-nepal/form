@@ -28,7 +28,7 @@
 <body class="fx">
 <!-- TRANSPORT HELD, 11 Oct 2026: the register scripts are not loaded, so nothing entered here can reach the retired register. Draft, not linked from any index. -->
 <a class="a11y-skip" href="#main" data-i18n="a11y.skip">Skip to the form</a>
-<div class="ribbon" data-i18n="ref.p002" data-i18n-html>Revised draft for field piloting <span>· saved on this phone, sent to the coordination register when there is signal</span></div>
+<div class="ribbon">Clinical source candidate · production collection held · open-page memory only</div>
 
 <div class="top">
   <div>
@@ -36,7 +36,7 @@
     <div class="sub" data-i18n="ro.sub">Layer 1 · closing a referral already made</div>
   </div>
   <div class="spacer"></div>
-  <a href="index.html" data-i18n="ref.p005">← Forms</a>
+  <a href="../index.html" data-i18n="ref.p005">← Forms</a>
   <a href="../../hub/" data-i18n="ref.p006">Hub</a>
 </div>
 
@@ -133,7 +133,7 @@
       <div class="step"><span class="n">3</span><h2 data-i18n="ref.p079">Save</h2></div>
       <div id="errs"></div>
       <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
-        <button type="submit" class="btn" data-i18n="ro.save">Save this outcome</button>
+        <button type="submit" disabled class="btn" data-i18n="ro.save">Save this outcome</button>
         <button type="button" class="btn ghost" id="csvBtn" data-i18n="ref.p081">Export CSV</button>
         <button type="button" class="btn grey" id="clearBtn" data-i18n="ref.p082">Clear everything on this device</button>
         <span class="xs" id="count"></span>
@@ -149,7 +149,8 @@
   </main>
 
 <script src="../../hub/assets/codes.js"></script>
-<script src="../../hub/assets/l1.js"></script>
+
+<script src="../lib/clinical-plumbing.js"></script>
 <script>
 (function () {
   "use strict";
@@ -157,10 +158,7 @@
   var $ = function (id) { return document.getElementById(id); };
 
   L.fillSelect($("org"), C.ORGS.concat([{ code: "OTHER", name: "Other — not listed", np: "अन्य — सूचीमा नभएको", np_src: "draft" }]));
-  ["org", "direction"].forEach(function (id) {
-    var v = L.recall(id); if (v) $(id).value = v;
-    $(id).addEventListener("change", function () { L.remember(id, $(id).value); });
-  });
+
 
   function record() {
     return {
@@ -199,52 +197,18 @@
     return e;
   }
 
-  function showCount() {
-    var n = L.all(KIND).length;
-    $("count").textContent = n ? n + " referral outcome(s) on this device" : "nothing saved on this device yet";
-  }
-  showCount();
+
 
   Array.prototype.forEach.call(document.querySelectorAll("input,select"), function (el) {
     el.addEventListener("change", payload);
     if (el.tagName === "INPUT" && el.type === "text") el.addEventListener("input", payload);
   });
 
-  $("f").addEventListener("submit", function (ev) {
-    ev.preventDefault();
-    var r = record(), e = problems(r);
-    if (e.length) {
-      $("errs").innerHTML = '<div class="banner stop"><b>Not saved.</b><ul><li>' +
-        e.map(function (x) { return x.replace(/</g, "&lt;"); }).join("</li><li>") + "</li></ul></div>";
-      $("errs").scrollIntoView({ block: "center" });
-      return;
-    }
-    var res = L.save(KIND, r);
-    $("ccode").value = ""; $("arrived").value = ""; $("arrDate").value = "";
-    $("confBy").value = ""; $("barrier").value = "";
-    $("errs").innerHTML = '<div class="banner ok"><b>Saved on this device.</b> ' +
-      (res.persisted ? "" : "Storage is blocked — export before closing. ") +
-      "It is matched to the referral by the contact code and the date of referral.</div>";
-    showCount(); payload();
-  });
+  window.ClinicalCollector = Object.freeze({kind:"referrals",collect:record,problems});
 
-  $("csvBtn").addEventListener("click", function () {
-    var list = L.all(KIND);
-    if (!list.length) { alert("Nothing saved on this device yet."); return; }
-    L.download("mhpss_np_referral_outcomes_" + L.stamp() + ".csv", L.toCSV(list, COLS), "text/csv");
-  });
-  $("clearBtn").addEventListener("click", function () {
-    if (!L.all(KIND).length) { alert("Nothing saved on this device yet."); return; }
-    if (confirm("Delete every referral outcome held in this browser? This cannot be undone.")) {
-      L.clear(KIND); showCount(); $("errs").innerHTML = '<div class="banner"><b>Cleared.</b></div>';
-    }
-  });
-
-  if (!L.storageWorks()) $("storeWarn").textContent = " This browser is blocking storage, so entries live only while this page is open.";
-  payload();
 })();
 </script>
-<script src="pwa.js"></script>
+
 <script src="../../hub/assets/mark.js"></script>
 <script src="../../hub/assets/icons.js"></script>
 <script src="../../hub/assets/i18n-strings.js"></script>
@@ -294,5 +258,5 @@
 })();
 </script>
 <script src="../../hub/assets/i18n.js"></script>
-</body>
+<script src="../../hub/review-current-v51/fb-config.js"></script><script src="../../hub/review-current-v51/current-auth.js"></script><script src="../lib/clinical-api.js"></script><script src="../lib/clinical-form.js"></script></body>
 </html>

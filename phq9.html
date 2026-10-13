@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="../hub/assets/home-nav.css"></head>
 <body class="fx"><nav aria-label="Home navigation"><a data-home-link href="../hub/">← Back to Home</a></nav>
 <a class="a11y-skip" href="#main" data-i18n="a11y.skip">Skip to the form</a>
-<div class="ribbon" data-i18n="phq9.p002" data-i18n-html>Revised draft <span>· English items only — the validated Nepali text has not been obtained · saved on this phone, sent to the coordination register when there is signal</span></div>
+<div class="ribbon">Clinical source candidate · production collection held · open-page memory only</div>
 
 <div class="top">
   <div>
@@ -162,7 +162,7 @@
       <div class="step"><span class="n">4</span><h2 data-i18n="phq9.p033">Save</h2></div>
       <div id="errs"></div>
       <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
-        <button type="submit" class="btn" data-i18n="phq9.p034">Save this administration</button>
+        <button type="submit" disabled class="btn" data-i18n="phq9.p034">Save this administration</button>
         <button type="button" class="btn ghost" id="csvBtn" data-i18n="phq9.p035">Export CSV</button>
         <button type="button" class="btn grey" id="clearBtn" data-i18n="phq9.p036">Clear everything on this device</button>
         <span class="xs" id="count"></span>
@@ -187,9 +187,10 @@
   </main>
 
 <script src="../hub/assets/codes.js"></script>
-<script src="../hub/assets/l1.js"></script>
-<script src="../hub/assets/fb-config.js"></script>
-<script src="../hub/assets/fb.js"></script>
+
+
+
+<script src="lib/clinical-plumbing.js"></script>
 <script>
 (function () {
   "use strict";
@@ -223,10 +224,7 @@
   L.fillSelect($("org"), C.ORGS.concat([{ code: "OTHER", name: "Other — not listed", np: "अन्य — सूचीमा नभएको", np_src: "draft" }]));
   L.fillSelect($("cadre"), C.CADRES);
   $("dateAD").value = L.today();
-  ["org", "cadre"].forEach(function (id) {
-    var v = L.recall(id); if (v) $(id).value = v;
-    $(id).addEventListener("change", function () { L.remember(id, $(id).value); });
-  });
+
 
   /* render items */
   function renderItems() {
@@ -355,11 +353,7 @@
     return e;
   }
 
-  function showCount() {
-    var n = L.all(KIND).length;
-    $("count").textContent = n ? n + " administration(s) on this device" : "nothing saved on this device yet";
-  }
-  showCount();
+
 
   document.querySelectorAll('input[type=radio]').forEach(function (i) {
     i.addEventListener("change", refresh);
@@ -369,38 +363,11 @@
   });
   $("ccode").addEventListener("input", payload);
 
-  $("f").addEventListener("submit", function (ev) {
-    ev.preventDefault();
-    var r = record(), e = problems(r);
-    if (e.length) {
-      $("errs").innerHTML = '<div class="banner stop"><b>Not saved.</b><ul><li>' +
-        e.map(function (x) { return x; }).join("</li><li>") + "</li></ul></div>";
-      $("errs").scrollIntoView({ block: "center" });
-      return;
-    }
-    var res = L.save(KIND, r);
-    $("errs").innerHTML = '<div class="banner ok"><b>Saved on this device.</b> ' +
-      (res.persisted ? "" : "Storage is blocked, so it is only in memory — export before closing. ") +
-      "The record goes to the coordination register when there is signal.</div>";
-    showCount();
-  });
-
-  $("csvBtn").addEventListener("click", function () {
-    var list = L.all(KIND);
-    if (!list.length) { alert("Nothing saved on this device yet."); return; }
-    L.download("mhpss_np_phq9_" + L.stamp() + ".csv", L.toCSV(list, COLS), "text/csv");
-  });
-  $("clearBtn").addEventListener("click", function () {
-    if (!L.all(KIND).length) { alert("Nothing saved on this device yet."); return; }
-    if (confirm("Delete every record held in this browser? This cannot be undone.")) {
-      L.clear(KIND); showCount(); $("errs").innerHTML = '<div class="banner"><b>Cleared.</b></div>';
-    }
-  });
-
+  window.ClinicalCollector = Object.freeze({kind:"phq9",collect:record,problems});
   refresh();
 })();
 </script>
-<script src="pwa.js"></script>
+
 <!-- The bilingual engine. On a page that is not yet keyed up it still earns
      its place: it sets data-lang, which is what makes the Nepali words in
      the code lists appear in the dropdowns, and it mounts the ENG/NEP
@@ -409,5 +376,5 @@
 <script src="../hub/assets/icons.js"></script>
 <script src="../hub/assets/i18n-strings.js"></script>
 <script src="../hub/assets/i18n.js"></script>
-</body>
+<script src="../hub/review-current-v51/fb-config.js"></script><script src="../hub/review-current-v51/current-auth.js"></script><script src="lib/clinical-api.js"></script><script src="lib/clinical-form.js"></script></body>
 </html>
