@@ -1,0 +1,22 @@
+{
+  "version": "clinical-frontend/2",
+  "form_base": "d4e3c96a3de6b9ad97fc59a0b3aa0f22ea7ac333",
+  "hub_base": "4544e876f69d5e6a2ea5b5c87861c81474a316de",
+  "backend": "ffe6708a3d53eb6afbe6457cf1c41cadbb9214bf",
+  "production": "HELD",
+  "assets": {
+    "claude-final-form/drafts/contact.html": "006ba01bf43342cb11982f0172aa73b4faa4897c1ed03847fa3c528780aa3422",
+    "claude-final-form/drafts/referral-outcome.html": "5d99e7324b4bbe5f55bba2204ab5ea73f047a7f6fd8bcbf7d589515dc94954d4",
+    "claude-final-form/lib/clinical-api.js": "cc87c22f4c60f934304298e891e6aa01862f3aa1f7d441bd1ff49ac6f8ec2ef1",
+    "claude-final-form/lib/clinical-form.js": "6fae40cce7392a6c188e2f0cb47905dfb0d6e57818940fce812d0e49a4bff569",
+    "claude-final-form/phq9.html": "bf077ccb665764ec7ffbb71f40156f86fd3e4a0ba7338fd0815e147ecd527602",
+    "claude-final-form/sw.js": "3780b825953b1206b8ce99ad9004c8413f845e89b3b6877fb8ce14f2481b77d5",
+    "claude-final-form/tools/precache-fingerprint.py": "eea55e925d4ab71cbaaafbda3e841974977b2643adcad4afe313e7012dd9c0ff",
+    "claude-final-form/tools/precache.sha": "75be733b95e6f42fef3edde1e7e6e42bccb417dfedf2cb591136e936a7b34561",
+    "claude-final-form/tools/sw-precache-check.py": "8c9b62ce33adeab2d95b9917ae2a2c61ef061185e10f3d8905b12675cfa736f6",
+    "all-homes/assets/clinical-api.js": "cc87c22f4c60f934304298e891e6aa01862f3aa1f7d441bd1ff49ac6f8ec2ef1",
+    "all-homes/assets/clinical-surface.js": "b13ba0a6955d7aa60bef627dc78cf3b357d58803ae18d86e298375c8c1b8adca",
+    "all-homes/assets/instrument-homes.css": "d7580556026c91882a0456ccfdf40a0a31f80bc58ccceb1d78d193eb71e7b9cd",
+    "all-homes/index.html": "14fb9ea7685e71e4b8cb535072b2808ea47dd44c1b5f86168261dc460bd9772a"
+  }
+}

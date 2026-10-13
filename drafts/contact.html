@@ -431,8 +431,9 @@
   });
 
   /* contact code, live */
+  var receivedCode = "";
   function code() {
-    return L.contactCode([$("ini").value, $("byear").value, $("sex").value, $("mun").value]);
+    return receivedCode || L.contactCode([$("ini").value, $("byear").value, $("sex").value, $("mun").value]);
   }
   function refreshCode() {
     var c = code();
@@ -441,20 +442,27 @@
     refreshPayload();
   }
   ["ini", "byear", "sex", "mun"].forEach(function (id) {
-    $(id).addEventListener("input", refreshCode);
-    $(id).addEventListener("change", refreshCode);
+    $(id).addEventListener("input", function(){receivedCode="";refreshCode();});
+    $(id).addEventListener("change", function(){receivedCode="";refreshCode();});
   });
 
   /* location */
-  var geo = null;
+  var geo = null, geoGeneration = 0;
+  function clearPrivate() { geoGeneration++; geo = null; receivedCode=""; $("geoOut").textContent = ""; }
+  $("f").addEventListener("reset", clearPrivate);
   $("geoBtn").addEventListener("click", function () {
+    var uid = window.BaselineAuth?.currentUser()?.uid, request = ++geoGeneration;
+    if (!uid) return;
+    var current = function () { return request === geoGeneration && window.BaselineAuth?.currentUser()?.uid === uid; };
     $("geoOut").textContent = "Looking…";
     L.geo(function (g) {
+      if (!current()) return;
       geo = g;
       $("geoOut").innerHTML = "<b>" + g.lat.toFixed(3) + ", " + g.lon.toFixed(3) + "</b> — rounded to " +
         "about 100 m" + (g.accuracy_m ? " (device accuracy ±" + g.accuracy_m + " m)" : "");
       refreshPayload();
     }, function (msg) {
+      if (!current()) return;
       geo = null;
       $("geoOut").textContent = msg + " You can leave the pin empty and name the ward instead.";
     });
@@ -546,7 +554,7 @@
   function problems(r) {
     var e = [];
     if (!r.org) e.push("Choose the reporting organisation.");
-    if (!r.focal_name) e.push("Give the focal point name.");
+
     if (!r.provider_type) e.push("Choose the type of service provider.");
     if (!r.date_ad) e.push("Give the Gregorian date.");
     if (r.date_ad && r.date_ad > L.today()) e.push("The date is in the future.");
@@ -578,7 +586,7 @@
 
 
 
-  window.ClinicalCollector = Object.freeze({kind:"contacts",collect:record,problems,clearPrivate:()=>{geo=null;}});
+  window.ClinicalCollector = Object.freeze({kind:"contacts",collect:record,problems,clearPrivate,refresh:refreshPayload,restorePrivate:r=>{clearPrivate();receivedCode=r.contact_code||"";$("codeOut").textContent=receivedCode;geo=typeof r.lat==='number'&&typeof r.lon==='number'?{lat:r.lat,lon:r.lon,rounded_to_dp:r.geo_rounded_dp}:null;if(geo)$("geoOut").textContent=geo.lat+", "+geo.lon;}});
   refreshCode();
 })();
 </script>

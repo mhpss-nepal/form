@@ -24,6 +24,10 @@ Exit 0 complete / 1 a page needs a file that is not precached / 2 cannot read.
 import os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+def disk(path):
+    if path.startswith('../hub/') and not os.path.exists(os.path.join(ROOT,'../hub')):
+        return os.path.join(ROOT,'../all-homes',path[len('../hub/'):])
+    return os.path.join(ROOT,path)
 SW   = os.path.join(ROOT, "sw.js")
 
 REF  = re.compile(r'(?:src|href)\s*=\s*"([^"]+\.(?:js|css))"', re.I)
@@ -69,11 +73,13 @@ def main():
     # is in the hub repository, one folder over (../hub/assets/), both on the
     # live site and in the working copies; a wrong path here would be a form
     # that installs and then has no stylesheet, no code list and no bridge.
+    required={'phq9.html','drafts/contact.html','drafts/referral-outcome.html','lib/clinical-api.js','lib/clinical-form.js','lib/clinical-plumbing.js','../hub/assets/clinical-api.js','../hub/assets/clinical-surface.js','../hub/assets/instrument-homes.css'}
+    for path in sorted(required-cached):problems.append((path,'(clinical dependency missing from PRECACHE)'))
     for path in sorted(cached):
-        if not os.path.isfile(os.path.join(ROOT, path)):
+        if not os.path.isfile(disk(path)):
             problems.append((path, "(listed in PRECACHE but not found on disk)"))
     for path in sorted(p for p in cached if p.endswith(".html")):
-        full = os.path.join(ROOT, path)
+        full = disk(path)
         if not os.path.isfile(full):
             problems.append((path, "(the precached page itself is missing)"))
             continue

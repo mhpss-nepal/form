@@ -32,9 +32,18 @@
    the header now describes the register bridge the file actually has.
    store.js is a precached asset, so that change does not reach an
    installed phone until this name changes too. */
-const CACHE = "mhpss-np-field-v47";
+const CACHE = "mhpss-np-field-v48-clinical";
 
 const PRECACHE = [
+  "phq9.html",
+  "drafts/contact.html",
+  "drafts/referral-outcome.html",
+  "lib/clinical-api.js",
+  "lib/clinical-form.js",
+  "lib/clinical-plumbing.js",
+  "../hub/assets/clinical-api.js",
+  "../hub/assets/clinical-surface.js",
+  "../hub/assets/instrument-homes.css",
   "./",
   "index.html",
   "lib/directory-strings.js",
@@ -99,13 +108,15 @@ const PRECACHE = [
 self.addEventListener("install", (e) => {
   e.waitUntil((async () => {
     const c = await caches.open(CACHE);
-    /* one at a time: a single 404 must not fail the whole install and
-       leave the worker with no cache at all */
-    await Promise.all(PRECACHE.map(async (u) => {
-      try { await c.add(new Request(u, { cache: "reload" })); }
-      catch (err) { /* keep going — logged below on first fetch miss */ }
-    }));
-    self.skipWaiting();
+    // Fail atomically: a partial clinical shell must never replace the old shell.
+    try { await c.addAll(PRECACHE.map(u=>new Request(u,{cache:"reload"}))); }
+    catch(err){await caches.delete(CACHE);throw err;}
+    // Waiting worker: replace only the obsolete clinical shell/dependencies in
+    // previous caches, so the old network-first controller cannot revive L1.
+    // Browser records and all unrelated form queues are outside CacheStorage.
+    const clinical=PRECACHE.filter(u=>/clinical-|phq9\.html|drafts\/(contact|referral-outcome)\.html|instrument-homes\.css/.test(u));
+    for(const key of await caches.keys())if(key!==CACHE){const old=await caches.open(key);for(const u of clinical){const request=new Request(new URL(u,self.location));await old.delete(request,{ignoreSearch:true});const response=await c.match(request);if(response)await old.put(request,response);}}
+    // Natural activation after existing clients close; no forced tab takeover.
   })());
 });
 

@@ -204,7 +204,7 @@
     if (el.tagName === "INPUT" && el.type === "text") el.addEventListener("input", payload);
   });
 
-  window.ClinicalCollector = Object.freeze({kind:"referrals",collect:record,problems});
+  window.ClinicalCollector = Object.freeze({kind:"referrals",collect:record,problems,refresh:payload});
 
 })();
 </script>

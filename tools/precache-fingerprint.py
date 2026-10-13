@@ -40,7 +40,10 @@ def resolve(entry: str) -> Path:
     if entry == "./":
         return ROOT / "index.html"
     if entry.startswith("../hub/"):
-        return ROOT.parent / "hub" / entry.removeprefix("../hub/")
+        sibling = ROOT.parent / "hub"
+        if not sibling.exists():
+            sibling = ROOT.parent / "all-homes"
+        return sibling / entry.removeprefix("../hub/")
     return ROOT / entry
 
 
