@@ -497,7 +497,7 @@ table.mx td.t { font-weight: 700; }
 <link rel="stylesheet" href="../hub/assets/home-nav.css"></head>
 <body class="fx institutional-utility"><nav aria-label="Home navigation"><a data-home-link href="../hub/">← Back to Home</a></nav>
 <a class="a11y-skip" href="#main" data-i18n="a11y.skip">Skip to the form</a>
-<div class="ribbon"><span data-i18n="banner.trial">Revised draft for field piloting</span><span lang="en"> · device-only 5Ws; automatic delivery is unavailable</span></div>
+<div class="ribbon"><span data-i18n="banner.trial">Revised draft for field piloting</span><span lang="en"> · device saved first; delivery requires an exact verified server receipt</span></div>
 
 <div class="top">
   <div>
@@ -532,8 +532,9 @@ table.mx td.t { font-weight: 700; }
 
   <div class="banner stop" data-i18n="f4.stop" data-i18n-html><b>This form records services, not people.</b> Never enter a beneficiary's name, phone number, date of birth, identity number, diagnosis, assessment score, or any detail that could identify an individual. There is no field for it, and none is to be added. If someone needs individual follow-up, refer them — do not record them here.</div>
 
-  <div class="banner" data-iu-operational-copy="offline"><b>Offline entry is available.</b> This 5Ws version is device-only. Reconnection does not send these reports to the Hub. Export JSON/CSV and retain the files before clearing storage or replacing this device. <span id="storeWarn"></span><span class="iu-language-note">English operational wording pending human-reviewed Nepali translation.</span></div>
+  <div class="banner" data-iu-operational-copy="offline"><b>Offline entry is available.</b> Device records are retained first. Explicit Save sends only the current event with your existing verified account; Retry sends immutable pending revisions. Received means a matching durable server receipt. Old records are never automatically uploaded. Export JSON/CSV and retain the files before clearing storage or replacing this device. <span id="storeWarn"></span><span class="iu-language-note">English operational wording pending human-reviewed Nepali translation.</span></div>
 
+  <div class="banner"><p id="activityStatus" role="status">Restoring persistent sign-in. Device records remain retained.</p><button type="button" id="activityRetry">Retry pending</button> <button type="button" id="activityNew">New distinct event</button> <button type="button" id="activityRestore">Restore my draft</button> <button type="button" id="activityHistory">My received 0.10 / correct</button> <a href="../hub/?view=entries">My Dashboard</a> · <a href="../hub/?view=dashboard&amp;house=5ws">Processed 5Ws</a><div id="activityReceived"></div></div>
   <form id="f" autocomplete="off" novalidate>
 
     <!-- 1 · WHO IS REPORTING -->
@@ -895,7 +896,9 @@ table.mx td.t { font-weight: 700; }
      had to move while hub was left alone. See the header of lib/store.js. -->
 <script src="lib/store.js"></script>
 <script src="../hub/assets/fb-config.js"></script>
-<!-- 5Ws 0.10 is device-only until the authenticated receiver supports its full schema. -->
+<script src="../hub/review-current-v51/fb-config.js"></script>
+<script src="../hub/review-current-v51/current-auth.js"></script>
+<script src="../hub/assets/activity-api.js"></script>
 <script>
 (function () {
   var C = window.CODES, S = window.STORE;
@@ -1644,6 +1647,15 @@ table.mx td.t { font-weight: 700; }
       '<span class="iu-language-note">English validation guidance — Nepali translation pending review.</span></li>';
   }
 
+  window.ActivityCollector = Object.freeze({collect:collect,render:render,refresh:function(){disApply();gridTally();},restore:function(rec){
+    softReset();
+    var order=['org','district','site','palika','reportingRole'];
+    order.concat(Object.keys(rec).filter(function(k){return order.indexOf(k)<0;})).forEach(function(k){var e=$(k);if(e&&typeof rec[k]!=='object'){e.value=rec[k]===null?'':String(rec[k]);e.dispatchEvent(new Event('change',{bubbles:true}));}});
+    $('partners').value=(rec.partners||[]).join(', ');
+    document.querySelectorAll('#tgs input').forEach(function(e){e.checked=(rec.targetGroups||[]).indexOf(e.value)>=0;});disApply();
+    (rec.activities||[]).forEach(function(a){var d=$(detailId(a.code));if(d)d.open=true;Object.keys(a.cells||{}).forEach(function(k){var i=k.lastIndexOf('_'),e=$(cellId(a.code,k.slice(0,i),k.slice(i+1)));if(e)e.value=a.cells[k];});var desc=$(actId(a.code,'desc'));if(desc)desc.value=a.describe||'';});
+    ['disF0_17','disM0_17','disF18','disM18'].forEach(function(k){$(k).value=rec[k]===null||rec[k]===undefined?'':rec[k];});gridTally();activateEntry();
+  }});
   /* ---------- submit ---------- */
   $("f").addEventListener("submit", function (e) {
     e.preventDefault();
@@ -1665,13 +1677,7 @@ table.mx td.t { font-weight: 700; }
     }
     box.classList.remove("has-errors");
     box.innerHTML = "";
-    var res = S.save(rec);
-    saveReporter();
-    if (!res.persisted) toast("Saved for this page only — this browser is blocking storage. Export before closing.", true);
-    else if (res.duplicateOf) toast(tx("updated") + res.record.id + ")");
-    else toast(tx("saved") + res.record.id);
-    if (res.persisted) softReset();
-    render();
+    window.ActivityForm.submit(rec);
   });
 
   function softReset() {
@@ -1686,7 +1692,8 @@ table.mx td.t { font-weight: 700; }
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
   $("reset").addEventListener("click", function () {
-    softReset(); $("problems").classList.remove("has-errors"); $("problems").innerHTML = "";
+    if (window.ActivityForm && window.ActivityForm.busy()) return;
+    softReset(); if(window.ActivityForm)window.ActivityForm.saveDraft(); $("problems").classList.remove("has-errors"); $("problems").innerHTML = "";
   });
 
   /* ---------- saved list ---------- */
@@ -1805,6 +1812,7 @@ table.mx td.t { font-weight: 700; }
   repaint();
 })();
 </script>
+<script src="lib/activity-form.js"></script>
 <script src="pwa.js"></script>
 <!-- The bilingual engine. On a page that is not yet keyed up it still earns
      its place: it sets data-lang, which is what makes the Nepali words in
