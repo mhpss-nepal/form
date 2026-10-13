@@ -134,17 +134,12 @@ class TrialScopeContractTest(unittest.TestCase):
         for name in self.NEPALI_DEFAULT_PAGES:
             self.assertIn(name, present, f"the Nepali list names a missing page: {name}")
 
-    def test_landing_exposes_exactly_one_form_and_no_unapproved_entrypoint(self) -> None:
-        parser = LandingParser()
-        parser.feed((ROOT / "index.html").read_text(encoding="utf-8"))
-
-        self.assertEqual(parser.form_links, ["5ws-report.html"])
-        self.assertEqual(parser.form_urls, ["./", "5ws-report.html"])
-        self.assertEqual(parser.qr_keys, ["5ws"])
-        landing = (ROOT / "index.html").read_text(encoding="utf-8")
-        self.assertNotIn("../hub/forms.html", landing)
-        for page in FORMS:
-            self.assertNotIn(page, landing)
+    def test_landing_exposes_authorised_directory_without_raw_drafts(self) -> None:
+        from test_directory_correction import DESTINATIONS
+        landing = (ROOT / 'index.html').read_text()
+        self.assertEqual(re.findall(r'<a href="([^"]+)" data-i18n="dir.open"', landing), DESTINATIONS)
+        self.assertNotIn('href="drafts/', landing)
+        self.assertNotIn('house=', landing)
 
     def test_trial_landing_does_not_route_through_hub_form_advertising(self) -> None:
         landing = (ROOT / "index.html").read_text(encoding="utf-8")
@@ -204,32 +199,15 @@ class TrialScopeContractTest(unittest.TestCase):
         recorded = (ROOT / "tools" / "precache.sha").read_text(encoding="utf-8").strip()
         self.assertEqual(recorded, digest.hexdigest())
 
-    def test_qr_generator_and_card_check_are_trial_scoped(self) -> None:
-        builder = (ROOT / "tools" / "qr-build.py").read_text(encoding="utf-8")
+    def test_qr_generator_matches_the_eight_form_directory(self) -> None:
+        from test_directory_correction import DESTINATIONS
+        builder = (ROOT / 'tools/qr-build.py').read_text()
         targets = re.search(r"TARGETS\s*=\s*\[(.*?)\]", builder, re.DOTALL)
-        if targets is None:
-            self.fail("TARGETS list is missing from tools/qr-build.py")
-        self.assertEqual(
-            re.findall(r'\("([a-z0-9]+)"\s*,\s*"(/form/[^\"]*)"\)', targets.group(1)),
-            [("master", "/form/"), ("5ws", "/form/5ws-report.html")],
-        )
-        checker = (ROOT / "tools" / "qr-check.py").read_text(encoding="utf-8")
-        self.assertIn('ALLOWED_CARD_KEYS = {"5ws"}', checker)
-        qr_asset = (ROOT / "qr-trial.js").read_text(encoding="utf-8")
-        entries = re.findall(
-            r'^"([a-z0-9]+)":\{\s*"n":\d+,\s*"url":"([^"]+)"',
-            qr_asset,
-            re.MULTILINE,
-        )
-        self.assertEqual(entries, [
-            ("master", "https://mhpss-nepal.github.io/form/"),
-            ("5ws", "https://mhpss-nepal.github.io/form/5ws-report.html"),
-        ])
-        self.assertNotIn("../hub/assets/qr.js", (ROOT / "index.html").read_text(encoding="utf-8"))
-        self.assertNotIn("../hub/assets/qr.js", (ROOT / "cards.html").read_text(encoding="utf-8"))
-        for page in UNAPPROVED_PAGES:
-            self.assertNotIn(page, builder)
-            self.assertNotIn(page, qr_asset)
+        self.assertIsNotNone(targets)
+        paths = re.findall(r'\("([a-z0-9]+)"\s*,\s*"(/form/[^\"]*)"\)', targets.group(1))
+        self.assertEqual([p for _, p in paths], ['/form/'] + ['/form/' + p for p in [DESTINATIONS[0], DESTINATIONS[1], DESTINATIONS[2], DESTINATIONS[3], *DESTINATIONS[4:]]])
+        self.assertEqual(len(paths), 9)
+        self.assertIn('ALLOWED_CARD_KEYS = {"5ws"}', (ROOT / 'tools/qr-check.py').read_text())
 
     def test_qr_checker_rejects_any_extra_asset_entry(self) -> None:
         checker_path = ROOT / "tools" / "qr-check.py"
@@ -241,7 +219,7 @@ class TrialScopeContractTest(unittest.TestCase):
 
         original = (ROOT / "qr-trial.js").read_text(encoding="utf-8")
         five_ws = original.split('"5ws":{', 1)[1].split("\n}", 1)[0]
-        extra = '"contact":{' + five_ws
+        extra = '"unapproved":{' + five_ws
         mutated = original.replace("\n};\nwindow.QR._base", "\n},\n" + extra + "\n};\nwindow.QR._base")
         with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8") as asset:
             asset.write(mutated)

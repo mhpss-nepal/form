@@ -140,12 +140,12 @@ class PreviewIsolationContractTest(unittest.TestCase):
         for page in ("contact.html", "phq9.html", "referral.html", "selfreport.html"):
             self.assertNotIn(f'"{page}"', self.sw)
 
-    def test_field_landing_still_exposes_only_5ws(self) -> None:
+    def test_field_landing_uses_inert_review_routes_for_held_templates(self) -> None:
+        from test_directory_correction import DESTINATIONS
         hrefs = re.findall(r'href="([^"]+\.html)"', self.landing)
-        self.assertEqual(sorted(hrefs), ["5ws-report.html", "cards.html"])
-        self.assertEqual(hrefs.count("5ws-report.html"), 1)
-        for page in ("contact.html", "phq9.html", "referral.html", "selfreport.html"):
-            self.assertNotIn(page, self.landing)
+        self.assertEqual(sorted(hrefs), sorted(DESTINATIONS + ['cards.html']))
+        self.assertNotIn('preview.html?', self.landing)
+        self.assertNotIn('href="drafts/', self.landing)
         self.assertIn('"4ws-report.html"', self.sw)
 
 

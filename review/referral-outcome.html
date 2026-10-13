@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'none'; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<title>Template review — MHPSS Nepal</title>
+<link rel="stylesheet" href="../../hub/assets/app.css"><link rel="stylesheet" href="../../hub/assets/design.css"><link rel="stylesheet" href="../../hub/assets/form.css">
+<style>html,body{max-width:100%;margin:0} .wrap{min-width:0} .review-bar{padding:14px; background:#183039;color:white} .review-bar a{color:white} .review-bar button{min-width:44px;min-height:44px;margin:6px} .review-bar p{margin:6px 0} .review-bar :focus-visible{outline:3px solid #ffd166} input:disabled,select:disabled,textarea:disabled{opacity:1;color:inherit;-webkit-text-fill-color:currentColor} [hidden]{display:block!important} .actions,.savebar,.sticky-save{position:static!important} pre{white-space:pre-wrap;overflow-wrap:break-word} .tw{max-width:100%;overflow:auto} #toast:empty{display:none} .top{flex-wrap:wrap} .top>*{min-width:0} .hint{white-space:normal} .review-bar button[aria-pressed=true]{font-weight:bold;text-decoration:underline}</style>
+<style>
+  .a11y-skip{position:absolute;left:-9999px;top:0;z-index:1000;background:#fff;color:#183039;padding:10px 14px;border:2px solid #183039;border-radius:0 0 6px 0;font-weight:700;text-decoration:none}
+  .a11y-skip:focus{left:0}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+</style>
+<script src="../template-review.js"></script></head><body class="fx">
+<header class="review-bar"><a href="../index.html">← Forms</a><strong> · Template review — not collecting</strong><p>Read-only source questions. Saving, export and location are disabled. No account is needed. Source descriptions of saving and publication describe the proposed workflow, not this review. Nepali template wording remains a draft pending human review.</p><button type="button" data-review-lang="en" aria-pressed="true">EN</button><button type="button" data-review-lang="ne" aria-pressed="false">NE</button></header>
+
+<!-- TRANSPORT HELD, 11 Oct 2026: the register scripts are not loaded, so nothing entered here can reach the retired register. Draft, not linked from any index. -->
+<a class="a11y-skip" href="#main" data-i18n="a11y.skip">Skip to the form</a>
+
+
+<div class="top">
+  <div>
+    <div class="brand" data-i18n="ro.brand">Referral outcome</div>
+    <div class="sub" data-i18n="ro.sub">Layer 1 · closing a referral already made</div>
+  </div>
+  <div class="spacer"></div>
+  <span>← Forms</span>
+  <span>Hub</span>
+</div>
+
+<div class="wrap">
+  <main id="main">
+
+  <h1 data-i18n="ro.h1">Did the person arrive?</h1>
+  <p class="lede" data-i18n="ro.lede">Fill this in when you know what became of a referral — one you made, or one that was
+    sent to you. It is a separate record on purpose: the answer is known days later, and a record already
+    saved cannot be altered. Until this is filed, a referral is a person sent somewhere and nothing more.</p>
+
+  
+
+  <form id="f" autocomplete="off" novalidate>
+
+    <div class="card">
+      <div class="step"><span class="n">1</span><h2 data-i18n="ro.h2a">The referral you are closing</h2></div>
+      <div class="row three">
+        <div class="f">
+          <label for="org" data-i18n="ro.orgLab">Your organisation</label>
+          <select disabled autocomplete="off" id="org"></select>
+        </div>
+        <div class="f">
+          <label for="direction" data-i18n="ref.p035">Direction</label>
+          <select disabled autocomplete="off" id="direction">
+            <option value="" data-i18n="ro.choose">— choose —</option>
+            <option value="OUT" data-i18n="ref.p037">Out — we sent them elsewhere</option>
+            <option value="IN" data-i18n="ref.p038">In — they were sent to us</option>
+          </select>
+          <div class="help" data-i18n="ro.dirHelp">Choose “In” to report someone sent to you — including someone who never arrived,
+            for whom there is no contact record at all.</div>
+        </div>
+        <div class="f">
+          <label for="dateAD" data-i18n="ref.p013">Date of referral (AD)</label>
+          <input disabled autocomplete="off" type="date" id="dateAD">
+        </div>
+      </div>
+      <div class="row">
+        <div class="f">
+          <label for="ccode" data-i18n="ref.p020">Contact code</label>
+          <input disabled autocomplete="off" type="text" id="ccode" placeholder="NP-XXXXX-XXXXX" style="font-family:ui-monospace,Menlo,monospace" data-i18n-skip>
+          <div class="help" data-i18n="ro.ccodeHelp">The same code as on the contact record the referral was made from. The code and the
+            date are the only join there is, so copy them exactly.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="step"><span class="n">2</span><h2 data-i18n="ro.h2b">What happened</h2></div>
+      <div class="row three">
+        <div class="f">
+          <label for="arrived" data-i18n="ref.p058">Arrival</label>
+          <select disabled autocomplete="off" id="arrived">
+            <option value="" data-i18n="ro.choose">— choose —</option>
+            <option value="Y" data-i18n="ref.p060">Confirmed arrived</option>
+            <option value="N" data-i18n="ref.p061">Did not arrive</option>
+            <option value="DECL" data-i18n="ref.p062">Person declined the referral</option>
+          </select>
+          <div class="help" data-i18n="ro.arrHelp">If it is not yet known, there is nothing to file — come back when it is.</div>
+        </div>
+        <div class="f">
+          <label for="arrDate" data-i18n="ref.p063" data-i18n-html>Date confirmed <span class="opt">— if known</span></label>
+          <input disabled autocomplete="off" type="date" id="arrDate">
+        </div>
+        <div class="f">
+          <label for="confBy" data-i18n="ref.p064" data-i18n-html>Confirmed how <span class="opt">— optional</span></label>
+          <select disabled autocomplete="off" id="confBy">
+            <option value="" data-i18n="ref.p065">— choose —</option>
+            <option value="RECV" data-i18n="ref.p066">Receiving service told us</option>
+            <option value="PERS" data-i18n="ref.p067">The person told us</option>
+            <option value="FAM" data-i18n="ref.p068">A family member told us</option>
+            <option value="OTH" data-i18n="ref.p069">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="f">
+        <label for="barrier" data-i18n="ref.p070" data-i18n-html>If they did not arrive, what got in the way? <span class="opt">— optional</span></label>
+        <select disabled autocomplete="off" id="barrier">
+          <option value="" data-i18n="ref.p071">— choose —</option>
+          <option value="DIST" data-i18n="ref.p072">Distance or no transport</option>
+          <option value="COST" data-i18n="ref.p073">Cost</option>
+          <option value="CLOSED" data-i18n="ref.p074">Service was closed or full</option>
+          <option value="STIG" data-i18n="ref.p075">Stigma or family objection</option>
+          <option value="LOST" data-i18n="ref.p076">Lost contact with the person</option>
+          <option value="OTH" data-i18n="ref.p077">Other</option>
+        </select>
+        <div class="help" data-i18n="ref.p078">The barrier list is what turns a broken pathway into something fixable.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="step"><span class="n">3</span><h2 data-i18n="ref.p079">Save</h2></div>
+      <div id="errs"></div>
+      <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
+        <button disabled type="submit" class="btn" data-i18n="ro.save">Save this outcome</button>
+        <button disabled type="button" class="btn ghost" id="csvBtn" data-i18n="ref.p081">Export CSV</button>
+        <button disabled type="button" class="btn grey" id="clearBtn" data-i18n="ref.p082">Clear everything on this device</button>
+        <span class="xs" id="count"></span>
+      </div>
+      <div class="f" style="margin-top:16px">
+        <label data-i18n="ref.p083">What would be sent, if there were anywhere to send it</label>
+        <pre id="payload" class="pay">—</pre>
+      </div>
+    </div>
+  </form>
+</div>
+
+  </main>
+
+
+<script src="../../hub/assets/codes.js"></script><script src="../../hub/assets/i18n-strings.js"></script>
+<script>window.REVIEW_LISTS={};
+
+
+/* Draft strings for this form, new on 23 September 2026. English is the page
+   itself; the Nepali is a MACHINE DRAFT for piloting, to be validated by a
+   translator. Every other string reuses a key the shared dictionary already
+   carries (ref.*), so only the page furniture is new. When this form is merged,
+   move both maps into hub/assets/i18n-strings.js and delete this block. */
+(function () {
+  var S = window.I18N_STRINGS = window.I18N_STRINGS || {};
+  S.en = S.en || {}; S.ne = S.ne || {};
+  var EN = {
+    "ro.p001": "Referral outcome — MHPSS Nepal",
+    "ro.brand": "Referral outcome",
+    "ro.sub": "Layer 1 · closing a referral already made",
+    "ro.h1": "Did the person arrive?",
+    "ro.h2a": "The referral you are closing",
+    "ro.h2b": "What happened",
+    "ro.orgLab": "Your organisation",
+    "ro.choose": "— choose —",
+    "ro.save": "Save this outcome",
+    "ro.dirHelp": "Choose \u201cIn\u201d to report someone sent to you — including someone who never arrived, for whom there is no contact record at all.",
+    "ro.ccodeHelp": "The same code as on the contact record the referral was made from. The code and the date are the only join there is, so copy them exactly.",
+    "ro.arrHelp": "If it is not yet known, there is nothing to file — come back when it is.",
+    "ro.lede": "Fill this in when you know what became of a referral — one you made, or one that was sent to you. It is a separate record on purpose: the answer is known days later, and a record already saved cannot be altered. Until this is filed, a referral is a person sent somewhere and nothing more.",
+    "ro.note": "<b>The referral itself is recorded on the person\u2019s own record.</b> Making a referral is part of the <a href=\"contact.html\">service contact record</a>, from 23 September 2026. This form carries only what happened afterwards."
+  };
+  var NE = {
+    "ro.p001": "रेफरल नतिजा — MHPSS नेपाल",
+    "ro.brand": "रेफरल नतिजा",
+    "ro.sub": "तह १ · गरिसकेको रेफरल टुङ्ग्याउने",
+    "ro.h1": "के व्यक्ति पुग्नुभयो?",
+    "ro.h2a": "कुन रेफरल टुङ्ग्याउँदै हुनुहुन्छ",
+    "ro.h2b": "के भयो",
+    "ro.orgLab": "तपाईंको संस्था",
+    "ro.choose": "— छान्नुहोस् —",
+    "ro.save": "यो नतिजा सुरक्षित गर्नुहोस्",
+    "ro.dirHelp": "तपाईंकहाँ पठाइएको व्यक्तिको विवरण दिन “भित्र” छान्नुहोस् — कहिल्यै नआएको व्यक्ति पनि, जसको कुनै सम्पर्क अभिलेख हुँदैन।",
+    "ro.ccodeHelp": "रेफरल गरिएको सम्पर्क अभिलेखमा भएकै कोड। कोड र मिति नै एक मात्र जोड हो, त्यसैले ठ्याक्कै उतार्नुहोस्।",
+    "ro.arrHelp": "थाहा भइसकेको छैन भने अहिले केही अभिलेख गर्नु पर्दैन — थाहा भएपछि फर्केर आउनुहोस्।",
+    "ro.lede": "तपाईंले गर्नुभएको वा तपाईंकहाँ पठाइएको रेफरलको नतिजा थाहा भएपछि यो फारम भर्नुहोस्। यो जानाजान छुट्टै अभिलेख हो: नतिजा केही दिनपछि मात्र थाहा हुन्छ, र पठाइसकेको अभिलेख परिवर्तन गर्न मिल्दैन। यो नभरेसम्म रेफरल भनेको कतै पठाइएको व्यक्ति मात्रै हो।",
+    "ro.note": "<b>रेफरल आफैँ व्यक्तिको आफ्नै अभिलेखमा राखिन्छ।</b> २३ सेप्टेम्बर २०२६ देखि रेफरल गर्ने काम <a href=\"contact.html\">सेवा सम्पर्क अभिलेख</a>को अंश हो। यो फारमले त्यसपछि के भयो भन्ने मात्र बोक्छ।"
+  };
+  Object.keys(EN).forEach(function (k) { if (!S.en[k]) S.en[k] = EN[k]; });
+  Object.keys(NE).forEach(function (k) { if (!S.ne[k]) S.ne[k] = NE[k]; });
+})();
+
+</script><script>mountTemplateReview('referral-outcome');</script></body></html>

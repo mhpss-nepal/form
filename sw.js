@@ -32,11 +32,12 @@
    the header now describes the register bridge the file actually has.
    store.js is a precached asset, so that change does not reach an
    installed phone until this name changes too. */
-const CACHE = "mhpss-np-field-v44";
+const CACHE = "mhpss-np-field-v45";
 
 const PRECACHE = [
   "./",
   "index.html",
+  "lib/directory-strings.js",
   "5ws-report.html",
   "lib/store.js",
   "lib/strings.js",
