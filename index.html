@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="../hub/assets/home-nav.css"></head>
 <body class="fx landing"><nav aria-label="Home navigation"><a data-home-link href="../hub/">← Back to Home</a></nav>
 <a class="a11y-skip" href="#main" data-i18n="a11y.skip">Skip to the form</a>
-<div class="ribbon"><span data-i18n="banner.trial"></span><span data-i18n="banner.trialSub"></span></div>
+<div class="ribbon"><span data-i18n="dir.banner"></span><span data-i18n="dir.bannerSub"></span></div>
 
 <div class="top">
   <div>
@@ -46,7 +46,7 @@
   <div class="ml-hero">
     <div class="eyebrow" data-i18n="ml.p012"></div>
     <h1 data-i18n="ml.p036"></h1>
-    <p class="lede" data-i18n="ml.p030" data-i18n-html></p>
+    <p class="lede" data-i18n="dir.intro" data-i18n-html></p>
     <div class="ml-phone">
       <button class="pb" id="copyAll" data-url="./" data-i18n="ml.p076"></button>
       <button class="pb" id="qrAll" data-i18n="ml.p075"></button>
@@ -55,7 +55,7 @@
     <div class="qrbox" id="qrAllBox" hidden></div>
   </div>
 
-  <div class="banner stop" data-i18n="ml.p011" data-i18n-html></div>
+  <div class="banner stop" data-i18n="dir.delivery" data-i18n-html></div>
 
   <h2 data-i18n="ml.p040"></h2>
 
@@ -98,13 +98,18 @@
       <div class="qrbox" hidden></div>
     </div>
 
+    <div class="ml-card svc" data-directory-kind="training"><div class="tag" data-i18n="dir.training.tag">TRAINING</div><h3 data-i18n="dir.training.title">Training & orientation</h3><p data-i18n="dir.training.status">Separate approved training access is required to send reports.</p><div class="ml-actions"><a href="training-report.html" data-i18n="dir.training.action">Open form</a></div></div>
+    <div class="ml-card svc" data-directory-kind="contacts"><div class="tag" data-i18n="dir.contacts.tag">AWAITING ACTIVATION</div><h3 data-i18n="dir.contacts.title">Service contacts & referrals</h3><p data-i18n="dir.contacts.status">Individual collection is not activated.</p><div class="ml-actions"><a href="../hub/?view=dashboard&house=contacts" data-i18n="dir.contacts.action">Open dashboard home</a></div></div>
+    <div class="ml-card svc" data-directory-kind="referrals"><div class="tag" data-i18n="dir.referrals.tag">AWAITING ACTIVATION</div><h3 data-i18n="dir.referrals.title">Referral outcomes</h3><p data-i18n="dir.referrals.status">Follow-up collection is not activated.</p><div class="ml-actions"><a href="../hub/?view=dashboard&house=referrals" data-i18n="dir.referrals.action">Open dashboard home</a></div></div>
+    <div class="ml-card svc" data-directory-kind="providers"><div class="tag" data-i18n="dir.providers.tag">AWAITING ACTIVATION</div><h3 data-i18n="dir.providers.title">Provider registration</h3><p data-i18n="dir.providers.status">Registration and publication review are not activated.</p><div class="ml-actions"><a href="../hub/?view=dashboard&house=providers" data-i18n="dir.providers.action">Open dashboard home</a></div></div>
+    <div class="ml-card svc" data-directory-kind="servicepoints"><div class="tag" data-i18n="dir.servicepoints.tag">AWAITING ACTIVATION</div><h3 data-i18n="dir.servicepoints.title">Service-point registration</h3><p data-i18n="dir.servicepoints.status">Registration and publication review are not activated.</p><div class="ml-actions"><a href="../hub/?view=dashboard&house=servicepoints" data-i18n="dir.servicepoints.action">Open dashboard home</a></div></div>
   </div>
 
   <h2 data-i18n="ml.p039"></h2>
   <div class="ml-note">
     <ul>
       <li data-i18n="ml.p035" data-i18n-html></li>
-      <li data-i18n="ml.p034" data-i18n-html></li>
+      <li data-i18n="dir.copyHelp" data-i18n-html></li>
       <li data-i18n="ml.p033" data-i18n-html></li>
       <li data-i18n="ml.p032" data-i18n-html></li>
     </ul>
@@ -227,6 +232,7 @@ document.getElementById('qrAll').addEventListener('click', function(){
 <script src="../hub/assets/mark.js"></script>
 <script src="../hub/assets/icons.js"></script>
 <script src="../hub/assets/i18n-strings.js"></script>
+<script src="lib/directory-strings.js"></script>
 <script src="../hub/assets/i18n.js"></script>
 </body>
 </html>
