@@ -3,7 +3,7 @@
 const L=window.L1;if(!L)throw Error('Draft helpers unavailable');const rows=Object.create(null);
 L.all=kind=>(rows[kind]||[]).map(r=>JSON.parse(JSON.stringify(r)));
 L.save=(kind,obj)=>{const r=JSON.parse(JSON.stringify(obj));r._saved=new Date().toISOString();r._syntheticPreview=true;(rows[kind]||(rows[kind]=[])).push(r);return {count:rows[kind].length,persisted:false,synced:null};};
-L.clear=kind=>{rows[kind]=[];};L.storageWorks=()=>false;
+L.clear=kind=>{rows[kind]=[];};L.storageWorks=()=>false;L.recall=()=>'';L.remember=()=>{};
 const original=L.download;L.download=(name,bytes,mime)=>original('SYNTHETIC-PREVIEW-'+name,bytes,mime);
 L.geo=(_ok,err)=>err('Device location is unavailable in synthetic-only draft inspection.');
 function notice(){for(const node of document.querySelectorAll('.banner,.help,.xs')){if(node.id==='syntheticDraftNotice')continue;if(/sent to the coordination register|goes to the coordination|go to the coordination|sent to the register|appears on the public directory|entries also go|entry also goes|Records are held on this phone/i.test(node.textContent)){const warn=node.querySelector('#storeWarn');node.removeAttribute('data-i18n');node.removeAttribute('data-i18n-html');node.textContent='Synthetic-only input inspection. Saved previews live in this page memory only; no receiver, automatic delivery or directory publication is activated.';if(warn)node.append(warn);}}const ribbon=document.querySelector('.ribbon');if(ribbon){ribbon.removeAttribute('data-i18n');ribbon.removeAttribute('data-i18n-html');ribbon.replaceChildren(document.createTextNode('SYNTHETIC-ONLY FORM PREVIEW · No real records, device persistence, receiver or clinical activation.'));}
