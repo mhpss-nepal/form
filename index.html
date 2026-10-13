@@ -281,7 +281,41 @@ document.getElementById('qrAll').addEventListener('click', function(){
 <script src="../hub/assets/mark.js"></script>
 <script src="../hub/assets/icons.js"></script>
 <script src="../hub/assets/i18n-strings.js"></script>
-<script src="lib/directory-strings.js"></script>
+<script src="lib/directory-status-20261013.js"></script>
+<script>
+/* A missing directory asset must not expose internal keys or stale status.
+   Keep this directory-only fallback in step with the versioned dictionary. */
+if (!window.DIRECTORY_STATUS_READY) {
+  (function () {
+    var S = window.I18N_STRINGS = window.I18N_STRINGS || {};
+    var labels = {
+      'dir.open': 'Open form', 'dir.copy': 'Copy link', 'dir.qr': 'QR',
+      'dir.banner': 'FORM DIRECTORY',
+      'dir.bannerSub': ' · Choose a form. Delivery status is shown separately.',
+      'dir.intro': 'Eight instruments. Open a form, copy its link or show its QR code. Templates marked review only do not collect information.',
+      'dir.delivery': '<strong>Device saving is not server delivery.</strong> The 5Ws form saves a device copy and sends when signed in with approved reporting access; delivery is confirmed only by a matching server receipt. Retained pending reports require Retry after connectivity returns. Training requires verified sign-in and a matching server receipt. PHQ-9 and Self-report are not connected for automatic delivery. Provider and service-point registrations are private submissions, pending review; receipt does not publish or verify credentials. The two contact/referral review templates cannot save or send information.',
+      'dir.offlineHelp': '<strong>Offline use:</strong> availability depends on the form and previously loaded assets. Review templates cannot retain entries. Offline delivery and installed-device updates have not been certified.',
+      'dir.provenance': 'This directory includes eight instruments. Two contact/referral instruments open read-only source templates; their collection is not activated. Template availability is not approval for collecting individual information.',
+      'dir.copyHelp': '<strong>Copy link:</strong> share the form or read-only template address. A shared link does not grant access to records.'
+    };
+    var rows = [
+      ['training', 'Training & orientation', 'Verified training access is required to send a report.', 'TRAINING'],
+      ['contacts', 'Service contacts & referrals', 'Review only. Individual collection is not activated.', 'TEMPLATE REVIEW'],
+      ['referrals', 'Referral outcomes', 'Review only. Follow-up collection is not activated.', 'TEMPLATE REVIEW'],
+      ['providers', 'Provider registration', 'Private registration. Verified sign-in required; credentials unverified and publication held.', 'PRIVATE REGISTRATION'],
+      ['servicepoints', 'Service-point registration', 'Private registration. Verified sign-in required; credentials unverified and publication held.', 'PRIVATE REGISTRATION']
+    ];
+    rows.forEach(function (row) {
+      labels['dir.' + row[0] + '.title'] = row[1];
+      labels['dir.' + row[0] + '.status'] = row[2];
+      labels['dir.' + row[0] + '.tag'] = row[3];
+    });
+    ['en', 'ne'].forEach(function (lang) {
+      S[lang] = S[lang] || {}; Object.assign(S[lang], labels);
+    });
+  })();
+}
+</script>
 <script src="../hub/assets/i18n.js"></script>
 </body>
 </html>
