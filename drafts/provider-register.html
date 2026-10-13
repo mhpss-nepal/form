@@ -10,15 +10,15 @@
 <link rel="stylesheet" href="../../hub/assets/app.css">
 <link rel="stylesheet" href="../../hub/assets/design.css">
 <link rel="stylesheet" href="../../hub/assets/form.css">
-<link rel="manifest" href="manifest.webmanifest">
+
 <meta name="theme-color" content="#1d1d1b">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MHPSS Field">
 </head>
-<body class="fx">
-<!-- TRANSPORT HELD, 11 Oct 2026: the register scripts are not loaded, so nothing entered here can reach the retired register. Draft, not linked from any index. -->
+<body class="fx" data-draft-preview="synthetic"><nav aria-label="Home navigation"><a href="../../hub/">← Back to Home</a> · <a href="../index.html">All forms</a></nav>
+<!-- TRANSPORT HELD, 11 Oct 2026: the register scripts are not loaded, so nothing entered here can reach the retired register. Synthetic-only input inspection; real collection remains held. -->
 <div class="ribbon"><span data-i18n="banner.trial">Revised draft for field piloting</span><span data-i18n="banner.trialSub"> · saved on this phone, sent to the coordination register when there is signal</span></div>
 
 <div class="top">
@@ -27,7 +27,7 @@
     <div class="sub" data-i18n="pr.brandSub">Referral Directory · fill this in yourself, about yourself</div>
   </div>
   <div class="spacer"></div>
-  <a href="index.html" data-i18n="pr.navAll">All forms</a>
+  <a href="../index.html" data-i18n="pr.navAll">All forms</a>
   <a href="service-point.html" data-i18n="pr.navSp">Register a service point</a>
 </div>
 
@@ -181,6 +181,7 @@
 
 <script src="../../hub/assets/codes.js"></script>
 <script src="../../hub/assets/l1.js"></script>
+<script src="../draft-preview.js"></script>
 <script>
 (function () {
   "use strict";
@@ -302,7 +303,7 @@
     }
     box.innerHTML = "";
     var res = L1.save(KIND, rec);
-    if (!res.persisted) toast("Saved for this page only — this browser is blocking storage. Export before closing.", true);
+    if (!res.persisted) toast("Synthetic preview saved in page memory only. No server delivery; reload clears it.", true);
     else toast("Entry saved · " + rec.id);
     softReset(); render();
   });
@@ -328,9 +329,7 @@
     $("cnt").textContent = rows.length ? "— " + rows.length : "";
     rows.slice().reverse().slice(0, 40).forEach(function (r) {
       var tr = document.createElement("tr");
-      tr.innerHTML = "<td>" + (r.providerName || "—") + "</td><td>" + nameOf(C.CADRES, r.cadre, r.cadreOther) +
-        "</td><td>" + (r.org === "OTHER" ? (r.orgOther || "—") : nameOf(C.ORGS, r.org)) +
-        "</td><td>" + (r.place || "—") + "</td><td class='xs'>" + (r.id || "—") + "</td>";
+      [r.providerName || "—", nameOf(C.CADRES,r.cadre,r.cadreOther), r.org === "OTHER" ? r.orgOther || "—" : nameOf(C.ORGS,r.org),r.place || "—",r.id || "—"].forEach(function(value){var td=document.createElement("td");td.textContent=value;tr.appendChild(td);});
       tb.appendChild(tr);
     });
   }
@@ -345,11 +344,11 @@
   });
   $("wipe").addEventListener("click", function () { L1.clear(KIND); render(); toast("Saved entries cleared from this device"); });
 
-  if (!L1.storageWorks()) $("storeWarn").textContent = " This browser is blocking storage, so entries live only while this page is open.";
+  if (!L1.storageWorks()) $("storeWarn").textContent = " Synthetic-only preview intentionally uses page memory. Reload clears preview entries; no records are sent.";
   paintLists(); render();
 })();
 </script>
-<script src="pwa.js"></script>
+
 <script src="../../hub/assets/mark.js"></script>
 <script src="../../hub/assets/icons.js"></script>
 <script src="../../hub/assets/i18n-strings.js"></script>

@@ -32,7 +32,7 @@
    the header now describes the register bridge the file actually has.
    store.js is a precached asset, so that change does not reach an
    installed phone until this name changes too. */
-const CACHE = "mhpss-np-field-v44";
+const CACHE = "mhpss-np-field-v45-activityday";
 
 const PRECACHE = [
   "./",
@@ -40,6 +40,11 @@ const PRECACHE = [
   "5ws-report.html",
   "lib/store.js",
   "lib/strings.js",
+  "lib/directory-strings.js",
+  "lib/5ws-activityday-form.js",
+  "../hub/assets/activityday-api.js",
+  "../hub/review-current-v51/current-auth.js",
+  "../hub/assets/home-nav.css",
   /* the under-1-KB redirect behind 4Ws cards already distributed in the
      field. Without this stub a first scan with no signal falls back to the
      landing page instead of the form. It records nothing and is not an
@@ -106,7 +111,8 @@ self.addEventListener("install", (e) => {
 self.addEventListener("activate", (e) => {
   e.waitUntil((async () => {
     const keys = await caches.keys();
-    await Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)));
+    // Delete only this field-form cache family; preserve sibling TEST/Hub queues and caches.
+    await Promise.all(keys.filter((k) => /^mhpss-np-field-v[0-9]+(?:-[a-z0-9-]+)?$/.test(k) && k !== CACHE).map((k) => caches.delete(k)));
     await self.clients.claim();
   })());
 });

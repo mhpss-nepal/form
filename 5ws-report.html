@@ -497,7 +497,7 @@ table.mx td.t { font-weight: 700; }
 <link rel="stylesheet" href="../hub/assets/home-nav.css"></head>
 <body class="fx institutional-utility"><nav aria-label="Home navigation"><a data-home-link href="../hub/">← Back to Home</a></nav>
 <a class="a11y-skip" href="#main" data-i18n="a11y.skip">Skip to the form</a>
-<div class="ribbon"><span data-i18n="banner.trial">Revised draft for field piloting</span><span lang="en"> · device-only 5Ws; automatic delivery is unavailable</span></div>
+<div class="ribbon"><span data-i18n="banner.trial">Revised draft for field piloting</span><span lang="en"> · device save and trusted delivery are separate</span></div>
 
 <div class="top">
   <div>
@@ -515,8 +515,8 @@ table.mx td.t { font-weight: 700; }
     <span><b>Institutional Utility design preview.</b> Use demonstration or non-identifiable data only. New interface-only copy remains in English pending human-reviewed Nepali wording.</span>
   </div>
   <div class="iu-sync" id="iuSyncStatus" role="status" aria-live="polite" aria-atomic="true" data-state="waiting">
-    <b>Device-only 5Ws · automatic delivery unavailable</b>
-    <span>5Ws 0.10 is saved on this device only. Automatic delivery is unavailable. Export JSON/CSV before clearing storage or replacing this device.</span>
+    <b>5Ws device copy · check trusted delivery below</b>
+    <span>A device save is not a receipt. Verified reporting access is required for the separate 0.10 receiver. Keep device exports and use Retry for pending delivery.</span>
   </div>
   <nav class="steps" id="steps" aria-label="Steps">
     <a href="#s1" data-step="s1"><i>1</i><span data-i18n="f4.step1">Who</span></a>
@@ -532,7 +532,7 @@ table.mx td.t { font-weight: 700; }
 
   <div class="banner stop" data-i18n="f4.stop" data-i18n-html><b>This form records services, not people.</b> Never enter a beneficiary's name, phone number, date of birth, identity number, diagnosis, assessment score, or any detail that could identify an individual. There is no field for it, and none is to be added. If someone needs individual follow-up, refer them — do not record them here.</div>
 
-  <div class="banner" data-iu-operational-copy="offline"><b>Offline entry is available.</b> This 5Ws version is device-only. Reconnection does not send these reports to the Hub. Export JSON/CSV and retain the files before clearing storage or replacing this device. <span id="storeWarn"></span><span class="iu-language-note">English operational wording pending human-reviewed Nepali translation.</span></div>
+  <div class="banner" data-iu-operational-copy="offline"><b>Offline entry is available.</b> The device copy remains available. New deliberate submissions use a UID-scoped queue; reconnect and choose Retry for pending delivery. Historical device records never auto-upload. Export JSON/CSV and retain the files before clearing storage or replacing this device. <span id="storeWarn"></span><span class="iu-language-note">English operational wording pending human-reviewed Nepali translation.</span></div>
 
   <form id="f" autocomplete="off" novalidate>
 
@@ -841,7 +841,7 @@ table.mx td.t { font-weight: 700; }
     <div class="card" id="s5">
       <div class="step"><span class="n">5</span><h2 data-i18n="f4.h5check">Check and save</h2></div>
       <div id="problems" role="alert" aria-live="assertive" tabindex="-1"></div>
-      <div class="help" data-iu-operational-copy="save">Saving the same organisation, place, date, activity and start time twice updates that report rather than creating a second one. The report is kept on this device. Automatic delivery is unavailable for this 5Ws version. Export JSON/CSV and retain the files.<span class="iu-language-note">English operational wording pending human-reviewed Nepali translation.</span></div>
+      <div class="help" data-iu-operational-copy="save">Saving the same organisation, place, date, activity and start time twice updates that report rather than creating a second one. The report is kept on this device. Trusted delivery is confirmed only by the matching server receipt below. Export JSON/CSV and retain the files.<span class="iu-language-note">English operational wording pending human-reviewed Nepali translation.</span></div>
     </div>
   </form>
 
@@ -893,9 +893,18 @@ table.mx td.t { font-weight: 700; }
 </script>
 <!-- The 5Ws form reads its own copy of the store: the age bands live there and
      had to move while hub was left alone. See the header of lib/store.js. -->
+<section aria-label="Trusted 0.10 delivery" style="max-width:1100px;margin:1rem auto;padding:1rem">
+  <p id="activitydayStatus" role="status">Local history is available. Sign in through the Hub to queue new reports for the separate 0.10 candidate receiver.</p>
+  <button type="button" id="activitydayRetry">Retry this account's queued revisions</button>
+  <a href="../hub/5ws-activityday.html?view=own">Own received history</a>
+  <a href="../hub/5ws-activityday.html?view=current">Scoped activity-day dashboard</a>
+</section>
 <script src="lib/store.js"></script>
 <script src="../hub/assets/fb-config.js"></script>
-<!-- 5Ws 0.10 is device-only until the authenticated receiver supports its full schema. -->
+<script src="../hub/review-current-v51/current-auth.js"></script>
+<script src="../hub/assets/activityday-api.js"></script>
+<script src="lib/5ws-activityday-form.js"></script>
+<!-- Candidate 0.10 transport uses a separate receiver and never the approved 0.4 wire. -->
 <script>
 (function () {
   var C = window.CODES, S = window.STORE;
@@ -1645,7 +1654,7 @@ table.mx td.t { font-weight: 700; }
   }
 
   /* ---------- submit ---------- */
-  $("f").addEventListener("submit", function (e) {
+  $("f").addEventListener("submit", async function (e) {
     e.preventDefault();
     var rec = collect();
     var problems = S.validate(rec);
@@ -1670,7 +1679,11 @@ table.mx td.t { font-weight: 700; }
     if (!res.persisted) toast("Saved for this page only — this browser is blocking storage. Export before closing.", true);
     else if (res.duplicateOf) toast(tx("updated") + res.record.id + ")");
     else toast(tx("saved") + res.record.id);
-    if (res.persisted) softReset();
+    var queued = false;
+    try { queued = (await ActivityDayForm.submit(res.record)).queued; }
+    catch (error) { document.getElementById('activitydayStatus').textContent = error.message + ' Current editor and local history retained.'; }
+    // A late network completion must never clear edits made while it was in flight.
+    if (res.persisted && queued && JSON.stringify(collect()) === JSON.stringify(rec)) softReset();
     render();
   });
 
@@ -1792,8 +1805,8 @@ table.mx td.t { font-weight: 700; }
     if (!storageWorks()) {
       show("memory", t.memoryTitle, t.memoryBody); return;
     }
-    show("local-only", "Device-only 5Ws · automatic delivery unavailable",
-      "Reports stay on this device. Export JSON/CSV before clearing storage or replacing this device. Reconnection does not deliver them to the Hub.");
+    show("local-only", "5Ws device copy · check trusted delivery below",
+      "Device history is separate from the trusted UID queue. Check the delivery result below; Retry sends pending exact revisions. Historical records never auto-upload.");
   }
   function repaint() {
     paint(null);
