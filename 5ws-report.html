@@ -846,7 +846,7 @@ table.mx td.t { font-weight: 700; }
   </form>
 
   <div class="actions">
-    <button type="submit" class="btn" form="f" data-i18n="f4.btnSave">Save report</button>
+    <button type="submit" class="btn" form="f" data-i18n="f4.btnSave" disabled>Save report</button>
     <button type="button" class="btn grey" id="reset" data-i18n="f4.btnClear">Clear</button>
   </div>
 
@@ -894,8 +894,8 @@ table.mx td.t { font-weight: 700; }
 <!-- The 5Ws form reads its own copy of the store: the age bands live there and
      had to move while hub was left alone. See the header of lib/store.js. -->
 <section aria-label="Trusted 0.10 delivery" style="max-width:1100px;margin:1rem auto;padding:1rem">
-  <p id="activitydayStatus" role="status">Local history is available. Sign in through the Hub to queue new reports for the separate 0.10 candidate receiver.</p>
-  <button type="button" id="activitydayRetry">Retry this account's queued revisions</button>
+  <p id="activitydayStatus" role="status">Delivery dependencies unavailable. Submit and Retry are unavailable; current editor, local history and queued revisions are retained. Reconnect and reload this page before sending.</p>
+  <button type="button" id="activitydayRetry" disabled>Retry this account's queued revisions</button>
   <a href="../hub/5ws-activityday.html?view=own">Own received history</a>
   <a href="../hub/5ws-activityday.html?view=current">Scoped activity-day dashboard</a>
 </section>
@@ -1653,9 +1653,28 @@ table.mx td.t { font-weight: 700; }
       '<span class="iu-language-note">English validation guidance — Nepali translation pending review.</span></li>';
   }
 
+  /* A new network-first page may be cached by an older controller without
+     its new delivery scripts. Fail closed before any save/queue/editor reset;
+     never silently fall back to the legacy transport. */
+  function deliveryReady() {
+    return !!(window.BaselineAuth && window.ACTIVITYDAY_API &&
+      window.ActivityDayForm && typeof window.ActivityDayForm.submit === "function" &&
+      window.ActivityDayForm.api);
+  }
+  function deliveryUnavailable() {
+    $("activitydayRetry").disabled = true;
+    document.querySelector('button[type="submit"][form="f"]').disabled = true;
+    $("activitydayStatus").textContent = "Delivery dependencies unavailable. Submit and Retry are unavailable; current editor, local history and queued revisions are retained. Reconnect and reload this page before sending.";
+  }
+  if (deliveryReady()) {
+    $("activitydayRetry").disabled = false;
+    document.querySelector('button[type="submit"][form="f"]').disabled = false;
+  } else deliveryUnavailable();
+
   /* ---------- submit ---------- */
   $("f").addEventListener("submit", async function (e) {
     e.preventDefault();
+    if (!deliveryReady()) { deliveryUnavailable(); return; }
     var rec = collect();
     var problems = S.validate(rec);
     document.querySelectorAll("#actGrid details[open] input[type=number]").forEach(function (input) {

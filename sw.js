@@ -32,7 +32,7 @@
    the header now describes the register bridge the file actually has.
    store.js is a precached asset, so that change does not reach an
    installed phone until this name changes too. */
-const CACHE = "mhpss-np-field-v45-activityday";
+const CACHE = "mhpss-np-field-v46-activityday-ready";
 
 const PRECACHE = [
   "./",
@@ -98,13 +98,16 @@ const PRECACHE = [
 self.addEventListener("install", (e) => {
   e.waitUntil((async () => {
     const c = await caches.open(CACHE);
-    /* one at a time: a single 404 must not fail the whole install and
-       leave the worker with no cache at all */
-    await Promise.all(PRECACHE.map(async (u) => {
-      try { await c.add(new Request(u, { cache: "reload" })); }
-      catch (err) { /* keep going — logged below on first fetch miss */ }
-    }));
-    self.skipWaiting();
+    /* Every listed asset is required. addAll commits the batch atomically:
+       failed dependencies must not activate, claim old tabs or retire their
+       recovery cache. Only this uninstalled candidate cache is cleaned up. */
+    try {
+      await c.addAll(PRECACHE.map((u) => new Request(u, { cache: "reload" })));
+    } catch (err) {
+      await caches.delete(CACHE);
+      throw err;
+    }
+    await self.skipWaiting();
   })());
 });
 
