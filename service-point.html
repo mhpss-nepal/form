@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Register a service point — MHPSS Nepal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Manrope:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="../hub/assets/app.css">
+<link rel="stylesheet" href="../hub/assets/design.css">
+<link rel="stylesheet" href="../hub/assets/form.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1d1d1b">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MHPSS Field">
+</head>
+<body class="fx">
+<!-- Candidate private registration receiver. Public publication remains held. -->
+<div class="ribbon"><span data-i18n="banner.trial">Revised draft for field piloting</span><span data-candidate-delivery-note="true"> · private pending review; explicit authenticated delivery only</span></div>
+
+<div class="top">
+  <div>
+    <div class="brand" data-i18n="sp.brand">Register a service point</div>
+    <div class="sub" data-i18n="sp.brandSub">Referral Directory · one entry per place where your organisation works</div>
+  </div>
+  <div class="spacer"></div>
+  <a href="all-forms.html" data-i18n="sp.navAll">All forms</a>
+  <a href="../hub/" data-i18n="sp.navDash">Dashboard</a>
+</div>
+
+<div class="wrap">
+  <nav class="steps" id="steps" aria-label="Steps">
+    <a href="#s1" data-step="s1"><i>1</i><span data-i18n="sp.step1">Who</span></a>
+    <a href="#s2" data-step="s2"><i>2</i><span data-i18n="sp.step2">Where</span></a>
+    <a href="#s3" data-step="s3"><i>3</i><span data-i18n="sp.step3">What</span></a>
+    <a href="#s4" data-step="s4"><i>4</i><span data-i18n="sp.step4">How to reach</span></a>
+    <a href="#s5" data-step="s5"><i>5</i><span data-i18n="sp.step5">Confirm</span></a>
+  </nav>
+
+  <h1 data-i18n="sp.h1">Put your service on the referral directory</h1>
+  <p class="lede" data-i18n="sp.lede">One entry is one place where people can be sent: an organisation, a palika, the services offered there and how to reach them. Fill one entry for each place you work in. A coordinator checks every entry before it appears on the public directory.</p>
+
+  <div class="banner stop" data-i18n="sp.stop" data-i18n-html><b>This form lists a service, not a person.</b> No service user's name, phone number or details belong here. The contact you give in step 1 is for the coordination team to reach you and is never published; only the institutional number you give in step 4 is shown to the public.</div>
+
+  <div class="banner"><b>What happens next.</b> Your entry is saved on this phone and goes to the coordination register when there is signal. Nothing is published until a coordinator has checked it. Once listed, you will be asked to confirm the details are still correct every 30 days — the directory shows the date it was last confirmed. <span id="storeWarn"></span></div>
+
+  <form id="f" autocomplete="off" novalidate>
+
+    <!-- 1 · WHO -->
+    <div class="card" id="s1">
+      <div class="step"><span class="n">1</span><h2 data-i18n="sp.h1who">Who provides the service</h2><span class="hint" data-i18n="sp.h1hint">saved for next time</span></div>
+
+      <div class="row">
+        <div class="f">
+          <label for="org" data-i18n="sp.orgLab">Organisation</label>
+          <select id="org" name="org"></select>
+        </div>
+        <div class="f" id="orgOtherWrap" hidden>
+          <label for="orgOther" data-i18n="sp.orgOtherLab">Name of organisation</label>
+          <input type="text" id="orgOther" name="orgOther" placeholder="Full name, as it should appear in the directory">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="f">
+          <label for="orgType" data-i18n="sp.typeLab">Type of organisation</label>
+          <select id="orgType" name="orgType"></select>
+        </div>
+      </div>
+
+      <div class="row three">
+        <div class="f">
+          <label for="focalName" data-i18n="sp.focalLab">Contact person for this entry</label>
+          <input type="text" id="focalName" name="focalName" placeholder="Person the coordination team can call back">
+          <div class="help" data-i18n="sp.focalHelp">Internal only. Never shown on the public directory.</div>
+        </div>
+        <div class="f">
+          <label for="focalPhone" data-i18n="sp.focalPhoneLab">Their phone</label>
+          <input type="tel" id="focalPhone" name="focalPhone" placeholder="98XXXXXXXX">
+        </div>
+        <div class="f">
+          <label for="focalEmail" data-i18n="sp.focalEmailLab" data-i18n-html>Their email <span class="opt">— optional</span></label>
+          <input type="email" id="focalEmail" name="focalEmail" placeholder="name@organisation.org">
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 · WHERE -->
+    <div class="card" id="s2">
+      <div class="step"><span class="n">2</span><h2 data-i18n="sp.h2">Where the service is</h2></div>
+
+      <div class="row three">
+        <div class="f">
+          <label for="district" data-i18n="sp.districtLab">District</label>
+          <select id="district" name="district"></select>
+        </div>
+        <div class="f">
+          <label for="palika" data-i18n="sp.palikaLab">Palika</label>
+          <select id="palika" name="palika"></select>
+          <div class="help" data-i18n="sp.palikaHelp">The list follows the district you chose.</div>
+        </div>
+        <div class="f">
+          <label for="site" data-i18n="sp.siteLab">Place</label>
+          <select id="site" name="site"></select>
+        </div>
+      </div>
+
+      <div class="row" id="siteOtherWrap" hidden>
+        <div class="f">
+          <label for="siteOther" data-i18n="sp.siteOtherLab">Name of the place, as printed</label>
+          <input type="text" id="siteOther" name="siteOther" placeholder="Health post, school, office, holding centre…">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="f">
+          <label for="placeAddress" data-i18n="sp.addrLab" data-i18n-html>Address, as printed <span class="opt">— optional</span></label>
+          <input type="text" id="placeAddress" name="placeAddress" placeholder="Ward, tole, landmark">
+          <div class="help" data-i18n="sp.addrHelp">Written as it appears on a sign or a letterhead. The directory shows a palika, never a point on a map.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 · WHAT -->
+    <div class="card" id="s3">
+      <div class="step"><span class="n">3</span><h2 data-i18n="sp.h3">What is offered here</h2></div>
+
+      <div class="f">
+        <label data-i18n="sp.svcLab">Services — select all that apply</label>
+        <div class="chks" id="svcs"></div>
+      </div>
+
+      <div class="f">
+        <label data-i18n="sp.cadreLab">Who provides them — select all that work here</label>
+        <div class="chks" id="cadres"></div>
+        <div class="help" data-i18n="sp.cadreHelp">Which roles are present, not how many people. Numbers are never asked here.</div>
+      </div>
+
+      <div class="f">
+        <label data-i18n="sp.tgLab" data-i18n-html>Who the service is for <span class="opt">— optional</span></label>
+        <div class="chks" id="tgs"></div>
+      </div>
+
+      <div class="row">
+        <div class="f">
+          <label for="languages" data-i18n="sp.langLab">Languages the service works in</label>
+          <input type="text" id="languages" name="languages" placeholder="Nepali, Tamang, English…">
+        </div>
+        <div class="f">
+          <label for="notTaken" data-i18n="sp.notLab" data-i18n-html>What this place does not take <span class="opt">— optional</span></label>
+          <input type="text" id="notTaken" name="notTaken" placeholder="So people are not sent to the wrong place">
+        </div>
+      </div>
+
+      <div class="banner stop" data-i18n="sp.safeg" data-i18n-html><b>Three kinds of case have their own pathway.</b> Gender-based violence, unaccompanied or separated children, and immediate risk to life are not routed through this directory. If your organisation runs one of those services, say so to the coordination team directly.</div>
+    </div>
+
+    <!-- 4 · HOW TO REACH -->
+    <div class="card" id="s4">
+      <div class="step"><span class="n">4</span><h2 data-i18n="sp.h4">How people reach it</h2></div>
+
+      <div class="row">
+        <div class="f">
+          <label for="modality" data-i18n="sp.modLab">Setting</label>
+          <select id="modality" name="modality"></select>
+        </div>
+        <div class="f" id="modalityOtherWrap" hidden>
+          <label for="modalityOther" data-i18n="sp.modOtherLab">Which setting?</label>
+          <input type="text" id="modalityOther" name="modalityOther" placeholder="Describe it briefly">
+        </div>
+      </div>
+
+      <div class="row three">
+        <div class="f">
+          <label for="hours" data-i18n="sp.hoursLab">Days and hours open</label>
+          <input type="text" id="hours" name="hours" placeholder="Sun–Fri, 10:00–17:00">
+        </div>
+        <div class="f">
+          <label for="access" data-i18n="sp.accessLab">Getting seen</label>
+          <select id="access" name="access"></select>
+        </div>
+        <div class="f">
+          <label for="cost" data-i18n="sp.costLab">Cost to the person</label>
+          <select id="cost" name="cost"></select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="f">
+          <label for="orgPhone" data-i18n="sp.phoneLab">Number to call — the organisation's, not a personal mobile</label>
+          <input type="tel" id="orgPhone" name="orgPhone" placeholder="One number, shown on the public directory">
+          <div class="help" data-i18n="sp.phoneHelp">One number only. It is published, so it must be a number someone answers.</div>
+        </div>
+        <div class="f">
+          <label data-i18n="sp.a11yLab" data-i18n-html>Access <span class="opt">— optional</span></label>
+          <div class="chks" id="a11y"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 · CONFIRM -->
+    <div class="card" id="s5">
+      <div class="step"><span class="n">5</span><h2 data-i18n="sp.h5">Confirm and save</h2></div>
+
+      <div class="row">
+        <div class="f">
+          <label for="authName" data-i18n="sp.authLab">Person confirming this entry</label>
+          <input type="text" id="authName" name="authName" placeholder="Someone authorised by the organisation">
+        </div>
+        <div class="f">
+          <label for="authRole" data-i18n="sp.authRoleLab">Their role</label>
+          <input type="text" id="authRole" name="authRole" placeholder="Position in the organisation">
+        </div>
+      </div>
+
+      <div class="f">
+        <div class="chks">
+          <label class="chk"><input type="checkbox" id="okPublish"><span data-i18n="sp.okPublish">These service details may be shown on the public referral directory.</span></label>
+          <label class="chk"><input type="checkbox" id="okCorrect"><span data-i18n="sp.okCorrect">They are correct today, and we will confirm them again when asked.</span></label>
+        </div>
+      </div>
+
+      <div id="problems"></div>
+      <div class="help" data-i18n="sp.saveHelp">The current registration is immutable on this device. Use Retry for the exact same submission or New distinct registration for another entry.</div>
+    </div>
+  </form>
+
+  <div class="actions">
+    <button type="submit" class="btn" form="f" data-i18n="sp.btnSave">Save entry</button>
+    <button type="button" class="btn grey" id="reset" data-i18n="sp.btnClear">Clear</button>
+  </div>
+
+  <section class="saved">
+    <h2>Saved on this device <span class="xs" id="cnt"></span></h2>
+    <p class="help" style="margin:0 0 10px" data-i18n="sp.savedHelp">This is the historical device copy, not server receipt history. No automatic historical upload.</p>
+    <div class="btns" style="margin-bottom:12px">
+      <button type="button" class="btn ghost sm" id="expCsv" data-i18n="sp.expCsv">Export CSV</button>
+      <button type="button" class="btn grey sm" id="wipe" data-i18n="sp.wipe">Clear all saved entries</button>
+    </div>
+    <div class="tbl-wrap">
+      <table class="data" id="tbl">
+        <thead><tr><th data-i18n="sp.thOrg">Organisation</th><th data-i18n="sp.thPlace">Place</th><th data-i18n="sp.thSvc">Services</th><th data-i18n="sp.thPhone">Number</th><th>ID</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <div class="empty" id="emptyMsg" data-i18n="sp.empty">No entries saved on this device yet.</div>
+    </div>
+  </section>
+
+  <p class="xs" style="margin:18px 6px 0" data-i18n="sp.foot">Draft instrument, schema dir-sp-0.1.0. Services, cadres, settings, districts and palikas are read from the shared code list agreed on 17 September 2026; the organisation-type and access lists on this page are new and move into that list when this form is merged. Nepali labels follow the shared list; the page's own text is English until its strings are translated. Revised draft for field piloting.</p>
+</div>
+
+<section class="card"><h2>Private registration receiving · candidate</h2><p>Pending review only. Qualifications are unverified. No public publication or role grant. An unticked publication consent is stored as unknown, not agreement. Existing device records are never uploaded automatically.</p><p id="directoryStatus" role="status">Sign in from Home to send.</p><div class="btns"><button type="button" id="directoryRetry">Retry pending unchanged</button><button type="button" id="directoryNew">New distinct registration</button><button type="button" id="directoryHistory">My submitted registrations</button><button type="button" id="directoryRestore">Restore my draft</button></div><div id="directoryReceived"></div><a href="../hub/?view=dashboard&house=servicepoints">Private review home</a></section><div id="toast"></div>
+
+<script src="../hub/assets/codes.js"></script>
+<script src="../hub/assets/l1.js"></script>
+<script src="../hub/review-current-v51/fb-config.js"></script>
+<script src="../hub/review-current-v51/current-auth.js"></script>
+<script src="../hub/assets/directory-api.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = window.CODES, $ = function (id) { return document.getElementById(id); };
+  var KIND = "service_point", SCHEMA = "dir-sp-0.1.0";
+  var live = function (list) { return list.filter(function (x) { return !x.retired; }); };
+
+  /* New on this page, not yet in codes.js — they move there when this form
+     is merged, so that the hub and the public site read one list. */
+  var ORG_TYPES = [
+    { code: "GOV",  name: "Government" },
+    { code: "NNGO", name: "NGO — national" },
+    { code: "INGO", name: "NGO — international" },
+    { code: "UN",   name: "UN agency" },
+    { code: "OTH",  name: "Other" }
+  ];
+  var ACCESS = [
+    { code: "WALK", name: "Walk in, no appointment" },
+    { code: "APPT", name: "By appointment" },
+    { code: "BOTH", name: "Both" }
+  ];
+  var COST = [
+    { code: "FREE", name: "Free" },
+    { code: "SOME", name: "Some services are charged" }
+  ];
+  var A11Y = [
+    { code: "STEP", name: "Step-free access" },
+    { code: "FEM",  name: "Female staff available" },
+    { code: "SIGN", name: "Sign language or interpreter" }
+  ];
+
+  function sortByLabel(items) {
+    return items.slice().sort(function (a, b) {
+      var la = C.label(a), lb = C.label(b);
+      if (/^Other|^अन्य/.test(la)) return 1;
+      if (/^Other|^अन्य/.test(lb)) return -1;
+      return la.localeCompare(lb);
+    });
+  }
+  function chks(box, items, keep) {
+    var picked = keep || [];
+    box.innerHTML = "";
+    items.forEach(function (it) {
+      var l = document.createElement("label");
+      l.className = "chk";
+      l.innerHTML = '<input type="checkbox" value="' + it.code + '"><span>' + C.label(it) + "</span>";
+      box.appendChild(l);
+    });
+    picked.forEach(function (v) {
+      var i = box.querySelector('input[value="' + v + '"]');
+      if (i) i.checked = true;
+    });
+  }
+  function ticked(box) {
+    return [].slice.call(box.querySelectorAll("input:checked")).map(function (i) { return i.value; });
+  }
+  function toast(msg, warn) {
+    var t = $("toast");
+    t.textContent = msg; t.className = warn ? "show warn" : "show";
+    clearTimeout(t._h); t._h = setTimeout(function () { t.className = ""; }, 3400);
+  }
+
+  /* ---------- services: the substantive activities, grouped ----------
+     The four layer-specific "Other (describe)" codes are left out: they
+     exist so a reported activity can be placed in a layer at coordination.
+     A directory entry says what a person can be referred for, so it keeps
+     only the general "Other activity" (9). */
+  function fillServices() {
+    var keep = ticked($("svcs"));
+    $("svcs").innerHTML = "";
+    C.ACTIVITY_GROUPS.forEach(function (g) {
+      var items = C.ACTIVITIES.filter(function (a) { return a.group === g.code && !a.retired && (!a.other || a.code === "9"); });
+      if (!items.length) return;
+      var h = document.createElement("div");
+      h.className = "hint";
+      h.style.cssText = "flex:0 0 100%;margin:6px 0 2px";
+      h.textContent = C.label(g);
+      $("svcs").appendChild(h);
+      items.sort(function (a, b) { return C.label(a).localeCompare(C.label(b)); });
+      items.forEach(function (a) {
+        var l = document.createElement("label");
+        l.className = "chk";
+        l.innerHTML = '<input type="checkbox" value="' + a.code + '"><span>' + C.label(a) + "</span>";
+        $("svcs").appendChild(l);
+      });
+    });
+    keep.forEach(function (v) {
+      var i = $("svcs").querySelector('input[value="' + v + '"]');
+      if (i) i.checked = true;
+    });
+  }
+
+  function paintLists() {
+    L1.fillSelect($("org"), C.ORGS, { placeholder: "Select…" });
+    L1.fillSelect($("orgType"), ORG_TYPES, { placeholder: "Select…" });
+    L1.fillSelect($("district"), C.DISTRICTS, { placeholder: "Select…" });
+    L1.fillSelect($("modality"), live(C.MODALITIES), { placeholder: "Select…" });
+    L1.fillSelect($("access"), ACCESS, { placeholder: "Select…" });
+    L1.fillSelect($("cost"), COST, { placeholder: "Select…" });
+    fillServices();
+    chks($("cadres"), sortByLabel(live(C.CADRES)), ticked($("cadres")));
+    chks($("tgs"), sortByLabel(C.TARGET_GROUPS), ticked($("tgs")));
+    chks($("a11y"), A11Y, ticked($("a11y")));
+    refreshPalikas(); refreshSites();
+  }
+
+  function refreshPalikas() {
+    var d = $("district").value, keep = $("palika").value;
+    var list = C.PALIKAS.filter(function (p) { return !d || p.district === d; });
+    L1.fillSelect($("palika"), list, { value: "pcode", placeholder: "Select…" });
+    if (keep) $("palika").value = keep;
+  }
+  function refreshSites() {
+    var d = $("district").value, keep = $("site").value;
+    var sites = C.FORM_SITES.filter(function (s) { return s.code !== "OTHER" && (!d || s.district === d); });
+    L1.fillSelect($("site"), sites.concat([{ code: "OTHER", name: "Other — name it below" }]), { placeholder: "Select…" });
+    if (keep) $("site").value = keep;
+    $("siteOtherWrap").hidden = $("site").value !== "OTHER";
+  }
+  $("district").addEventListener("change", function () { refreshPalikas(); refreshSites(); });
+  $("site").addEventListener("change", function () { $("siteOtherWrap").hidden = this.value !== "OTHER"; });
+  $("org").addEventListener("change", function () { $("orgOtherWrap").hidden = this.value !== "OTHER"; });
+  $("modality").addEventListener("change", function () { $("modalityOtherWrap").hidden = this.value !== "OTH"; });
+  document.addEventListener("codes:relabel", paintLists);
+
+  /* ---------- the step rail ---------- */
+  (function rail() {
+    var links = [].slice.call(document.querySelectorAll("#steps a"));
+    var cards = links.map(function (a) { return $(a.getAttribute("data-step")); });
+    function paint(i) { links.forEach(function (a, k) { a.classList.toggle("on", k === i); a.classList.toggle("done", k < i); }); }
+    if ("IntersectionObserver" in window) {
+      var ratios = cards.map(function () { return 0; });
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { ratios[cards.indexOf(e.target)] = e.isIntersecting ? e.intersectionRatio : 0; });
+        var best = 0; ratios.forEach(function (r, k) { if (r > ratios[best]) best = k; });
+        paint(best);
+      }, { threshold: [0, 0.25, 0.5] });
+      cards.forEach(function (c) { io.observe(c); });
+    }
+    paint(0);
+  })();
+
+  /* ---------- remember the reporter ---------- */
+  var REMEMBER = ["org", "orgOther", "orgType", "focalName", "focalPhone", "focalEmail", "district"];
+  function loadReporter() {
+    REMEMBER.forEach(function (k) {
+      var v = L1.recall("sp-" + k);
+      if (v && $(k)) $(k).value = v;
+    });
+    $("orgOtherWrap").hidden = $("org").value !== "OTHER";
+    refreshPalikas(); refreshSites();
+  }
+  function saveReporter() { REMEMBER.forEach(function (k) { L1.remember("sp-" + k, $(k).value); }); }
+
+  /* ---------- collect, check, save ---------- */
+  function collect() {
+    var rec = {
+      kind: KIND, schema: SCHEMA, source: "registration",
+      org: $("org").value, orgOther: $("orgOther").value.trim(), orgType: $("orgType").value,
+      focalName: $("focalName").value.trim(), focalPhone: $("focalPhone").value.trim(), focalEmail: $("focalEmail").value.trim(),
+      district: $("district").value, palika: $("palika").value,
+      site: $("site").value, siteOther: $("siteOther").value.trim(), placeAddress: $("placeAddress").value.trim(),
+      services: ticked($("svcs")), cadres: ticked($("cadres")), targetGroups: ticked($("tgs")),
+      languages: $("languages").value.trim(), notTaken: $("notTaken").value.trim(),
+      modality: $("modality").value, modalityOther: $("modalityOther").value.trim(),
+      hours: $("hours").value.trim(), access: $("access").value, cost: $("cost").value,
+      orgPhone: $("orgPhone").value.trim(), accessibility: ticked($("a11y")),
+      authName: $("authName").value.trim(), authRole: $("authRole").value.trim(),
+      consentPublish: $("okPublish").checked ? true : null, checkedOn: L1.today()
+    };
+    rec.id = "SP-" + L1.contactCode([rec.org, rec.orgOther, rec.district, rec.palika, rec.site, rec.siteOther]).slice(3);
+    return rec;
+  }
+  function validate(r) {
+    var p = [];
+    if (!r.org) p.push("Choose the organisation.");
+    if (r.org === "OTHER" && !r.orgOther) p.push("Write the name of the organisation.");
+    if (!r.district) p.push("Choose the district.");
+    if (!r.palika) p.push("Choose the palika.");
+    if (r.site === "OTHER" && !r.siteOther) p.push("Name the place.");
+    if (!r.services.length) p.push("Tick at least one service.");
+    if (!r.modality) p.push("Choose how people reach the service.");
+    if (!/^[0-9+()\/.\s-]{4,}$/.test(r.orgPhone)) p.push("Give one number people can call — digits only, no words.");
+    if (!r.authName) p.push("Say who is confirming this entry.");
+    if (!$("okCorrect").checked) p.push("Tick that the details are correct today.");
+    return p;
+  }
+
+  $("f").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var rec = collect(), problems = validate(rec), box = $("problems");
+    if (problems.length) {
+      box.innerHTML = '<div class="banner warn"><b>' + problems.length +
+        (problems.length === 1 ? " thing needs fixing before this can be saved." : " things need fixing before this can be saved.") +
+        "</b><ul style='margin:8px 0 0;padding-left:18px'>" +
+        problems.map(function (p) { return "<li>" + p + "</li>"; }).join("") + "</ul></div>";
+      box.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    box.innerHTML = "";
+    window.DirectoryForm.submit(rec);
+
+  });
+
+  function softReset() {
+    ["palika", "site", "siteOther", "placeAddress", "languages", "notTaken", "modality", "modalityOther", "hours", "orgPhone", "authName", "authRole"].forEach(function (id) { $(id).value = ""; });
+    ["svcs", "cadres", "tgs", "a11y"].forEach(function (b) {
+      $(b).querySelectorAll("input:checked").forEach(function (i) { i.checked = false; });
+    });
+    $("okPublish").checked = false; $("okCorrect").checked = false;
+    $("siteOtherWrap").hidden = true; $("modalityOtherWrap").hidden = true;
+    refreshSites(); window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  $("reset").addEventListener("click", function () { softReset(); $("problems").innerHTML = ""; });
+
+  /* ---------- what is on this device ---------- */
+  function orgName(r) {
+    if (r.org === "OTHER") return r.orgOther || "—";
+    var o = C.orgByCode[r.org];
+    return o ? C.label(o) : (r.org || "—");
+  }
+  function placeName(r) {
+    if (r.site === "OTHER") return r.siteOther || "—";
+    var s = C.siteByCode[r.site];
+    return s ? C.label(s) : (C.palikaName(r.palika) || "—");
+  }
+  function render() {
+    var rows = L1.all(KIND), tb = $("tbl").querySelector("tbody");
+    tb.innerHTML = "";
+    $("emptyMsg").hidden = rows.length > 0;
+    $("cnt").textContent = rows.length ? "— " + rows.length : "";
+    rows.slice().reverse().slice(0, 40).forEach(function (r) {
+      var tr = document.createElement("tr");
+      [orgName(r),placeName(r),(r.services||[]).length,r.orgPhone,r.id].forEach(function(v){var td=document.createElement('td');td.textContent=v==null?'—':String(v);tr.appendChild(td);});
+      tb.appendChild(tr);
+    });
+  }
+  $("expCsv").addEventListener("click", function () {
+    var rows = L1.all(KIND);
+    if (!rows.length) return toast("Nothing to export yet", true);
+    var cols = ["id", "org", "orgOther", "orgType", "district", "palika", "site", "siteOther", "placeAddress",
+      "services", "cadres", "targetGroups", "languages", "notTaken", "modality", "modalityOther",
+      "hours", "access", "cost", "orgPhone", "accessibility", "authName", "authRole", "consentPublish", "checkedOn", "_saved"];
+    L1.download("mhpss_np_service_points_" + L1.stamp() + ".csv", L1.toCSV(rows.map(function (r) {
+      var o = {}; cols.forEach(function (c) { o[c] = Array.isArray(r[c]) ? r[c].join(" ") : r[c]; }); return o;
+    }), cols), "text/csv");
+  });
+  $("wipe").addEventListener("click", function () {
+    L1.clear(KIND); render(); toast("Saved entries cleared from this device");
+  });
+
+  if (!L1.storageWorks()) $("storeWarn").textContent = " This browser is blocking storage, so entries live only while this page is open.";
+  window.DirectoryCollector=Object.freeze({collect,render});
+  paintLists(); loadReporter(); render();
+})();
+</script>
+<script src="lib/directory-form.js" data-instrument="servicepoints"></script>
+<script src="../hub/assets/mark.js"></script>
+<script src="../hub/assets/icons.js"></script>
+<script src="../hub/assets/i18n-strings.js"></script>
+<script>
+/* Draft strings for this form. English is the page itself; the Nepali is a
+   MACHINE DRAFT for piloting and is to be validated by a translator. When this
+   form is merged, move both maps into hub/assets/i18n-strings.js and delete this
+   block. Nothing here overwrites a key the shared dictionary already has. */
+(function () {
+  var S = window.I18N_STRINGS = window.I18N_STRINGS || {};
+  S.en = S.en || {}; S.ne = S.ne || {};
+  var EN = {
+  "sp.brand": "Register a service point",
+  "sp.brandSub": "Referral Directory · one entry per place where your organisation works",
+  "sp.navAll": "All forms",
+  "sp.navDash": "Dashboard",
+  "sp.step1": "Who",
+  "sp.step2": "Where",
+  "sp.step3": "What",
+  "sp.step4": "How to reach",
+  "sp.step5": "Confirm",
+  "sp.h1": "Put your service on the referral directory",
+  "sp.lede": "One entry is one place where people can be sent: an organisation, a palika, the services offered there and how to reach them. Fill one entry for each place you work in. A coordinator checks every entry before it appears on the public directory.",
+  "sp.stop": "<b>This form lists a service, not a person.</b> No service user's name, phone number or details belong here. The contact you give in step 1 is for the coordination team to reach you and is never published; only the institutional number you give in step 4 is shown to the public.",
+  "sp.h1who": "Who provides the service",
+  "sp.h1hint": "saved for next time",
+  "sp.orgLab": "Organisation",
+  "sp.orgOtherLab": "Name of organisation",
+  "sp.typeLab": "Type of organisation",
+  "sp.focalLab": "Contact person for this entry",
+  "sp.focalHelp": "Internal only. Never shown on the public directory.",
+  "sp.focalPhoneLab": "Their phone",
+  "sp.focalEmailLab": "Their email <span class=\"opt\">— optional</span>",
+  "sp.h2": "Where the service is",
+  "sp.districtLab": "District",
+  "sp.palikaLab": "Palika",
+  "sp.palikaHelp": "The list follows the district you chose.",
+  "sp.siteLab": "Place",
+  "sp.siteOtherLab": "Name of the place, as printed",
+  "sp.addrLab": "Address, as printed <span class=\"opt\">— optional</span>",
+  "sp.addrHelp": "Written as it appears on a sign or a letterhead. The directory shows a palika, never a point on a map.",
+  "sp.h3": "What is offered here",
+  "sp.svcLab": "Services — select all that apply",
+  "sp.cadreLab": "Who provides them — select all that work here",
+  "sp.cadreHelp": "Which roles are present, not how many people. Numbers are never asked here.",
+  "sp.tgLab": "Who the service is for <span class=\"opt\">— optional</span>",
+  "sp.langLab": "Languages the service works in",
+  "sp.notLab": "What this place does not take <span class=\"opt\">— optional</span>",
+  "sp.safeg": "<b>Three kinds of case have their own pathway.</b> Gender-based violence, unaccompanied or separated children, and immediate risk to life are not routed through this directory. If your organisation runs one of those services, say so to the coordination team directly.",
+  "sp.h4": "How people reach it",
+  "sp.modLab": "Setting",
+  "sp.modOtherLab": "Which setting?",
+  "sp.hoursLab": "Days and hours open",
+  "sp.accessLab": "Getting seen",
+  "sp.costLab": "Cost to the person",
+  "sp.phoneLab": "Number to call — the organisation's, not a personal mobile",
+  "sp.phoneHelp": "One number only. It is published, so it must be a number someone answers.",
+  "sp.a11yLab": "Access <span class=\"opt\">— optional</span>",
+  "sp.h5": "Confirm and save",
+  "sp.authLab": "Person confirming this entry",
+  "sp.authRoleLab": "Their role",
+  "sp.okPublish": "These service details may be shown on the public referral directory.",
+  "sp.okCorrect": "They are correct today, and we will confirm them again when asked.",
+  "sp.saveHelp": "The current registration is immutable on this device. Use Retry for the exact same submission or New distinct registration for another entry.",
+  "sp.btnSave": "Save entry",
+  "sp.btnClear": "Clear",
+  "sp.savedHelp": "This is the historical device copy, not server receipt history. No automatic historical upload.",
+  "sp.expCsv": "Export CSV",
+  "sp.wipe": "Clear all saved entries",
+  "sp.thOrg": "Organisation",
+  "sp.thPlace": "Place",
+  "sp.thSvc": "Services",
+  "sp.thPhone": "Number",
+  "sp.empty": "No entries saved on this device yet.",
+  "sp.foot": "Draft instrument, schema dir-sp-0.1.0. Services, cadres, settings, districts and palikas are read from the shared code list agreed on 17 September 2026; the organisation-type and access lists on this page are new and move into that list when this form is merged. Nepali labels follow the shared list; the page's own text is English until its strings are translated. Revised draft for field piloting."
+};
+  var NE = {
+  "sp.brand": "सेवा स्थल दर्ता",
+  "sp.navAll": "सबै फारम",
+  "sp.navDash": "ड्यासबोर्ड",
+  "sp.step1": "को",
+  "sp.step2": "कहाँ",
+  "sp.step3": "के",
+  "sp.step4": "कसरी पुग्ने",
+  "sp.step5": "पुष्टि",
+  "sp.h1": "आफ्नो सेवा रेफरल डाइरेक्टरीमा राख्नुहोस्",
+  "sp.h1who": "सेवा कसले दिन्छ",
+  "sp.h1hint": "अर्को पटकका लागि सुरक्षित",
+  "sp.h2": "सेवा कहाँ छ",
+  "sp.h3": "यहाँ के के सेवा छ",
+  "sp.h4": "मानिस कसरी पुग्छन्",
+  "sp.h5": "पुष्टि गरी सुरक्षित गर्नुहोस्",
+  "sp.orgLab": "संस्था",
+  "sp.orgOtherLab": "संस्थाको नाम",
+  "sp.typeLab": "संस्थाको प्रकार",
+  "sp.focalLab": "यो प्रविष्टिका लागि सम्पर्क व्यक्ति",
+  "sp.focalPhoneLab": "निजको फोन",
+  "sp.focalEmailLab": "निजको इमेल <span class=\"opt\">— वैकल्पिक</span>",
+  "sp.districtLab": "जिल्ला",
+  "sp.palikaLab": "पालिका",
+  "sp.siteLab": "स्थान",
+  "sp.siteOtherLab": "स्थानको नाम, लेखिएअनुसार",
+  "sp.addrLab": "ठेगाना, लेखिएअनुसार <span class=\"opt\">— वैकल्पिक</span>",
+  "sp.svcLab": "सेवाहरू — लागू हुने सबै छान्नुहोस्",
+  "sp.cadreLab": "कसले दिन्छ — यहाँ काम गर्ने सबै छान्नुहोस्",
+  "sp.tgLab": "सेवा कसका लागि हो <span class=\"opt\">— वैकल्पिक</span>",
+  "sp.langLab": "सेवा दिने भाषा",
+  "sp.notLab": "यो स्थानले नलिने कुरा <span class=\"opt\">— वैकल्पिक</span>",
+  "sp.modLab": "सेवा कहाँ दिइन्छ",
+  "sp.modOtherLab": "कुन तरिका?",
+  "sp.hoursLab": "खुल्ने दिन र समय",
+  "sp.accessLab": "भेट्ने तरिका",
+  "sp.costLab": "सेवाग्राहीलाई लाग्ने शुल्क",
+  "sp.phoneLab": "सम्पर्क नम्बर — संस्थाको, व्यक्तिगत मोबाइल होइन",
+  "sp.a11yLab": "पहुँच <span class=\"opt\">— वैकल्पिक</span>",
+  "sp.authLab": "यो प्रविष्टि पुष्टि गर्ने व्यक्ति",
+  "sp.authRoleLab": "निजको पद",
+  "sp.btnSave": "प्रविष्टि सुरक्षित गर्नुहोस्",
+  "sp.btnClear": "खाली गर्नुहोस्",
+  "sp.expCsv": "CSV निर्यात",
+  "sp.wipe": "सुरक्षित सबै प्रविष्टि हटाउनुहोस्",
+  "sp.thOrg": "संस्था",
+  "sp.thPlace": "स्थान",
+  "sp.thSvc": "सेवा",
+  "sp.thPhone": "नम्बर",
+  "sp.empty": "यो यन्त्रमा अहिलेसम्म कुनै प्रविष्टि छैन।"
+};
+  Object.keys(EN).forEach(function (k) { if (S.en[k] == null) S.en[k] = EN[k]; });
+  Object.keys(NE).forEach(function (k) { if (S.ne[k] == null) S.ne[k] = NE[k]; });
+})();
+</script>
+<script src="../hub/assets/i18n.js"></script>
+</body>
+</html>
