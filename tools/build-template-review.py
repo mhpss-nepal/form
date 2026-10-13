@@ -49,6 +49,7 @@ def build(name):
     # Disable before parsing; the runtime also covers every generated question.
     html = re.sub(r'<(input|select|textarea)\b', r'<\1 disabled autocomplete="off"', html)
     html = re.sub(r'<button\b(?![^>]*data-review-lang)', '<button disabled', html)
+    html = '\n'.join(line.rstrip() for line in html.splitlines()) + '\n'
     (ROOT / 'review' / (name + '.html')).write_text(html)
 
 if __name__ == '__main__':
