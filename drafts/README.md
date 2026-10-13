@@ -25,3 +25,27 @@ the design went.
 
 `service-point.html` and `provider-register.html` were never on main. They enter the
 repository here for the first time.
+
+## The merged pair is now the only design for contacts and referrals
+
+Decision of 23 September, confirmed on 12 October. A referral is an outcome of a
+contact, not a parallel event, so the two are one form: `contact.html` here carries
+the referral as its last section, opened only when a referral was made. The person
+is typed once and carries one code.
+
+`referral-outcome.html` stays a form of its own on purpose. The outcome is known
+days later, often by a different worker or the receiving organisation, so folding it
+in would mean either editing a saved record or holding a form open for days. It is
+keyed by the contact code; one row is one referral outcome.
+
+The standalone `contact.html` and `referral.html` that stood at the repository root
+were the versions of 21 September, from before that decision. They have been
+removed, together with the two cards on the Layer 1 landing page and the two entries
+in the translation preview index. Nothing person-level is offered anywhere until the
+per-organisation locked house exists and the written basis from EDCD and the TWG is
+in hand -- the decision of 11 October.
+
+The PHQ-9 page linked to the deleted referral form from its item-9 instruction, at
+the point where a positive answer on thoughts of self-harm is handled. That line now
+names the organisation's own referral pathway instead of a form, so the instruction
+still stands and no link is dead.
