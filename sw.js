@@ -32,12 +32,14 @@
    the header now describes the register bridge the file actually has.
    store.js is a precached asset, so that change does not reach an
    installed phone until this name changes too. */
-const CACHE = "mhpss-np-field-v43";
+const CACHE = "mhpss-np-field-v44";
 
 const PRECACHE = [
   "./",
   "index.html",
   "5ws-report.html",
+  "lib/store.js",
+  "lib/strings.js",
   /* the under-1-KB redirect behind 4Ws cards already distributed in the
      field. Without this stub a first scan with no signal falls back to the
      landing page instead of the form. It records nothing and is not an

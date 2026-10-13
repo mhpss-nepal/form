@@ -12,7 +12,9 @@
   main { max-width:1040px; margin:0 auto; padding:26px 18px 60px; }
   h1 { font-size:22px; margin:0 0 6px; }
   .lede { color:var(--mute); margin:0 0 22px; }
-  table { width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line); }
+  table { width:100%; table-layout:fixed; border-collapse:collapse; background:#fff; border:1px solid var(--line); }
+  th, td { overflow-wrap:break-word; }
+  @media(max-width:600px){th,td{padding:8px 5px;font-size:12px}a.open{padding:0 7px;white-space:normal}code{overflow-wrap:anywhere}}
   th, td { padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
   th { background:#eef1f2; font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:#3c4d57; text-align:left; }
   td { text-align:left; }
@@ -106,19 +108,6 @@ switch language, and check that English mode contains no Devanagari.</p>
       <td><span class="pill p-bad">Cannot be machine-translated</span><br>The nine items must be the
           validated Nepali text, obtained — not regenerated.</td>
       <td><strong>Obtain the PRIME / Kohrt Unicode items.</strong> Do not approve a fresh translation.</td>
-    </tr>
-    <tr>
-      <td><strong>Referral</strong><br><code>referral.html</code></td>
-      <td><a class="open" href="../preview.html?preview_form=referral.html">Open form</a></td>
-      <td><span class="pill p-warn">Not keyed yet</span><br>Prose is inside the HTML, so it cannot be
-          translated by key until it is migrated. ~668 words.</td>
-      <td>Needs keying first, then translation.</td>
-    </tr>
-    <tr>
-      <td><strong>Contact</strong><br><code>contact.html</code></td>
-      <td><a class="open" href="../preview.html?preview_form=contact.html">Open form</a></td>
-      <td><span class="pill p-warn">Not keyed yet</span><br>~765 words inside the HTML.</td>
-      <td>Needs keying first, then translation.</td>
     </tr>
     <tr>
       <td><strong>QR cards</strong><br><code>cards.html</code></td>
