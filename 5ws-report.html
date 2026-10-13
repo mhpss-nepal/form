@@ -497,7 +497,7 @@ table.mx td.t { font-weight: 700; }
 <link rel="stylesheet" href="../hub/assets/home-nav.css"></head>
 <body class="fx institutional-utility"><nav aria-label="Home navigation"><a data-home-link href="../hub/">← Back to Home</a></nav>
 <a class="a11y-skip" href="#main" data-i18n="a11y.skip">Skip to the form</a>
-<div class="ribbon"><span data-i18n="banner.trial">Revised draft for field piloting</span><span data-i18n="banner.trialSub"> · saved on this phone, sent to the coordination register when there is signal</span></div>
+<div class="ribbon"><span data-i18n="banner.trial">Revised draft for field piloting</span><span lang="en"> · device-only 5Ws; automatic delivery is unavailable</span></div>
 
 <div class="top">
   <div>
@@ -515,8 +515,8 @@ table.mx td.t { font-weight: 700; }
     <span><b>Institutional Utility design preview.</b> Use demonstration or non-identifiable data only. New interface-only copy remains in English pending human-reviewed Nepali wording.</span>
   </div>
   <div class="iu-sync" id="iuSyncStatus" role="status" aria-live="polite" aria-atomic="true" data-state="waiting">
-    <b>Checking device and connection state…</b>
-    <span>Saving on this device is different from delivery. During the supervised pilot, confirm delivery by finding the record in the Hub.</span>
+    <b>Device-only 5Ws · automatic delivery unavailable</b>
+    <span>5Ws 0.10 is saved on this device only. Automatic delivery is unavailable. Export JSON/CSV before clearing storage or replacing this device.</span>
   </div>
   <nav class="steps" id="steps" aria-label="Steps">
     <a href="#s1" data-step="s1"><i>1</i><span data-i18n="f4.step1">Who</span></a>
@@ -532,7 +532,7 @@ table.mx td.t { font-weight: 700; }
 
   <div class="banner stop" data-i18n="f4.stop" data-i18n-html><b>This form records services, not people.</b> Never enter a beneficiary's name, phone number, date of birth, identity number, diagnosis, assessment score, or any detail that could identify an individual. There is no field for it, and none is to be added. If someone needs individual follow-up, refer them — do not record them here.</div>
 
-  <div class="banner" data-iu-operational-copy="offline"><b>Offline entry is available.</b> Reliability after reconnection is still being validated and strengthened. Keep this page open after internet returns; wait for the sync status; do not repeatedly resubmit or clear browser storage when status is unclear. A record appearing in the Hub confirms delivery for the supervised pilot. <span id="storeWarn"></span><span class="iu-language-note">English operational wording pending human-reviewed Nepali translation.</span></div>
+  <div class="banner" data-iu-operational-copy="offline"><b>Offline entry is available.</b> This 5Ws version is device-only. Reconnection does not send these reports to the Hub. Export JSON/CSV and retain the files before clearing storage or replacing this device. <span id="storeWarn"></span><span class="iu-language-note">English operational wording pending human-reviewed Nepali translation.</span></div>
 
   <form id="f" autocomplete="off" novalidate>
 
@@ -841,7 +841,7 @@ table.mx td.t { font-weight: 700; }
     <div class="card" id="s5">
       <div class="step"><span class="n">5</span><h2 data-i18n="f4.h5check">Check and save</h2></div>
       <div id="problems" role="alert" aria-live="assertive" tabindex="-1"></div>
-      <div class="help" data-iu-operational-copy="save">Saving the same organisation, place, date, activity and start time twice updates that report rather than creating a second one. The report is kept on this device. After internet returns, keep this page open and wait for sync status; confirm delivery in the Hub.<span class="iu-language-note">English operational wording pending human-reviewed Nepali translation.</span></div>
+      <div class="help" data-iu-operational-copy="save">Saving the same organisation, place, date, activity and start time twice updates that report rather than creating a second one. The report is kept on this device. Automatic delivery is unavailable for this 5Ws version. Export JSON/CSV and retain the files.<span class="iu-language-note">English operational wording pending human-reviewed Nepali translation.</span></div>
     </div>
   </form>
 
@@ -853,7 +853,7 @@ table.mx td.t { font-weight: 700; }
   <!-- SAVED -->
   <section class="saved">
   <h2 data-i18n="f4.savedH" data-i18n-html>Saved on this device <span class="xs" id="cnt"></span></h2>
-  <p class="help" style="margin:0 0 10px" data-iu-operational-copy="saved">This list is the copy on this device; it does not by itself confirm remote delivery. After internet returns, keep this page open and wait for sync status. For the supervised pilot, confirm delivery under <a href="../hub/#reports">Reports received</a> in the Hub.<span class="iu-language-note">English operational wording pending human-reviewed Nepali translation.</span></p>
+  <p class="help" style="margin:0 0 10px" data-iu-operational-copy="saved">This list is the copy on this device; it does not by itself confirm remote delivery. These 5Ws reports are not sent automatically to the Hub. Export JSON/CSV and retain the files before clearing storage or replacing this device.<span class="iu-language-note">English operational wording pending human-reviewed Nepali translation.</span></p>
   <div class="btns" style="margin-bottom:12px">
     <button type="button" class="btn ghost sm" id="expCsv" data-i18n="f4.expCsv">Export CSV</button>
     <button type="button" class="btn ghost sm" id="expJson" data-i18n="f4.expJson">Export JSON</button>
@@ -895,7 +895,7 @@ table.mx td.t { font-weight: 700; }
      had to move while hub was left alone. See the header of lib/store.js. -->
 <script src="lib/store.js"></script>
 <script src="../hub/assets/fb-config.js"></script>
-<script src="../hub/assets/fb.js"></script>
+<!-- 5Ws 0.10 is device-only until the authenticated receiver supports its full schema. -->
 <script>
 (function () {
   var C = window.CODES, S = window.STORE;
@@ -1649,6 +1649,10 @@ table.mx td.t { font-weight: 700; }
     e.preventDefault();
     var rec = collect();
     var problems = S.validate(rec);
+    document.querySelectorAll("#actGrid details[open] input[type=number]").forEach(function (input) {
+      if (input.validity.badInput || (input.value !== "" && (!/^\d+$/.test(input.value) || !Number.isSafeInteger(Number(input.value)))))
+        problems.push("Joint cell must be a non-negative integer: " + input.id);
+    });
     var box = $("problems");
     if (problems.length) {
       box.innerHTML = '<div class="banner warn"><b>' + problems.length + (problems.length === 1 ? tx("fixOne") : tx("fixMany")) +
@@ -1666,12 +1670,14 @@ table.mx td.t { font-weight: 700; }
     if (!res.persisted) toast("Saved for this page only — this browser is blocking storage. Export before closing.", true);
     else if (res.duplicateOf) toast(tx("updated") + res.record.id + ")");
     else toast(tx("saved") + res.record.id);
-    softReset();
+    if (res.persisted) softReset();
     render();
   });
 
   function softReset() {
-    ["sessionTime", "dateBS", "site", "siteOther", "palika", "ward", "partners", "activity", "activityOther", "modalityOther", "targetGroupOther", "description", "reachedTotal"].concat(S.OF_WHOM, disFields()).forEach(function (id) { $(id).value = ""; });
+    ["sessionTime", "dateBS", "site", "siteOther", "palika", "ward", "partners", "modalityOther", "targetGroupOther", "description", "reachedTotal", "newToday"].concat(S.OF_WHOM, disFields()).forEach(function (id) { if ($(id)) $(id).value = ""; });
+    document.querySelectorAll("#actGrid input").forEach(function (i) { i.value = ""; });
+    document.querySelectorAll("#actGrid details").forEach(function (d) { d.open = false; });
     document.querySelectorAll("#tgs input:checked").forEach(function (i) { i.checked = false; });
     $("siteOtherWrap").hidden = true; $("palikaWrap").hidden = true; $("wardWrap").hidden = true;
     $("modalityOtherWrap").hidden = true; $("tgOtherWrap").hidden = true;
@@ -1756,34 +1762,8 @@ table.mx td.t { font-weight: 700; }
   if (!box) return;
 
   var COPY = {
-    en: {
-      checkingTitle: "Checking device and connection state…",
-      checkingBody: "Saving on this device is different from delivery. During the supervised pilot, confirm delivery by finding the record in the Hub.",
-      memoryTitle: "Device storage is blocked",
-      memoryBody: "A save may last only while this page remains open. Export before closing. Remote delivery is not confirmed here.",
-      offlineTitle: "Offline · local entry available",
-      offlineBody: "A saved report stays on this device and may wait in the queue. Keep this page open when internet returns; do not repeatedly resubmit or clear browser storage when status is unclear.",
-      queuedTitle: function (n) { return n + (n === 1 ? " report waiting to sync" : " reports waiting to sync"); },
-      queuedBody: "Keep this page open while internet is available. A report appearing in the Hub is the supervised-pilot confirmation.",
-      readyTitle: "Online · queue empty; delivery not confirmed",
-      readyBody: "Saving on this device is separate from remote delivery. After saving, wait for the sync status and confirm the record in the Hub.",
-      unavailableTitle: "Remote delivery is not available",
-      unavailableBody: "Reports can remain on this device for export. This page does not confirm remote delivery."
-    },
-    ne: {
-      checkingTitle: "Checking device and connection state…",
-      checkingBody: "Saving on this device is different from delivery. During the supervised pilot, confirm delivery by finding the record in the Hub.",
-      memoryTitle: "Device storage is blocked",
-      memoryBody: "A save may last only while this page remains open. Export before closing. Remote delivery is not confirmed here.",
-      offlineTitle: "Offline · local entry available",
-      offlineBody: "A saved report stays on this device and may wait in the queue. Keep this page open when internet returns; do not repeatedly resubmit or clear browser storage when status is unclear.",
-      queuedTitle: function (n) { return n + (n === 1 ? " report waiting to sync" : " reports waiting to sync"); },
-      queuedBody: "Keep this page open while internet is available. A report appearing in the Hub is the supervised-pilot confirmation.",
-      readyTitle: "Online · queue empty; delivery not confirmed",
-      readyBody: "Saving on this device is separate from remote delivery. After saving, wait for the sync status and confirm the record in the Hub.",
-      unavailableTitle: "Remote delivery is not available",
-      unavailableBody: "Reports can remain on this device for export. This page does not confirm remote delivery."
-    }
+    en: { memoryTitle: "Device storage is blocked", memoryBody: "A save may last only while this page remains open. Export before closing. Automatic delivery is unavailable." },
+    ne: { memoryTitle: "Device storage is blocked", memoryBody: "A save may last only while this page remains open. Export before closing. Automatic delivery is unavailable." }
   };
 
   function lang() {
@@ -1812,30 +1792,17 @@ table.mx td.t { font-weight: 700; }
     if (!storageWorks()) {
       show("memory", t.memoryTitle, t.memoryBody); return;
     }
-    if (!navigator.onLine) {
-      show("waiting", t.offlineTitle, t.offlineBody); return;
-    }
-    if (status && status.pending > 0) {
-      show("waiting", t.queuedTitle(status.pending), t.queuedBody);
-      return;
-    }
-    if (status && status.configured && status.ready) {
-      show("connected", t.readyTitle, t.readyBody); return;
-    }
-    if (status && !status.configured) {
-      show("memory", t.unavailableTitle, t.unavailableBody); return;
-    }
-    show("waiting", t.checkingTitle, t.checkingBody);
+    show("local-only", "Device-only 5Ws · automatic delivery unavailable",
+      "Reports stay on this device. Export JSON/CSV before clearing storage or replacing this device. Reconnection does not deliver them to the Hub.");
   }
   function repaint() {
-    paint(window.FB && typeof window.FB.status === "function" ? window.FB.status() : null);
+    paint(null);
   }
   window.InstitutionalPreviewStatus = { paint: paint, storageWorks: storageWorks };
   window.addEventListener("online", repaint);
   window.addEventListener("offline", repaint);
   document.addEventListener("i18n:changed", repaint);
-  if (window.FB && typeof window.FB.onStatus === "function") window.FB.onStatus(paint);
-  else repaint();
+  repaint();
 })();
 </script>
 <script src="pwa.js"></script>
