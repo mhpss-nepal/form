@@ -6,8 +6,8 @@ import unittest
 from html.parser import HTMLParser
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
-BASE='6135d80a67cb0b277d1b243a8c02f37ca1437164'
-DESTINATIONS=['5ws-report.html','phq9.html','selfreport.html','training-report.html','review/contact.html','review/referral-outcome.html','review/provider-register.html','review/service-point.html']
+BASE='36e104cbf9f6f1b29aef0d95ace1d0454306316b'
+DESTINATIONS=['5ws-report.html','phq9.html','selfreport.html','training-report.html','review/contact.html','provider-register.html','service-point.html']
 class Controls(HTMLParser):
     def __init__(self): super().__init__();self.controls=[];self.labels=[];self.inlabel=False;self.current=''
     def handle_starttag(self,tag,attrs):
@@ -23,23 +23,24 @@ class DirectoryCorrection(unittest.TestCase):
         s=(ROOT/'index.html').read_text()
         self.assertEqual(re.findall(r'<a href="([^"]+)" data-i18n="dir.open"',s),DESTINATIONS)
         self.assertEqual(re.findall(r'data-url="([^"]+)" onclick="COPY',s),DESTINATIONS)
-        self.assertEqual(s.count('onclick="QRT(this)"'),8)
+        self.assertEqual(s.count('onclick="QRT(this)"'),7)
         self.assertNotIn('fb.js',s)
         self.assertNotIn('house=',s)
     def test_form_sources_byte_locked(self):
-        for f in DESTINATIONS[:4]+['drafts/'+x.split('/')[-1] for x in DESTINATIONS[4:]]:
+        for f in DESTINATIONS[:4]+['provider-register.html','service-point.html','pwa.js','template-review.js']:
             expected=subprocess.check_output(['git','show',BASE+':'+f],cwd=ROOT)
             self.assertEqual((ROOT/f).read_bytes(),expected,f)
     def test_source_controls_and_question_labels_preserved(self):
-        for f in DESTINATIONS[4:]:
-            original=Controls();original.feed((ROOT/'drafts'/Path(f).name).read_text().split('<script')[0])
+        for f in ['review/contact-instrument.html','review/referral-outcome.html']:
+            name='contact' if 'contact-instrument' in f else 'referral-outcome'
+            original=Controls();original.feed((ROOT/'tools/source-templates'/(name+'.txt')).read_text().split('<script')[0])
             review=Controls();review.feed((ROOT/f).read_text())
             self.assertEqual(original.controls,review.controls,f)
             self.assertEqual(original.labels,review.labels,f)
     def test_safe_script_allowlist_and_network_csp(self):
-        for f in DESTINATIONS[4:]:
+        for f in ['review/contact-instrument.html','review/referral-outcome.html']:
             s=(ROOT/f).read_text()
-            self.assertEqual(re.findall(r'<script src="([^"]+)"',s),['../template-review.js','../../hub/assets/codes.js','../../hub/assets/i18n-strings.js'])
+            self.assertEqual(re.findall(r'<script src="([^"]+)"',s),['../template-preview-20261014.js','../../hub/assets/codes.js','../../hub/assets/i18n-strings.js'])
             self.assertIn("connect-src 'none'; form-action 'none'",s)
             for word in ['L1.','L.save','localStorage','submissions_preview','fetch(','XMLHttpRequest']:
                 self.assertNotIn(word,s)
@@ -50,7 +51,7 @@ class DirectoryCorrection(unittest.TestCase):
     def test_qr_scope_equals_open_routes(self):
         spec=importlib.util.spec_from_file_location('qr',ROOT/'tools/qr-check.py'); assert spec and spec.loader
         mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod)
-        self.assertEqual(set(mod.ALLOWED_QR_URLS.values()),{'/form/'}|{'/form/'+f for f in DESTINATIONS})
+        self.assertEqual(set(mod.ALLOWED_QR_URLS.values()),{'/form/','/form/review/referral-outcome.html'}|{'/form/'+f for f in DESTINATIONS})
     def test_alternate_directory_is_redirect_only(self):
         s=(ROOT/'all-forms.html').read_text();self.assertIn("location.replace('./'+location.search+location.hash)",s)
         self.assertNotIn('preview.html',s)

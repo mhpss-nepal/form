@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-default="ne">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-i18n="ro.p001">Referral outcome — MHPSS Nepal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Lora + Manrope. design.css declares Georgia / system fallbacks, so a
+     failed font request costs typography and never legibility -- which
+     matters on the field forms, where there may be no signal at all. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Manrope:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="../../hub/assets/app.css">
+<link rel="stylesheet" href="../../hub/assets/design.css">
+<link rel="stylesheet" href="../../hub/assets/form.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1d1d1b">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MHPSS Field">
+<style>
+  .a11y-skip{position:absolute;left:-9999px;top:0;z-index:1000;background:#fff;color:#183039;padding:10px 14px;border:2px solid #183039;border-radius:0 0 6px 0;font-weight:700;text-decoration:none}
+  .a11y-skip:focus{left:0}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+</style>
+</head>
+<body class="fx">
+<!-- TRANSPORT HELD, 11 Oct 2026: the register scripts are not loaded, so nothing entered here can reach the retired register. Draft, not linked from any index. -->
+<a class="a11y-skip" href="#main" data-i18n="a11y.skip">Skip to the form</a>
+<div class="ribbon" data-i18n="ref.p002" data-i18n-html>Revised draft for field piloting <span>· saved on this phone, sent to the coordination register when there is signal</span></div>
+
+<div class="top">
+  <div>
+    <div class="brand" data-i18n="ro.brand">Referral outcome</div>
+    <div class="sub" data-i18n="ro.sub">Layer 1 · closing a referral already made</div>
+  </div>
+  <div class="spacer"></div>
+  <a href="index.html" data-i18n="ref.p005">← Forms</a>
+  <a href="../../hub/" data-i18n="ref.p006">Hub</a>
+</div>
+
+<div class="wrap">
+  <main id="main">
+
+  <h1 data-i18n="ro.h1">Did the person arrive?</h1>
+  <p class="lede" data-i18n="ro.lede">Fill this in when you know what became of a referral — one you made, or one that was
+    sent to you. It is a separate record on purpose: the answer is known days later, and a record already
+    saved cannot be altered. Until this is filed, a referral is a person sent somewhere and nothing more.</p>
+
+  <div class="banner" data-i18n="ro.note" data-i18n-html><b>The referral itself is recorded on the person’s own record.</b>
+    Making a referral is part of the <a href="contact.html">service contact record</a>, from 23 September 2026.
+    This form carries only what happened afterwards. <span id="storeWarn"></span></div>
+
+  <form id="f" autocomplete="off" novalidate>
+
+    <div class="card">
+      <div class="step"><span class="n">1</span><h2 data-i18n="ro.h2a">The referral you are closing</h2></div>
+      <div class="row three">
+        <div class="f">
+          <label for="org" data-i18n="ro.orgLab">Your organisation</label>
+          <select id="org"></select>
+        </div>
+        <div class="f">
+          <label for="direction" data-i18n="ref.p035">Direction</label>
+          <select id="direction">
+            <option value="" data-i18n="ro.choose">— choose —</option>
+            <option value="OUT" data-i18n="ref.p037">Out — we sent them elsewhere</option>
+            <option value="IN" data-i18n="ref.p038">In — they were sent to us</option>
+          </select>
+          <div class="help" data-i18n="ro.dirHelp">Choose “In” to report someone sent to you — including someone who never arrived,
+            for whom there is no contact record at all.</div>
+        </div>
+        <div class="f">
+          <label for="dateAD" data-i18n="ref.p013">Date of referral (AD)</label>
+          <input type="date" id="dateAD">
+        </div>
+      </div>
+      <div class="row">
+        <div class="f">
+          <label for="ccode" data-i18n="ref.p020">Contact code</label>
+          <input type="text" id="ccode" placeholder="NP-XXXXX-XXXXX" style="font-family:ui-monospace,Menlo,monospace" data-i18n-skip>
+          <div class="help" data-i18n="ro.ccodeHelp">The same code as on the contact record the referral was made from. The code and the
+            date are the only join there is, so copy them exactly.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="step"><span class="n">2</span><h2 data-i18n="ro.h2b">What happened</h2></div>
+      <div class="row three">
+        <div class="f">
+          <label for="arrived" data-i18n="ref.p058">Arrival</label>
+          <select id="arrived">
+            <option value="" data-i18n="ro.choose">— choose —</option>
+            <option value="Y" data-i18n="ref.p060">Confirmed arrived</option>
+            <option value="N" data-i18n="ref.p061">Did not arrive</option>
+            <option value="DECL" data-i18n="ref.p062">Person declined the referral</option>
+          </select>
+          <div class="help" data-i18n="ro.arrHelp">If it is not yet known, there is nothing to file — come back when it is.</div>
+        </div>
+        <div class="f">
+          <label for="arrDate" data-i18n="ref.p063" data-i18n-html>Date confirmed <span class="opt">— if known</span></label>
+          <input type="date" id="arrDate">
+        </div>
+        <div class="f">
+          <label for="confBy" data-i18n="ref.p064" data-i18n-html>Confirmed how <span class="opt">— optional</span></label>
+          <select id="confBy">
+            <option value="" data-i18n="ref.p065">— choose —</option>
+            <option value="RECV" data-i18n="ref.p066">Receiving service told us</option>
+            <option value="PERS" data-i18n="ref.p067">The person told us</option>
+            <option value="FAM" data-i18n="ref.p068">A family member told us</option>
+            <option value="OTH" data-i18n="ref.p069">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="f">
+        <label for="barrier" data-i18n="ref.p070" data-i18n-html>If they did not arrive, what got in the way? <span class="opt">— optional</span></label>
+        <select id="barrier">
+          <option value="" data-i18n="ref.p071">— choose —</option>
+          <option value="DIST" data-i18n="ref.p072">Distance or no transport</option>
+          <option value="COST" data-i18n="ref.p073">Cost</option>
+          <option value="CLOSED" data-i18n="ref.p074">Service was closed or full</option>
+          <option value="STIG" data-i18n="ref.p075">Stigma or family objection</option>
+          <option value="LOST" data-i18n="ref.p076">Lost contact with the person</option>
+          <option value="OTH" data-i18n="ref.p077">Other</option>
+        </select>
+        <div class="help" data-i18n="ref.p078">The barrier list is what turns a broken pathway into something fixable.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="step"><span class="n">3</span><h2 data-i18n="ref.p079">Save</h2></div>
+      <div id="errs"></div>
+      <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
+        <button type="submit" class="btn" data-i18n="ro.save">Save this outcome</button>
+        <button type="button" class="btn ghost" id="csvBtn" data-i18n="ref.p081">Export CSV</button>
+        <button type="button" class="btn grey" id="clearBtn" data-i18n="ref.p082">Clear everything on this device</button>
+        <span class="xs" id="count"></span>
+      </div>
+      <div class="f" style="margin-top:16px">
+        <label data-i18n="ref.p083">What would be sent, if there were anywhere to send it</label>
+        <pre id="payload" class="pay">—</pre>
+      </div>
+    </div>
+  </form>
+</div>
+
+  </main>
+
+<script src="../../hub/assets/codes.js"></script>
+<script src="../../hub/assets/l1.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = window.CODES, L = window.L1, KIND = "referral";
+  var $ = function (id) { return document.getElementById(id); };
+
+  L.fillSelect($("org"), C.ORGS.concat([{ code: "OTHER", name: "Other — not listed", np: "अन्य — सूचीमा नभएको", np_src: "draft" }]));
+  ["org", "direction"].forEach(function (id) {
+    var v = L.recall(id); if (v) $(id).value = v;
+    $(id).addEventListener("change", function () { L.remember(id, $(id).value); });
+  });
+
+  function record() {
+    return {
+      schema: "mhpss-np-referral-outcome/0.1.0-draft",
+      kind: "referral",
+      record_type: "outcome",
+      org: $("org").value,
+      direction: $("direction").value,
+      contact_code: $("ccode").value.trim().toUpperCase(),
+      date_ad: $("dateAD").value,
+      arrived: $("arrived").value,
+      arrival_confirmed_date: $("arrDate").value,
+      confirmed_by: $("confBy").value,
+      barrier: $("barrier").value
+    };
+  }
+  var COLS = Object.keys(record()).concat(["_saved"]);
+  function payload() { $("payload").textContent = JSON.stringify(record(), null, 2); }
+
+  function problems(r) {
+    var e = [];
+    if (!r.org) e.push("Choose your organisation.");
+    if (!r.direction) e.push("Say whether the referral went out from you or came in to you.");
+    if (!r.contact_code) e.push("Give the contact code the referral was made under.");
+    if (r.contact_code && !/^NP-[0-9A-Z]{5}-[0-9A-Z]{5}$/.test(r.contact_code))
+      e.push("The contact code should look like NP-ABCDE-12345.");
+    if (!r.date_ad) e.push("Give the date of the referral.");
+    if (r.date_ad && r.date_ad > L.today()) e.push("The referral date is in the future.");
+    if (!r.arrived) e.push("Say what happened. If it is not yet known, there is nothing to file yet.");
+    if (r.arrived === "Y" && !r.arrival_confirmed_date)
+      e.push("If arrival is confirmed, give the date it was confirmed.");
+    if (r.arrival_confirmed_date && r.date_ad && r.arrival_confirmed_date < r.date_ad)
+      e.push("Arrival cannot be confirmed before the referral was made.");
+    if (r.arrived === "N" && !r.barrier)
+      e.push("If the person did not arrive, say what got in the way — that is the point of recording it.");
+    return e;
+  }
+
+  function showCount() {
+    var n = L.all(KIND).length;
+    $("count").textContent = n ? n + " referral outcome(s) on this device" : "nothing saved on this device yet";
+  }
+  showCount();
+
+  Array.prototype.forEach.call(document.querySelectorAll("input,select"), function (el) {
+    el.addEventListener("change", payload);
+    if (el.tagName === "INPUT" && el.type === "text") el.addEventListener("input", payload);
+  });
+
+  $("f").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var r = record(), e = problems(r);
+    if (e.length) {
+      $("errs").innerHTML = '<div class="banner stop"><b>Not saved.</b><ul><li>' +
+        e.map(function (x) { return x.replace(/</g, "&lt;"); }).join("</li><li>") + "</li></ul></div>";
+      $("errs").scrollIntoView({ block: "center" });
+      return;
+    }
+    var res = L.save(KIND, r);
+    $("ccode").value = ""; $("arrived").value = ""; $("arrDate").value = "";
+    $("confBy").value = ""; $("barrier").value = "";
+    $("errs").innerHTML = '<div class="banner ok"><b>Saved on this device.</b> ' +
+      (res.persisted ? "" : "Storage is blocked — export before closing. ") +
+      "It is matched to the referral by the contact code and the date of referral.</div>";
+    showCount(); payload();
+  });
+
+  $("csvBtn").addEventListener("click", function () {
+    var list = L.all(KIND);
+    if (!list.length) { alert("Nothing saved on this device yet."); return; }
+    L.download("mhpss_np_referral_outcomes_" + L.stamp() + ".csv", L.toCSV(list, COLS), "text/csv");
+  });
+  $("clearBtn").addEventListener("click", function () {
+    if (!L.all(KIND).length) { alert("Nothing saved on this device yet."); return; }
+    if (confirm("Delete every referral outcome held in this browser? This cannot be undone.")) {
+      L.clear(KIND); showCount(); $("errs").innerHTML = '<div class="banner"><b>Cleared.</b></div>';
+    }
+  });
+
+  if (!L.storageWorks()) $("storeWarn").textContent = " This browser is blocking storage, so entries live only while this page is open.";
+  payload();
+})();
+</script>
+<script src="pwa.js"></script>
+<script src="../../hub/assets/mark.js"></script>
+<script src="../../hub/assets/icons.js"></script>
+<script src="../../hub/assets/i18n-strings.js"></script>
+<script>
+/* Draft strings for this form, new on 23 September 2026. English is the page
+   itself; the Nepali is a MACHINE DRAFT for piloting, to be validated by a
+   translator. Every other string reuses a key the shared dictionary already
+   carries (ref.*), so only the page furniture is new. When this form is merged,
+   move both maps into hub/assets/i18n-strings.js and delete this block. */
+(function () {
+  var S = window.I18N_STRINGS = window.I18N_STRINGS || {};
+  S.en = S.en || {}; S.ne = S.ne || {};
+  var EN = {
+    "ro.p001": "Referral outcome — MHPSS Nepal",
+    "ro.brand": "Referral outcome",
+    "ro.sub": "Layer 1 · closing a referral already made",
+    "ro.h1": "Did the person arrive?",
+    "ro.h2a": "The referral you are closing",
+    "ro.h2b": "What happened",
+    "ro.orgLab": "Your organisation",
+    "ro.choose": "— choose —",
+    "ro.save": "Save this outcome",
+    "ro.dirHelp": "Choose \u201cIn\u201d to report someone sent to you — including someone who never arrived, for whom there is no contact record at all.",
+    "ro.ccodeHelp": "The same code as on the contact record the referral was made from. The code and the date are the only join there is, so copy them exactly.",
+    "ro.arrHelp": "If it is not yet known, there is nothing to file — come back when it is.",
+    "ro.lede": "Fill this in when you know what became of a referral — one you made, or one that was sent to you. It is a separate record on purpose: the answer is known days later, and a record already saved cannot be altered. Until this is filed, a referral is a person sent somewhere and nothing more.",
+    "ro.note": "<b>The referral itself is recorded on the person\u2019s own record.</b> Making a referral is part of the <a href=\"contact.html\">service contact record</a>, from 23 September 2026. This form carries only what happened afterwards."
+  };
+  var NE = {
+    "ro.p001": "रेफरल नतिजा — MHPSS नेपाल",
+    "ro.brand": "रेफरल नतिजा",
+    "ro.sub": "तह १ · गरिसकेको रेफरल टुङ्ग्याउने",
+    "ro.h1": "के व्यक्ति पुग्नुभयो?",
+    "ro.h2a": "कुन रेफरल टुङ्ग्याउँदै हुनुहुन्छ",
+    "ro.h2b": "के भयो",
+    "ro.orgLab": "तपाईंको संस्था",
+    "ro.choose": "— छान्नुहोस् —",
+    "ro.save": "यो नतिजा सुरक्षित गर्नुहोस्",
+    "ro.dirHelp": "तपाईंकहाँ पठाइएको व्यक्तिको विवरण दिन “भित्र” छान्नुहोस् — कहिल्यै नआएको व्यक्ति पनि, जसको कुनै सम्पर्क अभिलेख हुँदैन।",
+    "ro.ccodeHelp": "रेफरल गरिएको सम्पर्क अभिलेखमा भएकै कोड। कोड र मिति नै एक मात्र जोड हो, त्यसैले ठ्याक्कै उतार्नुहोस्।",
+    "ro.arrHelp": "थाहा भइसकेको छैन भने अहिले केही अभिलेख गर्नु पर्दैन — थाहा भएपछि फर्केर आउनुहोस्।",
+    "ro.lede": "तपाईंले गर्नुभएको वा तपाईंकहाँ पठाइएको रेफरलको नतिजा थाहा भएपछि यो फारम भर्नुहोस्। यो जानाजान छुट्टै अभिलेख हो: नतिजा केही दिनपछि मात्र थाहा हुन्छ, र पठाइसकेको अभिलेख परिवर्तन गर्न मिल्दैन। यो नभरेसम्म रेफरल भनेको कतै पठाइएको व्यक्ति मात्रै हो।",
+    "ro.note": "<b>रेफरल आफैँ व्यक्तिको आफ्नै अभिलेखमा राखिन्छ।</b> २३ सेप्टेम्बर २०२६ देखि रेफरल गर्ने काम <a href=\"contact.html\">सेवा सम्पर्क अभिलेख</a>को अंश हो। यो फारमले त्यसपछि के भयो भन्ने मात्र बोक्छ।"
+  };
+  Object.keys(EN).forEach(function (k) { if (!S.en[k]) S.en[k] = EN[k]; });
+  Object.keys(NE).forEach(function (k) { if (!S.ne[k]) S.ne[k] = NE[k]; });
+})();
+</script>
+<script src="../../hub/assets/i18n.js"></script>
+</body>
+</html>

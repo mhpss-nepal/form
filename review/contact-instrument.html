@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'none'; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<title>Protected preview — MHPSS Nepal</title>
+<link rel="stylesheet" href="../../hub/assets/app.css"><link rel="stylesheet" href="../../hub/assets/design.css"><link rel="stylesheet" href="../../hub/assets/form.css">
+<style>html,body{max-width:100%;margin:0} .wrap{min-width:0} .review-bar{padding:14px;background:#183039;color:white} .review-bar a{color:white} .review-bar button{min-width:44px;min-height:44px;margin:6px} .review-bar p{margin:6px 0} :focus-visible{outline:3px solid #d19e14} input:disabled,select:disabled,textarea:disabled{opacity:1;color:inherit;-webkit-text-fill-color:currentColor} [hidden]{display:none!important} .actions,.savebar,.sticky-save{position:static!important} pre{white-space:pre-wrap;overflow-wrap:break-word} .tw{max-width:100%;overflow:auto} #toast:empty{display:none} .top{flex-wrap:wrap} .top>*{min-width:0} .hint{white-space:normal} .review-bar button[aria-pressed=true]{font-weight:bold;text-decoration:underline}</style>
+<style>
+  .a11y-skip{position:absolute;left:-9999px;top:0;z-index:1000;background:#fff;color:#183039;padding:10px 14px;border:2px solid #183039;border-radius:0 0 6px 0;font-weight:700;text-decoration:none}
+  .a11y-skip:focus{left:0}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+</style>
+<script src="../template-preview-20261014.js"></script></head><body class="fx">
+<header class="review-bar"><a href="../index.html" target="_top">← Forms</a> · <a href="../../hub/" target="_top">Hub</a><strong> · Protected preview — not collecting</strong><p data-preview-notice>Interactive preview — not saved or sent. Do not enter real personal information. Only sending, saving, export, location and contact-code generation are held. No account is needed.</p><p>Source descriptions of saving describe a proposed workflow, not this preview. Nepali template wording remains a draft pending human review.</p><button type="button" data-review-lang="en">EN</button><button type="button" data-review-lang="ne">NE</button><button type="button" data-review-reset>Clear current preview</button></header>
+
+<!-- TRANSPORT HELD, 11 Oct 2026: the register scripts are not loaded, so nothing entered here can reach the retired register. Draft, not linked from any index. -->
+<a class="a11y-skip" href="#main" data-i18n="a11y.skip">Skip to the form</a>
+
+
+<div class="top">
+  <div>
+    <div class="brand" data-i18n="svc.p003">Service contact record</div>
+    <div class="sub" data-i18n="svc.p004">Layer 1 · Rasuwa / Bhote Koshi</div>
+  </div>
+  <div class="spacer"></div>
+  <a href="index.html" data-i18n="svc.p005">← Forms</a>
+  <a href="../../hub/" data-i18n="svc.p006">Hub</a>
+</div>
+
+<div class="wrap">
+  <main id="main">
+
+  <h1 data-i18n="svc.p007">One contact with one person</h1>
+  <p class="lede" data-i18n="svc.p008" data-i18n-html>Use this when you have seen, spoken to or supported a specific person. For a group
+    activity or a day's total, use the <a href="5ws-report.html">activity report</a> instead — this form
+    is deliberately one record per person per contact, because that is the only way a returning person can
+    be recognised instead of counted twice.</p>
+
+  <div class="banner stop" data-i18n="svc.p009" data-i18n-html>
+    <b>The person's name and phone number stay on this handset.</b> You type a few details so the phone can
+    work out a <b>contact code</b>; the details are used for that calculation and then discarded. Only the
+    code is saved. Nobody downstream — not the coordination view, not the dashboard, not this site — ever
+    receives the name, the number, or a date of birth.
+  </div>
+
+
+
+  <form id="f" autocomplete="off" novalidate>
+
+    <!-- 1 -->
+    <div class="card">
+      <div class="step"><span class="n">1</span><h2 data-i18n="svc.p011">Who is reporting</h2><span class="hint" >Template question</span></div>
+      <div class="row">
+        <div class="f">
+          <label for="org" data-i18n="svc.p013">Reporting organisation</label>
+          <select disabled autocomplete="off" id="org"></select>
+        </div>
+        <div class="f" id="orgOtherWrap" hidden>
+          <label for="orgOther" data-i18n="svc.p014">Name of organisation</label>
+          <input disabled autocomplete="off" type="text" id="orgOther" placeholder="Full name, as it should appear in reports" data-i18n-ph="svc.p087">
+        </div>
+      </div>
+      <div class="row three">
+        <div class="f">
+          <label for="focalName" data-i18n="svc.p015">Focal point name</label>
+          <input disabled autocomplete="off" type="text" id="focalName" placeholder="You — the person recording this" data-i18n-ph="svc.p088">
+          <div class="help" data-i18n="svc.p016">A staff member, never a service user.</div>
+        </div>
+        <div class="f">
+          <label for="focalPhone" data-i18n="svc.p017">Focal point phone</label>
+          <input disabled autocomplete="off" type="tel" id="focalPhone" placeholder="98XXXXXXXX" data-i18n-skip>
+        </div>
+        <div class="f">
+          <label for="cadre" data-i18n="svc.p018">Type of service provider</label>
+          <select disabled autocomplete="off" id="cadre"></select>
+          <div class="help" data-i18n="svc.p019">Who actually delivered this contact. Asked for on 15 September so that
+            counsellors, psychologists and psychiatrists can be counted apart.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="card">
+      <div class="step"><span class="n">2</span><h2 data-i18n="svc.p020">When and where</h2></div>
+      <div class="row three">
+        <div class="f">
+          <label for="dateAD" data-i18n="svc.p021">Date — Gregorian (AD)</label>
+          <input disabled autocomplete="off" type="date" id="dateAD">
+          <div class="help" data-i18n="svc.p022">This is the date the system sorts and groups on.</div>
+        </div>
+        <div class="f">
+          <label for="dateBS" data-i18n="svc.p023" data-i18n-html>Date — Bikram Sambat <span class="opt">— optional</span></label>
+          <input disabled autocomplete="off" type="text" id="dateBS" placeholder="2083-05-29" pattern="\d{4}-\d{2}-\d{2}" data-i18n-skip>
+          <div class="help" data-i18n="svc.p024" data-i18n-html>Typed as reported. <b>Not converted automatically</b> — that needs a verified
+            BS calendar table, which has not been obtained.</div>
+        </div>
+        <div class="f">
+          <label for="province" data-i18n="f4.provLab">Province</label>
+          <select disabled autocomplete="off" id="province"></select>
+          <div class="help" data-i18n="f4.provHelp">All seven provinces are listed. Choosing one shortens the district list; choosing nothing keeps every district available.</div>
+        </div>
+        <div class="f">
+          <label for="district" data-i18n="svc.p025">District</label>
+          <select disabled autocomplete="off" id="district"></select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="f">
+          <label for="site" data-i18n="svc.p026">Site</label>
+          <select disabled autocomplete="off" id="site"></select>
+          <div class="help" id="siteHelp" data-i18n="svc.p027">From the holding-centre roster. Only choose “Other” if the site
+            genuinely is not listed — every “Other” has to be reconciled by hand later.</div>
+        </div>
+        <div class="f">
+          <label for="ward" data-i18n="svc.p028" data-i18n-html>Municipality and ward <span class="opt">— optional</span></label>
+          <input disabled autocomplete="off" type="text" id="ward" placeholder="e.g. Uttargaya, ward 4" data-i18n-ph="svc.p089">
+          <div class="help" data-i18n="svc.p029">Asked for on 15 September as province / subdistrict. Free text for now: the
+            agreed municipality and ward code list has not been obtained.</div>
+        </div>
+      </div>
+      <div class="f" id="siteOtherWrap" hidden>
+        <label for="siteOther" data-i18n="svc.p030">Name of site</label>
+        <input disabled autocomplete="off" type="text" id="siteOther" placeholder="Site name, ward, municipality" data-i18n-ph="svc.p090">
+      </div>
+      <div class="f">
+        <label data-i18n="svc.p031" data-i18n-html>Location pin <span class="opt">— optional</span></label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <button disabled type="button" class="btn ghost sm" id="geoBtn" data-i18n="svc.p032">📍 Use my location</button>
+          <span id="geoOut" class="xs" style="flex:1 1 200px;min-width:0"></span>
+        </div>
+        <div class="help" data-i18n="svc.p033">Recorded to three decimal places — a grid of roughly 100 m. Enough to put the
+          site on a map; not enough to point at a household. A precise pin, a small count and a target
+          group together identify people even with no name attached, which is why the precision is
+          reduced here rather than in the dashboard.</div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="card">
+      <div class="step"><span class="n">3</span><h2 data-i18n="svc.p034">The person</h2></div>
+      <div class="f">
+        <label data-i18n="svc.p035">Is this the first time your organisation has recorded this person?</label>
+        <div class="radios" id="newRet">
+          <label><input disabled autocomplete="off" type="radio" name="nr" value="NEW"> <span data-i18n="svc.p036">New — first contact</span></label>
+          <label><input disabled autocomplete="off" type="radio" name="nr" value="RET"> <span data-i18n="svc.p037">Returning — seen before</span></label>
+          <label><input disabled autocomplete="off" type="radio" name="nr" value="UNK"> <span data-i18n="svc.p038">Not known</span></label>
+        </div>
+        <div class="help" data-i18n="svc.p039">This is the question that makes the cumulative figure mean something. On
+          15 September the reported total was over 9,000 with duplication nobody could size.</div>
+      </div>
+
+      <div id="codeWrap">
+        <div class="banner" style="margin-top:4px" data-i18n="svc.p040" data-i18n-html>
+          <b>These four boxes are not saved.</b> They are read, combined into a code, and cleared when you
+          save. Type them the same way each time and the same person gets the same code.
+        </div>
+        <div class="row four">
+          <div class="f">
+            <label for="ini" data-i18n="svc.p041">Initials</label>
+            <input disabled autocomplete="off" type="text" id="ini" maxlength="4" placeholder="e.g. RB" data-i18n-ph="svc.p091">
+            <div class="help" data-i18n="svc.p042">First letters of the name, as the person says it.</div>
+          </div>
+          <div class="f">
+            <label for="byear" data-i18n="svc.p043">Year of birth</label>
+            <input disabled autocomplete="off" type="text" id="byear" inputmode="numeric" maxlength="4" placeholder="1990" pattern="\d{4}" data-i18n-skip>
+            <div class="help" data-i18n="svc.p044">Year only — never a full date.</div>
+          </div>
+          <div class="f">
+            <label for="sex" data-i18n="svc.p045">Sex</label>
+            <select disabled autocomplete="off" id="sex">
+              <option value="" data-i18n="svc.p046">— choose —</option>
+              <option value="F" data-i18n="svc.p047">Female</option>
+              <option value="M" data-i18n="svc.p048">Male</option>
+              <option value="O" data-i18n="svc.p049">Other</option>
+              <option value="NS" data-i18n="svc.p050">Not stated</option>
+            </select>
+          </div>
+          <div class="f">
+            <label for="mun" data-i18n="svc.p051">Municipality</label>
+            <input disabled autocomplete="off" type="text" id="mun" placeholder="e.g. Uttargaya" data-i18n-ph="svc.p092">
+            <div class="help" data-i18n="svc.p052">Where the person is from, not where you met them.</div>
+          </div>
+        </div>
+        <div class="f">
+          <label data-i18n="svc.p053">Contact code</label>
+          <div id="codeOut" class="codebox" data-i18n="svc.p054">— fill the four boxes above —</div>
+          <div class="help" data-i18n="svc.p055" data-i18n-html>This is the only part that is saved. It is a <b>pseudonym, not an anonymous
+            token</b>: the four inputs vary little, so someone holding a list of candidate names could
+            test them against a code. Adequate for agreeing these questions; a live register needs the
+            code mixed with a secret this handset never holds, which means a server.</div>
+        </div>
+      </div>
+
+      <div class="row three">
+        <div class="f">
+          <label for="ageband" data-i18n="svc.p056">Age band</label>
+          <select disabled autocomplete="off" id="ageband">
+          <option value="">— choose —</option>
+          <option value="0-4">0–4</option>
+          <option value="5-9">5–9</option>
+          <option value="10-17">10–17</option>
+          <option value="18-59">18–59</option>
+          <option value="60+">60 and over</option>
+          <option value="NS">Not stated</option>
+        </select>
+        <div class="f">
+          <label for="disAsked" data-i18n="dis.person">Does the person identify themselves as a person with disability?</label>
+          <select disabled autocomplete="off" id="disAsked">
+            <option value="" data-i18n="dis.blank">&mdash; not asked &mdash;</option>
+            <option value="Y" data-i18n="dis.yes">Yes</option>
+            <option value="N" data-i18n="dis.no">No</option>
+          </select>
+          <div class="help" data-i18n="dis.personHelp">Asked of the person, one answer per row. Only ask if they are able to answer, and leave it blank rather than guess &mdash; blank is recorded as "not asked", which is different from "No".</div>
+        </div>
+        </div>
+        <div class="f">
+          <label for="tgroup" data-i18n="svc.p060">Target group</label>
+          <select disabled autocomplete="off" id="tgroup"></select>
+        </div>
+        <div class="f">
+          <label for="disab" data-i18n="svc.p061" data-i18n-html>Disability reported <span class="opt">— optional</span></label>
+          <select disabled autocomplete="off" id="disab">
+            <option value="" data-i18n="svc.p062">— choose —</option>
+            <option value="Y" data-i18n="svc.p063">Yes, reported</option>
+            <option value="N" data-i18n="svc.p064">No</option>
+            <option value="NS" data-i18n="svc.p065">Not asked</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="card">
+      <div class="step"><span class="n">4</span><h2 data-i18n="svc.p066">What was provided</h2></div>
+      <div class="row three">
+        <div class="f">
+          <label for="service" data-i18n="svc.p067">Service at this contact</label>
+          <select disabled autocomplete="off" id="service"></select>
+          <div class="help" data-i18n="svc.p068" data-i18n-html>Draft list. The agreed service list is an <b>open action item</b> from
+            15 September and is not settled.</div>
+        </div>
+        <div class="f">
+          <label for="modality" data-i18n="svc.p069">Modality</label>
+          <select disabled autocomplete="off" id="modality"></select>
+        </div>
+        <div class="f">
+          <label for="mins" data-i18n="svc.p070" data-i18n-html>Length in minutes <span class="opt">— optional</span></label>
+          <input disabled autocomplete="off" type="text" id="mins" inputmode="numeric" placeholder="30" pattern="\d{1,4}" data-i18n-skip>
+        </div>
+      </div>
+      <div class="row">
+        <div class="f">
+          <label for="outcome" data-i18n="svc.p071">Outcome of this contact</label>
+          <select disabled autocomplete="off" id="outcome">
+            <option value="" data-i18n="svc.p072">— choose —</option>
+            <option value="CLOSE" data-i18n="svc.p073">Supported, no further contact planned</option>
+            <option value="FOLLOW" data-i18n="svc.p074">Follow-up arranged with us</option>
+            <option value="REFER" data-i18n="svcref.refer">Referred on — add the referral below</option>
+            <option value="DECL" data-i18n="svc.p076">Support declined</option>
+            <option value="OTH" data-i18n="svc.p077">Other</option>
+          </select>
+        </div>
+        <div class="f">
+          <label for="notes" data-i18n="svc.p078" data-i18n-html>Anything the coordination team needs to know <span class="opt">— optional</span></label>
+          <input disabled autocomplete="off" type="text" id="notes" maxlength="200" placeholder="About the service or the site — not about the person" data-i18n-ph="svc.p093">
+          <div class="help" data-i18n="svc.p079">Never a clinical detail, a diagnosis, or anything that would identify someone.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 · the referral. Shown only when this contact ends in one. Decision of
+         23 September 2026: the stand-alone referral form is withdrawn and the
+         referral is recorded where it happens — on the person's own record. -->
+    <div class="card" id="refCard" hidden>
+      <div class="step"><span class="n">5</span><h2 data-i18n="svcref.head">The referral</h2></div>
+
+      <div class="banner" data-i18n="svcref.note" data-i18n-html><b>The referral and this contact are the same moment, so it is recorded here.</b>
+        Whether the person arrived is a different moment — record that later, on the
+        <a href="referral-outcome.html">referral outcome form</a>. Everything already on this record
+        (organisation, date, place, contact code, sex, age band, target group) belongs to the referral too
+        and is not asked again.</div>
+
+      <div class="f">
+        <label data-i18n="safeguard.checkLabel">Safeguarding check</label>
+        <div class="radios">
+          <label><input disabled autocomplete="off" type="checkbox" id="notgbv"> <span data-i18n="safeguard.confirmation">This is not a GBV case, not an unaccompanied or separated child, and not an immediate risk to life</span></label>
+        </div>
+        <div class="help" data-i18n="safeguard.consequence">If you cannot tick this, close the form and use the specialised pathway.</div>
+      </div>
+
+      <div class="row three">
+        <div class="f">
+          <label for="reason" data-i18n="ref.p034">Referred for</label>
+          <select disabled autocomplete="off" id="reason"></select>
+        </div>
+        <div class="f">
+          <label for="urgency" data-i18n="ref.p039">Urgency</label>
+          <select disabled autocomplete="off" id="urgency">
+            <option value="" data-i18n="ref.p040">— choose —</option>
+            <option value="SAME" data-i18n="ref.p041">Same day</option>
+            <option value="WEEK" data-i18n="ref.p042">Within a week</option>
+            <option value="ROUT" data-i18n="ref.p043">Routine</option>
+          </select>
+        </div>
+        <div class="f">
+          <label for="toType" data-i18n="ref.p044">Type of service referred to</label>
+          <select disabled autocomplete="off" id="toType">
+            <option value="" data-i18n="ref.p045">— choose —</option>
+            <option value="PSC" data-i18n="ref.p046">Psychosocial counselling</option>
+            <option value="PHC" data-i18n="ref.p047">Health post / primary care</option>
+            <option value="HOSP" data-i18n="ref.p048">Hospital — general</option>
+            <option value="PSYT" data-i18n="ref.p049">Psychiatric service</option>
+            <option value="PROT" data-i18n="ref.p050">Protection services</option>
+            <option value="LEG" data-i18n="ref.p051">Legal or documentation support</option>
+            <option value="LIVE" data-i18n="ref.p052">Livelihood or cash support</option>
+            <option value="OTH" data-i18n="ref.p053">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="f">
+          <label for="toName" data-i18n="ref.p054" data-i18n-html>Name of receiving service <span class="opt">— optional</span></label>
+          <input disabled autocomplete="off" type="text" id="toName" maxlength="120" placeholder="Facility or organisation" data-i18n-ph="ref.p084">
+          <div class="help" data-i18n="ref.p055">Free text for now. The agreed directory of services does not exist yet — it is
+            being built from the registration forms.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="card">
+      <div class="step"><span class="n">6</span><h2 data-i18n="svc.p080">Save</h2></div>
+      <div id="errs"></div>
+      <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
+        <button disabled type="submit" class="btn" data-i18n="svc.p081">Save this contact</button>
+        <button disabled type="button" class="btn ghost" id="csvBtn" data-i18n="svc.p082">Export CSV</button>
+        <button disabled type="button" class="btn ghost" id="jsonBtn" data-i18n="svc.p083">Export JSON</button>
+        <button disabled type="button" class="btn grey" id="clearBtn" data-i18n="svc.p084">Clear everything on this device</button>
+        <span class="xs" id="count"></span>
+      </div>
+      <div class="f" style="margin-top:16px">
+        <label data-i18n="svc.p085">What would be sent, if there were anywhere to send it</label>
+        <pre id="payload" class="pay">—</pre>
+        <div class="help" data-i18n="svc.p086" data-i18n-html>Shown so the Technical Working Group can see exactly what leaves the handset before
+          agreeing to collect anything. Note what is <i>not</i> in it.</div>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+  </main>
+
+
+<script src="../../hub/assets/codes.js"></script><script src="../../hub/assets/i18n-strings.js"></script>
+<script>window.REVIEW_LISTS={};
+window.REVIEW_LISTS.SERVICES = [
+    { code: "PFA",  name: "Psychological first aid" },
+    { code: "IND",  name: "Individual counselling session" },
+    { code: "PSE",  name: "Psychoeducation / information" },
+    { code: "CLIN", name: "Clinical consultation (prescriber present)" },
+    { code: "CM",   name: "Case management / follow-up visit" },
+    { code: "FAM",  name: "Family support" },
+    { code: "REFO", name: "Referral only, no other service" },
+    { code: "OTH",  name: "Other" }
+  ];
+window.REVIEW_LISTS.REASONS = [
+    { code: "DISTRESS", name: "Severe distress not settling with support" },
+    { code: "SUSPMNS",  name: "Possible mental disorder needing clinical assessment" },
+    { code: "MEDS",     name: "Medication review or continuation" },
+    { code: "PREEX",    name: "Pre-existing condition interrupted by the disaster" },
+    { code: "SUBST",    name: "Alcohol or substance use" },
+    { code: "EPIL",     name: "Seizures / epilepsy" },
+    { code: "SOCIAL",   name: "Social, documentation or livelihood need" },
+    { code: "OTH",      name: "Other" }
+  ];
+
+/* Draft strings for the referral block added on 23 September 2026. English is the
+   page itself; the Nepali is a MACHINE DRAFT for piloting, to be validated by a
+   translator. Every other string on this block reuses a key the shared dictionary
+   already carries (ref.*, safeguard.*), so only three strings are new. When this
+   change is merged, move both maps into hub/assets/i18n-strings.js and delete this
+   block. Nothing here overwrites a key the shared dictionary already has. */
+(function () {
+  var S = window.I18N_STRINGS = window.I18N_STRINGS || {};
+  S.en = S.en || {}; S.ne = S.ne || {};
+  var EN = {
+    "svcref.head": "The referral",
+    "svcref.refer": "Referred on — add the referral below",
+    "svcref.note": "<b>The referral and this contact are the same moment, so it is recorded here.</b> Whether the person arrived is a different moment — record that later, on the <a href=\"referral-outcome.html\">referral outcome form</a>. Everything already on this record (organisation, date, place, contact code, sex, age band, target group) belongs to the referral too and is not asked again."
+  };
+  var NE = {
+    "svcref.head": "रेफरल",
+    "svcref.refer": "रेफर गरियो — तलको रेफरल भाग भर्नुहोस्",
+    "svcref.note": "<b>रेफरल र यो सम्पर्क एउटै क्षणका हुन्, त्यसैले यहीँ अभिलेख गरिन्छ।</b> व्यक्ति पुग्नुभयो कि पुग्नुभएन भन्ने अर्को क्षणको कुरा हो — त्यो पछि <a href=\"referral-outcome.html\">रेफरल नतिजा फारम</a>मा अभिलेख गर्नुहोस्। यो अभिलेखमा भइसकेका कुरा (संस्था, मिति, स्थान, सम्पर्क कोड, लिङ्ग, उमेर समूह, लक्षित समूह) रेफरलका पनि हुन्, त्यसैले फेरि सोधिँदैन।"
+  };
+  Object.keys(EN).forEach(function (k) { if (!S.en[k]) S.en[k] = EN[k]; });
+  Object.keys(NE).forEach(function (k) { if (!S.ne[k]) S.ne[k] = NE[k]; });
+})();
+
+</script><script>mountTemplateReview('contact');</script></body></html>

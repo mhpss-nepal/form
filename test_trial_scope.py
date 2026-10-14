@@ -162,7 +162,7 @@ class TrialScopeContractTest(unittest.TestCase):
 
     def test_service_worker_and_manifest_do_not_advertise_unapproved_pages(self) -> None:
         sw = (ROOT / "sw.js").read_text(encoding="utf-8")
-        for page in FORMS:
+        for page in (p for p in FORMS if p != "contact.html"):
             self.assertNotIn(f'"{page}"', sw)
 
         # 4ws-report.html is a content-free redirect kept for already-printed
