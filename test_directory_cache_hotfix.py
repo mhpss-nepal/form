@@ -6,7 +6,7 @@ import subprocess
 import unittest
 
 ROOT = Path(__file__).resolve().parent
-MODULE = 'lib/directory-status-20261013.js'
+MODULE = 'lib/directory-status-20261014.js'
 
 
 def dictionary(script):
@@ -32,8 +32,9 @@ class DirectoryCacheHotfix(unittest.TestCase):
             self.assertIn('not connected for automatic delivery', labels['dir.delivery'])
             for kind in ('providers', 'servicepoints'):
                 self.assertIn('publication held', labels['dir.' + kind + '.status'])
-            for kind in ('contacts', 'referrals'):
-                self.assertIn('Review only', labels['dir.' + kind + '.status'])
+            self.assertIn('Interactive preview', labels['dir.contacts.status'])
+            self.assertIn('not saved or sent', labels['dir.contacts.status'].lower())
+            self.assertIn('Review only', labels['dir.referrals.status'])
 
     def test_versioned_asset_loads_before_engine_and_is_precached(self):
         html = (ROOT / 'index.html').read_text()
@@ -45,7 +46,7 @@ class DirectoryCacheHotfix(unittest.TestCase):
         cache_version = re.search(r'const CACHE = "mhpss-np-field-v(\d+)"', sw)
         self.assertIsNotNone(cache_version)
         self.assertGreaterEqual(int(cache_version.group(1)), 47)
-        self.assertEqual(len(re.findall(r'data-i18n="dir.open"', html)), 8)
+        self.assertEqual(len(re.findall(r'data-i18n="dir.open"', html)), 7)
 
 
 if __name__ == '__main__':

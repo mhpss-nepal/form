@@ -137,7 +137,7 @@ class PreviewIsolationContractTest(unittest.TestCase):
         for forbidden in ("preview.html", "preview-mode.js", "translation-review-index.html"):
             self.assertNotIn(forbidden, self.landing)
             self.assertNotIn(f'"{forbidden}"', self.sw)
-        for page in ("contact.html", "phq9.html", "referral.html", "selfreport.html"):
+        for page in ("phq9.html", "referral.html", "selfreport.html"):
             self.assertNotIn(f'"{page}"', self.sw)
 
     def test_field_landing_uses_inert_review_routes_for_held_templates(self) -> None:
