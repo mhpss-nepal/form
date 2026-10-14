@@ -42,7 +42,9 @@ class DirectoryCacheHotfix(unittest.TestCase):
         self.assertLess(html.index('src="' + MODULE + '"'),
                         html.index('src="../hub/assets/i18n.js"'))
         self.assertIn('"' + MODULE + '"', sw)
-        self.assertIn('mhpss-np-field-v47', sw)
+        cache_version = re.search(r'const CACHE = "mhpss-np-field-v(\d+)"', sw)
+        self.assertIsNotNone(cache_version)
+        self.assertGreaterEqual(int(cache_version.group(1)), 47)
         self.assertEqual(len(re.findall(r'data-i18n="dir.open"', html)), 8)
 
 

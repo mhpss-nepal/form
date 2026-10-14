@@ -23,6 +23,8 @@
 <style>
   .a11y-skip{position:absolute;left:-9999px;top:0;z-index:1000;background:#fff;color:#183039;padding:10px 14px;border:2px solid #183039;border-radius:0 0 6px 0;font-weight:700;text-decoration:none}
   .a11y-skip:focus{left:0}
+  /* Directory QR URLs must not inherit design.css's 18px .u icon box. */
+  .qrbox .directory-qr-url{display:block;width:100%;height:auto;min-width:0;margin:12px 0 8px;overflow-wrap:anywhere;word-break:normal;line-height:1.5;background:transparent;border-radius:0}
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 </style>
 <link rel="stylesheet" href="../hub/assets/home-nav.css"></head>
@@ -258,7 +260,7 @@ function svgFor(key){
        + 'aria-label="QR code for ' + d.url + '">'
        + '<rect width="' + size + '" height="' + size + '" fill="#fff"/>'
        + '<g fill="#20313b">' + r + '</g></svg>'
-       + '<div class="u">' + d.url + '</div>'
+       + '<div class="directory-qr-url">' + d.url + '</div>'
        + '<p class="xs">Print this page, or screenshot the code, and put it where people can reach it.</p>';
 }
 function QRT(btn){
