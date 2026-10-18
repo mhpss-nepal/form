@@ -894,6 +894,40 @@ table.mx td.t { font-weight: 700; }
 </script>
 <!-- The 5Ws form reads its own copy of the store: the age bands live there and
      had to move while hub was left alone. See the header of lib/store.js. -->
+<script>
+/* Same-page safety boundary: an older network-first worker can supply this
+   HTML without the delivery module. Never mutate the editor/device store by
+   falling back to a partial module. No auth identity is required for readiness. */
+(function () {
+  var f = document.getElementById('f');
+  var ids = ['activityRetry', 'activityNew', 'activityRestore', 'activityHistory', 'reset'];
+  var submit = document.querySelector('button[type=submit][form=f]');
+  function ready() {
+    var m = window.ActivityForm, a = window.ACTIVITY_API, s = window.STORE;
+    return !!(m && m.ready === true && typeof m.submit === 'function' &&
+      typeof m.busy === 'function' && typeof m.saveDraft === 'function' &&
+      m.api && typeof m.api.outbox === 'function' &&
+      a && typeof a.create === 'function' && typeof a.payload === 'function' &&
+      window.BaselineAuth && typeof window.BaselineAuth.onChange === 'function' &&
+      s && typeof s.save === 'function' && window.ActivityCollector);
+  }
+  function refuse() {
+    submit.disabled = true;
+    ids.forEach(function (id) { document.getElementById(id).disabled = true; });
+    document.getElementById('activityStatus').textContent = 'Delivery dependencies unavailable. Submit, Retry and editor actions are unavailable; current fields, device history, drafts and queued revisions are retained. Reconnect and reload before saving.';
+  }
+  function guard(e) {
+    if (!ready()) { e.preventDefault(); e.stopImmediatePropagation(); refuse(); }
+  }
+  f.addEventListener('submit', guard, true);
+  ids.forEach(function (id) { document.getElementById(id).addEventListener('click', guard, true); });
+  // Native form.submit() bypasses submit listeners; route the page's method
+  // through this same guarded handler instead of navigating away with fields.
+  f.submit = function () { if (!ready()) { refuse(); return; } f.requestSubmit(); };
+  window.ActivityDelivery = Object.freeze({ready:ready, refuse:refuse});
+  refuse();
+})();
+</script>
 <script src="lib/store.js"></script>
 <script src="../hub/assets/fb-config.js"></script>
 <script src="../hub/review-current-v51/fb-config.js"></script>
@@ -1813,6 +1847,7 @@ table.mx td.t { font-weight: 700; }
 })();
 </script>
 <script src="lib/activity-form.js"></script>
+<script>if (!window.ActivityDelivery.ready()) window.ActivityDelivery.refuse();</script>
 <script src="pwa.js"></script>
 <!-- The bilingual engine. On a page that is not yet keyed up it still earns
      its place: it sets data-lang, which is what makes the Nepali words in

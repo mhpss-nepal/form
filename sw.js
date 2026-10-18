@@ -32,7 +32,7 @@
    the header now describes the register bridge the file actually has.
    store.js is a precached asset, so that change does not reach an
    installed phone until this name changes too. */
-const CACHE = "mhpss-np-field-v49";
+const CACHE = "mhpss-np-field-v50";
 
 const PRECACHE = [
   "./",
@@ -107,20 +107,22 @@ const PRECACHE = [
 self.addEventListener("install", (e) => {
   e.waitUntil((async () => {
     const c = await caches.open(CACHE);
-    /* one at a time: a single 404 must not fail the whole install and
-       leave the worker with no cache at all */
-    await Promise.all(PRECACHE.map(async (u) => {
-      try { await c.add(new Request(u, { cache: "reload" })); }
-      catch (err) { /* keep going — logged below on first fetch miss */ }
-    }));
-    self.skipWaiting();
+    /* All listed assets are required. An incomplete candidate must not
+       claim clients or retire their predecessor recovery shell. */
+    try {
+      await c.addAll(PRECACHE.map((u) => new Request(u, { cache: "reload" })));
+    } catch (err) {
+      await caches.delete(CACHE); // only this failed candidate, never user data
+      throw err;
+    }
+    await self.skipWaiting();
   })());
 });
 
 self.addEventListener("activate", (e) => {
   e.waitUntil((async () => {
     const keys = await caches.keys();
-    await Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)));
+    await Promise.all(keys.filter((k) => k.startsWith("mhpss-np-field-v") && k !== CACHE).map((k) => caches.delete(k)));
     await self.clients.claim();
   })());
 });
