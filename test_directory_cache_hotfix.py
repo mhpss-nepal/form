@@ -6,7 +6,7 @@ import subprocess
 import unittest
 
 ROOT = Path(__file__).resolve().parent
-MODULE = 'lib/directory-status-20261014.js'
+MODULE = 'lib/directory-status-20261119.js'
 
 
 def dictionary(script):
@@ -27,14 +27,16 @@ class DirectoryCacheHotfix(unittest.TestCase):
             labels = expected[lang]
             self.assertEqual([labels['dir.' + key] for key in ('open', 'copy', 'qr')],
                              ['Open form', 'Copy link', 'QR'])
-            self.assertIn('approved reporting access', labels['dir.delivery'])
-            self.assertNotIn('device-only', labels['dir.delivery'])
-            self.assertIn('not connected for automatic delivery', labels['dir.delivery'])
+            # Plain-language delivery rule: sent only on a server confirmation, Retry when offline.
+            self.assertIn('server has received it', labels['d2.note'])
+            self.assertIn('Retry', labels['d2.note'])
+            self.assertNotIn('device-only', labels['d2.note'])
+            for kind in ('directory', 'grief'):
+                self.assertIn('NOT SENT', labels['dir.' + kind + '.tag'])
+                self.assertIn('entries stay on this phone', labels['dir.' + kind + '.status'])
             for kind in ('providers', 'servicepoints'):
-                self.assertIn('publication held', labels['dir.' + kind + '.status'])
-            self.assertIn('Interactive preview', labels['dir.contacts.status'])
-            self.assertIn('not saved or sent', labels['dir.contacts.status'].lower())
-            self.assertIn('Review only', labels['dir.referrals.status'])
+                self.assertIn('before anything is published', labels['dir.' + kind + '.status'])
+            self.assertIn('Nothing is saved or sent', labels['dir.contacts.status'])
 
     def test_versioned_asset_loads_before_engine_and_is_precached(self):
         html = (ROOT / 'index.html').read_text()
