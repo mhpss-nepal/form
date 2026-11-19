@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Layer 1 · Field forms — MHPSS Nepal</title>
+<title>Field forms — MHPSS Nepal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Lora + Manrope. design.css declares Georgia / system fallbacks, so a
@@ -26,9 +26,15 @@
   /* Directory QR URLs must not inherit design.css's 18px .u icon box. */
   .qrbox .directory-qr-url{display:block;width:100%;height:auto;min-width:0;margin:12px 0 8px;overflow-wrap:anywhere;word-break:normal;line-height:1.5;background:transparent;border-radius:0}
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .d2-note{background:#eef6f3;border-left:4px solid #0f7a6b;color:#183039}
+  .d2-preview .tag{background:#fff4dc;color:#7a4b00}
+  @media (min-width:900px){.d2-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  .d2-more{margin:28px 0 8px;border:1px solid #d7e0e3;border-radius:14px;padding:4px 18px 14px;background:#fbfcfc}
+  .d2-more summary{cursor:pointer;font-weight:700;padding:12px 0;font-size:17px;color:#183039}
+  .d2-more[open] summary{border-bottom:1px solid #e3e9eb;margin-bottom:10px}
 </style>
 <link rel="stylesheet" href="../hub/assets/home-nav.css"></head>
-<body class="fx landing"><nav aria-label="Home navigation"><a data-home-link href="../hub/">← Back to Home</a></nav>
+<body class="fx landing">
 <a class="a11y-skip" href="#main" data-i18n="a11y.skip">Skip to the form</a>
 <div class="ribbon"><span data-i18n="dir.banner"></span><span data-i18n="dir.bannerSub"></span></div>
 
@@ -38,17 +44,16 @@
     <div class="sub" data-i18n="page.index.sub"></div>
   </div>
   <div class="spacer"></div>
-  <a href="../hub/">← <span data-i18n="nav.hub"></span></a>
-  <a href="../hub/"><span data-i18n="nav.coordination"></span></a>
+  <a href="../hub/"><span data-i18n="d2.dash"></span> →</a>
 </div>
 
 <div class="wrap">
   <main id="main">
 
   <div class="ml-hero">
-    <div class="eyebrow" data-i18n="ml.p012"></div>
+    <div class="eyebrow" data-i18n="d2.eyebrow"></div>
     <h1 data-i18n="ml.p036"></h1>
-    <p class="lede" data-i18n="dir.intro" data-i18n-html></p>
+    <p class="lede" data-i18n="d2.lede"></p>
     <div class="ml-phone">
       <button class="pb" id="copyAll" data-url="./" data-i18n="ml.p076"></button>
       <button class="pb" id="qrAll" data-i18n="ml.p075"></button>
@@ -57,17 +62,15 @@
     <div class="qrbox" id="qrAllBox" hidden></div>
   </div>
 
-  <div class="banner stop" data-i18n="dir.delivery" data-i18n-html></div>
+  <div class="banner d2-note" data-i18n="d2.note" data-i18n-html></div>
 
-  <h2 data-i18n="ml.p040"></h2>
+  <h2 data-i18n="d2.forms"></h2>
 
-  <div class="ml-grid">
-
-    <div class="ml-card svc">
-      <div class="tag" data-i18n="ml.p010"></div>
-      <h3 data-i18n="ml.p048"></h3>
-      <p data-i18n="ml.p029" data-i18n-html></p>
-      <p class="src" data-i18n="ml.p028"></p>
+  <div class="ml-grid d2-grid">
+    <div class="ml-card svc" data-directory-kind="5ws">
+      <div class="tag" data-i18n="dir.5ws.tag"></div>
+      <h3 data-i18n="dir.5ws.title"></h3>
+      <p data-i18n="dir.5ws.status"></p>
       <div class="ml-actions">
         <a href="5ws-report.html" data-i18n="dir.open"></a>
         <button class="sec" data-url="5ws-report.html" onclick="COPY(this)" data-i18n="dir.copy"></button>
@@ -75,31 +78,6 @@
       </div>
       <div class="qrbox" hidden></div>
     </div>
-    <div class="ml-card clin">
-      <div class="tag" data-i18n="ml.p008"></div>
-      <h3 data-i18n="ml.p046"></h3>
-      <p data-i18n="ml.p025" data-i18n-html></p>
-      <p class="src" data-i18n="ml.p024"></p>
-      <div class="ml-actions">
-        <a href="phq9.html" data-i18n="dir.open"></a>
-        <button class="sec" data-url="phq9.html" onclick="COPY(this)" data-i18n="dir.copy"></button>
-        <button class="sec" data-qr="phq9" onclick="QRT(this)" data-i18n="dir.qr"></button>
-      </div>
-      <div class="qrbox" hidden></div>
-    </div>
-    <div class="ml-card selfr">
-      <div class="tag" data-i18n="ml.p006"></div>
-      <h3 data-i18n="ml.p044"></h3>
-      <p data-i18n="ml.p021" data-i18n-html></p>
-      <p class="src" data-i18n="ml.p020"></p>
-      <div class="ml-actions">
-        <a href="selfreport.html" data-i18n="dir.open"></a>
-        <button class="sec" data-url="selfreport.html" onclick="COPY(this)" data-i18n="dir.copy"></button>
-        <button class="sec" data-qr="self" onclick="QRT(this)" data-i18n="dir.qr"></button>
-      </div>
-      <div class="qrbox" hidden></div>
-    </div>
-
     <div class="ml-card svc" data-directory-kind="training">
       <div class="tag" data-i18n="dir.training.tag"></div>
       <h3 data-i18n="dir.training.title"></h3>
@@ -111,18 +89,32 @@
       </div>
       <div class="qrbox" hidden></div>
     </div>
-    <div class="ml-card svc" data-directory-kind="contacts">
-      <div class="tag" data-i18n="dir.contacts.tag"></div>
-      <h3 data-i18n="dir.contacts.title"></h3>
-      <p data-i18n="dir.contacts.status"></p>
+    <div class="ml-card svc d2-preview" data-directory-kind="directory">
+      <div class="tag" data-i18n="dir.directory.tag"></div>
+      <h3 data-i18n="dir.directory.title"></h3>
+      <p data-i18n="dir.directory.status"></p>
       <div class="ml-actions">
-        <a href="review/contact.html" data-i18n="dir.open"></a>
-        <button class="sec" data-url="review/contact.html" onclick="COPY(this)" data-i18n="dir.copy"></button>
-        <button class="sec" data-qr="contact" onclick="QRT(this)" data-i18n="dir.qr"></button>
+        <a href="preview/referral-directory.html" data-i18n="dir.open"></a>
+        <button class="sec" data-url="preview/referral-directory.html" onclick="COPY(this)" data-i18n="dir.copy"></button>
       </div>
       <div class="qrbox" hidden></div>
     </div>
+    <div class="ml-card svc d2-preview" data-directory-kind="grief">
+      <div class="tag" data-i18n="dir.grief.tag"></div>
+      <h3 data-i18n="dir.grief.title"></h3>
+      <p data-i18n="dir.grief.status"></p>
+      <div class="ml-actions">
+        <a href="preview/grief-early-assessment.html" data-i18n="dir.open"></a>
+        <button class="sec" data-url="preview/grief-early-assessment.html" onclick="COPY(this)" data-i18n="dir.copy"></button>
+      </div>
+      <div class="qrbox" hidden></div>
+    </div>
+  </div>
 
+  <details class="d2-more">
+    <summary><span data-i18n="d2.more"></span></summary>
+    <p class="lede" data-i18n="d2.more.sub"></p>
+    <div class="ml-grid">
     <div class="ml-card svc" data-directory-kind="providers">
       <div class="tag" data-i18n="dir.providers.tag"></div>
       <h3 data-i18n="dir.providers.title"></h3>
@@ -145,59 +137,28 @@
       </div>
       <div class="qrbox" hidden></div>
     </div>
-  </div>
+    <div class="ml-card svc" data-directory-kind="contacts">
+      <div class="tag" data-i18n="dir.contacts.tag"></div>
+      <h3 data-i18n="dir.contacts.title"></h3>
+      <p data-i18n="dir.contacts.status"></p>
+      <div class="ml-actions">
+        <a href="review/contact.html" data-i18n="dir.open"></a>
+        <button class="sec" data-url="review/contact.html" onclick="COPY(this)" data-i18n="dir.copy"></button>
+        <button class="sec" data-qr="contact" onclick="QRT(this)" data-i18n="dir.qr"></button>
+      </div>
+      <div class="qrbox" hidden></div>
+    </div>
+    </div>
+  </details>
 
-  <h2 data-i18n="ml.p039"></h2>
+  <h2 data-i18n="d2.how"></h2>
   <div class="ml-note">
     <ul>
-      <li data-i18n="ml.p035" data-i18n-html></li>
-      <li data-i18n="dir.copyHelp" data-i18n-html></li>
-      <li data-i18n="ml.p033" data-i18n-html></li>
-      <li data-i18n="dir.offlineHelp" data-i18n-html></li>
+      <li data-i18n="d2.how.open" data-i18n-html></li>
+      <li data-i18n="d2.how.copy" data-i18n-html></li>
+      <li data-i18n="d2.how.qr" data-i18n-html></li>
     </ul>
   </div>
-
-  <h2 data-i18n="ml.p038"></h2>
-  <p class="lede" data-i18n="ml.p013"></p>
-  <div class="tw">
-  <table class="prov">
-    <tr><th scope="col" data-i18n="ml.p051"></th><th scope="col" data-i18n="ml.p050"></th><th scope="col" data-i18n="ml.p049"></th></tr>
-    <tr>
-      <td data-i18n="ml.p069"></td>
-      <td data-i18n="ml.p068"></td>
-      <td data-i18n="ml.p067"></td>
-    </tr>
-    <tr>
-      <td data-i18n="ml.p066"></td>
-      <td data-i18n="ml.p065"></td>
-      <td data-i18n="ml.p064"></td>
-    </tr>
-    <tr>
-      <td data-i18n="ml.p063"></td>
-      <td data-i18n="ml.p062"></td>
-      <td data-i18n="ml.p061"></td>
-    </tr>
-    <tr>
-      <td data-i18n="ml.p060"></td>
-      <td data-i18n="ml.p059"></td>
-      <td data-i18n="ml.p058"></td>
-    </tr>
-    <tr>
-      <td data-i18n="ml.p057"></td>
-      <td data-i18n="ml.p056"></td>
-      <td data-i18n="ml.p055"></td>
-    </tr>
-    <tr>
-      <td data-i18n="ml.p054"></td>
-      <td data-i18n="ml.p053" data-i18n-html></td>
-      <td data-i18n="dir.provenance"></td>
-    </tr>
-  </table>
-  </div>
-
-  <h2 data-i18n="ml.p037"></h2>
-  <div class="banner warn" data-i18n="ml.p002" data-i18n-html></div>
-  <div class="banner" data-i18n="ml.p001" data-i18n-html></div>
 
   <!-- Filled by assets/brand.js. Emblems are off until the official
        files are supplied — see that file before changing anything here. -->
@@ -273,38 +234,54 @@ document.getElementById('qrAll').addEventListener('click', function(){
 <script src="../hub/assets/mark.js"></script>
 <script src="../hub/assets/icons.js"></script>
 <script src="../hub/assets/i18n-strings.js"></script>
-<script src="lib/directory-status-20261014.js"></script>
+<script src="lib/directory-status-20261119.js"></script>
 <script>
 /* A missing directory asset must not expose internal keys or stale status.
    Keep this directory-only fallback in step with the versioned dictionary. */
 if (!window.DIRECTORY_STATUS_READY) {
   (function () {
     var S = window.I18N_STRINGS = window.I18N_STRINGS || {};
-    var labels = {
-      'dir.open': 'Open form', 'dir.copy': 'Copy link', 'dir.qr': 'QR',
-      'dir.banner': 'FORM DIRECTORY',
-      'dir.bannerSub': ' · Choose a form. Delivery status is shown separately.',
-      'dir.intro': 'Seven workflows, eight instruments. Open a form, copy its link or show its QR code. Contacts and later referral outcomes share one interactive preview; nothing entered there is saved or sent.',
-      'dir.delivery': '<strong>Device saving is not server delivery.</strong> The 5Ws form saves a device copy and sends when signed in with approved reporting access; delivery is confirmed only by a matching server receipt. Retained pending reports require Retry after connectivity returns. Training requires verified sign-in and a matching server receipt. PHQ-9 and Self-report are not connected for automatic delivery. Provider and service-point registrations are private submissions, pending review; receipt does not publish or verify credentials. The contact/referral interactive preview cannot save or send information. Do not enter real personal information.',
-      'dir.offlineHelp': '<strong>Offline use:</strong> availability depends on the form and previously loaded assets. Review templates cannot retain entries. Offline delivery and installed-device updates have not been certified.',
-      'dir.provenance': 'This directory has seven workflows covering eight instruments. Contact with referral initiation and later referral outcome share one workflow. Individual collection remains held; interactive preview is not approval to collect personal information.',
-      'dir.copyHelp': '<strong>Copy link:</strong> share the form or protected preview address. A shared link does not grant access to records.'
-    };
-    var rows = [
-      ['training', 'Training & orientation', 'Verified training access is required to send a report.', 'TRAINING'],
-      ['contacts', 'Service contacts & referrals', 'Interactive preview: contact + referral, then later outcome. Not saved or sent. Do not enter real personal information.', 'INTERACTIVE PREVIEW'],
-      ['referrals', 'Referral outcomes', 'Review only. Follow-up collection is not activated.', 'INTERACTIVE PREVIEW'],
-      ['providers', 'Provider registration', 'Private registration. Verified sign-in required; credentials unverified and publication held.', 'PRIVATE REGISTRATION'],
-      ['servicepoints', 'Service-point registration', 'Private registration. Verified sign-in required; credentials unverified and publication held.', 'PRIVATE REGISTRATION']
-    ];
-    rows.forEach(function (row) {
-      labels['dir.' + row[0] + '.title'] = row[1];
-      labels['dir.' + row[0] + '.status'] = row[2];
-      labels['dir.' + row[0] + '.tag'] = row[3];
-    });
-    ['en', 'ne'].forEach(function (lang) {
-      S[lang] = S[lang] || {}; Object.assign(S[lang], labels);
-    });
+var labels={
+"dir.open": "Open form",
+"dir.copy": "Copy link",
+"dir.qr": "QR",
+"dir.banner": "FIELD FORMS",
+"dir.bannerSub": " · MHPSS Nepal",
+"d2.eyebrow": "MHPSS Nepal · Field forms",
+"d2.lede": "Pick the form for your task. Open it on this phone, copy its link to share, or show its QR code.",
+"d2.note": "<strong>A report counts as sent only when the form confirms that the server has received it.</strong> Until then a copy stays on this phone. If you are offline, the report waits: open the form again when you are back online and press Retry. Never write the names or phone numbers of the people you support.",
+"d2.forms": "Forms for field reporting",
+"d2.dash": "Dashboard",
+"page.index.sub": "Flood response · Rasuwa / Bhote Koshi",
+"dir.5ws.tag": "EVERY ACTIVITY",
+"dir.5ws.title": "Activity report (5Ws)",
+"dir.5ws.status": "Who did what, where, when and for whom: one report per session. It records services, not people. Sign-in is needed to send.",
+"dir.training.tag": "TRAINING",
+"dir.training.title": "Training & orientation report",
+"dir.training.status": "For a training or orientation session you ran. Sign-in is needed to send.",
+"dir.directory.tag": "PREVIEW · NOT SENT",
+"dir.directory.title": "Referral directory",
+"dir.directory.status": "Where each service is, who runs it and how to refer, with a map pin. For partner review: entries stay on this phone.",
+"dir.grief.tag": "PREVIEW · NOT SENT",
+"dir.grief.title": "Grief early assessment",
+"dir.grief.status": "A short guided conversation with an adult after a death in the family: the loss, rites, reactions and needs. No names. For review: entries stay on this phone.",
+"d2.more": "More forms for the coordination team",
+"d2.more.sub": "Registrations and a referral practice preview. Use these only when the coordination team asks you to.",
+"dir.providers.tag": "REGISTRATION",
+"dir.providers.title": "Provider registration",
+"dir.providers.status": "Register a service provider. Sign-in is needed; the coordination team reviews it before anything is published.",
+"dir.servicepoints.tag": "REGISTRATION",
+"dir.servicepoints.title": "Service-point registration",
+"dir.servicepoints.status": "Register a place where services are given. Sign-in is needed; the coordination team reviews it before anything is published.",
+"dir.contacts.tag": "PRACTICE ONLY",
+"dir.contacts.title": "Contacts & referrals",
+"dir.contacts.status": "Practise recording a contact, its referral and the later outcome. Nothing is saved or sent. Do not enter real names.",
+"d2.how": "How to share a form",
+"d2.how.open": "<b>Open form</b> — fill it in yourself on this phone.",
+"d2.how.copy": "<b>Copy link</b> — send the link to a colleague by WhatsApp or email.",
+"d2.how.qr": "<b>QR</b> — print it or show it on screen; a phone camera opens the form."
+};
+['en','ne'].forEach(function(lang){S[lang]=S[lang]||{};Object.assign(S[lang],labels);});
   })();
 }
 </script>
