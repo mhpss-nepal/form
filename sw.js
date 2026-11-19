@@ -32,7 +32,7 @@
    the header now describes the register bridge the file actually has.
    store.js is a precached asset, so that change does not reach an
    installed phone until this name changes too. */
-const CACHE = "mhpss-np-field-v55";
+const CACHE = "mhpss-np-field-v56";
 
 const PRECACHE = [
   "./",
@@ -101,7 +101,24 @@ const PRECACHE = [
   "../hub/assets/design.css",
   "../hub/assets/mark.js",
   "../hub/assets/icons.js",
-  "pwa.js"
+  "pwa.js",
+  /* 19 Nov 2026 (decision 2A): the grief and referral directory forms must open and save with no
+     signal, because staff often have none and borrow a colleague's phone. Pages, their sender,
+     sign-in and access scripts, the proofreading drawer, and a local copy of Leaflet 1.9.4
+     (byte-identical to unpkg) so the location form works offline. The map tiles stay online-only:
+     the OpenStreetMap tile policy forbids bulk prefetching; the GPS position does not need them. */
+  "preview/grief-early-assessment.html",
+  "preview/referral-directory.html",
+  "lib/form-send.js",
+  "lib/proof-mode.js",
+  "../hub/assets/access-api.js",
+  "vendor/leaflet-1.9.4/leaflet.js",
+  "vendor/leaflet-1.9.4/leaflet.css",
+  "vendor/leaflet-1.9.4/images/marker-icon.png",
+  "vendor/leaflet-1.9.4/images/marker-icon-2x.png",
+  "vendor/leaflet-1.9.4/images/marker-shadow.png",
+  "vendor/leaflet-1.9.4/images/layers.png",
+  "vendor/leaflet-1.9.4/images/layers-2x.png"
 ];
 
 self.addEventListener("install", (e) => {
@@ -129,6 +146,19 @@ self.addEventListener("fetch", (e) => {
   const req = e.request;
   if (req.method !== "GET") return;
   const url = new URL(req.url);
+  /* The Firebase sign-in SDK (pinned 10.13.0) is kept after the first online visit, so a phone that
+     opens a form with no signal still knows who is signed in and can send when signal returns. */
+  if (url.origin === "https://www.gstatic.com" && url.pathname.startsWith("/firebasejs/10.13.0/")) {
+    e.respondWith((async () => {
+      const c = await caches.open(CACHE);
+      const hit = await c.match(req);
+      if (hit) return hit;
+      const fresh = await fetch(req);
+      if (fresh && fresh.ok) c.put(req, fresh.clone());
+      return fresh;
+    })());
+    return;
+  }
   if (url.origin !== self.location.origin) return;
 
   const isPage = req.mode === "navigate" ||

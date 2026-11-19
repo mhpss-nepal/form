@@ -31,8 +31,12 @@ class GriefRegistration(unittest.TestCase):
         self.assertIn('${o}-${d}-${t}-${devTag()}-', G)
         self.assertIn('r.code=ed?ed.code:code()', G)  # new records get code(); a corrected record keeps its code (19 Nov 2026)
 
-    def test_names_stay_with_the_organisation(self):
-        self.assertIn('never sent to coordination or shown on the dashboard', G)
+    def test_notice_says_who_sees_names(self):
+        # Decision 1B/1A (19 Nov 2026): the organisation and the MHPSS coordination team can see names and
+        # phone numbers; never published or on a dashboard. The old organisation-only promise must not return.
+        self.assertIn('the MHPSS coordination team can also see them to follow up', G)
+        self.assertIn('never published or shown on any dashboard', G)
+        self.assertNotIn('never sent to coordination', G)
 
 
 class GriefAgeGroups(unittest.TestCase):
