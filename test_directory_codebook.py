@@ -36,9 +36,16 @@ class DirectoryUsesTheFiveWsLists(unittest.TestCase):
         self.assertIn('0&ndash;4, 5&ndash;9, 10&ndash;17, 18&ndash;59, 60+', fivews)
 
     def test_delivery_mode_and_msp_block_present(self):
-        self.assertEqual(re.findall(r'name="delivery" value="([^"]+)"', self.html), ['inperson', 'remote', 'both'])
+        self.assertEqual(re.findall(r'name="delivery" value="([^"]+)"', self.html), ['atplace', 'outreach', 'remote'])
         self.assertIn('For MSP mapping only', self.html)
         self.assertIn('Optional · CMC-Nepal mapping team', self.html)
+
+    def test_no_field_is_asked_twice(self):
+        # 19 Nov 2026 audit: one person field set, one delivery question, one access question, clients wording
+        for gone in ('name="focalName"', 'name="acceptsRef"', 'value="outreach"><span><b>Outreach / home visit', 'Taking new people', 'Cost to the person', 'MISSING.map'):
+            self.assertNotIn(gone, self.html)
+        self.assertEqual(self.html.count('name="focalEmail"'), 1)
+        self.assertIn('Accepting new clients now', self.html)
 
 
 if __name__ == '__main__':

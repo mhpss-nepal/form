@@ -78,7 +78,7 @@ table.staff td input{width:72px}
 <header>
   <div class="kicker">Layer 1 · Field form · MHPSS Nepal</div>
   <h1>Referral Directory — Service Mapping</h1>
-  <p>One entry is one place where people can be sent for MHPSS services.</p>
+  <p>One entry is one place where clients can be referred for MHPSS services.</p>
 </header>
 <nav class="tabs" role="tablist">
   <button class="on" data-tab="form">Register a service point</button>
@@ -98,22 +98,14 @@ table.staff td input{width:72px}
     <div><label class="f" for="org">Implementing organisation</label>
       <select id="org" name="org" required></select>
       <input class="hidden" type="text" id="orgOther" name="orgOther" placeholder="Name of organisation"></div>
-    <div><label class="f" for="partners">Partner organisation(s) <span class="opt">— optional</span></label>
-      <input type="text" id="partners" name="partners" placeholder="e.g. delivered with a municipality or another NGO"></div>
-  </div>
-  <div class="grid2">
-    <div><label class="f" for="focalName">Focal point for this entry</label>
-      <p class="help">Internal only. Never shown on the public directory.</p>
-      <input type="text" id="focalName" name="focalName" autocomplete="off"></div>
-    <div><label class="f" for="focalEmail">Focal point email <span class="opt">— internal</span></label>
-      <p class="help">Used only to ask you to confirm this entry again.</p>
-      <input type="email" id="focalEmail" name="focalEmail" autocomplete="off"></div>
+    <div><label class="f" for="partners">Implementing partner(s) <span class="opt">— optional</span></label>
+      <input type="text" id="partners" name="partners" placeholder="e.g. a municipality or another NGO that delivers it with you"></div>
   </div>
 </div>
 
 <div class="card">
   <h2><span class="n">2</span>Where the service is</h2>
-  <p class="lead">Choose the place, then drop a pin so people and referring workers can find it.</p>
+  <p class="lead">Choose the place, then drop a pin so clients and referring workers can find it.</p>
   <div class="grid2">
     <div><label class="f" for="province">Province</label><select id="province" name="province" required></select></div>
     <div><label class="f" for="district">District</label><select id="district" name="district" required disabled></select></div>
@@ -163,16 +155,17 @@ table.staff td input{width:72px}
   <p class="help">Categories follow the Protection Cluster referral pathway used by partners in Nepal, so one directory serves both. MSP numbers are shown where the MSP covers the service.</p>
   <div class="checks two" id="crossServices"></div>
   <label class="f" style="margin-top:16px">Basic needs and recovery services also offered here <span class="opt">— optional</span></label>
-  <p class="help">People in the field ask first about housing and livelihood. Listing these here lets a worker link MHPSS with practical help in one referral.</p>
+  <p class="help">In the field, clients ask first about housing and livelihood. Listing these here lets a worker link MHPSS with practical help in one referral.</p>
   <div class="checks two" id="otherServices"></div>
   <label class="f" style="margin-top:16px">Who provides the services here</label>
   <p class="help">Which roles work at this place, using the cadre list agreed with EDCD for the 5Ws form. Numbers of staff are asked only in the MSP mapping section.</p>
   <div class="checks two" id="cadres"></div>
   
-  <label class="f">Taking new people now</label>
+  <label class="f">Accepting new clients now</label>
+  <p class="help">Update this whenever it changes. The directory shows the date it was last updated.</p>
   <div class="pill"><label><input type="radio" name="capacity" value="open" checked>Yes</label><label><input type="radio" name="capacity" value="waiting">Waiting list</label><label><input type="radio" name="capacity" value="full">Not at the moment</label></div>
   <label class="f" for="details">Details of the services <span class="opt">— optional</span></label>
-  <p class="help">e.g. the intervention used (Problem Management Plus, mhGAP-HIG), conditions treated, group sizes.</p>
+  <p class="help">e.g. conditions treated, individual or group sessions, length of a session.</p>
   <textarea id="details" name="details" maxlength="400"></textarea>
 </div>
 
@@ -193,7 +186,7 @@ table.staff td input{width:72px}
       <input type="text" id="languages" name="languages" placeholder="e.g. Nepali, Tamang"></div>
   </div>
   <label class="f" for="access">Accessibility measures <span class="opt">— one or two sentences</span></label>
-  <p class="help">e.g. ramp, ground-floor room, sign language, home visits for people who cannot travel.</p>
+  <p class="help">e.g. ramp, ground-floor room, sign language, home visits for clients who cannot travel.</p>
   <textarea id="access" name="access" maxlength="300"></textarea>
 </div>
 
@@ -211,24 +204,22 @@ table.staff td input{width:72px}
       <input type="text" id="hours" name="hours" placeholder="e.g. Sun–Fri 10:00–16:00" required></div>
   </div>
   <label class="f">How the service is delivered</label>
-  <div class="pill" id="deliveryPills">
-    <label><input type="radio" name="delivery" value="inperson">In person</label>
-    <label><input type="radio" name="delivery" value="remote">Remote (phone or online)</label>
-    <label><input type="radio" name="delivery" value="both">Both</label>
+  <p class="help">Tick all that apply.</p>
+  <div class="checks" id="delivery">
+    <label class="chk"><input type="checkbox" name="delivery" value="atplace"><span><b>In person at this place</b></span></label>
+    <label class="chk"><input type="checkbox" name="delivery" value="outreach"><span><b>In person through outreach or home visits</b></span></label>
+    <label class="chk"><input type="checkbox" name="delivery" value="remote"><span><b>Remote (phone or online)</b></span></label>
   </div>
-  <label class="f">How people get seen</label>
-  <div class="checks two" id="entry">
+  <label class="f">How clients can reach the service</label>
+  <div class="checks" id="entry">
     <label class="chk"><input type="checkbox" name="entry" value="walkin"><span><b>Walk in</b></span></label>
-    <label class="chk"><input type="checkbox" name="entry" value="referral"><span><b>Referral needed</b></span></label>
     <label class="chk"><input type="checkbox" name="entry" value="appointment"><span><b>By appointment</b></span></label>
-    <label class="chk"><input type="checkbox" name="entry" value="outreach"><span><b>Outreach / home visit</b></span></label>
+    <label class="chk"><input type="checkbox" name="entry" value="referral"><span><b>Referral from another organisation</b></span></label>
   </div>
   <div class="grid2">
-    <div><label class="f">Accepts referrals from other organisations</label>
-      <div class="pill"><label><input type="radio" name="acceptsRef" value="yes" checked>Yes</label><label><input type="radio" name="acceptsRef" value="no">No</label></div></div>
-    <div><label class="f">How referrals are sent</label>
+    <div class="hidden" id="refViaBox"><label class="f">How referrals are sent</label>
       <div class="pill"><label><input type="checkbox" name="refVia" value="phone">Phone</label><label><input type="checkbox" name="refVia" value="email">Email</label><label><input type="checkbox" name="refVia" value="inperson">In person</label><label><input type="checkbox" name="refVia" value="form">Referral form</label></div></div>
-    <div><label class="f" for="cost">Cost to the person</label>
+    <div><label class="f" for="cost">Cost to clients</label>
       <select id="cost" name="cost" required><option value="">Choose…</option><option>Free</option><option>Partly free</option><option>Fee charged</option></select></div>
   </div>
 </div>
@@ -254,7 +245,7 @@ table.staff td input{width:72px}
       <p class="help">Month and year. The entry is flagged for re-confirmation one month before.</p>
       <input type="month" id="until" name="until">
       <label class="chk" style="margin-top:8px"><input type="checkbox" id="untilUnknown" name="untilUnknown" value="yes"><span>End date not known</span></label></div>
-    <div><label class="f" for="funder">Project or funding partner <span class="opt">— optional, internal</span></label>
+    <div><label class="f" for="funder">Funding partner <span class="opt">— optional, internal</span></label>
       <input type="text" id="funder" name="funder" placeholder="e.g. UNICEF, UNFPA, SDC"></div>
   </div>
   <div><label class="f" for="from">Running since <span class="opt">— optional</span></label><input type="month" id="from" name="from" style="max-width:260px"></div>
@@ -266,7 +257,8 @@ table.staff td input{width:72px}
   <label class="chk"><input type="checkbox" id="mspOn" name="mspMapping" value="yes"><span><b>This entry is part of the MSP mapping</b><small>Opens the questions below.</small></span></label>
   <div id="mspBox" class="hidden">
     <label class="f" style="margin-top:14px">Number of staff who deliver this service</label>
-    <p class="help">Count each person once, under their main role.</p>
+    <p class="help">Count each person once, under their main role. Roles come from section 3.</p>
+    <p class="help hidden" id="staffNone" style="color:#a35a00">Tick who provides the services in section 3 first; their rows appear here.</p>
     <div style="overflow-x:auto"><table class="list staff"><thead><tr><th>Role</th><th>Full-time</th><th>Part-time</th></tr></thead><tbody id="staffRows"></tbody></table></div>
     <label class="f" style="margin-top:14px">Training the staff have had for this service</label>
     <div class="checks two" id="training"></div>
@@ -285,6 +277,7 @@ table.staff td input{width:72px}
   <div class="grid2">
     <div><label class="f" for="confName">Person confirming this entry</label><input type="text" id="confName" name="confName" required></div>
     <div><label class="f" for="confRole">Their role</label><input type="text" id="confRole" name="confRole" required></div>
+    <div><label class="f" for="focalEmail">Email for re-confirmation <span class="opt">— internal</span></label><p class="help">Used only to ask you to confirm this entry again. Never published.</p><input type="email" id="focalEmail" name="focalEmail" autocomplete="off"></div>
   </div>
   <label class="chk" style="margin-top:12px"><input type="checkbox" id="consentPublish" name="consentPublish" required><span><b>The service details may be shown on the public referral directory.</b><small>Names and emails of focal points are never published. The pin follows the choice in section 2.</small></span></label>
   <label class="chk" style="margin-top:8px"><input type="checkbox" id="consentCorrect" name="consentCorrect" required><span><b>The details are correct today, and we will confirm them again when asked.</b><small>Entries are asked to be re-confirmed every three months.</small></span></label>
@@ -324,7 +317,7 @@ table.staff td input{width:72px}
 </section>
 
 <section id="tab-gaps" class="hidden">
-  <div class="card"><h2>Gaps by palika — which key services can people be referred to?</h2>
+  <div class="card"><h2>Gaps by palika — which key services can clients be referred to?</h2>
   <p class="lead">Built from the entries saved on this device. A red cell means no registered place in that palika offers the service. The key services come from the risks field staff named in Nuwakot and Rasuwa (suicidal thoughts, child marriage and trafficking risk, families of the missing, survivors needing a crisis centre) and from the MSP activities that carry them.</p>
   <div style="overflow-x:auto"><table class="list" id="gaptable"></table></div>
   <p class="src" style="margin-top:8px">A gap here means "not registered yet", not "does not exist". It becomes reliable once every partner working in the palika has registered its service points.</p>
@@ -338,7 +331,7 @@ table.staff td input{width:72px}
   </div>
 </section>
 </main>
-<footer>MHPSS Nepal · Referral Directory — Service Mapping · preview v2, 19 Nov 2026 · Draft instrument, to be agreed with partners. English only in this preview; the Nepali version follows after review by a human translator.</footer>
+<footer>MHPSS Nepal · Referral Directory — Service Mapping · preview v2.1, 19 Nov 2026 · Draft instrument, to be agreed with partners. English only in this preview; the Nepali version follows after review by a human translator.</footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
@@ -384,12 +377,14 @@ opt($("#province"),provinces.map(p=>({v:p,t:p})),"Choose…");
 chk($("#services"),SERVICES.map(s=>({v:s.c,t:s.c+". "+s.n,d:s.d,m:s.msp!=="—"?"MSP "+s.msp:""})),"services");
 chk($("#crossServices"),CROSS.map(s=>({v:s.c,t:s.n,m:s.msp?"MSP "+s.msp:"",d:"Protection Cluster: "+s.pc})),"crossServices");
 chk($("#otherServices"),OTHER.map(o=>({v:o,t:o})),"otherServices");
-chk($("#missingRoles"),MISSING.map(o=>({v:o,t:o})),"missingRoles");
+chk($("#missingRoles"),CADRES.filter(c=>!/^Other/.test(c.n)).map(c=>({v:c.c,t:c.n})).concat([{v:"CASEMGR",t:"Case manager"},{v:"MEDLEGAL",t:"Medico-legal team"},{v:"FEMALE",t:"Female staff"}]),"missingRoles");
 chk($("#cadres"),CADRES.filter(c=>!/^Other/.test(c.n)).map(c=>({v:c.c,t:c.n})),"cadres");
 chk($("#training"),TRAINING,"training");
-$("#staffRows").innerHTML=CADRES.filter(c=>!/^Other/.test(c.n)).map(c=>`<tr><td>${c.n}</td><td><input type="number" min="0" max="99" inputmode="numeric" name="ft_${c.c}" aria-label="${c.n}, full-time"></td><td><input type="number" min="0" max="99" inputmode="numeric" name="pt_${c.c}" aria-label="${c.n}, part-time"></td></tr>`).join("");
+$("#staffRows").innerHTML=CADRES.filter(c=>!/^Other/.test(c.n)).map(c=>`<tr data-c="${c.c}"><td>${c.n}</td><td><input type="number" min="0" max="99" inputmode="numeric" name="ft_${c.c}" aria-label="${c.n}, full-time"></td><td><input type="number" min="0" max="99" inputmode="numeric" name="pt_${c.c}" aria-label="${c.n}, part-time"></td></tr>`).join("");
+function staffRows(){const t=$$("input[name=cadres]:checked").map(i=>i.value);$$("#staffRows tr").forEach(r=>r.classList.toggle("hidden",!t.includes(r.dataset.c)));$("#staffNone").classList.toggle("hidden",t.length>0)}
+staffRows();
 $("#mspOn").onchange=e=>$("#mspBox").classList.toggle("hidden",!e.target.checked);
-$("#f").addEventListener("change",e=>{if(e.target.name==="continuity")$("#projectBox").classList.toggle("hidden",e.target.value!=="project");if(e.target.name==="training")$("#manualName").classList.toggle("hidden",!$$("input[name=training]:checked").some(i=>i.value==="MANUAL"));if(e.target.id==="untilUnknown")$("#until").disabled=e.target.checked});
+$("#f").addEventListener("change",e=>{if(e.target.name==="entry")$("#refViaBox").classList.toggle("hidden",!$$("input[name=entry]:checked").some(i=>i.value==="referral"));if(e.target.name==="cadres"||e.target.id==="mspOn")staffRows();if(e.target.id==="facility"&&e.target.value==="TEL"){const r=$("input[name=delivery][value=remote]");if(r)r.checked=true}if(e.target.name==="continuity")$("#projectBox").classList.toggle("hidden",e.target.value!=="project");if(e.target.name==="training")$("#manualName").classList.toggle("hidden",!$$("input[name=training]:checked").some(i=>i.value==="MANUAL"));if(e.target.id==="untilUnknown")$("#until").disabled=e.target.checked});
 chk($("#groups"),GROUPS.filter(c=>!/^Other/.test(c.n)).map(c=>({v:c.c,t:c.n})),"groups");
 $("#org").onchange=e=>$("#orgOther").classList.toggle("hidden",e.target.value!=="OTHER");
 $("#province").onchange=e=>{const ds=GEO.districts.filter(d=>d.pr===e.target.value).sort((a,b)=>a.n.localeCompare(b.n));opt($("#district"),ds.map(d=>({v:d.c,t:d.n})),"Choose…");$("#district").disabled=!ds.length;opt($("#palika"),[],"Choose a district first");$("#palika").disabled=true;progress()};
@@ -419,7 +414,7 @@ $("#f").onsubmit=e=>{e.preventDefault();$("#errors").classList.add("hidden");$("
  const s=progress(),miss=Object.entries(s).filter(([k,v])=>!v).map(([k])=>k);
  if(miss.length){alertBox("Please complete section"+(miss.length>1?"s ":" ")+miss.join(", ")+". "+(!pin?"The pin location is still missing. ":""));return}
  const fd=new FormData($("#f")),r={};for(const[k,v]of fd.entries()){if(r[k]!==undefined){r[k]=[].concat(r[k],v)}else r[k]=v}
- ["services","otherServices","cadres","gender","age","groups","entry","refVia","training"].forEach(k=>r[k]=[].concat(r[k]||[]));
+ ["services","otherServices","cadres","gender","age","groups","entry","refVia","training","delivery"].forEach(k=>r[k]=[].concat(r[k]||[]));
  r.edcdSetting=EDCD[r.facility]||"OTH";r.integrated=(r.facility==="FAC-HF"||r.facility==="FAC-GOV")&&r.continuity==="permanent";
  if(r.mspMapping==="yes"){r.staff={};CADRES.forEach(c=>{const f=+(r["ft_"+c.c]||0),p=+(r["pt_"+c.c]||0);if(f||p)r.staff[c.c]={ft:f,pt:p}})}else{["training","missingRoles"].forEach(k=>r[k]=[]);delete r.supervision;delete r.barriers;delete r.manualName}
  Object.keys(r).filter(k=>/^(ft|pt)_/.test(k)).forEach(k=>delete r[k]);
@@ -432,7 +427,7 @@ $("#f").onsubmit=e=>{e.preventDefault();$("#errors").classList.add("hidden");$("
  const l=read(),i=l.findIndex(x=>x.id===r.id);if(i>=0)l[i]=r;else l.push(r);write(l);
  const sv=$("#saved");sv.innerHTML=(i>=0?"Updated":"Saved")+` on this device: <b>${r.placeName}</b> (${r.id}). ${l.length} entr${l.length>1?"ies":"y"} saved here. Open “Directory map” to see it.`;sv.classList.remove("hidden")};
 $("#resetBtn").onclick=()=>{$("#f").reset();$("#clearPin").click();["#district","#palika"].forEach(s=>{$(s).innerHTML="";$(s).disabled=true});$("#safeWarn").classList.add("hidden");progress()};
-$("#exportBtn").onclick=()=>{const l=read();if(!l.length){alertBox("Nothing saved yet.");return}const cols=["id","org","orgOther","placeName","facility","edcdSetting","continuity","until","untilUnknown","funder","integrated","status","mspMapping","staff","training","manualName","supervision","barriers","province","district","palika","ward","lat","lng","pinVisibility","services","crossServices","mspActivities","otherServices","cadres","missingRoles","capacity","gender","age","groups","languages","criteria","access","refPhone","refEmail","hours","entry","acceptsRef","refVia","cost","status","from","until","savedOn"];
+$("#exportBtn").onclick=()=>{const l=read();if(!l.length){alertBox("Nothing saved yet.");return}const cols=["id","org","orgOther","placeName","facility","edcdSetting","continuity","until","untilUnknown","funder","integrated","status","mspMapping","staff","training","manualName","supervision","barriers","province","district","palika","ward","lat","lng","pinVisibility","services","crossServices","mspActivities","otherServices","cadres","missingRoles","capacity","gender","age","groups","languages","criteria","access","refPhone","refEmail","hours","entry","refVia","cost","status","from","until","savedOn"];
  const esc=v=>`"${String(Array.isArray(v)?v.join("; "):(v&&typeof v==="object")?Object.entries(v).map(([k,x])=>k+" "+x.ft+"FT/"+x.pt+"PT").join("; "):v??"").replace(/"/g,'""')}"`;const csv="﻿"+cols.join(",")+"\n"+l.map(r=>cols.map(c=>esc(r[c])).join(",")).join("\n");
  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download=`referral-directory-${localDate()}.csv`;a.click()};
 // directory
@@ -448,7 +443,7 @@ function renderGaps(){const l=read().filter(r=>r.status!=="paused");const pal=c=
  const ps=Object.keys(by);if(!ps.length){$("#gaptable").innerHTML="<tr><td>Nothing saved on this device yet.</td></tr>";return}
  $("#gaptable").innerHTML="<thead><tr><th>Key service</th>"+ps.map(p=>`<th>${pal(p)}</th>`).join("")+"</tr></thead><tbody>"+KEYSVC.map(([n,f])=>"<tr><td>"+n+"</td>"+ps.map(p=>{const k=by[p].filter(r=>{r.crossServices=r.crossServices||[];r.otherServices=r.otherServices||[];return f(r)}).length;return k?`<td style="background:#e6f5ec;color:#1e7a4c;font-weight:600">${k} place${k>1?"s":""}</td>`:`<td style="background:#fdecea;color:#a3221c;font-weight:600">None registered</td>`}).join("")+"</tr>").join("")+"</tbody>"}
 // alignment table
-const ALIGN=[["Where the service is hosted","Tool 3B Location — type of facility · EDCD service settings (17 Sep 2026) · EDCD MHPSS module reporting type"],["Running now / planned / paused","Tool 4 activity information 4 (p. 63)"],["Continuity · funding confirmed until","Tool 4 donor advocacy 1, 'fully funded?' (p. 64)"],["MSP mapping: staff by role, full- and part-time","Tool 4 human resources 1–2 (p. 64) · Tool 3B Staffing"],["MSP mapping: training","Tool 4 human resources 3 (p. 64)"],["MSP mapping: supportive supervision","Tool 4 human resources 4 (p. 64)"],["MSP mapping: barriers","Tool 4 donor advocacy 2 (p. 64)"],["Delivered in person, remotely or both","5Ws service settings: in person (holding centre, community, facility) or telephone / helpline"],["Who provides the services here · age groups · groups the service focuses on","Same cadre, age and target-group codes as the 5Ws form (agreed with EDCD, 17 Sep 2026)"],["Implementing organisation · partners","Tool 3B Agency name · Tool 4 contact 1–2"],["Focal point (internal)","Tool 3B Contact, phone, email · Tool 4 contact 3–5"],["Province · district · palika · ward · place name","Tool 3B Location A/B · Tool 4 activity 2 (geographic location)"],["Type of place","Tool 3B Type of facility · Tool 4 referral 4 (facility)"],["Pin location + who may see it","Added for Nepal (19 Nov 2026); not in Tool 3B"],["MHPSS services 1–10 with MSP activity","Tool 3B pre-defined service list (codes 1–10)"],["Roles working here","Tool 3B Staffing · Tool 4 referral 5 (type of staff); counts not asked"],["Details of the services","Tool 3B Notes · Tool 4 referral 8"],["Gender · age · focus groups · criteria","Tool 4 reach 1–3 · referral 7 (selection criteria)"],["Languages · accessibility","Tool 4 referral 9 · reach 4"],["Referral number · email · person","Tool 4 referral 1–3"],["Days and hours","Tool 4 referral 6"],["Cost","Tool 4 referral 10"],["Running now / planned","Tool 4 activity 4"],["Protection and GBV services linked to MHPSS","Nepal Protection Cluster referral pathway categories (website extraction 26 Sep 2026); MSP 3.11 and 3.13"],["Basic needs and recovery services","IASC Inter-Agency Referral Guidance Note 2017, p. 6; field requests for housing and livelihood (Nov 2026)"],["Roles missing now; taking new people","Added for Nepal (19 Nov 2026) from field findings: crisis centre without counsellor, case manager or medico-legal team; specialists thinning"],["Gaps by palika","Added for Nepal (19 Nov 2026)"]];
+const ALIGN=[["Where the service is hosted","Tool 3B Location — type of facility · EDCD service settings (17 Sep 2026) · EDCD MHPSS module reporting type"],["Running now / planned / paused","Tool 4 activity information 4 (p. 63)"],["Continuity · funding confirmed until","Tool 4 donor advocacy 1, 'fully funded?' (p. 64)"],["MSP mapping: staff by role, full- and part-time","Tool 4 human resources 1–2 (p. 64) · Tool 3B Staffing"],["MSP mapping: training","Tool 4 human resources 3 (p. 64)"],["MSP mapping: supportive supervision","Tool 4 human resources 4 (p. 64)"],["MSP mapping: barriers","Tool 4 donor advocacy 2 (p. 64)"],["Who provides the services here · age groups · groups the service focuses on","Same cadre, age and target-group codes as the 5Ws form (agreed with EDCD, 17 Sep 2026)"],["Implementing organisation · partners","Tool 3B Agency name · Tool 4 contact 1–2"],["Focal point (internal)","Tool 3B Contact, phone, email · Tool 4 contact 3–5"],["Province · district · palika · ward · place name","Tool 3B Location A/B · Tool 4 activity 2 (geographic location)"],["Type of place","Tool 3B Type of facility · Tool 4 referral 4 (facility)"],["Pin location + who may see it","Added for Nepal (19 Nov 2026); not in Tool 3B"],["MHPSS services 1–10 with MSP activity","Tool 3B pre-defined service list (codes 1–10)"],["Roles working here","Tool 3B Staffing · Tool 4 referral 5 (type of staff); counts not asked"],["Details of the services","Tool 3B Notes · Tool 4 referral 8"],["Gender · age · focus groups · criteria","Tool 4 reach 1–3 · referral 7 (selection criteria)"],["Languages · accessibility","Tool 4 referral 9 · reach 4"],["Referral number · email · person","Tool 4 referral 1–3"],["Days and hours","Tool 4 referral 6"],["Cost","Tool 4 referral 10"],["Running now / planned","Tool 4 activity 4"],["Protection and GBV services linked to MHPSS","Nepal Protection Cluster referral pathway categories (website extraction 26 Sep 2026); MSP 3.11 and 3.13"],["Basic needs and recovery services","IASC Inter-Agency Referral Guidance Note 2017, p. 6; field requests for housing and livelihood (Nov 2026)"],["Roles missing now; accepting new clients","Added for Nepal (19 Nov 2026) from field findings: crisis centre without counsellor, case manager or medico-legal team; specialists thinning"],["Gaps by palika","Added for Nepal (19 Nov 2026)"]];
 $("#aligntable").innerHTML=ALIGN.map(a=>`<tr><td>${a[0]}</td><td>${a[1]}</td></tr>`).join("");
 progress();
 </script>
