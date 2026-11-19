@@ -266,6 +266,7 @@ table.staff td input{width:72px}
     <label class="f" style="margin-top:14px">Do these staff receive regular supportive supervision?</label>
     <div class="pill"><label><input type="radio" name="supervision" value="yes">Yes</label><label><input type="radio" name="supervision" value="no">No</label><label><input type="radio" name="supervision" value="unknown">Not known</label></div>
     <label class="f" style="margin-top:14px">Roles this place needs but does not have now</label>
+    <p class="help">Roles already ticked in section 3 are not listed. If more staff are needed in a role you already have, write it under barriers.</p>
     <div class="checks two" id="missingRoles"></div>
     <label class="f" for="barriers" style="margin-top:14px">Barriers that need advocacy <span class="opt">— one or two sentences</span></label>
     <textarea id="barriers" name="barriers" maxlength="300" placeholder="e.g. no female counsellor; road closed in the monsoon; funding ends in March"></textarea>
@@ -331,7 +332,7 @@ table.staff td input{width:72px}
   </div>
 </section>
 </main>
-<footer>MHPSS Nepal · Referral Directory — Service Mapping · preview v2.1, 19 Nov 2026 · Draft instrument, to be agreed with partners. English only in this preview; the Nepali version follows after review by a human translator.</footer>
+<footer>MHPSS Nepal · Referral Directory — Service Mapping · preview v2.2, 19 Nov 2026 · Draft instrument, to be agreed with partners. English only in this preview; the Nepali version follows after review by a human translator.</footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
@@ -381,7 +382,7 @@ chk($("#missingRoles"),CADRES.filter(c=>!/^Other/.test(c.n)).map(c=>({v:c.c,t:c.
 chk($("#cadres"),CADRES.filter(c=>!/^Other/.test(c.n)).map(c=>({v:c.c,t:c.n})),"cadres");
 chk($("#training"),TRAINING,"training");
 $("#staffRows").innerHTML=CADRES.filter(c=>!/^Other/.test(c.n)).map(c=>`<tr data-c="${c.c}"><td>${c.n}</td><td><input type="number" min="0" max="99" inputmode="numeric" name="ft_${c.c}" aria-label="${c.n}, full-time"></td><td><input type="number" min="0" max="99" inputmode="numeric" name="pt_${c.c}" aria-label="${c.n}, part-time"></td></tr>`).join("");
-function staffRows(){const t=$$("input[name=cadres]:checked").map(i=>i.value);$$("#staffRows tr").forEach(r=>r.classList.toggle("hidden",!t.includes(r.dataset.c)));$("#staffNone").classList.toggle("hidden",t.length>0)}
+function staffRows(){const t=$$("input[name=cadres]:checked").map(i=>i.value);$$("#missingRoles label.chk").forEach(l=>{const v=l.querySelector("input").value;const have=t.includes(v);l.classList.toggle("hidden",have);if(have)l.querySelector("input").checked=false});$$("#staffRows tr").forEach(r=>r.classList.toggle("hidden",!t.includes(r.dataset.c)));$("#staffNone").classList.toggle("hidden",t.length>0)}
 staffRows();
 $("#mspOn").onchange=e=>$("#mspBox").classList.toggle("hidden",!e.target.checked);
 $("#f").addEventListener("change",e=>{if(e.target.name==="entry")$("#refViaBox").classList.toggle("hidden",!$$("input[name=entry]:checked").some(i=>i.value==="referral"));if(e.target.name==="cadres"||e.target.id==="mspOn")staffRows();if(e.target.id==="facility"&&e.target.value==="TEL"){const r=$("input[name=delivery][value=remote]");if(r)r.checked=true}if(e.target.name==="continuity")$("#projectBox").classList.toggle("hidden",e.target.value!=="project");if(e.target.name==="training")$("#manualName").classList.toggle("hidden",!$$("input[name=training]:checked").some(i=>i.value==="MANUAL"));if(e.target.id==="untilUnknown")$("#until").disabled=e.target.checked});
