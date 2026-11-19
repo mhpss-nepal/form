@@ -207,7 +207,7 @@ details.about>summary{cursor:pointer;list-style:revert}details.about[open]>summa
 <div class="hidden" id="refViaBox"><label class="f" data-i18n="dirf.104">How referrals are sent</label>
 <div class="pill"><label><input type="checkbox" name="refVia" value="phone"><span data-i18n="dirf.105">Phone</span></label><label><input type="checkbox" name="refVia" value="email"><span data-i18n="dirf.106">Email</span></label><label><input type="checkbox" name="refVia" value="inperson"><span data-i18n="dirf.107">In person</span></label><label><input type="checkbox" name="refVia" value="form"><span data-i18n="dirf.108">Referral form</span></label></div></div>
 <div><label class="f" for="cost" data-i18n="dirf.109">Cost to clients</label>
-<select id="cost" name="cost" required=""><option value="" data-i18n="dirf.025">Choose…</option><option data-i18n="dirf.111">Free</option><option data-i18n="dirf.112">Partly free</option><option data-i18n="dirf.113">Fee charged</option></select></div>
+<select id="cost" name="cost" required=""><option value="" data-i18n="dirf.025">Choose…</option><option value="FREE" data-i18n="dirf.111">Free</option><option value="SOME" data-i18n="dirf.112">Partly free</option><option value="FEE" data-i18n="dirf.113">Fee charged</option></select></div>
 </div>
 </div>
 <div class="card">
@@ -389,10 +389,10 @@ $("#f").onsubmit=e=>{e.preventDefault();$("#errors").classList.add("hidden");$("
  if(sensitiveNow()&&r.pinVisibility==="public")r.pinVisibility="internal";
  ["crossServices","missingRoles"].forEach(k=>r[k]=[].concat(r[k]||[]));
  r.mspActivities=[...new Set(r.services.map(c=>SERVICES.find(s=>s.c===c).msp).concat(r.crossServices.map(c=>CROSS.find(s=>s.c===c).msp||"—")).filter(m=>m!=="—"))].sort();
- r.savedOn=localDate();r.schema="np-directory-0.2-preview";
+ r.savedOn=localDate();r.schema="np-directory-0.2";
  r.id="SP"+Math.abs([...(r.org+r.palika+r.placeName.toLowerCase())].reduce((h,c)=>(h*31+c.charCodeAt(0))|0,7)).toString(36).toUpperCase();
- const l=read(),i=l.findIndex(x=>x.id===r.id);if(i>=0)l[i]=r;else l.push(r);write(l);
- const sv=$("#saved");sv.innerHTML=(i>=0?T("dirf.msg.updated","Updated on this device:"):T("dirf.msg.saved","Saved on this device:"))+` <b>${r.placeName}</b> (${r.id}). ${T("dirf.msg.count","Entries saved here:")} ${l.length}. ${T("dirf.msg.export","Until the form is connected, use Export saved (CSV) to pass entries to coordination.")}`;sv.classList.remove("hidden")};
+ const l=read(),i=l.findIndex(x=>x.id===r.id);if(i>=0)l[i]=r;else l.push(r);write(l);window.FORM_SEND_AFTER_SAVE&&setTimeout(FORM_SEND_AFTER_SAVE,0);
+ const sv=$("#saved");sv.innerHTML=(i>=0?T("dirf.msg.updated","Updated on this device:"):T("dirf.msg.saved","Saved on this device:"))+` <b>${r.placeName}</b> (${r.id}). ${T("dirf.msg.count","Entries saved here:")} ${l.length}. ${T("dirf.msg.export","Signed in, the record is sent to the server; Export saved (CSV) keeps a copy for your organisation.")}`;sv.classList.remove("hidden")};
 $("#resetBtn").onclick=()=>{$("#f").reset();$("#clearPin").click();["#district","#palika"].forEach(s=>{$(s).innerHTML="";$(s).disabled=true});$("#safeWarn").classList.add("hidden");progress()};
 $("#exportBtn").onclick=()=>{const l=read();if(!l.length){alertBox(T("dirf.msg.nothing","Nothing saved yet."));return}const cols=["id","org","orgOther","placeName","facility","edcdSetting","continuity","until","untilUnknown","funder","integrated","status","mspMapping","staff","training","manualName","supervision","barriers","province","district","palika","ward","lat","lng","pinVisibility","services","crossServices","mspActivities","otherServices","cadres","missingRoles","capacity","gender","age","groups","languages","criteria","access","refPhone","refEmail","hours","entry","refVia","cost","status","from","until","savedOn"];
  const esc=v=>`"${String(Array.isArray(v)?v.join("; "):(v&&typeof v==="object")?Object.entries(v).map(([k,x])=>k+" "+x.ft+"FT/"+x.pt+"PT").join("; "):v??"").replace(/"/g,'""')}"`;const csv="﻿"+cols.join(",")+"\n"+l.map(r=>cols.map(c=>esc(r[c])).join(",")).join("\n");
@@ -417,5 +417,10 @@ progress();
 <script src="../../hub/assets/i18n-strings.js"></script>
 <script src="../../hub/assets/i18n.js"></script>
 <script src="../lib/proof-mode.js"></script>
+<script src="../../hub/assets/fb-config.js"></script>
+<script src="../../hub/review-current-v51/fb-config.js"></script>
+<script src="../../hub/review-current-v51/current-auth.js"></script>
+<script>window.FORM_SEND={form:"directory",route:"/directory/servicepoints2/intake",protocol:"directory-submit/2",needsOrg:false,read:function(){return read().filter(function(r){return r.schema==="np-directory-0.2"})},payload:function(r){return JSON.parse(JSON.stringify(r))}};</script>
+<script src="../lib/form-send.js"></script>
 </body>
 </html>
