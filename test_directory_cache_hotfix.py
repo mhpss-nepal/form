@@ -32,8 +32,11 @@ class DirectoryCacheHotfix(unittest.TestCase):
             self.assertIn('Retry', labels['d2.note'])
             self.assertNotIn('device-only', labels['d2.note'])
             for kind in ('directory', 'grief'):
-                self.assertIn('NOT SENT', labels['dir.' + kind + '.tag'])
-                self.assertIn('entries stay on this phone', labels['dir.' + kind + '.status'])
+                # Server receivers live since 19 Nov 2026: say how sending works, never "not sent yet".
+                self.assertEqual('SIGN IN TO SEND', labels['dir.' + kind + '.tag'])
+                self.assertIn('saved on this phone first', labels['dir.' + kind + '.status'])
+                self.assertIn('only when the server confirms it', labels['dir.' + kind + '.status'])
+                self.assertNotIn('Until the server connection opens', labels['dir.' + kind + '.status'])
             for kind in ('providers', 'servicepoints'):
                 self.assertIn('before anything is published', labels['dir.' + kind + '.status'])
             self.assertIn('Nothing is saved or sent', labels['dir.contacts.status'])

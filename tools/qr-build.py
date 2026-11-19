@@ -27,13 +27,12 @@ CONF = os.path.join(ROOT, "tools", "site.conf")
 TARGETS = [
     ("master",   "/form/"),
     ("5ws",      "/form/5ws-report.html"),
-    ("phq9",     "/form/phq9.html"),
-    ("self",     "/form/selfreport.html"),
     ("training", "/form/training-report.html"),
-    ("contact",  "/form/review/contact.html"),
-    ("referral", "/form/review/referral-outcome.html"),
+    ("directory", "/form/preview/referral-directory.html"),
+    ("grief",    "/form/preview/grief-early-assessment.html"),
     ("provider", "/form/provider-register.html"),
     ("servicepoint", "/form/service-point.html"),
+    ("contact",  "/form/review/contact.html"),
 ]
 
 HEADER = """/* Pre-computed QR matrices (ECC level M).

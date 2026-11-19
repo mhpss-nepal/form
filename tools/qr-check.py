@@ -36,11 +36,10 @@ ALLOWED_CARD_KEYS = {"5ws"}
 ALLOWED_QR_URLS = {
     "master": "/form/",
     "5ws": "/form/5ws-report.html",
-    "phq9": "/form/phq9.html",
-    "self": "/form/selfreport.html",
     "training": "/form/training-report.html",
+    "directory": "/form/preview/referral-directory.html",
+    "grief": "/form/preview/grief-early-assessment.html",
     "contact": "/form/review/contact.html",
-    "referral": "/form/review/referral-outcome.html",
     "provider": "/form/provider-register.html",
     "servicepoint": "/form/service-point.html",
 }

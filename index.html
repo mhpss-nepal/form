@@ -96,6 +96,7 @@
       <div class="ml-actions">
         <a href="preview/referral-directory.html" data-i18n="dir.open"></a>
         <button class="sec" data-url="preview/referral-directory.html" onclick="COPY(this)" data-i18n="dir.copy"></button>
+        <button class="sec" data-qr="directory" onclick="QRT(this)" data-i18n="dir.qr"></button>
       </div>
       <div class="qrbox" hidden></div>
     </div>
@@ -106,6 +107,7 @@
       <div class="ml-actions">
         <a href="preview/grief-early-assessment.html" data-i18n="dir.open"></a>
         <button class="sec" data-url="preview/grief-early-assessment.html" onclick="COPY(this)" data-i18n="dir.copy"></button>
+        <button class="sec" data-qr="grief" onclick="QRT(this)" data-i18n="dir.qr"></button>
       </div>
       <div class="qrbox" hidden></div>
     </div>
@@ -259,12 +261,12 @@ var labels={
 "dir.training.tag": "TRAINING",
 "dir.training.title": "Training & orientation report",
 "dir.training.status": "For a training or orientation session you ran. Sign-in is needed to send.",
-"dir.directory.tag": "ON THIS PHONE · NOT SENT YET",
+"dir.directory.tag": "SIGN IN TO SEND",
 "dir.directory.title": "Referral directory",
-"dir.directory.status": "Where each service is, who runs it and how to refer, with a map pin. Until the server connection opens, entries stay on this phone; send them with Export (CSV).",
-"dir.grief.tag": "ON THIS PHONE · NOT SENT YET",
+"dir.directory.status": "Where each service is, who runs it and how to refer, with a map pin. Each entry is saved on this phone first; after sign-in it is sent to the server and counts as sent only when the server confirms it.",
+"dir.grief.tag": "SIGN IN TO SEND",
 "dir.grief.title": "Grief early assessment",
-"dir.grief.status": "A short guided conversation with an adult after a death in the family: the loss, ceremonies, reactions and needs. The person chooses to give a name or stay anonymous with a code. Until the server connection opens, entries stay on this phone; send them with Export (CSV).",
+"dir.grief.status": "A short guided conversation with an adult after a death in the family: the loss, ceremonies, reactions and needs. The person chooses to give a name or stay anonymous with a code. Each conversation is saved on this phone first; after sign-in it is sent to the server and counts as sent only when the server confirms it. Your coordinator then checks it.",
 "d2.more": "More forms for the coordination team",
 "d2.more.sub": "Registrations and a referral practice preview. Use these only when the coordination team asks you to.",
 "dir.providers.tag": "REGISTRATION",

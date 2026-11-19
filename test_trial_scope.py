@@ -206,7 +206,7 @@ class TrialScopeContractTest(unittest.TestCase):
         self.assertIsNotNone(targets)
         paths = re.findall(r'\("([a-z0-9]+)"\s*,\s*"(/form/[^\"]*)"\)', targets.group(1))
         self.assertEqual([p for _, p in paths], ['/form/'] + ['/form/' + p for p in [DESTINATIONS[0], DESTINATIONS[1], DESTINATIONS[2], DESTINATIONS[3], *DESTINATIONS[4:]]])
-        self.assertEqual(len(paths), 9)
+        self.assertEqual(len(paths), len(DESTINATIONS) + 1)  # the door plus each of its forms (QC 19 Nov 2026)
         self.assertIn('ALLOWED_CARD_KEYS = {"5ws"}', (ROOT / 'tools/qr-check.py').read_text())
 
     def test_qr_checker_rejects_any_extra_asset_entry(self) -> None:

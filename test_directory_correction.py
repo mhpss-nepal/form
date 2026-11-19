@@ -27,7 +27,7 @@ class DirectoryCorrection(unittest.TestCase):
         s=(ROOT/'index.html').read_text()
         self.assertEqual(re.findall(r'<a href="([^"]+)" data-i18n="dir.open"',s),DESTINATIONS)
         self.assertEqual(re.findall(r'data-url="([^"]+)" onclick="COPY',s),DESTINATIONS)
-        self.assertEqual(s.count('onclick="QRT(this)"'),5)
+        self.assertEqual(s.count('onclick="QRT(this)"'),len(DESTINATIONS))  # every form on the door has a QR (QC 19 Nov 2026)
         self.assertNotIn('phq9.html',s);self.assertNotIn('selfreport.html',s)
         self.assertNotIn('fb.js',s)
         self.assertNotIn('house=',s)
@@ -56,7 +56,7 @@ class DirectoryCorrection(unittest.TestCase):
     def test_qr_scope_equals_open_routes(self):
         spec=importlib.util.spec_from_file_location('qr',ROOT/'tools/qr-check.py'); assert spec and spec.loader
         mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod)
-        self.assertEqual(set(mod.ALLOWED_QR_URLS.values()),{'/form/','/form/review/referral-outcome.html'}|{'/form/'+f for f in SOURCES})
+        self.assertEqual(set(mod.ALLOWED_QR_URLS.values()),{'/form/'}|{'/form/'+f for f in DESTINATIONS})  # QR scope = the door (QC 19 Nov 2026)
     def test_alternate_directory_is_redirect_only(self):
         s=(ROOT/'all-forms.html').read_text();self.assertIn("location.replace('./'+location.search+location.hash)",s)
         self.assertNotIn('preview.html',s)
