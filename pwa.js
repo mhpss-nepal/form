@@ -80,6 +80,15 @@
          fix was live and verified at the origin, and the browser went on
          serving the previous version until the worker was updated by hand.
          A field worker will not do that by hand, so it is done here. */
+      /* QC 20 Nov 2026: the first visit after a release could show the previous wording (cached
+         scripts with fresh pages). When the new worker takes over and nothing has been typed yet,
+         reload once so the page and its scripts are the same version. */
+      var hadWorker = !!navigator.serviceWorker.controller, typed = false, reloaded = false;
+      document.addEventListener("input", function () { typed = true; }, true);
+      navigator.serviceWorker.addEventListener("controllerchange", function () {
+        if (!hadWorker || reloaded || typed) return;
+        reloaded = true; location.reload();
+      });
       navigator.serviceWorker.register("sw.js", { scope: "./", updateViaCache: "none" }).then(function (reg) {
         /* and ask, every load, whether a newer one exists. sw.js calls
            skipWaiting() and clients.claim(), so a new version takes over on

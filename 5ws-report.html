@@ -511,12 +511,9 @@ table.mx td.t { font-weight: 700; }
 
 <div class="wrap">
   <main id="main">
-  <div class="iu-preview-notice" id="iuPreviewNotice" role="note">
-    <span><b>Institutional Utility design preview.</b> Use demonstration or non-identifiable data only. New interface-only copy remains in English pending human-reviewed Nepali wording.</span>
-  </div>
   <div class="iu-sync" id="iuSyncStatus" role="status" aria-live="polite" aria-atomic="true" data-state="waiting">
-    <b>Device-only 5Ws · automatic delivery unavailable</b>
-    <span>5Ws 0.10 is saved on this device only. Automatic delivery is unavailable. Export JSON/CSV before clearing storage or replacing this device.</span>
+    <b>Saved on this phone first</b>
+    <span>Signed in and with signal, Save sends the report. It counts as sent only when the server confirms it; until then it stays on this phone.</span>
   </div>
   <nav class="steps" id="steps" aria-label="Steps">
     <a href="#s1" data-step="s1"><i>1</i><span data-i18n="f4.step1">Who</span></a>
@@ -532,7 +529,7 @@ table.mx td.t { font-weight: 700; }
 
   <div class="banner stop" data-i18n="f4.stop" data-i18n-html><b>This form records services, not people.</b> Never enter a beneficiary's name, phone number, date of birth, identity number, diagnosis, assessment score, or any detail that could identify an individual. There is no field for it, and none is to be added. If someone needs individual follow-up, refer them — do not record them here.</div>
 
-  <div class="banner" data-iu-operational-copy="offline"><b>Offline entry is available.</b> Device records are retained first. Explicit Save sends only the current event with your existing verified account; Retry sends immutable pending revisions. Received means a matching durable server receipt. Old records are never automatically uploaded. Export JSON/CSV and retain the files before clearing storage or replacing this device. <span id="storeWarn"></span><span class="iu-language-note">English operational wording pending human-reviewed Nepali translation.</span></div>
+  <div class="banner" data-iu-operational-copy="offline"><b>No signal?</b> You can still fill in and save. When the phone has signal again, open this form and press <b>Retry pending</b>. Export a copy before clearing the browser or changing phones.</div>
 
   <div class="banner"><p id="activityStatus" role="status">Restoring persistent sign-in. Device records remain retained.</p><button type="button" id="activityRetry">Retry pending</button> <button type="button" id="activityNew">New distinct event</button> <button type="button" id="activityRestore">Restore my draft</button> <button type="button" id="activityHistory">My received 0.10 / correct</button> <a href="../hub/?view=entries">My Dashboard</a> · <a href="../hub/?view=dashboard&amp;house=5ws">Processed 5Ws</a><div id="activityReceived"></div></div>
   <form id="f" autocomplete="off" novalidate>
@@ -1799,8 +1796,10 @@ table.mx td.t { font-weight: 700; }
     if (!storageWorks()) {
       show("memory", t.memoryTitle, t.memoryBody); return;
     }
-    show("local-only", "Device-only 5Ws · automatic delivery unavailable",
-      "Reports stay on this device. Export JSON/CSV before clearing storage or replacing this device. Reconnection does not deliver them to the Hub.");
+    /* QC 20 Nov 2026: the old text said reports never reach the server, which was not true once
+       signed in (activity-form.js sends to /activity/intake and shows the receipt). */
+    show("local-only", "Saved on this phone first",
+      "Signed in and with signal, Save sends the report. It counts as sent only when the server confirms it; until then it stays on this phone.");
   }
   function repaint() {
     paint(null);
