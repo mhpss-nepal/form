@@ -68,7 +68,7 @@ table.list td{border-bottom:1px solid var(--line);padding:8px;vertical-align:top
 #dirmap{height:420px;border-radius:12px;border:1px solid var(--line)}
 .src{font-size:12.5px;color:var(--muted)}
 footer{max-width:1180px;margin:0 auto;padding:8px 16px 40px;color:var(--muted);font-size:12.5px}
-</style>
+details.about>summary{cursor:pointer;list-style:revert}details.about[open]>summary{margin-bottom:10px}.codebox{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin:12px 0;padding:10px 12px;border:1px dashed #8a9bb0;border-radius:8px;background:#f7f9fb}.codebox>span{font-size:12.5px;font-weight:700;color:#52647a;text-transform:uppercase;letter-spacing:.05em}.codebox b{font:700 18px ui-monospace,Menlo,monospace;color:#1d3557;letter-spacing:.04em}.codebox small{flex-basis:100%;color:#52647a}.tag{display:inline-block;font:700 10.5px/1 system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;border-radius:4px;padding:4px 6px;margin-right:6px;vertical-align:2px}.tag.ask{background:#1f6fb2;color:#fff}.tag.view{background:#e6ebf1;color:#33475b}</style>
 <style>
 header{background:linear-gradient(135deg,#3b2f5c,#5b4a8b)}
 .card h2 .n{background:#eee9f7;color:#5b4a8b}
@@ -101,11 +101,7 @@ header{background:linear-gradient(135deg,#3b2f5c,#5b4a8b)}
   <h1>Grief Early Assessment</h1>
   <p>A short conversation added to a contact you already have. It maps losses, mourning and needs. It does not diagnose anyone.</p>
 </header>
-<nav class="tabs" role="tablist">
-  <button class="on" data-tab="form">Record a conversation</button>
-  <button data-tab="map">Mapping by palika (saved here)</button>
-  <button data-tab="about">Why these questions</button>
-</nav>
+
 <main>
 <section id="tab-form">
 <div class="layout">
@@ -114,7 +110,7 @@ header{background:linear-gradient(135deg,#3b2f5c,#5b4a8b)}
 <div class="card">
   <h2><span class="n">1</span>Before you start</h2>
   <p class="lead">Use this only for adults (18 and over) during a visit or session you are already doing. For a child who lost a parent or carer, follow your child protection pathway instead.</p>
-  <div class="script"><span class="draft">Draft wording for review</span><br>"Many families here lost someone or something important in the flood. I would like to ask a few questions about how you and your family are managing, so that we can plan support in this area. It takes about ten minutes. Your name is not written down. You can stop or skip any question at any time, and saying no will not change any help you receive."</div>
+  <div class="script"><span class="draft">Draft wording for review</span><br>"Many families here lost someone or something important in the flood. I would like to ask a few questions about how you and your family are managing, so that we can plan support in this area. It takes about ten minutes. You can choose whether we write down your name and phone number so that we can contact you again, or keep only a code without your name. You can stop or skip any question at any time, and saying no will not change any help you receive."</div>
   <label class="f">Does the person agree to continue?</label>
   <div class="pill"><label><input type="radio" name="consent" value="yes">Yes</label><label><input type="radio" name="consent" value="no">No — stop here</label><label><input type="radio" name="consent" value="later">Not now — come back later</label></div>
   <div class="banner info hidden" id="declined">Thank you. Only the palika and the date are saved, so that coordination knows how many people were approached. Nothing else is asked.</div>
@@ -124,7 +120,7 @@ header{background:linear-gradient(135deg,#3b2f5c,#5b4a8b)}
     <div><label class="f" for="district">District</label><select id="district" name="district" required></select></div>
     <div><label class="f" for="palika">Palika</label><select id="palika" name="palika" required disabled></select></div>
     <div><label class="f" for="ward">Ward</label><input type="number" id="ward" name="ward" min="1" max="35" inputmode="numeric"></div>
-    <div><label class="f" for="setting">This conversation happened during</label>
+    <div><label class="f" for="setting">Where are you talking with the person?</label>
       <select id="setting" name="setting" required><option value="">Choose…</option><option>Home visit</option><option>Psychosocial group session</option><option>Individual counselling session</option><option>Health facility contact</option><option>Holding centre or shelter</option><option>Other</option></select></div>
     <div><label class="f" for="worker">Your role</label><select id="worker" name="worker" required></select></div>
   </div>
@@ -132,52 +128,58 @@ header{background:linear-gradient(135deg,#3b2f5c,#5b4a8b)}
 
 <div id="rest">
 <div class="card">
-  <h2><span class="n">2</span>About the person</h2>
-  <p class="lead">No name, phone number or contact code is recorded on this form.</p>
-  <div class="grid2">
+  <h2><span class="n">2</span>Basic information</h2>
+  <p class="lead">Name and phone number are written only if the person chooses it. They stay with your organisation and are never sent to coordination or shown on the dashboard.</p>
+  <label class="f"><span class="tag ask">Ask</span> &ldquo;We may want to check on you again later. Would you like us to write down your name and phone number so that we can contact you? Or we can keep only a code, without your name.&rdquo;</label>
+  <div class="pill"><label><input type="radio" name="reg" value="byname">By name &mdash; can be contacted again</label><label><input type="radio" name="reg" value="anon">Anonymous &mdash; code only</label></div>
+  <div class="codebox hidden" id="codeBox"><span>Conversation code</span><b id="codeOut">&mdash;</b><small id="codeNote">Made automatically by the form &mdash; nothing to fill in.</small></div>
+  <div id="nameBox" class="hidden"><div class="grid2"><div><label class="f" for="pName">Name the person wants to be called</label><input type="text" id="pName" autocomplete="off"></div><div><label class="f" for="pPhone">Phone number</label><input type="tel" id="pPhone" inputmode="tel" autocomplete="off"></div><div><label class="f">Best way to reach the person</label><div class="pill"><label><input type="radio" name="pReach" value="call">Phone call</label><label><input type="radio" name="pReach" value="visit">Home visit</label><label><input type="radio" name="pReach" value="trusted">Through someone they trust</label></div></div><div><label class="f" for="pTime">Best time to reach <span class="opt">— optional</span></label><input type="text" id="pTime" autocomplete="off" placeholder="e.g. evenings"></div></div></div>
+  <div id="anonBox" class="hidden"><label class="f" for="pInit">Initials <span class="opt">— optional</span></label><input type="text" id="pInit" maxlength="4" autocomplete="off" style="max-width:160px;text-transform:uppercase"><p class="src" style="margin:4px 0 0">Leave blank where initials could identify the person, for example in a small village.</p></div>
+  <div class="grid2" style="margin-top:12px">
     <div><label class="f">Sex</label><div class="pill"><label><input type="radio" name="sex" value="F">Female</label><label><input type="radio" name="sex" value="M">Male</label><label><input type="radio" name="sex" value="O">Other / not said</label></div></div>
-    <div><label class="f">Age group</label><div class="pill"><label><input type="radio" name="age" value="18-59">18–59</label><label><input type="radio" name="age" value="60+">60+</label></div></div>
-    <div><label class="f">Living now</label><div class="pill"><label><input type="radio" name="living" value="home">At own home</label><label><input type="radio" name="living" value="displaced">Displaced (relatives, shelter, rented)</label></div></div>
-    <div><label class="f">Person with a disability <span class="opt">— as the person says</span></label><div class="pill"><label><input type="radio" name="disability" value="yes">Yes</label><label><input type="radio" name="disability" value="no">No</label><label><input type="radio" name="disability" value="ns">Not said</label></div></div>
+    <div><label class="f">Age group <span class="opt">— same groups as the 5Ws form</span></label><div class="pill"><label><input type="radio" name="age" value="0-4">0–4</label><label><input type="radio" name="age" value="5-9">5–9</label><label><input type="radio" name="age" value="10-17">10–17</label><label><input type="radio" name="age" value="18-59">18–59</label><label><input type="radio" name="age" value="60+">60+</label></div><div class="banner warn hidden" id="ageWarn">This form is for adults (18 and over). For a child or adolescent, stop here and follow your child protection pathway.</div></div>
+    <div><label class="f">Where is the person living now?</label><div class="pill"><label><input type="radio" name="living" value="home">At their own home</label><label><input type="radio" name="living" value="displaced">Away from home (with relatives, in a shelter or renting)</label></div></div>
+    <div><label class="f">Does the person have a disability? <span class="opt">— record what the person says</span></label><div class="pill"><label><input type="radio" name="disability" value="yes">Yes</label><label><input type="radio" name="disability" value="no">No</label><label><input type="radio" name="disability" value="ns">Not said</label></div></div>
   </div>
 </div>
 
 <div class="card">
   <h2><span class="n">3</span>What was lost</h2>
-  <label class="f">Who died or is still missing <span class="opt">— tick all</span></label>
+  <label class="f"><span class="tag ask">Ask</span> &ldquo;Did anyone in your family die or go missing in the flood? Who?&rdquo; <span class="opt">— tick all that apply</span></label>
   <div class="checks two" id="who"></div>
   <div class="grid2">
-    <div><label class="f" for="nDied">Family members who died</label><input type="number" id="nDied" name="nDied" min="0" max="30" inputmode="numeric" value="0"></div>
-    <div><label class="f" for="nMissing">Family members still missing</label><input type="number" id="nMissing" name="nMissing" min="0" max="30" inputmode="numeric" value="0"></div>
+    <div><label class="f" for="nDied">Number of family members who died</label><input type="number" id="nDied" name="nDied" min="0" max="30" inputmode="numeric" value="0"></div>
+    <div><label class="f" for="nMissing">Number of family members still missing</label><input type="number" id="nMissing" name="nMissing" min="0" max="30" inputmode="numeric" value="0"></div>
   </div>
-  <label class="f">Other losses <span class="opt">— tick all</span></label>
+  <label class="f"><span class="tag ask">Ask</span> &ldquo;What else did your family lose in the flood?&rdquo; <span class="opt">— tick all that apply</span></label>
   <div class="checks two" id="otherLoss"></div>
 </div>
 
 <div class="card">
-  <h2><span class="n">4</span>Mourning and rites</h2>
-  <label class="f">Have the rites for the person who died or is missing taken place?</label>
+  <h2><span class="n">4</span>Funeral and mourning ceremonies</h2>
+  <label class="f"><span class="tag ask">Ask</span> &ldquo;Has the family been able to hold the funeral or mourning ceremonies?&rdquo;</label>
   <div class="checks two" id="rites"></div>
-  <div id="obstacleBox" class="hidden"><label class="f">What is in the way? <span class="opt">— tick all</span></label><div class="checks two" id="obstacles"></div></div>
-  <label class="f">Would help with rites or a memorial be welcome?</label>
+  <div id="obstacleBox" class="hidden"><label class="f"><span class="tag ask">Ask</span> &ldquo;What is stopping the family from holding them?&rdquo; <span class="opt">— tick all that apply</span></label><div class="checks two" id="obstacles"></div></div>
+  <label class="f"><span class="tag ask">Ask</span> &ldquo;Would the family like help to hold the ceremonies or a memorial?&rdquo;</label>
   <div class="pill"><label><input type="radio" name="ritesHelp" value="yes">Yes</label><label><input type="radio" name="ritesHelp" value="no">No</label><label><input type="radio" name="ritesHelp" value="notnow">Not now</label></div>
 </div>
 
 <div class="card">
   <h2><span class="n">5</span>How the person has been in the past month</h2>
-  <p class="lead">These are common reactions to loss. Ask in your own words. Answers are not added up and there is no score.</p>
+  <p class="lead">These are common reactions to loss. Answers are not added up and there is no score.</p>
+  <p class="lead"><span class="tag ask">Ask</span> &ldquo;In the past month, how often have you had&hellip; [read each one] &mdash; not at all, on some days, or on most days?&rdquo; You may use your own words.</p>
   <div class="rx" id="rx"></div>
-  <label class="f" style="margin-top:14px">Daily activities (work, household, caring for others)</label>
-  <div class="pill"><label><input type="radio" name="functioning" value="usual">As usual</label><label><input type="radio" name="functioning" value="difficulty">With difficulty</label><label><input type="radio" name="functioning" value="unable">Mostly unable</label></div>
-  <label class="f">Is this more than people here would expect after such a loss?</label>
+  <label class="f" style="margin-top:14px"><span class="tag ask">Ask</span> &ldquo;In the past month, have you been able to do your daily work &mdash; at home, in your job, caring for others?&rdquo;</label>
+  <div class="pill"><label><input type="radio" name="functioning" value="usual">As usual</label><label><input type="radio" name="functioning" value="difficulty">Yes, but with difficulty</label><label><input type="radio" name="functioning" value="unable">Mostly not able</label></div>
+  <label class="f"><span class="tag view">Your view</span> Are these reactions stronger than people here would expect after such a loss?</label>
   <div class="pill"><label><input type="radio" name="beyondExpected" value="yes">Yes</label><label><input type="radio" name="beyondExpected" value="no">No</label><label><input type="radio" name="beyondExpected" value="unsure">Not sure</label></div>
 </div>
 
 <div class="card">
   <h2><span class="n">6</span>Support and what would help</h2>
-  <label class="f">Who is supporting the person now <span class="opt">— tick all</span></label>
+  <label class="f"><span class="tag ask">Ask</span> &ldquo;Who is helping you now?&rdquo; <span class="opt">— tick all that apply</span></label>
   <div class="checks two" id="support"></div>
-  <label class="f">What would help most <span class="opt">— tick up to three</span></label>
+  <label class="f"><span class="tag ask">Ask</span> &ldquo;What would help you most now?&rdquo; <span class="opt">— tick up to three</span></label>
   <div class="checks two" id="needs"></div>
 </div>
 
@@ -188,14 +190,14 @@ header{background:linear-gradient(135deg,#3b2f5c,#5b4a8b)}
   <div class="urgent hidden" id="urgent"><h3>Act today — do not leave this to the form</h3>
     <ul style="margin:0;padding-left:18px"><li>Stay with the person or make sure someone they trust is with them.</li><li>Call your supervisor now and arrange a same-day assessment by a trained provider.</li><li>If there is an immediate plan or means, follow your organisation's emergency protocol.</li></ul>
     <p class="src" style="margin-top:6px">Follows mhGAP-HIG module SUI (self-harm/suicide). Organisation-specific numbers to be added after review.</p></div>
-  <label class="f">Children in this household who lost a parent or main carer?</label>
+  <label class="f"><span class="tag ask">Ask</span> &ldquo;Are there children in your household who lost their mother, father or main carer?&rdquo;</label>
   <div class="pill"><label><input type="radio" name="childLostCarer" value="no">No</label><label><input type="radio" name="childLostCarer" value="yes">Yes</label></div>
   <div class="banner warn hidden" id="cpWarn">Make sure the children have consistent care and connect the family to a child protection actor (mhGAP-HIG, grief module, p. 20).</div>
-  <label class="f">Your view of the reactions <span class="opt">— not a diagnosis</span></label>
+  <label class="f"><span class="tag view">Your view</span> How do the reactions look to you? <span class="opt">— not a diagnosis</span></label>
   <div class="checks two" id="triage"></div>
-  <label class="f">What you did</label>
+  <label class="f"><span class="tag view">Note</span> What you did</label>
   <div class="checks two" id="action"></div>
-  <div id="refBox" class="hidden"><label class="f">Referred to</label><div class="checks two" id="refTo"></div>
+  <div id="refBox" class="hidden"><label class="f">Where did you refer the person?</label><div class="checks two" id="refTo"></div>
     <label class="f">Did the person accept the referral?</label><div class="pill"><label><input type="radio" name="refAccepted" value="yes">Yes</label><label><input type="radio" name="refAccepted" value="no">No</label></div></div>
 </div>
 </div>
@@ -215,9 +217,9 @@ header{background:linear-gradient(135deg,#3b2f5c,#5b4a8b)}
   <h2 style="font-size:16px">Progress</h2>
   <ul class="steps" id="steps">
     <li data-s="1"><span class="dot"></span>Agreement and place</li>
-    <li data-s="2"><span class="dot"></span>About the person</li>
+    <li data-s="2"><span class="dot"></span>Basic information</li>
     <li data-s="3"><span class="dot"></span>What was lost</li>
-    <li data-s="4"><span class="dot"></span>Mourning and rites</li>
+    <li data-s="4"><span class="dot"></span>Funeral and mourning</li>
     <li data-s="5"><span class="dot"></span>Past month</li>
     <li data-s="6"><span class="dot"></span>Support</li>
     <li data-s="7"><span class="dot"></span>Safety and next step</li>
@@ -227,21 +229,13 @@ header{background:linear-gradient(135deg,#3b2f5c,#5b4a8b)}
 </div>
 </section>
 
-<section id="tab-map" class="hidden">
-  <div class="card"><h2>Grief mapping by palika — conversations saved on this device</h2>
-  <p class="lead">This is the view coordination would use to plan rites support, groups and referral capacity. It counts people, never shows a single person, and in the live version hides any palika with fewer than five conversations.</p>
-  <div class="kpis" id="kpis"></div>
-  <div style="overflow-x:auto"><table class="list" id="maptable"></table></div>
-  <h2 style="margin-top:18px;font-size:16px">Reactions reported on most days (all palikas)</h2>
-  <div id="rxbars"></div>
-  </div>
-</section>
 
-<section id="tab-about" class="hidden">
-  <div class="card"><h2>Why these questions</h2>
+
+<section id="tab-about">
+  <details class="card about"><summary><h2 style="display:inline">About this form &mdash; why these questions</h2></summary>
   <div style="overflow-x:auto"><table class="list"><thead><tr><th>Section</th><th>Source</th></tr></thead><tbody id="srcTable"></tbody></table></div>
-  <p class="src" style="margin-top:10px">Owner decision of 19 Nov 2026: a loss profile and reactions without score or cut-off, daily functioning, help wanted, and a danger screen leading to same-day referral. No screening scale is used before 26 February 2027 (programme design decisions 11 and 13, 6 Oct 2026). Field request of 17 Nov 2026 for a quick baseline through CMC-Nepal field staff.</p>
-  </div>
+  <p class="src" style="margin-top:10px">Owner decision of 19 Nov 2026: a loss profile and reactions without score or cut-off, daily functioning, help wanted, and a danger screen leading to same-day referral. No screening scale is used before 26 February 2027 (programme design decisions 11 and 13, 6 Oct 2026). Field request of 17 Nov 2026 for a quick baseline through CMC-Nepal field staff. Owner request of 19 Nov 2026: the person chooses to be registered by name (so that the organisation can contact them for follow-up) or anonymously with a conversation code; names and phone numbers stay with the organisation.</p>
+  </details>
 </section>
 </main>
 <footer>MHPSS Nepal · Grief Early Assessment · preview 19 Nov 2026 · Draft instrument for CMC-Nepal. English only in this preview; the Nepali version must be translated and checked by a human translator before field use.</footer>
@@ -254,9 +248,9 @@ const LBL={};const ck=(box,items,name,type="checkbox")=>{items.forEach(i=>{if(Ar
 const opt=(sel,items,ph)=>{$(sel).innerHTML=`<option value="">${ph}</option>`+items.map(i=>`<option value="${i[0]}">${i[1]}</option>`).join("")};
 ck("#who",[["spouse","Husband / wife / partner"],["child","Son / daughter"],["parent","Mother / father"],["sibling","Brother / sister"],["relative","Other relative"],["friend","Friend / neighbour"],["none","No one died or is missing"]],"who");
 ck("#otherLoss",[["house","House"],["land","Land"],["livestock","Livestock"],["livelihood","Work or income"],["community","Community place (temple, monastery, school)"],["documents","Documents"]],"otherLoss");
-ck("#rites",[["completed","Completed"],["adapted","Done in another way","e.g. with an effigy or substitute because no body was found"],["waiting","Waiting","e.g. waiting for the body or for news"],["blocked","Blocked"],["na","Not relevant — no one died or is missing"]],"rites","radio");
-ck("#obstacles",[["nobody","No body found"],["cost","Cost"],["priest","Priest, lama or elder not available"],["place","Place destroyed or unsafe"],["displaced","Family displaced"],["timing","Customary time has passed"],["other","Other"]],"obstacles");
-const RX=[["sad","Sadness"],["yearn","Yearning or longing for the person who died"],["intrusive","Memories or pictures of what happened that come back unwanted"],["sleep","Sleep problems"],["appetite","Little appetite or energy"],["concentr","Difficulty concentrating"],["withdraw","Keeping away from other people"],["body","Body pains or complaints without a clear cause"],["voice","Hearing or seeing the person who died","Common in many cultures; ask gently"],["anger","Anger"],["compare","Keeps comparing life before and after the flood","Reported by field staff, 17 Nov 2026"]];
+ck("#rites",[["completed","Yes, done"],["adapted","Yes, done in another way","e.g. with an effigy or substitute because no body was found"],["waiting","Not yet — waiting","for the body or for news"],["blocked","Not yet — something is stopping it"],["na","Does not apply — no one died or is missing"]],"rites","radio");
+ck("#obstacles",[["nobody","The body has not been found"],["cost","Cannot afford the costs"],["priest","No priest, lama or elder to lead them"],["place","The place for the ceremony is destroyed or unsafe"],["displaced","The family has had to move away"],["timing","The usual time for the ceremony has passed"],["other","Other"]],"obstacles");
+const RX=[["sad","Feeling sad"],["yearn","Missing or longing for the person who died"],["intrusive","Pictures or memories of the flood coming back when you do not want them"],["sleep","Trouble sleeping"],["appetite","Not wanting to eat, or having no energy"],["concentr","Finding it hard to concentrate"],["withdraw","Keeping away from other people"],["body","Pains or other body complaints with no clear cause"],["voice","Hearing or seeing the person who died","Common in many cultures; ask gently"],["anger","Feeling angry"],["compare","Comparing life before and after the flood again and again","Reported by field staff, 17 Nov 2026"]];
 $("#rx").innerHTML=RX.map(([k,t,d])=>`<div class="row"><span><b>${t}</b>${d?`<small>${d}</small>`:""}</span><div class="seg">${[["0","Not at all"],["1","Some days"],["2","Most days"]].map(([v,l])=>`<label><input type="radio" name="rx_${k}" value="${v}">${l}</label>`).join("")}</div></div>`).join("");
 ck("#support",[["family","Family"],["neighbours","Neighbours or friends"],["religious","Priest, lama or religious leader"],["group","A group or community activity"],["org","An organisation"],["nobody","No one"]],"support");
 ck("#needs",[["rites","Help with rites or a memorial"],["news","News about a missing relative"],["talk","Someone to talk to"],["group","Meeting others who lost family"],["livelihood","Help with income or housing"],["health","Health care for body complaints"],["documents","Help with documents"],["safety","Protection or safety"]],"needs");
@@ -272,14 +266,16 @@ const localDate=()=>{const d=new Date(),z=n=>String(n).padStart(2,"0");return`${
 $("#date").value=localDate();
 const radio=n=>($(`input[name=${n}]:checked`)||{}).value||"";
 const multi=n=>$$(`input[name=${n}]:checked`).map(i=>i.value);
-function sync(){const c=radio("consent");$("#rest").classList.toggle("hidden",c!=="yes");$("#declined").classList.toggle("hidden",!(c==="no"||c==="later"));
+function devTag(){const A="ABCDEFGHJKMNPQRSTUVWXYZ23456789",mk=()=>Array.from({length:3},()=>A[Math.floor(Math.random()*A.length)]).join("");try{let t=localStorage.getItem("mhpss-np-device-tag");if(!t){t=mk();localStorage.setItem("mhpss-np-device-tag",t)}return t}catch(e){return window.__tag||(window.__tag=mk())}}
+function code(){const o=$("#org").value,d=$("#district").value,t=($("#date").value||"").replace(/-/g,"").slice(2);if(!o||!d||!t)return"";const pre=`${o}-${d}-${t}-${devTag()}-`;const n=read().filter(r=>(r.code||"").startsWith(pre)).length+1;return pre+String(n).padStart(2,"0")}
+function sync(){const c=radio("consent");$("#ageWarn").classList.toggle("hidden",!["0-4","5-9","10-17"].includes(radio("age")));const rg=radio("reg");$("#nameBox").classList.toggle("hidden",rg!=="byname");$("#anonBox").classList.toggle("hidden",rg!=="anon");$("#codeBox").classList.toggle("hidden",!rg);$("#codeOut").textContent=code()||"— choose organisation, district and date";$("#codeNote").innerHTML=rg==="anon"?"Made automatically &mdash; nothing to fill in. Write it on a small card for the person; if they come back or call, ask for the code.":"Made automatically &mdash; nothing to fill in. Kept with this record; use it when you follow up.";$("#rest").classList.toggle("hidden",c!=="yes");$("#declined").classList.toggle("hidden",!(c==="no"||c==="later"));
  const r=radio("rites");$("#obstacleBox").classList.toggle("hidden",r!=="blocked"&&r!=="waiting");
  $("#urgent").classList.toggle("hidden",radio("selfharm")!=="yes");$("#cpWarn").classList.toggle("hidden",radio("childLostCarer")!=="yes");
  const a=multi("action");$("#refBox").classList.toggle("hidden",!(a.includes("referred")||a.includes("urgent")));
  if(radio("selfharm")==="yes"&&radio("triage")!=="redflag"){const t=$("input[name=triage][value=redflag]");t.checked=true}
  const n=$$("input[name=needs]:checked");$$("input[name=needs]").forEach(i=>i.disabled=!i.checked&&n.length>=3);progress()}
 document.addEventListener("change",sync);document.addEventListener("input",sync);
-function progress(){const c=radio("consent");const s={1:!!c&&$("#palika").value&&$("#setting").value&&$("#worker").value,2:radio("sex")&&radio("age"),3:multi("who").length>0,4:!!radio("rites"),5:RX.every(([k])=>radio("rx_"+k))&&radio("functioning"),6:multi("support").length>0,7:radio("selfharm")&&radio("triage")&&multi("action").length>0};
+function progress(){const c=radio("consent");const s={1:!!c&&$("#palika").value&&$("#setting").value&&$("#worker").value,2:radio("sex")&&["18-59","60+"].includes(radio("age"))&&radio("reg")&&(radio("reg")!=="byname"||(!!$("#pName").value.trim()&&(!!$("#pPhone").value.trim()||radio("pReach")==="visit"))),3:multi("who").length>0,4:!!radio("rites"),5:RX.every(([k])=>radio("rx_"+k))&&radio("functioning"),6:multi("support").length>0,7:radio("selfharm")&&radio("triage")&&multi("action").length>0};
  if(c&&c!=="yes"){for(let i=2;i<=7;i++)s[i]=true}
  $$("#steps li").forEach(li=>li.querySelector(".dot").classList.toggle("done",!!s[li.dataset.s]));return s}
 function read(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return window.__mem||[]}}
@@ -288,10 +284,10 @@ $("#f").onsubmit=e=>{e.preventDefault();$("#errors").classList.add("hidden");$("
  if(miss.length){$("#errors").innerHTML="Please complete section"+(miss.length>1?"s ":" ")+miss.join(", ")+".";$("#errors").classList.remove("hidden");return}
  const c=radio("consent");const r={schema:"np-grief-early-0.1-preview",date:$("#date").value,org:$("#org").value,district:$("#district").value,palika:$("#palika").value,ward:$("#ward").value,setting:$("#setting").value,worker:$("#worker").value,consent:c};
  if(c==="yes")Object.assign(r,{sex:radio("sex"),age:radio("age"),living:radio("living"),disability:radio("disability"),who:multi("who"),nDied:+$("#nDied").value||0,nMissing:+$("#nMissing").value||0,otherLoss:multi("otherLoss"),rites:radio("rites"),obstacles:multi("obstacles"),ritesHelp:radio("ritesHelp"),rx:Object.fromEntries(RX.map(([k])=>[k,+radio("rx_"+k)])),functioning:radio("functioning"),beyondExpected:radio("beyondExpected"),support:multi("support"),needs:multi("needs"),selfharm:radio("selfharm"),childLostCarer:radio("childLostCarer"),triage:radio("triage"),action:multi("action"),refTo:multi("refTo"),refAccepted:radio("refAccepted")});
- r.id="G"+Date.now().toString(36).toUpperCase();const l=read();l.push(r);write(l);
- $("#saved").innerHTML=`Saved on this device (${l.length} conversation${l.length>1?"s":""}). Open “Mapping by palika” to see the totals.`;$("#saved").classList.remove("hidden");$("#f").reset();$("#date").value=localDate();$("#org").value="CMC";sync();window.scrollTo(0,0)};
+ r.id="G"+Date.now().toString(36).toUpperCase();r.code=code();if(c==="yes"){r.reg=radio("reg");if(r.reg==="byname")Object.assign(r,{name:$("#pName").value.trim(),phone:$("#pPhone").value.trim(),reach:radio("pReach"),bestTime:$("#pTime").value.trim()});else r.initials=$("#pInit").value.trim().toUpperCase()}const l=read();l.push(r);write(l);
+ $("#saved").innerHTML=`Saved on this device (${l.length} conversation${l.length>1?"s":""}). Code ${r.code}${r.reg==="anon"?" &mdash; write it on the person&rsquo;s card":""}.`;$("#saved").classList.remove("hidden");$("#f").reset();$("#date").value=localDate();$("#org").value="CMC";sync();window.scrollTo(0,0)};
 $("#resetBtn").onclick=()=>{$("#f").reset();$("#date").value=localDate();$("#org").value="CMC";sync()};
-$("#exportBtn").onclick=()=>{const l=read();if(!l.length)return;const cols=["id","date","org","district","palika","ward","setting","worker","consent","sex","age","living","disability","who","nDied","nMissing","otherLoss","rites","obstacles","ritesHelp",...RX.map(([k])=>"rx_"+k),"functioning","beyondExpected","support","needs","selfharm","childLostCarer","triage","action","refTo","refAccepted"];
+$("#exportBtn").onclick=()=>{const l=read();if(!l.length)return;const cols=["id","code","reg","name","phone","reach","bestTime","initials","date","org","district","palika","ward","setting","worker","consent","sex","age","living","disability","who","nDied","nMissing","otherLoss","rites","obstacles","ritesHelp",...RX.map(([k])=>"rx_"+k),"functioning","beyondExpected","support","needs","selfharm","childLostCarer","triage","action","refTo","refAccepted"];
  const esc=v=>`"${String(Array.isArray(v)?v.join("; "):v??"").replace(/"/g,'""')}"`;const csv="﻿"+cols.join(",")+"\n"+l.map(r=>cols.map(c=>esc(c.startsWith("rx_")?(r.rx||{})[c.slice(3)]:r[c])).join(",")).join("\n");
  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download=`grief-early-assessment-${localDate()}.csv`;a.click()};
 $$(".tabs button").forEach(b=>b.onclick=()=>{$$(".tabs button").forEach(x=>x.classList.toggle("on",x===b));["form","map","about"].forEach(t=>$("#tab-"+t).classList.toggle("hidden",t!==b.dataset.tab));if(b.dataset.tab==="map")renderMap()});

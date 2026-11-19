@@ -71,7 +71,7 @@ table.list td{border-bottom:1px solid var(--line);padding:8px;vertical-align:top
 footer{max-width:1180px;margin:0 auto;padding:8px 16px 40px;color:var(--muted);font-size:12.5px}
 .card.msp{border:1.5px dashed #6b4fa0;background:#faf8fd}.badge{display:inline-block;margin-left:8px;padding:2px 9px;border-radius:999px;background:#ece6f7;color:#4a3478;font-size:12px;font-weight:700;vertical-align:middle}
 table.staff td input{width:72px}
-</style>
+details.about>summary{cursor:pointer;list-style:revert}details.about[open]>summary{margin-bottom:10px}</style>
 </head>
 <body>
 <div class="preview">PREVIEW FOR REVIEW · 19 Nov 2026 · Entries stay on this device only — nothing is sent anywhere</div>
@@ -80,12 +80,7 @@ table.staff td input{width:72px}
   <h1>Referral Directory — Service Mapping</h1>
   <p>One entry is one place where clients can be referred for MHPSS services.</p>
 </header>
-<nav class="tabs" role="tablist">
-  <button class="on" data-tab="form">Register a service point</button>
-  <button data-tab="dir">Directory map (saved here)</button>
-  <button data-tab="gaps">Gaps by palika</button>
-  <button data-tab="about">How this aligns with the MSP</button>
-</nav>
+
 <main>
 <section id="tab-form">
 <div class="layout">
@@ -309,27 +304,15 @@ table.staff td input{width:72px}
 </div>
 </section>
 
-<section id="tab-dir" class="hidden">
-  <div class="card"><h2>Service points saved on this device</h2>
-  <p class="lead">The live directory shows the same view for all organisations, after coordination has checked each entry. Pins marked "palika only" or "coordination only" are not shown on the public map.</p>
-  <div id="dirmap"></div>
-  <div style="overflow-x:auto;margin-top:12px"><table class="list" id="dirtable"><thead><tr><th>Place</th><th>Organisation</th><th>Palika</th><th>Services (MSP)</th><th>Hosted at · continuity</th><th>Call</th><th>Pin</th></tr></thead><tbody></tbody></table></div>
-  </div>
-</section>
 
-<section id="tab-gaps" class="hidden">
-  <div class="card"><h2>Gaps by palika — which key services can clients be referred to?</h2>
-  <p class="lead">Built from the entries saved on this device. A red cell means no registered place in that palika offers the service. The key services come from the risks field staff named in Nuwakot and Rasuwa (suicidal thoughts, child marriage and trafficking risk, families of the missing, survivors needing a crisis centre) and from the MSP activities that carry them.</p>
-  <div style="overflow-x:auto"><table class="list" id="gaptable"></table></div>
-  <p class="src" style="margin-top:8px">A gap here means "not registered yet", not "does not exist". It becomes reliable once every partner working in the palika has registered its service points.</p>
-  </div>
-</section>
-<section id="tab-about" class="hidden">
-  <div class="card"><h2>How this form aligns with the MSP service mapping</h2>
+
+
+<section id="tab-about">
+  <details class="card about"><summary><h2 style="display:inline">About this form &mdash; how it aligns with the MSP service mapping</h2></summary>
   <p>The IASC MHPSS Minimum Service Package names a comprehensive mapping of MHPSS actors, services and activities, and joint referral pathways with a directory of services, as core coordination actions (activity 1.1, p. 27). The multi-sectoral MHPSS assessment toolkit that accompanies the MSP (field-test draft, May 2024) gives the data tool for this: Tool 3B, "Simplified MHPSS 4Ws mapping for referral pathways and service directories" (pp. 60–61), and the referral-directory fields of Tool 4 (pp. 62–63).</p>
   <div style="overflow-x:auto"><table class="list"><thead><tr><th>This form</th><th>MSP tool field</th><th>Hosted at · continuity</th></tr></thead><tbody id="aligntable"></tbody></table></div>
   <p class="src">Additional fields kept from the September directory form: public referral number, cost, re-confirmation. Added on 19 Nov 2026: pin location and who may see it. Protection and GBV categories follow the Nepal Protection Cluster referral pathway, so partners register once for both directories.</p>
-  </div>
+  </details>
 </section>
 </main>
 <footer>MHPSS Nepal · Referral Directory — Service Mapping · preview v2.2, 19 Nov 2026 · Draft instrument, to be agreed with partners. English only in this preview; the Nepali version follows after review by a human translator.</footer>
@@ -426,7 +409,7 @@ $("#f").onsubmit=e=>{e.preventDefault();$("#errors").classList.add("hidden");$("
  r.savedOn=localDate();r.schema="np-directory-0.2-preview";
  r.id="SP"+Math.abs([...(r.org+r.palika+r.placeName.toLowerCase())].reduce((h,c)=>(h*31+c.charCodeAt(0))|0,7)).toString(36).toUpperCase();
  const l=read(),i=l.findIndex(x=>x.id===r.id);if(i>=0)l[i]=r;else l.push(r);write(l);
- const sv=$("#saved");sv.innerHTML=(i>=0?"Updated":"Saved")+` on this device: <b>${r.placeName}</b> (${r.id}). ${l.length} entr${l.length>1?"ies":"y"} saved here. Open “Directory map” to see it.`;sv.classList.remove("hidden")};
+ const sv=$("#saved");sv.innerHTML=(i>=0?"Updated":"Saved")+` on this device: <b>${r.placeName}</b> (${r.id}). ${l.length} entr${l.length>1?"ies":"y"} saved here. Until the form is connected, use Export saved (CSV) to pass entries to coordination.`;sv.classList.remove("hidden")};
 $("#resetBtn").onclick=()=>{$("#f").reset();$("#clearPin").click();["#district","#palika"].forEach(s=>{$(s).innerHTML="";$(s).disabled=true});$("#safeWarn").classList.add("hidden");progress()};
 $("#exportBtn").onclick=()=>{const l=read();if(!l.length){alertBox("Nothing saved yet.");return}const cols=["id","org","orgOther","placeName","facility","edcdSetting","continuity","until","untilUnknown","funder","integrated","status","mspMapping","staff","training","manualName","supervision","barriers","province","district","palika","ward","lat","lng","pinVisibility","services","crossServices","mspActivities","otherServices","cadres","missingRoles","capacity","gender","age","groups","languages","criteria","access","refPhone","refEmail","hours","entry","refVia","cost","status","from","until","savedOn"];
  const esc=v=>`"${String(Array.isArray(v)?v.join("; "):(v&&typeof v==="object")?Object.entries(v).map(([k,x])=>k+" "+x.ft+"FT/"+x.pt+"PT").join("; "):v??"").replace(/"/g,'""')}"`;const csv="﻿"+cols.join(",")+"\n"+l.map(r=>cols.map(c=>esc(r[c])).join(",")).join("\n");
