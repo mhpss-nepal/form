@@ -2,4 +2,5 @@
 #   keyed   = no loose English allowed; Nepali still awaited
 #   pending = not yet migrated; counted and reported, not blocked
 index.html keyed
-selfreport.html keyed
+# selfreport.html was keyed; since 20 Nov 2026 it is a short English closure notice
+# (the form is closed until the server guest door exists), so it is no longer enforced.
