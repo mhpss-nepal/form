@@ -17,7 +17,9 @@ class FormSend(unittest.TestCase):
         for page, route, proto in [(GRIEF, "/grief/intake", "grief-submit/1"),
                                    (DIRF, "/directory/servicepoints2/intake", "directory-submit/2")]:
             auth = page.index("review-current-v51/current-auth.js")
+            api = page.index("hub/assets/access-api.js")
             cfg = page.index("window.FORM_SEND=")
+            self.assertLess(auth, api); self.assertLess(api, cfg)
             lib = page.index("../lib/form-send.js")
             self.assertLess(auth, cfg); self.assertLess(cfg, lib)
             self.assertIn('route:"%s"' % route, page)
@@ -44,7 +46,10 @@ class FormSend(unittest.TestCase):
         self.assertIn("body.revision !== rev", SEND)
         self.assertIn("request_sha256", SEND)
         self.assertIn('"X-Selected-Org"', SEND)
-        self.assertIn("https://mhpss5ws-tdp3xtfnsq-as.a.run.app", SEND)
+        self.assertIn("var BASE = A.BASE", SEND)
+        api = ROOT.parent / "hub" / "assets" / "access-api.js"
+        if api.exists():
+            self.assertIn("https://mhpss5ws-tdp3xtfnsq-as.a.run.app", api.read_text(encoding="utf-8"))
         # the password is never stored
         self.assertNotRegex(SEND, r"localStorage\.setItem\([^)]*[Pp]ass")
 
@@ -54,3 +59,22 @@ class FormSend(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class OwnRecords(unittest.TestCase):
+    """19 Nov 2026 20:25 NPT decisions: field staff see their own records with the coordinator's
+    decision, and a returned record reopens in the form as the next version of the same record."""
+    def test_my_records_and_correction(self):
+        self.assertIn("A.griefEntries", SEND); self.assertIn("A.dirMine", SEND)
+        self.assertIn("Returned — please correct", SEND)
+        self.assertIn("CFG.load(r.payload)", SEND)
+        self.assertIn("const ed=window.__edit;r.id=ed?ed.id:", GRIEF)
+        self.assertIn("if(ix>=0)l[ix]=r;else l.push(r)", GRIEF)
+        for page in (GRIEF, DIRF):
+            self.assertIn("title:function(p)", page); self.assertIn("load:function(p)", page)
+
+    def test_sign_in_by_email_link_first(self):
+        api = (ROOT.parent / "hub" / "assets" / "access-api.js")
+        if api.exists():
+            s = api.read_text(encoding="utf-8")
+            self.assertLess(s.index("Email me a sign-in link"), s.index("Use a password instead"))

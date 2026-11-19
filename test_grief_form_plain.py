@@ -29,7 +29,7 @@ class GriefRegistration(unittest.TestCase):
     def test_code_is_automatic_and_device_unique(self):
         self.assertIn('function devTag()', G)
         self.assertIn('${o}-${d}-${t}-${devTag()}-', G)
-        self.assertIn('r.code=code()', G)
+        self.assertIn('r.code=ed?ed.code:code()', G)  # new records get code(); a corrected record keeps its code (19 Nov 2026)
 
     def test_names_stay_with_the_organisation(self):
         self.assertIn('never sent to coordination or shown on the dashboard', G)
