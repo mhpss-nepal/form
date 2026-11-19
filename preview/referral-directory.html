@@ -420,7 +420,8 @@ progress();
 <script src="../../hub/assets/fb-config.js"></script>
 <script src="../../hub/review-current-v51/fb-config.js"></script>
 <script src="../../hub/review-current-v51/current-auth.js"></script>
-<script>window.FORM_SEND={form:"directory",route:"/directory/servicepoints2/intake",protocol:"directory-submit/2",needsOrg:false,read:function(){return read().filter(function(r){return r.schema==="np-directory-0.2"})},payload:function(r){return JSON.parse(JSON.stringify(r))}};</script>
+<script src="../../hub/assets/access-api.js"></script>
+<script>window.FORM_SEND={form:"directory",route:"/directory/servicepoints2/intake",protocol:"directory-submit/2",needsOrg:false,read:function(){return read().filter(function(r){return r.schema==="np-directory-0.2"})},payload:function(r){return JSON.parse(JSON.stringify(r))},title:function(p){return p.placeName+" · "+p.org},load:function(p){$("#resetBtn").click();var flat=Object.assign({},p);if(p.staff){Object.keys(p.staff).forEach(function(c){flat["ft_"+c]=p.staff[c].ft;flat["pt_"+c]=p.staff[c].pt})}["staff","lat","lng","pinAccuracyM","mspActivities","edcdSetting","integrated","savedOn","schema","id"].forEach(function(k){delete flat[k]});FORM_SEND_FILL(flat,["org","province","district","palika","mspMapping"]);if(p.lat!=null)setPin(p.lat,p.lng,p.pinAccuracyM);progress()}};</script>
 <script src="../lib/form-send.js"></script>
 </body>
 </html>
