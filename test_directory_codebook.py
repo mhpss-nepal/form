@@ -48,5 +48,10 @@ class DirectoryUsesTheFiveWsLists(unittest.TestCase):
         self.assertIn('Accepting new clients now', self.html)
 
 
+    def test_roles_needed_hides_roles_already_present(self):
+        self.assertIn('$$("#missingRoles label.chk").forEach', self.html)
+        self.assertIn('Roles already ticked in section 3 are not listed', self.html)
+
+
 if __name__ == '__main__':
     unittest.main()
