@@ -27,7 +27,9 @@ class FormSend(unittest.TestCase):
             self.assertIn("FORM_SEND_AFTER_SAVE", page)
 
     def test_schemas_are_the_released_ones(self):
-        self.assertIn('schema:"np-grief-early-0.2"', GRIEF)
+        # 20 Nov 2026: Grief Conversation 0.3 (state now, optional Nepal PHQ-9); 0.2 records already queued still send
+        self.assertIn('schema:"np-grief-early-0.3"', GRIEF)
+        self.assertIn('r.schema==="np-grief-early-0.2"||r.schema==="np-grief-early-0.3"', GRIEF)
         self.assertIn('r.schema="np-directory-0.2"', DIRF)
         self.assertNotIn("-preview\"", GRIEF + DIRF)
 

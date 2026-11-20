@@ -94,5 +94,19 @@ class MonitoringNotReview20Nov(unittest.TestCase):
         self.assertIn('pending: ["send.st.pending", "Received"', s)
         self.assertNotIn('"Waiting for review"', s)
 
+
+class GriefConversation03(unittest.TestCase):
+    def setUp(self):
+        self.s = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "preview", "grief-early-assessment.html"), encoding="utf-8").read()
+    def test_name_and_schema(self):
+        self.assertIn('<h1 data-i18n="grief.003">Grief Conversation</h1>', self.s)
+        self.assertIn('schema:"np-grief-early-0.3"', self.s)
+        self.assertIn('r.schema==="np-grief-early-0.2"||r.schema==="np-grief-early-0.3"', self.s)
+    def test_state_now_required_and_phq9_optional_uses_validated_nepali(self):
+        self.assertIn('7:radio("stateNow")&&', self.s)
+        self.assertIn('NE["phq9.item"+i]', self.s)
+        self.assertIn('NE["phq9.scale"+v]', self.s)
+        self.assertIn('(radio("selfharm")==="yes"||p9)&&radio("triage")!=="redflag"', self.s)
+
 if __name__ == "__main__":
     unittest.main()
