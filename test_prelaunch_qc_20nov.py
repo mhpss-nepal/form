@@ -108,5 +108,21 @@ class GriefConversation03(unittest.TestCase):
         self.assertIn('NE["phq9.scale"+v]', self.s)
         self.assertIn('(radio("selfharm")==="yes"||p9)&&radio("triage")!=="redflag"', self.s)
 
+class GriefDoorName20Nov(unittest.TestCase):
+    """20 Nov 2026: the forms page names the grief form Grief Conversation and no longer says a coordinator checks every record (monitoring, not review)."""
+    def test_door_and_dashboard_wording(self):
+        root = Path(__file__).resolve().parent
+        for f in ('index.html', 'lib/directory-status-20261119.js'):
+            s = (root / f).read_text(encoding='utf-8')
+            self.assertIn('"dir.grief.title": "Grief Conversation"', s)
+            self.assertNotIn('Grief early assessment', s)
+            self.assertNotIn('Your coordinator then checks it', s)
+        hub = root.parent / 'hub' / 'grief.html'
+        if hub.exists():
+            h = hub.read_text(encoding='utf-8')
+            self.assertNotIn('Grief Early Assessment form', h)
+            self.assertNotIn('not yet checked by a coordinator', h)
+
+
 if __name__ == "__main__":
     unittest.main()
