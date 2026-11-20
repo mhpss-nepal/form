@@ -1,3 +1,4 @@
+import os
 """Pre-launch QC of 20 Nov 2026: each fixed problem is locked here so it cannot come back.
 Static checks only; they run anywhere (no network, no browser, no server paths)."""
 import re
@@ -81,6 +82,17 @@ class FiveWsStatusIsTruthful(unittest.TestCase):
             self.assertNotIn(phrase, s)
         self.assertIn("Saved on this phone first", s)
 
+
+
+class MonitoringNotReview20Nov(unittest.TestCase):
+    def test_referral_destination_required_when_referred(self):
+        s = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "preview", "grief-early-assessment.html"), encoding="utf-8").read()
+        self.assertIn('multi("refTo").length>0&&!!radio("refAccepted")', s)
+
+    def test_status_received_not_waiting_for_review(self):
+        s = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "lib", "form-send.js"), encoding="utf-8").read()
+        self.assertIn('pending: ["send.st.pending", "Received"', s)
+        self.assertNotIn('"Waiting for review"', s)
 
 if __name__ == "__main__":
     unittest.main()

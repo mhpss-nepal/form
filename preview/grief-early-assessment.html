@@ -262,7 +262,7 @@ function sync(){const c=radio("consent");$("#ageWarn").classList.toggle("hidden"
  if(radio("selfharm")==="yes"&&radio("triage")!=="redflag"){const t=$("input[name=triage][value=redflag]");t.checked=true}
  const n=$$("input[name=needs]:checked");$$("input[name=needs]").forEach(i=>i.disabled=!i.checked&&n.length>=3);progress()}
 document.addEventListener("change",sync);document.addEventListener("input",sync);
-function progress(){const c=radio("consent");const s={1:!!c&&$("#palika").value&&$("#setting").value&&$("#worker").value,2:radio("sex")&&["18-59","60+"].includes(radio("age"))&&radio("reg")&&(radio("reg")!=="byname"||(!!$("#pName").value.trim()&&(!!$("#pPhone").value.trim()||radio("pReach")==="visit"))),3:multi("who").length>0,4:!!radio("rites"),5:RX.every(([k])=>radio("rx_"+k))&&radio("functioning"),6:multi("support").length>0,7:radio("selfharm")&&radio("triage")&&multi("action").length>0};
+function progress(){const c=radio("consent");const s={1:!!c&&$("#palika").value&&$("#setting").value&&$("#worker").value,2:radio("sex")&&["18-59","60+"].includes(radio("age"))&&radio("reg")&&(radio("reg")!=="byname"||(!!$("#pName").value.trim()&&(!!$("#pPhone").value.trim()||radio("pReach")==="visit"))),3:multi("who").length>0,4:!!radio("rites"),5:RX.every(([k])=>radio("rx_"+k))&&radio("functioning"),6:multi("support").length>0,7:radio("selfharm")&&radio("triage")&&multi("action").length>0&&($("#refBox").classList.contains("hidden")||(multi("refTo").length>0&&!!radio("refAccepted")))};
  if(c&&c!=="yes"){for(let i=2;i<=7;i++)s[i]=true}
  $$("#steps li").forEach(li=>li.querySelector(".dot").classList.toggle("done",!!s[li.dataset.s]));return s}
 function read(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return window.__mem||[]}}
