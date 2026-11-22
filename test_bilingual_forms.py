@@ -15,7 +15,7 @@ PROT = ('consent.', 'safeguard.', 'clinical.')
 
 def dictionary():
     js = "global.window={};eval(require('fs').readFileSync(process.argv[1],'utf8'));const S=window.I18N_STRINGS;" \
-         "console.log(JSON.stringify({en:S.en,ne:S.ne,machine:S._meta.source.machine,pro:S._meta.professionalOnly}))"
+         "console.log(JSON.stringify({en:S.en,ne:S.ne,machine:S._meta.source.machine,human:S._meta.source.human,pro:S._meta.professionalOnly}))"
     return json.loads(subprocess.run(['node', '-e', js, str(HUB)], capture_output=True, text=True, check=True).stdout)
 
 
@@ -46,11 +46,19 @@ class BilingualForms(unittest.TestCase):
             mine = [k for k in self.S['en'] if k.startswith(pfx + '.') or re.match(r'^(consent|safeguard|clinical)\.%s\b' % pfx, k)]
             self.assertTrue(len(mine) > 150, pfx)
             for k in mine:
+                # Nepali is either a declared machine draft or declared human
+                # (proofreading round 1, 21 Nov 2026). Protected keys carry
+                # Nepali only when a person wrote it; the PHQ-9 back-translation
+                # lines never do (validated Kohrt 2016 text is final).
                 if k.startswith(PROT):
-                    self.assertNotIn(k, self.S['ne'], k)
+                    if k in self.S['ne']:
+                        self.assertIn(k, self.S['human'], k)
+                        self.assertNotIn(k, self.S['machine'], k)
+                    if re.match(r'clinical\.grief\.phq\.(item|scale)', k):
+                        self.assertNotIn(k, self.S['ne'], k)
                 else:
                     self.assertIn(k, self.S['ne'], k)
-                    self.assertIn(k, self.S['machine'], k)
+                    self.assertTrue(k in self.S['machine'] or k in self.S['human'], k)
         for p in PROT:
             self.assertIn(p, self.S['pro'])
 
