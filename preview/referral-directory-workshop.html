@@ -123,7 +123,7 @@ details.about>summary{cursor:pointer;list-style:revert}details.about[open]>summa
 </select></div>
 </div>
 <label class="f" data-i18n="dirf.033">Pin location</label>
-<p class="help">You are not at the place today: zoom the map to the place and tap where the service is. You can drag the pin to correct it.</p>
+<p class="help">You are not at the place today. After you choose the district, the map moves there: zoom in and tap where the service is. An approximate pin is fine; CMC-Nepal checks every entry.</p>
 <div class="maprow">
 <button type="button" class="btn" id="gps" hidden style="display:none" data-i18n="dirf.035">📍 Use my current location</button>
 <button type="button" class="btn ghost" id="clearPin" data-i18n="dirf.036">Remove pin</button>
@@ -473,6 +473,10 @@ progress();
 (function(){
   var VALLEY={s:27.55,n:27.83,w:85.18,e:85.56}, VALLEY_D={KTM:1,LAL:1,BHA:1};
   var SECRET=["SAFEHOUSE","CHILDSHELTER"];
+  /* district centres (bounding-box centre of the 2015 district boundaries, geoJSON-Nepal by mesaugat on GitHub;
+     Nawalparasi and Rukum East/West share the pre-split centre). Used only to move the map, never stored. */
+  var DC={"RAS":[28.174,85.459],"NUW":[27.923,85.243],"DHA":[28.006,84.963],"KTM":[27.695,85.357],"CHT":[27.616,84.359],"NAW":[27.609,84.01],"SIN":[27.906,85.754],"GOR":[28.274,84.811],"TAN":[27.936,84.253],"TAP":[27.609,87.826],"PAN":[27.147,87.786],"ILA":[26.882,87.891],"JHA":[26.583,87.917],"MOR":[26.617,87.466],"SUN":[26.641,87.134],"DHAN":[27.019,87.371],"TER":[27.132,87.574],"SAN":[27.547,87.309],"BHO":[27.176,87.089],"SOL":[27.727,86.686],"KHO":[27.157,86.708],"OKH":[27.338,86.446],"UDA":[26.934,86.724],"SAP":[26.656,86.755],"SIR":[26.741,86.336],"DHANU":[26.831,86.057],"MAH":[26.885,85.815],"SAR":[26.968,85.574],"RAU":[26.988,85.337],"BAR":[27.108,85.071],"PAR":[27.221,84.729],"SIND":[27.184,85.907],"RAM":[27.538,86.188],"DOL":[27.823,86.207],"KAV":[27.561,85.635],"LAL":[27.547,85.341],"BHA":[27.674,85.443],"MAK":[27.436,85.098],"LAM":[28.283,84.444],"MAN":[28.678,84.184],"KAS":[28.35,83.992],"SYA":[28.048,83.738],"PARB":[28.2,83.697],"BAG":[28.356,83.279],"MYA":[28.545,83.49],"MUS":[28.952,83.869],"PAL":[27.819,83.633],"NAWAL":[27.609,84.01],"RUP":[27.562,83.434],"KAP":[27.626,82.968],"ARG":[27.949,83.044],"GUL":[28.1,83.312],"RUK":[28.731,82.669],"ROL":[28.326,82.655],"PYU":[28.122,82.85],"DAN":[27.968,82.448],"BAN":[28.093,81.849],"BARD":[28.37,81.414],"RUKU":[28.731,82.669],"SAL":[28.4,82.084],"SUR":[28.649,81.511],"JAJ":[28.868,82.198],"DAI":[28.883,81.67],"DOLP":[29.213,83.04],"JUM":[29.24,82.214],"KAL":[29.215,81.745],"MUG":[29.679,82.303],"HUM":[30.024,81.879],"BAJ":[29.72,81.154],"BAJU":[29.61,81.492],"ACH":[29.068,81.308],"DOT":[29.186,80.842],"KAI":[28.738,80.894],"KAN":[28.831,80.306],"DAD":[29.209,80.47],"BAI":[29.507,80.576],"DAR":[29.924,80.74]};
+  document.getElementById("district").addEventListener("change",function(e){var c=DC[e.target.value];if(c){try{map.setView(c,10)}catch(x){}}});
   var f=document.getElementById("f");
   function pinInValleyWrong(){
     try{ if(!pin)return false; var ll=pin.getLatLng(); var d=document.getElementById("district").value;
