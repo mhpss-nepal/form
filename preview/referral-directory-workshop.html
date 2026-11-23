@@ -123,9 +123,9 @@ details.about>summary{cursor:pointer;list-style:revert}details.about[open]>summa
 </select></div>
 </div>
 <label class="f" data-i18n="dirf.033">Pin location</label>
-<p class="help" data-i18n="dirf.034">Tap the map at the entrance of the place, or stand at the place and use your phone's location. You can drag the pin to correct it.</p>
+<p class="help">You are not at the place today: zoom the map to the place and tap where the service is. You can drag the pin to correct it.</p>
 <div class="maprow">
-<button type="button" class="btn" id="gps" data-i18n="dirf.035">📍 Use my current location</button>
+<button type="button" class="btn" id="gps" hidden style="display:none" data-i18n="dirf.035">📍 Use my current location</button>
 <button type="button" class="btn ghost" id="clearPin" data-i18n="dirf.036">Remove pin</button>
 </div>
 <div id="map" aria-label="Map for placing the service point"></div>
@@ -461,6 +461,50 @@ progress();
   f.addEventListener("submit",function(){setTimeout(function(){var err=document.getElementById("errors");if(err&&!err.classList.contains("hidden")){active=true;mark(true)}else{active=false;clear()}},0)});
   ["change","input"].forEach(function(t){f.addEventListener(t,function(){if(active)setTimeout(function(){if(!mark(false)){active=false;var err=document.getElementById("errors");if(err)err.classList.add("hidden")}},0)})});
   document.addEventListener("click",function(e){if(active&&e.target&&e.target.closest&&e.target.closest("#map,#gps,#clearPin"))setTimeout(function(){mark(false)},600)});
+})();
+</script>
+<script>
+/* 23 Nov 2026 (owner decisions after his phone test):
+   1. At the workshop participants are in Kathmandu, far from their services, so a pin in the Kathmandu
+      valley for a service in another district is refused: the participant moves the pin to the place.
+      ("Use my current location" is hidden on this page for the same reason.)
+   2. Safe houses and child shelters are not recorded on this open page: the details go directly to the
+      GBV / child protection focal point. */
+(function(){
+  var VALLEY={s:27.55,n:27.83,w:85.18,e:85.56}, VALLEY_D={KTM:1,LAL:1,BHA:1};
+  var SECRET=["SAFEHOUSE","CHILDSHELTER"];
+  var f=document.getElementById("f");
+  function pinInValleyWrong(){
+    try{ if(!pin)return false; var ll=pin.getLatLng(); var d=document.getElementById("district").value;
+      return !!d && !VALLEY_D[d] && ll.lat>=VALLEY.s && ll.lat<=VALLEY.n && ll.lng>=VALLEY.w && ll.lng<=VALLEY.e;
+    }catch(e){return false}}
+  function secretTicked(){return SECRET.filter(function(v){var e=f.querySelector('[name="crossServices"][value="'+v+'"]');return e&&e.checked})}
+  function note(id,host,html){var n=document.getElementById(id);if(!html){if(n)n.remove();return}
+    if(!n){n=document.createElement("div");n.id=id;n.className="banner warn";n.style.cssText="border:2px solid #d93025;color:#a3221c;font-weight:600;margin:8px 0";host.insertAdjacentElement("afterend",n)}
+    n.innerHTML=html}
+  function check(){
+    var map=document.getElementById("map"), cs=document.getElementById("crossServices");
+    var wrong=pinInValleyWrong(), sec=secretTicked();
+    note("wsPinNote",map,wrong?"This pin is in the Kathmandu valley, but the service is in another district. Zoom the map to the place and tap where the service is.":"");
+    if(map)map.classList.toggle("ws-miss",wrong);
+    note("wsSecretNote",cs,sec.length?"Safe houses and child shelters are <b>not recorded on this open page</b>, to keep their location safe. Untick them and give the details directly to the GBV / child protection focal point.":"");
+    if(cs)cs.classList.toggle("ws-miss",!!sec.length);
+    return {wrong:wrong,sec:sec.length>0}}
+  document.addEventListener("submit",function(e){
+    if(e.target!==f)return;
+    var r=check();
+    if(r.wrong||r.sec){
+      e.preventDefault();e.stopImmediatePropagation();
+      var err=document.getElementById("errors");
+      err.innerHTML=r.sec?"Safe houses and child shelters are not recorded on this page. Untick them in section 3.":"Move the pin to the place of the service (section 2).";
+      err.classList.remove("hidden");
+      var t=document.getElementById(r.sec?"wsSecretNote":"wsPinNote");
+      try{t.scrollIntoView({behavior:"smooth",block:"center"})}catch(x){}
+    }},true);
+  f.addEventListener("change",function(){setTimeout(check,0)});
+  document.addEventListener("click",function(e){if(e.target&&e.target.closest&&e.target.closest("#map,#clearPin"))setTimeout(check,400)});
+  document.addEventListener("mouseup",function(){setTimeout(check,400)});
+  document.addEventListener("touchend",function(){setTimeout(check,400)});
 })();
 </script>
 <script src="../lib/workshop-send.js"></script>

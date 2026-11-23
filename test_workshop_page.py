@@ -50,6 +50,14 @@ class WorkshopPage(unittest.TestCase):
         self.assertIn("Please fill in the parts marked in red.", PAGE)
         self.assertIn('scrollIntoView({behavior:"smooth",block:"center"})', PAGE)
 
+    def test_pin_and_safe_house_guards(self):
+        # 23 Nov 2026 (owner): participants sit in Kathmandu, far from their services;
+        # safe houses and child shelters are not recorded on this open page.
+        self.assertIn('id="gps" hidden style="display:none"', PAGE)
+        self.assertIn("VALLEY_D={KTM:1,LAL:1,BHA:1}", PAGE)
+        self.assertIn('var SECRET=["SAFEHOUSE","CHILDSHELTER"];', PAGE)
+        self.assertIn("e.stopImmediatePropagation()", PAGE)
+
 
 if __name__ == "__main__":
     unittest.main()
