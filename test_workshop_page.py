@@ -58,6 +58,16 @@ class WorkshopPage(unittest.TestCase):
         self.assertIn('var SECRET=["SAFEHOUSE","CHILDSHELTER"];', PAGE)
         self.assertIn("e.stopImmediatePropagation()", PAGE)
 
+    def test_map_moves_to_the_chosen_district(self):
+        # 23 Nov 2026: participants place the pin far from where they sit; the map jumps to the district.
+        import json, re
+        dc = json.loads(re.search(r"var DC=(\{.*?\});", PAGE).group(1))
+        geo = json.loads(re.search(r"const GEO = (\{.*?\});\n", PAGE, re.S).group(1))
+        self.assertEqual(set(dc), {d["c"] for d in geo["districts"]})
+        for lat, lng in dc.values():
+            self.assertTrue(26.0 <= lat <= 30.6 and 80.0 <= lng <= 88.3)
+        self.assertIn("map.setView(c,10)", PAGE)
+
 
 if __name__ == "__main__":
     unittest.main()
