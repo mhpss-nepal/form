@@ -80,7 +80,7 @@ details.about>summary{cursor:pointer;list-style:revert}details.about[open]>summa
 <h1 data-i18n="dirf.003">Referral Directory — Service Mapping</h1>
 <p data-i18n="dirf.004">One entry is one place where clients can be referred for MHPSS services.</p>
 </header>
-<div class="banner info" id="workshopNote" style="margin:12px auto;max-width:1100px"><b>Workshop entry page · MHPSS review workshop, 24 November 2026 (open until 30 November).</b> No sign-in is needed. Describe one place per entry, save it, and it is sent to the coordination team. Every entry is checked with CMC-Nepal before anything appears in the Referral Directory.</div>
+<div class="banner info" id="workshopNote" style="margin:12px auto;max-width:1100px"><b>Workshop entry page · MHPSS review workshop, 24 November 2026 (open until 30 November).</b> No sign-in is needed. Describe one place per entry and tap <b>Send to the coordination team</b> at the end. Every entry is checked with CMC-Nepal before anything appears in the Referral Directory.</div>
 <main>
 <section id="tab-form">
 <div class="layout">
@@ -237,7 +237,7 @@ details.about>summary{cursor:pointer;list-style:revert}details.about[open]>summa
 </div>
 <div><label class="f" for="from"><span data-i18n="dirf.133">Running since</span> <span class="opt" data-i18n="dirf.011">— optional</span></label><input type="month" id="from" name="from" style="max-width:260px"></div>
 </div>
-<div class="card msp" id="mspCard">
+<div class="card msp" id="mspCard" hidden style="display:none" aria-hidden="true"><!-- 23 Nov 2026 (owner): MSP mapping questions are not for workshop participants; kept in the page, unchecked and hidden, so the shared script still finds its elements -->
 <h2><span class="n" data-i18n-skip="">7</span><span data-i18n="dirf.136">For MSP mapping only</span> <span class="badge" data-i18n="dirf.137">Optional · CMC-Nepal mapping team</span></h2>
 <p class="lead" data-i18n="dirf.138">Fill this part only when the entry is collected for the MHPSS Minimum Service Package mapping. It is never shown on the public directory. Questions follow the MSP assessment toolkit, Tool 4 (pp. 63–64).</p>
 <label class="chk"><input type="checkbox" id="mspOn" name="mspMapping" value="yes"><span><b data-i18n="dirf.139">This entry is part of the MSP mapping</b><small data-i18n="dirf.140">Opens the questions below.</small></span></label>
@@ -259,7 +259,7 @@ details.about>summary{cursor:pointer;list-style:revert}details.about[open]>summa
 </div>
 </div>
 <div class="card">
-<h2><span class="n" data-i18n-skip="">8</span><span data-i18n="dirf.158">Confirm</span></h2>
+<h2><span class="n" data-i18n-skip="">7</span><span data-i18n="dirf.158">Confirm</span></h2>
 <div class="grid2">
 <div><label class="f" for="confName" data-i18n="dirf.159">Person confirming this entry</label><input type="text" id="confName" name="confName" required=""></div>
 <div><label class="f" for="confRole" data-i18n="dirf.160">Their role</label><input type="text" id="confRole" name="confRole" required=""></div>
@@ -268,8 +268,8 @@ details.about>summary{cursor:pointer;list-style:revert}details.about[open]>summa
 <label class="chk" style="margin-top:12px"><input type="checkbox" id="consentPublish" name="consentPublish" required=""><span><b data-i18n="consent.dirf.publish.01">The service details may be shown on the public referral directory.</b><small data-i18n="consent.dirf.publish.02">Names and emails of focal points are never published. The pin follows the choice in section 2.</small></span></label>
 <label class="chk" style="margin-top:8px"><input type="checkbox" id="consentCorrect" name="consentCorrect" required=""><span><b data-i18n="consent.dirf.correct.01">The details are correct today, and we will confirm them again when asked.</b><small data-i18n="consent.dirf.correct.02">Entries are asked to be re-confirmed every three months.</small></span></label>
 <div class="actions">
-<button type="submit" class="btn" data-i18n="dirf.164">Save entry on this device</button>
-<button type="button" class="btn ghost" id="exportBtn" data-i18n="dirf.165">Export saved entries (CSV)</button>
+<button type="submit" class="btn" id="wsSubmit">Send to the coordination team</button>
+<button type="button" class="btn ghost" id="exportBtn" hidden style="display:none" data-i18n="dirf.165">Export saved entries (CSV)</button>
 <button type="button" class="btn warn" id="resetBtn" data-i18n="dirf.166">Clear form</button>
 </div>
 <div class="banner ok hidden" id="saved"></div>
@@ -285,7 +285,7 @@ details.about>summary{cursor:pointer;list-style:revert}details.about[open]>summa
 <li data-s="4"><span class="dot"></span><span data-i18n="dirf.171">Who it is for</span></li>
 <li data-s="5"><span class="dot"></span><span data-i18n="dirf.172">How to reach it</span></li>
 <li data-s="6"><span class="dot"></span><span data-i18n="dirf.173">How long it runs</span></li>
-<li data-s="7"><span class="dot"></span><span data-i18n="dirf.174">MSP mapping</span> <small data-i18n="dirf.175">(optional)</small></li>
+<li data-s="7" style="display:none"><span class="dot"></span><span data-i18n="dirf.174">MSP mapping</span> <small data-i18n="dirf.175">(optional)</small></li>
 <li data-s="8"><span class="dot"></span><span data-i18n="dirf.158">Confirm</span></li>
 </ul>
 <div class="banner info" data-i18n="dirf.177">Coordination checks each entry before it appears on the public directory.</div>
