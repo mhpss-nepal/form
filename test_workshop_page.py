@@ -44,6 +44,12 @@ class WorkshopPage(unittest.TestCase):
         self.assertIn("#steps li[data-s=", PAGE)
         self.assertNotIn('miss.join(", ")', PAGE)
 
+    def test_missing_answers_are_marked_in_red(self):
+        # 23 Nov 2026 (owner): participants must see where the missing answers are.
+        self.assertIn(".ws-miss{outline:3px solid #d93025", PAGE)
+        self.assertIn("Please fill in the parts marked in red.", PAGE)
+        self.assertIn('scrollIntoView({behavior:"smooth",block:"center"})', PAGE)
+
 
 if __name__ == "__main__":
     unittest.main()

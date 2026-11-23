@@ -419,6 +419,50 @@ progress();
 <script src="../../hub/assets/i18n-strings.js"></script>
 <script src="../../hub/assets/i18n.js"></script>
 <script>window.FORM_SEND={form:"directory",route:"/directory/servicepoints2/intake",protocol:"directory-submit/2",needsOrg:false,read:function(){return read().filter(function(r){return r.schema==="np-directory-0.2"})},payload:function(r){return JSON.parse(JSON.stringify(r))},title:function(p){return p.placeName+" · "+p.org},load:function(p){$("#resetBtn").click();var flat=Object.assign({},p);if(p.staff){Object.keys(p.staff).forEach(function(c){flat["ft_"+c]=p.staff[c].ft;flat["pt_"+c]=p.staff[c].pt})}["staff","lat","lng","pinAccuracyM","mspActivities","edcdSetting","integrated","savedOn","schema","id","recordedBy"].forEach(function(k){delete flat[k]});if(window.FORM_SEND_SET_RECORDER)FORM_SEND_SET_RECORDER(p.recordedBy||"");FORM_SEND_FILL(flat,["org","province","district","palika","mspMapping"]);if(p.lat!=null)setPin(p.lat,p.lng,p.pinAccuracyM);progress()}};</script>
+<script>
+/* 23 Nov 2026 (owner test): after "Please complete these sections" participants could not see where the
+   missing answers were. Each missing answer is now outlined in red, its section gets a red border, and the
+   page scrolls to the first one. The marks update as the answers are filled in. */
+(function(){
+  var REQ={1:["org"],2:["province","district","palika","placeName","facility","@pin"],3:["services","crossServices"],4:["gender","age"],5:["refPhone","hours","cost"],6:["status","continuity","@until"],8:["confName","confRole","consentPublish","consentCorrect"]};
+  var st=document.createElement("style");
+  st.textContent=".ws-miss{outline:3px solid #d93025!important;outline-offset:3px;border-radius:8px;background:#fff4f3}.card.ws-miss-card{border:2px solid #d93025!important}.ws-miss-note{color:#d93025;font-weight:700;font-size:13.5px;margin:0 0 8px}";
+  document.head.appendChild(st);
+  var f=document.getElementById("f"), active=false;
+  function els(n){return f.querySelectorAll('[name="'+n+'"]')}
+  function empty(n){var l=els(n);if(!l.length)return false;var e=l[0];if(e.type==="checkbox"||e.type==="radio")return ![].some.call(l,function(x){return x.checked});return !String(e.value||"").trim()}
+  function box(n){
+    if(n==="@pin")return document.getElementById("map");
+    if(n==="@until")return document.getElementById("until");
+    var l=els(n);if(!l.length)return null;var e=l[0];
+    if(e.type==="checkbox"||e.type==="radio"){if(l.length===1)return e.closest("label")||e;return e.closest(".checks,.pill")||(e.closest("label")&&e.closest("label").parentElement)||e}
+    return e}
+  function missing(n){
+    if(n==="@pin"){try{return !pin}catch(e){return false}}
+    if(n==="@until"){var c=f.querySelector('[name="continuity"]:checked');return !!c&&c.value==="project"&&!document.getElementById("until").value&&!document.getElementById("untilUnknown").checked}
+    return empty(n)}
+  function clear(){[].forEach.call(document.querySelectorAll(".ws-miss"),function(x){x.classList.remove("ws-miss")});[].forEach.call(document.querySelectorAll(".ws-miss-card"),function(x){x.classList.remove("ws-miss-card")});[].forEach.call(document.querySelectorAll(".ws-miss-note"),function(x){x.remove()})}
+  function mark(scroll){
+    clear();var s=progress(),first=null;
+    Object.keys(REQ).forEach(function(k){
+      if(s[k])return;
+      var list=REQ[k];
+      if(k==="3")list=list.slice(0,1).concat(list.slice(1)); /* either list may be ticked: mark both */
+      list.forEach(function(n){
+        if(!missing(n))return;
+        if(k==="3"&&!(empty("services")&&empty("crossServices")))return;
+        var b=box(n);if(!b)return;
+        b.classList.add("ws-miss");
+        var card=b.closest(".card");
+        if(card&&!card.classList.contains("ws-miss-card")){card.classList.add("ws-miss-card");var h=card.querySelector("h2");if(h){var note=document.createElement("p");note.className="ws-miss-note";note.textContent="Please fill in the parts marked in red.";h.insertAdjacentElement("afterend",note)}}
+        first=first||b})});
+    if(scroll&&first){try{first.scrollIntoView({behavior:"smooth",block:"center"})}catch(e){}}
+    return !!first}
+  f.addEventListener("submit",function(){setTimeout(function(){var err=document.getElementById("errors");if(err&&!err.classList.contains("hidden")){active=true;mark(true)}else{active=false;clear()}},0)});
+  ["change","input"].forEach(function(t){f.addEventListener(t,function(){if(active)setTimeout(function(){if(!mark(false)){active=false;var err=document.getElementById("errors");if(err)err.classList.add("hidden")}},0)})});
+  document.addEventListener("click",function(e){if(active&&e.target&&e.target.closest&&e.target.closest("#map,#gps,#clearPin"))setTimeout(function(){mark(false)},600)});
+})();
+</script>
 <script src="../lib/workshop-send.js"></script>
 </body>
 </html>
