@@ -39,6 +39,11 @@ class WorkshopPage(unittest.TestCase):
         self.assertIn('<li data-s="7" style="display:none">', PAGE)
         self.assertIn('id="exportBtn" hidden', PAGE)
 
+    def test_incomplete_message_names_sections(self):
+        # 23 Nov 2026 (owner): "complete section 8" pointed at a number no longer shown; name the section instead.
+        self.assertIn("#steps li[data-s=", PAGE)
+        self.assertNotIn('miss.join(", ")', PAGE)
+
 
 if __name__ == "__main__":
     unittest.main()

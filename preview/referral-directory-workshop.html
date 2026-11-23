@@ -381,7 +381,7 @@ function read(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){
 function write(l){window.__mem=l;try{localStorage.setItem(KEY,JSON.stringify(l))}catch(e){}}
 $("#f").onsubmit=e=>{e.preventDefault();$("#errors").classList.add("hidden");$("#saved").classList.add("hidden");
  const s=progress(),miss=Object.entries(s).filter(([k,v])=>!v).map(([k])=>k);
- if(miss.length){alertBox(T("dirf.msg.incomplete","Please complete these sections:")+" "+miss.join(", ")+". "+(!pin?T("dirf.msg.noPin","The pin location is still missing."):""));return}
+ if(miss.length){alertBox(T("dirf.msg.incomplete","Please complete these sections:")+" "+miss.map(k=>{const li=document.querySelector('#steps li[data-s="'+k+'"]');return li?li.innerText.replace(/\s+/g," ").trim():k}).join(", ")+". "+(!pin?T("dirf.msg.noPin","The pin location is still missing."):""));return}
  const fd=new FormData($("#f")),r={};for(const[k,v]of fd.entries()){if(r[k]!==undefined){r[k]=[].concat(r[k],v)}else r[k]=v}
  ["services","otherServices","cadres","gender","age","groups","entry","refVia","training","delivery"].forEach(k=>r[k]=[].concat(r[k]||[]));
  r.edcdSetting=EDCD[r.facility]||"OTH";r.integrated=(r.facility==="FAC-HF"||r.facility==="FAC-GOV")&&r.continuity==="permanent";
