@@ -24,6 +24,14 @@ class WorkshopPage(unittest.TestCase):
         self.assertIn("checked with CMC-Nepal before anything appears", PAGE)
         self.assertIn('content="noindex"', PAGE)
 
+    def test_save_box_shows_the_sending_state(self):
+        # 23 Nov 2026: the green box under the save button must say whether the entry was sent,
+        # and must not keep the regular form's sign-in sentence.
+        self.assertIn("Sent and received by the coordination team.", JS)
+        self.assertIn('document.getElementById("saved")', JS)
+        self.assertIn("Signed in, the record is sent to the server", JS)  # removed from the box
+        self.assertIn("split(x).join", JS)
+
 
 if __name__ == "__main__":
     unittest.main()
