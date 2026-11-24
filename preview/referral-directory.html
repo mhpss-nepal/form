@@ -90,9 +90,9 @@ details.about>summary{cursor:pointer;list-style:revert}details.about[open]>summa
 <div class="grid2">
 <div><label class="f" for="org" data-i18n="dirf.008">Implementing organisation</label>
 <select id="org" name="org" required=""></select>
-<input class="hidden" type="text" id="orgOther" name="orgOther" placeholder="Name of organisation" data-i18n-ph="dirf.009"></div>
+<input class="hidden" type="text" id="orgOther" name="orgOther" placeholder="Name of organisation" data-i18n-ph="dirf.009" maxlength="160"></div>
 <div><label class="f" for="partners"><span data-i18n="dirf.010">Implementing partner(s)</span> <span class="opt" data-i18n="dirf.011">— optional</span></label>
-<input type="text" id="partners" name="partners" placeholder="e.g. a municipality or another NGO that delivers it with you" data-i18n-ph="dirf.012"></div>
+<input type="text" id="partners" name="partners" placeholder="e.g. a municipality or another NGO that delivers it with you" data-i18n-ph="dirf.012" maxlength="300"></div>
 </div>
 </div>
 <div class="card">
@@ -107,7 +107,7 @@ details.about>summary{cursor:pointer;list-style:revert}details.about[open]>summa
 <div class="grid2">
 <div><label class="f" for="placeName" data-i18n="dirf.021">Name of the place</label>
 <p class="help" data-i18n="dirf.022">As written on the sign or letterhead, e.g. "Dhunche Primary Health Care Centre".</p>
-<input type="text" id="placeName" name="placeName" required=""></div>
+<input type="text" id="placeName" name="placeName" required="" maxlength="300"></div>
 <div><label class="f" for="facility" data-i18n="dirf.023">Where the service is hosted</label>
 <p class="help" data-i18n="dirf.024">Categories follow the service settings agreed with EDCD for the 5Ws form (17 Sep 2026) and the reporting types in the EDCD MHPSS module.</p>
 <select id="facility" name="facility" required="">
@@ -141,7 +141,7 @@ details.about>summary{cursor:pointer;list-style:revert}details.about[open]>summa
 <h2><span class="n" data-i18n-skip="">3</span><span data-i18n="dirf.043">What is offered here</span></h2>
 <p class="lead" data-i18n="dirf.044">Tick every MHPSS service delivered at this place. The list and codes follow the MSP service directory tool (Tool 3B), so this directory feeds the MSP gap analysis without re-coding.</p>
 <div class="checks two" id="services"></div>
-<input class="hidden" type="text" id="serviceOther" name="serviceOther" placeholder="Describe the other service" data-i18n-ph="dirf.045">
+<input class="hidden" type="text" id="serviceOther" name="serviceOther" placeholder="Describe the other service" data-i18n-ph="dirf.045" maxlength="300">
 <label class="f" style="margin-top:18px"><span data-i18n="dirf.046">Protection and GBV services linked to MHPSS</span> <span class="opt" data-i18n="dirf.047">— tick what is offered at this same place</span></label>
 <p class="help" data-i18n="dirf.048">Categories follow the Protection Cluster referral pathway used by partners in Nepal, so one directory serves both. MSP numbers are shown where the MSP covers the service.</p>
 <div class="checks two" id="crossServices"></div>
@@ -170,9 +170,9 @@ details.about>summary{cursor:pointer;list-style:revert}details.about[open]>summa
 <div class="checks two" id="groups"></div>
 <div class="grid2">
 <div><label class="f" for="criteria"><span data-i18n="dirf.077">Selection criteria</span> <span class="opt" data-i18n="dirf.078">— if any</span></label>
-<input type="text" id="criteria" name="criteria" placeholder="e.g. adults only; residents of this palika" data-i18n-ph="dirf.079"></div>
+<input type="text" id="criteria" name="criteria" placeholder="e.g. adults only; residents of this palika" data-i18n-ph="dirf.079" maxlength="300"></div>
 <div><label class="f" for="languages" data-i18n="dirf.080">Languages the service works in</label>
-<input type="text" id="languages" name="languages" placeholder="e.g. Nepali, Tamang" data-i18n-ph="dirf.081"></div>
+<input type="text" id="languages" name="languages" placeholder="e.g. Nepali, Tamang" data-i18n-ph="dirf.081" maxlength="200"></div>
 </div>
 <label class="f" for="access"><span data-i18n="dirf.082">Accessibility measures</span> <span class="opt" data-i18n="dirf.083">— one or two sentences</span></label>
 <p class="help" data-i18n="dirf.084">e.g. ramp, ground-floor room, sign language, home visits for clients who cannot travel.</p>
@@ -183,13 +183,13 @@ details.about>summary{cursor:pointer;list-style:revert}details.about[open]>summa
 <div class="grid2">
 <div><label class="f" for="refPhone" data-i18n="dirf.087">Referral number to call</label>
 <p class="help" data-i18n="dirf.088">The organisation's number that someone answers. It is published.</p>
-<input type="tel" id="refPhone" name="refPhone" inputmode="tel" required=""></div>
+<input type="tel" id="refPhone" name="refPhone" inputmode="tel" required="" maxlength="300"></div>
 <div><label class="f" for="refEmail"><span data-i18n="dirf.089">Referral email</span> <span class="opt" data-i18n="dirf.090">— optional, published</span></label>
-<input type="email" id="refEmail" name="refEmail"></div>
+<input type="email" id="refEmail" name="refEmail" maxlength="200"></div>
 <div><label class="f" for="refName"><span data-i18n="dirf.091">Person who handles referrals</span> <span class="opt" data-i18n="dirf.092">— internal</span></label>
-<input type="text" id="refName" name="refName" autocomplete="off"></div>
+<input type="text" id="refName" name="refName" autocomplete="off" maxlength="120"></div>
 <div><label class="f" for="hours" data-i18n="dirf.093">Days and hours open</label>
-<input type="text" id="hours" name="hours" placeholder="e.g. Sun–Fri 10:00–16:00" required="" data-i18n-ph="dirf.094"></div>
+<input type="text" id="hours" name="hours" placeholder="e.g. Sun–Fri 10:00–16:00" required="" data-i18n-ph="dirf.094" maxlength="300"></div>
 </div>
 <label class="f" data-i18n="dirf.095">How the service is delivered</label>
 <p class="help" data-i18n="dirf.096">Tick all that apply.</p>
@@ -232,7 +232,7 @@ details.about>summary{cursor:pointer;list-style:revert}details.about[open]>summa
 <input type="month" id="until" name="until">
 <label class="chk" style="margin-top:8px"><input type="checkbox" id="untilUnknown" name="untilUnknown" value="yes"><span data-i18n="dirf.129">End date not known</span></label></div>
 <div><label class="f" for="funder"><span data-i18n="dirf.130">Funding partner</span> <span class="opt" data-i18n="dirf.131">— optional, internal</span></label>
-<input type="text" id="funder" name="funder" placeholder="e.g. UNICEF, UNFPA, SDC" data-i18n-ph="dirf.132"></div>
+<input type="text" id="funder" name="funder" placeholder="e.g. UNICEF, UNFPA, SDC" data-i18n-ph="dirf.132" maxlength="200"></div>
 </div>
 <div><label class="f" for="from"><span data-i18n="dirf.133">Running since</span> <span class="opt" data-i18n="dirf.011">— optional</span></label><input type="month" id="from" name="from" style="max-width:260px"></div>
 </div>
@@ -247,7 +247,7 @@ details.about>summary{cursor:pointer;list-style:revert}details.about[open]>summa
 <div style="overflow-x:auto"><table class="list staff"><thead><tr><th data-i18n="dirf.144">Role</th><th data-i18n="dirf.145">Full-time</th><th data-i18n="dirf.146">Part-time</th></tr></thead><tbody id="staffRows"></tbody></table></div>
 <label class="f" style="margin-top:14px" data-i18n="dirf.147">Training the staff have had for this service</label>
 <div class="checks two" id="training"></div>
-<input type="text" id="manualName" name="manualName" class="hidden" placeholder="Name of the intervention manual" data-i18n-ph="dirf.148">
+<input type="text" id="manualName" name="manualName" class="hidden" placeholder="Name of the intervention manual" data-i18n-ph="dirf.148" maxlength="200">
 <label class="f" style="margin-top:14px" data-i18n="dirf.149">Do these staff receive regular supportive supervision?</label>
 <div class="pill"><label><input type="radio" name="supervision" value="yes"><span data-i18n="dirf.056">Yes</span></label><label><input type="radio" name="supervision" value="no"><span data-i18n="dirf.151">No</span></label><label><input type="radio" name="supervision" value="unknown"><span data-i18n="dirf.152">Not known</span></label></div>
 <label class="f" style="margin-top:14px" data-i18n="dirf.153">Roles this place needs but does not have now</label>
