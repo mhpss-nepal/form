@@ -63,6 +63,7 @@ input:focus,select:focus,textarea:focus{outline:3px solid #bcd8f2;border-color:v
 .steps li:last-child{border-bottom:0}
 .dot{width:12px;height:12px;border-radius:50%;background:#c9d4de;flex:0 0 auto}
 .dot.done{background:var(--ok)}
+.steps li.done .dot{background:var(--ok)}
 .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 table.list{width:100%;border-collapse:collapse;font-size:13.5px}
 table.list th{background:var(--brand);color:#fff;text-align:left;padding:8px;font-weight:600}
@@ -511,6 +512,7 @@ progress();
   document.addEventListener("touchend",function(){setTimeout(check,400)});
 })();
 </script>
+<script>/* 24 Nov 2026: Clear form also hides the previous status box. */(function(){var b=document.getElementById("resetBtn");if(b)b.addEventListener("click",function(){["saved","errors"].forEach(function(id){var e=document.getElementById(id);if(e)e.classList.add("hidden")})})})();</script>
 <script src="../lib/workshop-send.js?v=20261124a"></script>
 </body>
 </html>
