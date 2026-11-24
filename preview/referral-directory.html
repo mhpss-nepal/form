@@ -62,6 +62,7 @@ input:focus,select:focus,textarea:focus{outline:3px solid #bcd8f2;border-color:v
 .steps li:last-child{border-bottom:0}
 .dot{width:12px;height:12px;border-radius:50%;background:#c9d4de;flex:0 0 auto}
 .dot.done{background:var(--ok)}
+.steps li.done .dot{background:var(--ok)}
 .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 table.list{width:100%;border-collapse:collapse;font-size:13.5px}
 table.list th{background:var(--brand);color:#fff;text-align:left;padding:8px;font-weight:600}
@@ -422,6 +423,7 @@ progress();
 <script src="../../hub/review-current-v51/current-auth.js"></script>
 <script src="../../hub/assets/access-api.js"></script>
 <script>window.FORM_SEND={form:"directory",route:"/directory/servicepoints2/intake",protocol:"directory-submit/2",needsOrg:false,read:function(){return read().filter(function(r){return r.schema==="np-directory-0.2"})},payload:function(r){return JSON.parse(JSON.stringify(r))},title:function(p){return p.placeName+" · "+p.org},load:function(p){$("#resetBtn").click();var flat=Object.assign({},p);if(p.staff){Object.keys(p.staff).forEach(function(c){flat["ft_"+c]=p.staff[c].ft;flat["pt_"+c]=p.staff[c].pt})}["staff","lat","lng","pinAccuracyM","mspActivities","edcdSetting","integrated","savedOn","schema","id","recordedBy"].forEach(function(k){delete flat[k]});if(window.FORM_SEND_SET_RECORDER)FORM_SEND_SET_RECORDER(p.recordedBy||"");FORM_SEND_FILL(flat,["org","province","district","palika","mspMapping"]);if(p.lat!=null)setPin(p.lat,p.lng,p.pinAccuracyM);progress()}};</script>
-<script src="../lib/form-send.js"></script>
+<script>/* 24 Nov 2026: Clear form also hides the previous status box. */(function(){var b=document.getElementById("resetBtn");if(b)b.addEventListener("click",function(){["saved","errors"].forEach(function(id){var e=document.getElementById(id);if(e)e.classList.add("hidden")})})})();</script>
+<script src="../lib/form-send.js?v=20261124b"></script>
 </body>
 </html>
