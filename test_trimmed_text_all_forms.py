@@ -13,7 +13,7 @@ class EverySenderCleansText(unittest.TestCase):
         for rel in SENDERS:
             js = (HERE / rel).read_text(encoding="utf-8")
             self.assertIn("function clean(v)", js, rel)
-            self.assertIn("return clean(rawPayload(r));", js, rel)
+            self.assertIn("clean(rawPayload(r))", js, rel)
 
     def test_every_sending_page_uses_a_cleaning_sender(self):
         for page in HERE.rglob("*.html"):

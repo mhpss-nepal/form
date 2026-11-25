@@ -183,9 +183,9 @@ details.about>summary{cursor:pointer;list-style:revert}details.about[open]>summa
 <div class="grid2">
 <div><label class="f" for="refPhone" data-i18n="dirf.087">Referral number to call</label>
 <p class="help" data-i18n="dirf.088">The organisation's number that someone answers. It is published.</p>
-<input type="tel" id="refPhone" name="refPhone" inputmode="tel" required="" maxlength="300"></div>
+<input type="tel" id="refPhone" name="refPhone" inputmode="tel" required="" maxlength="80"></div>
 <div><label class="f" for="refEmail"><span data-i18n="dirf.089">Referral email</span> <span class="opt" data-i18n="dirf.090">— optional, published</span></label>
-<input type="email" id="refEmail" name="refEmail" maxlength="200"></div>
+<input type="email" id="refEmail" name="refEmail" maxlength="200" pattern="[A-Za-z0-9_+.\-]+@[A-Za-z0-9\-]+(\.[A-Za-z0-9\-]+)+"></div>
 <div><label class="f" for="refName"><span data-i18n="dirf.091">Person who handles referrals</span> <span class="opt" data-i18n="dirf.092">— internal</span></label>
 <input type="text" id="refName" name="refName" autocomplete="off" maxlength="120"></div>
 <div><label class="f" for="hours" data-i18n="dirf.093">Days and hours open</label>
@@ -229,12 +229,12 @@ details.about>summary{cursor:pointer;list-style:revert}details.about[open]>summa
 <div class="grid2 hidden" id="projectBox">
 <div><label class="f" for="until" data-i18n="dirf.127">Funding confirmed until</label>
 <p class="help" data-i18n="dirf.128">Month and year. The entry is flagged for re-confirmation one month before.</p>
-<input type="month" id="until" name="until">
+<input type="month" id="until" name="until" pattern="20[2-4][0-9]-(0[1-9]|1[0-2])" placeholder="YYYY-MM">
 <label class="chk" style="margin-top:8px"><input type="checkbox" id="untilUnknown" name="untilUnknown" value="yes"><span data-i18n="dirf.129">End date not known</span></label></div>
 <div><label class="f" for="funder"><span data-i18n="dirf.130">Funding partner</span> <span class="opt" data-i18n="dirf.131">— optional, internal</span></label>
 <input type="text" id="funder" name="funder" placeholder="e.g. UNICEF, UNFPA, SDC" data-i18n-ph="dirf.132" maxlength="200"></div>
 </div>
-<div><label class="f" for="from"><span data-i18n="dirf.133">Running since</span> <span class="opt" data-i18n="dirf.011">— optional</span></label><input type="month" id="from" name="from" style="max-width:260px"></div>
+<div><label class="f" for="from"><span data-i18n="dirf.133">Running since</span> <span class="opt" data-i18n="dirf.011">— optional</span></label><input type="month" id="from" name="from" pattern="20[2-4][0-9]-(0[1-9]|1[0-2])" placeholder="YYYY-MM" style="max-width:260px"></div>
 </div>
 <div class="card msp" id="mspCard">
 <h2><span class="n" data-i18n-skip="">7</span><span data-i18n="dirf.136">For MSP mapping only</span> <span class="badge" data-i18n="dirf.137">Optional · CMC-Nepal mapping team</span></h2>
@@ -260,9 +260,9 @@ details.about>summary{cursor:pointer;list-style:revert}details.about[open]>summa
 <div class="card">
 <h2><span class="n" data-i18n-skip="">8</span><span data-i18n="dirf.158">Confirm</span></h2>
 <div class="grid2">
-<div><label class="f" for="confName" data-i18n="dirf.159">Person confirming this entry</label><input type="text" id="confName" name="confName" required=""></div>
-<div><label class="f" for="confRole" data-i18n="dirf.160">Their role</label><input type="text" id="confRole" name="confRole" required=""></div>
-<div><label class="f" for="focalEmail"><span data-i18n="dirf.161">Email for re-confirmation</span> <span class="opt" data-i18n="dirf.092">— internal</span></label><p class="help" data-i18n="dirf.163">Used only to ask you to confirm this entry again. Never published.</p><input type="email" id="focalEmail" name="focalEmail" autocomplete="off"></div>
+<div><label class="f" for="confName" data-i18n="dirf.159">Person confirming this entry</label><input type="text" id="confName" name="confName" required="" maxlength="120"></div>
+<div><label class="f" for="confRole" data-i18n="dirf.160">Their role</label><input type="text" id="confRole" name="confRole" required="" maxlength="120"></div>
+<div><label class="f" for="focalEmail"><span data-i18n="dirf.161">Email for re-confirmation</span> <span class="opt" data-i18n="dirf.092">— internal</span></label><p class="help" data-i18n="dirf.163">Used only to ask you to confirm this entry again. Never published.</p><input type="email" id="focalEmail" name="focalEmail" autocomplete="off" maxlength="200" pattern="[A-Za-z0-9_+.\-]+@[A-Za-z0-9\-]+(\.[A-Za-z0-9\-]+)+"></div>
 </div>
 <label class="chk" style="margin-top:12px"><input type="checkbox" id="consentPublish" name="consentPublish" required=""><span><b data-i18n="consent.dirf.publish.01">The service details may be shown on the public referral directory.</b><small data-i18n="consent.dirf.publish.02">Names and emails of focal points are never published. The pin follows the choice in section 2.</small></span></label>
 <label class="chk" style="margin-top:8px"><input type="checkbox" id="consentCorrect" name="consentCorrect" required=""><span><b data-i18n="consent.dirf.correct.01">The details are correct today, and we will confirm them again when asked.</b><small data-i18n="consent.dirf.correct.02">Entries are asked to be re-confirmed every three months.</small></span></label>
@@ -424,6 +424,7 @@ progress();
 <script src="../../hub/assets/access-api.js"></script>
 <script>window.FORM_SEND={form:"directory",route:"/directory/servicepoints2/intake",protocol:"directory-submit/2",needsOrg:false,read:function(){return read().filter(function(r){return r.schema==="np-directory-0.2"})},payload:function(r){return JSON.parse(JSON.stringify(r))},title:function(p){return p.placeName+" · "+p.org},load:function(p){$("#resetBtn").click();var flat=Object.assign({},p);if(p.staff){Object.keys(p.staff).forEach(function(c){flat["ft_"+c]=p.staff[c].ft;flat["pt_"+c]=p.staff[c].pt})}["staff","lat","lng","pinAccuracyM","mspActivities","edcdSetting","integrated","savedOn","schema","id","recordedBy"].forEach(function(k){delete flat[k]});if(window.FORM_SEND_SET_RECORDER)FORM_SEND_SET_RECORDER(p.recordedBy||"");FORM_SEND_FILL(flat,["org","province","district","palika","mspMapping"]);if(p.lat!=null)setPin(p.lat,p.lng,p.pinAccuracyM);progress()}};</script>
 <script>/* 24 Nov 2026: Clear form also hides the previous status box. */(function(){var b=document.getElementById("resetBtn");if(b)b.addEventListener("click",function(){["saved","errors"].forEach(function(id){var e=document.getElementById(id);if(e)e.classList.add("hidden")})})})();</script>
-<script src="../lib/form-send.js?v=20261124b"></script>
+<script>/* 25 Nov 2026: typed values that the server would refuse are corrected while typing: the referral number keeps Latin digits and + ( ) / . - space (Nepali digits become Latin, a comma becomes /), up to 80 characters; a ward loses leading zeros. */(function(){function on(id,ev,fix){var e=document.getElementById(id);if(e)e.addEventListener(ev,function(){var v=fix(e.value);if(v!==e.value)e.value=v})}on("refPhone","input",function(v){return v.replace(/[\u0966-\u096F]/g,function(d){return String(d.charCodeAt(0)-0x966)}).replace(/[,;|]/g,"/").replace(/[^0-9+()\/. -]/g,"").slice(0,80)});on("ward","change",function(v){return v.replace(/^0+/,"")});})();</script>
+<script src="../lib/form-send.js?v=20261125a"></script>
 </body>
 </html>

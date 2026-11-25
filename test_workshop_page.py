@@ -13,7 +13,7 @@ class WorkshopPage(unittest.TestCase):
     def test_no_sign_in_scripts(self):
         for s in ("current-auth.js", "access-api.js", "form-send.js", "fb-config.js"):
             self.assertNotIn(s, PAGE)
-        self.assertIn('<script src="../lib/workshop-send.js?v=20261124a"></script>', PAGE)
+        self.assertIn('<script src="../lib/workshop-send.js?v=20261125a"></script>', PAGE)
 
     def test_sends_only_to_the_workshop_route_without_identity(self):
         self.assertIn('var ROUTE = "/directory/workshop/intake";', JS)
@@ -74,7 +74,7 @@ class TrimmedText(unittest.TestCase):
     # 24 Nov 2026: entries were refused with "bounded trimmed text required" (trailing space, Enter).
     def test_payload_is_cleaned_before_sending(self):
         self.assertIn("function clean(v)", JS)
-        self.assertIn("CFG.payload = function (r) { return clean(rawPayload(r)); };", JS)
+        self.assertIn("CFG.payload = function (r) { return fixFields(clean(rawPayload(r))); };", JS)
         self.assertIn(".trim()", JS)
 
 
