@@ -1,6 +1,8 @@
 """Referral Directory service point, form v2.2 (np-directory-0.2, 19 Nov 2026).
 Service types follow MSP Tool 3B plus the Protection Cluster referral pathway; cadre, age and target
-group lists are the EDCD-approved 5Ws lists. Fields arrive as the form's FormData plus computed keys;
+group lists are the EDCD-approved 5Ws lists.
+25 Nov 2026 (CMC-Nepal feedback, owner decision): gender adds gsm (gender and sexual minorities), cost adds INS
+(covered by health insurance), cross-services add CCCM (camp / site management focal point). Fields arrive as the form's FormData plus computed keys;
 unknown keys are refused, optional text may be absent or empty."""
 import copy,json,re
 from datetime import date,datetime,timedelta,timezone
@@ -8,7 +10,7 @@ from training_contract import Invalid,digest,text,count,geography
 from frozen20.trusted_validator import CODES,members
 SCHEMA='np-directory-0.2'
 SERVICES={str(n) for n in range(1,11)}
-CROSS={'CM-GBV','CM-CP','CMR','SAFEHOUSE','CHILDSHELTER','LEGAL','LJC','POLICE','HOTLINE','REHAB','TRACING'}
+CROSS={'CCCM','CM-GBV','CM-CP','CMR','SAFEHOUSE','CHILDSHELTER','LEGAL','LJC','POLICE','HOTLINE','REHAB','TRACING'}
 SENSITIVE_CROSS={'SAFEHOUSE','CHILDSHELTER'}
 OTHER={'Housing or shelter repair','Livelihood or skills','Cash or financial assistance','Material assistance (non-food items)','Nutrition','Education','Physical health care','Physical rehabilitation'}
 TRAINING={'PFA','MHGAP','MANUAL','CM','CMR','NONE'}
@@ -52,7 +54,7 @@ def validate_payload(p):
     if p.get('ward','')!='' and not re.fullmatch(r'[1-9][0-9]?',p['ward']):raise Invalid('ward refused')
     if p['facility'] not in FACILITY or p['edcdSetting']!=FACILITY[p['facility']]:raise Invalid('setting refused')
     if type(p['integrated']) is not bool or p['integrated']!=(p['facility'] in {'FAC-HF','FAC-GOV'} and p['continuity']=='permanent'):raise Invalid('integration flag refused')
-    choices={'pinVisibility':{'public','palika','internal'},'cost':{'FREE','SOME','FEE'},'status':{'running','planned','paused'},'continuity':{'permanent','project','unknown'}}
+    choices={'pinVisibility':{'public','palika','internal'},'cost':{'FREE','SOME','FEE','INS'},'status':{'running','planned','paused'},'continuity':{'permanent','project','unknown'}}
     for k,allowed in choices.items():
         if p[k] not in allowed:raise Invalid('code refused: '+k)
     if p.get('capacity','') not in {'','open','waiting','full'} or p.get('supervision','') not in {'','yes','no','unknown'}:raise Invalid('code refused')
@@ -65,7 +67,7 @@ def validate_payload(p):
     if not re.fullmatch(r'[0-9+()/. -]{4,80}',p['refPhone']):raise Invalid('phone refused')
     cadres=_codes('CADRES')-{'OTH'}
     _list(p,'services',SERVICES);_list(p,'crossServices',CROSS);_list(p,'otherServices',OTHER);_list(p,'cadres',cadres)
-    _list(p,'gender',{'women','men','girls','boys'});_list(p,'age',{'0-4','5-9','10-17','18-59','60+'});_list(p,'groups',_codes('TARGET_GROUPS'))
+    _list(p,'gender',{'women','men','girls','boys','gsm'});_list(p,'age',{'0-4','5-9','10-17','18-59','60+'});_list(p,'groups',_codes('TARGET_GROUPS'))
     _list(p,'delivery',{'atplace','outreach','remote'});_list(p,'entry',{'walkin','appointment','referral'});_list(p,'refVia',{'phone','email','inperson','form'})
     _list(p,'training',TRAINING);_list(p,'missingRoles',cadres|{'CASEMGR','MEDLEGAL','FEMALE'})
     _list(p,'mspActivities',{'3.5','3.6','3.8','3.9','3.10','3.11','3.12','3.13','3.14'})
